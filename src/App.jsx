@@ -887,7 +887,7 @@ const styles = {
   grid2: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 8 }
 };
 
-export default function App() {
+export default function App() { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#1e293b',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#0c4a6e'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#0c4a6e'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#0c4a6e'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#0c4a6e'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#0c4a6e'}}>Contacto</h2><p>Para dudas sobre esta política, contáctanos a través de nuestras redes sociales.</p><p style={{fontSize:12,color:'#94a3b8',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#0ea5e9'}}>← Volver a MiLana</a></div>); }
   const [activa, setActiva] = useState(null);
 
   const Comp = activa ? CALCULADORAS.find(c => c.id === activa)?.comp : null;
@@ -980,7 +980,7 @@ export default function App() {
             Los cálculos son estimaciones informativas. Para montos exactos consulta con un especialista fiscal o laboral.
           </p>
           <p style={{fontSize:11,color:'#cbd5e1',marginTop:8}}>
-            MiLana © 2026 · Hecho en México 🇲🇽
+            MiLana © 2026 · Hecho en México 🇲🇽 · <a href="/privacidad" style={{color:'#94a3b8'}}>Privacidad</a>
           </p>
         </div>
       </div>

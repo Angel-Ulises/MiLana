@@ -904,12 +904,24 @@ function Btn({ onClick, children }) {
 }
 
 function ResultBox({ children }) {
+  const compartirWhatsApp = () => {
+    const texto = encodeURIComponent('Acabo de calcular mis finanzas gratis en MiLana 💰 Pruébalo tú también: https://milanaaqui.mx');
+    window.open(`https://wa.me/?text=${texto}`, '_blank', 'noopener,noreferrer');
+  };
   return (
     <div className="ml-result" style={{
       background:'#faf7f0',border:'1px solid #e8dcc3',borderRadius:14,boxShadow:'0 2px 10px rgba(0,0,0,0.04)',
       padding:20,marginTop:8
     }}>
       {children}
+      <button onClick={compartirWhatsApp} style={{
+        width:'100%',marginTop:16,padding:'10px 16px',background:'#e9f9ef',
+        border:'1px solid #bfe8cd',borderRadius:10,color:'#15803d',fontSize:13,
+        fontWeight:600,cursor:'pointer',display:'flex',alignItems:'center',
+        justifyContent:'center',gap:6
+      }}>
+        📲 Compartir por WhatsApp
+      </button>
     </div>
   );
 }
@@ -978,7 +990,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
     }}>
       <div style={{maxWidth:680,margin:'0 auto',padding:'24px 16px'}}>
         
-        <style>{`@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}}`}</style>{/* Header */}
+        <style>{`@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-calc-card{transition:border-color 0.15s,box-shadow 0.15s,transform 0.15s}.ml-calc-card:hover{border-color:#b45309;transform:translateY(-2px);box-shadow:0 8px 24px rgba(180,83,9,0.14)}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card:hover{transform:none}}`}</style>{/* Header */}
         <div style={{textAlign:'center',marginBottom:32}}>
           <span style={{
             display:'inline-block',fontSize:11,fontWeight:700,color:'#92400e',
@@ -1040,14 +1052,12 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             <h2 style={{fontSize:15,fontWeight:600,color:'#475569',margin:'0 0 12px 4px'}}>¿Qué necesitas calcular?</h2>
             <div style={{display:'flex',flexWrap:'wrap',justifyContent:'center',gap:12}}>
             {CALCULADORAS.map(c => (
-              <button key={c.id} onClick={() => setActiva(c.id)} style={{
+              <button key={c.id} onClick={() => setActiva(c.id)} className="ml-calc-card" style={{
                 flex:'1 1 150px',maxWidth:200,
                 background:'white',border:'2px solid #e2e8f0',borderRadius:14,
                 padding:'20px 14px',textAlign:'center',cursor:'pointer',
-                transition:'all 0.2s',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'
+                boxShadow:'0 2px 8px rgba(0,0,0,0.04)'
               }}
-              onMouseEnter={e => {e.target.style.borderColor='#b45309';e.target.style.transform='translateY(-2px)';e.target.style.boxShadow='0 8px 24px rgba(180,83,9,0.14)'}}
-              onMouseLeave={e => {e.target.style.borderColor='#e2e8f0';e.target.style.transform='none';e.target.style.boxShadow='0 2px 8px rgba(0,0,0,0.04)'}}
               >
                 <div style={{fontSize:32,marginBottom:8}}>{c.emoji}</div>
                 <div style={{fontSize:14,fontWeight:600,color:'#1e293b'}}>{c.nombre}</div>

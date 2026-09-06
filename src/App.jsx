@@ -889,6 +889,8 @@ const styles = {
 
 export default function App() { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#1e293b',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#0c4a6e'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#0c4a6e'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#0c4a6e'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#0c4a6e'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#0c4a6e'}}>Contacto</h2><p>Para dudas sobre esta política, contáctanos a través de nuestras redes sociales.</p><p style={{fontSize:12,color:'#94a3b8',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#0ea5e9'}}>← Volver a MiLana</a></div>); }
   const [activa, setActiva] = useState(null);
+  const [cerrando, setCerrando] = useState(false);
+  const cerrarCalc = () => { setCerrando(true); setTimeout(() => { setActiva(null); setCerrando(false); }, 180); };
 
   const Comp = activa ? CALCULADORAS.find(c => c.id === activa)?.comp : null;
   const calc = CALCULADORAS.find(c => c.id === activa);
@@ -925,8 +927,8 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
 
         {/* Calculadora activa */}
         {(activa || cerrando) && (
-          <div key={activa} className="ml-panel" style={{marginBottom:24}}>
-            <button onClick={() => setActiva(null)} style={{
+          <div key={activa} className={cerrando ? "ml-panel ml-panel-out" : "ml-panel"} style={{marginBottom:24}}>
+            <button onClick={cerrarCalc} style={{
               background:'none',border:'none',color:'#0ea5e9',fontSize:14,
               cursor:'pointer',padding:'8px 0',fontWeight:500,display:'flex',
               alignItems:'center',gap:4
@@ -939,9 +941,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
               border:'1px solid #e2e8f0'
             }}>
               <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
-const [activa, setActiva] = useState(null);
-  const [cerrando, setCerrando] = useState(false);
-  const cerrarCalc = () => { setCerrando(true); setTimeout(() => { setActiva(null); setCerrando(false); }, 180); };                
+                <span style={{fontSize:28}}>{calc.emoji}</span>
                 <div>
                   <h2 style={{margin:0,fontSize:20,fontWeight:700,color:'#0c4a6e'}}>{calc.nombre}</h2>
                   <span style={{fontSize:12,color:'#94a3b8'}}>{calc.desc}</span>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import regulatoryData from "./data/regulatory-data.json";
 
 // ═══════════════════════════════════════════════════════════════
 // DATOS OFICIALES 2026 — SAT / CONASAMI / INEGI
@@ -955,6 +956,38 @@ function Note({ children }) {
   );
 }
 
+const FICHA_ESTILOS = {
+  verified: { emoji: '✅', label: 'Verificado', bg: '#eef7f0', border: '#bfe8cd', color: '#15803d' },
+  'needs-review': { emoji: '🟡', label: 'Pendiente de verificación', bg: '#fef9ec', border: '#f3e3b8', color: '#92400e' },
+  blocked: { emoji: '🔴', label: 'Cálculo en revisión', bg: '#fdf2f2', border: '#f3caca', color: '#b91c1c' },
+};
+
+function FichaConfianza({ id }) {
+  const data = regulatoryData.calculators[id];
+  if (!data) return null;
+  const cfg = FICHA_ESTILOS[data.verificationStatus] || FICHA_ESTILOS['needs-review'];
+  const fuentes = (data.sources || []).map(s => s.institution).filter(Boolean);
+  const fundamento = (data.legalBasis || [])
+    .map(l => (l.reference ? `${l.name} — ${l.reference}` : l.name))
+    .filter(Boolean);
+
+  return (
+    <div style={{
+      marginTop: 12, padding: '12px 14px', borderRadius: 10,
+      background: cfg.bg, border: `1px solid ${cfg.border}`,
+      fontSize: 12, color: cfg.color, lineHeight: 1.6
+    }}>
+      <div style={{ fontWeight: 700, marginBottom: 4 }}>{cfg.emoji} {cfg.label}</div>
+      {fundamento.length > 0 && <div>Fundamento: {fundamento.join('; ')}</div>}
+      {fuentes.length > 0 && <div>Fuente: {fuentes.join(', ')}</div>}
+      {data.verifiedAt && <div>Última verificación: {data.verifiedAt}</div>}
+      <div style={{ marginTop: 4, opacity: 0.85 }}>
+        Este cálculo es informativo, no una asesoría fiscal o legal.
+      </div>
+    </div>
+  );
+}
+
 // ═══════════════════════════════════════════════════════════════
 // APP PRINCIPAL
 // ═══════════════════════════════════════════════════════════════
@@ -1044,6 +1077,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                 </div>
               </div>
               <Comp />
+              <FichaConfianza id={calc.id} />
             </div>
           </div>
         )}

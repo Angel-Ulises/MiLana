@@ -171,7 +171,7 @@ function CalcFiniquito() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula lo que te corresponde al renunciar. Incluye días trabajados, aguinaldo, vacaciones y prima vacacional proporcionales. Datos LFT 2026.
+        Calcula el finiCalcula el finiquito que te corresponde al renunciar de forma voluntaria. El resultado incluye días trabajados pendientes de pago, aguinaldo proporcional, vacaciones proporcionales y prima vacacional, conforme a la Ley Federal del Trabajo vigente en 2026.quito que te corresponde al renunciar de forma voluntaria. El resultado incluye días trabajados pendientes de pago, aguinaldo proporcional, vacaciones proporcionales y prima vacacional, conforme a la Ley Federal del Trabajo vigente en 2026.
       </p>
       <div style={styles.grid2}>
         <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 15000" />
@@ -258,7 +258,7 @@ function CalcLiquidacion() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula tu liquidación por despido injustificado. Incluye 3 meses de indemnización, 20 días por año y prima de antigüedad. Art. 48 y 50 LFT.
+        Calcula la liquidación que te corresponde en caso de despido injustificado. El resultado incluye la indemnización constitucional de 3 meses, 20 días de salario por cada año trabajado y la prima de antigüedad, conforme a los artículos 48 y 50 de la Ley Federal del Trabajo.
       </p>
       <div style={styles.grid2}>
         <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 20000" />
@@ -327,7 +327,7 @@ function CalcAguinaldo() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula tu aguinaldo proporcional o completo. Mínimo 15 días por ley (Art. 87 LFT). Exención de 30 UMAs en ISR.
+        Calcula tu aguinaldo, ya sea completo o proporcional al tiempo trabajado. La ley establece un mínimo de 15 días de salario (Art. 87 LFT) y una exención de ISR equivalente a 30 UMAs.
       </p>
       <div style={styles.grid2}>
         <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 18000" />
@@ -382,7 +382,7 @@ function CalcISR() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula cuánto ISR te retienen de tu sueldo mensual. Tablas actualizadas al Anexo 8 RMF 2026 (DOF 28/12/2025).
+        Calcula el Impuesto Sobre la Renta que se retiene de tu sueldo mensual, con base en las tablas del Anexo 8 de la Resolución Miscelánea Fiscal 2026, publicadas en el Diario Oficial de la Federación el 28 de diciembre de 2025.
       </p>
       <div style={styles.grid2}>
         <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 25000" />
@@ -442,7 +442,7 @@ function CalcRESICO() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        RESICO (Régimen Simplificado de Confianza) para personas físicas con ingresos hasta $3.5M anuales. Tasas del 1% al 2.5% sobre ingresos.
+        Calcula el impuesto que pagarías bajo el Régimen Simplificado de Confianza (RESICO), disponible para personas físicas con ingresos anuales de hasta 3.5 millones de pesos. Las tasas aplicables van del 1% al 2.5% sobre tus ingresos.
       </p>
       <div style={styles.grid2}>
         <Field label="Ingreso mensual facturado ($)" value={ingresoMensual} onChange={setIngresoMensual} type="number" placeholder="Ej: 40000" />
@@ -508,7 +508,7 @@ function CalcPTU() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Estima tu Reparto de Utilidades (PTU). Las empresas reparten el 10% de utilidades. Tope: 3 meses de salario. Art. 117-131 LFT.
+        Estima el monto que te corresponde por Participación de los Trabajadores en las Utilidades (PTU). Las empresas están obligadas a repartir el 10% de sus utilidades anuales, con un tope equivalente a 3 meses de salario, conforme a los artículos 117 al 131 de la Ley Federal del Trabajo.
       </p>
       <div style={styles.grid2}>
         <Field label="Tu salario mensual ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 15000" />
@@ -570,7 +570,7 @@ function CalcBrutoNeto() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Convierte tu salario bruto a neto. Ve cuánto te queda realmente después de ISR e IMSS.
+        Convierte tu salario bruto a neto y conoce cuánto recibirás realmente después de las retenciones de ISR y de la cuota obrera del IMSS.
       </p>
       <div style={styles.grid2}>
         <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 30000" />
@@ -624,7 +624,7 @@ function CalcVacaciones() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Consulta cuántos días de vacaciones te corresponden según tu antigüedad. Reforma "Vacaciones Dignas" 2023, Art. 76 LFT.
+        Consulta cuántos días de vacaciones te corresponden de acuerdo con tu antigüedad en la empresa, conforme a la reforma de Vacaciones Dignas de 2023 (Art. 76 LFT).
       </p>
       <div style={styles.grid2}>
         <Field label="Años trabajados en la empresa" value={aniosTrabajados} onChange={setAniosTrabajados} type="number" placeholder="Ej: 3" />
@@ -689,7 +689,7 @@ function CalcInfonavit() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Simula tu crédito Infonavit. Ve cuánto pagarás realmente de intereses y el costo total del crédito.
+        Simula tu crédito Infonavit y conoce el pago mensual, el total de intereses y el costo final del crédito a lo largo del plazo elegido.
       </p>
       <div style={styles.grid2}>
         <Field label="Monto del crédito ($)" value={montoCredito} onChange={setMontoCredito} type="number" placeholder="Ej: 800000" />
@@ -759,7 +759,7 @@ function CalcPension() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Estima tu pensión IMSS bajo Ley 97 (AFORE). Mínimo 825 semanas cotizadas en 2026. Edad mínima de retiro: 65 años.
+        Estima el monto de tu pensión bajo el esquema de Ley 97 (AFORE). En 2026 se requiere un mínimo de 825 semanas cotizadas y una edad mínima de retiro de 65 años.
       </p>
       <div style={styles.grid2}>
         <Field label="Salario mensual actual ($)" value={salarioActual} onChange={setSalarioActual} type="number" placeholder="Ej: 25000" />
@@ -814,7 +814,7 @@ function Field({ label, value, onChange, type = 'text', placeholder = '' }) {
 
 function Btn({ onClick, children }) {
   return (
-    <button onClick={onClick} style={{
+    <button onClick={onClick} className="ml-btn" style={{
       width:'100%',padding:'14px 24px',background:'linear-gradient(135deg,#0ea5e9,#0284c7)',
       color:'white',border:'none',borderRadius:12,fontSize:16,fontWeight:600,
       cursor:'pointer',marginTop:8,marginBottom:16,transition:'transform 0.1s',
@@ -830,7 +830,7 @@ function Btn({ onClick, children }) {
 
 function ResultBox({ children }) {
   return (
-    <div style={{
+    <div className="ml-result" style={{
       background:'#f0f9ff',border:'2px solid #bae6fd',borderRadius:14,
       padding:20,marginTop:8
     }}>
@@ -875,9 +875,9 @@ const CALCULADORAS = [
   { id: 'liquidacion', nombre: 'Liquidación', emoji: '⚖️', desc: 'Despido injustificado', comp: CalcLiquidacion },
   { id: 'aguinaldo', nombre: 'Aguinaldo', emoji: '🎄', desc: 'Proporcional o completo', comp: CalcAguinaldo },
   { id: 'isr', nombre: 'ISR Mensual', emoji: '🧾', desc: 'Retención de nómina', comp: CalcISR },
-  { id: 'resico', nombre: 'RESICO', emoji: '💼', desc: 'Freelancers / independientes', comp: CalcRESICO },
+  { id: 'resico', nombre: 'RESICO', emoji: '💼', desc: 'Ingresos por actividad independiente', comp: CalcRESICO },
   { id: 'ptu', nombre: 'PTU', emoji: '💰', desc: 'Reparto de utilidades', comp: CalcPTU },
-  { id: 'bruto-neto', nombre: 'Bruto a Neto', emoji: '💵', desc: 'Cuánto te queda realmente', comp: CalcBrutoNeto },
+  { id: 'bruto-neto', nombre: 'Bruto a Neto', emoji: '💵', desc: 'Salario neto real', comp: CalcBrutoNeto },
   { id: 'vacaciones', nombre: 'Vacaciones', emoji: '🏖️', desc: 'Días según antigüedad', comp: CalcVacaciones },
   { id: 'infonavit', nombre: 'Infonavit', emoji: '🏠', desc: 'Simulador de crédito', comp: CalcInfonavit },
   { id: 'pension', nombre: 'Pensión IMSS', emoji: '👴', desc: 'Estimación Ley 97', comp: CalcPension },
@@ -901,7 +901,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
     }}>
       <div style={{maxWidth:680,margin:'0 auto',padding:'24px 16px'}}>
         
-        {/* Header */}
+        <style>{`@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result{animation:none}.ml-btn:hover{transform:none}}`}</style>{/* Header */}
         <div style={{textAlign:'center',marginBottom:32}}>
           <div style={{fontSize:36,marginBottom:4}}>🇲🇽</div>
           <h1 style={{
@@ -911,7 +911,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             MiLana
           </h1>
           <p style={{color:'#64748b',fontSize:14,margin:0}}>
-            Calculadoras financieras de México — Datos 2026 del SAT
+            Calculadoras financieras y fiscales para México — Datos 2026
           </p>
           <div style={{
             display:'inline-flex',alignItems:'center',gap:6,
@@ -925,7 +925,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
 
         {/* Calculadora activa */}
         {activa && (
-          <div style={{marginBottom:24}}>
+          <div key={activa} className="ml-panel" style={{marginBottom:24}}>
             <button onClick={() => setActiva(null)} style={{
               background:'none',border:'none',color:'#0ea5e9',fontSize:14,
               cursor:'pointer',padding:'8px 0',fontWeight:500,display:'flex',

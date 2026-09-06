@@ -156,16 +156,12 @@ function CalcFiniquito() {
 
     const bruto = pagoSalario + aguinaldo + pagoVacaciones + primaVac + primaAnt;
 
-    // ISR estimado simplificado
-    const isrEstimado = calcISR(bruto, ISR_MENSUAL_2026);
-
     setResult({
       sd: sd,
       pagoSalario, dt, aguinaldo, diasAnio,
       vacDias, vacProporcionales: totalVacDias, pagoVacaciones,
       primaVac, primaAnt, aniosCompletos,
-      bruto, isrEstimado,
-      neto: bruto - isrEstimado
+      bruto,
     });
   };
 
@@ -190,10 +186,8 @@ function CalcFiniquito() {
           <ResultLine label="Prima vacacional (25%)" value={fmt(result.primaVac)} />
           {result.primaAnt > 0 && <ResultLine label={`Prima antigüedad (${result.aniosCompletos} años)`} value={fmt(result.primaAnt)} />}
           <Divider />
-          <ResultLine label="Total bruto" value={fmt(result.bruto)} bold />
-          <ResultLine label="ISR estimado" value={`- ${fmt(result.isrEstimado)}`} color="#b91c1c" />
-          <ResultLine label="Total neto estimado" value={fmt(result.neto)} bold color="#15803d" />
-          <Note>Cálculo basado en LFT y tablas ISR 2026. Para montos exactos consulta con un especialista laboral.</Note>
+          <ResultLine label="Total bruto estimado" value={fmt(result.bruto)} bold color="#15803d" />
+          <Note>Este resultado es el total bruto (antes de impuestos) de tu finiquito. No incluye el ISR por pagos de separación: ese impuesto se calcula con un procedimiento específico (Art. 95 LISR) que depende de tu salario ordinario y de cómo se traten los distintos conceptos que integran el finiquito, así que no lo estimamos aquí para evitar darte una cifra neta poco confiable. Consulta con tu área de Recursos Humanos o un especialista laboral/fiscal para el neto exacto.</Note>
         </ResultBox>
       )}
     </div>
@@ -303,32 +297,34 @@ function CalcAguinaldo() {
     const da = parseInt(diasAguinaldo) || 15;
     if (sm <= 0) return;
 
+    const ANIO_REFERENCIA = 2026; // aguinaldo estimado del año en curso (periodo vigente del sitio)
     let diasProporcionales = 365;
     if (fechaIngreso) {
       const fi = new Date(fechaIngreso);
-      const finAnio = new Date(fi.getFullYear(), 11, 31);
-      const hoy = new Date();
-      const ref = hoy < finAnio ? hoy : finAnio;
-      diasProporcionales = diasEntre(fechaIngreso, ref.toISOString().split('T')[0]);
+      if (fi.getFullYear() < ANIO_REFERENCIA) {
+        // Ingresó antes del año de referencia: se considera el año completo
+        diasProporcionales = 365;
+      } else {
+        // Ingresó durante el año de referencia: proporcional desde el ingreso hasta el cierre de ese año
+        const finAnio = new Date(ANIO_REFERENCIA, 11, 31);
+        diasProporcionales = diasEntre(fechaIngreso, finAnio.toISOString().split('T')[0]);
+      }
     }
 
     const aguinaldoBruto = sd * da * (diasProporcionales / 365);
     const exencion = UMA_DIARIA * 30; // 30 UMAs exención aguinaldo
-    const gravado = Math.max(aguinaldoBruto - exencion, 0);
-    const isrAguinaldo = calcISR(gravado, ISR_MENSUAL_2026);
 
     setResult({
       sd, da, diasProporcionales,
-      aguinaldoBruto, exencion, gravado,
-      isrAguinaldo,
-      neto: aguinaldoBruto - isrAguinaldo
+      aguinaldoBruto, exencion,
+      gravado: Math.max(aguinaldoBruto - exencion, 0),
     });
   };
 
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula tu aguinaldo, ya sea completo o proporcional al tiempo trabajado. La ley establece un mínimo de 15 días de salario (Art. 87 LFT) y una exención de ISR equivalente a 30 UMAs.
+        Calcula tu aguinaldo estimado del año, ya sea completo o proporcional al tiempo trabajado en 2026. La ley establece un mínimo de 15 días de salario (Art. 87 LFT) y una exención de ISR equivalente a 30 UMAs.
       </p>
       <div style={styles.grid2}>
         <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 18000" />
@@ -339,14 +335,12 @@ function CalcAguinaldo() {
       {result && (
         <ResultBox>
           <ResultLine label="Salario diario" value={fmt(result.sd)} />
-          <ResultLine label={`Días proporcionales trabajados`} value={result.diasProporcionales} />
-          <ResultLine label="Aguinaldo bruto" value={fmt(result.aguinaldoBruto)} bold />
+          <ResultLine label={`Días proporcionales trabajados en el año`} value={result.diasProporcionales} />
+          <ResultLine label="Aguinaldo bruto estimado" value={fmt(result.aguinaldoBruto)} bold color="#15803d" />
           <Divider />
-          <ResultLine label={`Exención ISR (30 UMAs = ${fmt(result.exencion)})`} value={fmt(Math.min(result.aguinaldoBruto, result.exencion))} color="#15803d" />
-          <ResultLine label="Gravado" value={fmt(result.gravado)} />
-          <ResultLine label="ISR estimado" value={`- ${fmt(result.isrAguinaldo)}`} color="#b91c1c" />
-          <Divider />
-          <ResultLine label="Aguinaldo neto estimado" value={fmt(result.neto)} bold color="#15803d" />
+          <ResultLine label={`Parte exenta de ISR (30 UMAs = ${fmt(result.exencion)})`} value={fmt(Math.min(result.aguinaldoBruto, result.exencion))} color="#15803d" />
+          <ResultLine label="Parte gravada" value={fmt(result.gravado)} />
+          <Note>Este resultado es el aguinaldo bruto (antes de impuestos) y su parte exenta/gravada de ISR. No calculamos el ISR a retener ni un neto: la retención sobre el aguinaldo sigue un procedimiento específico (Art. 174 del Reglamento de la LISR) que relaciona esta prestación con tu salario ordinario mensual, así que una tarifa aplicada de forma aislada podría darte una cifra incorrecta. Consulta con tu área de nóminas para el neto exacto.</Note>
         </ResultBox>
       )}
     </div>
@@ -469,66 +463,31 @@ function CalcRESICO() {
 }
 
 function CalcPTU() {
-  const [salarioMensual, setSalarioMensual] = useState('');
-  const [diasTrabajados, setDiasTrabajados] = useState('365');
   const [utilidadesEmpresa, setUtilidadesEmpresa] = useState('');
-  const [totalEmpleados, setTotalEmpleados] = useState('');
   const [result, setResult] = useState(null);
 
   const calcular = () => {
-    const sm = parseFloat(salarioMensual) || 0;
-    const dt = parseInt(diasTrabajados) || 365;
     const util = parseFloat(utilidadesEmpresa) || 0;
-    const emp = parseInt(totalEmpleados) || 1;
-    if (sm <= 0 || util <= 0) return;
+    if (util <= 0) return;
 
     const repartoTotal = util * 0.10;
-    const mitadDias = repartoTotal / 2;
-    const mitadSalarios = repartoTotal / 2;
 
-    // Simplificación: reparto equitativo entre empleados
-    const ptuPorDias = (mitadDias / (emp * 365)) * dt;
-    const ptuPorSalario = (mitadSalarios / (emp * sm * 12)) * (sm * (dt / 30));
-    const ptuBruto = ptuPorDias + ptuPorSalario;
-
-    // Tope de 3 meses de salario o promedio de últimos 3 años PTU
-    const tope = sm * 3;
-    const ptuFinal = Math.min(ptuBruto, tope);
-
-    // Exención 15 UMAs
-    const exencion = UMA_DIARIA * 15;
-    const gravado = Math.max(ptuFinal - exencion, 0);
-    const isr = calcISR(gravado, ISR_MENSUAL_2026);
-
-    setResult({
-      repartoTotal, ptuBruto, ptuFinal, tope, exencion, gravado, isr,
-      neto: ptuFinal - isr
-    });
+    setResult({ repartoTotal });
   };
 
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Estima el monto que te corresponde por Participación de los Trabajadores en las Utilidades (PTU). Las empresas están obligadas a repartir el 10% de sus utilidades anuales, con un tope equivalente a 3 meses de salario, conforme a los artículos 117 al 131 de la Ley Federal del Trabajo.
+        Calcula el monto total que una empresa debe repartir por Participación de los Trabajadores en las Utilidades (PTU): el 10% de sus utilidades anuales, conforme a los artículos 117 al 131 de la Ley Federal del Trabajo.
       </p>
       <div style={styles.grid2}>
-        <Field label="Tu salario mensual ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 15000" />
-        <Field label="Días trabajados en el año" value={diasTrabajados} onChange={setDiasTrabajados} type="number" placeholder="365" />
         <Field label="Utilidades de la empresa ($)" value={utilidadesEmpresa} onChange={setUtilidadesEmpresa} type="number" placeholder="Ej: 5000000" />
-        <Field label="Total de empleados" value={totalEmpleados} onChange={setTotalEmpleados} type="number" placeholder="Ej: 50" />
       </div>
       <Btn onClick={calcular}>Calcular PTU</Btn>
       {result && (
         <ResultBox>
-          <ResultLine label="10% de utilidades a repartir" value={fmt(result.repartoTotal)} />
-          <ResultLine label="Tu PTU estimado (bruto)" value={fmt(result.ptuBruto)} />
-          <ResultLine label={`Tope (3 meses de salario)`} value={fmt(result.tope)} />
-          <ResultLine label="PTU a pagar" value={fmt(result.ptuFinal)} bold />
-          <Divider />
-          <ResultLine label={`Exención ISR (15 UMAs = ${fmt(result.exencion)})`} value={fmt(Math.min(result.ptuFinal, result.exencion))} color="#15803d" />
-          <ResultLine label="ISR estimado" value={`- ${fmt(result.isr)}`} color="#b91c1c" />
-          <ResultLine label="PTU neto estimado" value={fmt(result.neto)} bold color="#15803d" />
-          <Note>Estimación simplificada. El reparto real depende de la estructura salarial de todos los empleados.</Note>
+          <ResultLine label="10% de utilidades a repartir (PTU total)" value={fmt(result.repartoTotal)} bold color="#15803d" />
+          <Note>Esta calculadora solo obtiene el monto total a repartir entre todos los trabajadores (10% de las utilidades). No calcula la parte individual que le corresponde a cada trabajador: eso depende de los días trabajados y el salario de cada persona en relación con los de toda la plantilla (Art. 123 LFT), además de un tope de 3 meses de salario o el promedio de la PTU de los últimos 3 años, lo que sea más favorable para el trabajador. Consulta con el área de Recursos Humanos o Nóminas de tu empresa para el monto individual que te corresponde.</Note>
         </ResultBox>
       )}
     </div>
@@ -803,72 +762,60 @@ function CalcInfonavit() {
 }
 
 function CalcPension() {
-  const [salarioActual, setSalarioActual] = useState('');
   const [edad, setEdad] = useState('');
   const [semanasCotizadas, setSemanasCotizadas] = useState('');
   const [result, setResult] = useState(null);
 
   const calcular = () => {
-    const sm = parseFloat(salarioActual) || 0;
     const ed = parseInt(edad) || 0;
     const sc = parseInt(semanasCotizadas) || 0;
-    if (sm <= 0 || ed <= 0) return;
-
-    const sd = sm / 30;
+    if (ed <= 0) return;
 
     // Ley 97 (AFORE) — la mayoría de trabajadores actuales
-    const minSemanas = 875; // 2026, sube gradualmente
+    const minSemanas = 875; // 2026, sube gradualmente hasta 1000 en 2031
     const cumpleMinimo = sc >= minSemanas;
+    const tipoRetiro = ed >= 65 ? 'vejez' : (ed >= 60 ? 'cesantia' : null);
 
-    // Estimación de ahorro en AFORE
-    const aniosCotizados = sc / 52;
-    const aportacionMensual = sm * 0.065; // ~6.5% cuota total AFORE
-    const saldoEstimado = aportacionMensual * 12 * aniosCotizados * 1.04; // rendimiento 4% promedio
-
-    // Pensión estimada con AFORE (renta vitalicia muy simplificada)
-    const aniosPension = 85 - Math.max(ed, 65);
-    const pensionAFORE = aniosPension > 0 ? saldoEstimado / (aniosPension * 12) : 0;
-
-    // Nota: la "pensión garantizada" (Art. 170 LSS) NO se calcula aquí a propósito.
-    // Depende de una tabla oficial de dos entradas (semanas cotizadas × salario
-    // promedio en UMAs) que se actualiza cada febrero con el INPC — no es un monto
-    // fijo, así que no se aproxima con una fórmula de una sola variable.
+    // Nota: el monto de la pensión (AFORE o "pensión garantizada", Art. 170 LSS)
+    // NO se calcula aquí a propósito. Depende del saldo real acumulado en tu
+    // AFORE (aportaciones, rendimientos, comisiones) o de una tabla oficial de
+    // dos entradas (semanas cotizadas × salario promedio en UMAs) que se
+    // actualiza cada febrero con el INPC — no es algo que una fórmula simple
+    // de una sola variable pueda aproximar con responsabilidad.
 
     setResult({
-      sd, sc, minSemanas, cumpleMinimo,
-      aniosCotizados, aportacionMensual, saldoEstimado,
-      pensionAFORE,
+      sc, minSemanas, cumpleMinimo,
       faltanSemanas: Math.max(minSemanas - sc, 0),
-      edadRetiro: 65
+      edad: ed,
+      tipoRetiro,
     });
   };
 
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Estima el monto de tu pensión bajo el esquema de Ley 97 (AFORE). En 2026 se requiere un mínimo de 875 semanas cotizadas y una edad mínima de retiro de 65 años.
+        Revisa si cumples los requisitos generales de edad y semanas cotizadas para pensionarte bajo el esquema de Ley 97 (AFORE). En 2026 se requiere un mínimo de 875 semanas cotizadas.
       </p>
       <div style={styles.grid2}>
-        <Field label="Salario mensual actual ($)" value={salarioActual} onChange={setSalarioActual} type="number" placeholder="Ej: 25000" />
         <Field label="Tu edad actual" value={edad} onChange={setEdad} type="number" placeholder="Ej: 35" />
         <Field label="Semanas cotizadas en IMSS" value={semanasCotizadas} onChange={setSemanasCotizadas} type="number" placeholder="Ej: 520" />
       </div>
-      <Btn onClick={calcular}>Estimar Pensión</Btn>
+      <Btn onClick={calcular}>Revisar Requisitos</Btn>
       {result && (
         <ResultBox>
           <ResultLine label="Semanas cotizadas" value={result.sc} />
           <ResultLine label={`Mínimo requerido (2026)`} value={`${result.minSemanas} semanas`} />
-          <ResultLine label="¿Cumples el mínimo?" value={result.cumpleMinimo ? '✅ Sí' : `❌ Faltan ${result.faltanSemanas} semanas`} color={result.cumpleMinimo ? '#15803d' : '#b91c1c'} />
+          <ResultLine label="¿Cumples el mínimo de semanas?" value={result.cumpleMinimo ? '✅ Sí' : `❌ Faltan ${result.faltanSemanas} semanas`} color={result.cumpleMinimo ? '#15803d' : '#b91c1c'} />
           <Divider />
-          <ResultLine label={`Años cotizados`} value={`${result.aniosCotizados.toFixed(1)} años`} />
-          <ResultLine label="Aportación mensual a AFORE (~6.5%)" value={fmt(result.aportacionMensual)} />
-          <ResultLine label="Saldo estimado en AFORE" value={fmt(result.saldoEstimado)} bold />
-          <Divider />
-          <ResultLine label="Pensión estimada con AFORE" value={fmt(result.pensionAFORE) + "/mes"} bold color="#15803d" />
+          <ResultLine label="Tipo de retiro según tu edad" value={
+            result.tipoRetiro === 'vejez' ? 'Vejez (65 años o más)' :
+            result.tipoRetiro === 'cesantia' ? 'Cesantía en edad avanzada (60 a 64 años)' :
+            'Aún no alcanzas la edad mínima (60 años)'
+          } bold />
           <div style={{marginTop:12,padding:'12px 14px',background:'#f1f5f9',borderRadius:10,fontSize:13,color:'#475569',lineHeight:1.5}}>
-            <strong>Pensión garantizada:</strong> no incluida en esta estimación. Su determinación depende de las semanas cotizadas y del salario promedio expresado en UMAs durante toda tu vida laboral, conforme a la tabla oficial aplicable (Art. 170 LSS) — no es un monto fijo.
+            <strong>Pensión garantizada:</strong> no incluida aquí. Su determinación depende de las semanas cotizadas y del salario promedio expresado en UMAs durante toda tu vida laboral, conforme a la tabla oficial aplicable (Art. 170 LSS) — no es un monto fijo.
           </div>
-          <Note>Esta es una proyección ilustrativa del ahorro en AFORE bajo los supuestos indicados (rendimiento 4% anual, aportación ~6.5%), no una cotización ni una determinación oficial de pensión. Tu pensión real también depende del rendimiento real de tu AFORE, las aportaciones voluntarias y tu modalidad de retiro. Consulta tu estado de cuenta en AFORE o el simulador oficial del IMSS para un cálculo preciso.</Note>
+          <Note>Esta calculadora solo revisa los requisitos generales de edad y semanas cotizadas del régimen de Ley 97. No estima el monto de tu pensión ni el saldo de tu AFORE — eso depende de tu historial real de aportaciones, rendimientos y comisiones. Consulta tu estado de cuenta en AFORE o el simulador oficial del IMSS/CONSAR para una proyección de tu pensión.</Note>
         </ResultBox>
       )}
     </div>

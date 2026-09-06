@@ -149,7 +149,7 @@ function CalcFiniquito() {
     // Prima de antigüedad (solo si >= 15 años en renuncia voluntaria)
     let primaAnt = 0;
     if (aniosCompletos >= 15) {
-      const topeDiario = UMA_DIARIA * 2;
+      const topeDiario = SALARIO_MINIMO_GENERAL * 2; // Art. 162 LFT: tope es 2x salario mínimo, no 2x UMA
       const sdTope = Math.min(sd, topeDiario);
       primaAnt = 12 * sdTope * aniosCompletos;
     }
@@ -239,8 +239,8 @@ function CalcLiquidacion() {
     // 20 días por año trabajado
     const indem20 = sdi * 20 * Math.max(aniosCompletos, 1);
 
-    // Prima de antigüedad (12 días por año, tope 2 UMAs)
-    const topeDiario = UMA_DIARIA * 2;
+    // Prima de antigüedad (12 días por año, tope 2x salario mínimo — Art. 162 LFT)
+    const topeDiario = SALARIO_MINIMO_GENERAL * 2;
     const sdTope = Math.min(sd, topeDiario);
     const primaAnt = 12 * sdTope * Math.max(aniosCompletos, 1);
 
@@ -980,6 +980,9 @@ function FichaConfianza({ id }) {
       <div style={{ fontWeight: 700, marginBottom: 4 }}>{cfg.emoji} {cfg.label}</div>
       {fundamento.length > 0 && <div>Fundamento: {fundamento.join('; ')}</div>}
       {fuentes.length > 0 && <div>Fuente: {fuentes.join(', ')}</div>}
+      {fundamento.length === 0 && fuentes.length === 0 && (
+        <div>La información normativa de esta calculadora aún está en proceso de revisión.</div>
+      )}
       {data.verifiedAt && <div>Última verificación: {data.verifiedAt}</div>}
       <div style={{ marginTop: 4, opacity: 0.85 }}>
         Este cálculo es informativo, no una asesoría fiscal o legal.

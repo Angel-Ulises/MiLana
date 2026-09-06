@@ -1101,7 +1101,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             borderRadius:20,fontSize:11,fontWeight:600,marginTop:8
           }}>
             <span style={{width:6,height:6,background:'#15803d',borderRadius:'50%',display:'inline-block'}} />
-            Actualizado septiembre 2026 — Anexo 8 RMF
+            Fuentes y fecha de revisión por calculadora
           </div>
         </div>
 

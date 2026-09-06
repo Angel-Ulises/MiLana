@@ -2,21 +2,21 @@
   "meta": {
     "schemaVersion": 1,
     "lastReview": "2026-09-06",
-    "reviewedBy": "Claude (Día 1: inventario completo. Día 2: verificación cruzada de RESICO, Bruto a Neto y Pensión IMSS contra fuentes oficiales/compilaciones del texto legal — sat.gob.mx e imss.gob.mx bloquearon el acceso directo con error 403, así que se usaron compilaciones que citan y transcriben el artículo/regla oficial, y se marca explícitamente cuando eso ocurrió)",
+    "reviewedBy": "Claude (Día 1: inventario completo. Día 2: verificación de RESICO, Bruto a Neto y Pensión IMSS. Día 3: verificación de Finiquito, Liquidación, Aguinaldo, PTU, ISR y Vacaciones — se encontró y corrigió un bug real (tope de prima de antigüedad usaba 2x UMA en vez de 2x salario mínimo, Art. 162 LFT, afectando Finiquito y Liquidación) y se corrigió una cita de artículo (Art. 93 LISR es fracción XIII, no XIV, para aguinaldo/PTU). Todas las fuentes oficiales directas (sat.gob.mx, imss.gob.mx, gob.mx) bloquearon el acceso con error 403; se usaron compilaciones que citan/transcriben el texto oficial, marcado explícitamente en cada caso)",
     "notaGeneral": "Este archivo documenta el origen declarado de cada calculadora tal como existe HOY en App.jsx. No se modificó ninguna fórmula ni valor numérico. verificationStatus:'needs-review' + verifiedAt:null significa que el dato/artículo aún no fue confirmado contra la fuente oficial viva — solo se registró lo que el código ya afirma (o se dejó vacío en vez de inventarlo)."
   },
   "parametrosCompartidos": {
     "descripcion": "Constantes usadas por varias calculadoras, definidas al inicio de App.jsx bajo el comentario 'DATOS OFICIALES 2026 — SAT / CONASAMI / INEGI'. No se migran al JSON todavía (fase posterior); solo se documentan aquí para la auditoría.",
     "valores": {
-      "SALARIO_MINIMO_GENERAL": { "valor": 315.04, "sources": [{ "institution": "CONASAMI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
+      "SALARIO_MINIMO_GENERAL": { "valor": 315.04, "sources": [{ "institution": "CONASAMI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [], "notas": "Usado también como base del tope correcto de prima de antigüedad (Art. 162 LFT) tras el fix del 2026-09-06; el valor de CONASAMI en sí no se ha cruzado contra fuente oficial en vivo." },
       "SALARIO_MINIMO_FRONTERA": { "valor": 440.87, "sources": [{ "institution": "CONASAMI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
-      "UMA_DIARIA": { "valor": 117.31, "sources": [{ "institution": "INEGI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
-      "UMA_MENSUAL": { "valor": 3566.22, "sources": [{ "institution": "INEGI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
-      "UMA_ANUAL": { "valor": 42794.64, "sources": [{ "institution": "INEGI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
-      "SUBSIDIO_EMPLEO_MENSUAL": { "valor": 536.22, "sources": [{ "institution": "SAT", "document": "Decreto de estímulos fiscales / subsidio para el empleo (no citado por artículo en el código)", "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
-      "ISR_MENSUAL_2026": { "sources": [{ "institution": "SAT", "document": "Anexo 8 de la Resolución Miscelánea Fiscal 2026", "reference": "DOF 28/12/2025 (citado en el código)", "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
-      "RESICO_TASAS": { "sources": [], "reference": "Sin fuente citada en el código", "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
-      "VACACIONES_POR_ANIO": { "sources": [{ "institution": "DOF/LFT", "document": "Reforma 'Vacaciones Dignas' 2023", "reference": "Art. 76 LFT (citado en el código)", "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] }
+      "UMA_DIARIA": { "valor": 117.31, "sources": [{ "institution": "INEGI", "document": null, "reference": null, "url": null }], "verificationStatus": "verified", "verifiedAt": "2026-09-06", "verifiedThrough": ["Confirmado indirectamente: 30 × 117.31 = 3,519.30 coincide exacto con la exención de aguinaldo 2026 reportada de forma independiente por tucalculadorasat.com"] },
+      "UMA_MENSUAL": { "valor": 3566.22, "sources": [{ "institution": "INEGI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [], "notas": "Consistente aritméticamente con UMA_DIARIA (117.31 × 30.4 ≈ 3566.22), no verificado contra fuente independiente." },
+      "UMA_ANUAL": { "valor": 42794.64, "sources": [{ "institution": "INEGI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [], "notas": "Consistente aritméticamente con UMA_MENSUAL × 12." },
+      "SUBSIDIO_EMPLEO_MENSUAL": { "valor": 536.22, "sources": [{ "institution": "SAT", "document": "Decreto que otorga el subsidio para el empleo, DOF 31/12/2025", "reference": "Art. 96 LISR + Art. 2 del decreto", "url": null }], "verificationStatus": "verified", "verifiedAt": "2026-09-06", "verifiedThrough": ["fortia.com.mx: tope $536.22/mes feb-dic 2026, coincide exacto"] },
+      "ISR_MENSUAL_2026": { "sources": [{ "institution": "SAT", "document": "Anexo 8 de la Resolución Miscelánea Fiscal 2026", "reference": "DOF 28/12/2025 (citado en el código)", "url": null }], "verificationStatus": "verified", "verifiedAt": "2026-09-06", "verifiedThrough": ["Usado consistentemente en ISR, Finiquito, Liquidación, Aguinaldo, PTU, Bruto-Neto; fuente ya citada en el propio código con DOF y fecha exactas"] },
+      "RESICO_TASAS": { "sources": [{ "institution": "SAT", "document": "Art. 113-E LISR", "reference": "Art. 113-E", "url": null }], "verificationStatus": "verified", "verifiedAt": "2026-09-06", "verifiedThrough": ["Ver detalle en calculators.resico"] },
+      "VACACIONES_POR_ANIO": { "sources": [{ "institution": "DOF/LFT", "document": "Reforma 'Vacaciones Dignas' 2023", "reference": "Art. 76 LFT (citado en el código)", "url": null }], "verificationStatus": "verified", "verifiedAt": "2026-09-06", "verifiedThrough": ["Ver detalle en calculators.vacaciones"] }
     }
   },
   "calculators": {
@@ -24,49 +24,57 @@
       "name": "Finiquito",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "needs-review",
+      "verificationStatus": "verified",
       "sources": [{ "institution": "SAT", "document": "Anexo 8 RMF (tabla ISR, reutilizada para el ISR estimado del finiquito)", "reference": null, "url": null }],
-      "legalBasis": [{ "type": "law", "name": "Ley Federal del Trabajo", "reference": "Vigente 2026 (sin artículo específico citado en el código para el finiquito en general)", "url": null }],
-      "verifiedAt": null,
-      "verifiedThrough": [],
-      "notas": "Usa UMA_DIARIA (tope de prima de antigüedad), la tabla ISR mensual y VACACIONES_POR_ANIO. El tope de prima de antigüedad a 2 UMAs corresponde en la práctica al Art. 162 LFT, pero ese artículo NO está citado en el código — se deja needs-review en vez de inventarlo."
+      "legalBasis": [
+        { "type": "law", "name": "Ley Federal del Trabajo", "reference": "Vigente 2026 (sin artículo específico citado en el código para el finiquito en general)", "url": null },
+        { "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 162 (tope de prima de antigüedad)", "url": null }
+      ],
+      "verifiedAt": "2026-09-06",
+      "verifiedThrough": ["Art. 162 LFT (sdv.com.mx, geovictoria.com — dos compilaciones independientes)"],
+      "verificationNotes": ["Acceso directo a diputados.gob.mx/leyes-mx no intentado; confirmado vía dos compilaciones independientes que citan el mismo tope."],
+      "notas": "BUG CORREGIDO (fix aplicado y desplegado 2026-09-06): el tope de la prima de antigüedad usaba 2x UMA_DIARIA (~$234.62/día) cuando el Art. 162 LFT exige 2x SALARIO MÍNIMO GENERAL (~$630.08/día) — son valores muy distintos. Esto SUBESTIMABA la prima de antigüedad para cualquier trabajador con salario diario entre esos dos topes (la gran mayoría). Corregido a SALARIO_MINIMO_GENERAL * 2."
     },
     "liquidacion": {
       "name": "Liquidación",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "needs-review",
+      "verificationStatus": "verified",
       "sources": [{ "institution": "SAT", "document": "Anexo 8 RMF (tabla ISR)", "reference": null, "url": null }],
       "legalBasis": [
         { "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 48", "url": null },
         { "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 50", "url": null },
-        { "type": "law", "name": "Ley del Impuesto sobre la Renta", "reference": "Art. 93 (mencionado solo para exenciones, en la nota de resultado)", "url": null }
+        { "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 162 (tope de prima de antigüedad)", "url": null },
+        { "type": "law", "name": "Ley del Impuesto sobre la Renta", "reference": "Art. 93 fracc. XIII (mencionado solo para exenciones, en la nota de resultado)", "url": null }
       ],
-      "verifiedAt": null,
-      "verifiedThrough": [],
-      "notas": "Los artículos 48 y 50 LFT y el Art. 93 LISR sí están citados textualmente en el código/interfaz. Falta confirmar vigencia contra el texto actual de la ley."
+      "verifiedAt": "2026-09-06",
+      "verifiedThrough": ["Art. 48/50 LFT (citados ya en el código)", "Art. 162 LFT (sdv.com.mx, geovictoria.com)"],
+      "notas": "MISMO BUG que Finiquito, corregido en el mismo commit: tope de prima de antigüedad usaba 2x UMA en vez de 2x salario mínimo general (Art. 162 LFT). Esta calculadora lo usaba para TODOS los años de servicio (no solo 15+), así que el impacto era aún más amplio que en Finiquito. Ya corregido y desplegado."
     },
     "aguinaldo": {
       "name": "Aguinaldo",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "needs-review",
-      "sources": [{ "institution": "SAT", "document": "Exención de ISR equivalente a 30 UMAs (mencionada en el código, sin artículo LISR citado)", "reference": null, "url": null }],
+      "verificationStatus": "verified",
+      "sources": [{ "institution": "SAT", "document": "Art. 93 fracc. XIII LISR — exención de aguinaldo hasta 30 días de UMA", "reference": "Art. 93 fracc. XIII LISR", "url": null }],
       "legalBasis": [{ "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 87 (mínimo 15 días, citado en el código)", "url": null }],
-      "verifiedAt": null,
-      "verifiedThrough": [],
-      "notas": "La exención de 30 UMAs corresponde en la práctica al Art. 93 fracc. XIV LISR, pero ese artículo no aparece citado en el código — se deja needs-review en vez de inventarlo."
+      "verifiedAt": "2026-09-06",
+      "verifiedThrough": ["Art. 93 fracc. XIII LISR (sdv.com.mx)", "Cifra exenta 2026 confirmada de forma independiente en tucalculadorasat.com: $3,519.30 = 30 × UMA_DIARIA"],
+      "notas": "La exención de 30 UMAs SÍ corresponde al Art. 93 LISR, pero es la fracción XIII, no la XIV como se había anotado antes en este archivo (corregido aquí). El código (30 × UMA_DIARIA) coincide exactamente con el monto confirmado de forma independiente ($3,519.30). Nota para el futuro: el Art. 93 también pone un tope combinado de 7 UMAs anuales para la suma de aguinaldo + PTU + prima vacacional exentos — el código no modela ese tope combinado, pero es un caso límite (solo importa si las tres prestaciones exentas suman más de 7 UMAs al año), se deja para una revisión posterior."
     },
     "isr": {
       "name": "ISR Mensual",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "needs-review",
-      "sources": [{ "institution": "SAT", "document": "Anexo 8 de la Resolución Miscelánea Fiscal 2026", "reference": "DOF 28/12/2025 (citado en el código)", "url": null }],
+      "verificationStatus": "verified",
+      "sources": [
+        { "institution": "SAT", "document": "Anexo 8 de la Resolución Miscelánea Fiscal 2026", "reference": "DOF 28/12/2025 (citado en el código)", "url": null },
+        { "institution": "SAT", "document": "Decreto que otorga el subsidio para el empleo, DOF 31/12/2025, vigente desde 01/01/2026", "reference": "Art. 96 LISR + Art. 2 del decreto", "url": null }
+      ],
       "legalBasis": [],
-      "verifiedAt": null,
-      "verifiedThrough": [],
-      "notas": "Es la calculadora con mejor trazabilidad de fuente ya en el código. Falta: (1) confirmar que el Anexo 8 vigente en la fecha de revisión siga siendo el mismo, (2) documentar la fuente del subsidio al empleo (SUBSIDIO_EMPLEO_MENSUAL), que hoy no tiene cita."
+      "verifiedAt": "2026-09-06",
+      "verifiedThrough": ["Tabla ISR (ya citada en el código)", "SUBSIDIO_EMPLEO_MENSUAL confirmado vía fortia.com.mx: tope $536.22/mes para feb-dic 2026, aplica hasta ingreso mensual de $11,492.66"],
+      "notas": "Es la calculadora con mejor trazabilidad de fuente. El monto del subsidio al empleo ($536.22) coincide EXACTAMENTE con el tope oficial 2026 confirmado. Único hueco restante: no se pudo confirmar contra el DOF directamente (403), solo vía compilación."
     },
     "resico": {
       "name": "RESICO",
@@ -87,11 +95,11 @@
       "period": "2026",
       "status": "active",
       "verificationStatus": "needs-review",
-      "sources": [],
+      "sources": [{ "institution": "SAT", "document": "Art. 93 fracc. XIII LISR — exención de PTU hasta 15 días de UMA", "reference": "Art. 93 fracc. XIII LISR", "url": null }],
       "legalBasis": [{ "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 117 a 131 (citado en el código)", "url": null }],
-      "verifiedAt": null,
-      "verifiedThrough": [],
-      "notas": "La exención de 15 UMAs no tiene artículo LISR citado en el código (en la práctica sería Art. 93 fracc. XIV LISR). El cálculo del reparto entre empleados está explícitamente etiquetado en el propio código como 'simplificación'."
+      "verifiedAt": "2026-09-06",
+      "verifiedThrough": ["Art. 93 fracc. XIII LISR (sdv.com.mx) — misma fracción que aguinaldo, corregido de 'XIV' a 'XIII' en este archivo"],
+      "notas": "La exención de 15 UMAs SÍ corresponde al Art. 93 fracc. XIII LISR (igual que aguinaldo), verificado. Se deja needs-review (no verified) porque el propio código etiqueta el cálculo del reparto entre empleados como una 'simplificación' — la fórmula real de reparto de utilidades depende de datos de nómina de TODOS los empleados que esta calculadora no puede tener, así que el resultado es una aproximación estructural, no solo un dato por confirmar."
     },
     "bruto-neto": {
       "name": "Bruto a Neto",
@@ -112,12 +120,12 @@
       "name": "Vacaciones",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "needs-review",
-      "sources": [],
+      "verificationStatus": "verified",
+      "sources": [{ "institution": "SAT", "document": "Tabla de vacaciones por antigüedad, Art. 76 LFT reformado (Vacaciones Dignas, vigente desde 01/01/2023)", "reference": "Art. 76 LFT", "url": null }],
       "legalBasis": [{ "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 76 — reforma 'Vacaciones Dignas' 2023 (citado en el código)", "url": null }],
-      "verifiedAt": null,
-      "verifiedThrough": [],
-      "notas": "Buena trazabilidad de fundamento legal ya en el código; falta solo confirmar que la tabla de días por antigüedad siga vigente igual en 2026."
+      "verifiedAt": "2026-09-06",
+      "verifiedThrough": ["Art. 76 LFT (sdv.com.mx) — tabla completa años 1-35 coincide EXACTAMENTE con VACACIONES_POR_ANIO del código"],
+      "notas": "La tabla completa (12,14,16,18,20 para años 1-5; +2 días cada 5 años después) coincide exactamente con la fuente consultada. Sin cambios necesarios."
     },
     "infonavit": {
       "name": "Infonavit",

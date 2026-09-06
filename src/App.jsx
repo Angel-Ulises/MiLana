@@ -843,11 +843,11 @@ function ResultLine({ label, value, bold, color }) {
   return (
     <div style={{
       display:'flex',justifyContent:'space-between',alignItems:'center',
-      padding:'8px 0',borderBottom:'1px solid #e0f2fe',
+      padding: bold ? '10px 0' : '8px 0',borderBottom:'1px solid #e0f2fe',
       fontSize:14
     }}>
-      <span style={{color:'#475569',flex:1}}>{label}</span>
-      <span style={{fontWeight: bold ? 700 : 500, color: color || '#1e293b', textAlign:'right'}}>
+      <span style={{color:'#475569',flex:1,fontSize:bold?13:14}}>{label}</span>
+      <span style={{fontWeight: bold ? 700 : 500, fontSize: bold ? 17 : 14, color: color || '#1e293b', textAlign:'right'}}>
         {value}
       </span>
     </div>
@@ -901,7 +901,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
     }}>
       <div style={{maxWidth:680,margin:'0 auto',padding:'24px 16px'}}>
         
-        <style>{`@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result{animation:none}.ml-btn:hover{transform:none}}`}</style>{/* Header */}
+        <style>{`@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}}`}</style>{/* Header */}
         <div style={{textAlign:'center',marginBottom:32}}>
           <div style={{fontSize:36,marginBottom:4}}>🇲🇽</div>
           <h1 style={{
@@ -924,7 +924,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         </div>
 
         {/* Calculadora activa */}
-        {activa && (
+        {(activa || cerrando) && (
           <div key={activa} className="ml-panel" style={{marginBottom:24}}>
             <button onClick={() => setActiva(null)} style={{
               background:'none',border:'none',color:'#0ea5e9',fontSize:14,
@@ -939,7 +939,9 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
               border:'1px solid #e2e8f0'
             }}>
               <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
-                <span style={{fontSize:28}}>{calc.emoji}</span>
+const [activa, setActiva] = useState(null);
+  const [cerrando, setCerrando] = useState(false);
+  const cerrarCalc = () => { setCerrando(true); setTimeout(() => { setActiva(null); setCerrando(false); }, 180); };                
                 <div>
                   <h2 style={{margin:0,fontSize:20,fontWeight:700,color:'#0c4a6e'}}>{calc.nombre}</h2>
                   <span style={{fontSize:12,color:'#94a3b8'}}>{calc.desc}</span>
@@ -951,7 +953,8 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         )}
 
         {/* Grid de calculadoras */}
-        {!activa && (
+        {!activa && (           
+      <h2 style={{fontSize:15,fontWeight:600,color:'#475569',margin:'0 0 12px 4px'}}>¿Qué necesitas calcular?</h2>
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(150px,1fr))',gap:12}}>
             {CALCULADORAS.map(c => (
               <button key={c.id} onClick={() => setActiva(c.id)} style={{

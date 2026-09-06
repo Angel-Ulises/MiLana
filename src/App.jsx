@@ -809,9 +809,6 @@ function CalcPension() {
     const minSemanas = 875; // 2026, sube gradualmente
     const cumpleMinimo = sc >= minSemanas;
 
-    // Pensión mínima garantizada 2026
-    const pensionMinima = SALARIO_MINIMO_GENERAL * 30; // ~$9,451
-
     // Estimación de ahorro en AFORE
     const aniosCotizados = sc / 52;
     const aportacionMensual = sm * 0.065; // ~6.5% cuota total AFORE
@@ -821,12 +818,15 @@ function CalcPension() {
     const aniosPension = 85 - Math.max(ed, 65);
     const pensionAFORE = aniosPension > 0 ? saldoEstimado / (aniosPension * 12) : 0;
 
-    const pensionFinal = Math.max(pensionAFORE, cumpleMinimo ? pensionMinima : 0);
+    // Nota: la "pensión garantizada" (Art. 170 LSS) NO se calcula aquí a propósito.
+    // Depende de una tabla oficial de dos entradas (semanas cotizadas × salario
+    // promedio en UMAs) que se actualiza cada febrero con el INPC — no es un monto
+    // fijo, así que no se aproxima con una fórmula de una sola variable.
 
     setResult({
       sd, sc, minSemanas, cumpleMinimo,
       aniosCotizados, aportacionMensual, saldoEstimado,
-      pensionMinima, pensionAFORE, pensionFinal,
+      pensionAFORE,
       faltanSemanas: Math.max(minSemanas - sc, 0),
       edadRetiro: 65
     });
@@ -853,10 +853,11 @@ function CalcPension() {
           <ResultLine label="Aportación mensual a AFORE (~6.5%)" value={fmt(result.aportacionMensual)} />
           <ResultLine label="Saldo estimado en AFORE" value={fmt(result.saldoEstimado)} bold />
           <Divider />
-          <ResultLine label="Pensión mínima garantizada (simplificada)" value={fmt(result.pensionMinima) + "/mes"} />
-          <ResultLine label="Pensión estimada con AFORE" value={fmt(result.pensionAFORE) + "/mes"} />
-          <ResultLine label="Tu pensión estimada mensual" value={fmt(result.pensionFinal) + "/mes"} bold color="#15803d" />
-          <Note>Estimación muy simplificada. La "pensión mínima garantizada" mostrada aquí es un cálculo simplificado (salario mínimo × 30 días) y NO es la tabla oficial real del IMSS, que varía según tu edad, semanas cotizadas y salario promedio, y puede ser considerablemente distinta a esta cifra. Tu pensión real también depende del rendimiento de tu AFORE, las aportaciones voluntarias y tu modalidad de retiro. Consulta tu estado de cuenta en AFORE o el simulador oficial del IMSS para un cálculo preciso.</Note>
+          <ResultLine label="Pensión estimada con AFORE" value={fmt(result.pensionAFORE) + "/mes"} bold color="#15803d" />
+          <div style={{marginTop:12,padding:'12px 14px',background:'#f1f5f9',borderRadius:10,fontSize:13,color:'#475569',lineHeight:1.5}}>
+            <strong>Pensión garantizada:</strong> no incluida en esta estimación. Su determinación depende de las semanas cotizadas y del salario promedio expresado en UMAs durante toda tu vida laboral, conforme a la tabla oficial aplicable (Art. 170 LSS) — no es un monto fijo.
+          </div>
+          <Note>Esta es una proyección ilustrativa del ahorro en AFORE bajo los supuestos indicados (rendimiento 4% anual, aportación ~6.5%), no una cotización ni una determinación oficial de pensión. Tu pensión real también depende del rendimiento real de tu AFORE, las aportaciones voluntarias y tu modalidad de retiro. Consulta tu estado de cuenta en AFORE o el simulador oficial del IMSS para un cálculo preciso.</Note>
         </ResultBox>
       )}
     </div>

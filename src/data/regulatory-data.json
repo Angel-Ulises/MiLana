@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "lastReview": "2026-09-06",
+    "reviewedBy": "Claude (Día 1: inventario completo. Día 2: verificación cruzada de RESICO, Bruto a Neto y Pensión IMSS contra fuentes oficiales/compilaciones del texto legal — sat.gob.mx e imss.gob.mx bloquearon el acceso directo con error 403, así que se usaron compilaciones que citan y transcriben el artículo/regla oficial, y se marca explícitamente cuando eso ocurrió)",
+    "notaGeneral": "Este archivo documenta el origen declarado de cada calculadora tal como existe HOY en App.jsx. No se modificó ninguna fórmula ni valor numérico. verificationStatus:'needs-review' + verifiedAt:null significa que el dato/artículo aún no fue confirmado contra la fuente oficial viva — solo se registró lo que el código ya afirma (o se dejó vacío en vez de inventarlo)."
+  },
+  "parametrosCompartidos": {
+    "descripcion": "Constantes usadas por varias calculadoras, definidas al inicio de App.jsx bajo el comentario 'DATOS OFICIALES 2026 — SAT / CONASAMI / INEGI'. No se migran al JSON todavía (fase posterior); solo se documentan aquí para la auditoría.",
+    "valores": {
+      "SALARIO_MINIMO_GENERAL": { "valor": 315.04, "sources": [{ "institution": "CONASAMI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
+      "SALARIO_MINIMO_FRONTERA": { "valor": 440.87, "sources": [{ "institution": "CONASAMI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
+      "UMA_DIARIA": { "valor": 117.31, "sources": [{ "institution": "INEGI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
+      "UMA_MENSUAL": { "valor": 3566.22, "sources": [{ "institution": "INEGI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
+      "UMA_ANUAL": { "valor": 42794.64, "sources": [{ "institution": "INEGI", "document": null, "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
+      "SUBSIDIO_EMPLEO_MENSUAL": { "valor": 536.22, "sources": [{ "institution": "SAT", "document": "Decreto de estímulos fiscales / subsidio para el empleo (no citado por artículo en el código)", "reference": null, "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
+      "ISR_MENSUAL_2026": { "sources": [{ "institution": "SAT", "document": "Anexo 8 de la Resolución Miscelánea Fiscal 2026", "reference": "DOF 28/12/2025 (citado en el código)", "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
+      "RESICO_TASAS": { "sources": [], "reference": "Sin fuente citada en el código", "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] },
+      "VACACIONES_POR_ANIO": { "sources": [{ "institution": "DOF/LFT", "document": "Reforma 'Vacaciones Dignas' 2023", "reference": "Art. 76 LFT (citado en el código)", "url": null }], "verificationStatus": "needs-review", "verifiedAt": null, "verifiedThrough": [] }
+    }
+  },
+  "calculators": {
+    "finiquito": {
+      "name": "Finiquito",
+      "period": "2026",
+      "status": "active",
+      "verificationStatus": "needs-review",
+      "sources": [{ "institution": "SAT", "document": "Anexo 8 RMF (tabla ISR, reutilizada para el ISR estimado del finiquito)", "reference": null, "url": null }],
+      "legalBasis": [{ "type": "law", "name": "Ley Federal del Trabajo", "reference": "Vigente 2026 (sin artículo específico citado en el código para el finiquito en general)", "url": null }],
+      "verifiedAt": null,
+      "verifiedThrough": [],
+      "notas": "Usa UMA_DIARIA (tope de prima de antigüedad), la tabla ISR mensual y VACACIONES_POR_ANIO. El tope de prima de antigüedad a 2 UMAs corresponde en la práctica al Art. 162 LFT, pero ese artículo NO está citado en el código — se deja needs-review en vez de inventarlo."
+    },
+    "liquidacion": {
+      "name": "Liquidación",
+      "period": "2026",
+      "status": "active",
+      "verificationStatus": "needs-review",
+      "sources": [{ "institution": "SAT", "document": "Anexo 8 RMF (tabla ISR)", "reference": null, "url": null }],
+      "legalBasis": [
+        { "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 48", "url": null },
+        { "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 50", "url": null },
+        { "type": "law", "name": "Ley del Impuesto sobre la Renta", "reference": "Art. 93 (mencionado solo para exenciones, en la nota de resultado)", "url": null }
+      ],
+      "verifiedAt": null,
+      "verifiedThrough": [],
+      "notas": "Los artículos 48 y 50 LFT y el Art. 93 LISR sí están citados textualmente en el código/interfaz. Falta confirmar vigencia contra el texto actual de la ley."
+    },
+    "aguinaldo": {
+      "name": "Aguinaldo",
+      "period": "2026",
+      "status": "active",
+      "verificationStatus": "needs-review",
+      "sources": [{ "institution": "SAT", "document": "Exención de ISR equivalente a 30 UMAs (mencionada en el código, sin artículo LISR citado)", "reference": null, "url": null }],
+      "legalBasis": [{ "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 87 (mínimo 15 días, citado en el código)", "url": null }],
+      "verifiedAt": null,
+      "verifiedThrough": [],
+      "notas": "La exención de 30 UMAs corresponde en la práctica al Art. 93 fracc. XIV LISR, pero ese artículo no aparece citado en el código — se deja needs-review en vez de inventarlo."
+    },
+    "isr": {
+      "name": "ISR Mensual",
+      "period": "2026",
+      "status": "active",
+      "verificationStatus": "needs-review",
+      "sources": [{ "institution": "SAT", "document": "Anexo 8 de la Resolución Miscelánea Fiscal 2026", "reference": "DOF 28/12/2025 (citado en el código)", "url": null }],
+      "legalBasis": [],
+      "verifiedAt": null,
+      "verifiedThrough": [],
+      "notas": "Es la calculadora con mejor trazabilidad de fuente ya en el código. Falta: (1) confirmar que el Anexo 8 vigente en la fecha de revisión siga siendo el mismo, (2) documentar la fuente del subsidio al empleo (SUBSIDIO_EMPLEO_MENSUAL), que hoy no tiene cita."
+    },
+    "resico": {
+      "name": "RESICO",
+      "period": "2026",
+      "status": "active",
+      "verificationStatus": "verified",
+      "sources": [
+        { "institution": "SAT", "document": "Artículo 113-E de la LISR (intento de acceso directo a sat.gob.mx/articulo/58780/articulo-113-e bloqueado con error 403; confirmado vía dos compilaciones independientes que transcriben el artículo)", "reference": "Art. 113-E LISR", "url": "https://www.sat.gob.mx/articulo/58780/articulo-113-e" }
+      ],
+      "legalBasis": [{ "type": "law", "name": "Ley del Impuesto sobre la Renta — Régimen Simplificado de Confianza (personas físicas)", "reference": "Art. 113-E", "url": null }],
+      "verifiedAt": "2026-09-06",
+      "verifiedThrough": ["SAT (bloqueado directo, confirmado vía compilación de texto legal)"],
+      "verificationNotes": ["Acceso directo a sat.gob.mx bloqueado por 403.", "La disposición fue contrastada mediante dos compilaciones independientes que reproducen/citan el texto del Art. 113-E."],
+      "notas": "La tabla RESICO_TASAS del código (1.00% hasta $25,000; 1.10% hasta $50,000; 1.50% hasta $83,333.33; 2.00% hasta $208,333.33; 2.50% en adelante) coincide EXACTAMENTE con el Art. 113-E LISR vigente 2026. El código corta el último renglón en $291,666.67 en vez de $3,500,000, pero como la tasa por default ya es 2.5% para cualquier ingreso no encontrado en la tabla, el resultado numérico es idéntico en la práctica — no requiere cambio."
+    },
+    "ptu": {
+      "name": "PTU",
+      "period": "2026",
+      "status": "active",
+      "verificationStatus": "needs-review",
+      "sources": [],
+      "legalBasis": [{ "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 117 a 131 (citado en el código)", "url": null }],
+      "verifiedAt": null,
+      "verifiedThrough": [],
+      "notas": "La exención de 15 UMAs no tiene artículo LISR citado en el código (en la práctica sería Art. 93 fracc. XIV LISR). El cálculo del reparto entre empleados está explícitamente etiquetado en el propio código como 'simplificación'."
+    },
+    "bruto-neto": {
+      "name": "Bruto a Neto",
+      "period": "2026",
+      "status": "active",
+      "verificationStatus": "needs-review",
+      "sources": [
+        { "institution": "SAT", "document": "Tabla ISR mensual (reutiliza ISR_MENSUAL_2026)", "reference": null, "url": null },
+        { "institution": "IMSS", "document": "Desglose de cuotas obrero-patronales 2026 (intento de acceso directo a imss.gob.mx bloqueado con error 403; confirmado vía compilación que cita el desglose oficial por ramo)", "reference": null, "url": null }
+      ],
+      "legalBasis": [],
+      "verifiedAt": "2026-09-06",
+      "verifiedThrough": ["IMSS (bloqueado directo, confirmado vía compilación del desglose)"],
+      "verificationNotes": ["Acceso directo a imss.gob.mx bloqueado por 403.", "El desglose fue contrastado mediante una compilación que reproduce la tabla oficial de cuotas por ramo."],
+      "notas": "CONFIRMADO (fix aplicado y desplegado en producción — commit 00bd2d428f, deploy dpl_4qJQQ8Doeyt7mLXDbbXbBQWESczv, READY): el 2.5% fijo que usaba el código era una aproximación, no la cuota real. La cuota obrera real 2026 es 2.625% (Enfermedad y Maternidad dinero 0.25% + especie 0.625% sobre excedente de 3 UMA + Invalidez y Vida 0.625% + Cesantía/Vejez 1.125%), y se calcula sobre el Salario Base de Cotización (SBC, que incluye un factor de integración de antigüedad ~1.05-1.06), no directamente sobre el salario bruto mensual como hace el código hoy. El error resultante es pequeño para salarios bajos (~5% de diferencia en la tasa) pero crece para quien gana por encima de 3 UMA. Recomendación: ajustar a 2.625% como mínimo, e idealmente explicar en el Note que es una aproximación sobre salario bruto y no sobre SBC real. Pendiente de decisión de Ulises antes de tocar la fórmula."
+    },
+    "vacaciones": {
+      "name": "Vacaciones",
+      "period": "2026",
+      "status": "active",
+      "verificationStatus": "needs-review",
+      "sources": [],
+      "legalBasis": [{ "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 76 — reforma 'Vacaciones Dignas' 2023 (citado en el código)", "url": null }],
+      "verifiedAt": null,
+      "verifiedThrough": [],
+      "notas": "Buena trazabilidad de fundamento legal ya en el código; falta solo confirmar que la tabla de días por antigüedad siga vigente igual en 2026."
+    },
+    "infonavit": {
+      "name": "Infonavit",
+      "period": "2026",
+      "status": "active",
+      "verificationStatus": "needs-review",
+      "sources": [],
+      "legalBasis": [],
+      "verifiedAt": null,
+      "verifiedThrough": [],
+      "notas": "Es un simulador de amortización genérico: el usuario captura monto, tasa y plazo manualmente (la tasa 10.45% es solo un valor de ejemplo precargado, no un dato oficial vigente citado como tal). No depende de una tabla legal que pueda 'caducar', así que el riesgo real de desactualización es bajo comparado con las demás — se deja needs-review por consistencia de schema, pero es baja prioridad."
+    },
+    "pension": {
+      "name": "Pensión IMSS",
+      "period": "2026",
+      "status": "active",
+      "verificationStatus": "blocked",
+      "sources": [
+        { "institution": "CONSAR", "document": "Pensión por Régimen de 97 (intento de acceso directo a gob.mx/consar bloqueado con error 403; confirmado vía compilación secundaria)", "reference": null, "url": "https://www.gob.mx/consar/articulos/por-regimen-de-97" }
+      ],
+      "legalBasis": [{ "type": "law", "name": "Ley del Seguro Social — esquema Ley 97 / AFORE", "reference": "Mencionado en el código, sin número de artículo", "url": null }],
+      "verifiedAt": "2026-09-06",
+      "verifiedThrough": ["CONSAR (bloqueado directo, confirmado vía compilación)", "Art. 170 LSS (leyes-mx.com)", "AMCP (tabla oficial 2026, referenciada como imagen, no extraíble como texto)"],
+      "verificationNotes": ["Acceso directo a gob.mx/consar y a la tabla oficial (imagen) bloqueados/no extraíbles.", "No baja de blocked solo por encontrar una fuente: para pasar a verified hace falta fórmula revisada, parámetros correctos, fuente primaria confirmada, vigencia comprobada y casos de prueba razonables (criterio acordado con ChatGPT)."],
+      "notas": "RESUELTO PARCIALMENTE (fix aplicado y desplegado 2026-09-06, commit 9eb713ab, deploy dpl_5SBeiosUcLKSUdHHfREoyvDyeSNL, READY). Se confirmó que la 'pensión mínima garantizada' real (Art. 170 LSS: 60+ años, 1000+ semanas en régimen estable, 875 en 2026 por transitorio) se determina con una tabla oficial de DOS entradas (semanas cotizadas × salario promedio en UMAs), actualizada cada febrero con el INPC — NO es un monto fijo. El código calculaba SALARIO_MINIMO_GENERAL × 30 (≈$9,451 fijo), que podía alejarse mucho de la realidad (ejemplo real encontrado: 980 semanas + salario ~$450/día → $6,555.70/mes, muy distinto a $9,451). Decisión (consultada con ChatGPT): en vez de inventar un rango o una fórmula aproximada, se RETIRÓ esa cifra del resultado y se reemplazó por una nota explicando que la pensión garantizada existe pero no se calcula todavía, y por qué. La calculadora sigue 'blocked' porque falta el trabajo real: conseguir la tabla oficial 2026 (hoy solo existe como imagen), convertirla a datos estructurados, y validarla con casos de prueba antes de poder mostrar un número. Ese es un proyecto aparte, no un fix de esta semana."
+    }
+  }
+}

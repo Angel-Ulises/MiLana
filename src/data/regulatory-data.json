@@ -132,11 +132,11 @@
       "period": "2026",
       "status": "active",
       "verificationStatus": "needs-review",
-      "sources": [],
+      "sources": [{ "institution": "INFONAVIT", "document": "Páginas oficiales de compra/pago Infonavit (condiciones y tasas 3.69%-10.45% según nivel salarial; la mensualidad real puede incluir seguros y cuotas)", "reference": "Consultado 2026-09-06", "url": "https://portalmx.infonavit.org.mx/wps/portal/infonavit.web/trabajadores" }],
       "legalBasis": [],
-      "verifiedAt": null,
-      "verifiedThrough": [],
-      "notas": "Es un simulador de amortización genérico: el usuario captura monto, tasa y plazo manualmente (la tasa 10.45% es solo un valor de ejemplo precargado, no un dato oficial vigente citado como tal). No depende de una tabla legal que pueda 'caducar', así que el riesgo real de desactualización es bajo comparado con las demás — se deja needs-review por consistencia de schema, pero es baja prioridad."
+      "verifiedAt": "2026-09-06",
+      "verifiedThrough": ["Auditoría de ChatGPT (GPT-5.6 Sol, razonamiento Alta, 2026-09-06): la fórmula de amortización francesa es correcta matemáticamente, pero no representa el crédito Infonavit real completo (excluye seguros, cuotas y aportaciones patronales; la tasa real depende del producto/nivel salarial, no es universal)."],
+      "notas": "DECISIÓN CONJUNTA (Claude + ChatGPT, 2026-09-06): no sube a verified porque el nombre/resultado no debe prometer más de lo que la fórmula realmente calcula. Se reencuadró la calculadora como simulación de amortización de capital + intereses (copy y etiquetas de resultado actualizadas: 'Pago estimado (capital + interés)' en vez de 'Pago mensual', y disclaimer explícito de que no incluye seguros, cuotas, aportaciones patronales ni condiciones particulares del crédito). De paso se corrigió un bug de redondeo: el último pago de la tabla de amortización podía dejar un saldo residual distinto de cero por acumulación de decimales; ahora el último pago se ajusta para liquidar el saldo exacto. Con ese alcance limitado y explícito, needs-review es el estado correcto (no blocked): la fórmula en sí es válida para lo que dice calcular."
     },
     "pension": {
       "name": "Pensión IMSS",

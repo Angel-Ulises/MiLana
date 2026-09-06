@@ -544,7 +544,7 @@ function CalcBrutoNeto() {
 
     const sd = sm / 30;
     const isrMensual = calcISRMensual(sm);
-    const imssObrero = sm * 0.025; // ~2.5% cuota obrera estimada
+    const imssObrero = sm * 0.02625; // 2.625% cuota obrera IMSS 2026 (EyM dinero 0.25% + EyM especie 0.625% + Invalidez y Vida 0.625% + Cesantía y Vejez 1.125%), aproximada sobre salario bruto
     const totalDeducciones = isrMensual + imssObrero;
     const neto = sm - totalDeducciones;
 
@@ -580,7 +580,7 @@ function CalcBrutoNeto() {
         <ResultBox>
           <ResultLine label="Salario bruto mensual" value={fmt(result.bruto)} />
           <ResultLine label="ISR retenido" value={`- ${fmt(result.isrMensual)}`} color="#b91c1c" />
-          <ResultLine label="Cuota IMSS obrera (~2.5%)" value={`- ${fmt(result.imssObrero)}`} color="#b91c1c" />
+          <ResultLine label="Cuota IMSS obrera (2.625%)" value={`- ${fmt(result.imssObrero)}`} color="#b91c1c" />
           <Divider />
           <ResultLine label="Sueldo neto mensual" value={fmt(result.neto)} bold color="#15803d" />
           <ResultLine label="Ingreso por hora (40 hrs/sem)" value={fmt(result.ingresoPorHora)} />
@@ -591,6 +591,7 @@ function CalcBrutoNeto() {
           <ResultLine label="+ Aguinaldo (15 días)" value={fmt(result.aguinaldo)} />
           <ResultLine label="+ Prima vacacional" value={fmt(result.primaVac)} />
           <ResultLine label="Ingreso anual bruto total" value={fmt(result.ingresoAnualTotal)} bold />
+          <Note>La cuota IMSS se calcula sobre tu salario bruto para simplificar; el IMSS en realidad la calcula sobre tu Salario Base de Cotización (SBC), que puede ser distinto. El resultado es una aproximación cercana, no un recibo de nómina exacto.</Note>
         </ResultBox>
       )}
     </div>
@@ -852,10 +853,10 @@ function CalcPension() {
           <ResultLine label="Aportación mensual a AFORE (~6.5%)" value={fmt(result.aportacionMensual)} />
           <ResultLine label="Saldo estimado en AFORE" value={fmt(result.saldoEstimado)} bold />
           <Divider />
-          <ResultLine label="Pensión mínima garantizada" value={fmt(result.pensionMinima) + "/mes"} />
+          <ResultLine label="Pensión mínima garantizada (simplificada)" value={fmt(result.pensionMinima) + "/mes"} />
           <ResultLine label="Pensión estimada con AFORE" value={fmt(result.pensionAFORE) + "/mes"} />
           <ResultLine label="Tu pensión estimada mensual" value={fmt(result.pensionFinal) + "/mes"} bold color="#15803d" />
-          <Note>Estimación muy simplificada. Tu pensión real depende del rendimiento de tu AFORE, las aportaciones voluntarias y tu modalidad de retiro. Consulta tu estado de cuenta en AFORE para un cálculo más preciso.</Note>
+          <Note>Estimación muy simplificada. La "pensión mínima garantizada" mostrada aquí es un cálculo simplificado (salario mínimo × 30 días) y NO es la tabla oficial real del IMSS, que varía según tu edad, semanas cotizadas y salario promedio, y puede ser considerablemente distinta a esta cifra. Tu pensión real también depende del rendimiento de tu AFORE, las aportaciones voluntarias y tu modalidad de retiro. Consulta tu estado de cuenta en AFORE o el simulador oficial del IMSS para un cálculo preciso.</Note>
         </ResultBox>
       )}
     </div>

@@ -171,7 +171,7 @@ function CalcFiniquito() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula el finiCalcula el finiquito que te corresponde al renunciar de forma voluntaria. El resultado incluye días trabajados pendientes de pago, aguinaldo proporcional, vacaciones proporcionales y prima vacacional, conforme a la Ley Federal del Trabajo vigente en 2026.quito que te corresponde al renunciar de forma voluntaria. El resultado incluye días trabajados pendientes de pago, aguinaldo proporcional, vacaciones proporcionales y prima vacacional, conforme a la Ley Federal del Trabajo vigente en 2026.
+        Calcula el finiquito que te corresponde al renunciar de forma voluntaria. El resultado incluye días trabajados pendientes de pago, aguinaldo proporcional, vacaciones proporcionales y prima vacacional, conforme a la Ley Federal del Trabajo vigente en 2026.
       </p>
       <div style={styles.grid2}>
         <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 15000" />

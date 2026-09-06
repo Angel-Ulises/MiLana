@@ -7,8 +7,8 @@ import { useState } from "react";
 const SALARIO_MINIMO_GENERAL = 315.04;
 const SALARIO_MINIMO_FRONTERA = 440.87;
 const UMA_DIARIA = 117.31;
-const UMA_MENSUAL = 3567.04;
-const UMA_ANUAL = 42804.44;
+const UMA_MENSUAL = 3566.22;
+const UMA_ANUAL = 42794.64;
 const SUBSIDIO_EMPLEO_MENSUAL = 536.22;
 
 // Tabla ISR mensual 2026 — Anexo 8 RMF DOF 28/12/2025
@@ -730,7 +730,7 @@ function CalcPension() {
     const sd = sm / 30;
 
     // Ley 97 (AFORE) — la mayoría de trabajadores actuales
-    const minSemanas = 825; // 2026, sube gradualmente
+    const minSemanas = 875; // 2026, sube gradualmente
     const cumpleMinimo = sc >= minSemanas;
 
     // Pensión mínima garantizada 2026
@@ -919,7 +919,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             borderRadius:20,fontSize:11,fontWeight:600,marginTop:8
           }}>
             <span style={{width:6,height:6,background:'#059669',borderRadius:'50%',display:'inline-block'}} />
-            Actualizado febrero 2026 — Anexo 8 RMF
+            Actualizado septiembre 2026 — Anexo 8 RMF
           </div>
         </div>
 

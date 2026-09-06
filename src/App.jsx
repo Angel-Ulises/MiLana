@@ -282,7 +282,7 @@ function CalcLiquidacion() {
           <ResultLine label={`Prima antigüedad (12 días × ${result.aniosCompletos || 1} año(s))`} value={fmt(result.primaAnt)} />
           <ResultLine label="Subtotal indemnización" value={fmt(result.brutoLiquidacion)} bold />
           <Divider />
-          <ResultLine label="TOTAL BRUTO" value={fmt(result.brutoTotal)} bold color="#15803d" />
+          <ResultLine label="Total bruto" value={fmt(result.brutoTotal)} bold color="#15803d" />
           <Note>SDI calculado con factor de integración {result.factorIntegracion.toFixed(4)}. Montos brutos antes de ISR. Exenciones aplican según Art. 93 LISR.</Note>
         </ResultBox>
       )}
@@ -575,7 +575,7 @@ function CalcBrutoNeto() {
       <div style={styles.grid2}>
         <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 30000" />
       </div>
-      <Btn onClick={calcular}>Calcular</Btn>
+      <Btn onClick={calcular}>Calcular Bruto a Neto</Btn>
       {result && (
         <ResultBox>
           <ResultLine label="Salario bruto mensual" value={fmt(result.bruto)} />
@@ -667,6 +667,8 @@ function CalcInfonavit() {
   const [tasaAnual, setTasaAnual] = useState('10.45');
   const [plazoAnios, setPlazoAnios] = useState('20');
   const [result, setResult] = useState(null);
+  const [verTabla, setVerTabla] = useState(false);
+  const [vistaAnual, setVistaAnual] = useState(true);
 
   const calcular = () => {
     const monto = parseFloat(montoCredito) || 0;
@@ -680,9 +682,32 @@ function CalcInfonavit() {
     const totalPagado = pagoMensual * numPagos;
     const totalIntereses = totalPagado - monto;
 
+    const tablaMensual = [];
+    let saldo = monto;
+    for (let mes = 1; mes <= numPagos; mes++) {
+      const interes = saldo * tasaMensual;
+      const capital = pagoMensual - interes;
+      saldo = Math.max(saldo - capital, 0);
+      tablaMensual.push({ mes, pago: pagoMensual, interes, capital, saldo });
+    }
+
+    const tablaAnual = [];
+    for (let anio = 1; anio <= plazo; anio++) {
+      const filasAnio = tablaMensual.slice((anio - 1) * 12, anio * 12);
+      tablaAnual.push({
+        anio,
+        pago: filasAnio.reduce((s, f) => s + f.pago, 0),
+        interes: filasAnio.reduce((s, f) => s + f.interes, 0),
+        capital: filasAnio.reduce((s, f) => s + f.capital, 0),
+        saldo: filasAnio[filasAnio.length - 1].saldo
+      });
+    }
+
+    setVerTabla(false);
     setResult({
       monto, tasa, plazo, pagoMensual, totalPagado, totalIntereses,
-      porcentajeIntereses: (totalIntereses / monto) * 100
+      porcentajeIntereses: (totalIntereses / monto) * 100,
+      tablaMensual, tablaAnual
     });
   };
 
@@ -709,6 +734,56 @@ function CalcInfonavit() {
           <ResultLine label="Total solo en intereses" value={fmt(result.totalIntereses)} color="#b91c1c" />
           <ResultLine label="Pagarás de intereses" value={fmtPct(result.porcentajeIntereses) + " del crédito"} bold color="#b91c1c" />
           <Note>Simulación con pagos fijos mensuales. El cálculo real puede variar según el tipo de crédito (VSM, pesos, puntos Infonavit) y tu salario.</Note>
+
+          <button onClick={() => setVerTabla(v => !v)} className="ml-btn" style={{
+            width:'100%',marginTop:16,padding:'10px 16px',background:'#faf7f0',
+            border:'1px solid #e8dcc3',borderRadius:10,color:'#92400e',fontSize:13,
+            fontWeight:600,cursor:'pointer',display:'flex',alignItems:'center',
+            justifyContent:'center',gap:6
+          }}>
+            {verTabla ? '▲ Ocultar tabla de amortización' : '▼ Ver tabla de amortización'}
+          </button>
+
+          {verTabla && (
+            <div className="ml-result" style={{marginTop:12}}>
+              <div style={{display:'flex',justifyContent:'center',gap:8,marginBottom:10}}>
+                <button onClick={() => setVistaAnual(true)} style={{
+                  padding:'5px 14px',borderRadius:20,fontSize:12,fontWeight:600,cursor:'pointer',
+                  border: vistaAnual ? '1px solid #b45309' : '1px solid #e2e8f0',
+                  background: vistaAnual ? '#b45309' : 'white',
+                  color: vistaAnual ? 'white' : '#64748b'
+                }}>Por año</button>
+                <button onClick={() => setVistaAnual(false)} style={{
+                  padding:'5px 14px',borderRadius:20,fontSize:12,fontWeight:600,cursor:'pointer',
+                  border: !vistaAnual ? '1px solid #b45309' : '1px solid #e2e8f0',
+                  background: !vistaAnual ? '#b45309' : 'white',
+                  color: !vistaAnual ? 'white' : '#64748b'
+                }}>Por mes</button>
+              </div>
+              <div style={{maxHeight:320,overflowY:'auto',border:'1px solid #ece2cb',borderRadius:10}}>
+                <table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}>
+                  <thead>
+                    <tr style={{position:'sticky',top:0,background:'#faf7f0',boxShadow:'0 1px 0 #e8dcc3'}}>
+                      <th style={{padding:'8px 10px',textAlign:'left',color:'#475569',fontWeight:600}}>{vistaAnual ? 'Año' : 'Mes'}</th>
+                      <th style={{padding:'8px 10px',textAlign:'right',color:'#475569',fontWeight:600}}>Interés</th>
+                      <th style={{padding:'8px 10px',textAlign:'right',color:'#475569',fontWeight:600}}>Capital</th>
+                      <th style={{padding:'8px 10px',textAlign:'right',color:'#475569',fontWeight:600}}>Saldo restante</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(vistaAnual ? result.tablaAnual : result.tablaMensual).map((fila, i) => (
+                      <tr key={i} style={{borderTop:'1px solid #f3efe6', background: i % 2 ? '#faf8f4' : 'white'}}>
+                        <td style={{padding:'7px 10px',color:'#1e293b'}}>{vistaAnual ? fila.anio : fila.mes}</td>
+                        <td style={{padding:'7px 10px',textAlign:'right',color:'#b91c1c'}}>{fmt(fila.interes)}</td>
+                        <td style={{padding:'7px 10px',textAlign:'right',color:'#15803d'}}>{fmt(fila.capital)}</td>
+                        <td style={{padding:'7px 10px',textAlign:'right',color:'#1e293b',fontWeight:600}}>{fmt(fila.saldo)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </ResultBox>
       )}
     </div>
@@ -905,7 +980,14 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         
         <style>{`@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}}`}</style>{/* Header */}
         <div style={{textAlign:'center',marginBottom:32}}>
-          <div style={{fontSize:36,marginBottom:4}}>🇲🇽</div>
+          <span style={{
+            display:'inline-block',fontSize:11,fontWeight:700,color:'#92400e',
+            letterSpacing:'1.5px',textTransform:'uppercase',marginBottom:12,
+            background:'#f3efe6',padding:'4px 12px',borderRadius:20,
+            border:'1px solid #e8dcc3'
+          }}>
+            México
+          </span>
           <h1 style={{
             fontSize:28,fontWeight:800,color:'#16324a',margin:'0 0 4px 0',
             letterSpacing:'-0.5px'
@@ -956,9 +1038,10 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         {!activa && (
           <>
             <h2 style={{fontSize:15,fontWeight:600,color:'#475569',margin:'0 0 12px 4px'}}>¿Qué necesitas calcular?</h2>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(150px,1fr))',gap:12}}>
+            <div style={{display:'flex',flexWrap:'wrap',justifyContent:'center',gap:12}}>
             {CALCULADORAS.map(c => (
               <button key={c.id} onClick={() => setActiva(c.id)} style={{
+                flex:'1 1 150px',maxWidth:200,
                 background:'white',border:'2px solid #e2e8f0',borderRadius:14,
                 padding:'20px 14px',textAlign:'center',cursor:'pointer',
                 transition:'all 0.2s',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'
@@ -985,7 +1068,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             Los cálculos son estimaciones informativas. Para montos exactos consulta con un especialista fiscal o laboral.
           </p>
           <p style={{fontSize:11,color:'#cbd5e1',marginTop:8}}>
-            MiLana © 2026 · Hecho en México 🇲🇽 · <a href="/privacidad" style={{color:'#94a3b8'}}>Privacidad</a>
+            MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{color:'#94a3b8'}}>Privacidad</a>
           </p>
         </div>
       </div>

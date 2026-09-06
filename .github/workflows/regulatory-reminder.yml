@@ -1,0 +1,48 @@
+name: Recordatorio semanal de verificación regulatoria
+
+on:
+  schedule:
+    - cron: '0 14 * * 1'
+  workflow_dispatch: {}
+
+jobs:
+  crear-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Crear issue de recordatorio
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fecha = new Date().toISOString().split('T')[0];
+            const cuerpo = [
+              '## Recordatorio semanal — revisión de fuentes regulatorias',
+              '',
+              'Este Issue se genera automáticamente cada semana. Nadie decide solo: es solo un recordatorio para revisar manualmente (con apoyo de IA) si hubo cambios en las fuentes oficiales usadas por MiLana.',
+              '',
+              '### Fuentes a revisar',
+              '- [ ] DOF (Diario Oficial de la Federación) — dof.gob.mx',
+              '- [ ] SAT — sat.gob.mx (Anexo 8 RMF, tablas ISR, RESICO Art. 113-E, subsidio al empleo)',
+              '- [ ] IMSS — imss.gob.mx (cuotas obrero-patronales, UMA)',
+              '- [ ] INFONAVIT — infonavit.org.mx',
+              '- [ ] CONASAMI — conasami.gob.mx (salario mínimo general y frontera)',
+              '- [ ] INEGI — inegi.org.mx (UMA)',
+              '',
+              '### Qué hacer si algo cambió',
+              '1. Anota aquí qué cambió y desde cuándo aplica.',
+              '2. Actualiza `src/data/regulatory-data.json` con la nueva fuente/vigencia.',
+              '3. Si el cambio afecta una fórmula (no solo un número), actualiza también `src/App.jsx`.',
+              '4. Verifica y despliega antes de cerrar este Issue.',
+              '',
+              '### Si no cambió nada',
+              'Cierra este Issue con un comentario breve confirmando que se revisó y no hubo cambios.',
+              '',
+              '_No se cierra automáticamente. Ninguna IA decide "no cambió nada" por su cuenta — siempre requiere revisión humana._'
+            ].join('\n');
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Recordatorio: revisión regulatoria semanal — ${fecha}`,
+              body: cuerpo
+            });

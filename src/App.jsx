@@ -680,18 +680,28 @@ function CalcInfonavit() {
 
     const tasaMensual = tasa / 100 / 12;
     const numPagos = plazo * 12;
-    const pagoMensual = monto * (tasaMensual * Math.pow(1 + tasaMensual, numPagos)) / (Math.pow(1 + tasaMensual, numPagos) - 1);
-    const totalPagado = pagoMensual * numPagos;
-    const totalIntereses = totalPagado - monto;
+    const pagoBase = tasaMensual === 0
+      ? monto / numPagos
+      : monto * (tasaMensual * Math.pow(1 + tasaMensual, numPagos)) / (Math.pow(1 + tasaMensual, numPagos) - 1);
 
     const tablaMensual = [];
     let saldo = monto;
     for (let mes = 1; mes <= numPagos; mes++) {
       const interes = saldo * tasaMensual;
-      const capital = pagoMensual - interes;
+      let capital = pagoBase - interes;
+      let pagoFila = pagoBase;
+      if (mes === numPagos) {
+        // Ajuste del último pago para liquidar el saldo exacto (evita residuo por redondeo)
+        capital = saldo;
+        pagoFila = capital + interes;
+      }
       saldo = Math.max(saldo - capital, 0);
-      tablaMensual.push({ mes, pago: pagoMensual, interes, capital, saldo });
+      tablaMensual.push({ mes, pago: pagoFila, interes, capital, saldo });
     }
+
+    const pagoMensual = pagoBase;
+    const totalPagado = tablaMensual.reduce((s, f) => s + f.pago, 0);
+    const totalIntereses = totalPagado - monto;
 
     const tablaAnual = [];
     for (let anio = 1; anio <= plazo; anio++) {
@@ -716,7 +726,7 @@ function CalcInfonavit() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Simula tu crédito Infonavit y conoce el pago mensual, el total de intereses y el costo final del crédito a lo largo del plazo elegido.
+        Estima el pago mensual de capital e intereses de un crédito con las condiciones que ingreses. No incluye seguros, cuotas, aportaciones patronales ni otras condiciones particulares de tu crédito Infonavit — consulta tu contrato o Mi Cuenta Infonavit para tu monto real.
       </p>
       <div style={styles.grid2}>
         <Field label="Monto del crédito ($)" value={montoCredito} onChange={setMontoCredito} type="number" placeholder="Ej: 800000" />
@@ -730,12 +740,12 @@ function CalcInfonavit() {
           <ResultLine label="Tasa anual" value={fmtPct(result.tasa)} />
           <ResultLine label={`Plazo: ${result.plazo} años (${result.plazo * 12} pagos)`} value="" />
           <Divider />
-          <ResultLine label="Pago mensual" value={fmt(result.pagoMensual)} bold color="#15803d" />
+          <ResultLine label="Pago estimado (capital + interés)" value={fmt(result.pagoMensual)} bold color="#15803d" />
           <Divider />
-          <ResultLine label="Total que pagarás" value={fmt(result.totalPagado)} bold />
+          <ResultLine label="Total estimado (capital + intereses)" value={fmt(result.totalPagado)} bold />
           <ResultLine label="Total solo en intereses" value={fmt(result.totalIntereses)} color="#b91c1c" />
           <ResultLine label="Pagarás de intereses" value={fmtPct(result.porcentajeIntereses) + " del crédito"} bold color="#b91c1c" />
-          <Note>Simulación con pagos fijos mensuales. El cálculo real puede variar según el tipo de crédito (VSM, pesos, puntos Infonavit) y tu salario.</Note>
+          <Note>Esta es una simulación financiera de amortización de capital e intereses, no un cálculo oficial de Infonavit. No incluye seguros, cuotas, aportaciones patronales ni condiciones particulares de tu crédito (VSM, pesos, puntos Infonavit, tasa según tu nivel salarial). Consulta tu contrato o Mi Cuenta Infonavit para tu pago real.</Note>
 
           <button onClick={() => setVerTabla(v => !v)} className="ml-btn" style={{
             width:'100%',marginTop:16,padding:'10px 16px',background:'#faf7f0',
@@ -956,36 +966,74 @@ function Note({ children }) {
   );
 }
 
+const FICHA_ICONOS = {
+  verified: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+  ),
+  'needs-review': () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+  ),
+  blocked: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  ),
+};
+
 const FICHA_ESTILOS = {
-  verified: { emoji: '✅', label: 'Verificado', bg: '#eef7f0', border: '#bfe8cd', color: '#15803d' },
-  'needs-review': { emoji: '🟡', label: 'Pendiente de verificación', bg: '#fef9ec', border: '#f3e3b8', color: '#92400e' },
-  blocked: { emoji: '🔴', label: 'Cálculo en revisión', bg: '#fdf2f2', border: '#f3caca', color: '#b91c1c' },
+  verified: { label: 'Verificado', status: '#18794e', bg: '#edf8f2', border: '#b7e4cc', lastLabel: 'Última verificación', closing: 'Fuentes y fundamento revisados para el periodo indicado.' },
+  'needs-review': { label: 'Pendiente de verificación', status: '#8a5a00', bg: '#fff8e6', border: '#efd99b', lastLabel: 'Última revisión', closing: 'La base normativa de este cálculo aún está en proceso de verificación.' },
+  blocked: { label: 'Cálculo en revisión', status: '#b42318', bg: '#fff1f0', border: '#f1b8b3', lastLabel: 'Revisión del cálculo', closing: 'Este cálculo está en revisión y sus resultados pueden cambiar.' },
 };
 
 function FichaConfianza({ id }) {
   const data = regulatoryData.calculators[id];
   if (!data) return null;
-  const cfg = FICHA_ESTILOS[data.verificationStatus] || FICHA_ESTILOS['needs-review'];
+
   const fuentes = (data.sources || []).map(s => s.institution).filter(Boolean);
   const fundamento = (data.legalBasis || [])
     .map(l => (l.reference ? `${l.name} — ${l.reference}` : l.name))
     .filter(Boolean);
 
+  const hasSource = fuentes.length > 0;
+  const hasLegalBasis = fundamento.length > 0;
+  const hasVerificationDate = Boolean(data.verifiedAt);
+  const canShowVerified = data.verificationStatus === 'verified' && hasSource && hasLegalBasis && hasVerificationDate;
+  const displayStatus = canShowVerified ? 'verified' : (data.verificationStatus === 'blocked' ? 'blocked' : 'needs-review');
+  const cfg = FICHA_ESTILOS[displayStatus];
+  const Icono = FICHA_ICONOS[displayStatus];
+
   return (
     <div style={{
-      marginTop: 12, padding: '12px 14px', borderRadius: 10,
-      background: cfg.bg, border: `1px solid ${cfg.border}`,
-      fontSize: 12, color: cfg.color, lineHeight: 1.6
+      position: 'relative', marginTop: 20, padding: '14px 16px',
+      background: 'rgba(255,255,255,0.82)', border: '1px solid #e5e7eb',
+      borderLeft: `3px solid ${cfg.status}`, borderRadius: 14,
+      boxShadow: '0 1px 2px rgba(15,23,42,0.04)'
     }}>
-      <div style={{ fontWeight: 700, marginBottom: 4 }}>{cfg.emoji} {cfg.label}</div>
-      {fundamento.length > 0 && <div>Fundamento: {fundamento.join('; ')}</div>}
-      {fuentes.length > 0 && <div>Fuente: {fuentes.join(', ')}</div>}
-      {fundamento.length === 0 && fuentes.length === 0 && (
-        <div>La información normativa de esta calculadora aún está en proceso de revisión.</div>
-      )}
-      {data.verifiedAt && <div>Última verificación: {data.verifiedAt}</div>}
-      <div style={{ marginTop: 4, opacity: 0.85 }}>
-        Este cálculo es informativo, no una asesoría fiscal o legal.
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 12, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 650, color: '#172033' }}>
+          <span style={{ color: cfg.status, display: 'flex' }}><Icono /></span>
+          Sobre este cálculo
+        </div>
+        <span style={{
+          padding: '4px 8px', border: `1px solid ${cfg.border}`, borderRadius: 999,
+          background: cfg.bg, color: cfg.status, fontSize: 11, fontWeight: 700, letterSpacing: '0.02em', whiteSpace: 'nowrap'
+        }}>{cfg.label.toUpperCase()}</span>
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 20px' }}>
+        <div style={{ flex: '1 1 160px' }}>
+          <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>Fundamento</span>
+          <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{hasLegalBasis ? fundamento.join('; ') : 'Pendiente de verificación'}</span>
+        </div>
+        <div style={{ flex: '1 1 110px' }}>
+          <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>{cfg.lastLabel}</span>
+          <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{data.verifiedAt || 'Pendiente'}</span>
+        </div>
+        <div style={{ flex: '1 1 100%' }}>
+          <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>Fuente</span>
+          <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{hasSource ? fuentes.join(', ') : 'Pendiente de verificación'}</span>
+        </div>
+      </div>
+      <div style={{ marginTop: 14, paddingTop: 12, borderTop: '1px solid #edf0f4', fontSize: 12, lineHeight: 1.5, color: '#667085' }}>
+        {cfg.closing} Este cálculo es informativo, no una asesoría fiscal o legal.
       </div>
     </div>
   );

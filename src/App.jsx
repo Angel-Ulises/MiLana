@@ -1094,6 +1094,9 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         {/* Grid de calculadoras */}
         {!activa && (
           <>
+            <p style={{color:'#475569',fontSize:14,lineHeight:1.7,margin:'0 0 24px 4px',maxWidth:620}}>
+              MiLana reúne diez calculadoras gratuitas para entender tus finanzas y tus derechos laborales en México: finiquito, liquidación, ISR, aguinaldo, RESICO, PTU, sueldo bruto a neto, vacaciones, crédito Infonavit y pensión IMSS. Cada una está basada en la Ley Federal del Trabajo y en tablas oficiales del SAT, CONASAMI e INEGI vigentes para 2026, y muestra la fuente y la fecha de su última revisión debajo del resultado. No necesitas registrarte ni instalar nada: capturas tus datos, obtienes un estimado al instante y todo el cálculo ocurre en tu navegador, sin enviarse a ningún servidor. Elige abajo la calculadora que necesitas.
+            </p>
             <h2 style={{fontSize:15,fontWeight:600,color:'#475569',margin:'0 0 12px 4px'}}>¿Qué necesitas calcular?</h2>
             <div style={{display:'flex',flexWrap:'wrap',justifyContent:'center',gap:12}}>
             {CALCULADORAS.map(c => (

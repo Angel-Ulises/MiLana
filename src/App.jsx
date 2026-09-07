@@ -64,8 +64,9 @@ const VACACIONES_POR_ANIO = [
 
 function getVacDias(anios) {
   if (anios < 1) return 0;
-  const idx = Math.min(anios, VACACIONES_POR_ANIO.length) - 1;
-  return VACACIONES_POR_ANIO[idx] || 32;
+  if (anios <= VACACIONES_POR_ANIO.length) return VACACIONES_POR_ANIO[anios - 1];
+  // Después del año 35 la LFT no pone tope: se sigue sumando 2 días cada 5 años (Art. 76)
+  return 22 + 2 * Math.floor((anios - 6) / 5);
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -84,8 +85,10 @@ function calcISR(ingreso, tabla) {
 
 function calcISRMensual(brutoMensual) {
   const isr = calcISR(brutoMensual, ISR_MENSUAL_2026);
-  // Subsidio al empleo (aplica si ingreso <= ~$9,500 aprox)
-  const subsidio = brutoMensual <= (UMA_DIARIA * 3 * 30.4) ? SUBSIDIO_EMPLEO_MENSUAL : 0;
+  // Subsidio al empleo 2026 (decreto DOF 31/12/2025): límite $11,492.66 mensuales,
+  // monto = UMA mensual × 15.02% (enero 2026 usó UMA 2025 × 15.59%, no modelado aquí)
+  const LIMITE_SUBSIDIO_EMPLEO_2026 = 11492.66;
+  const subsidio = brutoMensual <= LIMITE_SUBSIDIO_EMPLEO_2026 ? UMA_MENSUAL * 0.1502 : 0;
   return Math.max(isr - subsidio, 0);
 }
 
@@ -230,13 +233,14 @@ function CalcLiquidacion() {
     // Indemnización constitucional (90 días SDI)
     const indem90 = sdi * 90;
 
-    // 20 días por año trabajado
-    const indem20 = sdi * 20 * Math.max(aniosCompletos, 1);
+    // 20 días por año de servicio (proporcional, sin redondear ni forzar mínimo de 1 año —
+    // la SCJN reconoce el pago proporcional cuando el servicio es menor a un año)
+    const indem20 = sdi * 20 * anios;
 
-    // Prima de antigüedad (12 días por año, tope 2x salario mínimo — Art. 162 LFT)
+    // Prima de antigüedad (12 días por año, tope 2x salario mínimo — Art. 162 LFT), proporcional
     const topeDiario = SALARIO_MINIMO_GENERAL * 2;
     const sdTope = Math.min(sd, topeDiario);
-    const primaAnt = 12 * sdTope * Math.max(aniosCompletos, 1);
+    const primaAnt = 12 * sdTope * anios;
 
     const brutoFiniquito = pagoSalario + aguinaldo + pagoVacaciones + primaVac;
     const brutoLiquidacion = indem90 + indem20 + primaAnt;
@@ -245,7 +249,7 @@ function CalcLiquidacion() {
     setResult({
       sd, sdi, factorIntegracion, dt,
       pagoSalario, aguinaldo, diasAnio, vacProporcionales, pagoVacaciones, primaVac,
-      indem90, indem20, primaAnt, aniosCompletos,
+      indem90, indem20, primaAnt, aniosCompletos, anios,
       brutoFiniquito, brutoLiquidacion, brutoTotal
     });
   };
@@ -273,8 +277,8 @@ function CalcLiquidacion() {
           <Divider />
           <div style={{marginBottom:12,fontWeight:600,color:'#1e293b'}}>⚖️ Indemnización (despido injustificado)</div>
           <ResultLine label={`90 días SDI (${fmt(result.sdi)}/día)`} value={fmt(result.indem90)} />
-          <ResultLine label={`20 días × ${result.aniosCompletos || 1} año(s)`} value={fmt(result.indem20)} />
-          <ResultLine label={`Prima antigüedad (12 días × ${result.aniosCompletos || 1} año(s))`} value={fmt(result.primaAnt)} />
+          <ResultLine label={`20 días × ${result.anios.toFixed(2)} año(s) de servicio`} value={fmt(result.indem20)} />
+          <ResultLine label={`Prima antigüedad (12 días × ${result.anios.toFixed(2)} año(s))`} value={fmt(result.primaAnt)} />
           <ResultLine label="Subtotal indemnización" value={fmt(result.brutoLiquidacion)} bold />
           <Divider />
           <ResultLine label="Total bruto" value={fmt(result.brutoTotal)} bold color="#15803d" />
@@ -396,9 +400,10 @@ function CalcISR() {
           <ResultLine label="Tasa efectiva real" value={fmtPct(result.tasaEfectiva)} bold />
           <Divider />
           <div style={{marginBottom:8,fontWeight:600,color:'#64748b',fontSize:13}}>Proyección anual</div>
-          <ResultLine label="Ingreso anual bruto" value={fmt(result.anual.bruto)} />
-          <ResultLine label="ISR anual" value={fmt(result.anual.isr)} />
-          <ResultLine label="Neto anual" value={fmt(result.anual.neto)} color="#15803d" />
+          <ResultLine label="Ingreso bruto × 12 meses" value={fmt(result.anual.bruto)} />
+          <ResultLine label="Retención mensual × 12" value={fmt(result.anual.isr)} />
+          <ResultLine label="Neto mensual × 12" value={fmt(result.anual.neto)} color="#15803d" />
+          <Note>Esta proyección es tu retención mensual multiplicada por 12, no un cálculo de declaración anual. El ISR del ejercicio anual se calcula distinto (tarifa anual, ajuste del retenedor y, en su caso, deducciones personales).</Note>
         </ResultBox>
       )}
     </div>
@@ -419,17 +424,10 @@ function CalcRESICO() {
     }
 
     const isrResico = ing * (tasa / 100);
-    const ivaMensual = ing * 0.16;
-    const totalImpuestos = isrResico + ivaMensual;
     const neto = ing - isrResico;
 
-    // Comparar con régimen general
-    const isrGeneral = calcISR(ing, ISR_MENSUAL_2026);
-    const ahorro = isrGeneral - isrResico;
-
     setResult({
-      ingreso: ing, tasa, isrResico, ivaMensual, totalImpuestos, neto,
-      isrGeneral, ahorro,
+      ingreso: ing, tasa, isrResico, neto,
       anual: { ingreso: ing * 12, isr: isrResico * 12, neto: neto * 12 }
     });
   };
@@ -437,10 +435,10 @@ function CalcRESICO() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula el impuesto que pagarías bajo el Régimen Simplificado de Confianza (RESICO), disponible para personas físicas con ingresos anuales de hasta 3.5 millones de pesos. Las tasas aplicables van del 1% al 2.5% sobre tus ingresos.
+        Calcula el ISR que pagarías bajo el Régimen Simplificado de Confianza (RESICO), disponible para personas físicas con ingresos anuales de hasta 3.5 millones de pesos. Las tasas aplicables van del 1% al 2.5% sobre tus ingresos efectivamente cobrados, conforme al Art. 113-E LISR.
       </p>
       <div style={styles.grid2}>
-        <Field label="Ingreso mensual facturado ($)" value={ingresoMensual} onChange={setIngresoMensual} type="number" placeholder="Ej: 40000" />
+        <Field label="Ingresos del mes efectivamente cobrados, sin IVA ($)" value={ingresoMensual} onChange={setIngresoMensual} type="number" placeholder="Ej: 40000" />
       </div>
       <Btn onClick={calcular}>Calcular RESICO</Btn>
       {result && (
@@ -449,13 +447,7 @@ function CalcRESICO() {
           <ResultLine label="Tasa RESICO" value={fmtPct(result.tasa)} bold />
           <ResultLine label="ISR RESICO mensual" value={fmt(result.isrResico)} color="#b91c1c" />
           <ResultLine label="Neto después de ISR" value={fmt(result.neto)} bold color="#15803d" />
-          <Divider />
-          <div style={{marginBottom:8,fontWeight:600,color:'#64748b',fontSize:13}}>Comparación vs Régimen General</div>
-          <ResultLine label="ISR régimen general" value={fmt(result.isrGeneral)} />
-          <ResultLine label="ISR RESICO" value={fmt(result.isrResico)} />
-          <ResultLine label="Ahorro mensual con RESICO" value={fmt(result.ahorro)} bold color="#15803d" />
-          <ResultLine label="Ahorro anual" value={fmt(result.ahorro * 12)} color="#15803d" />
-          <Note>RESICO aplica para personas físicas con ingresos anuales hasta $3,500,000. Recuerda que también debes pagar IVA (16%) a tus clientes.</Note>
+          <Note>RESICO aplica para personas físicas con ingresos anuales hasta $3,500,000 y ciertos requisitos de permanencia que esta calculadora no valida. El IVA se calcula aparte (hay actos gravados al 16%, al 0% y exentos, además de acreditamiento), así que no se incluye aquí.</Note>
         </ResultBox>
       )}
     </div>
@@ -504,7 +496,12 @@ function CalcBrutoNeto() {
 
     const sd = sm / 30;
     const isrMensual = calcISRMensual(sm);
-    const imssObrero = sm * 0.02625; // 2.625% cuota obrera IMSS 2026 (EyM dinero 0.25% + EyM especie 0.625% + Invalidez y Vida 0.625% + Cesantía y Vejez 1.125%), aproximada sobre salario bruto
+    // Cuota obrera IMSS 2026 sobre SBC (aproximado aquí con el salario bruto):
+    // 0.25% (EyM dinero) + 0.375% (EyM especie pensionados) + 0.625% (Invalidez y Vida)
+    // + 1.125% (Cesantía y Vejez) = 2.375% fijo, más 0.40% sobre el excedente de SBC por
+    // encima de 3 UMA mensuales (Cesantía y Vejez, excedente)
+    const topeExcedente = UMA_MENSUAL * 3;
+    const imssObrero = (sm * 0.02375) + (Math.max(sm - topeExcedente, 0) * 0.004);
     const totalDeducciones = isrMensual + imssObrero;
     const neto = sm - totalDeducciones;
 
@@ -520,7 +517,7 @@ function CalcBrutoNeto() {
     setResult({
       bruto: sm, isrMensual, imssObrero, totalDeducciones, neto,
       sd, aguinaldo, primaVac,
-      ingresoPorHora: neto / 160, // 40 hrs * 4 semanas
+      ingresoPorHora: neto / 173.33, // 40 hrs/sem promediadas a un mes de 4.33 semanas
       ingresoAnualTotal, isrAnual, imssAnual,
       netoAnual: ingresoAnualTotal - isrAnual - imssAnual,
       tasaRetencion: (totalDeducciones / sm) * 100
@@ -540,7 +537,7 @@ function CalcBrutoNeto() {
         <ResultBox>
           <ResultLine label="Salario bruto mensual" value={fmt(result.bruto)} />
           <ResultLine label="ISR retenido" value={`- ${fmt(result.isrMensual)}`} color="#b91c1c" />
-          <ResultLine label="Cuota IMSS obrera (2.625%)" value={`- ${fmt(result.imssObrero)}`} color="#b91c1c" />
+          <ResultLine label="Cuota IMSS obrera estimada" value={`- ${fmt(result.imssObrero)}`} color="#b91c1c" />
           <Divider />
           <ResultLine label="Sueldo neto mensual" value={fmt(result.neto)} bold color="#15803d" />
           <ResultLine label="Ingreso por hora (40 hrs/sem)" value={fmt(result.ingresoPorHora)} />
@@ -598,9 +595,9 @@ function CalcVacaciones() {
           {result.sd > 0 && (
             <>
               <Divider />
-              <ResultLine label="Pago de vacaciones" value={fmt(result.pagoVac)} />
+              <ResultLine label="Valor salarial del periodo vacacional" value={fmt(result.pagoVac)} />
               <ResultLine label="Prima vacacional (25%)" value={fmt(result.primaVac)} />
-              <ResultLine label="Total a recibir" value={fmt(result.total)} bold color="#15803d" />
+              <ResultLine label="Valor del periodo + prima" value={fmt(result.total)} bold color="#15803d" />
             </>
           )}
           <Divider />

@@ -49,7 +49,7 @@
       ],
       "verifiedAt": "2026-09-06",
       "verifiedThrough": ["Art. 48/50 LFT (citados ya en el código)", "Art. 162 LFT (sdv.com.mx, geovictoria.com)"],
-      "notas": "MISMO BUG que Finiquito, corregido en el mismo commit: tope de prima de antigüedad usaba 2x UMA en vez de 2x salario mínimo general (Art. 162 LFT). Esta calculadora lo usaba para TODOS los años de servicio (no solo 15+), así que el impacto era aún más amplio que en Finiquito. Ya corregido y desplegado."
+      "notas": "MISMO BUG que Finiquito, corregido en el mismo commit: tope de prima de antigüedad usaba 2x UMA en vez de 2x salario mínimo general (Art. 162 LFT). Esta calculadora lo usaba para TODOS los años de servicio (no solo 15+), así que el impacto era aún más amplio que en Finiquito. Ya corregido y desplegado. ACTUALIZACIÓN 2026-09-06 (hallazgo T-06): además se corrigió que el pago de 20 días por año y la prima de antigüedad redondeaban la antigüedad a años completos y forzaban un mínimo de 1 año (alguien con 6 meses recibía el equivalente a un año completo; alguien con 1.9 años solo recibía 1). Ahora ambos se calculan de forma proporcional a los años exactos de servicio."
     },
     "aguinaldo": {
       "name": "Aguinaldo",
@@ -74,7 +74,7 @@
       "legalBasis": [],
       "verifiedAt": "2026-09-06",
       "verifiedThrough": ["Tabla ISR (ya citada en el código)", "SUBSIDIO_EMPLEO_MENSUAL confirmado vía fortia.com.mx: tope $536.22/mes para feb-dic 2026, aplica hasta ingreso mensual de $11,492.66"],
-      "notas": "Es la calculadora con mejor trazabilidad de fuente. El monto del subsidio al empleo ($536.22) coincide EXACTAMENTE con el tope oficial 2026 confirmado. Único hueco restante: no se pudo confirmar contra el DOF directamente (403), solo vía compilación."
+      "notas": "Es la calculadora con mejor trazabilidad de fuente. El monto del subsidio al empleo ($536.22) coincide EXACTAMENTE con el tope oficial 2026 confirmado. Único hueco restante: no se pudo confirmar contra el DOF directamente (403), solo vía compilación. ACTUALIZACIÓN 2026-09-06 (auditoría transversal ChatGPT+Claude, hallazgo T-02): el decreto DOF 31/12/2025 fija el subsidio como UMA mensual por 15.02% (excepto enero 2026) con límite $11,492.66, no un monto fijo de $536.22 con límite ~$10,698.67 como calculaba el código antes. Corregido: ahora el límite y el monto se derivan de la UMA vigente. Esto también corrige a Bruto a Neto, que usa la misma función."
     },
     "resico": {
       "name": "RESICO",
@@ -88,7 +88,7 @@
       "verifiedAt": "2026-09-06",
       "verifiedThrough": ["SAT (bloqueado directo, confirmado vía compilación de texto legal)"],
       "verificationNotes": ["Acceso directo a sat.gob.mx bloqueado por 403.", "La disposición fue contrastada mediante dos compilaciones independientes que reproducen/citan el texto del Art. 113-E."],
-      "notas": "La tabla RESICO_TASAS del código (1.00% hasta $25,000; 1.10% hasta $50,000; 1.50% hasta $83,333.33; 2.00% hasta $208,333.33; 2.50% en adelante) coincide EXACTAMENTE con el Art. 113-E LISR vigente 2026. El código corta el último renglón en $291,666.67 en vez de $3,500,000, pero como la tasa por default ya es 2.5% para cualquier ingreso no encontrado en la tabla, el resultado numérico es idéntico en la práctica — no requiere cambio."
+      "notas": "La tabla RESICO_TASAS del código (1.00% hasta $25,000; 1.10% hasta $50,000; 1.50% hasta $83,333.33; 2.00% hasta $208,333.33; 2.50% en adelante) coincide EXACTAMENTE con el Art. 113-E LISR vigente 2026. El código corta el último renglón en $291,666.67 en vez de $3,500,000, pero como la tasa por default ya es 2.5% para cualquier ingreso no encontrado en la tabla, el resultado numérico es idéntico en la práctica — no requiere cambio. ACTUALIZACIÓN 2026-09-06 (hallazgo T-09): se retiró la sección de comparación contra el régimen general (calculaba el ISR de régimen general aplicando la tarifa de salarios a un ingreso de actividad empresarial, lo cual no es válido — ese régimen depende de deducciones autorizadas, PTU, pérdidas, etc., Art. 106 LISR) y la afirmación universal de que también debes pagar IVA del 16% (hay actos al 0%, exentos y acreditamiento). El campo de ingreso ahora se etiqueta como ingresos efectivamente cobrados sin IVA, que es la base real del Art. 113-E."
     },
     "ptu": {
       "name": "PTU",
@@ -114,7 +114,7 @@
       "verifiedAt": "2026-09-06",
       "verifiedThrough": ["IMSS (bloqueado directo, confirmado vía compilación del desglose)"],
       "verificationNotes": ["Acceso directo a imss.gob.mx bloqueado por 403.", "El desglose fue contrastado mediante una compilación que reproduce la tabla oficial de cuotas por ramo."],
-      "notas": "CONFIRMADO (fix aplicado y desplegado en producción — commit 00bd2d428f, deploy dpl_4qJQQ8Doeyt7mLXDbbXbBQWESczv, READY): el 2.5% fijo que usaba el código era una aproximación, no la cuota real. La cuota obrera real 2026 es 2.625% (Enfermedad y Maternidad dinero 0.25% + especie 0.625% sobre excedente de 3 UMA + Invalidez y Vida 0.625% + Cesantía/Vejez 1.125%), y se calcula sobre el Salario Base de Cotización (SBC, que incluye un factor de integración de antigüedad ~1.05-1.06), no directamente sobre el salario bruto mensual como hace el código hoy. El error resultante es pequeño para salarios bajos (~5% de diferencia en la tasa) pero crece para quien gana por encima de 3 UMA. Recomendación: ajustar a 2.625% como mínimo, e idealmente explicar en el Note que es una aproximación sobre salario bruto y no sobre SBC real. Pendiente de decisión de Ulises antes de tocar la fórmula."
+      "notas": "CONFIRMADO (fix aplicado y desplegado en producción — commit 00bd2d428f, deploy dpl_4qJQQ8Doeyt7mLXDbbXbBQWESczv, READY): el 2.5% fijo que usaba el código era una aproximación, no la cuota real. La cuota obrera real 2026 es 2.625% (Enfermedad y Maternidad dinero 0.25% + especie 0.625% sobre excedente de 3 UMA + Invalidez y Vida 0.625% + Cesantía/Vejez 1.125%), y se calcula sobre el Salario Base de Cotización (SBC, que incluye un factor de integración de antigüedad ~1.05-1.06), no directamente sobre el salario bruto mensual como hace el código hoy. El error resultante es pequeño para salarios bajos (~5% de diferencia en la tasa) pero crece para quien gana por encima de 3 UMA. ACTUALIZACIÓN 2026-09-06 (auditoría transversal, hallazgo T-08): 2.625% plano también era incorrecto — la estructura real es 2.375% fijo (suma de las cuatro ramas) más 0.40% adicional solo sobre el excedente de SBC por encima de 3 UMA mensuales (rama Cesantía y Vejez). Corregido en el código (aproximando SBC con el salario bruto, como ya se explicaba). También se corrigió el ingreso por hora, que dividía entre 160 en vez de 173.33 horas al mes."
     },
     "vacaciones": {
       "name": "Vacaciones",
@@ -125,7 +125,7 @@
       "legalBasis": [{ "type": "law", "name": "Ley Federal del Trabajo", "reference": "Art. 76 — reforma 'Vacaciones Dignas' 2023 (citado en el código)", "url": null }],
       "verifiedAt": "2026-09-06",
       "verifiedThrough": ["Art. 76 LFT (sdv.com.mx) — tabla completa años 1-35 coincide EXACTAMENTE con VACACIONES_POR_ANIO del código"],
-      "notas": "La tabla completa (12,14,16,18,20 para años 1-5; +2 días cada 5 años después) coincide exactamente con la fuente consultada. Sin cambios necesarios."
+      "notas": "La tabla completa (12,14,16,18,20 para años 1-5; +2 días cada 5 años después) coincide exactamente con la fuente consultada. Sin cambios necesarios. ACTUALIZACIÓN 2026-09-06 (hallazgo T-11): la tabla del código solo llega hasta el año 35 (32 días) y de ahí en adelante se congelaba en 32 días, sin límite en la ley real (Art. 76 sigue sumando 2 días cada 5 años indefinidamente). Se agregó una fórmula que continúa el patrón más allá del año 35. También se renombraron las etiquetas de resultado para no sugerir que es un pago adicional al salario ordinario, sino el valor del periodo vacacional más la prima."
     },
     "infonavit": {
       "name": "Infonavit",

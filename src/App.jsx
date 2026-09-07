@@ -1,5 +1,6 @@
 import { useState } from "react";
 import regulatoryData from "./data/regulatory-data.json";
+import articulos from "./data/articulos.json";
 
 // ═══════════════════════════════════════════════════════════════
 // DATOS OFICIALES 2026 — SAT / CONASAMI / INEGI
@@ -997,6 +998,36 @@ function FichaConfianza({ id }) {
   );
 }
 
+function Articulo({ id }) {
+  const [abierto, setAbierto] = useState(false);
+  const data = articulos[id];
+  if (!data) return null;
+  return (
+    <div style={{ marginTop: 14, paddingTop: 14, borderTop: '1px solid #edf0f4' }}>
+      <button
+        onClick={() => setAbierto(v => !v)}
+        style={{
+          background: 'none', border: 'none', padding: 0, cursor: 'pointer',
+          color: '#b45309', fontSize: 13, fontWeight: 600, display: 'flex',
+          alignItems: 'center', gap: 6
+        }}
+      >
+        {abierto ? '▾' : '▸'} {data.titulo}
+      </button>
+      {abierto && (
+        <div style={{ marginTop: 12 }}>
+          {data.parrafos.map((p, i) => (
+            <div key={i} style={{ marginBottom: 12 }}>
+              <h3 style={{ fontSize: 14, fontWeight: 700, color: '#16324a', margin: '0 0 6px 0' }}>{p.subtitulo}</h3>
+              <p style={{ fontSize: 13, lineHeight: 1.65, color: '#475569', margin: 0 }}>{p.texto}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ═══════════════════════════════════════════════════════════════
 // APP PRINCIPAL
 // ═══════════════════════════════════════════════════════════════
@@ -1087,6 +1118,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
               </div>
               <Comp />
               <FichaConfianza id={calc.id} />
+              <Articulo id={calc.id} />
             </div>
           </div>
         )}

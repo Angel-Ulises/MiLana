@@ -19,5 +19,194 @@
         "texto": "El finiquito no es una cantidad fija ni un porcentaje único del salario. Depende de lo que hayas trabajado, de las prestaciones generadas y de lo que ya te hayan pagado. Tampoco es correcto estimarlo únicamente multiplicando el salario por cierto número de días, porque cada concepto se determina por separado. Si tienes vacaciones pendientes, comisiones, bonos, cambios recientes de salario o prestaciones superiores a las mínimas legales, el resultado puede variar. Conserva recibos de nómina, contrato, comprobantes de vacaciones y otros documentos relacionados con tus prestaciones para comparar la estimación con el cálculo que te entregue tu empleador. Esta herramienta ofrece una estimación con fines informativos basada en los datos que captures y en los conceptos incluidos en la calculadora. No constituye asesoría legal, fiscal ni laboral, ni sustituye la revisión de tu caso por una autoridad o profesional competente."
       }
     ]
+  },
+  "liquidacion": {
+    "titulo": "Liquidación por despido injustificado: qué puede incluir y cómo se estima",
+    "parrafos": [
+      {
+        "subtitulo": "¿Qué es una liquidación?",
+        "texto": "Cuando una relación laboral termina por un despido que la persona trabajadora considera injustificado, la Ley Federal del Trabajo prevé distintas consecuencias según el caso. Entre ellas puede estar la posibilidad de solicitar la reinstalación o el pago de una indemnización, además de las prestaciones que ya se hubieran generado. Por eso, una liquidación no es lo mismo que un finiquito: el finiquito cubre conceptos devengados, mientras que una indemnización puede incorporar cantidades adicionales derivadas de la forma en que terminó la relación laboral. Esta calculadora sirve para obtener una referencia económica de los conceptos más comunes, pero no determina por sí sola si un despido fue legal o injustificado ni sustituye el procedimiento que corresponda."
+      },
+      {
+        "subtitulo": "¿Qué conceptos puede incluir?",
+        "texto": "En los supuestos legales aplicables, la indemnización puede considerar tres meses de salario y, dependiendo del tipo de relación y de la acción ejercida, veinte días de salario por cada año de servicios. Este último concepto no debe entenderse como automático en absolutamente todo despido injustificado: su procedencia depende del supuesto previsto en los artículos 49 y 50 de la Ley Federal del Trabajo y de las circunstancias concretas de la separación. También puede corresponder la prima de antigüedad conforme al artículo 162, además de salarios o prestaciones pendientes, como aguinaldo, vacaciones y prima vacacional proporcionales. La calculadora separa estos conceptos para que sea más fácil entender de dónde proviene la estimación."
+      },
+      {
+        "subtitulo": "¿Por qué el resultado puede cambiar?",
+        "texto": "La cantidad final depende de factores como el salario que legalmente deba tomarse como base, la antigüedad, el tipo de contrato, la fecha de separación y los conceptos que efectivamente procedan. También puede haber diferencias si existen prestaciones superiores a las mínimas legales, comisiones, bonos integrables al salario o cantidades pendientes de pago. En un conflicto laboral, la procedencia de cada concepto puede depender de lo que se acredite, de un convenio de conciliación o de una resolución de la autoridad competente. Por esa razón, conviene usar el resultado como una referencia para revisar un cálculo, no como una cifra definitiva exigible en todos los casos."
+      },
+      {
+        "subtitulo": "Dudas comunes",
+        "texto": "Una liquidación no se obtiene simplemente multiplicando el sueldo por un número fijo de días. Cada concepto tiene una base y una razón jurídica distinta, y algunos pueden coexistir con el finiquito. Tampoco debe asumirse que renunciar voluntariamente produce la misma indemnización que un despido injustificado. Si recibiste una propuesta de convenio, revisa por separado salario pendiente, prestaciones devengadas, indemnizaciones y prima de antigüedad, y conserva contrato, recibos de nómina y documentos de la separación. Esta herramienta ofrece una estimación con fines informativos basada en los datos que captures y en los conceptos incluidos en la calculadora. No constituye asesoría legal, fiscal ni laboral, ni sustituye la revisión de tu caso por una autoridad o profesional competente."
+      }
+    ]
+  },
+  "aguinaldo": {
+    "titulo": "Aguinaldo: cómo se genera, cuándo es proporcional y qué pasa con el ISR",
+    "parrafos": [
+      {
+        "subtitulo": "¿Qué es el aguinaldo?",
+        "texto": "El aguinaldo es una prestación anual reconocida por la Ley Federal del Trabajo para las personas trabajadoras. El artículo 87 establece un mínimo equivalente a quince días de salario y señala que debe pagarse antes del veinte de diciembre. Si la relación laboral termina antes de esa fecha o la persona no trabajó el año completo, el derecho no desaparece: corresponde la parte proporcional al tiempo efectivamente laborado. Algunas empresas otorgan un aguinaldo superior al mínimo por contrato, política interna o contrato colectivo. En esos casos, el cálculo real puede ser mayor que el mínimo legal. Esta calculadora permite estimar el importe con los datos que captures sin sustituir la revisión de tus condiciones particulares de trabajo."
+      },
+      {
+        "subtitulo": "¿Cómo funciona la parte proporcional?",
+        "texto": "Cuando no se trabaja todo el año, el aguinaldo se genera de manera proporcional. La idea es identificar cuánto aguinaldo correspondería por el periodo anual aplicable y reconocer únicamente la parte asociada al tiempo trabajado. La fecha de ingreso, la fecha de salida y el salario utilizado en el cálculo son relevantes. Si hubo cambios de salario, percepciones variables o una prestación de aguinaldo superior a la legal, el importe que pague el empleador puede requerir un tratamiento distinto al de una estimación sencilla. Por eso conviene comparar el resultado con el contrato, los recibos de nómina y la política de prestaciones de la empresa."
+      },
+      {
+        "subtitulo": "¿El aguinaldo paga ISR?",
+        "texto": "No todo el aguinaldo necesariamente recibe el mismo tratamiento fiscal. La Ley del Impuesto sobre la Renta contempla una parte exenta bajo determinados requisitos y establece que el excedente puede estar sujeto al impuesto. El límite de la exención depende de referencias fiscales que pueden actualizarse, por lo que es preferible que la calculadora utilice el valor vigente en lugar de repetirlo en este texto. La retención que aparezca en nómina también puede variar por el método fiscal aplicable, por los demás ingresos del periodo y por la situación de cada trabajador. Por eso, el aguinaldo bruto y el importe finalmente depositado pueden ser diferentes."
+      },
+      {
+        "subtitulo": "Dudas comunes",
+        "texto": "El aguinaldo no se pierde por renunciar antes de diciembre ni por haber trabajado solamente una parte del año; en esos casos puede corresponder el proporcional generado hasta la separación. Tampoco debe confundirse el importe bruto de la prestación con el monto neto después de una posible retención de ISR. Si tu empresa ofrece más días de aguinaldo que el mínimo legal, usa esa prestación real para comparar el cálculo. Conserva recibos de nómina y documentos donde consten tus prestaciones, especialmente si hubo cambios de salario durante el año. Esta herramienta ofrece una estimación con fines informativos basada en los datos que captures y en los conceptos incluidos en la calculadora. No constituye asesoría legal, fiscal ni laboral, ni sustituye la revisión de tu caso por una autoridad o profesional competente."
+      }
+    ]
+  },
+  "isr": {
+    "titulo": "Retención de ISR sobre sueldo mensual: cómo funciona una estimación de nómina",
+    "parrafos": [
+      {
+        "subtitulo": "¿Qué es la retención de ISR?",
+        "texto": "Cuando una persona recibe ingresos por salarios, el empleador normalmente actúa como retenedor del Impuesto sobre la Renta. El artículo 96 de la Ley del Impuesto sobre la Renta establece que las retenciones mensuales tienen el carácter de pagos provisionales a cuenta del impuesto anual. Esto significa que el ISR mostrado en un recibo de nómina no es simplemente un porcentaje fijo aplicado al sueldo. El empleador calcula la retención con las reglas fiscales correspondientes al periodo y posteriormente entera el impuesto. Esta calculadora busca reproducir de manera informativa el cálculo mensual a partir del ingreso capturado y de la tarifa vigente utilizada por el sitio."
+      },
+      {
+        "subtitulo": "¿Cómo funciona la tarifa?",
+        "texto": "La tarifa de ISR para salarios es progresiva. En términos prácticos, el ingreso gravable se ubica dentro de un rango; a partir de ahí intervienen elementos como un límite inferior, una cuota fija y una tasa aplicable al excedente. Por eso dos salarios distintos no necesariamente soportan la misma tasa efectiva, y aumentar el ingreso no significa que todo el sueldo pase a gravarse con la tasa más alta del rango. Las tablas y cantidades fiscales pueden actualizarse, así que este artículo no las reproduce. La calculadora es el lugar adecuado para aplicar los valores vigentes y mostrar una estimación numérica sin duplicar información que después tendría que mantenerse en dos sitios."
+      },
+      {
+        "subtitulo": "¿Qué es el subsidio al empleo?",
+        "texto": "El subsidio para el empleo es un beneficio fiscal dirigido a determinados trabajadores de menores ingresos y se aplica contra el ISR a cargo cuando se cumplen las condiciones vigentes. Su mecánica ha sido modificada mediante disposiciones fiscales y decretos, por lo que no conviene tratarlo como una cantidad fija permanente. Tampoco se aplica necesariamente a todas las personas asalariadas. Si una persona trabaja para más de un empleador, existen reglas para evitar que el beneficio se aplique indebidamente más de una vez. La calculadora incorpora el tratamiento vigente que haya sido verificado para el periodo mostrado, pero el recibo real puede reflejar particularidades adicionales."
+      },
+      {
+        "subtitulo": "Dudas comunes",
+        "texto": "El ISR estimado puede diferir del retenido en tu nómina si existen ingresos exentos, bonos, aguinaldo, prima vacacional, pagos extraordinarios, ajustes de periodos anteriores u otros conceptos con tratamiento fiscal específico. También puede haber diferencias entre la retención mensual y el impuesto anual, porque este último considera reglas y circunstancias adicionales. La calculadora no debe interpretarse como una declaración fiscal ni como sustituto del CFDI de nómina emitido por tu empleador. Úsala para entender el orden de magnitud de la retención y revisar cómo cambia el resultado al modificar el sueldo. Esta herramienta ofrece una estimación con fines informativos basada en los datos que captures y en los conceptos incluidos en la calculadora. No constituye asesoría legal, fiscal ni laboral, ni sustituye la revisión de tu caso por una autoridad o profesional competente."
+      }
+    ]
+  },
+  "resico": {
+    "titulo": "RESICO para personas físicas: cómo se estima el ISR sobre ingresos cobrados",
+    "parrafos": [
+      {
+        "subtitulo": "¿Qué es RESICO?",
+        "texto": "El Régimen Simplificado de Confianza para personas físicas es un esquema previsto en la Ley del Impuesto sobre la Renta para ciertos contribuyentes que realizan actividades empresariales, profesionales o conceden el uso o goce temporal de bienes y cumplen los requisitos legales. No es un régimen aplicable automáticamente a cualquier persona física: existen condiciones de entrada, permanencia y supuestos de exclusión que deben revisarse según la situación del contribuyente. Esta calculadora se concentra en estimar el ISR del régimen a partir de los ingresos que captures. No determina por sí misma si una persona puede tributar en RESICO ni sustituye la información registrada ante el SAT."
+      },
+      {
+        "subtitulo": "¿Sobre qué ingresos se calcula?",
+        "texto": "El artículo 113-E de la Ley del Impuesto sobre la Renta parte de los ingresos efectivamente cobrados por las actividades comprendidas en el régimen y amparados por los comprobantes fiscales correspondientes. Para el cálculo del ISR de RESICO, la ley utiliza los ingresos cobrados sin incluir el IVA y aplica la mecánica específica del régimen, en lugar de calcular el impuesto como si se tratara del régimen general con deducciones. Esta diferencia es importante: facturar una operación y cobrarla no siempre ocurren en el mismo momento. Por eso la fecha de cobro y el importe efectivamente percibido pueden cambiar el periodo en el que se considera el ingreso para esta estimación."
+      },
+      {
+        "subtitulo": "¿Cómo se aplica la tasa?",
+        "texto": "RESICO utiliza tasas reducidas que dependen del nivel de ingresos previsto por la ley. La calculadora identifica el rango correspondiente y aplica la tasa verificada para obtener una estimación del ISR. Este texto no reproduce la tabla completa para evitar duplicar valores que deben mantenerse actualizados en un solo lugar. Además, cuando una persona física en RESICO presta servicios o realiza determinadas operaciones con personas morales, puede existir una retención de ISR que después se considere en el cálculo fiscal correspondiente. Por eso el impuesto calculado sobre los ingresos y el efectivo que finalmente deba pagarse al SAT no siempre son exactamente la misma cifra."
+      },
+      {
+        "subtitulo": "Dudas comunes",
+        "texto": "Una tasa baja no significa que RESICO sea automáticamente la mejor opción para cualquier actividad. La posibilidad de permanecer en el régimen depende de cumplir sus requisitos y obligaciones, y algunos cambios en ingresos, actividades o situación societaria pueden afectar la elegibilidad. También es importante distinguir el ISR del IVA, porque son contribuciones diferentes y esta calculadora se enfoca en el impuesto indicado. Los CFDI, retenciones y declaraciones efectivamente presentadas son los documentos que deben usarse para revisar la situación fiscal real. Esta herramienta ofrece una estimación con fines informativos basada en los datos que captures y en los conceptos incluidos en la calculadora. No constituye asesoría legal, fiscal ni laboral, ni sustituye la revisión de tu caso por una autoridad o profesional competente."
+      }
+    ]
+  },
+  "ptu": {
+    "titulo": "Reparto de utilidades (PTU): cómo se determina y por qué cambia entre trabajadores",
+    "parrafos": [
+      {
+        "subtitulo": "¿Qué es la PTU?",
+        "texto": "La Participación de los Trabajadores en las Utilidades, conocida como PTU, es el derecho de las personas trabajadoras a participar en una parte de las utilidades de la empresa cuando se cumplen los supuestos legales. La Ley Federal del Trabajo establece que el porcentaje es determinado por la Comisión Nacional para la Participación de los Trabajadores en las Utilidades de las Empresas, y la resolución vigente fija ese porcentaje en diez por ciento sobre la renta gravable correspondiente. Esto no significa que cada trabajador reciba diez por ciento de su salario ni diez por ciento de la utilidad total por sí solo. Primero se determina la cantidad global a repartir y después se distribuye entre quienes tengan derecho."
+      },
+      {
+        "subtitulo": "¿Cómo se reparte entre trabajadores?",
+        "texto": "La Ley Federal del Trabajo dispone que la utilidad repartible se divide en dos partes iguales. Una se distribuye considerando los días trabajados por cada persona durante el año y la otra se reparte en proporción a los salarios devengados por el trabajo prestado. Por eso dos trabajadores de la misma empresa pueden recibir cantidades distintas aunque ocupen puestos similares. También existen reglas específicas sobre qué salario se toma en cuenta y quiénes participan o quedan excluidos en determinados supuestos. La calculadora busca representar la mecánica general con los datos que captures, pero el reparto real depende de la información completa de la empresa y del conjunto de trabajadores participantes."
+      },
+      {
+        "subtitulo": "¿Existe un límite individual?",
+        "texto": "Sí. La Ley Federal del Trabajo establece que el monto de PTU que recibe una persona trabajadora tiene como límite máximo tres meses de su salario o el promedio de la PTU recibida durante los últimos tres años, aplicándose la cantidad que resulte más favorable para la persona trabajadora. Este límite se aplica después de determinar la participación conforme a las reglas de reparto. También hay empresas y personas que pueden encontrarse en supuestos especiales o de excepción previstos por la propia ley. Por ello, una estimación individual no puede conocer por sí sola todos los datos fiscales, laborales y de plantilla que intervienen en el cálculo definitivo realizado por la empresa."
+      },
+      {
+        "subtitulo": "Dudas comunes",
+        "texto": "La PTU no es un bono discrecional ni depende únicamente del desempeño individual. Su existencia parte de la renta gravable y de las reglas laborales de participación y distribución. Una empresa puede haber tenido ventas importantes y, aun así, el dato relevante para PTU ser distinto de esas ventas. Del mismo modo, el importe individual depende de días trabajados, salario considerado, número de participantes y límites aplicables. Si recibes un cálculo de PTU, compáralo con la información que la empresa ponga a disposición conforme al procedimiento legal. Esta herramienta ofrece una estimación con fines informativos basada en los datos que captures y en los conceptos incluidos en la calculadora. No constituye asesoría legal, fiscal ni laboral, ni sustituye la revisión de tu caso por una autoridad o profesional competente."
+      }
+    ]
+  },
+  "bruto-neto": {
+    "titulo": "De salario bruto a neto: qué descuentos explican la diferencia",
+    "parrafos": [
+      {
+        "subtitulo": "¿Qué significa bruto y neto?",
+        "texto": "El salario bruto es el importe antes de aplicar las retenciones y descuentos que correspondan en la nómina. El salario neto es la cantidad que finalmente recibe la persona trabajadora después de restar esos conceptos. La diferencia no representa un solo impuesto ni una tasa única: puede incluir ISR, cuotas de seguridad social a cargo del trabajador y, en una nómina real, otros descuentos autorizados o derivados de obligaciones específicas. Esta calculadora se enfoca en una conversión estimada utilizando los conceptos que muestra expresamente, principalmente ISR y cuota obrera del IMSS. Por eso el resultado sirve como referencia y no necesariamente coincidirá peso por peso con todos los recibos de nómina."
+      },
+      {
+        "subtitulo": "¿Cómo influye el ISR?",
+        "texto": "El ISR sobre salarios se retiene conforme a la mecánica del artículo 96 de la Ley del Impuesto sobre la Renta y a las disposiciones fiscales vigentes. La tarifa es progresiva, de modo que la retención no se obtiene aplicando un porcentaje único a todo el salario. Además, el subsidio para el empleo puede modificar el resultado cuando se cumplen sus condiciones. Bonos, prestaciones, pagos extraordinarios y partes exentas o gravadas de determinadas percepciones también pueden hacer que una nómina real sea distinta a una simulación basada únicamente en un sueldo mensual. La calculadora utiliza los parámetros vigentes que hayan sido revisados para el periodo indicado."
+      },
+      {
+        "subtitulo": "¿Cómo influye la cuota del IMSS?",
+        "texto": "Las cuotas de seguridad social no deben confundirse con el ISR. La Ley del Seguro Social distribuye distintas aportaciones entre patrón, trabajador y, en ciertos ramos, el Estado. La parte obrera se determina con base en las reglas de cotización y en el salario base de cotización, que no siempre es idéntico al salario bruto escrito de forma aislada. Algunas prestaciones pueden integrar o no integrar ese salario conforme a las reglas aplicables. La calculadora estima la cuota obrera con el método incorporado en el sitio; las cuotas que corresponden al patrón son obligaciones distintas y no deben restarse como si fueran un descuento adicional al salario del trabajador."
+      },
+      {
+        "subtitulo": "Dudas comunes",
+        "texto": "Tu salario neto real puede ser menor que el estimado si tienes crédito Infonavit, pensión alimenticia, préstamos, caja de ahorro u otros descuentos procedentes, y también puede variar por bonos, horas extra o prestaciones con tratamientos diferentes. Por eso dos personas con el mismo sueldo bruto pueden recibir depósitos distintos. Revisa siempre el CFDI y el recibo de nómina para identificar cada percepción y deducción. Esta calculadora está pensada para explicar el efecto aproximado de ISR e IMSS, no para reconstruir todos los conceptos posibles de una nómina. Esta herramienta ofrece una estimación con fines informativos basada en los datos que captures y en los conceptos incluidos en la calculadora. No constituye asesoría legal, fiscal ni laboral, ni sustituye la revisión de tu caso por una autoridad o profesional competente."
+      }
+    ]
+  },
+  "vacaciones": {
+    "titulo": "Vacaciones dignas: cómo se generan los días y la prima vacacional",
+    "parrafos": [
+      {
+        "subtitulo": "¿Cómo funciona el derecho a vacaciones?",
+        "texto": "La Ley Federal del Trabajo reconoce un periodo anual de vacaciones pagadas para las personas trabajadoras y establece que su duración aumenta conforme a la antigüedad. El artículo 76 contiene la regla aplicable y fue modificado con la reforma conocida como vacaciones dignas. En lugar de repetir aquí toda la tabla de días por año de servicio, la calculadora utiliza la escala vigente para estimar el periodo que corresponde a la antigüedad capturada. Esto evita que una tabla duplicada quede desactualizada si la legislación cambia. El derecho a vacaciones es distinto del descanso semanal y de los días de descanso obligatorio, por lo que no deben mezclarse al estimar esta prestación."
+      },
+      {
+        "subtitulo": "¿Cuándo se generan y cómo se disfrutan?",
+        "texto": "Las vacaciones se relacionan con el tiempo de servicios prestados. Una vez cumplido el año correspondiente, el patrón debe concederlas dentro del plazo previsto por la ley y entregar una constancia que indique la antigüedad, el periodo que corresponde y la fecha en que se disfrutará. La Ley Federal del Trabajo también protege un periodo continuo de descanso y permite que la persona trabajadora distribuya los días en la forma que requiera dentro de las reglas legales. Si la relación de trabajo termina antes de completar un año de servicios, la propia ley contempla una remuneración proporcional al tiempo trabajado. Por eso las fechas de ingreso y salida son datos importantes para cualquier estimación."
+      },
+      {
+        "subtitulo": "¿Qué es la prima vacacional?",
+        "texto": "Además del salario correspondiente al periodo de vacaciones, la Ley Federal del Trabajo reconoce una prima vacacional no menor al veinticinco por ciento sobre los salarios que correspondan durante ese periodo. Una empresa puede otorgar una prima superior si así lo establece el contrato, un contrato colectivo o sus políticas de prestaciones. La prima vacacional es un concepto distinto del número de días de vacaciones: primero se identifica el periodo que corresponde y después se determina la prima sobre la base aplicable. También puede existir un tratamiento fiscal específico para parte de esta prestación, por lo que el importe bruto y el monto neto recibido pueden diferir."
+      },
+      {
+        "subtitulo": "Dudas comunes",
+        "texto": "Las vacaciones no son simplemente un pago adicional para sustituir el descanso mientras continúa la relación laboral; su finalidad principal es que la persona trabajadora disfrute el periodo que le corresponde. Tampoco conviene asumir que todas las empresas manejan exactamente la prestación mínima: algunas ofrecen más días o una prima mayor. Si hubo interrupciones, cambios de relación laboral o prestaciones superiores, revisa tu contrato y constancias de vacaciones. La calculadora sirve para estimar la prestación conforme a los datos capturados y a la tabla vigente incorporada en el sitio. Esta herramienta ofrece una estimación con fines informativos basada en los datos que captures y en los conceptos incluidos en la calculadora. No constituye asesoría legal, fiscal ni laboral, ni sustituye la revisión de tu caso por una autoridad o profesional competente."
+      }
+    ]
+  },
+  "infonavit": {
+    "titulo": "Simulador de crédito Infonavit: cómo entender capital, intereses y amortización",
+    "parrafos": [
+      {
+        "subtitulo": "¿Qué estima este simulador?",
+        "texto": "Un crédito de vivienda se paga gradualmente mediante amortizaciones. En cada periodo, una parte del pago puede destinarse a intereses y otra a reducir el capital pendiente. El capital es el monto de la deuda sin considerar los intereses que se generan por financiarla, mientras que los intereses dependen del saldo y de la tasa aplicable conforme a las condiciones del crédito. Este simulador simplifica ese proceso para mostrar cómo podría evolucionar una deuda a partir del monto, la tasa y el plazo que captures. Su objetivo es ayudarte a entender la amortización, no reproducir de manera exacta el estado de cuenta de un crédito Infonavit específico."
+      },
+      {
+        "subtitulo": "¿Qué incluye y qué deja fuera?",
+        "texto": "Infonavit informa que la mensualidad real de un crédito puede integrar capital, intereses, seguros y otras cuotas según las condiciones aplicables. Esta calculadora, en cambio, está delimitada deliberadamente a la amortización de capital e intereses. No incorpora seguros ni otros cargos que puedan aparecer en un crédito real. Esa diferencia es importante: el pago mostrado por el simulador puede ser menor o tener una distribución distinta a la que aparece en el estado de cuenta oficial. Para conocer el importe exigible, el saldo reconocido y la composición real de una mensualidad, debe consultarse Mi Cuenta Infonavit y la documentación contractual del crédito."
+      },
+      {
+        "subtitulo": "¿Qué pasa con las aportaciones patronales?",
+        "texto": "Las aportaciones que realiza el patrón al Infonavit pueden aplicarse al crédito conforme a las reglas que correspondan al financiamiento y a su fecha de contratación. En determinados créditos, esas aportaciones ayudan a cubrir conceptos del crédito y pueden acelerar la reducción del saldo. Este simulador no las incorpora en la proyección, porque su objetivo es aislar el comportamiento de capital e intereses con los datos que captura el usuario. Por esa razón, una persona con relación laboral y aportaciones patronales efectivamente aplicadas podría observar en su estado de cuenta una evolución distinta a la trayectoria simplificada mostrada aquí. Los pagos adicionales también pueden modificar el saldo y el tiempo de amortización."
+      },
+      {
+        "subtitulo": "Dudas comunes",
+        "texto": "Una simulación no equivale a una oferta de crédito ni a una tabla oficial de amortización. El contrato, la tasa asignada, los seguros, las cuotas, la situación del crédito, los pagos extraordinarios, posibles adeudos y la aplicación de aportaciones patronales pueden cambiar el resultado real. Usa esta herramienta para comparar escenarios y comprender cuánto de una proyección corresponde a intereses y cuánto a capital, pero verifica cualquier decisión o pago con tu estado de cuenta y los canales oficiales de Infonavit. Esta herramienta ofrece una estimación con fines informativos basada en los datos que captures y en los conceptos incluidos en la calculadora. No constituye asesoría legal, fiscal ni laboral, ni sustituye la revisión de tu caso por una autoridad o profesional competente."
+      }
+    ]
+  },
+  "pension": {
+    "titulo": "Pensión IMSS Ley 97: requisitos de cesantía y vejez sin proyectar el monto de tu AFORE",
+    "parrafos": [
+      {
+        "subtitulo": "¿A quién aplica la Ley 97?",
+        "texto": "El régimen conocido como Ley 97 corresponde, en términos generales, a las personas aseguradas cuya cotización al IMSS comenzó a partir de la entrada en vigor del sistema de cuentas individuales. Quienes tuvieron cotizaciones anteriores pueden encontrarse en una situación distinta y, cuando reúnen los requisitos legales, tener opciones que no deben confundirse con este régimen. En Ley 97, la cuenta individual administrada por una AFORE es una pieza central del sistema de retiro, cesantía en edad avanzada y vejez. Esta calculadora se limita a orientar sobre requisitos básicos y no intenta decidir qué régimen corresponde a una persona ni comparar beneficios entre Ley 73 y Ley 97."
+      },
+      {
+        "subtitulo": "¿Qué se necesita para cesantía o vejez?",
+        "texto": "La Ley del Seguro Social distingue la cesantía en edad avanzada de la vejez. La primera parte de la falta de trabajo remunerado a partir de los sesenta años, mientras que la pensión de vejez se vincula con los sesenta y cinco años. Además de la edad y la baja del régimen obligatorio cuando corresponda, se requiere un número mínimo de semanas reconocidas por el IMSS. Ese requisito se encuentra sujeto a un régimen transitorio que aumenta gradualmente hasta llegar al mínimo permanente previsto por la ley, por lo que este texto no repite una cifra anual. La calculadora debe usar el requisito vigente para el año seleccionado o revisado."
+      },
+      {
+        "subtitulo": "¿Por qué no se calcula aquí el monto de la pensión?",
+        "texto": "En Ley 97, el monto de una pensión no puede estimarse responsablemente multiplicando un salario por un porcentaje fijo. Intervienen los recursos de la cuenta individual y las modalidades previstas por la Ley del Seguro Social, como renta vitalicia o retiros programados. Además, la pensión garantizada tiene reglas propias y una tabla oficial que considera factores como edad, semanas de cotización y salario base de cotización actualizado. Por esa razón, esta calculadora no proyecta el saldo futuro de la AFORE ni promete una mensualidad de pensión. Su función es mostrar una orientación sobre elegibilidad y requisitos, evitando presentar como cierta una cifra que depende de información financiera y administrativa que el sitio no conoce."
+      },
+      {
+        "subtitulo": "Dudas comunes",
+        "texto": "Tener la edad requerida no basta si aún no se reúnen las semanas reconocidas que correspondan. También puede haber diferencias entre las semanas que una persona recuerda haber trabajado y las que aparecen oficialmente registradas, por lo que conviene consultar la constancia de semanas cotizadas del IMSS. El saldo de la AFORE, las aportaciones, rendimientos, beneficiarios y la modalidad de pensión son elementos distintos del requisito básico de edad y semanas. Usa esta herramienta para entender en qué etapa te encuentras, no para tomarla como resolución de pensión. Esta herramienta ofrece una estimación con fines informativos basada en los datos que captures y en los conceptos incluidos en la calculadora. No constituye asesoría legal, fiscal ni laboral, ni sustituye la revisión de tu caso por una autoridad o profesional competente."
+      }
+    ]
   }
 }

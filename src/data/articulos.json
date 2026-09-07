@@ -1,0 +1,23 @@
+{
+  "finiquito": {
+    "titulo": "Finiquito por renuncia voluntaria: qué incluye y cómo se estima",
+    "parrafos": [
+      {
+        "subtitulo": "¿Qué es el finiquito?",
+        "texto": "El finiquito es el pago con el que se cubren las cantidades que ya generaste durante la relación laboral y que siguen pendientes al momento de terminarla. En una renuncia voluntaria, no significa que pierdas las prestaciones que ya acumulaste. El empleador debe considerar, según corresponda, los salarios pendientes y la parte proporcional de las prestaciones devengadas hasta tu último día de trabajo. Esta calculadora está pensada específicamente para estimar un finiquito por renuncia voluntaria y ayudarte a identificar los conceptos que pueden integrar ese pago. El resultado puede cambiar según tus fechas reales de ingreso y salida, salario, prestaciones pactadas y pagos que ya hayas recibido."
+      },
+      {
+        "subtitulo": "¿Qué puede incluir?",
+        "texto": "Entre los conceptos más comunes están los días de salario pendientes, la parte proporcional del aguinaldo, las vacaciones que se hayan generado y no se hayan disfrutado o pagado cuando corresponda, y la prima vacacional relacionada con ellas. La Ley Federal del Trabajo reconoce el derecho al aguinaldo proporcional cuando la persona trabajadora no completa el año, así como el pago proporcional relacionado con vacaciones cuando la relación termina antes de completar el periodo correspondiente. También pueden existir otras cantidades pendientes derivadas del contrato individual, contrato colectivo o condiciones aplicables al empleo, por ejemplo comisiones o bonos ya devengados. Por eso, el finiquito real no siempre coincide exactamente entre dos personas que reciben el mismo salario."
+      },
+      {
+        "subtitulo": "¿Cuándo te corresponde?",
+        "texto": "Si decides renunciar voluntariamente, puedes tener derecho a recibir las cantidades que ya hayas generado hasta la fecha de separación. Esto es distinto de una liquidación o indemnización por despido: una renuncia ordinaria no produce, por sí sola, los mismos conceptos que pueden corresponder en un despido injustificado u otros supuestos previstos por la ley. Un punto especial es la prima de antigüedad. En una separación voluntaria, la Ley Federal del Trabajo establece requisitos específicos de antigüedad para que proceda, por lo que no debe asumirse automáticamente en todos los finiquitos. La calculadora toma como referencia los datos que captures, pero conviene verificar que correspondan con tu situación laboral real."
+      },
+      {
+        "subtitulo": "Dudas comunes",
+        "texto": "El finiquito no es una cantidad fija ni un porcentaje único del salario. Depende de lo que hayas trabajado, de las prestaciones generadas y de lo que ya te hayan pagado. Tampoco es correcto estimarlo únicamente multiplicando el salario por cierto número de días, porque cada concepto se determina por separado. Si tienes vacaciones pendientes, comisiones, bonos, cambios recientes de salario o prestaciones superiores a las mínimas legales, el resultado puede variar. Conserva recibos de nómina, contrato, comprobantes de vacaciones y otros documentos relacionados con tus prestaciones para comparar la estimación con el cálculo que te entregue tu empleador. Esta herramienta ofrece una estimación con fines informativos basada en los datos que captures y en los conceptos incluidos en la calculadora. No constituye asesoría legal, fiscal ni laboral, ni sustituye la revisión de tu caso por una autoridad o profesional competente."
+      }
+    ]
+  }
+}

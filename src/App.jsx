@@ -97,6 +97,17 @@ function diasEntre(f1, f2) {
   return Math.ceil((d2 - d1) / (1000 * 60 * 60 * 24));
 }
 
+// Último aniversario laboral (mismo día/mes que el ingreso) en o antes de fechaRef.
+// Vacaciones y prima vacacional proporcionales se ligan al aniversario de contratación,
+// no al año calendario (que sí es el criterio correcto para el aguinaldo).
+function aniversarioLaboral(fechaIngreso, fechaRef) {
+  const fi = new Date(fechaIngreso);
+  const fr = new Date(fechaRef);
+  let aniv = new Date(fr.getFullYear(), fi.getMonth(), fi.getDate());
+  if (aniv > fr) aniv = new Date(fr.getFullYear() - 1, fi.getMonth(), fi.getDate());
+  return aniv;
+}
+
 function fmt(n) {
   return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(n);
 }
@@ -118,9 +129,9 @@ function CalcFiniquito() {
   const calcular = () => {
     const sm = parseFloat(salarioMensual) || 0;
     const sd = sm / 30;
-    const dt = parseInt(diasTrabajados) || 0;
-    const vp = parseInt(vacPendientes) || 0;
-    if (!fechaIngreso || !fechaSalida || sm <= 0) return;
+    const dt = Math.max(parseInt(diasTrabajados) || 0, 0);
+    const vp = Math.max(parseInt(vacPendientes) || 0, 0);
+    if (!fechaIngreso || !fechaSalida || sm <= 0 || new Date(fechaSalida) <= new Date(fechaIngreso)) return;
 
     const totalDias = diasEntre(fechaIngreso, fechaSalida);
     const anios = totalDias / 365;
@@ -141,7 +152,8 @@ function CalcFiniquito() {
 
     // Vacaciones proporcionales del año en curso
     const vacDias = getVacDias(aniosCompletos + 1);
-    const fraccionAnio = (diasAnio / 365);
+    const diasDesdeAniversario = diasEntre(aniversarioLaboral(fechaIngreso, fechaSalida), fechaSalida);
+    const fraccionAnio = (diasDesdeAniversario / 365);
     const vacProporcionales = vacDias * fraccionAnio;
     const totalVacDias = vacProporcionales + vp;
     const pagoVacaciones = totalVacDias * sd;
@@ -207,8 +219,8 @@ function CalcLiquidacion() {
   const calcular = () => {
     const sm = parseFloat(salarioMensual) || 0;
     const sd = sm / 30;
-    const dt = parseInt(diasTrabajados) || 0;
-    if (!fechaIngreso || !fechaSalida || sm <= 0) return;
+    const dt = Math.max(parseInt(diasTrabajados) || 0, 0);
+    if (!fechaIngreso || !fechaSalida || sm <= 0 || new Date(fechaSalida) <= new Date(fechaIngreso)) return;
 
     const totalDias = diasEntre(fechaIngreso, fechaSalida);
     const anios = totalDias / 365;
@@ -226,7 +238,8 @@ function CalcLiquidacion() {
     const diasAnio = diasEntre(fi > inicioAnio ? fi : inicioAnio, fechaSalida);
     const aguinaldo = (15 / 365) * diasAnio * sd;
     const vacDias = getVacDias(aniosCompletos + 1);
-    const vacProporcionales = vacDias * (diasAnio / 365);
+    const diasDesdeAniversario = diasEntre(aniversarioLaboral(fechaIngreso, fechaSalida), fechaSalida);
+    const vacProporcionales = vacDias * (diasDesdeAniversario / 365);
     const pagoVacaciones = vacProporcionales * sd;
     const primaVac = pagoVacaciones * 0.25;
 
@@ -298,7 +311,8 @@ function CalcAguinaldo() {
   const calcular = () => {
     const sm = parseFloat(salarioMensual) || 0;
     const sd = sm / 30;
-    const da = parseInt(diasAguinaldo) || 15;
+    const daParsed = parseInt(diasAguinaldo, 10);
+    const da = Number.isFinite(daParsed) ? daParsed : 15;
     if (sm <= 0) return;
 
     const ANIO_REFERENCIA = 2026; // aguinaldo estimado del año en curso (periodo vigente del sitio)
@@ -632,7 +646,7 @@ function CalcInfonavit() {
     const monto = parseFloat(montoCredito) || 0;
     const tasa = parseFloat(tasaAnual) || 0;
     const plazo = parseInt(plazoAnios) || 0;
-    if (monto <= 0 || plazo <= 0) return;
+    if (monto <= 0 || plazo <= 0 || tasa < 0) return;
 
     const tasaMensual = tasa / 100 / 12;
     const numPagos = plazo * 12;

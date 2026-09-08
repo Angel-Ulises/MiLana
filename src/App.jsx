@@ -703,7 +703,7 @@ function CalcInfonavit() {
   return (
     <div>
       <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Estima el pago mensual de capital e intereses de un crédito con las condiciones que ingreses. No incluye seguros, cuotas, aportaciones patronales ni otras condiciones particulares de tu crédito Infonavit — consulta tu contrato o Mi Cuenta Infonavit para tu monto real.
+        Estima el pago mensual de capital e intereses de un crédito con las condiciones que ingreses. No incluye seguros, cuotas ni aportaciones patronales. Consulta tu contrato o Mi Cuenta Infonavit para tu monto real.
       </p>
       <div style={styles.grid2}>
         <Field label="Monto del crédito ($)" value={montoCredito} onChange={setMontoCredito} type="number" placeholder="Ej: 800000" />
@@ -831,9 +831,9 @@ function CalcPension() {
             'Aún no alcanzas la edad mínima (60 años)'
           } bold />
           <div style={{marginTop:12,padding:'12px 14px',background:'#f1f5f9',borderRadius:10,fontSize:13,color:'#475569',lineHeight:1.5}}>
-            <strong>Pensión garantizada:</strong> no incluida aquí. Su determinación depende de las semanas cotizadas y del salario promedio expresado en UMAs durante toda tu vida laboral, conforme a la tabla oficial aplicable (Art. 170 LSS) — no es un monto fijo.
+            <strong>Pensión garantizada:</strong> no incluida aquí. Depende de las semanas cotizadas y del salario promedio en UMAs durante tu vida laboral (tabla oficial, Art. 170 LSS): no es un monto fijo.
           </div>
-          <Note>Esta calculadora solo revisa los requisitos generales de edad y semanas cotizadas del régimen de Ley 97. No estima el monto de tu pensión ni el saldo de tu AFORE — eso depende de tu historial real de aportaciones, rendimientos y comisiones. Consulta tu estado de cuenta en AFORE o el simulador oficial del IMSS/CONSAR para una proyección de tu pensión.</Note>
+          <Note>Esta calculadora solo revisa los requisitos generales de edad y semanas cotizadas del régimen de Ley 97. No estima el monto de tu pensión ni el saldo de tu AFORE: eso depende de tu historial real de aportaciones, rendimientos y comisiones. Consulta tu estado de cuenta en AFORE o el simulador oficial del IMSS/CONSAR para una proyección de tu pensión.</Note>
         </ResultBox>
       )}
     </div>
@@ -923,11 +923,35 @@ function Divider() {
   return <div style={{borderTop:'2px dashed var(--ml-blue-100)',margin:'12px 0'}} />;
 }
 
-function Note({ children }) {
+// Desplegable nativo (<details>/<summary>), especificación acordada con GPT:
+// cerrado por defecto, chevron que gira, sin sombra, separador superior sutil.
+function Details({ summary, children }) {
   return (
-    <p style={{fontSize:12,color:'var(--ml-slate-400)',marginTop:14,lineHeight:1.5,fontStyle:'italic'}}>
-      ⚠️ {children}
-    </p>
+    <details className="ml-details">
+      <summary className="ml-details-summary">
+        <span>{summary}</span>
+        <svg className="ml-details-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </summary>
+      <div className="ml-details-body">{children}</div>
+    </details>
+  );
+}
+
+// La primera oración se muestra siempre (suele ser la aclaración esencial para
+// interpretar el resultado); el resto queda en "Supuestos y límites", cerrado
+// hasta que la persona quiera leerlo. Así el resultado no arrastra un bloque
+// de texto largo que casi nadie baja a leer.
+function Note({ children }) {
+  const texto = typeof children === 'string' ? children : '';
+  const corte = texto.indexOf('. ');
+  const esencial = corte === -1 ? texto : texto.slice(0, corte + 1);
+  const resto = corte === -1 ? '' : texto.slice(corte + 2).trim();
+
+  return (
+    <div style={{marginTop:14}}>
+      <p style={{fontSize:13,color:'var(--ml-slate-600)',lineHeight:1.5,margin:0}}>{esencial}</p>
+      {resto && <Details summary="Supuestos y límites">{resto}</Details>}
+    </div>
   );
 }
 
@@ -955,7 +979,7 @@ function FichaConfianza({ id }) {
 
   const fuentes = (data.sources || []).map(s => s.institution).filter(Boolean);
   const fundamento = (data.legalBasis || [])
-    .map(l => (l.reference ? `${l.name} — ${l.reference}` : l.name))
+    .map(l => (l.reference ? `${l.name}: ${l.reference}` : l.name))
     .filter(Boolean);
 
   const hasSource = fuentes.length > 0;
@@ -967,39 +991,28 @@ function FichaConfianza({ id }) {
   const Icono = FICHA_ICONOS[displayStatus];
 
   return (
-    <div style={{
-      position: 'relative', marginTop: 20, padding: '14px 16px',
-      background: 'rgba(255,255,255,0.82)', border: '1px solid #e5e7eb',
-      borderLeft: `3px solid ${cfg.status}`, borderRadius: 14,
-      boxShadow: '0 1px 2px rgba(15,23,42,0.04)'
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 12, flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 650, color: '#172033' }}>
-          <span style={{ color: cfg.status, display: 'flex' }}><Icono /></span>
-          Sobre este cálculo
-        </div>
-        <span style={{
-          padding: '4px 8px', border: `1px solid ${cfg.border}`, borderRadius: 999,
-          background: cfg.bg, color: cfg.status, fontSize: 11, fontWeight: 700, letterSpacing: '0.02em', whiteSpace: 'nowrap'
-        }}>{cfg.label.toUpperCase()}</span>
+    <div style={{ marginTop: 18 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600, color: cfg.status }}>
+        <span style={{ display: 'flex' }}><Icono /></span>
+        {cfg.label}
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 20px' }}>
-        <div style={{ flex: '1 1 160px' }}>
-          <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>Fundamento</span>
-          <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{hasLegalBasis ? fundamento.join('; ') : 'Pendiente de verificación'}</span>
+      <Details summary="Cómo se calcula y fuentes">
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 20px', marginBottom: 10 }}>
+          <div style={{ flex: '1 1 160px' }}>
+            <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>Fundamento</span>
+            <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{hasLegalBasis ? fundamento.join('; ') : 'Pendiente de verificación'}</span>
+          </div>
+          <div style={{ flex: '1 1 110px' }}>
+            <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>{cfg.lastLabel}</span>
+            <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{data.verifiedAt || 'Pendiente'}</span>
+          </div>
+          <div style={{ flex: '1 1 100%' }}>
+            <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>Fuente</span>
+            <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{hasSource ? fuentes.join(', ') : 'Pendiente de verificación'}</span>
+          </div>
         </div>
-        <div style={{ flex: '1 1 110px' }}>
-          <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>{cfg.lastLabel}</span>
-          <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{data.verifiedAt || 'Pendiente'}</span>
-        </div>
-        <div style={{ flex: '1 1 100%' }}>
-          <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>Fuente</span>
-          <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{hasSource ? fuentes.join(', ') : 'Pendiente de verificación'}</span>
-        </div>
-      </div>
-      <div style={{ marginTop: 14, paddingTop: 12, borderTop: '1px solid #edf0f4', fontSize: 12, lineHeight: 1.5, color: '#667085' }}>
         {cfg.closing} Este cálculo es informativo, no una asesoría fiscal o legal.
-      </div>
+      </Details>
     </div>
   );
 }
@@ -1173,7 +1186,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
     }}>
       <div style={{maxWidth:680,margin:'0 auto',padding:'24px 16px'}}>
         
-        <style>{`:root{--ml-blue-700:#1d4ed8;--ml-blue-600:#2563eb;--ml-blue-500:#3b82f6;--ml-blue-100:#dbeafe;--ml-blue-50:#eff6ff;--ml-slate-900:#0f172a;--ml-slate-600:#475569;--ml-slate-400:#94a3b8;--ml-slate-200:#e2e8f0;--ml-white:#ffffff;--ml-green-600:#16a34a;--ml-green-50:#f0fdf4;--ml-red-600:#dc2626;--ml-red-50:#fef2f2;--ml-amber-600:#d97706;--ml-radius-input:10px;--ml-radius-control:12px;--ml-radius-card:14px;--ml-radius-pill:999px;--ml-shadow-card:0 2px 10px rgba(15,23,42,0.06);--ml-shadow-btn:0 4px 12px rgba(37,99,235,0.28)}@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-grid-heading{font-size:22px;font-weight:600;color:var(--ml-slate-900);margin:0 0 12px 4px}@media (min-width:640px){.ml-grid-heading{font-size:26px}}.ml-calc-grid{display:grid;grid-template-columns:1fr;gap:12px}@media (min-width:640px){.ml-calc-grid{grid-template-columns:repeat(2,1fr);gap:20px}}@media (min-width:1024px){.ml-calc-grid{grid-template-columns:repeat(3,1fr)}}.ml-calc-card2{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;background:var(--ml-white);border:1px solid var(--ml-slate-200);border-radius:14px;box-shadow:var(--ml-shadow-card);padding:20px;padding-right:40px;cursor:pointer;transition:border-color 180ms,box-shadow 180ms,transform 180ms;font-family:inherit}@media (min-width:640px){.ml-calc-card2{flex-direction:column;align-items:flex-start;padding:24px;min-height:176px}}.ml-calc-card2:hover{border-color:var(--ml-blue-500);transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,0.16)}.ml-calc-card2:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:3px}.ml-calc-card2 .ml-card-title{display:block;font-size:18px;font-weight:600;color:var(--ml-slate-900)}.ml-calc-card2 .ml-card-desc{display:block;font-size:14px;line-height:1.5;color:var(--ml-slate-600);margin-top:4px}.ml-calc-card2 .ml-card-arrow{position:absolute;color:var(--ml-slate-400);display:flex;right:16px;top:50%;transform:translateY(-50%)}@media (min-width:640px){.ml-calc-card2 .ml-card-arrow{top:16px;transform:none}}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card2{transition:none}.ml-calc-card2:hover{transform:none}}`}</style>{/* Header */}
+        <style>{`:root{--ml-blue-700:#1d4ed8;--ml-blue-600:#2563eb;--ml-blue-500:#3b82f6;--ml-blue-100:#dbeafe;--ml-blue-50:#eff6ff;--ml-slate-900:#0f172a;--ml-slate-600:#475569;--ml-slate-400:#94a3b8;--ml-slate-200:#e2e8f0;--ml-white:#ffffff;--ml-green-600:#16a34a;--ml-green-50:#f0fdf4;--ml-red-600:#dc2626;--ml-red-50:#fef2f2;--ml-amber-600:#d97706;--ml-radius-input:10px;--ml-radius-control:12px;--ml-radius-card:14px;--ml-radius-pill:999px;--ml-shadow-card:0 2px 10px rgba(15,23,42,0.06);--ml-shadow-btn:0 4px 12px rgba(37,99,235,0.28)}@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-grid-heading{font-size:22px;font-weight:600;color:var(--ml-slate-900);margin:0 0 12px 4px}@media (min-width:640px){.ml-grid-heading{font-size:26px}}.ml-calc-grid{display:grid;grid-template-columns:1fr;gap:12px}@media (min-width:640px){.ml-calc-grid{grid-template-columns:repeat(2,1fr);gap:20px}}@media (min-width:1024px){.ml-calc-grid{grid-template-columns:repeat(3,1fr)}}.ml-calc-card2{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;background:var(--ml-white);border:1px solid var(--ml-slate-200);border-radius:14px;box-shadow:var(--ml-shadow-card);padding:20px;padding-right:40px;cursor:pointer;transition:border-color 180ms,box-shadow 180ms,transform 180ms;font-family:inherit}@media (min-width:640px){.ml-calc-card2{flex-direction:column;align-items:flex-start;padding:24px;min-height:176px}}.ml-calc-card2:hover{border-color:var(--ml-blue-500);transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,0.16)}.ml-calc-card2:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:3px}.ml-calc-card2 .ml-card-title{display:block;font-size:18px;font-weight:600;color:var(--ml-slate-900)}.ml-calc-card2 .ml-card-desc{display:block;font-size:14px;line-height:1.5;color:var(--ml-slate-600);margin-top:4px}.ml-calc-card2 .ml-card-arrow{position:absolute;color:var(--ml-slate-400);display:flex;right:16px;top:50%;transform:translateY(-50%)}@media (min-width:640px){.ml-calc-card2 .ml-card-arrow{top:16px;transform:none}}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card2{transition:none}.ml-calc-card2:hover{transform:none}}.ml-details{margin-top:10px;padding-top:10px;border-top:1px solid var(--ml-slate-200);background:transparent}.ml-details-summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:4px 0;font-size:14px;font-weight:500;color:var(--ml-slate-600);cursor:pointer}.ml-details-summary::-webkit-details-marker{display:none}.ml-details-summary:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:2px}.ml-details-chevron{flex:none;transition:transform 180ms}.ml-details[open] .ml-details-chevron{transform:rotate(180deg)}.ml-details-body{font-size:14px;line-height:1.6;color:var(--ml-slate-600);padding-bottom:6px}@media (prefers-reduced-motion: reduce){.ml-details-chevron{transition:none}}`}</style>{/* Header */}
         <div style={{textAlign:'center',marginBottom:32}}>
           <span style={{
             display:'inline-block',fontSize:11,fontWeight:700,color:'var(--ml-blue-700)',
@@ -1190,7 +1203,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             MiLana
           </h1>
           <p style={{color:'var(--ml-slate-600)',fontSize:14,margin:0}}>
-            Calculadoras financieras y fiscales para México — Datos 2026
+            Calculadoras financieras y fiscales para México. Datos 2026
           </p>
           <div style={{
             display:'inline-flex',alignItems:'center',gap:6,

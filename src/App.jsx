@@ -1119,6 +1119,44 @@ function CalculatorIcon({ id }) {
   );
 }
 
+// Piloto de heroes visuales (Fase 2): solo Inicio + 3 calculadoras.
+// Las otras 7 calculadoras conservan el header de ícono (Fase 3 pendiente).
+const PILOT_HERO = {
+  aguinaldo: {
+    title: 'Calcula tu aguinaldo',
+    body: 'Ingresa tus datos para obtener una estimación y consultar su desglose.',
+    img: 'aguinaldo',
+    ratio: '60-40',
+  },
+  isr: {
+    title: 'Entiende el ISR de tu sueldo',
+    body: 'Estima la retención mensual y revisa el desglose del cálculo.',
+    img: 'isr',
+    ratio: '65-35',
+    contain: true,
+  },
+  finiquito: {
+    title: 'Revisa tu finiquito con claridad',
+    body: 'Ingresa los datos de tu relación laboral para estimar los conceptos de tu finiquito.',
+    img: 'finiquito',
+    ratio: '60-40',
+  },
+};
+
+function HeroMedia({ name, contain }) {
+  return (
+    <span className="ml-hero-media">
+      <img
+        src={`/images/hero/${name}-desktop.jpg`}
+        alt=""
+        aria-hidden="true"
+        loading="eager"
+        style={contain ? { objectFit: 'contain' } : undefined}
+      />
+    </span>
+  );
+}
+
 function Articulo({ id }) {
   const [abierto, setAbierto] = useState(false);
   const data = articulos[id];
@@ -1186,7 +1224,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
     }}>
       <div style={{maxWidth:680,margin:'0 auto',padding:'24px 16px'}}>
         
-        <style>{`:root{--ml-blue-700:#1d4ed8;--ml-blue-600:#2563eb;--ml-blue-500:#3b82f6;--ml-blue-100:#dbeafe;--ml-blue-50:#eff6ff;--ml-slate-900:#0f172a;--ml-slate-600:#475569;--ml-slate-400:#94a3b8;--ml-slate-200:#e2e8f0;--ml-white:#ffffff;--ml-green-600:#16a34a;--ml-green-50:#f0fdf4;--ml-red-600:#dc2626;--ml-red-50:#fef2f2;--ml-amber-600:#d97706;--ml-radius-input:10px;--ml-radius-control:12px;--ml-radius-card:14px;--ml-radius-pill:999px;--ml-shadow-card:0 2px 10px rgba(15,23,42,0.06);--ml-shadow-btn:0 4px 12px rgba(37,99,235,0.28)}@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-grid-heading{font-size:22px;font-weight:600;color:var(--ml-slate-900);margin:0 0 12px 4px}@media (min-width:640px){.ml-grid-heading{font-size:26px}}.ml-calc-grid{display:grid;grid-template-columns:1fr;gap:12px}@media (min-width:640px){.ml-calc-grid{grid-template-columns:repeat(2,1fr);gap:20px}}@media (min-width:1024px){.ml-calc-grid{grid-template-columns:repeat(3,1fr)}}.ml-calc-card2{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;background:var(--ml-white);border:1px solid var(--ml-slate-200);border-radius:14px;box-shadow:var(--ml-shadow-card);padding:20px;padding-right:40px;cursor:pointer;transition:border-color 180ms,box-shadow 180ms,transform 180ms;font-family:inherit}@media (min-width:640px){.ml-calc-card2{flex-direction:column;align-items:flex-start;padding:24px;min-height:176px}}.ml-calc-card2:hover{border-color:var(--ml-blue-500);transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,0.16)}.ml-calc-card2:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:3px}.ml-calc-card2 .ml-card-title{display:block;font-size:18px;font-weight:600;color:var(--ml-slate-900)}.ml-calc-card2 .ml-card-desc{display:block;font-size:14px;line-height:1.5;color:var(--ml-slate-600);margin-top:4px}.ml-calc-card2 .ml-card-arrow{position:absolute;color:var(--ml-slate-400);display:flex;right:16px;top:50%;transform:translateY(-50%)}@media (min-width:640px){.ml-calc-card2 .ml-card-arrow{top:16px;transform:none}}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card2{transition:none}.ml-calc-card2:hover{transform:none}}.ml-details{margin-top:10px;padding-top:10px;border-top:1px solid var(--ml-slate-200);background:transparent}.ml-details-summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:4px 0;font-size:14px;font-weight:500;color:var(--ml-slate-600);cursor:pointer}.ml-details-summary::-webkit-details-marker{display:none}.ml-details-summary:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:2px}.ml-details-chevron{flex:none;transition:transform 180ms}.ml-details[open] .ml-details-chevron{transform:rotate(180deg)}.ml-details-body{font-size:14px;line-height:1.6;color:var(--ml-slate-600);padding-bottom:6px}@media (prefers-reduced-motion: reduce){.ml-details-chevron{transition:none}}`}</style>{/* Header */}
+        <style>{`:root{--ml-blue-700:#1d4ed8;--ml-blue-600:#2563eb;--ml-blue-500:#3b82f6;--ml-blue-100:#dbeafe;--ml-blue-50:#eff6ff;--ml-slate-900:#0f172a;--ml-slate-600:#475569;--ml-slate-400:#94a3b8;--ml-slate-200:#e2e8f0;--ml-white:#ffffff;--ml-green-600:#16a34a;--ml-green-50:#f0fdf4;--ml-red-600:#dc2626;--ml-red-50:#fef2f2;--ml-amber-600:#d97706;--ml-radius-input:10px;--ml-radius-control:12px;--ml-radius-card:14px;--ml-radius-pill:999px;--ml-shadow-card:0 2px 10px rgba(15,23,42,0.06);--ml-shadow-btn:0 4px 12px rgba(37,99,235,0.28)}@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-grid-heading{font-size:22px;font-weight:600;color:var(--ml-slate-900);margin:0 0 12px 4px}@media (min-width:640px){.ml-grid-heading{font-size:26px}}.ml-calc-grid{display:grid;grid-template-columns:1fr;gap:12px}@media (min-width:640px){.ml-calc-grid{grid-template-columns:repeat(2,1fr);gap:20px}}@media (min-width:1024px){.ml-calc-grid{grid-template-columns:repeat(3,1fr)}}.ml-calc-card2{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;background:var(--ml-white);border:1px solid var(--ml-slate-200);border-radius:14px;box-shadow:var(--ml-shadow-card);padding:20px;padding-right:40px;cursor:pointer;transition:border-color 180ms,box-shadow 180ms,transform 180ms;font-family:inherit}@media (min-width:640px){.ml-calc-card2{flex-direction:column;align-items:flex-start;padding:24px;min-height:176px}}.ml-calc-card2:hover{border-color:var(--ml-blue-500);transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,0.16)}.ml-calc-card2:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:3px}.ml-calc-card2 .ml-card-title{display:block;font-size:18px;font-weight:600;color:var(--ml-slate-900)}.ml-calc-card2 .ml-card-desc{display:block;font-size:14px;line-height:1.5;color:var(--ml-slate-600);margin-top:4px}.ml-calc-card2 .ml-card-arrow{position:absolute;color:var(--ml-slate-400);display:flex;right:16px;top:50%;transform:translateY(-50%)}@media (min-width:640px){.ml-calc-card2 .ml-card-arrow{top:16px;transform:none}}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card2{transition:none}.ml-calc-card2:hover{transform:none}}.ml-details{margin-top:10px;padding-top:10px;border-top:1px solid var(--ml-slate-200);background:transparent}.ml-details-summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:4px 0;font-size:14px;font-weight:500;color:var(--ml-slate-600);cursor:pointer}.ml-details-summary::-webkit-details-marker{display:none}.ml-details-summary:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:2px}.ml-details-chevron{flex:none;transition:transform 180ms}.ml-details[open] .ml-details-chevron{transform:rotate(180deg)}.ml-details-body{font-size:14px;line-height:1.6;color:var(--ml-slate-600);padding-bottom:6px}@media (prefers-reduced-motion: reduce){.ml-details-chevron{transition:none}}.ml-hero{display:flex;flex-direction:column;gap:20px}.ml-hero-media{width:100%;max-height:160px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:var(--ml-blue-50);display:block}.ml-hero-media img{width:100%;height:100%;object-fit:cover;display:block}.ml-hero-title{font-size:22px;font-weight:700;color:var(--ml-slate-900);margin:0 0 8px 0;letter-spacing:-0.3px}.ml-hero-body{font-size:14px;line-height:1.6;color:var(--ml-slate-600);margin:0 0 14px 0}.ml-hero-cta{display:inline-flex;align-items:center;gap:6px;padding:12px 22px;background:var(--ml-blue-600);color:#fff;border:none;border-radius:var(--ml-radius-control);font-size:15px;font-weight:600;cursor:pointer;transition:background 150ms;font-family:inherit}.ml-hero-cta:hover{background:var(--ml-blue-700)}@media (min-width:640px){.ml-hero{flex-direction:row;align-items:center;gap:28px}.ml-hero-text{flex:1 1 50%;min-width:0}.ml-hero-media{flex:1 1 50%;aspect-ratio:3/2;max-height:none}.ml-hero-ratio-60-40 .ml-hero-text{flex:1 1 60%}.ml-hero-ratio-60-40 .ml-hero-media{flex:1 1 40%}.ml-hero-ratio-65-35 .ml-hero-text{flex:1 1 65%}.ml-hero-ratio-65-35 .ml-hero-media{flex:1 1 35%}.ml-hero-title{font-size:26px}}.ml-hero-contain .ml-hero-media{background:var(--ml-slate-200)}.ml-hero-contain .ml-hero-media img{object-fit:contain}@media (prefers-reduced-motion: reduce){.ml-hero-cta{transition:none}}`}</style>{/* Header */}
         <div style={{textAlign:'center',marginBottom:32}}>
           <span style={{
             display:'inline-block',fontSize:11,fontWeight:700,color:'var(--ml-blue-700)',
@@ -1230,13 +1268,23 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
               boxShadow:'0 4px 24px rgba(15,23,42,0.06)',
               border:'1px solid var(--ml-slate-200)'
             }}>
-              <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
-                <CalculatorIcon id={calc.id} />
-                <div>
-                  <h2 style={{margin:0,fontSize:20,fontWeight:700,color:'var(--ml-blue-700)'}}>{calc.nombre}</h2>
-                  <span style={{fontSize:12,color:'var(--ml-slate-400)'}}>{calc.desc}</span>
+              {PILOT_HERO[calc.id] ? (
+                <div className={`ml-hero ml-hero-ratio-${PILOT_HERO[calc.id].ratio}${PILOT_HERO[calc.id].contain ? ' ml-hero-contain' : ''}`} style={{marginBottom:20}}>
+                  <div className="ml-hero-text">
+                    <h2 className="ml-hero-title">{PILOT_HERO[calc.id].title}</h2>
+                    <p className="ml-hero-body" style={{marginBottom:0}}>{PILOT_HERO[calc.id].body}</p>
+                  </div>
+                  <HeroMedia name={PILOT_HERO[calc.id].img} contain={PILOT_HERO[calc.id].contain} />
                 </div>
-              </div>
+              ) : (
+                <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
+                  <CalculatorIcon id={calc.id} />
+                  <div>
+                    <h2 style={{margin:0,fontSize:20,fontWeight:700,color:'var(--ml-blue-700)'}}>{calc.nombre}</h2>
+                    <span style={{fontSize:12,color:'var(--ml-slate-400)'}}>{calc.desc}</span>
+                  </div>
+                </div>
+              )}
               <Comp />
               <FichaConfianza id={calc.id} />
               <Articulo id={calc.id} />
@@ -1247,10 +1295,24 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         {/* Grid de calculadoras */}
         {!activa && (
           <>
+            <div className="ml-hero" style={{marginBottom:28}}>
+              <div className="ml-hero-text">
+                <h2 className="ml-hero-title">Tu dinero, más claro.</h2>
+                <p className="ml-hero-body">Explora calculadoras de sueldo, impuestos y prestaciones en México. Elige qué necesitas revisar.</p>
+                <button
+                  onClick={() => document.getElementById('calculadoras-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                  className="ml-hero-cta"
+                >
+                  Ver calculadoras
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+                </button>
+              </div>
+              <HeroMedia name="inicio" />
+            </div>
             <p style={{color:'var(--ml-slate-600)',fontSize:14,lineHeight:1.7,margin:'0 0 24px 4px',maxWidth:620}}>
               MiLana reúne diez calculadoras gratuitas para entender tus finanzas y tus derechos laborales en México: finiquito, liquidación, ISR, aguinaldo, RESICO, PTU, sueldo bruto a neto, vacaciones, crédito Infonavit y pensión IMSS. Cada una está basada en la Ley Federal del Trabajo y en tablas oficiales del SAT, CONASAMI e INEGI vigentes para 2026, y muestra la fuente y la fecha de su última revisión debajo del resultado. No necesitas registrarte ni instalar nada: capturas tus datos, obtienes un estimado al instante y todo el cálculo ocurre en tu navegador, sin enviarse a ningún servidor. Elige abajo la calculadora que necesitas.
             </p>
-            <h2 className="ml-grid-heading">¿Qué necesitas calcular?</h2>
+            <h2 className="ml-grid-heading" id="calculadoras-grid">¿Qué necesitas calcular?</h2>
             <div className="ml-calc-grid">
             {CALCULADORAS.map(c => (
               <button key={c.id} onClick={() => setActiva(c.id)} className="ml-calc-card2">

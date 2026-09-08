@@ -841,19 +841,19 @@ function CalcPension() {
 function Field({ label, value, onChange, type = 'text', placeholder = '' }) {
   return (
     <div style={{marginBottom:12}}>
-      <label style={{display:'block',fontSize:13,fontWeight:500,color:'#475569',marginBottom:6}}>{label}</label>
+      <label style={{display:'block',fontSize:13,fontWeight:500,color:'var(--ml-slate-600)',marginBottom:6}}>{label}</label>
       <input
         type={type}
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         style={{
-          width:'100%',padding:'12px 14px',border:'2px solid #e2e8f0',borderRadius:10,
-          fontSize:15,background:'#f8fafc',transition:'border 0.2s',outline:'none',
+          width:'100%',padding:'12px 14px',border:'2px solid var(--ml-slate-200)',borderRadius:'var(--ml-radius-input)',
+          fontSize:15,background:'var(--ml-blue-50)',transition:'border 0.2s',outline:'none',
           boxSizing:'border-box'
         }}
-        onFocus={e => e.target.style.borderColor = '#b45309'}
-        onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+        onFocus={e => e.target.style.borderColor = 'var(--ml-blue-600)'}
+        onBlur={e => e.target.style.borderColor = 'var(--ml-slate-200)'}
       />
     </div>
   );
@@ -862,10 +862,10 @@ function Field({ label, value, onChange, type = 'text', placeholder = '' }) {
 function Btn({ onClick, children }) {
   return (
     <button onClick={onClick} className="ml-btn" style={{
-      width:'100%',padding:'14px 24px',background:'linear-gradient(135deg,#b45309,#92400e)',
-      color:'white',border:'none',borderRadius:12,fontSize:16,fontWeight:600,
+      width:'100%',padding:'14px 24px',background:'linear-gradient(135deg,var(--ml-blue-600),var(--ml-blue-700))',
+      color:'white',border:'none',borderRadius:'var(--ml-radius-control)',fontSize:16,fontWeight:600,
       cursor:'pointer',marginTop:8,marginBottom:16,transition:'transform 0.1s',
-      boxShadow:'0 4px 12px rgba(180,83,9,0.28)'
+      boxShadow:'var(--ml-shadow-btn)'
     }}
     onMouseDown={e => e.target.style.transform = 'scale(0.98)'}
     onMouseUp={e => e.target.style.transform = 'scale(1)'}
@@ -882,13 +882,13 @@ function ResultBox({ children }) {
   };
   return (
     <div className="ml-result" style={{
-      background:'#faf7f0',border:'1px solid #e8dcc3',borderRadius:14,boxShadow:'0 2px 10px rgba(0,0,0,0.04)',
+      background:'var(--ml-blue-50)',border:'1px solid var(--ml-blue-100)',borderRadius:'var(--ml-radius-card)',boxShadow:'var(--ml-shadow-card)',
       padding:20,marginTop:8
     }}>
       {children}
       <button onClick={compartirWhatsApp} style={{
-        width:'100%',marginTop:16,padding:'10px 16px',background:'#e9f9ef',
-        border:'1px solid #bfe8cd',borderRadius:10,color:'#15803d',fontSize:13,
+        width:'100%',marginTop:16,padding:'10px 16px',background:'var(--ml-green-50)',
+        border:'1px solid #bbf7d0',borderRadius:'var(--ml-radius-input)',color:'var(--ml-green-600)',fontSize:13,
         fontWeight:600,cursor:'pointer',display:'flex',alignItems:'center',
         justifyContent:'center',gap:6
       }}>
@@ -902,11 +902,11 @@ function ResultLine({ label, value, bold, color }) {
   return (
     <div style={{
       display:'flex',justifyContent:'space-between',alignItems:'center',
-      padding: bold ? '10px 0' : '8px 0',borderBottom:'1px solid #ece2cb',
+      padding: bold ? '10px 0' : '8px 0',borderBottom:'1px solid var(--ml-blue-100)',
       fontSize:14
     }}>
-      <span style={{color:'#475569',flex:1,fontSize:bold?13:14}}>{label}</span>
-      <span style={{fontWeight: bold ? 700 : 500, fontSize: bold ? 17 : 14, color: color || '#1e293b', textAlign:'right'}}>
+      <span style={{color:'var(--ml-slate-600)',flex:1,fontSize:bold?13:14}}>{label}</span>
+      <span style={{fontWeight: bold ? 700 : 500, fontSize: bold ? 17 : 14, color: color || 'var(--ml-slate-900)', textAlign:'right'}}>
         {value}
       </span>
     </div>
@@ -914,12 +914,12 @@ function ResultLine({ label, value, bold, color }) {
 }
 
 function Divider() {
-  return <div style={{borderTop:'2px dashed #ddd0b0',margin:'12px 0'}} />;
+  return <div style={{borderTop:'2px dashed var(--ml-blue-100)',margin:'12px 0'}} />;
 }
 
 function Note({ children }) {
   return (
-    <p style={{fontSize:12,color:'#94a3b8',marginTop:14,lineHeight:1.5,fontStyle:'italic'}}>
+    <p style={{fontSize:12,color:'var(--ml-slate-400)',marginTop:14,lineHeight:1.5,fontStyle:'italic'}}>
       ⚠️ {children}
     </p>
   );
@@ -1008,7 +1008,7 @@ function Articulo({ id }) {
         onClick={() => setAbierto(v => !v)}
         style={{
           background: 'none', border: 'none', padding: 0, cursor: 'pointer',
-          color: '#b45309', fontSize: 13, fontWeight: 600, display: 'flex',
+          color: 'var(--ml-blue-600)', fontSize: 13, fontWeight: 600, display: 'flex',
           alignItems: 'center', gap: 6
         }}
       >
@@ -1018,8 +1018,8 @@ function Articulo({ id }) {
         <div style={{ marginTop: 12 }}>
           {data.parrafos.map((p, i) => (
             <div key={i} style={{ marginBottom: 12 }}>
-              <h3 style={{ fontSize: 14, fontWeight: 700, color: '#16324a', margin: '0 0 6px 0' }}>{p.subtitulo}</h3>
-              <p style={{ fontSize: 13, lineHeight: 1.65, color: '#475569', margin: 0 }}>{p.texto}</p>
+              <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--ml-blue-700)', margin: '0 0 6px 0' }}>{p.subtitulo}</h3>
+              <p style={{ fontSize: 13, lineHeight: 1.65, color: 'var(--ml-slate-600)', margin: 0 }}>{p.texto}</p>
             </div>
           ))}
         </div>
@@ -1049,7 +1049,7 @@ const styles = {
   grid2: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 8 }
 };
 
-export default function App() { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#1e293b',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#16324a'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#16324a'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#16324a'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#16324a'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#16324a'}}>Contacto</h2><p>Para dudas sobre esta política, contáctanos a través de nuestras redes sociales.</p><p style={{fontSize:12,color:'#94a3b8',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#b45309'}}>← Volver a MiLana</a></div>); }
+export default function App() { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#0f172a',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#1d4ed8'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Contacto</h2><p>Para dudas sobre esta política, contáctanos a través de nuestras redes sociales.</p><p style={{fontSize:12,color:'#94a3b8',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#2563eb'}}>← Volver a MiLana</a></div>); }
   const [activa, setActiva] = useState(null);
   const [cerrando, setCerrando] = useState(false);
   const cerrarCalc = () => { setCerrando(true); setTimeout(() => { setActiva(null); setCerrando(false); }, 180); };
@@ -1060,36 +1060,36 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
   return (
     <div style={{
       minHeight:'100vh',
-      background:'linear-gradient(180deg,#faf8f4 0%,#f3efe6 35%,#f8fafc 100%)',
+      background:'linear-gradient(180deg,var(--ml-blue-50) 0%,#f8fafc 35%,var(--ml-white) 100%)',
       fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif'
     }}>
       <div style={{maxWidth:680,margin:'0 auto',padding:'24px 16px'}}>
         
-        <style>{`@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-calc-card{transition:border-color 0.15s,box-shadow 0.15s,transform 0.15s}.ml-calc-card:hover{border-color:#b45309;transform:translateY(-2px);box-shadow:0 8px 24px rgba(180,83,9,0.14)}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card:hover{transform:none}}`}</style>{/* Header */}
+        <style>{`:root{--ml-blue-700:#1d4ed8;--ml-blue-600:#2563eb;--ml-blue-500:#3b82f6;--ml-blue-100:#dbeafe;--ml-blue-50:#eff6ff;--ml-slate-900:#0f172a;--ml-slate-600:#475569;--ml-slate-400:#94a3b8;--ml-slate-200:#e2e8f0;--ml-white:#ffffff;--ml-green-600:#16a34a;--ml-green-50:#f0fdf4;--ml-red-600:#dc2626;--ml-red-50:#fef2f2;--ml-amber-600:#d97706;--ml-radius-input:10px;--ml-radius-control:12px;--ml-radius-card:14px;--ml-radius-pill:999px;--ml-shadow-card:0 2px 10px rgba(15,23,42,0.06);--ml-shadow-btn:0 4px 12px rgba(37,99,235,0.28)}@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-calc-card{transition:border-color 0.15s,box-shadow 0.15s,transform 0.15s}.ml-calc-card:hover{border-color:var(--ml-blue-600);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,0.14)}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card:hover{transform:none}}`}</style>{/* Header */}
         <div style={{textAlign:'center',marginBottom:32}}>
           <span style={{
-            display:'inline-block',fontSize:11,fontWeight:700,color:'#92400e',
+            display:'inline-block',fontSize:11,fontWeight:700,color:'var(--ml-blue-700)',
             letterSpacing:'1.5px',textTransform:'uppercase',marginBottom:12,
-            background:'#f3efe6',padding:'4px 12px',borderRadius:20,
-            border:'1px solid #e8dcc3'
+            background:'var(--ml-blue-50)',padding:'4px 12px',borderRadius:'var(--ml-radius-pill)',
+            border:'1px solid var(--ml-blue-100)'
           }}>
             México
           </span>
           <h1 style={{
-            fontSize:28,fontWeight:800,color:'#16324a',margin:'0 0 4px 0',
+            fontSize:28,fontWeight:800,color:'var(--ml-blue-700)',margin:'0 0 4px 0',
             letterSpacing:'-0.5px'
           }}>
             MiLana
           </h1>
-          <p style={{color:'#64748b',fontSize:14,margin:0}}>
+          <p style={{color:'var(--ml-slate-600)',fontSize:14,margin:0}}>
             Calculadoras financieras y fiscales para México — Datos 2026
           </p>
           <div style={{
             display:'inline-flex',alignItems:'center',gap:6,
-            background:'#eef7f0',color:'#15803d',padding:'4px 12px',
-            borderRadius:20,fontSize:11,fontWeight:600,marginTop:8
+            background:'var(--ml-green-50)',color:'var(--ml-green-600)',padding:'4px 12px',
+            borderRadius:'var(--ml-radius-pill)',fontSize:11,fontWeight:600,marginTop:8
           }}>
-            <span style={{width:6,height:6,background:'#15803d',borderRadius:'50%',display:'inline-block'}} />
+            <span style={{width:6,height:6,background:'var(--ml-green-600)',borderRadius:'50%',display:'inline-block'}} />
             Fuentes y fecha de revisión por calculadora
           </div>
         </div>
@@ -1098,22 +1098,22 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         {(activa || cerrando) && (
           <div key={activa} className={cerrando ? "ml-panel ml-panel-out" : "ml-panel"} style={{marginBottom:24}}>
             <button onClick={cerrarCalc} style={{
-              background:'none',border:'none',color:'#b45309',fontSize:14,
+              background:'none',border:'none',color:'var(--ml-blue-600)',fontSize:14,
               cursor:'pointer',padding:'8px 0',fontWeight:500,display:'flex',
               alignItems:'center',gap:4
             }}>
               ← Todas las calculadoras
             </button>
             <div style={{
-              background:'white',borderRadius:16,padding:24,
-              boxShadow:'0 4px 24px rgba(0,0,0,0.06)',
-              border:'1px solid #e2e8f0'
+              background:'var(--ml-white)',borderRadius:16,padding:24,
+              boxShadow:'0 4px 24px rgba(15,23,42,0.06)',
+              border:'1px solid var(--ml-slate-200)'
             }}>
               <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
                 <span style={{fontSize:28}}>{calc.emoji}</span>
                 <div>
-                  <h2 style={{margin:0,fontSize:20,fontWeight:700,color:'#16324a'}}>{calc.nombre}</h2>
-                  <span style={{fontSize:12,color:'#94a3b8'}}>{calc.desc}</span>
+                  <h2 style={{margin:0,fontSize:20,fontWeight:700,color:'var(--ml-blue-700)'}}>{calc.nombre}</h2>
+                  <span style={{fontSize:12,color:'var(--ml-slate-400)'}}>{calc.desc}</span>
                 </div>
               </div>
               <Comp />
@@ -1126,22 +1126,22 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         {/* Grid de calculadoras */}
         {!activa && (
           <>
-            <p style={{color:'#475569',fontSize:14,lineHeight:1.7,margin:'0 0 24px 4px',maxWidth:620}}>
+            <p style={{color:'var(--ml-slate-600)',fontSize:14,lineHeight:1.7,margin:'0 0 24px 4px',maxWidth:620}}>
               MiLana reúne diez calculadoras gratuitas para entender tus finanzas y tus derechos laborales en México: finiquito, liquidación, ISR, aguinaldo, RESICO, PTU, sueldo bruto a neto, vacaciones, crédito Infonavit y pensión IMSS. Cada una está basada en la Ley Federal del Trabajo y en tablas oficiales del SAT, CONASAMI e INEGI vigentes para 2026, y muestra la fuente y la fecha de su última revisión debajo del resultado. No necesitas registrarte ni instalar nada: capturas tus datos, obtienes un estimado al instante y todo el cálculo ocurre en tu navegador, sin enviarse a ningún servidor. Elige abajo la calculadora que necesitas.
             </p>
-            <h2 style={{fontSize:15,fontWeight:600,color:'#475569',margin:'0 0 12px 4px'}}>¿Qué necesitas calcular?</h2>
+            <h2 style={{fontSize:15,fontWeight:600,color:'var(--ml-slate-600)',margin:'0 0 12px 4px'}}>¿Qué necesitas calcular?</h2>
             <div style={{display:'flex',flexWrap:'wrap',justifyContent:'center',gap:12}}>
             {CALCULADORAS.map(c => (
               <button key={c.id} onClick={() => setActiva(c.id)} className="ml-calc-card" style={{
                 flex:'1 1 150px',maxWidth:200,
-                background:'white',border:'2px solid #e2e8f0',borderRadius:14,
+                background:'var(--ml-white)',border:'2px solid var(--ml-slate-200)',borderRadius:'var(--ml-radius-card)',
                 padding:'20px 14px',textAlign:'center',cursor:'pointer',
-                boxShadow:'0 2px 8px rgba(0,0,0,0.04)'
+                boxShadow:'var(--ml-shadow-card)'
               }}
               >
                 <div style={{fontSize:32,marginBottom:8}}>{c.emoji}</div>
-                <div style={{fontSize:14,fontWeight:600,color:'#1e293b'}}>{c.nombre}</div>
-                <div style={{fontSize:11,color:'#94a3b8',marginTop:4}}>{c.desc}</div>
+                <div style={{fontSize:14,fontWeight:600,color:'var(--ml-slate-900)'}}>{c.nombre}</div>
+                <div style={{fontSize:11,color:'var(--ml-slate-400)',marginTop:4}}>{c.desc}</div>
               </button>
               ))}
             </div>
@@ -1149,8 +1149,8 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         )}
 
         {/* Footer con datos legales */}
-        <div style={{textAlign:'center',marginTop:40,padding:'20px 0',borderTop:'1px solid #e2e8f0'}}>
-          <p style={{fontSize:11,color:'#94a3b8',lineHeight:1.6,margin:0}}>
+        <div style={{textAlign:'center',marginTop:40,padding:'20px 0',borderTop:'1px solid var(--ml-slate-200)'}}>
+          <p style={{fontSize:11,color:'var(--ml-slate-400)',lineHeight:1.6,margin:0}}>
             Datos basados en: Anexo 8 RMF 2026 (DOF 28/12/2025) · Ley Federal del Trabajo · CONASAMI · INEGI UMA 2026
             <br/>
             Salario mínimo general: ${SALARIO_MINIMO_GENERAL}/día · Frontera: ${SALARIO_MINIMO_FRONTERA}/día · UMA: ${UMA_DIARIA}/día
@@ -1158,7 +1158,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             Los cálculos son estimaciones informativas. Para montos exactos consulta con un especialista fiscal o laboral.
           </p>
           <p style={{fontSize:11,color:'#cbd5e1',marginTop:8}}>
-            MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{color:'#94a3b8'}}>Privacidad</a>
+            MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{color:'var(--ml-slate-400)'}}>Privacidad</a>
           </p>
         </div>
       </div>

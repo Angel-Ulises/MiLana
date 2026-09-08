@@ -282,14 +282,20 @@ function CalcLiquidacion() {
       <Btn onClick={calcular}>Calcular Liquidación</Btn>
       {result && (
         <ResultBox>
-          <div style={{marginBottom:12,fontWeight:600,color:'#1e293b'}}>📋 Finiquito</div>
+          <div style={{marginBottom:12,fontWeight:600,color:'#1e293b',display:'flex',alignItems:'center',gap:6}}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" /><path d="M14 3v4h4" /><path d="M9 14.5l2 2 4-4.5" /></svg>
+            Finiquito
+          </div>
           <ResultLine label={`Salario (${result.dt} días)`} value={fmt(result.pagoSalario)} />
           <ResultLine label="Aguinaldo proporcional" value={fmt(result.aguinaldo)} />
           <ResultLine label={`Vacaciones (${result.vacProporcionales.toFixed(1)} días)`} value={fmt(result.pagoVacaciones)} />
           <ResultLine label="Prima vacacional" value={fmt(result.primaVac)} />
           <ResultLine label="Subtotal finiquito" value={fmt(result.brutoFiniquito)} bold />
           <Divider />
-          <div style={{marginBottom:12,fontWeight:600,color:'#1e293b'}}>⚖️ Indemnización (despido injustificado)</div>
+          <div style={{marginBottom:12,fontWeight:600,color:'#1e293b',display:'flex',alignItems:'center',gap:6}}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v18" /><path d="M7 7h10" /><path d="M7 7l-3 6a3 3 0 0 0 6 0z" /><path d="M17 7l-3 6a3 3 0 0 0 6 0z" /><path d="M9 21h6" /></svg>
+            Indemnización (despido injustificado)
+          </div>
           <ResultLine label={`90 días SDI (${fmt(result.sdi)}/día)`} value={fmt(result.indem90)} />
           <ResultLine label={`20 días × ${result.anios.toFixed(2)} año(s) de servicio`} value={fmt(result.indem20)} />
           <ResultLine label={`Prima antigüedad (12 días × ${result.anios.toFixed(2)} año(s))`} value={fmt(result.primaAnt)} />
@@ -841,19 +847,19 @@ function CalcPension() {
 function Field({ label, value, onChange, type = 'text', placeholder = '' }) {
   return (
     <div style={{marginBottom:12}}>
-      <label style={{display:'block',fontSize:13,fontWeight:500,color:'#475569',marginBottom:6}}>{label}</label>
+      <label style={{display:'block',fontSize:13,fontWeight:500,color:'var(--ml-slate-600)',marginBottom:6}}>{label}</label>
       <input
         type={type}
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         style={{
-          width:'100%',padding:'12px 14px',border:'2px solid #e2e8f0',borderRadius:10,
-          fontSize:15,background:'#f8fafc',transition:'border 0.2s',outline:'none',
+          width:'100%',padding:'12px 14px',border:'2px solid var(--ml-slate-200)',borderRadius:'var(--ml-radius-input)',
+          fontSize:15,background:'var(--ml-blue-50)',transition:'border 0.2s',outline:'none',
           boxSizing:'border-box'
         }}
-        onFocus={e => e.target.style.borderColor = '#b45309'}
-        onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+        onFocus={e => e.target.style.borderColor = 'var(--ml-blue-600)'}
+        onBlur={e => e.target.style.borderColor = 'var(--ml-slate-200)'}
       />
     </div>
   );
@@ -862,10 +868,10 @@ function Field({ label, value, onChange, type = 'text', placeholder = '' }) {
 function Btn({ onClick, children }) {
   return (
     <button onClick={onClick} className="ml-btn" style={{
-      width:'100%',padding:'14px 24px',background:'linear-gradient(135deg,#b45309,#92400e)',
-      color:'white',border:'none',borderRadius:12,fontSize:16,fontWeight:600,
+      width:'100%',padding:'14px 24px',background:'linear-gradient(135deg,var(--ml-blue-600),var(--ml-blue-700))',
+      color:'white',border:'none',borderRadius:'var(--ml-radius-control)',fontSize:16,fontWeight:600,
       cursor:'pointer',marginTop:8,marginBottom:16,transition:'transform 0.1s',
-      boxShadow:'0 4px 12px rgba(180,83,9,0.28)'
+      boxShadow:'var(--ml-shadow-btn)'
     }}
     onMouseDown={e => e.target.style.transform = 'scale(0.98)'}
     onMouseUp={e => e.target.style.transform = 'scale(1)'}
@@ -882,13 +888,13 @@ function ResultBox({ children }) {
   };
   return (
     <div className="ml-result" style={{
-      background:'#faf7f0',border:'1px solid #e8dcc3',borderRadius:14,boxShadow:'0 2px 10px rgba(0,0,0,0.04)',
+      background:'var(--ml-blue-50)',border:'1px solid var(--ml-blue-100)',borderRadius:'var(--ml-radius-card)',boxShadow:'var(--ml-shadow-card)',
       padding:20,marginTop:8
     }}>
       {children}
       <button onClick={compartirWhatsApp} style={{
-        width:'100%',marginTop:16,padding:'10px 16px',background:'#e9f9ef',
-        border:'1px solid #bfe8cd',borderRadius:10,color:'#15803d',fontSize:13,
+        width:'100%',marginTop:16,padding:'10px 16px',background:'var(--ml-green-50)',
+        border:'1px solid #bbf7d0',borderRadius:'var(--ml-radius-input)',color:'var(--ml-green-600)',fontSize:13,
         fontWeight:600,cursor:'pointer',display:'flex',alignItems:'center',
         justifyContent:'center',gap:6
       }}>
@@ -902,11 +908,11 @@ function ResultLine({ label, value, bold, color }) {
   return (
     <div style={{
       display:'flex',justifyContent:'space-between',alignItems:'center',
-      padding: bold ? '10px 0' : '8px 0',borderBottom:'1px solid #ece2cb',
+      padding: bold ? '10px 0' : '8px 0',borderBottom:'1px solid var(--ml-blue-100)',
       fontSize:14
     }}>
-      <span style={{color:'#475569',flex:1,fontSize:bold?13:14}}>{label}</span>
-      <span style={{fontWeight: bold ? 700 : 500, fontSize: bold ? 17 : 14, color: color || '#1e293b', textAlign:'right'}}>
+      <span style={{color:'var(--ml-slate-600)',flex:1,fontSize:bold?13:14}}>{label}</span>
+      <span style={{fontWeight: bold ? 700 : 500, fontSize: bold ? 17 : 14, color: color || 'var(--ml-slate-900)', textAlign:'right'}}>
         {value}
       </span>
     </div>
@@ -914,12 +920,12 @@ function ResultLine({ label, value, bold, color }) {
 }
 
 function Divider() {
-  return <div style={{borderTop:'2px dashed #ddd0b0',margin:'12px 0'}} />;
+  return <div style={{borderTop:'2px dashed var(--ml-blue-100)',margin:'12px 0'}} />;
 }
 
 function Note({ children }) {
   return (
-    <p style={{fontSize:12,color:'#94a3b8',marginTop:14,lineHeight:1.5,fontStyle:'italic'}}>
+    <p style={{fontSize:12,color:'var(--ml-slate-400)',marginTop:14,lineHeight:1.5,fontStyle:'italic'}}>
       ⚠️ {children}
     </p>
   );
@@ -998,6 +1004,108 @@ function FichaConfianza({ id }) {
   );
 }
 
+// Iconos de línea para las calculadoras (sustituyen los emojis), especificación
+// acordada con GPT: trazo 1.75, viewBox 24x24, color currentColor (--ml-blue-600),
+// contenedor 44x44 con fondo --ml-blue-50 y radio 12px, decorativos (aria-hidden).
+const CALC_ICON_PATHS = {
+  finiquito: (
+    <>
+      <path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
+      <path d="M14 3v4h4" />
+      <path d="M9 14.5l2 2 4-4.5" />
+    </>
+  ),
+  liquidacion: (
+    <>
+      <path d="M12 3v18" />
+      <path d="M7 7h10" />
+      <path d="M7 7l-3 6a3 3 0 0 0 6 0z" />
+      <path d="M17 7l-3 6a3 3 0 0 0 6 0z" />
+      <path d="M9 21h6" />
+    </>
+  ),
+  aguinaldo: (
+    <>
+      <rect x="3" y="9" width="18" height="12" rx="1.5" />
+      <path d="M3 13h18" />
+      <path d="M12 9v12" />
+      <path d="M12 9H8.5a2.25 2.25 0 0 1 0-4.5C11 4.5 12 9 12 9z" />
+      <path d="M12 9h3.5a2.25 2.25 0 0 0 0-4.5C13 4.5 12 9 12 9z" />
+    </>
+  ),
+  isr: (
+    <>
+      <rect x="5" y="3" width="14" height="18" rx="2" />
+      <path d="M8 7.5h8" />
+      <circle cx="8.2" cy="12.2" r="0.6" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="12.2" r="0.6" fill="currentColor" stroke="none" />
+      <circle cx="15.8" cy="12.2" r="0.6" fill="currentColor" stroke="none" />
+      <circle cx="8.2" cy="16" r="0.6" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="16" r="0.6" fill="currentColor" stroke="none" />
+      <circle cx="15.8" cy="16" r="0.6" fill="currentColor" stroke="none" />
+    </>
+  ),
+  resico: (
+    <>
+      <rect x="3.5" y="8" width="17" height="12" rx="1.5" />
+      <path d="M8.5 8V6.5A1.5 1.5 0 0 1 10 5h4a1.5 1.5 0 0 1 1.5 1.5V8" />
+      <path d="M3.5 13h17" />
+    </>
+  ),
+  ptu: (
+    <>
+      <circle cx="8.5" cy="7.5" r="2.5" />
+      <circle cx="16" cy="8.5" r="2" />
+      <path d="M4 20v-1.5A3.5 3.5 0 0 1 7.5 15h2A3.5 3.5 0 0 1 13 18.5V20" />
+      <path d="M15 20v-1a3 3 0 0 1 3-3h.3a2.7 2.7 0 0 1 2.7 2.7V20" />
+    </>
+  ),
+  'bruto-neto': (
+    <>
+      <path d="M4 8h12" />
+      <path d="M13 4l3 4-3 4" />
+      <path d="M20 16H8" />
+      <path d="M11 12l-3 4 3 4" />
+    </>
+  ),
+  vacaciones: (
+    <>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2.5v3M12 18.5v3M4.7 4.7l2.1 2.1M17.2 17.2l2.1 2.1M2.5 12h3M18.5 12h3M4.7 19.3l2.1-2.1M17.2 6.8l2.1-2.1" />
+    </>
+  ),
+  infonavit: (
+    <>
+      <path d="M4 11l8-7 8 7" />
+      <path d="M6 10v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-9" />
+      <path d="M10 20v-5h4v5" />
+    </>
+  ),
+  pension: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.5V12l3 2" />
+      <path d="M4.5 6.3A8.5 8.5 0 1 1 3.5 12" />
+      <path d="M3.5 8.3V12h3.6" />
+    </>
+  ),
+};
+
+function CalculatorIcon({ id }) {
+  const content = CALC_ICON_PATHS[id];
+  if (!content) return null;
+  return (
+    <span style={{
+      width: 44, height: 44, minWidth: 44, borderRadius: 12, background: 'var(--ml-blue-50)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--ml-blue-600)'
+    }}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        {content}
+      </svg>
+    </span>
+  );
+}
+
 function Articulo({ id }) {
   const [abierto, setAbierto] = useState(false);
   const data = articulos[id];
@@ -1008,7 +1116,7 @@ function Articulo({ id }) {
         onClick={() => setAbierto(v => !v)}
         style={{
           background: 'none', border: 'none', padding: 0, cursor: 'pointer',
-          color: '#b45309', fontSize: 13, fontWeight: 600, display: 'flex',
+          color: 'var(--ml-blue-600)', fontSize: 13, fontWeight: 600, display: 'flex',
           alignItems: 'center', gap: 6
         }}
       >
@@ -1018,8 +1126,8 @@ function Articulo({ id }) {
         <div style={{ marginTop: 12 }}>
           {data.parrafos.map((p, i) => (
             <div key={i} style={{ marginBottom: 12 }}>
-              <h3 style={{ fontSize: 14, fontWeight: 700, color: '#16324a', margin: '0 0 6px 0' }}>{p.subtitulo}</h3>
-              <p style={{ fontSize: 13, lineHeight: 1.65, color: '#475569', margin: 0 }}>{p.texto}</p>
+              <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--ml-blue-700)', margin: '0 0 6px 0' }}>{p.subtitulo}</h3>
+              <p style={{ fontSize: 13, lineHeight: 1.65, color: 'var(--ml-slate-600)', margin: 0 }}>{p.texto}</p>
             </div>
           ))}
         </div>
@@ -1033,23 +1141,23 @@ function Articulo({ id }) {
 // ═══════════════════════════════════════════════════════════════
 
 const CALCULADORAS = [
-  { id: 'finiquito', nombre: 'Finiquito', emoji: '📋', desc: 'Renuncia voluntaria', comp: CalcFiniquito },
-  { id: 'liquidacion', nombre: 'Liquidación', emoji: '⚖️', desc: 'Despido injustificado', comp: CalcLiquidacion },
-  { id: 'aguinaldo', nombre: 'Aguinaldo', emoji: '🎄', desc: 'Proporcional o completo', comp: CalcAguinaldo },
-  { id: 'isr', nombre: 'ISR Mensual', emoji: '🧾', desc: 'Retención de nómina', comp: CalcISR },
-  { id: 'resico', nombre: 'RESICO', emoji: '💼', desc: 'Ingresos por actividad independiente', comp: CalcRESICO },
-  { id: 'ptu', nombre: 'PTU', emoji: '💰', desc: 'Reparto de utilidades', comp: CalcPTU },
-  { id: 'bruto-neto', nombre: 'Bruto a Neto', emoji: '💵', desc: 'Salario neto real', comp: CalcBrutoNeto },
-  { id: 'vacaciones', nombre: 'Vacaciones', emoji: '🏖️', desc: 'Días según antigüedad', comp: CalcVacaciones },
-  { id: 'infonavit', nombre: 'Infonavit', emoji: '🏠', desc: 'Simulador de crédito', comp: CalcInfonavit },
-  { id: 'pension', nombre: 'Pensión IMSS', emoji: '👴', desc: 'Estimación Ley 97', comp: CalcPension },
+  { id: 'finiquito', nombre: 'Finiquito', desc: 'Renuncia voluntaria', comp: CalcFiniquito },
+  { id: 'liquidacion', nombre: 'Liquidación', desc: 'Despido injustificado', comp: CalcLiquidacion },
+  { id: 'aguinaldo', nombre: 'Aguinaldo', desc: 'Proporcional o completo', comp: CalcAguinaldo },
+  { id: 'isr', nombre: 'ISR Mensual', desc: 'Retención de nómina', comp: CalcISR },
+  { id: 'resico', nombre: 'RESICO', desc: 'Ingresos por actividad independiente', comp: CalcRESICO },
+  { id: 'ptu', nombre: 'PTU', desc: 'Reparto de utilidades', comp: CalcPTU },
+  { id: 'bruto-neto', nombre: 'Bruto a Neto', desc: 'Salario neto real', comp: CalcBrutoNeto },
+  { id: 'vacaciones', nombre: 'Vacaciones', desc: 'Días según antigüedad', comp: CalcVacaciones },
+  { id: 'infonavit', nombre: 'Infonavit', desc: 'Simulador de crédito', comp: CalcInfonavit },
+  { id: 'pension', nombre: 'Pensión IMSS', desc: 'Estimación Ley 97', comp: CalcPension },
 ];
 
 const styles = {
   grid2: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 8 }
 };
 
-export default function App() { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#1e293b',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#16324a'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#16324a'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#16324a'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#16324a'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#16324a'}}>Contacto</h2><p>Para dudas sobre esta política, contáctanos a través de nuestras redes sociales.</p><p style={{fontSize:12,color:'#94a3b8',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#b45309'}}>← Volver a MiLana</a></div>); }
+export default function App() { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#0f172a',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#1d4ed8'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Contacto</h2><p>Para dudas sobre esta política, contáctanos a través de nuestras redes sociales.</p><p style={{fontSize:12,color:'#94a3b8',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#2563eb'}}>← Volver a MiLana</a></div>); }
   const [activa, setActiva] = useState(null);
   const [cerrando, setCerrando] = useState(false);
   const cerrarCalc = () => { setCerrando(true); setTimeout(() => { setActiva(null); setCerrando(false); }, 180); };
@@ -1060,36 +1168,36 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
   return (
     <div style={{
       minHeight:'100vh',
-      background:'linear-gradient(180deg,#faf8f4 0%,#f3efe6 35%,#f8fafc 100%)',
+      background:'linear-gradient(180deg,var(--ml-blue-50) 0%,#f8fafc 35%,var(--ml-white) 100%)',
       fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif'
     }}>
       <div style={{maxWidth:680,margin:'0 auto',padding:'24px 16px'}}>
         
-        <style>{`@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-calc-card{transition:border-color 0.15s,box-shadow 0.15s,transform 0.15s}.ml-calc-card:hover{border-color:#b45309;transform:translateY(-2px);box-shadow:0 8px 24px rgba(180,83,9,0.14)}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card:hover{transform:none}}`}</style>{/* Header */}
+        <style>{`:root{--ml-blue-700:#1d4ed8;--ml-blue-600:#2563eb;--ml-blue-500:#3b82f6;--ml-blue-100:#dbeafe;--ml-blue-50:#eff6ff;--ml-slate-900:#0f172a;--ml-slate-600:#475569;--ml-slate-400:#94a3b8;--ml-slate-200:#e2e8f0;--ml-white:#ffffff;--ml-green-600:#16a34a;--ml-green-50:#f0fdf4;--ml-red-600:#dc2626;--ml-red-50:#fef2f2;--ml-amber-600:#d97706;--ml-radius-input:10px;--ml-radius-control:12px;--ml-radius-card:14px;--ml-radius-pill:999px;--ml-shadow-card:0 2px 10px rgba(15,23,42,0.06);--ml-shadow-btn:0 4px 12px rgba(37,99,235,0.28)}@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-grid-heading{font-size:22px;font-weight:600;color:var(--ml-slate-900);margin:0 0 12px 4px}@media (min-width:640px){.ml-grid-heading{font-size:26px}}.ml-calc-grid{display:grid;grid-template-columns:1fr;gap:12px}@media (min-width:640px){.ml-calc-grid{grid-template-columns:repeat(2,1fr);gap:20px}}@media (min-width:1024px){.ml-calc-grid{grid-template-columns:repeat(3,1fr)}}.ml-calc-card2{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;background:var(--ml-white);border:1px solid var(--ml-slate-200);border-radius:14px;box-shadow:var(--ml-shadow-card);padding:20px;padding-right:40px;cursor:pointer;transition:border-color 180ms,box-shadow 180ms,transform 180ms;font-family:inherit}@media (min-width:640px){.ml-calc-card2{flex-direction:column;align-items:flex-start;padding:24px;min-height:176px}}.ml-calc-card2:hover{border-color:var(--ml-blue-500);transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,0.16)}.ml-calc-card2:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:3px}.ml-calc-card2 .ml-card-title{display:block;font-size:18px;font-weight:600;color:var(--ml-slate-900)}.ml-calc-card2 .ml-card-desc{display:block;font-size:14px;line-height:1.5;color:var(--ml-slate-600);margin-top:4px}.ml-calc-card2 .ml-card-arrow{position:absolute;color:var(--ml-slate-400);display:flex;right:16px;top:50%;transform:translateY(-50%)}@media (min-width:640px){.ml-calc-card2 .ml-card-arrow{top:16px;transform:none}}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card2{transition:none}.ml-calc-card2:hover{transform:none}}`}</style>{/* Header */}
         <div style={{textAlign:'center',marginBottom:32}}>
           <span style={{
-            display:'inline-block',fontSize:11,fontWeight:700,color:'#92400e',
+            display:'inline-block',fontSize:11,fontWeight:700,color:'var(--ml-blue-700)',
             letterSpacing:'1.5px',textTransform:'uppercase',marginBottom:12,
-            background:'#f3efe6',padding:'4px 12px',borderRadius:20,
-            border:'1px solid #e8dcc3'
+            background:'var(--ml-blue-50)',padding:'4px 12px',borderRadius:'var(--ml-radius-pill)',
+            border:'1px solid var(--ml-blue-100)'
           }}>
             México
           </span>
           <h1 style={{
-            fontSize:28,fontWeight:800,color:'#16324a',margin:'0 0 4px 0',
+            fontSize:28,fontWeight:800,color:'var(--ml-blue-700)',margin:'0 0 4px 0',
             letterSpacing:'-0.5px'
           }}>
             MiLana
           </h1>
-          <p style={{color:'#64748b',fontSize:14,margin:0}}>
+          <p style={{color:'var(--ml-slate-600)',fontSize:14,margin:0}}>
             Calculadoras financieras y fiscales para México — Datos 2026
           </p>
           <div style={{
             display:'inline-flex',alignItems:'center',gap:6,
-            background:'#eef7f0',color:'#15803d',padding:'4px 12px',
-            borderRadius:20,fontSize:11,fontWeight:600,marginTop:8
+            background:'var(--ml-green-50)',color:'var(--ml-green-600)',padding:'4px 12px',
+            borderRadius:'var(--ml-radius-pill)',fontSize:11,fontWeight:600,marginTop:8
           }}>
-            <span style={{width:6,height:6,background:'#15803d',borderRadius:'50%',display:'inline-block'}} />
+            <span style={{width:6,height:6,background:'var(--ml-green-600)',borderRadius:'50%',display:'inline-block'}} />
             Fuentes y fecha de revisión por calculadora
           </div>
         </div>
@@ -1098,22 +1206,22 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         {(activa || cerrando) && (
           <div key={activa} className={cerrando ? "ml-panel ml-panel-out" : "ml-panel"} style={{marginBottom:24}}>
             <button onClick={cerrarCalc} style={{
-              background:'none',border:'none',color:'#b45309',fontSize:14,
+              background:'none',border:'none',color:'var(--ml-blue-600)',fontSize:14,
               cursor:'pointer',padding:'8px 0',fontWeight:500,display:'flex',
               alignItems:'center',gap:4
             }}>
               ← Todas las calculadoras
             </button>
             <div style={{
-              background:'white',borderRadius:16,padding:24,
-              boxShadow:'0 4px 24px rgba(0,0,0,0.06)',
-              border:'1px solid #e2e8f0'
+              background:'var(--ml-white)',borderRadius:16,padding:24,
+              boxShadow:'0 4px 24px rgba(15,23,42,0.06)',
+              border:'1px solid var(--ml-slate-200)'
             }}>
               <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
-                <span style={{fontSize:28}}>{calc.emoji}</span>
+                <CalculatorIcon id={calc.id} />
                 <div>
-                  <h2 style={{margin:0,fontSize:20,fontWeight:700,color:'#16324a'}}>{calc.nombre}</h2>
-                  <span style={{fontSize:12,color:'#94a3b8'}}>{calc.desc}</span>
+                  <h2 style={{margin:0,fontSize:20,fontWeight:700,color:'var(--ml-blue-700)'}}>{calc.nombre}</h2>
+                  <span style={{fontSize:12,color:'var(--ml-slate-400)'}}>{calc.desc}</span>
                 </div>
               </div>
               <Comp />
@@ -1126,22 +1234,21 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         {/* Grid de calculadoras */}
         {!activa && (
           <>
-            <p style={{color:'#475569',fontSize:14,lineHeight:1.7,margin:'0 0 24px 4px',maxWidth:620}}>
+            <p style={{color:'var(--ml-slate-600)',fontSize:14,lineHeight:1.7,margin:'0 0 24px 4px',maxWidth:620}}>
               MiLana reúne diez calculadoras gratuitas para entender tus finanzas y tus derechos laborales en México: finiquito, liquidación, ISR, aguinaldo, RESICO, PTU, sueldo bruto a neto, vacaciones, crédito Infonavit y pensión IMSS. Cada una está basada en la Ley Federal del Trabajo y en tablas oficiales del SAT, CONASAMI e INEGI vigentes para 2026, y muestra la fuente y la fecha de su última revisión debajo del resultado. No necesitas registrarte ni instalar nada: capturas tus datos, obtienes un estimado al instante y todo el cálculo ocurre en tu navegador, sin enviarse a ningún servidor. Elige abajo la calculadora que necesitas.
             </p>
-            <h2 style={{fontSize:15,fontWeight:600,color:'#475569',margin:'0 0 12px 4px'}}>¿Qué necesitas calcular?</h2>
-            <div style={{display:'flex',flexWrap:'wrap',justifyContent:'center',gap:12}}>
+            <h2 className="ml-grid-heading">¿Qué necesitas calcular?</h2>
+            <div className="ml-calc-grid">
             {CALCULADORAS.map(c => (
-              <button key={c.id} onClick={() => setActiva(c.id)} className="ml-calc-card" style={{
-                flex:'1 1 150px',maxWidth:200,
-                background:'white',border:'2px solid #e2e8f0',borderRadius:14,
-                padding:'20px 14px',textAlign:'center',cursor:'pointer',
-                boxShadow:'0 2px 8px rgba(0,0,0,0.04)'
-              }}
-              >
-                <div style={{fontSize:32,marginBottom:8}}>{c.emoji}</div>
-                <div style={{fontSize:14,fontWeight:600,color:'#1e293b'}}>{c.nombre}</div>
-                <div style={{fontSize:11,color:'#94a3b8',marginTop:4}}>{c.desc}</div>
+              <button key={c.id} onClick={() => setActiva(c.id)} className="ml-calc-card2">
+                <CalculatorIcon id={c.id} />
+                <span style={{flex:1,minWidth:0}}>
+                  <span className="ml-card-title">{c.nombre}</span>
+                  <span className="ml-card-desc">{c.desc}</span>
+                </span>
+                <span className="ml-card-arrow" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+                </span>
               </button>
               ))}
             </div>
@@ -1149,8 +1256,8 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         )}
 
         {/* Footer con datos legales */}
-        <div style={{textAlign:'center',marginTop:40,padding:'20px 0',borderTop:'1px solid #e2e8f0'}}>
-          <p style={{fontSize:11,color:'#94a3b8',lineHeight:1.6,margin:0}}>
+        <div style={{textAlign:'center',marginTop:40,padding:'20px 0',borderTop:'1px solid var(--ml-slate-200)'}}>
+          <p style={{fontSize:11,color:'var(--ml-slate-400)',lineHeight:1.6,margin:0}}>
             Datos basados en: Anexo 8 RMF 2026 (DOF 28/12/2025) · Ley Federal del Trabajo · CONASAMI · INEGI UMA 2026
             <br/>
             Salario mínimo general: ${SALARIO_MINIMO_GENERAL}/día · Frontera: ${SALARIO_MINIMO_FRONTERA}/día · UMA: ${UMA_DIARIA}/día
@@ -1158,7 +1265,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             Los cálculos son estimaciones informativas. Para montos exactos consulta con un especialista fiscal o laboral.
           </p>
           <p style={{fontSize:11,color:'#cbd5e1',marginTop:8}}>
-            MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{color:'#94a3b8'}}>Privacidad</a>
+            MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{color:'var(--ml-slate-400)'}}>Privacidad</a>
           </p>
         </div>
       </div>

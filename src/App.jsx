@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./design-home.css";
 import regulatoryData from "./data/regulatory-data.json";
 import articulos from "./data/articulos.json";
 
@@ -183,7 +184,7 @@ function CalcFiniquito() {
 
   return (
     <div>
-      <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
+      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
         Calcula el finiquito que te corresponde al renunciar de forma voluntaria. El resultado incluye días trabajados pendientes de pago, aguinaldo proporcional, vacaciones proporcionales y prima vacacional, conforme a la Ley Federal del Trabajo vigente en 2026.
       </p>
       <div style={styles.grid2}>
@@ -202,7 +203,7 @@ function CalcFiniquito() {
           <ResultLine label="Prima vacacional (25%)" value={fmt(result.primaVac)} />
           {result.primaAnt > 0 && <ResultLine label={`Prima antigüedad (${result.aniosCompletos} años)`} value={fmt(result.primaAnt)} />}
           <Divider />
-          <ResultLine label="Total bruto estimado" value={fmt(result.bruto)} bold color="#15803d" />
+          <ResultLine label="Total bruto estimado" value={fmt(result.bruto)} bold color="#28735A" />
           <Note>Este resultado es el total bruto (antes de impuestos) de tu finiquito. No incluye el ISR por pagos de separación: ese impuesto se calcula con un procedimiento específico (Art. 95 LISR) que depende de tu salario ordinario y de cómo se traten los distintos conceptos que integran el finiquito, así que no lo estimamos aquí para evitar darte una cifra neta poco confiable. Consulta con tu área de Recursos Humanos o un especialista laboral/fiscal para el neto exacto.</Note>
         </ResultBox>
       )}
@@ -270,7 +271,7 @@ function CalcLiquidacion() {
 
   return (
     <div>
-      <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
+      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
         Calcula la liquidación que te corresponde en caso de despido injustificado. El resultado incluye la indemnización constitucional de 3 meses, 20 días de salario por cada año trabajado y la prima de antigüedad, conforme a los artículos 48 y 50 de la Ley Federal del Trabajo.
       </p>
       <div style={styles.grid2}>
@@ -282,7 +283,7 @@ function CalcLiquidacion() {
       <Btn onClick={calcular}>Calcular Liquidación</Btn>
       {result && (
         <ResultBox>
-          <div style={{marginBottom:12,fontWeight:600,color:'#1e293b',display:'flex',alignItems:'center',gap:6}}>
+          <div style={{marginBottom:12,fontWeight:600,color:'#13263B',display:'flex',alignItems:'center',gap:6}}>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" /><path d="M14 3v4h4" /><path d="M9 14.5l2 2 4-4.5" /></svg>
             Finiquito
           </div>
@@ -292,7 +293,7 @@ function CalcLiquidacion() {
           <ResultLine label="Prima vacacional" value={fmt(result.primaVac)} />
           <ResultLine label="Subtotal finiquito" value={fmt(result.brutoFiniquito)} bold />
           <Divider />
-          <div style={{marginBottom:12,fontWeight:600,color:'#1e293b',display:'flex',alignItems:'center',gap:6}}>
+          <div style={{marginBottom:12,fontWeight:600,color:'#13263B',display:'flex',alignItems:'center',gap:6}}>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v18" /><path d="M7 7h10" /><path d="M7 7l-3 6a3 3 0 0 0 6 0z" /><path d="M17 7l-3 6a3 3 0 0 0 6 0z" /><path d="M9 21h6" /></svg>
             Indemnización (despido injustificado)
           </div>
@@ -301,7 +302,7 @@ function CalcLiquidacion() {
           <ResultLine label={`Prima antigüedad (12 días × ${result.anios.toFixed(2)} año(s))`} value={fmt(result.primaAnt)} />
           <ResultLine label="Subtotal indemnización" value={fmt(result.brutoLiquidacion)} bold />
           <Divider />
-          <ResultLine label="Total bruto" value={fmt(result.brutoTotal)} bold color="#15803d" />
+          <ResultLine label="Total bruto" value={fmt(result.brutoTotal)} bold color="#28735A" />
           <Note>SDI calculado con factor de integración {result.factorIntegracion.toFixed(4)}. Montos brutos antes de ISR. Exenciones aplican según Art. 93 LISR.</Note>
         </ResultBox>
       )}
@@ -348,7 +349,7 @@ function CalcAguinaldo() {
 
   return (
     <div>
-      <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
+      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
         Calcula tu aguinaldo estimado del año, ya sea completo o proporcional al tiempo trabajado en 2026. La ley establece un mínimo de 15 días de salario (Art. 87 LFT) y una exención de ISR equivalente a 30 UMAs.
       </p>
       <div style={styles.grid2}>
@@ -361,9 +362,9 @@ function CalcAguinaldo() {
         <ResultBox>
           <ResultLine label="Salario diario" value={fmt(result.sd)} />
           <ResultLine label={`Días proporcionales trabajados en el año`} value={result.diasProporcionales} />
-          <ResultLine label="Aguinaldo bruto estimado" value={fmt(result.aguinaldoBruto)} bold color="#15803d" />
+          <ResultLine label="Aguinaldo bruto estimado" value={fmt(result.aguinaldoBruto)} bold color="#28735A" />
           <Divider />
-          <ResultLine label={`Parte exenta de ISR (30 UMAs = ${fmt(result.exencion)})`} value={fmt(Math.min(result.aguinaldoBruto, result.exencion))} color="#15803d" />
+          <ResultLine label={`Parte exenta de ISR (30 UMAs = ${fmt(result.exencion)})`} value={fmt(Math.min(result.aguinaldoBruto, result.exencion))} color="#28735A" />
           <ResultLine label="Parte gravada" value={fmt(result.gravado)} />
           <Note>Este resultado es el aguinaldo bruto (antes de impuestos) y su parte exenta/gravada de ISR. No calculamos el ISR a retener ni un neto: la retención sobre el aguinaldo sigue un procedimiento específico (Art. 174 del Reglamento de la LISR) que relaciona esta prestación con tu salario ordinario mensual, así que una tarifa aplicada de forma aislada podría darte una cifra incorrecta. Consulta con tu área de nóminas para el neto exacto.</Note>
         </ResultBox>
@@ -401,7 +402,7 @@ function CalcISR() {
 
   return (
     <div>
-      <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
+      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
         Calcula el Impuesto Sobre la Renta que se retiene de tu sueldo mensual, con base en las tablas del Anexo 8 de la Resolución Miscelánea Fiscal 2026, publicadas en el Diario Oficial de la Federación el 28 de diciembre de 2025.
       </p>
       <div style={styles.grid2}>
@@ -414,16 +415,16 @@ function CalcISR() {
           <ResultLine label={`Tasa marginal (tu rango)`} value={fmtPct(result.tasaMarginal)} />
           <ResultLine label="Cuota fija del rango" value={fmt(result.cuotaFija)} />
           <ResultLine label="ISR causado" value={fmt(result.isrBruto)} />
-          {result.subsidio > 0 && <ResultLine label="Subsidio al empleo" value={`- ${fmt(result.subsidio)}`} color="#15803d" />}
+          {result.subsidio > 0 && <ResultLine label="Subsidio al empleo" value={`- ${fmt(result.subsidio)}`} color="#28735A" />}
           <Divider />
-          <ResultLine label="ISR a retener mensual" value={fmt(result.isrNeto)} bold color="#b91c1c" />
-          <ResultLine label="Sueldo neto mensual" value={fmt(result.neto)} bold color="#15803d" />
+          <ResultLine label="ISR a retener mensual" value={fmt(result.isrNeto)} bold color="#A94442" />
+          <ResultLine label="Sueldo neto mensual" value={fmt(result.neto)} bold color="#28735A" />
           <ResultLine label="Tasa efectiva real" value={fmtPct(result.tasaEfectiva)} bold />
           <Divider />
-          <div style={{marginBottom:8,fontWeight:600,color:'#64748b',fontSize:13}}>Proyección anual</div>
+          <div style={{marginBottom:8,fontWeight:600,color:'#5E6B78',fontSize:13}}>Proyección anual</div>
           <ResultLine label="Ingreso bruto × 12 meses" value={fmt(result.anual.bruto)} />
           <ResultLine label="Retención mensual × 12" value={fmt(result.anual.isr)} />
-          <ResultLine label="Neto mensual × 12" value={fmt(result.anual.neto)} color="#15803d" />
+          <ResultLine label="Neto mensual × 12" value={fmt(result.anual.neto)} color="#28735A" />
           <Note>Esta proyección es tu retención mensual multiplicada por 12, no un cálculo de declaración anual. El ISR del ejercicio anual se calcula distinto (tarifa anual, ajuste del retenedor y, en su caso, deducciones personales).</Note>
         </ResultBox>
       )}
@@ -455,7 +456,7 @@ function CalcRESICO() {
 
   return (
     <div>
-      <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
+      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
         Calcula el ISR que pagarías bajo el Régimen Simplificado de Confianza (RESICO), disponible para personas físicas con ingresos anuales de hasta 3.5 millones de pesos. Las tasas aplicables van del 1% al 2.5% sobre tus ingresos efectivamente cobrados, conforme al Art. 113-E LISR.
       </p>
       <div style={styles.grid2}>
@@ -466,8 +467,8 @@ function CalcRESICO() {
         <ResultBox>
           <ResultLine label="Ingreso mensual" value={fmt(result.ingreso)} />
           <ResultLine label="Tasa RESICO" value={fmtPct(result.tasa)} bold />
-          <ResultLine label="ISR RESICO mensual" value={fmt(result.isrResico)} color="#b91c1c" />
-          <ResultLine label="Neto después de ISR" value={fmt(result.neto)} bold color="#15803d" />
+          <ResultLine label="ISR RESICO mensual" value={fmt(result.isrResico)} color="#A94442" />
+          <ResultLine label="Neto después de ISR" value={fmt(result.neto)} bold color="#28735A" />
           <Note>RESICO aplica para personas físicas con ingresos anuales hasta $3,500,000 y ciertos requisitos de permanencia que esta calculadora no valida. El IVA se calcula aparte (hay actos gravados al 16%, al 0% y exentos, además de acreditamiento), así que no se incluye aquí.</Note>
         </ResultBox>
       )}
@@ -490,7 +491,7 @@ function CalcPTU() {
 
   return (
     <div>
-      <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
+      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
         Calcula el monto total que una empresa debe repartir por Participación de los Trabajadores en las Utilidades (PTU): el 10% de sus utilidades anuales, conforme a los artículos 117 al 131 de la Ley Federal del Trabajo.
       </p>
       <div style={styles.grid2}>
@@ -499,7 +500,7 @@ function CalcPTU() {
       <Btn onClick={calcular}>Calcular PTU</Btn>
       {result && (
         <ResultBox>
-          <ResultLine label="10% de utilidades a repartir (PTU total)" value={fmt(result.repartoTotal)} bold color="#15803d" />
+          <ResultLine label="10% de utilidades a repartir (PTU total)" value={fmt(result.repartoTotal)} bold color="#28735A" />
           <Note>Esta calculadora solo obtiene el monto total a repartir entre todos los trabajadores (10% de las utilidades). No calcula la parte individual que le corresponde a cada trabajador: eso depende de los días trabajados y el salario de cada persona en relación con los de toda la plantilla (Art. 123 LFT), además de un tope de 3 meses de salario o el promedio de la PTU de los últimos 3 años, lo que sea más favorable para el trabajador. Consulta con el área de Recursos Humanos o Nóminas de tu empresa para el monto individual que te corresponde.</Note>
         </ResultBox>
       )}
@@ -547,7 +548,7 @@ function CalcBrutoNeto() {
 
   return (
     <div>
-      <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
+      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
         Convierte tu salario bruto a neto y conoce cuánto recibirás realmente después de las retenciones de ISR y de la cuota obrera del IMSS.
       </p>
       <div style={styles.grid2}>
@@ -557,14 +558,14 @@ function CalcBrutoNeto() {
       {result && (
         <ResultBox>
           <ResultLine label="Salario bruto mensual" value={fmt(result.bruto)} />
-          <ResultLine label="ISR retenido" value={`- ${fmt(result.isrMensual)}`} color="#b91c1c" />
-          <ResultLine label="Cuota IMSS obrera estimada" value={`- ${fmt(result.imssObrero)}`} color="#b91c1c" />
+          <ResultLine label="ISR retenido" value={`- ${fmt(result.isrMensual)}`} color="#A94442" />
+          <ResultLine label="Cuota IMSS obrera estimada" value={`- ${fmt(result.imssObrero)}`} color="#A94442" />
           <Divider />
-          <ResultLine label="Sueldo neto mensual" value={fmt(result.neto)} bold color="#15803d" />
+          <ResultLine label="Sueldo neto mensual" value={fmt(result.neto)} bold color="#28735A" />
           <ResultLine label="Ingreso por hora (40 hrs/sem)" value={fmt(result.ingresoPorHora)} />
           <ResultLine label="Te retienen del total" value={fmtPct(result.tasaRetencion)} />
           <Divider />
-          <div style={{marginBottom:8,fontWeight:600,color:'#64748b',fontSize:13}}>Ingreso anual (con prestaciones)</div>
+          <div style={{marginBottom:8,fontWeight:600,color:'#5E6B78',fontSize:13}}>Ingreso anual (con prestaciones)</div>
           <ResultLine label="12 meses de sueldo" value={fmt(result.bruto * 12)} />
           <ResultLine label="+ Aguinaldo (15 días)" value={fmt(result.aguinaldo)} />
           <ResultLine label="+ Prima vacacional" value={fmt(result.primaVac)} />
@@ -602,7 +603,7 @@ function CalcVacaciones() {
 
   return (
     <div>
-      <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
+      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
         Consulta cuántos días de vacaciones te corresponden de acuerdo con tu antigüedad en la empresa, conforme a la reforma de Vacaciones Dignas de 2023 (Art. 76 LFT).
       </p>
       <div style={styles.grid2}>
@@ -612,22 +613,22 @@ function CalcVacaciones() {
       <Btn onClick={calcular}>Consultar</Btn>
       {result && (
         <ResultBox>
-          <ResultLine label={`Con ${result.anios} año(s) de antigüedad`} value={`${result.dias} días de vacaciones`} bold color="#15803d" />
+          <ResultLine label={`Con ${result.anios} año(s) de antigüedad`} value={`${result.dias} días de vacaciones`} bold color="#28735A" />
           {result.sd > 0 && (
             <>
               <Divider />
               <ResultLine label="Valor salarial del periodo vacacional" value={fmt(result.pagoVac)} />
               <ResultLine label="Prima vacacional (25%)" value={fmt(result.primaVac)} />
-              <ResultLine label="Valor del periodo + prima" value={fmt(result.total)} bold color="#15803d" />
+              <ResultLine label="Valor del periodo + prima" value={fmt(result.total)} bold color="#28735A" />
             </>
           )}
           <Divider />
-          <div style={{marginBottom:8,fontWeight:600,color:'#64748b',fontSize:13}}>Tabla de vacaciones LFT 2026</div>
+          <div style={{marginBottom:8,fontWeight:600,color:'#5E6B78',fontSize:13}}>Tabla de vacaciones LFT 2026</div>
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(100px,1fr))',gap:4}}>
             {result.tabla.map(t => (
               <div key={t.anio} style={{
                 padding:'6px 8px',fontSize:12,borderRadius:6,
-                background: t.anio === result.anios ? '#15803d' : '#f1f5f9',
+                background: t.anio === result.anios ? '#28735A' : '#f1f5f9',
                 color: t.anio === result.anios ? 'white' : '#475569',
                 textAlign:'center'
               }}>
@@ -702,7 +703,7 @@ function CalcInfonavit() {
 
   return (
     <div>
-      <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
+      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
         Estima el pago mensual de capital e intereses de un crédito con las condiciones que ingreses. No incluye seguros, cuotas ni aportaciones patronales. Consulta tu contrato o Mi Cuenta Infonavit para tu monto real.
       </p>
       <div style={styles.grid2}>
@@ -717,11 +718,11 @@ function CalcInfonavit() {
           <ResultLine label="Tasa anual" value={fmtPct(result.tasa)} />
           <ResultLine label={`Plazo: ${result.plazo} años (${result.plazo * 12} pagos)`} value="" />
           <Divider />
-          <ResultLine label="Pago estimado (capital + interés)" value={fmt(result.pagoMensual)} bold color="#15803d" />
+          <ResultLine label="Pago estimado (capital + interés)" value={fmt(result.pagoMensual)} bold color="#28735A" />
           <Divider />
           <ResultLine label="Total estimado (capital + intereses)" value={fmt(result.totalPagado)} bold />
-          <ResultLine label="Total solo en intereses" value={fmt(result.totalIntereses)} color="#b91c1c" />
-          <ResultLine label="Pagarás de intereses" value={fmtPct(result.porcentajeIntereses) + " del crédito"} bold color="#b91c1c" />
+          <ResultLine label="Total solo en intereses" value={fmt(result.totalIntereses)} color="#A94442" />
+          <ResultLine label="Pagarás de intereses" value={fmtPct(result.porcentajeIntereses) + " del crédito"} bold color="#A94442" />
           <Note>Esta es una simulación financiera de amortización de capital e intereses, no un cálculo oficial de Infonavit. No incluye seguros, cuotas, aportaciones patronales ni condiciones particulares de tu crédito (VSM, pesos, puntos Infonavit, tasa según tu nivel salarial). Consulta tu contrato o Mi Cuenta Infonavit para tu pago real.</Note>
 
           <button onClick={() => setVerTabla(v => !v)} className="ml-btn" style={{
@@ -740,13 +741,13 @@ function CalcInfonavit() {
                   padding:'5px 14px',borderRadius:20,fontSize:12,fontWeight:600,cursor:'pointer',
                   border: vistaAnual ? '1px solid #b45309' : '1px solid #e2e8f0',
                   background: vistaAnual ? '#b45309' : 'white',
-                  color: vistaAnual ? 'white' : '#64748b'
+                  color: vistaAnual ? 'white' : '#5E6B78'
                 }}>Por año</button>
                 <button onClick={() => setVistaAnual(false)} style={{
                   padding:'5px 14px',borderRadius:20,fontSize:12,fontWeight:600,cursor:'pointer',
                   border: !vistaAnual ? '1px solid #b45309' : '1px solid #e2e8f0',
                   background: !vistaAnual ? '#b45309' : 'white',
-                  color: !vistaAnual ? 'white' : '#64748b'
+                  color: !vistaAnual ? 'white' : '#5E6B78'
                 }}>Por mes</button>
               </div>
               <div style={{maxHeight:320,overflowY:'auto',border:'1px solid #ece2cb',borderRadius:10}}>
@@ -762,10 +763,10 @@ function CalcInfonavit() {
                   <tbody>
                     {(vistaAnual ? result.tablaAnual : result.tablaMensual).map((fila, i) => (
                       <tr key={i} style={{borderTop:'1px solid #f3efe6', background: i % 2 ? '#faf8f4' : 'white'}}>
-                        <td style={{padding:'7px 10px',color:'#1e293b'}}>{vistaAnual ? fila.anio : fila.mes}</td>
-                        <td style={{padding:'7px 10px',textAlign:'right',color:'#b91c1c'}}>{fmt(fila.interes)}</td>
-                        <td style={{padding:'7px 10px',textAlign:'right',color:'#15803d'}}>{fmt(fila.capital)}</td>
-                        <td style={{padding:'7px 10px',textAlign:'right',color:'#1e293b',fontWeight:600}}>{fmt(fila.saldo)}</td>
+                        <td style={{padding:'7px 10px',color:'#13263B'}}>{vistaAnual ? fila.anio : fila.mes}</td>
+                        <td style={{padding:'7px 10px',textAlign:'right',color:'#A94442'}}>{fmt(fila.interes)}</td>
+                        <td style={{padding:'7px 10px',textAlign:'right',color:'#28735A'}}>{fmt(fila.capital)}</td>
+                        <td style={{padding:'7px 10px',textAlign:'right',color:'#13263B',fontWeight:600}}>{fmt(fila.saldo)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -811,7 +812,7 @@ function CalcPension() {
 
   return (
     <div>
-      <p style={{color:'#64748b',marginBottom:20,fontSize:14,lineHeight:1.6}}>
+      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
         Revisa si cumples los requisitos generales de edad y semanas cotizadas para pensionarte bajo el esquema de Ley 97 (AFORE). En 2026 se requiere un mínimo de 875 semanas cotizadas.
       </p>
       <div style={styles.grid2}>
@@ -823,7 +824,7 @@ function CalcPension() {
         <ResultBox>
           <ResultLine label="Semanas cotizadas" value={result.sc} />
           <ResultLine label={`Mínimo requerido (2026)`} value={`${result.minSemanas} semanas`} />
-          <ResultLine label="¿Cumples el mínimo de semanas?" value={result.cumpleMinimo ? '✅ Sí' : `❌ Faltan ${result.faltanSemanas} semanas`} color={result.cumpleMinimo ? '#15803d' : '#b91c1c'} />
+          <ResultLine label="¿Cumples el mínimo de semanas?" value={result.cumpleMinimo ? '✅ Sí' : `❌ Faltan ${result.faltanSemanas} semanas`} color={result.cumpleMinimo ? '#28735A' : '#A94442'} />
           <Divider />
           <ResultLine label="Tipo de retiro según tu edad" value={
             result.tipoRetiro === 'vejez' ? 'Vejez (65 años o más)' :
@@ -1121,39 +1122,29 @@ function CalculatorIcon({ id }) {
 
 // Piloto de heroes visuales (Fase 2): solo Inicio + 3 calculadoras.
 // Las otras 7 calculadoras conservan el header de ícono (Fase 3 pendiente).
-const PILOT_HERO = {
-  aguinaldo: {
-    title: 'Calcula tu aguinaldo',
-    body: 'Ingresa tus datos para obtener una estimación y consultar su desglose.',
-    img: 'aguinaldo',
-    ratio: '60-40',
-  },
-  isr: {
-    title: 'Entiende el ISR de tu sueldo',
-    body: 'Estima la retención mensual y revisa el desglose del cálculo.',
-    img: 'isr',
-    ratio: '65-35',
-    contain: true,
-  },
-  finiquito: {
-    title: 'Revisa tu finiquito con claridad',
-    body: 'Ingresa los datos de tu relación laboral para estimar los conceptos de tu finiquito.',
-    img: 'finiquito',
-    ratio: '60-40',
-  },
-};
+// Anchos generados por scripts/generar-imagenes.py. Si cambian ahi, cambian aqui.
+const ANCHOS_IMAGEN = [480, 768, 1000];
 
-function HeroMedia({ name, contain }) {
+// Entrega a cada pantalla la resolucion que le toca, en WebP con respaldo JPEG.
+// Antes se servia siempre el mismo JPG de 1000 px y en pantallas retina el
+// navegador lo estiraba: por eso las fotos se veian suaves.
+function Foto({ name, alt = '', sizes, className, eager = false }) {
+  const srcset = (ext) =>
+    ANCHOS_IMAGEN.map(w => `/images/gen/${name}-${w}.${ext} ${w}w`).join(', ');
+  const mayor = ANCHOS_IMAGEN[ANCHOS_IMAGEN.length - 1];
   return (
-    <span className="ml-hero-media">
+    <picture className={className}>
+      <source type="image/webp" srcSet={srcset('webp')} sizes={sizes} />
       <img
-        src={`/images/hero/${name}-desktop.jpg`}
-        alt=""
-        aria-hidden="true"
-        loading="eager"
-        style={contain ? { objectFit: 'contain' } : undefined}
+        src={`/images/gen/${name}-${mayor}.jpg`}
+        srcSet={srcset('jpg')}
+        sizes={sizes}
+        alt={alt}
+        aria-hidden={alt ? undefined : 'true'}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
       />
-    </span>
+    </picture>
   );
 }
 
@@ -1208,7 +1199,39 @@ const styles = {
   grid2: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 8 }
 };
 
-export default function App() { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#0f172a',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#1d4ed8'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#1d4ed8'}}>Contacto</h2><p>Para dudas sobre esta política, contáctanos a través de nuestras redes sociales.</p><p style={{fontSize:12,color:'#94a3b8',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#2563eb'}}>← Volver a MiLana</a></div>); }
+
+const CSS_CALCULADORAS = `:root{--ml-blue-700:#245C93;--ml-blue-600:#2D6CAA;--ml-blue-500:#2D6CAA;--ml-blue-100:#DCEAF7;--ml-blue-50:#F2F7FB;--ml-slate-900:#13263B;--ml-slate-600:#5E6B78;--ml-slate-400:#7A8794;--ml-slate-200:#D9E1E8;--ml-white:#FFFFFF;--ml-green-600:#28735A;--ml-green-50:#EAF4EF;--ml-red-600:#A94442;--ml-red-50:#FBF1F1;--ml-amber-600:#9B6723;--ml-radius-input:10px;--ml-radius-control:12px;--ml-radius-card:14px;--ml-radius-pill:999px;--ml-shadow-card:0 2px 10px rgba(15,23,42,0.06);--ml-shadow-btn:0 4px 12px rgba(37,99,235,0.28)}@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-grid-heading{font-size:22px;font-weight:600;color:var(--ml-slate-900);margin:0 0 12px 4px}@media (min-width:640px){.ml-grid-heading{font-size:26px}}.ml-calc-grid{display:grid;grid-template-columns:1fr;gap:12px}@media (min-width:640px){.ml-calc-grid{grid-template-columns:repeat(2,1fr);gap:20px}}@media (min-width:1024px){.ml-calc-grid{grid-template-columns:repeat(3,1fr)}}.ml-calc-card2{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;background:var(--ml-white);border:1px solid var(--ml-slate-200);border-radius:14px;box-shadow:var(--ml-shadow-card);padding:20px;padding-right:40px;cursor:pointer;transition:border-color 180ms,box-shadow 180ms,transform 180ms;font-family:inherit}@media (min-width:640px){.ml-calc-card2{flex-direction:column;align-items:flex-start;padding:24px;min-height:176px}}.ml-calc-card2:hover{border-color:var(--ml-blue-500);transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,0.16)}.ml-calc-card2:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:3px}.ml-calc-card2 .ml-card-title{display:block;font-size:18px;font-weight:600;color:var(--ml-slate-900)}.ml-calc-card2 .ml-card-desc{display:block;font-size:14px;line-height:1.5;color:var(--ml-slate-600);margin-top:4px}.ml-calc-card2 .ml-card-arrow{position:absolute;color:var(--ml-slate-400);display:flex;right:16px;top:50%;transform:translateY(-50%)}@media (min-width:640px){.ml-calc-card2 .ml-card-arrow{top:16px;transform:none}}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card2{transition:none}.ml-calc-card2:hover{transform:none}}.ml-details{margin-top:10px;padding-top:10px;border-top:1px solid var(--ml-slate-200);background:transparent}.ml-details-summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:4px 0;font-size:14px;font-weight:500;color:var(--ml-slate-600);cursor:pointer}.ml-details-summary::-webkit-details-marker{display:none}.ml-details-summary:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:2px}.ml-details-chevron{flex:none;transition:transform 180ms}.ml-details[open] .ml-details-chevron{transform:rotate(180deg)}.ml-details-body{font-size:14px;line-height:1.6;color:var(--ml-slate-600);padding-bottom:6px}@media (prefers-reduced-motion: reduce){.ml-details-chevron{transition:none}}`;
+
+// Metadatos de presentacion para las tarjetas del nuevo Inicio.
+const CALC_META = {
+  finiquito:  { tag: 'Trabajo',      largo: 'Estima lo que corresponde al cerrar una relación laboral y revisa qué integra el cálculo.' },
+  isr:        { tag: 'Impuestos',    largo: 'Calcula la retención estimada y entiende de dónde sale.' },
+  aguinaldo:  { tag: 'Prestaciones', largo: 'Revisa tu monto proporcional o anual con datos claros.' },
+  'bruto-neto':{ tag: 'Sueldo',      largo: 'Visualiza cuánto llega realmente a tu cuenta y qué se descuenta.' },
+  resico:     { tag: 'Impuestos',    largo: 'Estima el ISR del régimen simplificado con fundamento visible.' },
+  liquidacion:{ tag: 'Trabajo',      largo: 'Calcula los conceptos de un despido injustificado y qué los integra.' },
+  ptu:        { tag: 'Prestaciones', largo: 'Revisa el 10% de utilidades que corresponde repartir.' },
+  vacaciones: { tag: 'Prestaciones', largo: 'Días que te tocan según tu antigüedad, con la tabla vigente.' },
+  infonavit:  { tag: 'Crédito',      largo: 'Simula la amortización de capital e intereses de tu crédito.' },
+  pension:    { tag: 'Retiro',       largo: 'Revisa si cumples los requisitos de la Ley 97 antes de proyectar nada.' },
+};
+
+// Orden de aparicion en el Inicio (las cinco primeras son las tarjetas visibles).
+const ORDEN_INICIO = ['finiquito','isr','aguinaldo','bruto-neto','resico','liquidacion','ptu','vacaciones','infonavit','pension'];
+
+const SITUACIONES = [
+  { titulo: 'Entender mi sueldo', desc: 'Bruto a neto, ISR, RESICO y lo que realmente cambia tu ingreso disponible.', ids: ['bruto-neto','isr','resico'] },
+  { titulo: 'Revisar mis prestaciones', desc: 'Aguinaldo, vacaciones, PTU e Infonavit, con contexto para saber si el cálculo tiene sentido.', ids: ['aguinaldo','vacaciones','ptu','infonavit'] },
+  { titulo: 'Terminar una relación laboral', desc: 'Finiquito, liquidación y los conceptos que debes distinguir antes de aceptar una cifra.', ids: ['finiquito','liquidacion'] },
+];
+
+const LECTURAS = [
+  { id: 'finiquito',  min: '5 min', tema: 'Trabajo', titulo: 'Finiquito vs. liquidación: la diferencia que cambia el monto' },
+  { id: 'bruto-neto', min: '4 min', tema: 'Sueldo',  titulo: 'Por qué tu sueldo bruto no es lo que llega a tu cuenta' },
+  { id: 'pension',    min: '6 min', tema: 'Retiro',  titulo: 'Qué revisar antes de confiar en una cifra de pensión' },
+];
+
+export default function App() { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#18283A',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#17324D'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#17324D'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#17324D'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#17324D'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#17324D'}}>Contacto</h2><p>Para dudas sobre esta política, contáctanos a través de nuestras redes sociales.</p><p style={{fontSize:12,color:'#7A8794',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#2D6CAA'}}>← Volver a MiLana</a></div>); }
   const [activa, setActiva] = useState(null);
   const [cerrando, setCerrando] = useState(false);
   const cerrarCalc = () => { setCerrando(true); setTimeout(() => { setActiva(null); setCerrando(false); }, 180); };
@@ -1216,134 +1239,230 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
   const Comp = activa ? CALCULADORAS.find(c => c.id === activa)?.comp : null;
   const calc = CALCULADORAS.find(c => c.id === activa);
 
-  return (
-    <div style={{
-      minHeight:'100vh',
-      background:'linear-gradient(180deg,var(--ml-blue-50) 0%,#f8fafc 35%,var(--ml-white) 100%)',
-      fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif'
-    }}>
-      <div style={{maxWidth:680,margin:'0 auto',padding:'24px 16px'}}>
-        
-        <style>{`:root{--ml-blue-700:#1d4ed8;--ml-blue-600:#2563eb;--ml-blue-500:#3b82f6;--ml-blue-100:#dbeafe;--ml-blue-50:#eff6ff;--ml-slate-900:#0f172a;--ml-slate-600:#475569;--ml-slate-400:#94a3b8;--ml-slate-200:#e2e8f0;--ml-white:#ffffff;--ml-green-600:#16a34a;--ml-green-50:#f0fdf4;--ml-red-600:#dc2626;--ml-red-50:#fef2f2;--ml-amber-600:#d97706;--ml-radius-input:10px;--ml-radius-control:12px;--ml-radius-card:14px;--ml-radius-pill:999px;--ml-shadow-card:0 2px 10px rgba(15,23,42,0.06);--ml-shadow-btn:0 4px 12px rgba(37,99,235,0.28)}@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-grid-heading{font-size:22px;font-weight:600;color:var(--ml-slate-900);margin:0 0 12px 4px}@media (min-width:640px){.ml-grid-heading{font-size:26px}}.ml-calc-grid{display:grid;grid-template-columns:1fr;gap:12px}@media (min-width:640px){.ml-calc-grid{grid-template-columns:repeat(2,1fr);gap:20px}}@media (min-width:1024px){.ml-calc-grid{grid-template-columns:repeat(3,1fr)}}.ml-calc-card2{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;background:var(--ml-white);border:1px solid var(--ml-slate-200);border-radius:14px;box-shadow:var(--ml-shadow-card);padding:20px;padding-right:40px;cursor:pointer;transition:border-color 180ms,box-shadow 180ms,transform 180ms;font-family:inherit}@media (min-width:640px){.ml-calc-card2{flex-direction:column;align-items:flex-start;padding:24px;min-height:176px}}.ml-calc-card2:hover{border-color:var(--ml-blue-500);transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,0.16)}.ml-calc-card2:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:3px}.ml-calc-card2 .ml-card-title{display:block;font-size:18px;font-weight:600;color:var(--ml-slate-900)}.ml-calc-card2 .ml-card-desc{display:block;font-size:14px;line-height:1.5;color:var(--ml-slate-600);margin-top:4px}.ml-calc-card2 .ml-card-arrow{position:absolute;color:var(--ml-slate-400);display:flex;right:16px;top:50%;transform:translateY(-50%)}@media (min-width:640px){.ml-calc-card2 .ml-card-arrow{top:16px;transform:none}}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card2{transition:none}.ml-calc-card2:hover{transform:none}}.ml-details{margin-top:10px;padding-top:10px;border-top:1px solid var(--ml-slate-200);background:transparent}.ml-details-summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:4px 0;font-size:14px;font-weight:500;color:var(--ml-slate-600);cursor:pointer}.ml-details-summary::-webkit-details-marker{display:none}.ml-details-summary:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:2px}.ml-details-chevron{flex:none;transition:transform 180ms}.ml-details[open] .ml-details-chevron{transform:rotate(180deg)}.ml-details-body{font-size:14px;line-height:1.6;color:var(--ml-slate-600);padding-bottom:6px}@media (prefers-reduced-motion: reduce){.ml-details-chevron{transition:none}}.ml-hero{display:flex;flex-direction:column;gap:20px}.ml-hero-media{width:100%;max-height:160px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:var(--ml-blue-50);display:block}.ml-hero-media img{width:100%;height:100%;object-fit:cover;display:block}.ml-hero-title{font-size:22px;font-weight:700;color:var(--ml-slate-900);margin:0 0 8px 0;letter-spacing:-0.3px}.ml-hero-body{font-size:14px;line-height:1.6;color:var(--ml-slate-600);margin:0 0 14px 0}.ml-hero-cta{display:inline-flex;align-items:center;gap:6px;padding:12px 22px;background:var(--ml-blue-600);color:#fff;border:none;border-radius:var(--ml-radius-control);font-size:15px;font-weight:600;cursor:pointer;transition:background 150ms;font-family:inherit}.ml-hero-cta:hover{background:var(--ml-blue-700)}@media (min-width:640px){.ml-hero{flex-direction:row;align-items:center;gap:28px}.ml-hero-text{flex:1 1 50%;min-width:0}.ml-hero-media{flex:1 1 50%;aspect-ratio:3/2;max-height:none}.ml-hero-ratio-60-40 .ml-hero-text{flex:1 1 60%}.ml-hero-ratio-60-40 .ml-hero-media{flex:1 1 40%}.ml-hero-ratio-65-35 .ml-hero-text{flex:1 1 65%}.ml-hero-ratio-65-35 .ml-hero-media{flex:1 1 35%}.ml-hero-title{font-size:26px}}.ml-hero-contain .ml-hero-media{background:var(--ml-slate-200)}.ml-hero-contain .ml-hero-media img{object-fit:contain}@media (prefers-reduced-motion: reduce){.ml-hero-cta{transition:none}}`}</style>{/* Header */}
-        <div style={{textAlign:'center',marginBottom:32}}>
-          <span style={{
-            display:'inline-block',fontSize:11,fontWeight:700,color:'var(--ml-blue-700)',
-            letterSpacing:'1.5px',textTransform:'uppercase',marginBottom:12,
-            background:'var(--ml-blue-50)',padding:'4px 12px',borderRadius:'var(--ml-radius-pill)',
-            border:'1px solid var(--ml-blue-100)'
-          }}>
-            México
-          </span>
-          <h1 style={{
-            fontSize:28,fontWeight:800,color:'var(--ml-blue-700)',margin:'0 0 4px 0',
-            letterSpacing:'-0.5px'
-          }}>
-            MiLana
-          </h1>
-          <p style={{color:'var(--ml-slate-600)',fontSize:14,margin:0}}>
-            Calculadoras financieras y fiscales para México. Datos 2026
-          </p>
-          <div style={{
-            display:'inline-flex',alignItems:'center',gap:6,
-            background:'var(--ml-green-50)',color:'var(--ml-green-600)',padding:'4px 12px',
-            borderRadius:'var(--ml-radius-pill)',fontSize:11,fontWeight:600,marginTop:8
-          }}>
-            <span style={{width:6,height:6,background:'var(--ml-green-600)',borderRadius:'50%',display:'inline-block'}} />
-            Fuentes y fecha de revisión por calculadora
-          </div>
-        </div>
+  const [verTodas, setVerTodas] = useState(false);
+  const [filtro, setFiltro] = useState(null);
 
-        {/* Calculadora activa */}
-        {(activa || cerrando) && (
-          <div key={activa} className={cerrando ? "ml-panel ml-panel-out" : "ml-panel"} style={{marginBottom:24}}>
+  const porId = Object.fromEntries(CALCULADORAS.map(c => [c.id, c]));
+  const idsVisibles = filtro ? filtro : (verTodas ? ORDEN_INICIO : ORDEN_INICIO.slice(0, 5));
+  const visibles = idsVisibles.map(id => ({ ...porId[id], ...CALC_META[id] }));
+
+  return (
+    <>
+      <style>{CSS_CALCULADORAS}</style>
+
+      <header className="site-header">
+        <div className="shell header-inner">
+          <a className="brand" href="/" aria-label="MiLana, inicio">
+            <span className="brand-mark" aria-hidden="true">M</span>
+            <span className="brand-name">MiLana</span>
+          </a>
+          <nav className="desktop-nav" aria-label="Principal">
+            <a href="#situaciones">Tu situación</a>
+            <a href="#calculadoras">Calculadoras</a>
+            <a href="#aprende">Aprende</a>
+            <a href="#fuentes">Fuentes</a>
+          </nav>
+          <a className="header-cta" href="#situaciones">Empezar</a>
+        </div>
+      </header>
+
+      {(activa || cerrando) ? (
+        <main className="shell" style={{maxWidth:720, paddingTop:32, paddingBottom:64}}>
+          <div key={activa} className={cerrando ? "ml-panel ml-panel-out" : "ml-panel"}>
             <button onClick={cerrarCalc} style={{
-              background:'none',border:'none',color:'var(--ml-blue-600)',fontSize:14,
-              cursor:'pointer',padding:'8px 0',fontWeight:500,display:'flex',
-              alignItems:'center',gap:4
+              background:'none',border:'none',color:'var(--ml-blue)',fontSize:14,
+              cursor:'pointer',padding:'8px 0',fontWeight:600,display:'flex',
+              alignItems:'center',gap:6,fontFamily:'inherit'
             }}>
               ← Todas las calculadoras
             </button>
             <div style={{
-              background:'var(--ml-white)',borderRadius:16,padding:24,
-              boxShadow:'0 4px 24px rgba(15,23,42,0.06)',
-              border:'1px solid var(--ml-slate-200)'
+              background:'var(--ml-paper)',borderRadius:20,padding:28,
+              boxShadow:'var(--ml-shadow-soft)',
+              border:'1px solid var(--ml-border)'
             }}>
-              {PILOT_HERO[calc.id] ? (
-                <div className={`ml-hero ml-hero-ratio-${PILOT_HERO[calc.id].ratio}${PILOT_HERO[calc.id].contain ? ' ml-hero-contain' : ''}`} style={{marginBottom:20}}>
-                  <div className="ml-hero-text">
-                    <h2 className="ml-hero-title">{PILOT_HERO[calc.id].title}</h2>
-                    <p className="ml-hero-body" style={{marginBottom:0}}>{PILOT_HERO[calc.id].body}</p>
-                  </div>
-                  <HeroMedia name={PILOT_HERO[calc.id].img} contain={PILOT_HERO[calc.id].contain} />
+              <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:20}}>
+                <CalculatorIcon id={calc.id} />
+                <div>
+                  <h1 style={{margin:0,fontFamily:'"Newsreader", Georgia, serif',fontSize:30,fontWeight:600,color:'var(--ml-ink)',letterSpacing:'-.03em',lineHeight:1.1}}>{calc.nombre}</h1>
+                  <span style={{fontSize:13,color:'var(--ml-soft)'}}>{calc.desc}</span>
                 </div>
-              ) : (
-                <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
-                  <CalculatorIcon id={calc.id} />
-                  <div>
-                    <h2 style={{margin:0,fontSize:20,fontWeight:700,color:'var(--ml-blue-700)'}}>{calc.nombre}</h2>
-                    <span style={{fontSize:12,color:'var(--ml-slate-400)'}}>{calc.desc}</span>
-                  </div>
-                </div>
-              )}
+              </div>
               <Comp />
               <FichaConfianza id={calc.id} />
               <Articulo id={calc.id} />
             </div>
           </div>
-        )}
+        </main>
+      ) : (
+        <main>
+          <section className="hero">
+            <div className="shell hero-grid">
+              <div className="hero-copy">
+                <p className="eyebrow">Dinero claro, decisiones propias</p>
+                <h1>Entiende lo que tienes. Decide lo que sigue.</h1>
+                <p className="hero-lede">MiLana reúne calculadoras, explicaciones y datos oficiales para ayudarte a pasar de la duda a una decisión concreta, sin lenguaje de banco y sin promesas fáciles.</p>
+                <div className="hero-actions">
+                  <a className="btn btn-primary" href="#situaciones">Explorar mi situación</a>
+                  <a className="btn btn-secondary" href="#calculadoras">Ver calculadoras</a>
+                </div>
+                <div className="hero-proof" aria-label="Señales de confianza">
+                  <span>Datos 2026</span>
+                  <span>Fuentes oficiales</span>
+                  <span>Sin registro</span>
+                </div>
+              </div>
 
-        {/* Grid de calculadoras */}
-        {!activa && (
-          <>
-            <div className="ml-hero" style={{marginBottom:28}}>
-              <div className="ml-hero-text">
-                <h2 className="ml-hero-title">Tu dinero, más claro.</h2>
-                <p className="ml-hero-body">Explora calculadoras de sueldo, impuestos y prestaciones en México. Elige qué necesitas revisar.</p>
-                <button
-                  onClick={() => document.getElementById('calculadoras-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-                  className="ml-hero-cta"
-                >
-                  Ver calculadoras
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+              <div className="hero-media-wrap">
+                <div className="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+                <div className="hero-orbit hero-orbit-two" aria-hidden="true"></div>
+                <figure className="hero-media">
+                  <Foto name="inicio" sizes="(max-width: 1023px) 100vw, 64vw" eager />
+                </figure>
+                <aside className="hero-note" aria-label="Qué ofrece MiLana">
+                  <span className="hero-note-kicker">Primero entiende</span>
+                  <strong>Luego compara escenarios.</strong>
+                  <span className="hero-note-copy">Y decide con números que sí puedes explicar.</span>
+                </aside>
+              </div>
+            </div>
+          </section>
+
+          <section id="situaciones" className="section situations">
+            <div className="shell">
+              <div className="section-head split-head">
+                <div>
+                  <p className="eyebrow">Empieza por lo que estás viviendo</p>
+                  <h2>No necesitas saber qué calculadora buscar.</h2>
+                </div>
+                <p>Elige una situación y MiLana te lleva a las herramientas y explicaciones que tienen sentido para ese momento.</p>
+              </div>
+              <div className="situation-grid">
+                {SITUACIONES.map((s, i) => (
+                  <a key={s.titulo} className="situation-card" href="#calculadoras"
+                     onClick={() => setFiltro(s.ids)}>
+                    <span className="situation-icon">{String(i + 1).padStart(2, '0')}</span>
+                    <h3>{s.titulo}</h3>
+                    <p>{s.desc}</p>
+                    <span className="text-link">Ver ruta <span>→</span></span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="section path-section">
+            <div className="shell">
+              <p className="eyebrow">La ruta MiLana</p>
+              <h2 className="path-title">De “no entiendo” a “sé por qué elegir esto”.</h2>
+              <div className="path-grid">
+                <div className="path-step">
+                  <span className="path-number">1</span>
+                  <div><h3>Entender</h3><p>Traducimos conceptos y reglas a lenguaje normal.</p></div>
+                </div>
+                <div className="path-step">
+                  <span className="path-number">2</span>
+                  <div><h3>Comparar</h3><p>Prueba números y escenarios sin perder el contexto.</p></div>
+                </div>
+                <div className="path-step">
+                  <span className="path-number">3</span>
+                  <div><h3>Decidir</h3><p>Qué cambia, qué revisar y qué conviene preguntar antes de actuar.</p></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="calculadoras" className="section calculators">
+            <div className="shell">
+              <div className="section-head calculators-head">
+                <div>
+                  <p className="eyebrow">Herramientas</p>
+                  <h2>Calculadoras que explican el resultado.</h2>
+                </div>
+                <button className="text-link standalone" onClick={() => { setFiltro(null); setVerTodas(true); }}
+                        style={{background:'none',border:0,cursor:'pointer',fontFamily:'inherit',padding:0}}>
+                  Ver las 10 calculadoras <span>→</span>
                 </button>
               </div>
-              <HeroMedia name="inicio" />
+              <div className="calculator-grid">
+                {visibles.map((c, i) => (
+                  <article key={c.id} className={`calculator-card${i === 0 && !verTodas && !filtro ? ' feature-card' : ''}`}>
+                    <span className="card-tag">{c.tag}</span>
+                    <h3>{c.nombre}</h3>
+                    <p>{c.largo}</p>
+                    <button className="text-link" onClick={() => setActiva(c.id)}
+                            style={{background:'none',border:0,cursor:'pointer',fontFamily:'inherit',padding:0,textAlign:'left'}}>
+                      Calcular <span>→</span>
+                    </button>
+                  </article>
+                ))}
+                {!verTodas && !filtro && (
+                  <article className="calculator-card quiet-card">
+                    <span className="card-tag">Más herramientas</span>
+                    <h3>Vacaciones, PTU, Infonavit y pensión</h3>
+                    <p>Accede al resto de herramientas cuando tu situación lo necesite.</p>
+                    <button className="text-link" onClick={() => setVerTodas(true)}
+                            style={{background:'none',border:0,cursor:'pointer',fontFamily:'inherit',padding:0}}>
+                      Ver todas <span>→</span>
+                    </button>
+                  </article>
+                )}
+              </div>
             </div>
-            <p style={{color:'var(--ml-slate-600)',fontSize:14,lineHeight:1.7,margin:'0 0 24px 4px',maxWidth:620}}>
-              MiLana reúne diez calculadoras gratuitas para entender tus finanzas y tus derechos laborales en México: finiquito, liquidación, ISR, aguinaldo, RESICO, PTU, sueldo bruto a neto, vacaciones, crédito Infonavit y pensión IMSS. Cada una está basada en la Ley Federal del Trabajo y en tablas oficiales del SAT, CONASAMI e INEGI vigentes para 2026, y muestra la fuente y la fecha de su última revisión debajo del resultado. No necesitas registrarte ni instalar nada: capturas tus datos, obtienes un estimado al instante y todo el cálculo ocurre en tu navegador, sin enviarse a ningún servidor. Elige abajo la calculadora que necesitas.
-            </p>
-            <h2 className="ml-grid-heading" id="calculadoras-grid">¿Qué necesitas calcular?</h2>
-            <div className="ml-calc-grid">
-            {CALCULADORAS.map(c => (
-              <button key={c.id} onClick={() => setActiva(c.id)} className="ml-calc-card2">
-                <CalculatorIcon id={c.id} />
-                <span style={{flex:1,minWidth:0}}>
-                  <span className="ml-card-title">{c.nombre}</span>
-                  <span className="ml-card-desc">{c.desc}</span>
-                </span>
-                <span className="ml-card-arrow" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-                </span>
-              </button>
-              ))}
-            </div>
-          </>
-        )}
+          </section>
 
-        {/* Footer con datos legales */}
-        <div style={{textAlign:'center',marginTop:40,padding:'20px 0',borderTop:'1px solid var(--ml-slate-200)'}}>
-          <p style={{fontSize:11,color:'var(--ml-slate-400)',lineHeight:1.6,margin:0}}>
-            Datos basados en: Anexo 8 RMF 2026 (DOF 28/12/2025) · Ley Federal del Trabajo · CONASAMI · INEGI UMA 2026
-            <br/>
-            Salario mínimo general: ${SALARIO_MINIMO_GENERAL}/día · Frontera: ${SALARIO_MINIMO_FRONTERA}/día · UMA: ${UMA_DIARIA}/día
-            <br/>
-            Los cálculos son estimaciones informativas. Para montos exactos consulta con un especialista fiscal o laboral.
-          </p>
-          <p style={{fontSize:11,color:'#cbd5e1',marginTop:8}}>
-            MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{color:'var(--ml-slate-400)'}}>Privacidad</a>
-          </p>
+          <section id="aprende" className="section learn-section">
+            <div className="shell learn-grid">
+              <div className="learn-copy">
+                <p className="eyebrow">Aprende antes de decidir</p>
+                <h2>La cifra importa. Entender qué significa importa más.</h2>
+                <p>Los mini-artículos responden la pregunta que aparece justo después del cálculo: “¿y ahora qué hago con esto?”</p>
+                <button className="btn btn-secondary" onClick={() => { setFiltro(null); setVerTodas(true); document.getElementById('calculadoras')?.scrollIntoView({behavior:'smooth'}); }}
+                        style={{cursor:'pointer',fontFamily:'inherit'}}>
+                  Explorar explicaciones
+                </button>
+              </div>
+              <div className="article-stack">
+                {LECTURAS.map(l => (
+                  <article key={l.id} className="article-row" onClick={() => setActiva(l.id)}
+                           style={{cursor:'pointer'}}>
+                    <span>{l.min}</span>
+                    <div><h3>{l.titulo}</h3><p>{l.tema}</p></div>
+                    <b>→</b>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section id="fuentes" className="trust-band">
+            <div className="shell trust-grid">
+              <div>
+                <p className="eyebrow">Confianza visible</p>
+                <h2>Cada número debe decir de dónde salió.</h2>
+              </div>
+              <div className="trust-points">
+                <div><span>01</span><p>Fuente oficial y fundamento por calculadora.</p></div>
+                <div><span>02</span><p>Fecha de revisión visible, no escondida en el pie.</p></div>
+                <div><span>03</span><p>Estado de verificación claro cuando un dato requiere revisión.</p></div>
+              </div>
+            </div>
+          </section>
+        </main>
+      )}
+
+      <footer className="site-footer">
+        <div className="shell footer-inner">
+          <div>
+            <span className="brand-name">MiLana</span>
+            <p>Dinero claro para decidir mejor.</p>
+            <p>Datos basados en: Anexo 8 RMF 2026 (DOF 28/12/2025) · Ley Federal del Trabajo · CONASAMI · INEGI UMA 2026</p>
+            <p>Salario mínimo general: ${SALARIO_MINIMO_GENERAL}/día · Frontera: ${SALARIO_MINIMO_FRONTERA}/día · UMA: ${UMA_DIARIA}/día</p>
+            <p>Los cálculos son estimaciones informativas. Para montos exactos consulta con un especialista fiscal o laboral.</p>
+          </div>
+          <p>MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{textDecoration:'underline'}}>Privacidad</a></p>
         </div>
-      </div>
-    </div>
+      </footer>
+    </>
   );
 }

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./design-home.css";
+import catalogoPaginas from "./data/paginas.json";
 import regulatoryData from "./data/regulatory-data.json";
 import articulos from "./data/articulos.json";
+import contenidoCalc from "./data/contenido-calculadoras.json";
 
 // ═══════════════════════════════════════════════════════════════
 // DATOS OFICIALES 2026 — SAT / CONASAMI / INEGI
@@ -1179,6 +1181,146 @@ function Articulo({ id }) {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// CONTENIDO EDITORIAL POR CALCULADORA (Fase 6)
+//
+// Lo escribe ChatGPT y vive en src/data/contenido-calculadoras.json.
+// El orden lo fijo el propio plan: proposito -> calculadora ->
+// interpretacion -> que significa -> metodologia -> supuestos ->
+// fundamento -> preguntas frecuentes -> siguiente decision.
+//
+// Por eso son DOS componentes: <Proposito> va arriba de la
+// calculadora y <ContenidoCalculadora> abajo. Si una calculadora
+// todavia no tiene contenido, ambos devuelven null y la pagina se
+// ve exactamente como antes.
+// ═══════════════════════════════════════════════════════════════
+
+const TITULOS_SECCION = {
+  interpretacion: 'Cómo leer tu resultado',
+  significado: 'Qué significa esto para ti',
+  metodologia: 'Cómo se calcula',
+  supuestos: 'Supuestos y límites',
+  fundamento: 'Fundamento y fuentes',
+};
+
+const ORDEN_SECCIONES = ['interpretacion', 'significado', 'metodologia', 'supuestos', 'fundamento'];
+
+function Proposito({ id }) {
+  const data = contenidoCalc[id];
+  if (!data || !data.proposito) return null;
+  return (
+    <p style={{
+      fontSize: 14.5, lineHeight: 1.7, color: 'var(--ml-slate-600, #4A5A6B)',
+      margin: '0 0 22px 0', paddingLeft: 14,
+      borderLeft: '3px solid var(--ml-blue, #2D6CAA)'
+    }}>
+      {data.proposito}
+    </p>
+  );
+}
+
+function Seccion({ titulo, children }) {
+  return (
+    <section style={{ marginTop: 26 }}>
+      <h2 style={{
+        fontFamily: '"Newsreader", Georgia, serif', fontSize: 19, fontWeight: 600,
+        color: 'var(--ml-ink, #13263B)', margin: '0 0 8px 0', letterSpacing: '-.02em'
+      }}>{titulo}</h2>
+      {children}
+    </section>
+  );
+}
+
+function Pregunta({ pregunta, respuesta }) {
+  const [abierta, setAbierta] = useState(false);
+  return (
+    <div style={{ borderBottom: '1px solid var(--ml-border, #edf0f4)' }}>
+      <button
+        type="button"
+        onClick={() => setAbierta(v => !v)}
+        aria-expanded={abierta}
+        style={{
+          width: '100%', background: 'none', border: 'none', cursor: 'pointer',
+          padding: '12px 0', textAlign: 'left', display: 'flex', gap: 10,
+          alignItems: 'flex-start', fontFamily: 'inherit', fontSize: 14,
+          fontWeight: 600, color: 'var(--ml-ink, #13263B)', lineHeight: 1.5
+        }}
+      >
+        <span aria-hidden="true" style={{ color: 'var(--ml-blue, #2D6CAA)', flexShrink: 0 }}>
+          {abierta ? '−' : '+'}
+        </span>
+        <span>{pregunta}</span>
+      </button>
+      {abierta && (
+        <p style={{
+          margin: '0 0 14px 24px', fontSize: 13.5, lineHeight: 1.7,
+          color: 'var(--ml-slate-600, #4A5A6B)'
+        }}>{respuesta}</p>
+      )}
+    </div>
+  );
+}
+
+function ContenidoCalculadora({ id, ir }) {
+  const data = contenidoCalc[id];
+  if (!data) return null;
+  const parrafo = {
+    fontSize: 13.5, lineHeight: 1.75, color: 'var(--ml-slate-600, #4A5A6B)', margin: 0
+  };
+  return (
+    <div style={{ marginTop: 30, paddingTop: 24, borderTop: '1px solid var(--ml-border, #edf0f4)' }}>
+      {ORDEN_SECCIONES.filter(k => data[k]).map(k => (
+        <Seccion key={k} titulo={TITULOS_SECCION[k]}>
+          <p style={parrafo}>{data[k]}</p>
+        </Seccion>
+      ))}
+
+      {Array.isArray(data.faq) && data.faq.length > 0 && (
+        <Seccion titulo="Preguntas frecuentes">
+          <div>
+            {data.faq.map((f, i) => (
+              <Pregunta key={i} pregunta={f.pregunta} respuesta={f.respuesta} />
+            ))}
+          </div>
+        </Seccion>
+      )}
+
+      {Array.isArray(data.siguientes) && data.siguientes.length > 0 && (
+        <Seccion titulo="Qué revisar después">
+          <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 8 }}>
+            {data.siguientes.map((s, i) => (
+              <li key={i}>
+                <a
+                  href={rutaDe(s.destino)}
+                  onClick={(e) => { if (ir) { e.preventDefault(); ir(s.destino); } }}
+                  style={{
+                    display: 'flex', gap: 10, alignItems: 'center',
+                    padding: '12px 14px', borderRadius: 12,
+                    border: '1px solid var(--ml-border, #edf0f4)',
+                    background: 'var(--ml-ivory, #FBF8F2)',
+                    color: 'var(--ml-blue, #2D6CAA)', textDecoration: 'none',
+                    fontSize: 13.5, fontWeight: 600, lineHeight: 1.5
+                  }}
+                >
+                  <span aria-hidden="true">→</span>
+                  <span>{s.texto}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Seccion>
+      )}
+
+      <p style={{
+        marginTop: 22, fontSize: 12, lineHeight: 1.6,
+        color: 'var(--ml-soft, #7A8794)'
+      }}>
+        MiLana es informativo y no sustituye asesoría profesional sobre tu caso particular.
+      </p>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
 // APP PRINCIPAL
 // ═══════════════════════════════════════════════════════════════
 
@@ -1199,6 +1341,24 @@ const styles = {
   grid2: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 8 }
 };
 
+
+
+// ---------------------------------------------------------------------------
+// Rutas reales por calculadora (/calculadoras/<slug>).
+// Cada una se sirve como un HTML propio generado en el build, con su title y
+// su metadata; aqui solo se traduce ruta <-> calculadora.
+// ---------------------------------------------------------------------------
+const RUTAS = catalogoPaginas.paginas;
+const SLUG_POR_ID = Object.fromEntries(RUTAS.map(p => [p.id, p.slug]));
+const ID_POR_SLUG = Object.fromEntries(RUTAS.map(p => [p.slug, p.id]));
+
+const rutaDe = (id) => (SLUG_POR_ID[id] ? `/calculadoras/${SLUG_POR_ID[id]}` : '/');
+
+function calculadoraDeLaUrl() {
+  if (typeof window === 'undefined') return null;
+  const m = window.location.pathname.match(/^\/calculadoras\/([^/]+)\/?$/);
+  return m ? (ID_POR_SLUG[m[1]] || null) : null;
+}
 
 const CSS_CALCULADORAS = `:root{--ml-blue-700:#245C93;--ml-blue-600:#2D6CAA;--ml-blue-500:#2D6CAA;--ml-blue-100:#DCEAF7;--ml-blue-50:#F2F7FB;--ml-slate-900:#13263B;--ml-slate-600:#5E6B78;--ml-slate-400:#7A8794;--ml-slate-200:#D9E1E8;--ml-white:#FFFFFF;--ml-green-600:#28735A;--ml-green-50:#EAF4EF;--ml-red-600:#A94442;--ml-red-50:#FBF1F1;--ml-amber-600:#9B6723;--ml-radius-input:10px;--ml-radius-control:12px;--ml-radius-card:14px;--ml-radius-pill:999px;--ml-shadow-card:0 2px 10px rgba(15,23,42,0.06);--ml-shadow-btn:0 4px 12px rgba(37,99,235,0.28)}@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-grid-heading{font-size:22px;font-weight:600;color:var(--ml-slate-900);margin:0 0 12px 4px}@media (min-width:640px){.ml-grid-heading{font-size:26px}}.ml-calc-grid{display:grid;grid-template-columns:1fr;gap:12px}@media (min-width:640px){.ml-calc-grid{grid-template-columns:repeat(2,1fr);gap:20px}}@media (min-width:1024px){.ml-calc-grid{grid-template-columns:repeat(3,1fr)}}.ml-calc-card2{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;background:var(--ml-white);border:1px solid var(--ml-slate-200);border-radius:14px;box-shadow:var(--ml-shadow-card);padding:20px;padding-right:40px;cursor:pointer;transition:border-color 180ms,box-shadow 180ms,transform 180ms;font-family:inherit}@media (min-width:640px){.ml-calc-card2{flex-direction:column;align-items:flex-start;padding:24px;min-height:176px}}.ml-calc-card2:hover{border-color:var(--ml-blue-500);transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,0.16)}.ml-calc-card2:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:3px}.ml-calc-card2 .ml-card-title{display:block;font-size:18px;font-weight:600;color:var(--ml-slate-900)}.ml-calc-card2 .ml-card-desc{display:block;font-size:14px;line-height:1.5;color:var(--ml-slate-600);margin-top:4px}.ml-calc-card2 .ml-card-arrow{position:absolute;color:var(--ml-slate-400);display:flex;right:16px;top:50%;transform:translateY(-50%)}@media (min-width:640px){.ml-calc-card2 .ml-card-arrow{top:16px;transform:none}}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card2{transition:none}.ml-calc-card2:hover{transform:none}}.ml-details{margin-top:10px;padding-top:10px;border-top:1px solid var(--ml-slate-200);background:transparent}.ml-details-summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:4px 0;font-size:14px;font-weight:500;color:var(--ml-slate-600);cursor:pointer}.ml-details-summary::-webkit-details-marker{display:none}.ml-details-summary:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:2px}.ml-details-chevron{flex:none;transition:transform 180ms}.ml-details[open] .ml-details-chevron{transform:rotate(180deg)}.ml-details-body{font-size:14px;line-height:1.6;color:var(--ml-slate-600);padding-bottom:6px}@media (prefers-reduced-motion: reduce){.ml-details-chevron{transition:none}}`;
 
@@ -1232,7 +1392,27 @@ const LECTURAS = [
 ];
 
 export default function App() { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#18283A',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#17324D'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#17324D'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#17324D'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#17324D'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#17324D'}}>Contacto</h2><p>Para dudas sobre esta política, contáctanos a través de nuestras redes sociales.</p><p style={{fontSize:12,color:'#7A8794',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#2D6CAA'}}>← Volver a MiLana</a></div>); }
-  const [activa, setActiva] = useState(null);
+  const [activa, _setActiva] = useState(calculadoraDeLaUrl);
+
+  // Navegar cambia la URL de verdad: el usuario puede compartirla, recargarla
+  // y el boton de atras del navegador funciona.
+  const setActiva = (id) => {
+    _setActiva(id);
+    if (typeof window !== 'undefined') {
+      const destino = id ? rutaDe(id) : '/';
+      if (window.location.pathname !== destino) window.history.pushState({ id }, '', destino);
+      window.scrollTo({ top: 0 });
+      const meta = RUTAS.find(p => p.id === id);
+      document.title = meta ? meta.titulo : 'MiLana — Calculadoras Financieras México 2026';
+    }
+  };
+
+  useEffect(() => {
+    const alNavegar = () => _setActiva(calculadoraDeLaUrl());
+    window.addEventListener('popstate', alNavegar);
+    return () => window.removeEventListener('popstate', alNavegar);
+  }, []);
+
   const [cerrando, setCerrando] = useState(false);
   const cerrarCalc = () => { setCerrando(true); setTimeout(() => { setActiva(null); setCerrando(false); }, 180); };
 
@@ -1269,13 +1449,13 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
       {(activa || cerrando) ? (
         <main className="shell" style={{maxWidth:720, paddingTop:32, paddingBottom:64}}>
           <div key={activa} className={cerrando ? "ml-panel ml-panel-out" : "ml-panel"}>
-            <button onClick={cerrarCalc} style={{
+            <a href="/" onClick={(e) => { e.preventDefault(); cerrarCalc(); }} style={{
               background:'none',border:'none',color:'var(--ml-blue)',fontSize:14,
               cursor:'pointer',padding:'8px 0',fontWeight:600,display:'flex',
               alignItems:'center',gap:6,fontFamily:'inherit'
             }}>
               ← Todas las calculadoras
-            </button>
+            </a>
             <div style={{
               background:'var(--ml-paper)',borderRadius:20,padding:28,
               boxShadow:'var(--ml-shadow-soft)',
@@ -1288,9 +1468,11 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                   <span style={{fontSize:13,color:'var(--ml-soft)'}}>{calc.desc}</span>
                 </div>
               </div>
+              <Proposito id={calc.id} />
               <Comp />
               <FichaConfianza id={calc.id} />
               <Articulo id={calc.id} />
+              <ContenidoCalculadora id={calc.id} ir={setActiva} />
             </div>
           </div>
         </main>
@@ -1390,10 +1572,10 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                     <span className="card-tag">{c.tag}</span>
                     <h3>{c.nombre}</h3>
                     <p>{c.largo}</p>
-                    <button className="text-link" onClick={() => setActiva(c.id)}
-                            style={{background:'none',border:0,cursor:'pointer',fontFamily:'inherit',padding:0,textAlign:'left'}}>
+                    <a className="text-link" href={rutaDe(c.id)}
+                       onClick={(e) => { e.preventDefault(); setActiva(c.id); }}>
                       Calcular <span>→</span>
-                    </button>
+                    </a>
                   </article>
                 ))}
                 {!verTodas && !filtro && (
@@ -1424,12 +1606,12 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
               </div>
               <div className="article-stack">
                 {LECTURAS.map(l => (
-                  <article key={l.id} className="article-row" onClick={() => setActiva(l.id)}
-                           style={{cursor:'pointer'}}>
+                  <a key={l.id} className="article-row" href={rutaDe(l.id)}
+                     onClick={(e) => { e.preventDefault(); setActiva(l.id); }}>
                     <span>{l.min}</span>
                     <div><h3>{l.titulo}</h3><p>{l.tema}</p></div>
                     <b>→</b>
-                  </article>
+                  </a>
                 ))}
               </div>
             </div>

@@ -1769,7 +1769,8 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             </div>
           </header>
 
-          <main className="shell calculator-main" style={{maxWidth:720, paddingBottom:64}}>
+          <main className="shell calculator-main" style={{paddingBottom:64}}>
+            <div className="calculator-form-column">
             <Comp />
             <FichaConfianza id={calc.id} />
             <Articulo id={calc.id} />
@@ -1779,6 +1780,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                 ← Todas las calculadoras
               </a>
             </p>
+            </div>
           </main>
         </div>
       ) : (

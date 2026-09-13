@@ -809,3 +809,24 @@ button, input, textarea, select { font: inherit; }
     padding-top: 28px;
   }
 }
+
+/* Alineacion del cuerpo con el encabezado (Fase 8).
+
+   El encabezado usa el shell de 1280 y arranca en su borde izquierdo,
+   pero la calculadora conservaba su columna de 720 centrada, asi que
+   el formulario empezaba mucho mas a la derecha que el H1 y el
+   proposito. ChatGPT lo resolvio alineando la herramienta al mismo eje:
+   la pagina se lee como una linea continua H1 -> proposito ->
+   herramienta, y el ritmo lo aporta la fotografia, no el formulario.
+
+   Solo en escritorio; en tablet y movil el ancho responsive ya
+   funciona. */
+
+@media (min-width: 1024px) {
+  .calculator-form-column {
+    width: 100%;
+    max-width: 720px;
+    margin-left: 0;
+    margin-right: auto;
+  }
+}

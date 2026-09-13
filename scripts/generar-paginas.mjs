@@ -32,6 +32,57 @@ const contenido = JSON.parse(
 const { origen, nombre } = catalogo.sitio;
 const paginas = catalogo.paginas;
 
+/**
+ * Revisa el contenido editorial antes de generar nada.
+ *
+ * Este archivo lo escribe ChatGPT y se integra por lotes, asi que un error
+ * tipico no es de sintaxis sino semantico: una clave con otro nombre, una
+ * seccion olvidada o un enlace a un destino que no existe. Sin esta
+ * revision, nada de eso falla en el build; falla en produccion como una
+ * seccion vacia o un enlace a la portada. Por eso se rompe el build aqui.
+ */
+function revisarContenido() {
+  const ids = new Set(paginas.map((p) => p.id));
+  const requeridas = [
+    "proposito", "interpretacion", "significado",
+    "metodologia", "supuestos", "fundamento",
+  ];
+  const problemas = [];
+
+  for (const [id, dato] of Object.entries(contenido)) {
+    if (id.startsWith("_")) continue; // notas del archivo
+    if (!ids.has(id)) {
+      problemas.push(`"${id}" no corresponde a ninguna calculadora de paginas.json`);
+      continue;
+    }
+    for (const clave of requeridas) {
+      if (typeof dato[clave] !== "string" || dato[clave].trim().length < 40) {
+        problemas.push(`${id}: falta la seccion "${clave}" o esta demasiado corta`);
+      }
+    }
+    for (const [i, f] of (dato.faq ?? []).entries()) {
+      if (!f?.pregunta || !f?.respuesta) problemas.push(`${id}: faq[${i}] sin pregunta o sin respuesta`);
+    }
+    for (const [i, s] of (dato.siguientes ?? []).entries()) {
+      if (!s?.texto) problemas.push(`${id}: siguientes[${i}] sin texto`);
+      if (!ids.has(s?.destino)) problemas.push(`${id}: siguientes[${i}] apunta a "${s?.destino}", que no existe`);
+      if (s?.destino === id) problemas.push(`${id}: siguientes[${i}] se enlaza a si misma`);
+    }
+  }
+
+  if (problemas.length) {
+    console.error("\nContenido editorial invalido:");
+    for (const p of problemas) console.error(`  - ${p}`);
+    console.error("");
+    process.exit(1);
+  }
+
+  const conContenido = Object.keys(contenido).filter((k) => !k.startsWith("_"));
+  console.log(`contenido editorial: ${conContenido.length} de ${paginas.length} calculadoras`);
+}
+
+revisarContenido();
+
 const plantilla = readFileSync(resolve(DIST, "index.html"), "utf8");
 
 const escapar = (t) =>

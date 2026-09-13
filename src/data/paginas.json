@@ -1,7 +1,7 @@
 {
   "_nota": "Fuente unica de las URLs indexables y su metadata. La usan scripts/generar-paginas.mjs (para emitir un HTML real por calculadora, con su title/description/canonical/OG/JSON-LD) y App.jsx (para saber que calculadora abrir segun la ruta). Si se agrega una calculadora, se agrega aqui y todo lo demas se genera solo.",
   "sitio": {
-    "origen": "https://milanaaqui.mx",
+    "origen": "https://www.milanaaqui.mx",
     "nombre": "MiLana",
     "descripcionGeneral": "Calculadoras financieras y fiscales para México, con la fuente oficial y la fecha de revisión visibles en cada cálculo."
   },

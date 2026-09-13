@@ -886,7 +886,7 @@ function Btn({ onClick, children }) {
 
 function ResultBox({ children }) {
   const compartirWhatsApp = () => {
-    const texto = encodeURIComponent('Acabo de calcular mis finanzas gratis en MiLana 💰 Pruébalo tú también: https://milanaaqui.mx');
+    const texto = encodeURIComponent('Acabo de calcular mis finanzas gratis en MiLana 💰 Pruébalo tú también: https://www.milanaaqui.mx');
     window.open(`https://wa.me/?text=${texto}`, '_blank', 'noopener,noreferrer');
   };
   return (

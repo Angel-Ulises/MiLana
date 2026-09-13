@@ -223,5 +223,341 @@
         "destino": "bruto-neto"
       }
     ]
+  },
+  "isr": {
+    "proposito": "Esta calculadora estima la retención mensual del Impuesto sobre la Renta aplicable a ingresos por salarios y considera el subsidio para el empleo cuando corresponde conforme a las reglas vigentes. Su objetivo es mostrar cómo se obtiene una retención ordinaria de nómina y permitir comparar la estimación con el CFDI o recibo correspondiente. No calcula por sí sola el impuesto anual ni determina todas las situaciones fiscales que pueden presentarse durante el ejercicio.",
+    "interpretacion": "Lee el resultado como una estimación de la retención correspondiente al mes, no como el impuesto definitivo de todo el año. La cantidad parte del ingreso gravable utilizado por la herramienta, aplica la tarifa mensual vigente y, cuando se cumplen las condiciones del subsidio para el empleo, incorpora ese beneficio al cálculo. Si tu recibo muestra una cantidad distinta, revisa primero si hubo ingresos exentos, pagos extraordinarios, ajustes de nómina, periodos distintos a un mes u otros conceptos que no formen parte del escenario capturado.",
+    "significado": "El ISR sobre salarios no se obtiene aplicando un único porcentaje al sueldo completo. La tarifa es progresiva: el ingreso se ubica en el rango que corresponda y el impuesto se determina con los elementos previstos para ese rango. Después puede intervenir el subsidio para el empleo cuando la persona trabajadora cumple las condiciones establecidas en el decreto vigente. Por eso un aumento de sueldo no significa que todo el ingreso pase a tributar con una sola tasa más alta.",
+    "metodologia": "MiLana parte del ingreso mensual gravable capturado y aplica la tarifa vigente para retenciones de salarios conforme al artículo 96 de la Ley del Impuesto sobre la Renta. El cálculo identifica el rango aplicable, determina el impuesto conforme a la cuota y al tratamiento del excedente previsto en esa tarifa y después considera el subsidio para el empleo cuando el nivel y tipo de ingreso cumplen las condiciones del decreto vigente. Las tarifas, parámetros y valores actualizables no están incorporados en este texto: la calculadora los obtiene del archivo regulatorio correspondiente.",
+    "supuestos": "La estimación está diseñada para una retención mensual ordinaria por salarios derivados de una relación laboral. No reproduce necesariamente el tratamiento especial de gratificaciones anuales, participación de utilidades, primas, pagos por separación u otras percepciones que pueden tener reglas particulares. Tampoco realiza el cálculo anual del ISR, ajustes de cierre del empleador ni integra automáticamente ingresos provenientes de otros patrones o de otras actividades. La aplicación del subsidio depende de que se cumplan las condiciones previstas en el decreto vigente. El resultado es informativo y no sustituye la determinación realizada en la nómina ni una revisión fiscal individual.",
+    "fundamento": "El artículo 94 de la Ley del Impuesto sobre la Renta considera ingresos por la prestación de un servicio personal subordinado a los salarios y demás prestaciones derivadas de una relación laboral. El artículo 96 obliga a quienes realizan estos pagos a efectuar retenciones y enteros mensuales a cuenta del impuesto anual y establece la mecánica de la tarifa mensual. El subsidio para el empleo se rige por el Decreto que otorga el subsidio para el empleo publicado en el Diario Oficial de la Federación y por sus modificaciones posteriores; dicho mecanismo se aplica, cuando corresponde, contra el ISR mensual determinado en términos del artículo 96. MiLana utiliza los parámetros vigentes almacenados en sus datos regulatorios en lugar de fijarlos dentro del contenido editorial.",
+    "faq": [
+      {
+        "pregunta": "¿La retención mensual de ISR es mi impuesto definitivo del año?",
+        "respuesta": "No necesariamente. Las retenciones mensuales sobre salarios tienen el carácter de pagos a cuenta del impuesto anual. Dependiendo de la situación de la persona, al finalizar el ejercicio puede existir un cálculo anual, un ajuste o una declaración en la que intervengan otros ingresos, retenciones y conceptos."
+      },
+      {
+        "pregunta": "¿El ISR se calcula aplicando un solo porcentaje a todo mi sueldo?",
+        "respuesta": "No. La tarifa mensual es progresiva. El ingreso gravable se ubica dentro del rango correspondiente y el impuesto se determina mediante la mecánica prevista para ese rango. Por eso la tasa asociada con una parte del ingreso no debe aplicarse directamente a todo el salario."
+      },
+      {
+        "pregunta": "¿Qué hace el subsidio para el empleo dentro del cálculo?",
+        "respuesta": "Es un beneficio fiscal para determinadas personas trabajadoras que puede disminuir el ISR mensual a su cargo conforme a las condiciones del decreto vigente. MiLana comprueba su aplicación usando los parámetros regulatorios correspondientes al periodo calculado."
+      },
+      {
+        "pregunta": "¿Por qué mi recibo de nómina puede mostrar un ISR diferente al de MiLana?",
+        "respuesta": "Puede haber diferencias si la nómina incluye percepciones adicionales, conceptos exentos, periodos de pago distintos, ajustes acumulados, pagos extraordinarios u otros elementos que la simulación no contempla. Compara primero el ingreso gravable utilizado en ambos cálculos."
+      },
+      {
+        "pregunta": "¿Un aumento de sueldo hace que todo mi ingreso pague la tasa del siguiente rango?",
+        "respuesta": "No. La estructura progresiva no funciona sustituyendo el impuesto de todo el ingreso por una única tasa al cambiar de rango. La mecánica de la tarifa determina el impuesto correspondiente al nivel de ingreso mediante los elementos previstos para ese intervalo."
+      },
+      {
+        "pregunta": "¿Aguinaldo, PTU y prima vacacional se calculan exactamente igual que un sueldo mensual ordinario?",
+        "respuesta": "No siempre. La Ley y su reglamentación contemplan reglas que pueden producir un tratamiento de retención distinto para ciertas percepciones extraordinarias. Esta calculadora está enfocada en la retención mensual ordinaria de salarios."
+      },
+      {
+        "pregunta": "¿Qué pasa si tengo dos empleadores?",
+        "respuesta": "Cada empleador puede efectuar retenciones respecto de los ingresos que paga, pero la situación anual de una persona puede involucrar la suma de ingresos provenientes de distintas fuentes. Una estimación aislada de una nómina no reproduce por sí sola ese resultado anual."
+      },
+      {
+        "pregunta": "¿El ISR que aparece aquí ya incluye las cuotas del IMSS?",
+        "respuesta": "No. El ISR y las cuotas de seguridad social son conceptos diferentes y tienen bases y reglas distintas. Si quieres estimar cuánto podría quedar disponible después de ambos conceptos, utiliza la calculadora de sueldo bruto a neto."
+      }
+    ],
+    "siguientes": [
+      {
+        "texto": "Estima cuánto queda de tu sueldo después de ISR y cuota obrera del IMSS",
+        "destino": "bruto-neto"
+      },
+      {
+        "texto": "Revisa por separado el tratamiento de tu aguinaldo",
+        "destino": "aguinaldo"
+      },
+      {
+        "texto": "Comprueba el cálculo de tu participación en las utilidades",
+        "destino": "ptu"
+      }
+    ]
+  },
+  "resico": {
+    "proposito": "Esta calculadora estima el ISR mensual de una persona física que tributa en el Régimen Simplificado de Confianza por las actividades comprendidas en el artículo 113-E de la Ley del Impuesto sobre la Renta. Está diseñada para explicar la mecánica básica del pago mensual a partir de ingresos efectivamente cobrados. No determina por sí sola si una persona reúne todos los requisitos para pertenecer al régimen ni calcula otros impuestos.",
+    "interpretacion": "El resultado representa una estimación del ISR correspondiente a los ingresos de RESICO considerados por la herramienta durante el periodo. La base no se construye como una utilidad obtenida al restar gastos: para esta mecánica se consideran los ingresos efectivamente cobrados que cumplen las condiciones legales, sin incluir el IVA y sin aplicar deducciones al determinar el pago mensual. Si existen retenciones acreditables u otras circunstancias fiscales que la calculadora no solicite expresamente, la cantidad efectivamente enterada puede ser distinta.",
+    "significado": "La característica central del cálculo mensual de RESICO para personas físicas es que mira principalmente cuánto ingreso elegible fue efectivamente cobrado y documentado, en lugar de calcular primero una utilidad restando gastos. Esto hace que tener facturas emitidas, cobradas o pendientes de pago pueda producir consecuencias diferentes dentro del periodo. El régimen también tiene requisitos de permanencia y obligaciones propias, por lo que obtener una cifra en la calculadora no significa por sí mismo que una persona pueda tributar bajo RESICO.",
+    "metodologia": "MiLana toma el importe de los ingresos de las actividades comprendidas en el régimen que hayan sido efectivamente cobrados y estén amparados por los comprobantes fiscales correspondientes. El IVA no se incorpora a la base del ISR y, para el pago mensual regulado por el artículo 113-E, no se restan deducciones. Sobre esa base se aplica la tasa que corresponda conforme a la tabla vigente almacenada en los datos regulatorios de MiLana. Cuando existan retenciones de ISR que legalmente puedan acreditarse, estas solo modifican la estimación final si la herramienta las contempla expresamente como dato de entrada.",
+    "supuestos": "La calculadora presupone que la persona ya determinó que puede tributar en el Régimen Simplificado de Confianza y que los ingresos capturados corresponden a actividades permitidas dentro del régimen. No verifica automáticamente límites de permanencia, composición de ingresos, características de socios o accionistas, incumplimientos de obligaciones ni otros supuestos que puedan impedir continuar en RESICO. No calcula IVA, no convierte gastos en deducciones para este pago mensual y no sustituye las declaraciones prellenadas ni la información de CFDI disponible para el SAT. Tampoco determina por sí sola el tratamiento de ingresos obtenidos fuera de RESICO.",
+    "fundamento": "El artículo 113-E de la Ley del Impuesto sobre la Renta regula el Régimen Simplificado de Confianza para las personas físicas que realizan las actividades previstas en esa disposición y cumplen sus requisitos. El propio artículo establece que el pago mensual se determina considerando los ingresos efectivamente cobrados amparados por CFDI, sin incluir el IVA y sin aplicar deducción alguna, mediante la tabla correspondiente. El artículo 113-G establece obligaciones aplicables a quienes tributan en esta sección y el artículo 113-J contempla la retención de ISR en determinados pagos realizados por personas morales a contribuyentes del régimen. El SAT regula además la presentación de los pagos mensuales mediante la Resolución Miscelánea Fiscal y sus reglas vigentes. Las tasas y límites actualizables se mantienen en los datos regulatorios de MiLana y no en este contenido.",
+    "faq": [
+      {
+        "pregunta": "¿RESICO calcula el ISR sobre mis facturas emitidas o sobre lo que realmente cobré?",
+        "respuesta": "La mecánica del artículo 113-E se basa en ingresos efectivamente cobrados que estén amparados por los comprobantes fiscales correspondientes. Por eso una factura emitida pero todavía no cobrada no debe confundirse automáticamente con un ingreso efectivamente percibido para este cálculo."
+      },
+      {
+        "pregunta": "¿Puedo restar mis gastos antes de aplicar la tasa mensual de RESICO?",
+        "respuesta": "No dentro de la mecánica del pago mensual prevista por el artículo 113-E. La base se determina sin aplicar deducciones. Esto es una diferencia importante frente a otros esquemas en los que el impuesto se calcula a partir de una utilidad fiscal."
+      },
+      {
+        "pregunta": "¿El IVA que cobro forma parte de la base de ISR de esta calculadora?",
+        "respuesta": "No. El artículo 113-E señala que el impuesto mensual se determina sobre los ingresos correspondientes sin incluir el IVA. El tratamiento y declaración del IVA son obligaciones distintas y esta calculadora no los determina."
+      },
+      {
+        "pregunta": "¿La calculadora puede decirme si tengo derecho a permanecer en RESICO?",
+        "respuesta": "No. La permanencia depende de cumplir requisitos y obligaciones establecidos en la Ley y demás disposiciones fiscales. La calculadora estima el ISR bajo el supuesto de que la persona ya se encuentra válidamente dentro del régimen."
+      },
+      {
+        "pregunta": "¿Por qué no aparece una tasa única de RESICO en la explicación?",
+        "respuesta": "Porque la tasa aplicable depende del nivel de ingresos considerado por la tabla vigente. MiLana obtiene esa información de sus datos regulatorios para el periodo correspondiente, evitando fijar en el contenido editorial cifras que pueden ser modificadas por disposiciones posteriores."
+      },
+      {
+        "pregunta": "¿Qué pasa si una persona moral me retuvo ISR por un pago?",
+        "respuesta": "La Ley contempla retenciones en determinados pagos efectuados por personas morales a contribuyentes personas físicas de RESICO. Una retención que legalmente resulte acreditable puede modificar la cantidad que finalmente se entera, pero la calculadora solo debe incorporarla cuando ese dato forme parte expresamente del escenario calculado."
+      },
+      {
+        "pregunta": "¿Puedo tener ingresos por salarios y también estar en RESICO?",
+        "respuesta": "La Ley contempla ciertos supuestos en los que pueden coexistir ingresos de RESICO con ingresos de otros capítulos, siempre que se satisfagan las condiciones aplicables. Cada tipo de ingreso conserva su propia mecánica fiscal, por lo que la retención de salarios no debe mezclarse directamente con el cálculo mensual de RESICO."
+      },
+      {
+        "pregunta": "¿El resultado sustituye la declaración mensual del SAT?",
+        "respuesta": "No. Es una estimación explicativa. La declaración oficial puede utilizar información prellenada proveniente de CFDI y otros datos fiscales, y es ese procedimiento oficial el que corresponde para el cumplimiento de la obligación."
+      }
+    ],
+    "siguientes": [
+      {
+        "texto": "Si también recibes salarios, revisa cómo funciona su retención mensual de ISR",
+        "destino": "isr"
+      },
+      {
+        "texto": "Si además tienes una relación laboral, estima tu sueldo bruto a neto",
+        "destino": "bruto-neto"
+      },
+      {
+        "texto": "Si recibes prestaciones laborales, revisa por separado tu aguinaldo",
+        "destino": "aguinaldo"
+      }
+    ]
+  },
+  "bruto-neto": {
+    "proposito": "Esta calculadora estima cuánto puede quedar disponible de un sueldo bruto después de considerar dos descuentos ordinarios asociados con una relación laboral formal: la retención de ISR, incluido el subsidio para el empleo cuando corresponda, y la cuota de seguridad social a cargo de la persona trabajadora. Su propósito es explicar por qué el sueldo anunciado o pactado como bruto no coincide necesariamente con la cantidad que llega a la cuenta.",
+    "interpretacion": "El sueldo neto mostrado es una estimación obtenida al partir del ingreso bruto y descontar los conceptos que modela la herramienta. Revisa por separado el ISR y la cuota obrera del IMSS, porque se determinan mediante reglas diferentes. Una nómina real puede mostrar otra cantidad si incluye bonos, percepciones exentas, ausencias, créditos de vivienda, préstamos, pensiones, fondos, descuentos internos, pagos extraordinarios u otros conceptos que esta calculadora no modele.",
+    "significado": "Bruto y neto describen momentos distintos de una nómina. El sueldo bruto representa las percepciones antes de los descuentos considerados; el neto es lo que queda después de aplicar las retenciones y deducciones correspondientes. El ISR se relaciona con el ingreso gravable para efectos fiscales, mientras que las cuotas del IMSS se determinan a partir del salario base de cotización y de las reglas de seguridad social. Esas bases no deben asumirse como idénticas en todos los casos.",
+    "metodologia": "MiLana estima primero el ISR mensual mediante la mecánica del artículo 96 de la Ley del Impuesto sobre la Renta y aplica el subsidio para el empleo cuando corresponda conforme al decreto vigente. De manera separada estima la cuota obrera del Seguro Social utilizando el salario base de cotización y las reglas aplicables a las ramas de aseguramiento en las que existe aportación de la persona trabajadora. Finalmente resta del sueldo bruto los descuentos modelados para obtener un neto estimado. Los parámetros fiscales, cuotas, límites y demás valores actualizables se leen desde los datos regulatorios vigentes y no quedan congelados en este texto.",
+    "supuestos": "La estimación presupone una relación laboral subordinada sujeta al régimen obligatorio del Seguro Social y una nómina ordinaria. No debe interpretarse el sueldo bruto capturado como idéntico al salario base de cotización en todas las situaciones, ya que la Ley del Seguro Social establece reglas sobre qué percepciones lo integran y cuáles pueden excluirse. La herramienta tampoco incorpora automáticamente amortizaciones de Infonavit, préstamos, pensiones alimenticias, fondos de ahorro, cuotas sindicales, descuentos internos, incidencias de asistencia ni cualquier otro concepto no solicitado. Existen además situaciones en las que la Ley asigna al patrón el pago de determinadas cuotas que normalmente podrían corresponder al trabajador. El resultado es orientativo y no sustituye el cálculo de nómina.",
+    "fundamento": "Para el componente fiscal, los artículos 94 y 96 de la Ley del Impuesto sobre la Renta regulan los ingresos por salarios y la retención mensual correspondiente, mientras que el Decreto que otorga el subsidio para el empleo y sus modificaciones determinan la aplicación vigente de ese beneficio. Para seguridad social, la Ley del Seguro Social establece en su artículo 27 las reglas de integración del salario base de cotización; las disposiciones de los seguros correspondientes determinan las cuotas que se distribuyen entre patrón, trabajador y Estado; el artículo 36 contempla el supuesto en que el patrón debe cubrir íntegramente la cuota del trabajador; y el artículo 38 obliga al patrón a retener del salario las cuotas que legalmente correspondan a la persona trabajadora y enterarlas al Instituto. MiLana obtiene de sus datos regulatorios las cuotas, límites y parámetros vigentes para el periodo calculado.",
+    "faq": [
+      {
+        "pregunta": "¿Sueldo bruto es lo mismo que salario base de cotización del IMSS?",
+        "respuesta": "No necesariamente. El salario base de cotización se integra conforme a reglas específicas de la Ley del Seguro Social. Algunas percepciones pueden integrarlo y otras pueden excluirse cuando cumplen las condiciones legales, por lo que no debe asumirse que siempre coincide exactamente con el sueldo bruto mostrado en una oferta o recibo."
+      },
+      {
+        "pregunta": "¿Qué descuentos incluye el neto estimado por MiLana?",
+        "respuesta": "Esta calculadora se concentra en la retención ordinaria de ISR, considerando el subsidio para el empleo cuando corresponda, y en la cuota obrera del IMSS modelada por la herramienta. Otros descuentos solo afectan el resultado si se incorporan expresamente."
+      },
+      {
+        "pregunta": "¿Por qué mi depósito real puede ser menor que el neto calculado?",
+        "respuesta": "Porque una nómina puede incluir conceptos adicionales como amortizaciones de vivienda, préstamos, ausencias, pensiones, fondos u otros descuentos. MiLana no debe inventar esos conceptos cuando no forman parte de los datos capturados."
+      },
+      {
+        "pregunta": "¿ISR e IMSS se calculan sobre exactamente la misma base?",
+        "respuesta": "No debe asumirse así. El ISR utiliza reglas fiscales para determinar el ingreso sujeto a retención, mientras que las cuotas de seguridad social parten del salario base de cotización definido por la Ley del Seguro Social. Las diferencias entre ambas bases pueden afectar el resultado."
+      },
+      {
+        "pregunta": "¿La empresa también paga cuotas al IMSS además de lo que aparece descontado en mi nómina?",
+        "respuesta": "Sí. El sistema de seguridad social contempla aportaciones que corresponden al patrón y otras que corresponden al trabajador, además de la participación del Estado en los supuestos previstos por la Ley. La calculadora de bruto a neto resta únicamente la parte que corresponda modelar como descuento de la persona trabajadora."
+      },
+      {
+        "pregunta": "¿El subsidio para el empleo puede cambiar mi sueldo neto?",
+        "respuesta": "Sí, cuando se cumplen sus condiciones puede disminuir el ISR mensual a cargo y, por tanto, modificar el neto estimado. MiLana aplica los parámetros vigentes del periodo desde sus datos regulatorios en lugar de incorporar cantidades fijas en esta explicación."
+      },
+      {
+        "pregunta": "¿Esta calculadora incluye mi descuento de Infonavit?",
+        "respuesta": "No como parte automática del cálculo de ISR e IMSS. Una amortización de crédito Infonavit es un concepto adicional y depende de la situación individual del crédito. Para analizar ese tema debe revisarse por separado la herramienta correspondiente."
+      },
+      {
+        "pregunta": "¿El neto calculado será idéntico en todos mis meses de nómina?",
+        "respuesta": "No necesariamente. Bonos, prestaciones, faltas, incapacidades, pagos extraordinarios, cambios salariales y otros movimientos pueden modificar las percepciones, las bases utilizadas o los descuentos de un periodo específico."
+      }
+    ],
+    "siguientes": [
+      {
+        "texto": "Revisa por separado cómo se determina tu retención mensual de ISR",
+        "destino": "isr"
+      },
+      {
+        "texto": "Si tienes un crédito de vivienda, revisa el cálculo relacionado con Infonavit",
+        "destino": "infonavit"
+      },
+      {
+        "texto": "Comprueba cuánto aguinaldo puedes generar además de tu sueldo ordinario",
+        "destino": "aguinaldo"
+      }
+    ]
+  },
+  "ptu": {
+    "proposito": "Esta calculadora estima la participación individual de una persona trabajadora en el reparto de utilidades a partir de la utilidad repartible y de los datos laborales capturados. Su objetivo es explicar cómo intervienen los días trabajados y el salario en la distribución entre las personas con derecho a participar. No determina por sí sola si una empresa generó utilidad repartible, si está exceptuada de la obligación ni sustituye el proyecto de reparto elaborado en el centro de trabajo.",
+    "interpretacion": "Lee el resultado como una estimación de tu participación dentro de una bolsa de utilidades previamente determinada. La cifra depende tanto de tus propios días y salario como de los días y salarios del conjunto de personas que participan. Por eso no basta conocer la utilidad de la empresa ni aplicar un porcentaje directamente a tu sueldo. Si el pago real es distinto, revisa primero la utilidad repartible utilizada, el universo de personas consideradas, tus días reconocidos, el salario empleado para PTU y la aplicación de los límites legales.",
+    "significado": "La PTU es un derecho de participación en las utilidades de la empresa y no un bono calculado únicamente sobre el salario individual. La Ley ordena distribuir la utilidad repartible atendiendo a dos factores diferentes: el tiempo trabajado y los salarios devengados. Esto significa que dos personas con el mismo salario pueden recibir cantidades distintas si trabajaron periodos diferentes, y dos personas con tiempos similares pueden obtener resultados distintos por sus salarios considerados para el reparto.",
+    "metodologia": "MiLana parte de la utilidad repartible destinada a las personas trabajadoras y la divide conforme a la mecánica establecida en la Ley Federal del Trabajo. Una parte se distribuye en función de los días trabajados y la otra en proporción a los salarios considerados para PTU. La herramienta calcula la participación relativa de la persona dentro de cada componente y después suma ambos resultados. Cuando corresponde, aplica las reglas y límites legales modelados por la calculadora. El porcentaje general de participación, los parámetros regulatorios y cualquier dato susceptible de actualización se obtienen del archivo de datos regulatorios y no se fijan en este contenido editorial.",
+    "supuestos": "La estimación presupone que la utilidad repartible, el total de días, los salarios del conjunto de personas participantes y los datos individuales capturados son correctos. No determina si el patrón está legalmente exceptuado de repartir utilidades, si una persona se encuentra dentro de alguna categoría excluida o con reglas particulares, ni reproduce automáticamente correcciones posteriores a la declaración fiscal. Para PTU, el concepto de salario utilizado por la Ley tiene reglas propias y no equivale necesariamente a todas las percepciones que aparecen en un recibo de nómina. El resultado es informativo y no sustituye el proyecto formal de reparto.",
+    "fundamento": "Los artículos 117 a 131 de la Ley Federal del Trabajo regulan la participación de las personas trabajadoras en las utilidades. El artículo 117 reconoce el derecho conforme al porcentaje determinado por la autoridad competente; el artículo 120 vincula la participación con la renta gravable determinada conforme a la legislación fiscal; el artículo 123 establece que la utilidad repartible se distribuye en dos partes iguales, una atendiendo a los días trabajados y otra a los salarios devengados; el artículo 124 define qué salario debe considerarse para esta materia; y los artículos 126 y 127 contienen excepciones, reglas especiales y límites aplicables al reparto. MiLana mantiene fuera de este texto los valores regulatorios que puedan modificarse.",
+    "faq": [
+      {
+        "pregunta": "¿La PTU se calcula aplicando un porcentaje directamente a mi sueldo?",
+        "respuesta": "No. Primero existe una utilidad repartible correspondiente a la empresa y después esa cantidad se distribuye entre las personas con derecho a participar conforme a los factores establecidos por la Ley. Tu salario es uno de esos factores, pero no es la única variable."
+      },
+      {
+        "pregunta": "¿Por qué importan mis días trabajados para calcular la PTU?",
+        "respuesta": "Porque una parte de la utilidad repartible se distribuye tomando en cuenta el número de días trabajados por cada persona. El tiempo reconocido durante el ejercicio influye directamente en esa parte de la participación."
+      },
+      {
+        "pregunta": "¿El salario usado para PTU es todo lo que recibí durante el año?",
+        "respuesta": "No necesariamente. La Ley Federal del Trabajo establece una definición específica de salario para el reparto de utilidades y excluye determinados conceptos. Por eso el total de percepciones de nómina no debe utilizarse automáticamente como salario para PTU."
+      },
+      {
+        "pregunta": "¿Si trabajé solo una parte del año puedo tener derecho a PTU?",
+        "respuesta": "Puede existir derecho aunque no se haya trabajado todo el ejercicio, siempre que se cumplan las condiciones aplicables al tipo de relación laboral. Las personas eventuales, por ejemplo, están sujetas a un tiempo mínimo de servicios previsto expresamente por la Ley."
+      },
+      {
+        "pregunta": "¿Todas las empresas están obligadas a repartir utilidades?",
+        "respuesta": "No. La Ley contempla determinados supuestos de excepción. Una calculadora individual no puede determinar únicamente con salario y días trabajados si el patrón está dentro de alguna de esas excepciones."
+      },
+      {
+        "pregunta": "¿Todas las personas que trabajan en una empresa participan de la misma manera?",
+        "respuesta": "No. La Ley establece exclusiones y reglas particulares para determinadas funciones, tipos de trabajadores y situaciones laborales. Por eso el universo utilizado para el reparto debe corresponder a las personas que legalmente tengan derecho a participar."
+      },
+      {
+        "pregunta": "¿Existe un límite a la PTU que puede recibir una persona?",
+        "respuesta": "Sí. La Ley Federal del Trabajo establece un límite individual y una regla para determinar cuál referencia resulta más favorable a la persona trabajadora. MiLana debe aplicar esa regla desde la lógica regulatoria de la calculadora y no mediante una cifra fija escrita en esta explicación."
+      },
+      {
+        "pregunta": "¿La PTU que recibo puede tener efectos de ISR?",
+        "respuesta": "Sí puede existir un tratamiento fiscal sobre la prestación, con reglas propias para determinar la parte que corresponda considerar para ISR. El resultado laboral de PTU y la retención fiscal no deben confundirse como si fueran el mismo cálculo."
+      }
+    ],
+    "siguientes": [
+      {
+        "texto": "Entiende por separado cómo funciona la retención mensual de ISR",
+        "destino": "isr"
+      },
+      {
+        "texto": "Si terminó tu relación laboral, revisa los conceptos que aún puedan estar pendientes",
+        "destino": "finiquito"
+      },
+      {
+        "texto": "Compara la PTU con otra prestación anual de tu relación laboral",
+        "destino": "aguinaldo"
+      }
+    ]
+  },
+  "infonavit": {
+    "proposito": "Esta calculadora simula cómo puede evolucionar el saldo de un crédito Infonavit a lo largo del tiempo a partir de los datos capturados sobre saldo, pago, tasa y demás componentes que contemple la herramienta. Su objetivo es ayudarte a entender cuánto del pago se destina a intereses y cuánto reduce la deuda, así como observar el efecto de aportaciones o pagos adicionales cuando estén incluidos en el escenario. No sustituye el estado de cuenta ni reproduce necesariamente todas las condiciones contractuales de un crédito real.",
+    "interpretacion": "Lee la tabla o proyección como un escenario financiero, no como el calendario oficial de tu crédito. Observa principalmente tres elementos: cómo disminuye el saldo, cuánto interés se genera en cada periodo y cómo cambia el plazo estimado cuando varía el pago aplicado a la deuda. Si la simulación difiere de Mi Cuenta Infonavit, utiliza como referencia oficial tu estado de cuenta, porque el crédito real puede incluir seguros, cuotas, adeudos, beneficios, reestructuras o reglas contractuales que una simulación general no conoce.",
+    "significado": "En una amortización, una mensualidad no reduce íntegramente el capital desde el primer pago. Parte puede destinarse a los intereses generados y a otros conceptos del crédito, mientras que el remanente reduce el saldo. Conforme cambia el saldo también cambia la cantidad sobre la que se calculan intereses. Además, durante la vigencia de determinados créditos las aportaciones patronales pueden contribuir a reducir la deuda conforme a las reglas aplicables, por lo que su efecto debe distinguirse del descuento realizado al salario de la persona acreditada.",
+    "metodologia": "MiLana parte del saldo y de las condiciones capturadas para proyectar el crédito periodo por periodo. En cada periodo estima los intereses sobre el saldo conforme a la tasa indicada y aplica el pago modelado según los componentes considerados por la herramienta, determinando después el nuevo saldo. Cuando el escenario incluye aportaciones patronales o pagos adicionales, estos se incorporan conforme a la lógica declarada por la calculadora. La simulación continúa hasta liquidar el saldo o alcanzar el horizonte seleccionado. Tasas, factores, modalidades de descuento y demás parámetros que puedan variar se mantienen en los datos regulatorios o son proporcionados por la persona usuaria, no en este contenido.",
+    "supuestos": "La proyección supone que las entradas permanecen constantes salvo que la calculadora indique lo contrario y que los pagos se realizan en los periodos previstos. No reconstruye automáticamente la historia de un crédito, reestructuras, prórrogas, adeudos, seguros, cuotas, apoyos, convenios ni diferencias entre productos otorgados bajo reglas de distintas fechas. Tampoco debe suponerse que todos los créditos Infonavit tienen la misma tasa, modalidad de amortización o tratamiento de aportaciones. El estado de cuenta y las condiciones contractuales emitidas por Infonavit prevalecen sobre esta simulación.",
+    "fundamento": "La Ley del Instituto del Fondo Nacional de la Vivienda para los Trabajadores regula el financiamiento y recuperación de los créditos. El artículo 29 establece obligaciones patronales relacionadas con aportaciones y descuentos para amortización de créditos; el artículo 43 Bis dispone, en los supuestos previstos por la Ley, la aplicación de aportaciones patronales a la reducción del saldo insoluto; el artículo 44 regula elementos de los créditos, incluidos intereses y plazo conforme a las reglas expedidas por el Instituto; y los artículos 47 y 48 remiten a reglas y disposiciones del Consejo de Administración para las condiciones y montos de financiamiento. Infonavit informa además que una mensualidad puede comprender capital, intereses, seguros y cuotas, por lo que una simulación general no debe presentarse como sustituto del estado de cuenta oficial.",
+    "faq": [
+      {
+        "pregunta": "¿La mensualidad completa reduce el capital de mi crédito?",
+        "respuesta": "No necesariamente. El pago puede cubrir distintos componentes del crédito. Infonavit identifica dentro de una mensualidad conceptos como capital, intereses y, según corresponda, seguros y cuotas. Solo la parte aplicada a capital reduce directamente esa porción de la deuda."
+      },
+      {
+        "pregunta": "¿Por qué al principio el saldo puede bajar más lentamente?",
+        "respuesta": "Porque los intereses se generan sobre el saldo del crédito y una parte del pago debe cubrirlos antes de que el resto reduzca capital. En una amortización, la proporción entre intereses y capital puede cambiar conforme avanza el crédito."
+      },
+      {
+        "pregunta": "¿Las aportaciones que hace mi patrón son un descuento adicional de mi sueldo?",
+        "respuesta": "No deben confundirse ambos conceptos. Las aportaciones patronales a vivienda son obligaciones del empleador, mientras que la amortización de un crédito puede implicar descuentos al salario conforme al aviso y las reglas aplicables. Su forma de aplicación al crédito depende de las condiciones correspondientes."
+      },
+      {
+        "pregunta": "¿Un pago adicional puede reducir el plazo del crédito?",
+        "respuesta": "Puede hacerlo si el importe se aplica de manera que reduzca capital, porque un saldo menor puede disminuir los intereses futuros y acelerar la amortización. El efecto exacto depende de las condiciones del crédito y de cómo Infonavit aplique el pago."
+      },
+      {
+        "pregunta": "¿Por qué la simulación puede no coincidir con mi estado de cuenta?",
+        "respuesta": "Porque el estado de cuenta refleja las condiciones reales de tu crédito, pagos efectivamente recibidos, intereses, seguros, cuotas, adeudos, beneficios o movimientos específicos. MiLana proyecta únicamente las variables incluidas en el escenario capturado."
+      },
+      {
+        "pregunta": "¿Todos los créditos Infonavit se amortizan de la misma manera?",
+        "respuesta": "No. Existen productos, fechas de contratación y condiciones distintas. Las reglas aplicables a tasa, mensualidad, aportaciones, apoyos o reestructuras pueden variar, por lo que no debe trasladarse automáticamente el resultado de un escenario a cualquier crédito."
+      },
+      {
+        "pregunta": "¿Qué dato oficial conviene comparar con la simulación?",
+        "respuesta": "El estado de cuenta disponible en Mi Cuenta Infonavit. Ahí puedes revisar el saldo, los movimientos y los componentes registrados oficialmente para tu crédito y detectar qué supuesto de la simulación produce una diferencia."
+      },
+      {
+        "pregunta": "¿Esta calculadora puede decirme cuánto crédito nuevo me prestaría Infonavit?",
+        "respuesta": "No. Una simulación de amortización analiza el comportamiento de un crédito con condiciones ya capturadas. La capacidad y condiciones para obtener un nuevo financiamiento dependen de las reglas de otorgamiento vigentes y de información que solo Infonavit puede determinar oficialmente."
+      }
+    ],
+    "siguientes": [
+      {
+        "texto": "Revisa cuánto queda de tu salario después de los descuentos ordinarios",
+        "destino": "bruto-neto"
+      },
+      {
+        "texto": "Entiende por separado cómo se calcula la retención mensual de ISR",
+        "destino": "isr"
+      },
+      {
+        "texto": "Explora los requisitos de pensión si estás organizando tus decisiones de largo plazo",
+        "destino": "pension"
+      }
+    ]
+  },
+  "pension": {
+    "proposito": "Esta calculadora revisa requisitos generales de cesantía en edad avanzada y vejez para personas sujetas al régimen de la Ley del Seguro Social de 1997. Su objetivo es ayudarte a identificar si la edad, la situación laboral y las semanas reconocidas se acercan a las condiciones exigidas por la Ley para solicitar una pensión. No estima una pensión garantizada ni promete un monto mensual, porque la cuantía y modalidad dependen de factores que no pueden reducirse a una sola cifra fija.",
+    "interpretacion": "Lee el resultado principalmente como una verificación de requisitos. La calculadora debe distinguir entre cumplir la edad correspondiente, encontrarse en la situación laboral exigida y reunir el mínimo de semanas vigente para el año evaluado. Si alguno de estos elementos falta, eso no significa necesariamente que los recursos de la cuenta individual se pierdan: la Ley contempla alternativas según las circunstancias. Si los requisitos aparecen cumplidos, el resultado tampoco equivale a una resolución de pensión; el reconocimiento oficial corresponde al IMSS.",
+    "significado": "Bajo la Ley de 1997, tener cierta edad por sí sola no genera automáticamente una pensión. Para cesantía en edad avanzada se requiere, entre otras condiciones, haber alcanzado la edad legal aplicable, estar privado de trabajo remunerado y contar con las semanas reconocidas que correspondan. Para vejez existe una edad legal distinta y también debe cumplirse el periodo mínimo de cotización. El requisito de semanas se encuentra sujeto al régimen transitorio derivado de la reforma pensionaria, por lo que MiLana debe obtener el mínimo vigente desde sus datos regulatorios y no dejarlo escrito como una cifra permanente.",
+    "metodologia": "MiLana compara la edad capturada con el ramo solicitado, verifica la situación de baja o ausencia de trabajo remunerado cuando corresponde y contrasta las semanas reconocidas con el mínimo exigible para el año evaluado. Ese mínimo se obtiene del archivo regulatorio porque el régimen transitorio establece una evolución gradual hasta llegar al requisito ordinario previsto en la Ley. La herramienta informa sobre elegibilidad general y no calcula el monto de la pensión garantizada. Tampoco transforma automáticamente el saldo de la cuenta individual en una mensualidad, ya que la Ley contempla modalidades como renta vitalicia y retiros programados sujetas a condiciones y cálculos adicionales.",
+    "supuestos": "La calculadora está orientada al régimen de la Ley del Seguro Social de 1997 y presupone que las semanas ingresadas son las reconocidas por el IMSS. No determina automáticamente si una persona con cotizaciones anteriores a la entrada en vigor de ese régimen puede elegir entre legislaciones, ni compara resultados con la Ley de 1973. Tampoco valida beneficiarios, saldo real de la Afore, recursos de vivienda, seguros de sobrevivencia, resoluciones del Instituto ni condiciones para retiro anticipado. Las semanas requeridas pueden depender del año conforme al régimen transitorio, por lo que el valor vigente debe provenir de los datos regulatorios. El resultado es informativo y no sustituye la resolución del IMSS.",
+    "fundamento": "La Ley del Seguro Social regula el seguro de retiro, cesantía en edad avanzada y vejez. El artículo 153 vincula las prestaciones con periodos de espera medidos en semanas reconocidas por el Instituto. El artículo 154 define la cesantía en edad avanzada y establece sus requisitos generales; los artículos 156 y 157 regulan el inicio del derecho y las opciones para disponer de la cuenta individual cuando se reúnen los requisitos. Los artículos 161 a 164 regulan el ramo de vejez y las opciones de pensión. El artículo 170 regula la pensión garantizada mediante variables previstas en la propia Ley, por lo que MiLana no la convierte en una cantidad fija editorial. Además, el régimen transitorio de la reforma publicada en el Diario Oficial de la Federación establece la evolución del requisito mínimo de semanas, que la calculadora consulta desde los datos regulatorios correspondientes a cada año.",
+    "faq": [
+      {
+        "pregunta": "¿Esta calculadora corresponde a la Ley de 1973 o a la Ley de 1997?",
+        "respuesta": "Está diseñada para revisar los requisitos del régimen de la Ley del Seguro Social de 1997. Si una persona cotizó antes de la entrada en vigor de ese régimen puede encontrarse en una situación de transición que requiere analizar por separado qué legislación puede resultar aplicable."
+      },
+      {
+        "pregunta": "¿Cuál es la diferencia entre cesantía en edad avanzada y vejez?",
+        "respuesta": "Son ramos distintos del mismo seguro. La cesantía en edad avanzada parte de la pérdida de trabajo remunerado a partir de la edad definida por la Ley, mientras que la vejez exige una edad legal posterior. En ambos casos deben cumplirse además las semanas reconocidas y los demás requisitos aplicables."
+      },
+      {
+        "pregunta": "¿Por qué MiLana no deja escrito un número fijo de semanas necesarias?",
+        "respuesta": "Porque la reforma pensionaria estableció un régimen transitorio en el que el mínimo exigible cambia según el año hasta alcanzar el requisito ordinario previsto en la Ley. La calculadora consulta el valor vigente desde los datos regulatorios para evitar mostrar un requisito desactualizado."
+      },
+      {
+        "pregunta": "¿Cumplir las semanas necesarias garantiza que ya tengo una pensión?",
+        "respuesta": "No por sí solo. También deben cumplirse la edad y las demás condiciones del ramo correspondiente, y el IMSS debe reconocer oficialmente el derecho mediante el trámite respectivo."
+      },
+      {
+        "pregunta": "¿Qué sucede si llego a la edad correspondiente pero todavía no reúno las semanas requeridas?",
+        "respuesta": "La Ley contempla alternativas, entre ellas continuar cotizando hasta reunir el periodo necesario o, en los supuestos previstos, disponer del saldo de la cuenta individual. La opción adecuada depende de la situación concreta y no la decide automáticamente esta calculadora."
+      },
+      {
+        "pregunta": "¿Mi saldo de Afore determina por sí solo si tengo derecho a pensionarme?",
+        "respuesta": "No. Para cesantía y vejez existen requisitos legales relacionados con edad, semanas reconocidas y situación laboral. El saldo de la cuenta individual es relevante para la forma de financiar y calcular determinadas modalidades de pensión, pero no sustituye esos requisitos."
+      },
+      {
+        "pregunta": "¿Por qué MiLana no calcula una pensión garantizada con una sola fórmula?",
+        "respuesta": "Porque la Ley relaciona la pensión garantizada con varias variables y parámetros legales, y su determinación oficial depende de información reconocida por el sistema de seguridad social. Presentar una cifra fija o una fórmula simplificada podría producir una expectativa incorrecta."
+      },
+      {
+        "pregunta": "¿Dónde puedo comprobar oficialmente mis semanas y comenzar el trámite?",
+        "respuesta": "Las semanas reconocidas y la procedencia de una pensión deben verificarse ante el IMSS mediante sus servicios y trámites oficiales. La información capturada en MiLana sirve para entender los requisitos y detectar qué dato necesitas comprobar, pero no modifica los registros del Instituto."
+      }
+    ],
+    "siguientes": [
+      {
+        "texto": "Revisa cómo un crédito de vivienda puede evolucionar antes del retiro",
+        "destino": "infonavit"
+      },
+      {
+        "texto": "Entiende cuánto queda disponible de tu sueldo mientras continúas cotizando",
+        "destino": "bruto-neto"
+      },
+      {
+        "texto": "Revisa tus prestaciones laborales actuales antes de planear el largo plazo",
+        "destino": "aguinaldo"
+      }
+    ]
   }
 }

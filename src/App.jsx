@@ -5,6 +5,7 @@ import regulatoryData from "./data/regulatory-data.json";
 import articulos from "./data/articulos.json";
 import contenidoCalc from "./data/contenido-calculadoras.json";
 import catalogoSituaciones from "./data/situaciones.json";
+import catalogoFotos from "./data/fotos.json";
 
 // ═══════════════════════════════════════════════════════════════
 // DATOS OFICIALES 2026 — SAT / CONASAMI / INEGI
@@ -1136,23 +1137,47 @@ const ANCHOS_IMAGEN = [480, 768, 1024, 1440, 1920, 2400];
 // Entrega a cada pantalla la resolucion que le toca, en WebP con respaldo JPEG.
 // Antes se servia siempre el mismo JPG de 1000 px y en pantallas retina el
 // navegador lo estiraba: por eso las fotos se veian suaves.
-function Foto({ name, alt = '', sizes, className, eager = false }) {
-  const srcset = (ext) =>
-    ANCHOS_IMAGEN.map(w => `/images/gen/${name}-${w}.${ext} ${w}w`).join(', ');
+const ANCHOS_MOVIL_IMAGEN = [480, 768, 1024, 1440];
+
+// Punto focal y fuente movil por foto. Vienen de datos, no de CSS global:
+// donde esta el sujeto cambia en cada imagen.
+const FOTOS = catalogoFotos.fotos;
+
+function Foto({ name, alt = '', sizes, className, eager = false, focal, movil }) {
+  const srcset = (base, anchos, ext) =>
+    anchos.map(w => `/images/gen/${base}-${w}.${ext} ${w}w`).join(', ');
   // El src es solo el respaldo para navegadores que ignoran srcset: no
   // conviene que sea la variante mas pesada.
   const respaldo = 1440;
   return (
     <picture className={className}>
-      <source type="image/webp" srcSet={srcset('webp')} sizes={sizes} />
+      {/* Cuatro fotos conservan su master vertical original: en una franja
+          de 230px a 100vw el recorte 3:2 de escritorio pierde demasiado. */}
+      {movil && (
+        <source
+          media="(max-width: 640px)"
+          type="image/webp"
+          srcSet={srcset(movil, ANCHOS_MOVIL_IMAGEN, 'webp')}
+          sizes="100vw"
+        />
+      )}
+      {movil && (
+        <source
+          media="(max-width: 640px)"
+          srcSet={srcset(movil, ANCHOS_MOVIL_IMAGEN, 'jpg')}
+          sizes="100vw"
+        />
+      )}
+      <source type="image/webp" srcSet={srcset(name, ANCHOS_IMAGEN, 'webp')} sizes={sizes} />
       <img
         src={`/images/gen/${name}-${respaldo}.jpg`}
-        srcSet={srcset('jpg')}
+        srcSet={srcset(name, ANCHOS_IMAGEN, 'jpg')}
         sizes={sizes}
         alt={alt}
         aria-hidden={alt ? undefined : 'true'}
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
+        style={focal ? { objectPosition: focal } : undefined}
       />
     </picture>
   );
@@ -1215,15 +1240,9 @@ const ORDEN_SECCIONES = ['interpretacion', 'significado', 'metodologia', 'supues
 function Proposito({ id }) {
   const data = contenidoCalc[id];
   if (!data || !data.proposito) return null;
-  return (
-    <p style={{
-      fontSize: 14.5, lineHeight: 1.7, color: 'var(--ml-slate-600, #4A5A6B)',
-      margin: '0 0 22px 0', paddingLeft: 14,
-      borderLeft: '3px solid var(--ml-blue, #2D6CAA)'
-    }}>
-      {data.proposito}
-    </p>
-  );
+  // Desde la Fase 8 el proposito forma parte del encabezado editorial y su
+  // tipografia la fija .calculator-purpose en design-home.css.
+  return <p className="calculator-purpose">{data.proposito}</p>;
 }
 
 function Seccion({ titulo, children }) {
@@ -1710,35 +1729,58 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
       {situacion && !activa && !cerrando ? (
         <SituationHub situacion={situacion} ir={setActiva} irASituacion={irASituacion} />
       ) : (activa || cerrando) ? (
-        <main className="shell" style={{maxWidth:720, paddingTop:32, paddingBottom:64}}>
-          <div key={activa} className={cerrando ? "ml-panel ml-panel-out" : "ml-panel"}>
-            <a href="/" onClick={(e) => { e.preventDefault(); cerrarCalc(); }} style={{
-              background:'none',border:'none',color:'var(--ml-blue)',fontSize:14,
-              cursor:'pointer',padding:'8px 0',fontWeight:600,display:'flex',
-              alignItems:'center',gap:6,fontFamily:'inherit'
-            }}>
-              ← Todas las calculadoras
-            </a>
-            <div style={{
-              background:'var(--ml-paper)',borderRadius:20,padding:28,
-              boxShadow:'var(--ml-shadow-soft)',
-              border:'1px solid var(--ml-border)'
-            }}>
-              <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:20}}>
-                <CalculatorIcon id={calc.id} />
-                <div>
-                  <h1 style={{margin:0,fontFamily:'"Newsreader", Georgia, serif',fontSize:30,fontWeight:600,color:'var(--ml-ink)',letterSpacing:'-.03em',lineHeight:1.1}}>{calc.nombre}</h1>
-                  <span style={{fontSize:13,color:'var(--ml-soft)'}}>{calc.desc}</span>
+        <div key={activa} className={cerrando ? "ml-panel ml-panel-out" : "ml-panel"}>
+          {/*
+            Encabezado editorial de la calculadora (Fase 8).
+            El proposito deja de ser un bloque aislado y pasa a formar parte
+            del encabezado, conservando su posicion antes de la calculadora.
+            La foto se integra aqui mismo: al costado en escritorio, como
+            franja debajo del texto en tablet y movil.
+          */}
+          <header className="calculator-hero">
+            <div className="calculator-hero-inner">
+              <div className="calculator-hero-copy">
+                <nav aria-label="Ruta de navegación" style={{fontSize:13,color:'var(--ml-soft)',marginBottom:18}}>
+                  <a href="/" onClick={(e) => { e.preventDefault(); cerrarCalc(); }} style={{color:'var(--ml-blue)',textDecoration:'none'}}>Inicio</a>
+                  <span aria-hidden="true"> / </span>
+                  <a href="/#calculadoras" onClick={(e) => { e.preventDefault(); cerrarCalc(); }} style={{color:'var(--ml-blue)',textDecoration:'none'}}>Calculadoras</a>
+                </nav>
+                <div className="calculator-hero-icon" style={{display:'flex',alignItems:'center',gap:10}}>
+                  <CalculatorIcon id={calc.id} />
+                  <span style={{fontSize:12,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:'var(--ml-blue)'}}>
+                    {CALC_META[calc.id]?.tag || calc.desc}
+                  </span>
                 </div>
+                <h1>{calc.nombre}</h1>
+                <Proposito id={calc.id} />
               </div>
-              <Proposito id={calc.id} />
-              <Comp />
-              <FichaConfianza id={calc.id} />
-              <Articulo id={calc.id} />
-              <ContenidoCalculadora id={calc.id} ir={setActiva} />
+
+              {FOTOS[calc.id] && (
+                <div className="calculator-hero-media">
+                  <Foto
+                    name={calc.id}
+                    sizes="(max-width: 1023px) 100vw, min(48vw, 760px)"
+                    focal={FOTOS[calc.id].focal}
+                    movil={FOTOS[calc.id].movil}
+                    eager
+                  />
+                </div>
+              )}
             </div>
-          </div>
-        </main>
+          </header>
+
+          <main className="shell calculator-main" style={{maxWidth:720, paddingBottom:64}}>
+            <Comp />
+            <FichaConfianza id={calc.id} />
+            <Articulo id={calc.id} />
+            <ContenidoCalculadora id={calc.id} ir={setActiva} />
+            <p style={{marginTop:30}}>
+              <a href="/" onClick={(e) => { e.preventDefault(); cerrarCalc(); }} style={{color:'var(--ml-blue)',fontSize:14,fontWeight:600,textDecoration:'none'}}>
+                ← Todas las calculadoras
+              </a>
+            </p>
+          </main>
+        </div>
       ) : (
         <main>
           <section className="hero">

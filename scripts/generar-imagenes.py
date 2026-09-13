@@ -30,6 +30,12 @@ SALIDA = RAIZ / "public" / "images" / "gen"
 # pantalla retina de 1440 CSS px necesita ~1840 px reales; 2400 cubre 4K.
 ANCHOS = [480, 768, 1024, 1440, 1920, 2400]
 
+# Los masters que terminan en -movil son los verticales originales y solo se
+# usan en pantallas de hasta 640 CSS px. Ni con densidad 3x pasan de ~1300 px
+# fisicos, asi que generar 1920 o 2400 seria publicar archivos enormes que
+# nadie descarga: en vertical, 2400 de ancho son 3600 de alto.
+ANCHOS_MOVIL = [480, 768, 1024, 1440]
+
 CALIDAD_WEBP = 82
 CALIDAD_JPEG = 86
 
@@ -45,8 +51,9 @@ def generar(master: Path) -> list:
         # srcset variantes de varios MB que ninguna pantalla necesita y que un
         # navegador podria llegar a descargar. Por encima de 2400 px no hay
         # ganancia visible ni en 4K, asi que ahi se corta.
-        objetivos = sorted({a for a in ANCHOS if a <= ancho_master})
-        if ancho_master < max(ANCHOS):
+        anchos = ANCHOS_MOVIL if master.stem.endswith("-movil") else ANCHOS
+        objetivos = sorted({a for a in anchos if a <= ancho_master})
+        if ancho_master < max(anchos):
             objetivos = sorted(set(objetivos) | {ancho_master})
         for ancho in objetivos:
             if ancho > ancho_master:

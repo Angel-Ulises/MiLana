@@ -599,3 +599,213 @@ button, input, textarea, select { font: inherit; }
       );
   }
 }
+
+/* ============================================================
+   ENCABEZADO DE CALCULADORA (Fase 8)
+
+   Especificacion de ChatGPT. La fotografia no va como banda
+   ancha encima del titulo ni como tarjeta: se integra en el
+   mismo encabezado editorial, sangrando al borde derecho y
+   disuelta con un fade lateral corto. En tablet y movil baja
+   debajo del proposito como franja a todo lo ancho.
+
+   Tratamiento mas sobrio que el Hero V2 del Inicio: aqui la
+   foto abre la situacion y despues los numeros mandan.
+   ============================================================ */
+
+.calculator-hero {
+  position: relative;
+  min-height: 360px;
+  overflow: hidden;
+  background: #FBF8F2;
+}
+
+.calculator-hero-inner {
+  width: min(calc(100% - 64px), 1280px);
+  min-height: 360px;
+  margin-inline: auto;
+
+  display: flex;
+  align-items: center;
+
+  position: relative;
+  z-index: 2;
+}
+
+.calculator-hero-copy {
+  width: 54%;
+  max-width: 620px;
+  padding: 48px 0 50px;
+  position: relative;
+  z-index: 4;
+}
+
+.calculator-hero-icon {
+  margin-bottom: 18px;
+}
+
+.calculator-hero h1 {
+  margin: 0;
+  max-width: 590px;
+
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+
+  color: #13263B;
+}
+
+.calculator-purpose {
+  max-width: 580px;
+  margin: 18px 0 0;
+
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.65;
+
+  color: #5E6B78;
+}
+
+.calculator-hero-media {
+  position: absolute;
+  z-index: 1;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: min(48vw, 760px);
+
+  overflow: hidden;
+}
+
+.calculator-hero-media picture,
+.calculator-hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.calculator-hero-media img {
+  object-fit: cover;
+
+  filter:
+    saturate(.82)
+    contrast(.97)
+    brightness(1.02)
+    sepia(.02);
+}
+
+.calculator-hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      #FBF8F2 0%,
+      rgb(251 248 242 / 0.96) 8%,
+      rgb(251 248 242 / 0.68) 18%,
+      rgb(251 248 242 / 0.24) 29%,
+      rgb(251 248 242 / 0) 40%
+    );
+}
+
+.calculator-main {
+  padding-top: 44px;
+}
+
+@media (max-width: 1023px) {
+
+  .calculator-hero {
+    min-height: 0;
+  }
+
+  .calculator-hero-inner {
+    width: min(calc(100% - 48px), 1280px);
+    min-height: 0;
+
+    display: block;
+  }
+
+  .calculator-hero-copy {
+    width: 100%;
+    max-width: 680px;
+
+    padding: 42px 0 0;
+  }
+
+  .calculator-hero h1 {
+    max-width: 650px;
+    font-size: 46px;
+  }
+
+  .calculator-purpose {
+    max-width: 650px;
+  }
+
+  .calculator-hero-media {
+    position: relative;
+
+    top: auto;
+    right: auto;
+    bottom: auto;
+
+    width: 100vw;
+    height: 320px;
+
+    margin-top: 28px;
+    margin-left: calc(50% - 50vw);
+  }
+
+  .calculator-hero-media::after {
+    background:
+      linear-gradient(
+        180deg,
+        #FBF8F2 0%,
+        rgb(251 248 242 / 0.76) 9%,
+        rgb(251 248 242 / 0.24) 19%,
+        rgb(251 248 242 / 0) 30%
+      );
+  }
+
+  .calculator-main {
+    padding-top: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .calculator-hero-inner {
+    width: calc(100% - 40px);
+  }
+
+  .calculator-hero-copy {
+    padding-top: 34px;
+  }
+
+  .calculator-hero h1 {
+    font-size: 38px;
+    line-height: 1.03;
+  }
+
+  .calculator-purpose {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.60;
+  }
+
+  .calculator-hero-media {
+    height: 230px;
+    margin-top: 22px;
+  }
+
+  .calculator-main {
+    padding-top: 28px;
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "_nota": "Las tres rutas de decision de la Fase 7, redactadas por ChatGPT. Un solo componente (SituationHub en App.jsx) las renderiza y scripts/generar-paginas.mjs emite un HTML real por cada una en /situaciones/<slug>. Agregar una situacion aqui basta para que aparezca en el sitio y en el sitemap.",
+  "situaciones": [
+    {
+      "id": "entender-mi-sueldo",
+      "slug": "entender-mi-sueldo",
+      "titulo": "Entender mi sueldo 2026 | Bruto, neto, ISR y RESICO | MiLana",
+      "descripcion": "Separa sueldo bruto, impuestos y descuentos para saber qué llega realmente a tu cuenta, y compara ofertas o aumentos sin adivinar.",
+      "eyebrow": "Ruta MiLana",
+      "h1": "Entiende qué te pagan, qué te descuentan y qué termina llegando a ti.",
+      "lede": "Empieza por separar sueldo bruto, impuestos y descuentos. Cuando entiendes cada pieza, comparar ofertas, aumentos o cambios de ingreso deja de ser una adivinanza.",
+      "decisiones": [
+        { "texto": "Quiero saber cuánto me queda realmente", "destino": "bruto-neto" },
+        { "texto": "Quiero entender por qué me retienen ISR", "destino": "isr" },
+        { "texto": "Trabajo por mi cuenta y quiero entender RESICO", "destino": "resico" }
+      ],
+      "explicacion": [
+        "Casi todas las conversaciones sobre dinero en el trabajo empiezan con una cifra suelta: lo que dice una oferta, lo que aparece en un contrato, lo que alguien menciona de pasada. El problema es que esa cifra casi nunca se refiere a lo mismo. Un sueldo pactado describe lo que la empresa se compromete a pagar; lo que llega a tu cuenta es el resultado de restarle retenciones y descuentos que se determinan con reglas distintas entre sí.",
+        "Por eso conviene pensar tu ingreso en tres momentos y no en uno. Primero, lo que se pacta. Después, lo que se retiene, donde el ISR sigue una tarifa progresiva y la seguridad social parte de una base propia que no siempre coincide con tu sueldo. Y al final, lo que queda disponible, que es la única cifra con la que realmente puedes planear.",
+        "Si trabajas por tu cuenta la estructura cambia de nombre pero no de lógica: en el Régimen Simplificado de Confianza el impuesto mensual mira lo que efectivamente cobraste, no lo que facturaste. Entender de dónde sale cada descuento es lo que te permite comparar dos ofertas, revisar un aumento o detectar que un recibo no cuadra."
+      ],
+      "ruta": [
+        { "paso": "Sueldo pactado", "detalle": "Identifica si la cifra que te dieron está expresada en bruto o en neto, y si incluye prestaciones." },
+        { "paso": "Descuentos", "detalle": "Separa la retención de ISR de la cuota de seguridad social: se calculan con reglas y bases diferentes." },
+        { "paso": "Dinero disponible", "detalle": "Trabaja con lo que queda después de los descuentos ordinarios, que es lo único con lo que puedes planear." }
+      ],
+      "herramientas": ["bruto-neto", "isr", "resico"],
+      "antes": [
+        { "titulo": "Comprueba si la cifra es bruta o neta", "detalle": "Es la confusión más común al comparar ofertas. Dos sueldos aparentemente iguales pueden dejar cantidades distintas si uno se expresó antes de descuentos y el otro después." },
+        { "titulo": "Distingue salario ordinario de pagos extraordinarios", "detalle": "Bonos, comisiones y gratificaciones pueden tener un tratamiento distinto al del sueldo mensual, así que mezclarlos distorsiona el promedio." },
+        { "titulo": "Compara siempre periodos equivalentes", "detalle": "Un mes con aguinaldo, PTU o una falta no representa un mes típico. Para comparar, usa periodos con la misma composición." }
+      ],
+      "lecturas": ["bruto-neto", "isr", "resico"],
+      "siguiente": {
+        "texto": "Ahora revisa qué prestaciones acompañan a tu sueldo",
+        "destino": "revisar-mis-prestaciones"
+      }
+    },
+    {
+      "id": "revisar-mis-prestaciones",
+      "slug": "revisar-mis-prestaciones",
+      "titulo": "Revisar mis prestaciones 2026 | Aguinaldo, vacaciones, PTU, vivienda y retiro | MiLana",
+      "descripcion": "Aguinaldo, vacaciones, utilidades, Infonavit y pensión: revisa cada prestación por separado y compárala con tus documentos.",
+      "eyebrow": "Ruta MiLana",
+      "h1": "Tu sueldo no termina en la quincena.",
+      "lede": "Aguinaldo, vacaciones, utilidades, vivienda y retiro forman parte de la relación laboral aunque no aparezcan como dinero disponible todos los meses. Aquí puedes revisar cada componente sin mezclarlos.",
+      "decisiones": [
+        { "texto": "Quiero revisar pagos que recibo durante el año", "ancla": "pagos" },
+        { "texto": "Quiero revisar descanso y vacaciones", "destino": "vacaciones" },
+        { "texto": "Quiero entender vivienda y retiro", "ancla": "largo-plazo" }
+      ],
+      "explicacion": [
+        "Una relación laboral formal genera derechos que no se ven cada quincena. Algunos llegan como dinero en fechas específicas, como el aguinaldo o el reparto de utilidades. Otros son tiempo, como las vacaciones y su prima. Y otros se acumulan en cuentas que no tocas hoy pero que definen decisiones grandes más adelante, como la subcuenta de vivienda y la de retiro.",
+        "El error más frecuente es revisarlos como si fueran un solo paquete. Cada prestación tiene su propia regla para determinar cuánto corresponde, y casi todas dependen de dos datos que conviene tener claros antes de calcular nada: tu antigüedad y el salario que se está usando como base. Una fecha de ingreso mal registrada puede cambiar tus días de vacaciones; un salario base distinto puede cambiar lo que se acumula para vivienda y retiro.",
+        "También conviene recordar que la ley fija mínimos, no máximos. Un contrato, un convenio colectivo o una política interna pueden reconocer más días o mejores condiciones. Por eso el objetivo aquí no es llegar a una cifra única, sino poder comparar cada componente contra tus recibos, constancias y contrato, y saber cuál revisar cuando algo no cuadra."
+      ],
+      "ruta": [
+        { "paso": "Identificar el derecho", "detalle": "Define qué prestación estás revisando y bajo qué condición se genera: tiempo trabajado, antigüedad o resultados de la empresa." },
+        { "paso": "Calcularlo", "detalle": "Usa la herramienta que corresponde a esa prestación, con la antigüedad y el salario correctos." },
+        { "paso": "Compararlo con tus documentos", "detalle": "Contrasta el resultado con recibos, constancias y contrato antes de concluir que existe una diferencia." }
+      ],
+      "herramientas": ["aguinaldo", "vacaciones", "ptu", "infonavit", "pension"],
+      "grupos": [
+        { "ancla": "pagos", "titulo": "Pagos y descanso", "ids": ["aguinaldo", "vacaciones", "ptu"] },
+        { "ancla": "largo-plazo", "titulo": "Largo plazo", "ids": ["infonavit", "pension"] }
+      ],
+      "antes": [
+        { "titulo": "Confirma tu antigüedad y tus fechas", "detalle": "La fecha real de ingreso determina el periodo de vacaciones que te corresponde y la proporción de varias prestaciones. Un dato mal capturado cambia todo el resultado." },
+        { "titulo": "Distingue mínimos legales de prestaciones superiores", "detalle": "Si tu contrato o tu empresa reconoce más días o mejores condiciones, esa es tu referencia, no el mínimo de la ley." },
+        { "titulo": "Revisa recibos y constancias antes de asumir un error", "detalle": "Muchas diferencias se explican por prestaciones ya pagadas o días ya disfrutados que no se estaban considerando." }
+      ],
+      "lecturas": ["aguinaldo", "vacaciones", "pension"],
+      "siguiente": {
+        "texto": "¿Cambiará o terminará tu relación laboral? Revisa qué ocurre con lo pendiente",
+        "destino": "terminar-relacion-laboral"
+      }
+    },
+    {
+      "id": "terminar-relacion-laboral",
+      "slug": "terminar-relacion-laboral",
+      "titulo": "Terminar una relación laboral 2026 | Finiquito, liquidación y pendientes | MiLana",
+      "descripcion": "Finiquito, indemnización y prestaciones pendientes no son lo mismo. Identifica cómo terminó la relación y revisa cada cantidad por separado.",
+      "eyebrow": "Ruta MiLana",
+      "h1": "Antes de aceptar una cifra, identifica qué estás cerrando.",
+      "lede": "Finiquito, indemnización y prestaciones pendientes no significan lo mismo. Primero identifica cómo terminó la relación; después revisa cada cantidad por separado.",
+      "decisiones": [
+        { "texto": "Renuncié o terminó normalmente mi relación", "destino": "finiquito" },
+        { "texto": "Me despidieron o quiero revisar una indemnización", "destino": "liquidacion" },
+        { "texto": "Quiero comprobar qué prestaciones quedaron pendientes", "ancla": "pendientes" }
+      ],
+      "explicacion": [
+        "Cuando termina un trabajo suele aparecer una sola cifra en una hoja, y la pregunta inmediata es si está bien. Esa pregunta no se puede responder mirando el total. Un cierre laboral puede contener cosas muy distintas: cantidades que ya habías generado y quedaron pendientes, y en ciertos casos conceptos ligados a la causa por la que terminó la relación.",
+        "Por eso el primer paso no es calcular, es identificar. Una renuncia, una terminación de contrato y un despido no producen los mismos conceptos, aunque el salario y la antigüedad sean idénticos. Lo que sí ocurre en todos los casos es que las prestaciones ya devengadas —días trabajados, aguinaldo proporcional, vacaciones y prima pendientes— deben revisarse, porque no desaparecen por la forma en que terminó la relación.",
+        "Una calculadora puede ayudarte a ordenar los componentes y a ver qué variable mueve cada parte del resultado, pero no puede determinar la causa jurídica de una separación ni si procede una indemnización. Si la cifra que te ofrecen y la que estimas difieren mucho, lo útil es saber exactamente en qué concepto está la diferencia antes de firmar."
+      ],
+      "comparacion": {
+        "titulo": "Finiquito ≠ Liquidación",
+        "columnas": [
+          { "titulo": "Finiquito", "texto": "Revisa cantidades ya generadas y pendientes al terminar la relación." },
+          { "titulo": "Liquidación", "texto": "Puede incorporar conceptos indemnizatorios según la causa de terminación." }
+        ],
+        "nota": "Una misma separación puede requerir revisar más de un concepto. La calculadora no determina por sí sola la causa jurídica."
+      },
+      "ruta": [
+        { "paso": "Identifica la salida", "detalle": "Renuncia, terminación de contrato o despido: la causa determina qué conceptos pueden entrar en juego." },
+        { "paso": "Separa conceptos", "detalle": "Distingue lo que ya habías generado de lo que dependería de la causa de terminación." },
+        { "paso": "Comprueba pendientes", "detalle": "Revisa aguinaldo proporcional, vacaciones y prima pendientes, y cualquier cantidad no cubierta." }
+      ],
+      "herramientas": ["finiquito", "liquidacion", "aguinaldo", "vacaciones"],
+      "grupos": [
+        { "ancla": "cierre", "titulo": "El cierre", "ids": ["finiquito", "liquidacion"] },
+        { "ancla": "pendientes", "titulo": "Prestaciones pendientes", "ids": ["aguinaldo", "vacaciones"] }
+      ],
+      "antes": [
+        { "titulo": "Ten a la mano tu fecha real de ingreso y de salida", "detalle": "La antigüedad afecta varios conceptos, y una diferencia de fechas puede cambiar el resultado más que cualquier otro dato." },
+        { "titulo": "Revisa qué salario aparece en tus documentos", "detalle": "El salario usado en el cálculo debe corresponder con el de tus recibos. Si no coincide, esa es la primera diferencia a aclarar." },
+        { "titulo": "Comprueba qué prestaciones ya se pagaron o disfrutaron", "detalle": "Vacaciones tomadas o aguinaldo ya cubierto explican buena parte de las diferencias entre una estimación y la cifra ofrecida." }
+      ],
+      "lecturas": ["finiquito", "liquidacion", "vacaciones"],
+      "siguiente": {
+        "texto": "Vuelve a entender tu ingreso completo y prepara tu siguiente etapa",
+        "destino": "entender-mi-sueldo"
+      }
+    }
+  ]
+}

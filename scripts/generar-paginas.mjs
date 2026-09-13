@@ -29,8 +29,18 @@ const catalogo = JSON.parse(readFileSync(resolve(RAIZ, "src/data/paginas.json"),
 const contenido = JSON.parse(
   readFileSync(resolve(RAIZ, "src/data/contenido-calculadoras.json"), "utf8")
 );
+// Rutas de situacion (Fase 7). Son paginas-hub: explican como pensar una
+// situacion y enlazan a las calculadoras que le corresponden.
+const situaciones = JSON.parse(
+  readFileSync(resolve(RAIZ, "src/data/situaciones.json"), "utf8")
+).situaciones;
 const { origen, nombre } = catalogo.sitio;
 const paginas = catalogo.paginas;
+const SLUG_POR_ID = Object.fromEntries(paginas.map((p) => [p.id, p.slug]));
+// Nombre corto de cada calculadora para los enlaces del respaldo estatico.
+const TITULO_CORTO = Object.fromEntries(
+  paginas.map((p) => [p.id, p.titulo.split("|")[0].replace(/\s*20\d\d\s*$/, "").trim()])
+);
 
 /**
  * Revisa el contenido editorial antes de generar nada.
@@ -175,12 +185,13 @@ function construir(pagina) {
   return url;
 }
 
-function sitemap(urls) {
+function sitemap(urls, urlsSituacion = []) {
   const hoy = new Date().toISOString().slice(0, 10);
   const entrada = (loc, prioridad, frecuencia) =>
     `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${hoy}</lastmod>\n    <changefreq>${frecuencia}</changefreq>\n    <priority>${prioridad}</priority>\n  </url>`;
   const cuerpo = [
     entrada(`${origen}/`, "1.0", "weekly"),
+    ...urlsSituacion.map((u) => entrada(u, "0.9", "monthly")),
     ...urls.map((u) => entrada(u, "0.9", "monthly")),
     entrada(`${origen}/privacidad`, "0.3", "yearly"),
   ].join("\n");
@@ -191,9 +202,137 @@ function sitemap(urls) {
   );
 }
 
+/**
+ * HTML real por situacion. Sin FAQPage a proposito: un hub no es una pagina
+ * de preguntas, y declarar el mismo esquema en todo el sitio lo devalua.
+ * Lleva BreadcrumbList y CollectionPage, que es lo que realmente es.
+ */
+
+/**
+ * Contenido estatico del hub, dentro de #root.
+ *
+ * Hasta aqui el HTML que sirve el servidor traia el <head> completo pero el
+ * cuerpo vacio: todo lo dibujaba React. Para un rastreador que no ejecuta
+ * JavaScript, y para cualquier persona a la que le falle el bundle, la
+ * pagina no existia. ChatGPT lo pidio explicito para la Fase 7: los hubs no
+ * pueden ser solo navegacion.
+ *
+ * React reemplaza estos nodos en el primer render, asi que no compite con la
+ * version interactiva; es respaldo, no duplicado.
+ */
+function cuerpoEstatico(s) {
+  const e = escapar;
+  const parrafos = s.explicacion.map((p) => `<p>${e(p)}</p>`).join("\n      ");
+  const decisiones = s.decisiones
+    .map((d) => `<li><a href="${d.ancla ? `#${d.ancla}` : `/calculadoras/${SLUG_POR_ID[d.destino]}`}">${e(d.texto)}</a></li>`)
+    .join("\n        ");
+  const ruta = s.ruta
+    .map((r) => `<li><strong>${e(r.paso)}</strong> — ${e(r.detalle)}</li>`)
+    .join("\n        ");
+  const ids = s.grupos ? s.grupos.flatMap((g) => g.ids) : s.herramientas;
+  const herramientas = ids
+    .map((id) => `<li><a href="/calculadoras/${SLUG_POR_ID[id]}">${e(TITULO_CORTO[id] || id)}</a></li>`)
+    .join("\n        ");
+  const antes = s.antes
+    .map((a) => `<li><strong>${e(a.titulo)}</strong> — ${e(a.detalle)}</li>`)
+    .join("\n        ");
+  const comparacion = s.comparacion
+    ? `\n      <h2>${e(s.comparacion.titulo)}</h2>\n      ` +
+      s.comparacion.columnas.map((c) => `<p><strong>${e(c.titulo)}.</strong> ${e(c.texto)}</p>`).join("\n      ") +
+      `\n      <p>${e(s.comparacion.nota)}</p>`
+    : "";
+
+  return `    <div id="root">
+      <p>${e(s.eyebrow)}</p>
+      <h1>${e(s.h1)}</h1>
+      <p>${e(s.lede)}</p>
+
+      <h2>¿Qué necesitas resolver?</h2>
+      <ul>
+        ${decisiones}
+      </ul>
+
+      ${parrafos}${comparacion}
+
+      <h2>Tu ruta de decisión</h2>
+      <ol>
+        ${ruta}
+      </ol>
+
+      <h2>Herramientas para esta situación</h2>
+      <ul>
+        ${herramientas}
+      </ul>
+
+      <h2>Antes de decidir</h2>
+      <ul>
+        ${antes}
+      </ul>
+
+      <p><a href="/situaciones/${s.siguiente.destino}">${e(s.siguiente.texto)}</a></p>
+    </div>`;
+}
+
+function construirSituacion(s) {
+  const url = `${origen}/situaciones/${s.slug}`;
+  let html = plantilla;
+
+  html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/gi, "");
+  html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapar(s.titulo)}</title>`);
+  html = ponerMeta(html, "description", s.descripcion);
+  html = ponerMeta(html, "og:title", s.titulo, true);
+  html = ponerMeta(html, "og:description", s.descripcion, true);
+  html = ponerMeta(html, "og:url", url, true);
+  html = ponerMeta(html, "og:type", "website", true);
+  html = ponerMeta(html, "twitter:title", s.titulo);
+  html = ponerMeta(html, "twitter:description", s.descripcion);
+
+  const canonical = `<link rel="canonical" href="${url}" />`;
+  html = /<link\s+rel=["']canonical["'][^>]*>/i.test(html)
+    ? html.replace(/<link\s+rel=["']canonical["'][^>]*>/i, canonical)
+    : html.replace("</head>", `    ${canonical}\n  </head>`);
+
+  const datos = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        name: s.h1,
+        headline: s.h1,
+        url,
+        inLanguage: "es-MX",
+        description: s.descripcion,
+        isPartOf: { "@type": "WebSite", name: nombre, url: origen },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Inicio", item: origen },
+          { "@type": "ListItem", position: 2, name: "Situaciones", item: `${origen}/#situaciones` },
+          { "@type": "ListItem", position: 3, name: s.h1, item: url },
+        ],
+      },
+    ],
+  };
+  html = html.replace(
+    "</head>",
+    `    <script type="application/ld+json">${JSON.stringify(datos)}</script>\n  </head>`
+  );
+
+  html = html.replace('<div id="root"></div>', cuerpoEstatico(s));
+
+  const destino = resolve(DIST, "situaciones", s.slug, "index.html");
+  mkdirSync(dirname(destino), { recursive: true });
+  writeFileSync(destino, html, "utf8");
+  return url;
+}
+
 const urls = paginas.map(construir);
-sitemap(urls);
+const urlsSituacion = situaciones.map(construirSituacion);
+sitemap(urls, urlsSituacion);
 
 console.log(`${urls.length} paginas de calculadora generadas:`);
 for (const u of urls) console.log(`  ${u}`);
-console.log("sitemap.xml actualizado con " + (urls.length + 2) + " URLs");
+console.log(`${urlsSituacion.length} rutas de situacion generadas:`);
+for (const u of urlsSituacion) console.log(`  ${u}`);
+console.log("sitemap.xml actualizado con " + (urls.length + urlsSituacion.length + 2) + " URLs");

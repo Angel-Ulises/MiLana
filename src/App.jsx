@@ -4,6 +4,7 @@ import catalogoPaginas from "./data/paginas.json";
 import regulatoryData from "./data/regulatory-data.json";
 import articulos from "./data/articulos.json";
 import contenidoCalc from "./data/contenido-calculadoras.json";
+import catalogoSituaciones from "./data/situaciones.json";
 
 // ═══════════════════════════════════════════════════════════════
 // DATOS OFICIALES 2026 — SAT / CONASAMI / INEGI
@@ -1321,6 +1322,226 @@ function ContenidoCalculadora({ id, ir }) {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// RUTAS DE SITUACION (Fase 7)
+//
+// Un solo componente para las tres: el contenido vive en
+// src/data/situaciones.json y aqui solo se dibuja, en el orden que
+// fijo ChatGPT: hero, que necesitas resolver, explicacion editorial,
+// ruta de decision, herramientas, antes de decidir, lecturas,
+// confianza y siguiente ruta.
+//
+// Todo son enlaces normales y texto renderizado, no un cuestionario:
+// un rastreador debe poder leer la pagina entera y seguir cada
+// enlace sin ejecutar nada.
+// ═══════════════════════════════════════════════════════════════
+
+function SituationHub({ situacion, ir, irASituacion }) {
+  const s = situacion;
+  const calcDe = (id) => CALCULADORAS.find((c) => c.id === id);
+
+  const enlaceDecision = (d) =>
+    d.ancla ? `#${d.ancla}` : rutaDe(d.destino);
+
+  const clicDecision = (e, d) => {
+    if (d.ancla) return; // el ancla la maneja el navegador
+    e.preventDefault();
+    ir(d.destino);
+  };
+
+  const tarjetaHerramienta = (id) => {
+    const c = calcDe(id);
+    if (!c) return null;
+    return (
+      <a
+        key={id}
+        href={rutaDe(id)}
+        onClick={(e) => { e.preventDefault(); ir(id); }}
+        style={{
+          display: 'flex', gap: 12, alignItems: 'flex-start', padding: 16,
+          borderRadius: 14, border: '1px solid var(--ml-border, #e6e9ee)',
+          background: 'var(--ml-paper, #fff)', textDecoration: 'none',
+          boxShadow: 'var(--ml-shadow-soft, 0 2px 10px rgba(15,23,42,.05))'
+        }}
+      >
+        <CalculatorIcon id={id} />
+        <span>
+          <span style={{ display: 'block', fontSize: 15, fontWeight: 700, color: 'var(--ml-ink, #13263B)' }}>{c.nombre}</span>
+          <span style={{ display: 'block', fontSize: 13, lineHeight: 1.5, color: 'var(--ml-soft, #6B7885)', marginTop: 3 }}>{c.desc}</span>
+        </span>
+      </a>
+    );
+  };
+
+  const rejilla = (ids) => (
+    <div style={{ display: 'grid', gap: 10, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
+      {ids.map(tarjetaHerramienta)}
+    </div>
+  );
+
+  return (
+    <main className="shell" style={{ maxWidth: 860, paddingTop: 28, paddingBottom: 72 }}>
+      {/* 1. Breadcrumb + hero */}
+      <nav aria-label="Ruta de navegación" style={{ fontSize: 13, color: 'var(--ml-soft, #6B7885)', marginBottom: 22 }}>
+        <a href="/" onClick={(e) => { e.preventDefault(); irASituacion(null, true); }} style={{ color: 'var(--ml-blue, #2D6CAA)', textDecoration: 'none' }}>Inicio</a>
+        <span aria-hidden="true"> / </span>
+        <span>Situaciones</span>
+      </nav>
+
+      <header style={{ marginBottom: 34 }}>
+        <p className="eyebrow" style={{ margin: 0 }}>{s.eyebrow}</p>
+        <h1 style={{
+          fontFamily: '"Newsreader", Georgia, serif', fontSize: 38, fontWeight: 600,
+          letterSpacing: '-.03em', lineHeight: 1.12, color: 'var(--ml-ink, #13263B)',
+          margin: '10px 0 14px 0'
+        }}>{s.h1}</h1>
+        <p style={{ fontSize: 17, lineHeight: 1.65, color: 'var(--ml-slate-600, #4A5A6B)', margin: 0, maxWidth: 660 }}>{s.lede}</p>
+      </header>
+
+      {/* 2. Que necesitas resolver */}
+      <section style={{ marginBottom: 40 }}>
+        <h2 style={hubH2}>¿Qué necesitas resolver?</h2>
+        <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
+          {s.decisiones.map((d, i) => (
+            <a
+              key={i}
+              href={enlaceDecision(d)}
+              onClick={(e) => clicDecision(e, d)}
+              style={{
+                display: 'block', padding: '20px 18px', borderRadius: 16,
+                border: '1px solid var(--ml-border, #e6e9ee)',
+                background: 'var(--ml-ivory, #FBF8F2)', textDecoration: 'none'
+              }}
+            >
+              <span style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '.08em', color: 'var(--ml-blue, #2D6CAA)', marginBottom: 8 }}>
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span style={{ display: 'block', fontSize: 15.5, fontWeight: 600, lineHeight: 1.45, color: 'var(--ml-ink, #13263B)' }}>{d.texto}</span>
+              <span style={{ display: 'block', fontSize: 13, fontWeight: 600, color: 'var(--ml-blue, #2D6CAA)', marginTop: 12 }}>Ver ruta →</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* 3. Explicacion editorial */}
+      <section style={{ marginBottom: 40 }}>
+        {s.explicacion.map((p, i) => (
+          <p key={i} style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ml-slate-600, #4A5A6B)', margin: '0 0 16px 0' }}>{p}</p>
+        ))}
+      </section>
+
+      {/* Pieza exclusiva del hub de cierre laboral */}
+      {s.comparacion && (
+        <section style={{ marginBottom: 40 }}>
+          <h2 style={hubH2}>{s.comparacion.titulo}</h2>
+          <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
+            {s.comparacion.columnas.map((c, i) => (
+              <div key={i} style={{
+                padding: 20, borderRadius: 16, background: 'var(--ml-navy, #17324D)', color: '#fff'
+              }}>
+                <h3 style={{ margin: '0 0 8px 0', fontFamily: '"Newsreader", Georgia, serif', fontSize: 20, fontWeight: 600 }}>{c.titulo}</h3>
+                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.65, opacity: .88 }}>{c.texto}</p>
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize: 13.5, lineHeight: 1.65, color: 'var(--ml-soft, #6B7885)', margin: '14px 0 0 0' }}>{s.comparacion.nota}</p>
+        </section>
+      )}
+
+      {/* 4. Ruta de decision */}
+      <section style={{ marginBottom: 40 }}>
+        <h2 style={hubH2}>Tu ruta de decisión</h2>
+        <ol style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))' }}>
+          {s.ruta.map((r, i) => (
+            <li key={i} style={{ padding: '18px 16px', borderRadius: 14, border: '1px solid var(--ml-border, #e6e9ee)' }}>
+              <span style={{ display: 'block', fontFamily: '"Newsreader", Georgia, serif', fontSize: 26, color: 'var(--ml-blue, #2D6CAA)', lineHeight: 1 }}>{i + 1}</span>
+              <h3 style={{ margin: '10px 0 6px 0', fontSize: 15.5, fontWeight: 700, color: 'var(--ml-ink, #13263B)' }}>{r.paso}</h3>
+              <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.6, color: 'var(--ml-slate-600, #4A5A6B)' }}>{r.detalle}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* 5. Herramientas para esta situacion */}
+      <section style={{ marginBottom: 40 }}>
+        <h2 style={hubH2}>Herramientas para esta situación</h2>
+        {s.grupos ? (
+          s.grupos.map((g) => (
+            <div key={g.ancla} id={g.ancla} style={{ marginBottom: 20, scrollMarginTop: 90 }}>
+              <h3 style={{ fontSize: 13, fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--ml-soft, #6B7885)', margin: '0 0 10px 0' }}>{g.titulo}</h3>
+              {rejilla(g.ids)}
+            </div>
+          ))
+        ) : rejilla(s.herramientas)}
+      </section>
+
+      {/* 6. Antes de decidir */}
+      <section style={{ marginBottom: 40 }}>
+        <h2 style={hubH2}>Antes de decidir</h2>
+        <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 12 }}>
+          {s.antes.map((a, i) => (
+            <li key={i} style={{ paddingLeft: 16, borderLeft: '3px solid var(--ml-green, #28735A)' }}>
+              <h3 style={{ margin: '0 0 4px 0', fontSize: 15, fontWeight: 700, color: 'var(--ml-ink, #13263B)' }}>{a.titulo}</h3>
+              <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.65, color: 'var(--ml-slate-600, #4A5A6B)' }}>{a.detalle}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 7. Lecturas relacionadas */}
+      {Array.isArray(s.lecturas) && s.lecturas.length > 0 && (
+        <section style={{ marginBottom: 40 }}>
+          <h2 style={hubH2}>Lecturas relacionadas</h2>
+          <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 8 }}>
+            {s.lecturas.map((id) => {
+              const a = articulos[id];
+              if (!a) return null;
+              return (
+                <li key={id}>
+                  <a href={rutaDe(id)} onClick={(e) => { e.preventDefault(); ir(id); }}
+                     style={{ display: 'block', padding: '12px 14px', borderRadius: 12, border: '1px solid var(--ml-border, #e6e9ee)', color: 'var(--ml-blue, #2D6CAA)', textDecoration: 'none', fontSize: 14, fontWeight: 600, lineHeight: 1.5 }}>
+                    {a.titulo}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
+
+      {/* 8. Confianza */}
+      <section style={{
+        marginBottom: 34, padding: '16px 18px', borderRadius: 14,
+        background: 'var(--ml-ivory, #FBF8F2)', border: '1px solid var(--ml-border, #e6e9ee)',
+        display: 'flex', flexWrap: 'wrap', gap: '8px 22px', fontSize: 12.5, color: 'var(--ml-soft, #6B7885)'
+      }}>
+        <span>Fuentes oficiales citadas en cada cálculo</span>
+        <span>Metodología y supuestos a la vista</span>
+        <span>Sin registro y sin guardar tus datos</span>
+      </section>
+
+      {/* 9. Siguiente ruta */}
+      <a
+        href={`/situaciones/${s.siguiente.destino}`}
+        onClick={(e) => { e.preventDefault(); irASituacion(s.siguiente.destino); }}
+        style={{
+          display: 'flex', gap: 12, alignItems: 'center', justifyContent: 'space-between',
+          padding: '20px 22px', borderRadius: 16, background: 'var(--ml-navy, #17324D)',
+          color: '#fff', textDecoration: 'none', fontSize: 15.5, fontWeight: 600, lineHeight: 1.5
+        }}
+      >
+        <span>{s.siguiente.texto}</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </main>
+  );
+}
+
+const hubH2 = {
+  fontFamily: '"Newsreader", Georgia, serif', fontSize: 24, fontWeight: 600,
+  letterSpacing: '-.02em', color: 'var(--ml-ink, #13263B)', margin: '0 0 14px 0',
+};
+
+// ═══════════════════════════════════════════════════════════════
 // APP PRINCIPAL
 // ═══════════════════════════════════════════════════════════════
 
@@ -1360,6 +1581,19 @@ function calculadoraDeLaUrl() {
   return m ? (ID_POR_SLUG[m[1]] || null) : null;
 }
 
+// ---------------------------------------------------------------------------
+// Rutas de situacion (/situaciones/<slug>) — Fase 7.
+// Mismo patron que las calculadoras: el HTML lo emite el build y aqui solo se
+// traduce ruta <-> situacion.
+// ---------------------------------------------------------------------------
+const SITUACIONES_HUB = catalogoSituaciones.situaciones;
+
+function situacionDeLaUrl() {
+  if (typeof window === 'undefined') return null;
+  const m = window.location.pathname.match(/^\/situaciones\/([^/]+)\/?$/);
+  return m ? (SITUACIONES_HUB.find((s) => s.slug === m[1]) || null) : null;
+}
+
 const CSS_CALCULADORAS = `:root{--ml-blue-700:#245C93;--ml-blue-600:#2D6CAA;--ml-blue-500:#2D6CAA;--ml-blue-100:#DCEAF7;--ml-blue-50:#F2F7FB;--ml-slate-900:#13263B;--ml-slate-600:#5E6B78;--ml-slate-400:#7A8794;--ml-slate-200:#D9E1E8;--ml-white:#FFFFFF;--ml-green-600:#28735A;--ml-green-50:#EAF4EF;--ml-red-600:#A94442;--ml-red-50:#FBF1F1;--ml-amber-600:#9B6723;--ml-radius-input:10px;--ml-radius-control:12px;--ml-radius-card:14px;--ml-radius-pill:999px;--ml-shadow-card:0 2px 10px rgba(15,23,42,0.06);--ml-shadow-btn:0 4px 12px rgba(37,99,235,0.28)}@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-grid-heading{font-size:22px;font-weight:600;color:var(--ml-slate-900);margin:0 0 12px 4px}@media (min-width:640px){.ml-grid-heading{font-size:26px}}.ml-calc-grid{display:grid;grid-template-columns:1fr;gap:12px}@media (min-width:640px){.ml-calc-grid{grid-template-columns:repeat(2,1fr);gap:20px}}@media (min-width:1024px){.ml-calc-grid{grid-template-columns:repeat(3,1fr)}}.ml-calc-card2{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;background:var(--ml-white);border:1px solid var(--ml-slate-200);border-radius:14px;box-shadow:var(--ml-shadow-card);padding:20px;padding-right:40px;cursor:pointer;transition:border-color 180ms,box-shadow 180ms,transform 180ms;font-family:inherit}@media (min-width:640px){.ml-calc-card2{flex-direction:column;align-items:flex-start;padding:24px;min-height:176px}}.ml-calc-card2:hover{border-color:var(--ml-blue-500);transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,0.16)}.ml-calc-card2:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:3px}.ml-calc-card2 .ml-card-title{display:block;font-size:18px;font-weight:600;color:var(--ml-slate-900)}.ml-calc-card2 .ml-card-desc{display:block;font-size:14px;line-height:1.5;color:var(--ml-slate-600);margin-top:4px}.ml-calc-card2 .ml-card-arrow{position:absolute;color:var(--ml-slate-400);display:flex;right:16px;top:50%;transform:translateY(-50%)}@media (min-width:640px){.ml-calc-card2 .ml-card-arrow{top:16px;transform:none}}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card2{transition:none}.ml-calc-card2:hover{transform:none}}.ml-details{margin-top:10px;padding-top:10px;border-top:1px solid var(--ml-slate-200);background:transparent}.ml-details-summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:4px 0;font-size:14px;font-weight:500;color:var(--ml-slate-600);cursor:pointer}.ml-details-summary::-webkit-details-marker{display:none}.ml-details-summary:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:2px}.ml-details-chevron{flex:none;transition:transform 180ms}.ml-details[open] .ml-details-chevron{transform:rotate(180deg)}.ml-details-body{font-size:14px;line-height:1.6;color:var(--ml-slate-600);padding-bottom:6px}@media (prefers-reduced-motion: reduce){.ml-details-chevron{transition:none}}`;
 
 // Metadatos de presentacion para las tarjetas del nuevo Inicio.
@@ -1379,10 +1613,12 @@ const CALC_META = {
 // Orden de aparicion en el Inicio (las cinco primeras son las tarjetas visibles).
 const ORDEN_INICIO = ['finiquito','isr','aguinaldo','bruto-neto','resico','liquidacion','ptu','vacaciones','infonavit','pension'];
 
+// Las tres tarjetas del Inicio. Desde la Fase 7 ya no filtran la rejilla de
+// calculadoras: llevan a su ruta de decision real en /situaciones/<slug>.
 const SITUACIONES = [
-  { titulo: 'Entender mi sueldo', desc: 'Bruto a neto, ISR, RESICO y lo que realmente cambia tu ingreso disponible.', ids: ['bruto-neto','isr','resico'] },
-  { titulo: 'Revisar mis prestaciones', desc: 'Aguinaldo, vacaciones, PTU e Infonavit, con contexto para saber si el cálculo tiene sentido.', ids: ['aguinaldo','vacaciones','ptu','infonavit'] },
-  { titulo: 'Terminar una relación laboral', desc: 'Finiquito, liquidación y los conceptos que debes distinguir antes de aceptar una cifra.', ids: ['finiquito','liquidacion'] },
+  { slug: 'entender-mi-sueldo', titulo: 'Entender mi sueldo', desc: 'Bruto a neto, ISR, RESICO y lo que realmente cambia tu ingreso disponible.' },
+  { slug: 'revisar-mis-prestaciones', titulo: 'Revisar mis prestaciones', desc: 'Aguinaldo, vacaciones, PTU, vivienda y retiro, con contexto para saber si el cálculo tiene sentido.' },
+  { slug: 'terminar-relacion-laboral', titulo: 'Terminar una relación laboral', desc: 'Finiquito, liquidación y los conceptos que debes distinguir antes de aceptar una cifra.' },
 ];
 
 const LECTURAS = [
@@ -1398,6 +1634,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
   // y el boton de atras del navegador funciona.
   const setActiva = (id) => {
     _setActiva(id);
+    _setSituacion(null);
     if (typeof window !== 'undefined') {
       const destino = id ? rutaDe(id) : '/';
       if (window.location.pathname !== destino) window.history.pushState({ id }, '', destino);
@@ -1407,8 +1644,25 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
     }
   };
 
+  // Situacion abierta (/situaciones/<slug>). Vive aparte de `activa` porque
+  // son dos familias de rutas distintas, pero comparten el mismo popstate.
+  const [situacion, _setSituacion] = useState(situacionDeLaUrl);
+
+  const irASituacion = (slug, aInicio = false) => {
+    const s = slug ? SITUACIONES_HUB.find((x) => x.slug === slug) : null;
+    _setSituacion(s);
+    if (s) _setActiva(null);
+    if (typeof window !== 'undefined') {
+      const destino = s ? `/situaciones/${s.slug}` : '/';
+      if (window.location.pathname !== destino) window.history.pushState({ slug }, '', destino);
+      window.scrollTo({ top: 0 });
+      document.title = s ? s.titulo : 'MiLana — Calculadoras Financieras México 2026';
+    }
+    if (aInicio) _setSituacion(null);
+  };
+
   useEffect(() => {
-    const alNavegar = () => _setActiva(calculadoraDeLaUrl());
+    const alNavegar = () => { _setActiva(calculadoraDeLaUrl()); _setSituacion(situacionDeLaUrl()); };
     window.addEventListener('popstate', alNavegar);
     return () => window.removeEventListener('popstate', alNavegar);
   }, []);
@@ -1446,7 +1700,9 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         </div>
       </header>
 
-      {(activa || cerrando) ? (
+      {situacion && !activa && !cerrando ? (
+        <SituationHub situacion={situacion} ir={setActiva} irASituacion={irASituacion} />
+      ) : (activa || cerrando) ? (
         <main className="shell" style={{maxWidth:720, paddingTop:32, paddingBottom:64}}>
           <div key={activa} className={cerrando ? "ml-panel ml-panel-out" : "ml-panel"}>
             <a href="/" onClick={(e) => { e.preventDefault(); cerrarCalc(); }} style={{
@@ -1521,8 +1777,8 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
               </div>
               <div className="situation-grid">
                 {SITUACIONES.map((s, i) => (
-                  <a key={s.titulo} className="situation-card" href="#calculadoras"
-                     onClick={() => setFiltro(s.ids)}>
+                  <a key={s.titulo} className="situation-card" href={`/situaciones/${s.slug}`}
+                     onClick={(e) => { e.preventDefault(); irASituacion(s.slug); }}>
                     <span className="situation-icon">{String(i + 1).padStart(2, '0')}</span>
                     <h3>{s.titulo}</h3>
                     <p>{s.desc}</p>

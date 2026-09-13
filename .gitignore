@@ -7,3 +7,8 @@ dist
 # local que usa GPT para revisar el diseno. No forma parte del sitio.
 design-spec/fonts/
 design-spec/preview-local.html
+# Fotografias master (varios MB cada una). No se versionan: se reconstruyen
+# desde assets-master/FUENTES.json, que si esta en el repo. Lo que el sitio
+# necesita son las variantes de public/images/gen/.
+assets-master/*.jpg
+assets-master/originales-verticales/

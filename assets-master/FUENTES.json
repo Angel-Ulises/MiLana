@@ -1,0 +1,26 @@
+{
+  "_nota": "Procedencia de cada fotografia de MiLana. Los archivos master (.jpg de varios MB) NO se versionan: pesan demasiado y se pueden volver a obtener desde aqui. Con este archivo cualquiera reconstruye assets-master/ y despues corre `npm run imagenes` para regenerar public/images/gen/.",
+  "licencia": {
+    "plataforma": "Pexels",
+    "resumen": "Uso gratuito, personal y comercial, sin atribucion obligatoria. Se conserva el credito de todas formas por trazabilidad.",
+    "terminos": "https://www.pexels.com/license/",
+    "criterio_milana": "Sin marcas ni logotipos visibles, sin pantallas con texto legible, sin billetes como protagonista, fotografia documental y no pose de catalogo."
+  },
+  "recorte": {
+    "_nota": "Cinco fotos venian en vertical y el diseno las pide en 3:2 horizontal. El encuadre lo decidio ChatGPT foto por foto; aqui queda el recorte exacto aplicado sobre el master original. Los verticales originales se conservan fuera del repo por si despues sirven para recortes moviles.",
+    "formato": "x, y, ancho, alto en pixeles del master original"
+  },
+  "fotos": [
+    { "id": "inicio", "uso": "Hero del Inicio", "pexels": 9869384, "fotografo": "Ron Lach", "pagina": "https://www.pexels.com/photo/couple-working-together-at-home-9869384/", "master": "4973x3315", "recorte": null, "focal": { "desktop": "72% 44%", "tablet": "68% 44%", "movil": "64% 42%" } },
+    { "id": "finiquito", "uso": "/calculadoras/finiquito", "pexels": 6177617, "fotografo": "Cup of Couple", "pagina": "https://www.pexels.com/photo/crop-person-with-documents-in-modern-office-6177617/", "master": "4480x6720", "recorte": [0, 1866, 4480, 2987], "focal": "65% 48%" },
+    { "id": "liquidacion", "uso": "/calculadoras/liquidacion", "pexels": 7581013, "fotografo": "RDNE Stock project", "pagina": "https://www.pexels.com/photo/man-holding-some-papers-7581013/", "master": "4097x6145", "recorte": [0, 600, 4097, 2731], "focal": "68% 45%" },
+    { "id": "aguinaldo", "uso": "/calculadoras/aguinaldo", "pexels": 4308013, "fotografo": "Ketut Subiyanto", "pagina": "https://www.pexels.com/photo/happy-couple-looking-at-paperwork-4308013/", "master": "5911x3941", "recorte": null, "focal": "65% 52%" },
+    { "id": "isr", "uso": "/calculadoras/isr", "pexels": 8297024, "fotografo": "Mikhail Nilov", "pagina": "https://www.pexels.com/photo/calculator-beside-a-laptop-on-a-wooden-surface-8297024/", "master": "6000x4000", "recorte": null, "focal": "66% 48%", "_nota": "Sustituye a la 6964340, descartada por ChatGPT: su composicion vertical obligaba a elegir entre el rostro y la accion." },
+    { "id": "resico", "uso": "/calculadoras/resico", "pexels": 7223023, "fotografo": "MART PRODUCTION", "pagina": "https://www.pexels.com/photo/a-woman-in-a-brown-blazer-working-on-her-laptop-7223023/", "master": "5989x3993", "recorte": null, "focal": "68% 44%" },
+    { "id": "ptu", "uso": "/calculadoras/ptu", "pexels": 8152735, "fotografo": "Pavel Danilyuk", "pagina": "https://www.pexels.com/photo/people-doing-paperwork-at-a-desk-8152735/", "master": "5256x3509", "recorte": null, "focal": "67% 48%" },
+    { "id": "bruto-neto", "uso": "/calculadoras/bruto-a-neto", "pexels": 8297020, "fotografo": "Mikhail Nilov", "pagina": "https://www.pexels.com/photo/a-person-examining-documents-8297020/", "master": "4000x6000", "recorte": [0, 1666, 4000, 2667], "focal": "64% 52%" },
+    { "id": "vacaciones", "uso": "/calculadoras/vacaciones", "pexels": 9186152, "fotografo": "Timur Weber", "pagina": "https://www.pexels.com/photo/packing-suitcase-for-traveling-9186152/", "master": "3189x4643", "recorte": [0, 1258, 3189, 2126], "focal": "68% 52%" },
+    { "id": "infonavit", "uso": "/calculadoras/infonavit", "pexels": 7641906, "fotografo": "Alena Darmel", "pagina": "https://www.pexels.com/photo/a-couple-holding-the-keys-for-a-new-house-7641906/", "master": "4611x3074", "recorte": null, "focal": "68% 46%" },
+    { "id": "pension", "uso": "/calculadoras/pension-imss", "pexels": 8441854, "fotografo": "Kampus Production", "pagina": "https://www.pexels.com/photo/a-happy-elderly-couple-holding-a-document-8441854/", "master": "5640x3764", "recorte": null, "focal": "66% 46%" }
+  ]
+}

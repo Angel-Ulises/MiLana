@@ -39,9 +39,15 @@ def generar(master: Path) -> list:
         im = im.convert("RGB")
         ancho_master = im.width
         hechas = []
-        # El ancho nativo del master siempre se publica: si no, un master de
-        # 1000 px solo generaria hasta 768 y estariamos tirando resolucion.
-        objetivos = sorted({a for a in ANCHOS if a <= ancho_master} | {ancho_master})
+        # El ancho nativo se publica SOLO cuando el master se queda corto: si
+        # mide menos que el mayor ancho objetivo, generarlo evita tirar
+        # resolucion. Pero con masters de 6000 px publicar el nativo metia al
+        # srcset variantes de varios MB que ninguna pantalla necesita y que un
+        # navegador podria llegar a descargar. Por encima de 2400 px no hay
+        # ganancia visible ni en 4K, asi que ahi se corta.
+        objetivos = sorted({a for a in ANCHOS if a <= ancho_master})
+        if ancho_master < max(ANCHOS):
+            objetivos = sorted(set(objetivos) | {ancho_master})
         for ancho in objetivos:
             if ancho > ancho_master:
                 continue  # ampliar no recupera detalle

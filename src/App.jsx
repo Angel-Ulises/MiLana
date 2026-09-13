@@ -1126,7 +1126,12 @@ function CalculatorIcon({ id }) {
 // Piloto de heroes visuales (Fase 2): solo Inicio + 3 calculadoras.
 // Las otras 7 calculadoras conservan el header de ícono (Fase 3 pendiente).
 // Anchos generados por scripts/generar-imagenes.py. Si cambian ahi, cambian aqui.
-const ANCHOS_IMAGEN = [480, 768, 1000];
+//
+// Aqui estaba la causa real de que las fotos se vieran suaves: los masters
+// eran de 1000 px y este arreglo tampoco pedia mas de 1000, asi que una
+// pantalla retina de escritorio recibia esa imagen y la estiraba al doble.
+// Con masters de 4000-6000 px, el srcset ya puede llegar a 2400.
+const ANCHOS_IMAGEN = [480, 768, 1024, 1440, 1920, 2400];
 
 // Entrega a cada pantalla la resolucion que le toca, en WebP con respaldo JPEG.
 // Antes se servia siempre el mismo JPG de 1000 px y en pantallas retina el
@@ -1134,12 +1139,14 @@ const ANCHOS_IMAGEN = [480, 768, 1000];
 function Foto({ name, alt = '', sizes, className, eager = false }) {
   const srcset = (ext) =>
     ANCHOS_IMAGEN.map(w => `/images/gen/${name}-${w}.${ext} ${w}w`).join(', ');
-  const mayor = ANCHOS_IMAGEN[ANCHOS_IMAGEN.length - 1];
+  // El src es solo el respaldo para navegadores que ignoran srcset: no
+  // conviene que sea la variante mas pesada.
+  const respaldo = 1440;
   return (
     <picture className={className}>
       <source type="image/webp" srcSet={srcset('webp')} sizes={sizes} />
       <img
-        src={`/images/gen/${name}-${mayor}.jpg`}
+        src={`/images/gen/${name}-${respaldo}.jpg`}
         srcSet={srcset('jpg')}
         sizes={sizes}
         alt={alt}
@@ -1755,7 +1762,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                 <div className="hero-orbit hero-orbit-one" aria-hidden="true"></div>
                 <div className="hero-orbit hero-orbit-two" aria-hidden="true"></div>
                 <figure className="hero-media">
-                  <Foto name="inicio" sizes="(max-width: 1023px) 100vw, 64vw" eager />
+                  <Foto name="inicio" sizes="(max-width: 1023px) 102vw, (max-width: 1279px) 88vw, (max-width: 1599px) 83vw, 1230px" eager />
                 </figure>
                 <aside className="hero-note" aria-label="Qué ofrece MiLana">
                   <span className="hero-note-kicker">Primero entiende</span>

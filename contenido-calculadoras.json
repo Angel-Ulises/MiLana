@@ -1,0 +1,50 @@
+{
+  "_nota": "Contenido editorial por calculadora, redactado por ChatGPT segun la Fase 6. Complementa los mini-articulos de articulos.json, no los repite. Solo fuentes oficiales. No es asesoria individual.",
+  "finiquito": {
+    "proposito": "Esta calculadora estima los conceptos laborales que pueden quedar devengados y pendientes de pago cuando termina una relación de trabajo. Su objetivo no es decirte si la separación fue correcta ni determinar por sí sola si existe una indemnización adicional, sino ayudarte a ordenar los componentes que normalmente deben revisarse al cierre: salario pendiente, partes proporcionales de prestaciones y otros conceptos que correspondan según tu relación laboral.",
+    "interpretacion": "Lee el resultado como un desglose, no solo como una cifra final. Revisa cuánto corresponde a cada concepto y compáralo con tus recibos de nómina, fechas de ingreso y salida, días de vacaciones ya disfrutados y prestaciones pactadas. Una diferencia importante en uno de esos datos puede cambiar el total. El resultado representa una estimación con la información capturada; la cantidad efectivamente pagada puede variar si existen prestaciones superiores a las legales, conceptos pendientes que la calculadora no incluya o ajustes fiscales y de nómina.",
+    "significado": "El finiquito sirve para comprobar qué derechos ya se habían generado hasta la fecha en que terminó la relación laboral. Por eso conviene revisar sus componentes por separado. Una cifra total aparentemente razonable puede ocultar que falta una prestación, que se usó una antigüedad incorrecta o que se descontaron días que ya estaban devengados. También es importante no asumir que finiquito e indemnización son lo mismo: dependiendo de la forma en que terminó la relación laboral pueden existir otros conceptos que deben analizarse aparte.",
+    "metodologia": "MiLana parte de las fechas, salario y demás datos capturados por la persona usuaria y estima los conceptos incluidos en la herramienta conforme a las reglas laborales aplicables. Las prestaciones anuales se prorratean cuando corresponde de acuerdo con el tiempo generado hasta la fecha de terminación. Para vacaciones se considera la antigüedad para determinar el periodo aplicable y se toma en cuenta lo que ya se haya disfrutado o pagado cuando ese dato forma parte de la entrada. La prima vacacional se calcula sobre la remuneración vacacional correspondiente. El aguinaldo se estima en proporción al tiempo generado durante el periodo aplicable. Los conceptos se muestran separados para que pueda identificarse qué variable produce cada parte del resultado.",
+    "supuestos": "La estimación parte de que los datos ingresados son correctos y de que la relación está sujeta a la Ley Federal del Trabajo. No incorpora automáticamente todas las condiciones que pueden existir en contratos individuales, contratos colectivos, políticas internas o prestaciones superiores a las legales. Bonos, comisiones, horas extraordinarias, fondos de ahorro, premios, salarios pendientes u otras cantidades solo forman parte del resultado cuando la herramienta las solicita o las contempla expresamente. La prima de antigüedad tiene requisitos y reglas propias y no debe agregarse automáticamente en todos los casos. La existencia de una indemnización por despido u otra causa también requiere un análisis separado. El resultado es informativo y no sustituye la revisión de documentos ni asesoría laboral individual.",
+    "fundamento": "La estimación se apoya principalmente en la Ley Federal del Trabajo: artículos 76 y 78 para el periodo y disfrute de vacaciones; artículo 79 para la remuneración proporcional cuando la relación termina antes de completar el periodo correspondiente; artículo 80 para la prima vacacional; artículo 87 para el aguinaldo y su parte proporcional; y artículo 162 para la prima de antigüedad únicamente cuando resulte aplicable. La reforma en materia de vacaciones publicada en el Diario Oficial de la Federación el 27 de diciembre de 2022 modificó los artículos 76 y 78 y es la base de la estructura vigente de vacaciones utilizada por MiLana. No existe un único artículo de la Ley Federal del Trabajo que establezca una fórmula universal llamada 'finiquito'; el cálculo resulta de identificar y sumar los derechos ya generados que correspondan al caso.",
+    "faq": [
+      {
+        "pregunta": "¿El resultado de la calculadora es exactamente lo que deben depositarme?",
+        "respuesta": "No necesariamente. Es una estimación construida con los datos capturados y los conceptos que modela la herramienta. El pago real puede incluir prestaciones adicionales, cantidades pendientes, descuentos permitidos o efectos fiscales que no formen parte de esta estimación. Lo útil es comparar concepto por concepto, no únicamente el total."
+      },
+      {
+        "pregunta": "¿Un finiquito siempre incluye aguinaldo y vacaciones proporcionales?",
+        "respuesta": "Cuando esas prestaciones ya se han generado y permanecen pendientes al terminar la relación, deben revisarse como parte del cierre. La proporción concreta depende del tiempo transcurrido, la antigüedad y de lo que ya haya sido pagado o disfrutado."
+      },
+      {
+        "pregunta": "¿Por qué MiLana me pide la fecha de ingreso si ya puse mi salario?",
+        "respuesta": "Porque la antigüedad afecta algunos derechos, especialmente el periodo de vacaciones. Además, las fechas permiten determinar qué parte de determinadas prestaciones se había generado hasta el momento de la separación."
+      },
+      {
+        "pregunta": "¿Qué pasa si mi empresa me da más prestaciones que las mínimas legales?",
+        "respuesta": "La Ley establece mínimos, pero un contrato, convenio o política laboral puede reconocer condiciones superiores. Si recibes más días, primas, bonos u otras prestaciones de las que contempla la calculadora, deben revisarse por separado para no subestimar el cierre."
+      },
+      {
+        "pregunta": "¿La prima de antigüedad debe aparecer siempre en mi finiquito?",
+        "respuesta": "No. La prima de antigüedad tiene supuestos específicos previstos en la Ley Federal del Trabajo. Su procedencia depende, entre otros factores, de la forma en que terminó la relación y, en ciertos casos, de la antigüedad. Por eso MiLana no debe tratarla como un componente automático de todo finiquito."
+      },
+      {
+        "pregunta": "¿Si renuncié pierdo las prestaciones que ya había generado?",
+        "respuesta": "La terminación de la relación no elimina por sí misma las prestaciones que ya se habían devengado. Por eso el finiquito revisa los conceptos generados hasta la fecha de salida, aunque la terminación haya sido por renuncia."
+      },
+      {
+        "pregunta": "¿Finiquito y liquidación son la misma cosa?",
+        "respuesta": "No deben tratarse como equivalentes. El finiquito se concentra en derechos y cantidades generadas que quedan pendientes al terminar la relación. Una liquidación puede involucrar indemnizaciones u otros conceptos ligados a la causa de terminación. Si no sabes cuál corresponde a tu caso, conviene revisar ambas herramientas antes de interpretar una cifra."
+      },
+      {
+        "pregunta": "¿Qué datos conviene tener a la mano para revisar el resultado?",
+        "respuesta": "Fecha real de ingreso y salida, salario utilizado para el cálculo, recibos recientes de nómina, vacaciones disfrutadas o pagadas, comprobantes de aguinaldo y cualquier contrato o documento donde aparezcan prestaciones superiores a las mínimas legales. Esos datos permiten detectar por qué una cifra real puede diferir de la estimación."
+      }
+    ],
+    "siguientes": [
+      { "texto": "Revisa si además del finiquito podrían existir conceptos de liquidación", "destino": "liquidacion" },
+      { "texto": "Comprueba por separado la parte proporcional de tu aguinaldo", "destino": "aguinaldo" },
+      { "texto": "Revisa tus días y prima de vacaciones", "destino": "vacaciones" }
+    ]
+  }
+}

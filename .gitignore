@@ -2,3 +2,8 @@ node_modules
 dist
 .env
 .env.local
+
+# Material de trabajo visual: tipografias descargadas y la vista previa
+# local que usa GPT para revisar el diseno. No forma parte del sitio.
+design-spec/fonts/
+design-spec/preview-local.html

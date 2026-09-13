@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build && node scripts/generar-paginas.mjs",
+    "preview": "vite preview",
+    "imagenes": "python3 scripts/generar-imagenes.py"
   },
   "dependencies": {
     "react": "^18.2.0",

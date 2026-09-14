@@ -18,4 +18,4 @@ for a,b in repls.items():
         raise SystemExit(f'No se encontró literal a corregir: {a}')
     s = s.replace(a,b)
 p.write_text(s, encoding='utf-8')
-print('Literales JSX internos corregidos para ejecutar el script de cierre.')
+print('Literales JSX internos corregidos; listo para revalidar cálculo, build y contenido público.')

@@ -8,7 +8,7 @@
   const cleanPath = () => location.pathname.replace(/\/+$/, '') || '/';
   const slug = () => cleanPath().split('/').filter(Boolean).at(-1) || 'home';
   const send = (event, params) => window.gtag('event', event, { page_path: cleanPath(), ...params });
-  const formulaVersion = id => ['isr', 'aguinaldo'].includes(id) ? 'revised-2026-09-14' : 'scope-2026-09-14';
+  const formulaVersion = () => 'verified-scope-2026-09-14';
 
   function instrumentCalculator() {
     if (!cleanPath().startsWith('/calculadoras/')) return;

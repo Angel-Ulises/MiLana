@@ -11,13 +11,14 @@ html { scroll-padding-top: 88px; }
 /* Header y navegación móvil */
 .astra-menu-button {
   display: none;
-  min-width: 48px;
   min-height: 44px;
+  padding: 0 14px;
   border: 1px solid var(--ml-border, #D9E1E8);
   border-radius: 12px;
   background: #fff;
   color: var(--ml-ink, #13263B);
   font: inherit;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -61,19 +62,7 @@ html { scroll-padding-top: 88px; }
   transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
 }
 .calculator-card:hover { transform: translateY(-2px); }
-.astra-review-label {
-  display: inline-flex;
-  width: fit-content;
-  margin-top: 14px;
-  padding: 5px 8px;
-  border-radius: 999px;
-  background: #FFF6E8;
-  color: #8A5A00;
-  font-size: 11px;
-  line-height: 1.2;
-  font-weight: 750;
-  letter-spacing: .02em;
-}
+
 .calculators[data-astra-expanded="false"] .astra-extra-calc { display: none; }
 
 /* Situaciones compactas */
@@ -126,7 +115,7 @@ a { -webkit-tap-highlight-color: transparent; }
   width: 100%;
   max-width: 760px;
 }
-.calculator-main input,
+.calculator-main input:not([type="checkbox"]),
 .calculator-main select,
 .calculator-main button {
   min-height: 48px;
@@ -137,7 +126,6 @@ a { -webkit-tap-highlight-color: transparent; }
   font-size: 13px;
   line-height: 1.45;
 }
-.astra-mobile-photo { display: none; }
 
 /* Resultado: monto final inmediato; solo opacidad */
 .ml-result { animation: astraResultIn 160ms ease-out both !important; }
@@ -197,20 +185,7 @@ a { -webkit-tap-highlight-color: transparent; }
 
 @media (max-width: 639px) {
   .calculator-hero h1 { font-size: clamp(34px, 10vw, 38px); }
-  .calculator-hero-media { display: none !important; }
-  .astra-mobile-photo {
-    display: block;
-    margin: 24px 0 30px;
-    overflow: hidden;
-    border-radius: 16px;
-    background: #F2F7FB;
-  }
-  .astra-mobile-photo img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-  }
-  .calculator-main { padding-top: 24px !important; }
+  .calculator-main { padding-top: 28px !important; }
   .calculator-main form,
   .calculator-main > div:first-child { max-width: 100%; }
 }
@@ -219,7 +194,6 @@ a { -webkit-tap-highlight-color: transparent; }
   .hero-grid { padding-top: 32px; padding-bottom: 32px; }
   .hero-media-wrap,
   .hero-media { min-height: 160px; }
-  .astra-mobile-photo img { height: 160px; }
 }
 
 /* El contenido no depende de la animación. */
@@ -242,4 +216,26 @@ a { -webkit-tap-highlight-color: transparent; }
   .astra-menu-button:active,
   .calculator-card:hover,
   .situation-card:hover { transform: none !important; }
+}
+
+
+/* Cierre visual 2026-09-14 */
+.calc-intro { margin: 0 0 22px; color: var(--ml-muted, #5E6B78); font-size: 14px; line-height: 1.65; }
+.calc-help { margin: 6px 0 14px; color: var(--ml-soft, #7A8794); font-size: 12.5px; line-height: 1.55; }
+.calc-error { min-height: 1.25em; margin: 8px 0 0; color: #A94442; font-size: 13px; }
+.calc-check { display: flex; align-items: flex-start; gap: 10px; margin: 12px 0; color: var(--ml-text, #18283A); font-size: 14px; line-height: 1.5; }
+.calc-check input[type="checkbox"] { width: 18px; height: 18px; min-height: 18px; margin: 2px 0 0; flex: 0 0 auto; accent-color: var(--ml-blue, #2D6CAA); }
+.calculator-trust { margin-top: 24px; padding: 18px 0 0; border-top: 1px solid var(--ml-border, #D9E1E8); }
+.calculator-trust-head { display: flex; align-items: center; gap: 9px; color: var(--ml-ink, #13263B); font-size: 13px; }
+.calculator-trust-head span { color: var(--ml-soft, #7A8794); font-weight: 500; }
+.calculator-trust-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--ml-green, #28735A); flex: 0 0 auto; }
+.calculator-trust > p { margin: 8px 0 0; color: var(--ml-muted, #5E6B78); font-size: 13px; line-height: 1.6; }
+
+@media (max-width: 639px) {
+  .calculator-hero-copy { padding-bottom: 0; }
+  .calculator-hero-media { display: block !important; height: 210px; margin-top: 22px; }
+  .calculator-main { padding-top: 30px !important; }
+  .calculator-main > form, .calculator-main > div:first-child { width: 100%; max-width: 100%; }
+  .calculator-main .ml-result { padding: 18px !important; }
+  .astra-menu-button { padding-inline: 13px; border-radius: 11px; }
 }

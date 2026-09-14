@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { calcularISR, calcularAguinaldo, ISR_MENSUAL_2026 } from "./lib/calculos-revisados.mjs";
+import { useEffect, useState, useId } from "react";
 import "./design-home.css";
 import catalogoPaginas from "./data/paginas.json";
 import regulatoryData from "./data/regulatory-data.json";
@@ -16,22 +17,8 @@ const SALARIO_MINIMO_FRONTERA = 440.87;
 const UMA_DIARIA = 117.31;
 const UMA_MENSUAL = 3566.22;
 const UMA_ANUAL = 42794.64;
-const SUBSIDIO_EMPLEO_MENSUAL = 536.22;
 
 // Tabla ISR mensual 2026 — Anexo 8 RMF DOF 28/12/2025
-const ISR_MENSUAL_2026 = [
-  { li: 0.01, ls: 844.59, cf: 0, tasa: 1.92 },
-  { li: 844.60, ls: 7168.51, cf: 16.22, tasa: 6.40 },
-  { li: 7168.52, ls: 12598.02, cf: 420.95, tasa: 10.88 },
-  { li: 12598.03, ls: 14644.64, cf: 1011.68, tasa: 16.00 },
-  { li: 14644.65, ls: 17533.64, cf: 1339.14, tasa: 17.92 },
-  { li: 17533.65, ls: 35362.83, cf: 1856.84, tasa: 21.36 },
-  { li: 35362.84, ls: 55736.68, cf: 5665.16, tasa: 23.52 },
-  { li: 55736.69, ls: 106410.50, cf: 10457.09, tasa: 30.00 },
-  { li: 106410.51, ls: 141880.66, cf: 25659.23, tasa: 32.00 },
-  { li: 141880.67, ls: 425641.99, cf: 37009.69, tasa: 34.00 },
-  { li: 425642.00, ls: Infinity, cf: 133488.54, tasa: 35.00 },
-];
 
 // Tabla ISR anual 2026
 const ISR_ANUAL_2026 = [
@@ -90,12 +77,7 @@ function calcISR(ingreso, tabla) {
 }
 
 function calcISRMensual(brutoMensual) {
-  const isr = calcISR(brutoMensual, ISR_MENSUAL_2026);
-  // Subsidio al empleo 2026 (decreto DOF 31/12/2025): límite $11,492.66 mensuales,
-  // monto = UMA mensual × 15.02% (enero 2026 usó UMA 2025 × 15.59%, no modelado aquí)
-  const LIMITE_SUBSIDIO_EMPLEO_2026 = 11492.66;
-  const subsidio = brutoMensual <= LIMITE_SUBSIDIO_EMPLEO_2026 ? UMA_MENSUAL * 0.1502 : 0;
-  return Math.max(isr - subsidio, 0);
+  return calcularISR({ ingreso: brutoMensual, soloMinimo: false }).retenido;
 }
 
 function diasEntre(f1, f2) {
@@ -124,7 +106,9 @@ function fmtPct(n) { return n.toFixed(2) + '%'; }
 // CALCULADORAS
 // ═══════════════════════════════════════════════════════════════
 
-function CalcFiniquito() {
+function CalcFiniquito() { return <CalculoSuspendido id="finiquito" />; }
+
+function CalcFiniquitoPendiente() {
   const [salarioMensual, setSalarioMensual] = useState('');
   const [fechaIngreso, setFechaIngreso] = useState('');
   const [fechaSalida, setFechaSalida] = useState('');
@@ -215,7 +199,9 @@ function CalcFiniquito() {
   );
 }
 
-function CalcLiquidacion() {
+function CalcLiquidacion() { return <CalculoSuspendido id="liquidacion" />; }
+
+function CalcLiquidacionPendiente() {
   const [salarioMensual, setSalarioMensual] = useState('');
   const [fechaIngreso, setFechaIngreso] = useState('');
   const [fechaSalida, setFechaSalida] = useState('');
@@ -314,126 +300,71 @@ function CalcLiquidacion() {
   );
 }
 
-function CalcAguinaldo() {
-  const [salarioMensual, setSalarioMensual] = useState('');
-  const [diasAguinaldo, setDiasAguinaldo] = useState('15');
-  const [fechaIngreso, setFechaIngreso] = useState('');
-  const [result, setResult] = useState(null);
+function CalcAguinaldo() { return <CalculoRevisado tipo="aguinaldo" />; }
+function CalcISR() { return <CalculoRevisado tipo="isr" />; }
 
-  const calcular = () => {
-    const sm = parseFloat(salarioMensual) || 0;
-    const sd = sm / 30;
-    const daParsed = parseInt(diasAguinaldo, 10);
-    const da = Number.isFinite(daParsed) ? daParsed : 15;
-    if (sm <= 0) return;
-
-    const ANIO_REFERENCIA = 2026; // aguinaldo estimado del año en curso (periodo vigente del sitio)
-    let diasProporcionales = 365;
-    if (fechaIngreso) {
-      const fi = new Date(fechaIngreso);
-      if (fi.getFullYear() < ANIO_REFERENCIA) {
-        // Ingresó antes del año de referencia: se considera el año completo
-        diasProporcionales = 365;
-      } else {
-        // Ingresó durante el año de referencia: proporcional desde el ingreso hasta el cierre de ese año
-        const finAnio = new Date(ANIO_REFERENCIA, 11, 31);
-        diasProporcionales = diasEntre(fechaIngreso, finAnio.toISOString().split('T')[0]);
-      }
-    }
-
-    const aguinaldoBruto = sd * da * (diasProporcionales / 365);
-    const exencion = UMA_DIARIA * 30; // 30 UMAs exención aguinaldo
-
-    setResult({
-      sd, da, diasProporcionales,
-      aguinaldoBruto, exencion,
-      gravado: Math.max(aguinaldoBruto - exencion, 0),
-    });
+function CalculoRevisado({ tipo }) {
+  const isISR = tipo === 'isr';
+  const [importe, setImporte] = useState('');
+  const [dias, setDias] = useState('15');
+  const [fecha, setFecha] = useState('');
+  const [minimo, setMinimo] = useState('');
+  const [periodo, setPeriodo] = useState('2026-09');
+  const [confirmado, setConfirmado] = useState(false);
+  const [resultado, setResultado] = useState(null);
+  const [error, setError] = useState('');
+  const errorId = useId();
+  const editar = setter => valor => { setter(valor); setResultado(null); setError(''); };
+  const calcular = e => {
+    e.preventDefault(); setResultado(null);
+    try {
+      if (isISR && !confirmado) throw new Error('Confirma que es un mes completo ordinario con un solo empleador.');
+      const r = isISR
+        ? calcularISR({ ingreso: importe, soloMinimo: minimo === '' ? undefined : minimo === 'si', periodo })
+        : calcularAguinaldo({ salario: importe, dias, ingreso: fecha, anioCompleto: confirmado });
+      setResultado(r); setError('');
+    } catch (err) { setError(err.message); }
   };
-
-  return (
-    <div>
-      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula tu aguinaldo estimado del año, ya sea completo o proporcional al tiempo trabajado en 2026. La ley establece un mínimo de 15 días de salario (Art. 87 LFT) y una exención de ISR equivalente a 30 UMAs.
-      </p>
-      <div style={styles.grid2}>
-        <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 18000" />
-        <Field label="Días de aguinaldo (mín. 15)" value={diasAguinaldo} onChange={setDiasAguinaldo} type="number" placeholder="15" />
-        <Field label="Fecha de ingreso (si no trabajaste el año completo)" value={fechaIngreso} onChange={setFechaIngreso} type="date" />
-      </div>
-      <Btn onClick={calcular}>Calcular Aguinaldo</Btn>
-      {result && (
-        <ResultBox>
-          <ResultLine label="Salario diario" value={fmt(result.sd)} />
-          <ResultLine label={`Días proporcionales trabajados en el año`} value={result.diasProporcionales} />
-          <ResultLine label="Aguinaldo bruto estimado" value={fmt(result.aguinaldoBruto)} bold color="#28735A" />
-          <Divider />
-          <ResultLine label={`Parte exenta de ISR (30 UMAs = ${fmt(result.exencion)})`} value={fmt(Math.min(result.aguinaldoBruto, result.exencion))} color="#28735A" />
-          <ResultLine label="Parte gravada" value={fmt(result.gravado)} />
-          <Note>Este resultado es el aguinaldo bruto (antes de impuestos) y su parte exenta/gravada de ISR. No calculamos el ISR a retener ni un neto: la retención sobre el aguinaldo sigue un procedimiento específico (Art. 174 del Reglamento de la LISR) que relaciona esta prestación con tu salario ordinario mensual, así que una tarifa aplicada de forma aislada podría darte una cifra incorrecta. Consulta con tu área de nóminas para el neto exacto.</Note>
-        </ResultBox>
-      )}
+  return <form onSubmit={calcular} noValidate>
+    <p>{isISR ? 'Estimación de ISR para un mes completo ordinario de febrero a diciembre de 2026, con un solo empleador.' : 'Aguinaldo bruto proyectado al cierre de 2026. Supone salario mensual fijo y servicio continuo hasta el 31 de diciembre.'}</p>
+    <Field label={isISR ? 'Ingreso mensual gravable para ISR (MXN)' : 'Salario mensual fijo (MXN)'} type="number" value={importe} onChange={editar(setImporte)} help={isISR ? 'Captura la parte gravada de tus percepciones; puede ser distinta de tu sueldo bruto.' : 'No incluye incidencias ni cambios de salario.'} error={error} errorId={errorId} />
+    {isISR ? <>
+      <label htmlFor="isr-periodo">Mes completo de 2026</label>
+      <select id="isr-periodo" value={periodo} onChange={e=>editar(setPeriodo)(e.target.value)} style={{display:'block',width:'100%',minHeight:48,padding:12,margin:'8px 0 16px',border:'1px solid #64748b',borderRadius:8,fontSize:16}} aria-describedby={error ? errorId : undefined}>
+        {['Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'].map((mes,i)=><option key={mes} value={`2026-${String(i+2).padStart(2,'0')}`}>{mes}</option>)}
+      </select>
+      <p>Enero, nóminas parciales y pagos por separación no están incluidos.</p>
+      <label htmlFor="isr-minimo">¿En este mes percibiste únicamente el salario mínimo general de tu zona?</label>
+      <select id="isr-minimo" value={minimo} onChange={e=>editar(setMinimo)(e.target.value)} style={{display:'block',width:'100%',minHeight:48,padding:12,margin:'8px 0 16px',border:'1px solid #64748b',borderRadius:8,fontSize:16}} aria-describedby={`isr-minimo-ayuda ${error ? errorId : ''}`}>
+        <option value="">Selecciona una respuesta</option><option value="si">Sí</option><option value="no">No</option>
+      </select>
+      <p id="isr-minimo-ayuda">Se refiere al mínimo general aplicable al lugar donde trabajas.</p>
+      <label><input type="checkbox" checked={confirmado} onChange={e=>editar(setConfirmado)(e.target.checked)} aria-describedby={error ? errorId : undefined} /> Confirmo que es un mes completo ordinario con un solo empleador.</label>
+    </> : <>
+      <Field label="Días de prestación (al menos 15)" type="number" value={dias} onChange={editar(setDias)} help="Se permiten prestaciones superiores, por ejemplo 15.5 días. El valor inicial es 15." error={error} errorId={errorId} />
+      <Field label="Fecha de ingreso" type="date" value={fecha} onChange={editar(setFecha)} help="Se supone que continúas hasta el 31 de diciembre de 2026. Para una salida anterior, consulta Finiquito." error={error} errorId={errorId} />
+      {!fecha && <label><input type="checkbox" checked={confirmado} onChange={e=>editar(setConfirmado)(e.target.checked)} aria-describedby={error ? errorId : undefined} /> Confirmo que trabajé todo el año 2026.</label>}
+      <p>El periodo incluye el día de ingreso y el 31 de diciembre. <a href="/calculadoras/finiquito">Consultar Finiquito</a></p>
+    </>}
+    <p id={errorId} role="alert" style={{color:'#b42318'}}>{error}</p>
+    <Btn>{isISR ? 'Calcular ISR' : 'Calcular Aguinaldo'}</Btn>
+    <div aria-live="polite" aria-atomic="true">
+    {resultado && <ResultBox>{isISR ? <>
+      <ResultLine label="ISR causado para este supuesto" value={fmt(resultado.causado)} />
+      <ResultLine label="Subsidio aplicado" value={fmt(resultado.subsidio)} />
+      <ResultLine label="ISR mensual estimado" value={fmt(resultado.retenido)} bold />
+      <ResultLine label="Ingreso después de ISR, antes de otros descuentos" value={fmt(resultado.despuesISR)} bold />
+      {resultado.soloMinimo && <Note>No se aplica retención bajo el supuesto declarado de percibir únicamente el salario mínimo general (art. 96 LISR).</Note>}
+      <Note>No incluye IMSS ni otros descuentos. No es una declaración anual.</Note>
+    </> : <>
+      <ResultLine label="Salario diario" value={fmt(resultado.salarioDiario)} />
+      <ResultLine label="Días de prestación" value={resultado.diasPrestacion} />
+      <ResultLine label="Días del periodo incluido en 2026" value={resultado.diasPeriodo} />
+      <ResultLine label="Aguinaldo bruto proyectado" value={fmt(resultado.bruto)} bold />
+      <Note>La retención de ISR no está incluida. La revisión del bruto no certifica la exención fiscal.</Note>
+    </>}</ResultBox>}
     </div>
-  );
-}
-
-function CalcISR() {
-  const [salarioMensual, setSalarioMensual] = useState('');
-  const [result, setResult] = useState(null);
-
-  const calcular = () => {
-    const sm = parseFloat(salarioMensual) || 0;
-    if (sm <= 0) return;
-
-    const isrBruto = calcISR(sm, ISR_MENSUAL_2026);
-    const subsidio = sm <= (UMA_DIARIA * 3 * 30.4) ? SUBSIDIO_EMPLEO_MENSUAL : 0;
-    const isrNeto = Math.max(isrBruto - subsidio, 0);
-    const neto = sm - isrNeto;
-    const tasaEfectiva = (isrNeto / sm) * 100;
-
-    // Encontrar rango
-    let rango = ISR_MENSUAL_2026[0];
-    for (const r of ISR_MENSUAL_2026) {
-      if (sm >= r.li && sm <= r.ls) { rango = r; break; }
-    }
-
-    setResult({
-      bruto: sm, isrBruto, subsidio, isrNeto, neto,
-      tasaEfectiva, tasaMarginal: rango.tasa, cuotaFija: rango.cf,
-      anual: { bruto: sm * 12, isr: isrNeto * 12, neto: neto * 12 }
-    });
-  };
-
-  return (
-    <div>
-      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula el Impuesto Sobre la Renta que se retiene de tu sueldo mensual, con base en las tablas del Anexo 8 de la Resolución Miscelánea Fiscal 2026, publicadas en el Diario Oficial de la Federación el 28 de diciembre de 2025.
-      </p>
-      <div style={styles.grid2}>
-        <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 25000" />
-      </div>
-      <Btn onClick={calcular}>Calcular ISR</Btn>
-      {result && (
-        <ResultBox>
-          <ResultLine label="Ingreso mensual bruto" value={fmt(result.bruto)} />
-          <ResultLine label={`Tasa marginal (tu rango)`} value={fmtPct(result.tasaMarginal)} />
-          <ResultLine label="Cuota fija del rango" value={fmt(result.cuotaFija)} />
-          <ResultLine label="ISR causado" value={fmt(result.isrBruto)} />
-          {result.subsidio > 0 && <ResultLine label="Subsidio al empleo" value={`- ${fmt(result.subsidio)}`} color="#28735A" />}
-          <Divider />
-          <ResultLine label="ISR a retener mensual" value={fmt(result.isrNeto)} bold color="#A94442" />
-          <ResultLine label="Sueldo neto mensual" value={fmt(result.neto)} bold color="#28735A" />
-          <ResultLine label="Tasa efectiva real" value={fmtPct(result.tasaEfectiva)} bold />
-          <Divider />
-          <div style={{marginBottom:8,fontWeight:600,color:'#5E6B78',fontSize:13}}>Proyección anual</div>
-          <ResultLine label="Ingreso bruto × 12 meses" value={fmt(result.anual.bruto)} />
-          <ResultLine label="Retención mensual × 12" value={fmt(result.anual.isr)} />
-          <ResultLine label="Neto mensual × 12" value={fmt(result.anual.neto)} color="#28735A" />
-          <Note>Esta proyección es tu retención mensual multiplicada por 12, no un cálculo de declaración anual. El ISR del ejercicio anual se calcula distinto (tarifa anual, ajuste del retenedor y, en su caso, deducciones personales).</Note>
-        </ResultBox>
-      )}
-    </div>
-  );
+  </form>;
 }
 
 function CalcRESICO() {
@@ -471,8 +402,8 @@ function CalcRESICO() {
         <ResultBox>
           <ResultLine label="Ingreso mensual" value={fmt(result.ingreso)} />
           <ResultLine label="Tasa RESICO" value={fmtPct(result.tasa)} bold />
-          <ResultLine label="ISR RESICO mensual" value={fmt(result.isrResico)} color="#A94442" />
-          <ResultLine label="Neto después de ISR" value={fmt(result.neto)} bold color="#28735A" />
+          <ResultLine label="ISR causado antes de retenciones" value={fmt(result.isrResico)} color="#A94442" />
+          <ResultLine label="Ingreso menos ISR causado, antes de otros ajustes" value={fmt(result.neto)} bold color="#28735A" />
           <Note>RESICO aplica para personas físicas con ingresos anuales hasta $3,500,000 y ciertos requisitos de permanencia que esta calculadora no valida. El IVA se calcula aparte (hay actos gravados al 16%, al 0% y exentos, además de acreditamiento), así que no se incluye aquí.</Note>
         </ResultBox>
       )}
@@ -499,7 +430,7 @@ function CalcPTU() {
         Calcula el monto total que una empresa debe repartir por Participación de los Trabajadores en las Utilidades (PTU): el 10% de sus utilidades anuales, conforme a los artículos 117 al 131 de la Ley Federal del Trabajo.
       </p>
       <div style={styles.grid2}>
-        <Field label="Utilidades de la empresa ($)" value={utilidadesEmpresa} onChange={setUtilidadesEmpresa} type="number" placeholder="Ej: 5000000" />
+        <Field label="Renta gravable para PTU de la empresa ($)" value={utilidadesEmpresa} onChange={setUtilidadesEmpresa} type="number" placeholder="Ej: 5000000" />
       </div>
       <Btn onClick={calcular}>Calcular PTU</Btn>
       {result && (
@@ -512,7 +443,9 @@ function CalcPTU() {
   );
 }
 
-function CalcBrutoNeto() {
+function CalcBrutoNeto() { return <CalculoSuspendido id="bruto-neto" />; }
+
+function CalcBrutoNetoPendiente() {
   const [salarioMensual, setSalarioMensual] = useState('');
   const [result, setResult] = useState(null);
 
@@ -525,7 +458,7 @@ function CalcBrutoNeto() {
     // Cuota obrera IMSS 2026 sobre SBC (aproximado aquí con el salario bruto):
     // 0.25% (EyM dinero) + 0.375% (EyM especie pensionados) + 0.625% (Invalidez y Vida)
     // + 1.125% (Cesantía y Vejez) = 2.375% fijo, más 0.40% sobre el excedente de SBC por
-    // encima de 3 UMA mensuales (Cesantía y Vejez, excedente)
+    // encima de 3 UMA mensuales (Enfermedades y Maternidad, excedente)
     const topeExcedente = UMA_MENSUAL * 3;
     const imssObrero = (sm * 0.02375) + (Math.max(sm - topeExcedente, 0) * 0.004);
     const totalDeducciones = isrMensual + imssObrero;
@@ -849,11 +782,20 @@ function CalcPension() {
 // COMPONENTES UI
 // ═══════════════════════════════════════════════════════════════
 
-function Field({ label, value, onChange, type = 'text', placeholder = '' }) {
+function CalculoSuspendido({ id }) {
+  return <div role="status"><p>{regulatoryData.calculators[id].reviewReason}</p><p>La generación de importes está suspendida mientras corregimos estos puntos. Puedes consultar el alcance y las fuentes a continuación.</p><button disabled>Importes en revisión</button></div>;
+}
+
+function Field({ label, value, onChange, type = 'text', placeholder = '', help, error, errorId }) {
+  const id = useId();
   return (
     <div style={{marginBottom:12}}>
-      <label style={{display:'block',fontSize:13,fontWeight:500,color:'var(--ml-slate-600)',marginBottom:6}}>{label}</label>
+      <label htmlFor={id} style={{display:'block',fontSize:13,fontWeight:500,color:'var(--ml-slate-600)',marginBottom:6}}>{label}</label>
       <input
+        id={id}
+        aria-describedby={[help ? `${id}-help` : null, error ? errorId : null].filter(Boolean).join(' ') || undefined}
+        aria-invalid={error ? true : undefined}
+        step={type === 'number' ? 'any' : undefined}
         type={type}
         value={value}
         onChange={e => onChange(e.target.value)}
@@ -866,6 +808,7 @@ function Field({ label, value, onChange, type = 'text', placeholder = '' }) {
         onFocus={e => e.target.style.borderColor = 'var(--ml-blue-600)'}
         onBlur={e => e.target.style.borderColor = 'var(--ml-slate-200)'}
       />
+      {help && <p id={`${id}-help`} style={{fontSize:14}}>{help}</p>}
     </div>
   );
 }
@@ -979,47 +922,25 @@ const FICHA_ESTILOS = {
 };
 
 function FichaConfianza({ id }) {
-  const data = regulatoryData.calculators[id];
+  const data=regulatoryData.calculators[id];
   if (!data) return null;
-
-  const fuentes = (data.sources || []).map(s => s.institution).filter(Boolean);
-  const fundamento = (data.legalBasis || [])
-    .map(l => (l.reference ? `${l.name}: ${l.reference}` : l.name))
-    .filter(Boolean);
-
-  const hasSource = fuentes.length > 0;
-  const hasLegalBasis = fundamento.length > 0;
-  const hasVerificationDate = Boolean(data.verifiedAt);
-  const canShowVerified = data.verificationStatus === 'verified' && hasSource && hasLegalBasis && hasVerificationDate;
-  const displayStatus = canShowVerified ? 'verified' : (data.verificationStatus === 'blocked' ? 'blocked' : 'needs-review');
-  const cfg = FICHA_ESTILOS[displayStatus];
-  const Icono = FICHA_ICONOS[displayStatus];
-
-  return (
-    <div style={{ marginTop: 18 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600, color: cfg.status }}>
-        <span style={{ display: 'flex' }}><Icono /></span>
-        {cfg.label}
-      </div>
-      <Details summary="Cómo se calcula y fuentes">
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 20px', marginBottom: 10 }}>
-          <div style={{ flex: '1 1 160px' }}>
-            <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>Fundamento</span>
-            <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{hasLegalBasis ? fundamento.join('; ') : 'Pendiente de verificación'}</span>
-          </div>
-          <div style={{ flex: '1 1 110px' }}>
-            <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>{cfg.lastLabel}</span>
-            <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{data.verifiedAt || 'Pendiente'}</span>
-          </div>
-          <div style={{ flex: '1 1 100%' }}>
-            <span style={{ display: 'block', marginBottom: 3, fontSize: 11, fontWeight: 650, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#7b8495' }}>Fuente</span>
-            <span style={{ fontSize: 13, lineHeight: 1.45, color: '#354052' }}>{hasSource ? fuentes.join(', ') : 'Pendiente de verificación'}</span>
-          </div>
-        </div>
-        {cfg.closing} Este cálculo es informativo, no una asesoría fiscal o legal.
-      </Details>
-    </div>
-  );
+  const primary=(data.sources||[]).filter(s=>s.url && s.document && s.reference);
+  const complete=data.calculationReviewedAt && data.verificationScope && primary.length && data.referenceCases?.length;
+  const verified=data.verificationStatus==='verified' && complete;
+  const label=verified ? 'Cálculo revisado para el alcance indicado' : data.publicLabel || 'Revisión parcial';
+  return <section style={{marginTop:18}} aria-label="Estado de revisión">
+    <p style={{fontWeight:600,color:verified?'#18794e':'#8a5a00'}}>{label}</p>
+    <p>{data.reviewReason}</p>
+    <Details summary="Alcance, revisión y fuentes">
+      <p><strong>Alcance:</strong> {data.verificationScope}</p>
+      <p><strong>Periodo:</strong> {data.period}</p>
+      <p><strong>Consulta de fuentes:</strong> {data.sourceCheckedAt || 'Pendiente de comprobación completa'}</p>
+      <p><strong>Revisión del cálculo:</strong> {data.calculationReviewedAt || 'Pendiente; no equivale a la fecha de consulta de fuentes'}</p>
+      <ul>{(data.sources||[]).map((s,i)=><li key={i}>{s.url ? <a href={s.url} target="_blank" rel="noopener noreferrer">{s.institution}: {s.document}</a> : `${s.institution}: ${s.document}`} {s.reference && `(${s.reference})`}</li>)}</ul>
+      <p><strong>Revisar nuevamente:</strong> {data.nextReview}</p>
+      <p>Información orientativa; no determina un derecho individual ni sustituye asesoría profesional.</p>
+    </Details>
+  </section>;
 }
 
 // Iconos de línea para las calculadoras (sustituyen los emojis), especificación
@@ -1953,3 +1874,4 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
     </>
   );
 }
+

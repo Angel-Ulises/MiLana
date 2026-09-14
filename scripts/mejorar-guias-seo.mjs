@@ -16,6 +16,15 @@ const TITULOS = {
   'pension-imss-ley-97': 'Pensión IMSS Ley 97: requisitos y qué revisar | MiLana',
 };
 
+const IMAGENES = {
+  'finiquito-vs-liquidacion': '/images/gen/finiquito-1024.jpg',
+  'leer-recibo-nomina': '/images/gen/bruto-neto-1024.jpg',
+  'aguinaldo-bruto-neto': '/images/gen/aguinaldo-1024.jpg',
+  'vacaciones-prima-vacacional': '/images/gen/vacaciones-1024.jpg',
+  'resico-ingresos-cobrados': '/images/gen/resico-1024.jpg',
+  'pension-imss-ley-97': '/images/gen/pension-1024.jpg',
+};
+
 function texto(html, re) {
   return (html.match(re)?.[1] || '')
     .replace(/<[^>]+>/g, ' ')
@@ -27,6 +36,20 @@ function texto(html, re) {
 
 function atributo(html, re) {
   return (html.match(re)?.[1] || '').trim();
+}
+
+function escaparAtributo(valor) {
+  return String(valor ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function ponerMeta(html, atributoClave, clave, valor) {
+  const re = new RegExp(`<meta\\s+${atributoClave}=["']${clave}["'][^>]*>`, 'i');
+  const etiqueta = `<meta ${atributoClave}="${clave}" content="${escaparAtributo(valor)}">`;
+  return re.test(html) ? html.replace(re, etiqueta) : html.replace('</head>', `${etiqueta}</head>`);
 }
 
 function mejorar(slug) {
@@ -42,12 +65,28 @@ function mejorar(slug) {
   const h1 = texto(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i);
   const descripcion = atributo(html, /<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i);
   const canonical = atributo(html, /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i) || `${ORIGEN}/aprende/${slug}`;
+  const imagen = `${ORIGEN}${IMAGENES[slug]}`;
+  const altImagen = `Guía de MiLana: ${h1}`;
 
-  if (!titulo || !h1 || !descripcion) throw new Error(`Metadata incompleta en ${slug}`);
+  if (!titulo || !h1 || !descripcion || !IMAGENES[slug]) throw new Error(`Metadata incompleta en ${slug}`);
 
   if (!/<link\s+rel=["']icon["']/i.test(html)) {
     html = html.replace('</head>', '<link rel="icon" type="image/svg+xml" href="/favicon.svg"></head>');
   }
+
+  // Previsualización de enlaces para distribución orgánica en redes y mensajería.
+  html = ponerMeta(html, 'property', 'og:title', titulo);
+  html = ponerMeta(html, 'property', 'og:description', descripcion);
+  html = ponerMeta(html, 'property', 'og:type', 'website');
+  html = ponerMeta(html, 'property', 'og:locale', 'es_MX');
+  html = ponerMeta(html, 'property', 'og:url', canonical);
+  html = ponerMeta(html, 'property', 'og:image', imagen);
+  html = ponerMeta(html, 'property', 'og:image:alt', altImagen);
+  html = ponerMeta(html, 'name', 'twitter:card', 'summary_large_image');
+  html = ponerMeta(html, 'name', 'twitter:title', titulo);
+  html = ponerMeta(html, 'name', 'twitter:description', descripcion);
+  html = ponerMeta(html, 'name', 'twitter:image', imagen);
+  html = ponerMeta(html, 'name', 'twitter:image:alt', altImagen);
 
   // Estas páginas son guías estáticas revisadas periódicamente. WebPage expresa
   // ese hecho sin inventar una fecha de publicación original ni exigir campos de
@@ -64,6 +103,11 @@ function mejorar(slug) {
         url: canonical,
         inLanguage: 'es-MX',
         dateModified: '2026-09-14',
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: imagen,
+          caption: altImagen,
+        },
         isPartOf: {
           '@type': 'WebSite',
           name: 'MiLana',
@@ -95,8 +139,8 @@ function mejorar(slug) {
   );
 
   writeFileSync(archivo, html, 'utf8');
-  console.log(`guía SEO: ${slug}`);
+  console.log(`guía SEO/social: ${slug}`);
 }
 
 GUIAS.forEach(mejorar);
-console.log(`SEO de guías: ${GUIAS.length} páginas con favicon, WebPage y BreadcrumbList.`);
+console.log(`SEO de guías: ${GUIAS.length} páginas con WebPage, BreadcrumbList y tarjetas sociales.`);

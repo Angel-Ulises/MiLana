@@ -1,4 +1,5 @@
 import { calcularISR, calcularAguinaldo, ISR_MENSUAL_2026 } from "./lib/calculos-revisados.mjs";
+import { calcularFiniquito2026, calcularLiquidacion2026, calcularBrutoNeto2026 } from "./lib/calculos-laborales-2026.mjs";
 import { useEffect, useState, useId } from "react";
 import "./design-home.css";
 import catalogoPaginas from "./data/paginas.json";
@@ -106,198 +107,134 @@ function fmtPct(n) { return n.toFixed(2) + '%'; }
 // CALCULADORAS
 // ═══════════════════════════════════════════════════════════════
 
-function CalcFiniquito() { return <CalculoSuspendido id="finiquito" />; }
-
-function CalcFiniquitoPendiente() {
-  const [salarioMensual, setSalarioMensual] = useState('');
-  const [fechaIngreso, setFechaIngreso] = useState('');
-  const [fechaSalida, setFechaSalida] = useState('');
-  const [diasTrabajados, setDiasTrabajados] = useState('');
+function CalcFiniquito() {
+  const [salario, setSalario] = useState('');
+  const [ingreso, setIngreso] = useState('');
+  const [salida, setSalida] = useState('');
+  const [diasPendientes, setDiasPendientes] = useState('0');
   const [vacPendientes, setVacPendientes] = useState('0');
-  const [result, setResult] = useState(null);
-
-  const calcular = () => {
-    const sm = parseFloat(salarioMensual) || 0;
-    const sd = sm / 30;
-    const dt = Math.max(parseInt(diasTrabajados) || 0, 0);
-    const vp = Math.max(parseInt(vacPendientes) || 0, 0);
-    if (!fechaIngreso || !fechaSalida || sm <= 0 || new Date(fechaSalida) <= new Date(fechaIngreso)) return;
-
-    const totalDias = diasEntre(fechaIngreso, fechaSalida);
-    const anios = totalDias / 365;
-    const aniosCompletos = Math.floor(anios);
-    const fi = new Date(fechaIngreso);
-    const fs = new Date(fechaSalida);
-
-    // Días trabajados no pagados
-    const pagoSalario = sd * dt;
-
-    // Aguinaldo proporcional (15 días / 365 * días trabajados en el año)
-    const inicioAnio = new Date(fs.getFullYear(), 0, 1);
-    const diasAnio = diasEntre(
-      fi > inicioAnio ? fi : inicioAnio,
-      fechaSalida
-    );
-    const aguinaldo = (15 / 365) * diasAnio * sd;
-
-    // Vacaciones proporcionales del año en curso
-    const vacDias = getVacDias(aniosCompletos + 1);
-    const diasDesdeAniversario = diasEntre(aniversarioLaboral(fechaIngreso, fechaSalida), fechaSalida);
-    const fraccionAnio = (diasDesdeAniversario / 365);
-    const vacProporcionales = vacDias * fraccionAnio;
-    const totalVacDias = vacProporcionales + vp;
-    const pagoVacaciones = totalVacDias * sd;
-
-    // Prima vacacional 25%
-    const primaVac = pagoVacaciones * 0.25;
-
-    // Prima de antigüedad (solo si >= 15 años en renuncia voluntaria)
-    let primaAnt = 0;
-    if (aniosCompletos >= 15) {
-      const topeDiario = SALARIO_MINIMO_GENERAL * 2; // Art. 162 LFT: tope es 2x salario mínimo, no 2x UMA
-      const sdTope = Math.min(sd, topeDiario);
-      primaAnt = 12 * sdTope * aniosCompletos;
-    }
-
-    const bruto = pagoSalario + aguinaldo + pagoVacaciones + primaVac + primaAnt;
-
-    setResult({
-      sd: sd,
-      pagoSalario, dt, aguinaldo, diasAnio,
-      vacDias, vacProporcionales: totalVacDias, pagoVacaciones,
-      primaVac, primaAnt, aniosCompletos,
-      bruto,
-    });
+  const [diasAguinaldo, setDiasAguinaldo] = useState('15');
+  const [primaVac, setPrimaVac] = useState('25');
+  const [vacAnuales, setVacAnuales] = useState('');
+  const [causa, setCausa] = useState('renuncia');
+  const [zona, setZona] = useState('general');
+  const [resultado, setResultado] = useState(null);
+  const [error, setError] = useState('');
+  const errorId = useId();
+  const editar = setter => valor => { setter(valor); setResultado(null); setError(''); };
+  const calcular = e => {
+    e.preventDefault(); setResultado(null);
+    try {
+      setResultado(calcularFiniquito2026({
+        salarioMensual: salario, fechaIngreso: ingreso, fechaSalida: salida,
+        diasTrabajadosNoPagados: diasPendientes, vacacionesPendientes: vacPendientes,
+        causa, zona, diasAguinaldo, primaVacacionalPct: primaVac, diasVacacionesAnuales: vacAnuales,
+      }));
+      setError('');
+    } catch (err) { setError(err.message); }
   };
-
-  return (
-    <div>
-      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula el finiquito que te corresponde al renunciar de forma voluntaria. El resultado incluye días trabajados pendientes de pago, aguinaldo proporcional, vacaciones proporcionales y prima vacacional, conforme a la Ley Federal del Trabajo vigente en 2026.
-      </p>
-      <div style={styles.grid2}>
-        <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 15000" />
-        <Field label="Días trabajados sin pagar" value={diasTrabajados} onChange={setDiasTrabajados} type="number" placeholder="Ej: 12" />
-        <Field label="Fecha de ingreso" value={fechaIngreso} onChange={setFechaIngreso} type="date" />
-        <Field label="Fecha de salida" value={fechaSalida} onChange={setFechaSalida} type="date" />
-        <Field label="Vacaciones pendientes (días)" value={vacPendientes} onChange={setVacPendientes} type="number" placeholder="0" />
-      </div>
-      <Btn onClick={calcular}>Calcular Finiquito</Btn>
-      {result && (
-        <ResultBox>
-          <ResultLine label={`Salario (${result.dt} días)`} value={fmt(result.pagoSalario)} />
-          <ResultLine label={`Aguinaldo proporcional (${result.diasAnio} días del año)`} value={fmt(result.aguinaldo)} />
-          <ResultLine label={`Vacaciones (${result.vacProporcionales.toFixed(1)} días)`} value={fmt(result.pagoVacaciones)} />
-          <ResultLine label="Prima vacacional (25%)" value={fmt(result.primaVac)} />
-          {result.primaAnt > 0 && <ResultLine label={`Prima antigüedad (${result.aniosCompletos} años)`} value={fmt(result.primaAnt)} />}
-          <Divider />
-          <ResultLine label="Total bruto estimado" value={fmt(result.bruto)} bold color="#28735A" />
-          <Note>Este resultado es el total bruto (antes de impuestos) de tu finiquito. No incluye el ISR por pagos de separación: ese impuesto se calcula con un procedimiento específico (Art. 95 LISR) que depende de tu salario ordinario y de cómo se traten los distintos conceptos que integran el finiquito, así que no lo estimamos aquí para evitar darte una cifra neta poco confiable. Consulta con tu área de Recursos Humanos o un especialista laboral/fiscal para el neto exacto.</Note>
-        </ResultBox>
-      )}
+  return <form onSubmit={calcular} noValidate>
+    <p className="calc-intro">Estima el finiquito bruto de una terminación ocurrida en 2026 con salario mensual fijo. Separa salario pendiente, aguinaldo, vacaciones, prima vacacional y, cuando procede, prima de antigüedad.</p>
+    <div style={styles.grid2}>
+      <Field label="Salario mensual fijo (MXN)" value={salario} onChange={editar(setSalario)} type="number" placeholder="Ej: 18000" error={error} errorId={errorId} />
+      <Field label="Días trabajados aún no pagados" value={diasPendientes} onChange={editar(setDiasPendientes)} type="number" placeholder="0" error={error} errorId={errorId} />
+      <Field label="Fecha de ingreso" value={ingreso} onChange={editar(setIngreso)} type="date" error={error} errorId={errorId} />
+      <Field label="Último día trabajado en 2026" value={salida} onChange={editar(setSalida)} type="date" error={error} errorId={errorId} />
+      <Field label="Vacaciones pendientes ya adquiridas (días)" value={vacPendientes} onChange={editar(setVacPendientes)} type="number" placeholder="0" help="No incluyas aquí la parte proporcional del ciclo actual: MiLana la calcula con tus fechas." error={error} errorId={errorId} />
+      <Field label="Días de aguinaldo que te corresponden" value={diasAguinaldo} onChange={editar(setDiasAguinaldo)} type="number" placeholder="15" error={error} errorId={errorId} />
+      <Field label="Prima vacacional (%)" value={primaVac} onChange={editar(setPrimaVac)} type="number" placeholder="25" error={error} errorId={errorId} />
+      <Field label="Vacaciones anuales de tu prestación (opcional)" value={vacAnuales} onChange={editar(setVacAnuales)} type="number" placeholder="En blanco usa el mínimo legal" help="Si tu contrato da más días que la LFT, captura aquí ese número." error={error} errorId={errorId} />
     </div>
-  );
+    <label style={styles.fieldLabel} htmlFor="fin-causa">Cómo terminó la relación</label>
+    <select id="fin-causa" value={causa} onChange={e => editar(setCausa)(e.target.value)} style={styles.select}>
+      <option value="renuncia">Renuncia voluntaria</option>
+      <option value="separacion-patron">Separación por el patrón</option>
+    </select>
+    <label style={styles.fieldLabel} htmlFor="fin-zona">Zona de salario mínimo para el tope de prima de antigüedad</label>
+    <select id="fin-zona" value={zona} onChange={e => editar(setZona)(e.target.value)} style={styles.select}>
+      <option value="general">Zona del Salario Mínimo General</option>
+      <option value="frontera">Zona Libre de la Frontera Norte</option>
+    </select>
+    <p id={errorId} role="alert" className="calc-error">{error}</p>
+    <Btn>Calcular finiquito</Btn>
+    <div aria-live="polite" aria-atomic="true">
+      {resultado && <ResultBox>
+        <ResultLine label={'Salario pendiente (' + (diasPendientes || 0) + ' días)'} value={fmt(resultado.pagoSalarioPendiente)} />
+        <ResultLine label={'Aguinaldo proporcional (' + resultado.diasAguinaldo + ' días del año)'} value={fmt(resultado.aguinaldoProporcional)} />
+        <ResultLine label={'Vacaciones proporcionales (' + resultado.vacacionesProporcionalesDias.toFixed(2) + ' días)'} value={fmt(resultado.salarioDiario * resultado.vacacionesProporcionalesDias)} />
+        {resultado.vacacionesPendientesDias > 0 && <ResultLine label={'Vacaciones pendientes (' + resultado.vacacionesPendientesDias + ' días)'} value={fmt(resultado.salarioDiario * resultado.vacacionesPendientesDias)} />}
+        <ResultLine label={'Prima vacacional (' + resultado.primaPct + '%)'} value={fmt(resultado.primaVacacional)} />
+        {resultado.aplicaPrimaAntiguedad && <ResultLine label="Prima de antigüedad estimada" value={fmt(resultado.primaAntiguedad)} />}
+        <Divider />
+        <ResultLine label="Total bruto estimado" value={fmt(resultado.totalBruto)} bold color="#28735A" />
+        <Note>El total es bruto y no incluye una estimación de ISR por separación. Usa salario fijo y las prestaciones que capturaste; comisiones, bonos u otros conceptos integrables requieren un cálculo adicional con sus propios datos.</Note>
+      </ResultBox>}
+    </div>
+  </form>;
 }
 
-function CalcLiquidacion() { return <CalculoSuspendido id="liquidacion" />; }
-
-function CalcLiquidacionPendiente() {
-  const [salarioMensual, setSalarioMensual] = useState('');
-  const [fechaIngreso, setFechaIngreso] = useState('');
-  const [fechaSalida, setFechaSalida] = useState('');
-  const [diasTrabajados, setDiasTrabajados] = useState('');
-  const [result, setResult] = useState(null);
-
-  const calcular = () => {
-    const sm = parseFloat(salarioMensual) || 0;
-    const sd = sm / 30;
-    const dt = Math.max(parseInt(diasTrabajados) || 0, 0);
-    if (!fechaIngreso || !fechaSalida || sm <= 0 || new Date(fechaSalida) <= new Date(fechaIngreso)) return;
-
-    const totalDias = diasEntre(fechaIngreso, fechaSalida);
-    const anios = totalDias / 365;
-    const aniosCompletos = Math.floor(anios);
-    const fs = new Date(fechaSalida);
-    const fi = new Date(fechaIngreso);
-
-    // Salario diario integrado (SDI)
-    const factorIntegracion = 1 + (15/365) + (getVacDias(aniosCompletos + 1) * 0.25 / 365);
-    const sdi = sd * factorIntegracion;
-
-    // Parte finiquito
-    const pagoSalario = sd * dt;
-    const inicioAnio = new Date(fs.getFullYear(), 0, 1);
-    const diasAnio = diasEntre(fi > inicioAnio ? fi : inicioAnio, fechaSalida);
-    const aguinaldo = (15 / 365) * diasAnio * sd;
-    const vacDias = getVacDias(aniosCompletos + 1);
-    const diasDesdeAniversario = diasEntre(aniversarioLaboral(fechaIngreso, fechaSalida), fechaSalida);
-    const vacProporcionales = vacDias * (diasDesdeAniversario / 365);
-    const pagoVacaciones = vacProporcionales * sd;
-    const primaVac = pagoVacaciones * 0.25;
-
-    // Indemnización constitucional (90 días SDI)
-    const indem90 = sdi * 90;
-
-    // 20 días por año de servicio (proporcional, sin redondear ni forzar mínimo de 1 año —
-    // la SCJN reconoce el pago proporcional cuando el servicio es menor a un año)
-    const indem20 = sdi * 20 * anios;
-
-    // Prima de antigüedad (12 días por año, tope 2x salario mínimo — Art. 162 LFT), proporcional
-    const topeDiario = SALARIO_MINIMO_GENERAL * 2;
-    const sdTope = Math.min(sd, topeDiario);
-    const primaAnt = 12 * sdTope * anios;
-
-    const brutoFiniquito = pagoSalario + aguinaldo + pagoVacaciones + primaVac;
-    const brutoLiquidacion = indem90 + indem20 + primaAnt;
-    const brutoTotal = brutoFiniquito + brutoLiquidacion;
-
-    setResult({
-      sd, sdi, factorIntegracion, dt,
-      pagoSalario, aguinaldo, diasAnio, vacProporcionales, pagoVacaciones, primaVac,
-      indem90, indem20, primaAnt, aniosCompletos, anios,
-      brutoFiniquito, brutoLiquidacion, brutoTotal
-    });
+function CalcLiquidacion() {
+  const [salario, setSalario] = useState('');
+  const [ingreso, setIngreso] = useState('');
+  const [salida, setSalida] = useState('');
+  const [diasPendientes, setDiasPendientes] = useState('0');
+  const [vacPendientes, setVacPendientes] = useState('0');
+  const [diasAguinaldo, setDiasAguinaldo] = useState('15');
+  const [primaVac, setPrimaVac] = useState('25');
+  const [vacAnuales, setVacAnuales] = useState('');
+  const [zona, setZona] = useState('general');
+  const [indeterminada, setIndeterminada] = useState(false);
+  const [incluir20, setIncluir20] = useState(false);
+  const [resultado, setResultado] = useState(null);
+  const [error, setError] = useState('');
+  const errorId = useId();
+  const editar = setter => valor => { setter(valor); setResultado(null); setError(''); };
+  const calcular = e => {
+    e.preventDefault(); setResultado(null);
+    try {
+      setResultado(calcularLiquidacion2026({
+        salarioMensual: salario, fechaIngreso: ingreso, fechaSalida: salida,
+        diasTrabajadosNoPagados: diasPendientes, vacacionesPendientes: vacPendientes,
+        zona, diasAguinaldo, primaVacacionalPct: primaVac, diasVacacionesAnuales: vacAnuales,
+        relacionIndeterminada: indeterminada, incluirVeinteDias: incluir20,
+      }));
+      setError('');
+    } catch (err) { setError(err.message); }
   };
-
-  return (
-    <div>
-      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula la liquidación que te corresponde en caso de despido injustificado. El resultado incluye la indemnización constitucional de 3 meses, 20 días de salario por cada año trabajado y la prima de antigüedad, conforme a los artículos 48 y 50 de la Ley Federal del Trabajo.
-      </p>
-      <div style={styles.grid2}>
-        <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 20000" />
-        <Field label="Días trabajados sin pagar" value={diasTrabajados} onChange={setDiasTrabajados} type="number" placeholder="Ej: 15" />
-        <Field label="Fecha de ingreso" value={fechaIngreso} onChange={setFechaIngreso} type="date" />
-        <Field label="Fecha de despido" value={fechaSalida} onChange={setFechaSalida} type="date" />
-      </div>
-      <Btn onClick={calcular}>Calcular Liquidación</Btn>
-      {result && (
-        <ResultBox>
-          <div style={{marginBottom:12,fontWeight:600,color:'#13263B',display:'flex',alignItems:'center',gap:6}}>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" /><path d="M14 3v4h4" /><path d="M9 14.5l2 2 4-4.5" /></svg>
-            Finiquito
-          </div>
-          <ResultLine label={`Salario (${result.dt} días)`} value={fmt(result.pagoSalario)} />
-          <ResultLine label="Aguinaldo proporcional" value={fmt(result.aguinaldo)} />
-          <ResultLine label={`Vacaciones (${result.vacProporcionales.toFixed(1)} días)`} value={fmt(result.pagoVacaciones)} />
-          <ResultLine label="Prima vacacional" value={fmt(result.primaVac)} />
-          <ResultLine label="Subtotal finiquito" value={fmt(result.brutoFiniquito)} bold />
-          <Divider />
-          <div style={{marginBottom:12,fontWeight:600,color:'#13263B',display:'flex',alignItems:'center',gap:6}}>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v18" /><path d="M7 7h10" /><path d="M7 7l-3 6a3 3 0 0 0 6 0z" /><path d="M17 7l-3 6a3 3 0 0 0 6 0z" /><path d="M9 21h6" /></svg>
-            Indemnización (despido injustificado)
-          </div>
-          <ResultLine label={`90 días SDI (${fmt(result.sdi)}/día)`} value={fmt(result.indem90)} />
-          <ResultLine label={`20 días × ${result.anios.toFixed(2)} año(s) de servicio`} value={fmt(result.indem20)} />
-          <ResultLine label={`Prima antigüedad (12 días × ${result.anios.toFixed(2)} año(s))`} value={fmt(result.primaAnt)} />
-          <ResultLine label="Subtotal indemnización" value={fmt(result.brutoLiquidacion)} bold />
-          <Divider />
-          <ResultLine label="Total bruto" value={fmt(result.brutoTotal)} bold color="#28735A" />
-          <Note>SDI calculado con factor de integración {result.factorIntegracion.toFixed(4)}. Montos brutos antes de ISR. Exenciones aplican según Art. 93 LISR.</Note>
-        </ResultBox>
-      )}
+  return <form onSubmit={calcular} noValidate>
+    <p className="calc-intro">Estima un escenario de indemnización por despido injustificado para una relación por tiempo indeterminado, además de las prestaciones devengadas. Los 20 días por año se muestran solo si tú activas ese supuesto.</p>
+    <div style={styles.grid2}>
+      <Field label="Salario mensual fijo (MXN)" value={salario} onChange={editar(setSalario)} type="number" placeholder="Ej: 18000" error={error} errorId={errorId} />
+      <Field label="Días trabajados aún no pagados" value={diasPendientes} onChange={editar(setDiasPendientes)} type="number" placeholder="0" error={error} errorId={errorId} />
+      <Field label="Fecha de ingreso" value={ingreso} onChange={editar(setIngreso)} type="date" error={error} errorId={errorId} />
+      <Field label="Fecha de despido en 2026" value={salida} onChange={editar(setSalida)} type="date" error={error} errorId={errorId} />
+      <Field label="Vacaciones pendientes ya adquiridas (días)" value={vacPendientes} onChange={editar(setVacPendientes)} type="number" placeholder="0" error={error} errorId={errorId} />
+      <Field label="Días de aguinaldo que te corresponden" value={diasAguinaldo} onChange={editar(setDiasAguinaldo)} type="number" placeholder="15" error={error} errorId={errorId} />
+      <Field label="Prima vacacional (%)" value={primaVac} onChange={editar(setPrimaVac)} type="number" placeholder="25" error={error} errorId={errorId} />
+      <Field label="Vacaciones anuales de tu prestación (opcional)" value={vacAnuales} onChange={editar(setVacAnuales)} type="number" placeholder="En blanco usa el mínimo legal" error={error} errorId={errorId} />
     </div>
-  );
+    <label style={styles.fieldLabel} htmlFor="liq-zona">Zona de salario mínimo para la prima de antigüedad</label>
+    <select id="liq-zona" value={zona} onChange={e => editar(setZona)(e.target.value)} style={styles.select}>
+      <option value="general">Zona del Salario Mínimo General</option>
+      <option value="frontera">Zona Libre de la Frontera Norte</option>
+    </select>
+    <label className="calc-check"><input type="checkbox" checked={indeterminada} onChange={e => editar(setIndeterminada)(e.target.checked)} /> Confirmo que la relación era por tiempo indeterminado.</label>
+    <label className="calc-check"><input type="checkbox" checked={incluir20} onChange={e => editar(setIncluir20)(e.target.checked)} /> Incluir el escenario de 20 días de salario por año cuando jurídicamente proceda.</label>
+    <p className="calc-help">Los 20 días por año no son un pago automático en todo despido; por eso están apagados de forma predeterminada.</p>
+    <p id={errorId} role="alert" className="calc-error">{error}</p>
+    <Btn>Calcular escenario de liquidación</Btn>
+    <div aria-live="polite" aria-atomic="true">
+      {resultado && <ResultBox>
+        <ResultLine label="Prestaciones devengadas (finiquito)" value={fmt(resultado.subtotalSinPrimaAntiguedad)} />
+        <ResultLine label={'Indemnización de 3 meses (SDI ' + fmt(resultado.salarioDiarioIntegrado) + '/día)'} value={fmt(resultado.indemnizacionTresMeses)} />
+        {resultado.incluyeVeinteDias && <ResultLine label="Escenario de 20 días por año" value={fmt(resultado.indemnizacionVeinteDias)} />}
+        <ResultLine label="Prima de antigüedad" value={fmt(resultado.primaAntiguedad)} />
+        <Divider />
+        <ResultLine label="Total bruto del escenario" value={fmt(resultado.totalBruto)} bold color="#28735A" />
+        <Note>No determina si el despido fue injustificado ni si los 20 días por año proceden en tu caso. No incluye salarios vencidos, intereses ni ISR por pagos de separación.</Note>
+      </ResultBox>}
+    </div>
+  </form>;
 }
 
 function CalcAguinaldo() { return <CalculoRevisado tipo="aguinaldo" />; }
@@ -443,75 +380,63 @@ function CalcPTU() {
   );
 }
 
-function CalcBrutoNeto() { return <CalculoSuspendido id="bruto-neto" />; }
-
-function CalcBrutoNetoPendiente() {
-  const [salarioMensual, setSalarioMensual] = useState('');
-  const [result, setResult] = useState(null);
-
-  const calcular = () => {
-    const sm = parseFloat(salarioMensual) || 0;
-    if (sm <= 0) return;
-
-    const sd = sm / 30;
-    const isrMensual = calcISRMensual(sm);
-    // Cuota obrera IMSS 2026 sobre SBC (aproximado aquí con el salario bruto):
-    // 0.25% (EyM dinero) + 0.375% (EyM especie pensionados) + 0.625% (Invalidez y Vida)
-    // + 1.125% (Cesantía y Vejez) = 2.375% fijo, más 0.40% sobre el excedente de SBC por
-    // encima de 3 UMA mensuales (Enfermedades y Maternidad, excedente)
-    const topeExcedente = UMA_MENSUAL * 3;
-    const imssObrero = (sm * 0.02375) + (Math.max(sm - topeExcedente, 0) * 0.004);
-    const totalDeducciones = isrMensual + imssObrero;
-    const neto = sm - totalDeducciones;
-
-    // Prestaciones anuales
-    const aguinaldo = sd * 15;
-    const vacDias = 12; // primer año
-    const primaVac = sd * vacDias * 0.25;
-
-    const ingresoAnualTotal = (sm * 12) + aguinaldo + primaVac;
-    const isrAnual = isrMensual * 12;
-    const imssAnual = imssObrero * 12;
-
-    setResult({
-      bruto: sm, isrMensual, imssObrero, totalDeducciones, neto,
-      sd, aguinaldo, primaVac,
-      ingresoPorHora: neto / 173.33, // 40 hrs/sem promediadas a un mes de 4.33 semanas
-      ingresoAnualTotal, isrAnual, imssAnual,
-      netoAnual: ingresoAnualTotal - isrAnual - imssAnual,
-      tasaRetencion: (totalDeducciones / sm) * 100
-    });
+function CalcBrutoNeto() {
+  const [bruto, setBruto] = useState('');
+  const [gravable, setGravable] = useState('');
+  const [sbc, setSbc] = useState('');
+  const [dias, setDias] = useState('30');
+  const [minimo, setMinimo] = useState('');
+  const [periodo, setPeriodo] = useState('2026-09');
+  const [confirmado, setConfirmado] = useState(false);
+  const [resultado, setResultado] = useState(null);
+  const [error, setError] = useState('');
+  const errorId = useId();
+  const editar = setter => valor => { setter(valor); setResultado(null); setError(''); };
+  const calcular = e => {
+    e.preventDefault(); setResultado(null);
+    try {
+      if (!confirmado) throw new Error('Confirma que es un mes completo ordinario con un solo empleador.');
+      setResultado(calcularBrutoNeto2026({
+        brutoMensual: bruto, ingresoGravableISR: gravable, sbcDiario: sbc,
+        diasCotizados: dias, soloMinimo: minimo === '' ? undefined : minimo === 'si',
+        periodo, empleadorUnico: true,
+      }));
+      setError('');
+    } catch (err) { setError(err.message); }
   };
-
-  return (
-    <div>
-      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Convierte tu salario bruto a neto y conoce cuánto recibirás realmente después de las retenciones de ISR y de la cuota obrera del IMSS.
-      </p>
-      <div style={styles.grid2}>
-        <Field label="Salario mensual bruto ($)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 30000" />
-      </div>
-      <Btn onClick={calcular}>Calcular Bruto a Neto</Btn>
-      {result && (
-        <ResultBox>
-          <ResultLine label="Salario bruto mensual" value={fmt(result.bruto)} />
-          <ResultLine label="ISR retenido" value={`- ${fmt(result.isrMensual)}`} color="#A94442" />
-          <ResultLine label="Cuota IMSS obrera estimada" value={`- ${fmt(result.imssObrero)}`} color="#A94442" />
-          <Divider />
-          <ResultLine label="Sueldo neto mensual" value={fmt(result.neto)} bold color="#28735A" />
-          <ResultLine label="Ingreso por hora (40 hrs/sem)" value={fmt(result.ingresoPorHora)} />
-          <ResultLine label="Te retienen del total" value={fmtPct(result.tasaRetencion)} />
-          <Divider />
-          <div style={{marginBottom:8,fontWeight:600,color:'#5E6B78',fontSize:13}}>Ingreso anual (con prestaciones)</div>
-          <ResultLine label="12 meses de sueldo" value={fmt(result.bruto * 12)} />
-          <ResultLine label="+ Aguinaldo (15 días)" value={fmt(result.aguinaldo)} />
-          <ResultLine label="+ Prima vacacional" value={fmt(result.primaVac)} />
-          <ResultLine label="Ingreso anual bruto total" value={fmt(result.ingresoAnualTotal)} bold />
-          <Note>La cuota IMSS se calcula sobre tu salario bruto para simplificar; el IMSS en realidad la calcula sobre tu Salario Base de Cotización (SBC), que puede ser distinto. El resultado es una aproximación cercana, no un recibo de nómina exacto.</Note>
-        </ResultBox>
-      )}
+  return <form onSubmit={calcular} noValidate>
+    <p className="calc-intro">Estima cuánto queda después de ISR e IMSS separando las tres bases que una nómina no debe confundir: percepciones brutas, ingreso gravable para ISR y SBC diario reportado al IMSS.</p>
+    <div style={styles.grid2}>
+      <Field label="Percepciones brutas del mes (MXN)" value={bruto} onChange={editar(setBruto)} type="number" placeholder="Ej: 30000" help="Antes de ISR, IMSS y otras deducciones." error={error} errorId={errorId} />
+      <Field label="Ingreso gravable del mes para ISR (MXN)" value={gravable} onChange={editar(setGravable)} type="number" placeholder="Ej: 30000" help="Puede ser menor que el bruto si existen percepciones exentas." error={error} errorId={errorId} />
+      <Field label="Salario Base de Cotización diario (SBC)" value={sbc} onChange={editar(setSbc)} type="number" placeholder="Ej: 1000" help="Tómalo de tu alta, modificación salarial o información de nómina/IMSS; no se deduce del bruto." error={error} errorId={errorId} />
+      <Field label="Días cotizados en el mes" value={dias} onChange={editar(setDias)} type="number" placeholder="30" error={error} errorId={errorId} />
     </div>
-  );
+    <label style={styles.fieldLabel} htmlFor="bn-periodo">Mes completo de 2026</label>
+    <select id="bn-periodo" value={periodo} onChange={e => editar(setPeriodo)(e.target.value)} style={styles.select}>
+      {['Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'].map((mes,i)=><option key={mes} value={'2026-' + String(i+2).padStart(2,'0')}>{mes}</option>)}
+    </select>
+    <label style={styles.fieldLabel} htmlFor="bn-minimo">¿Percibiste únicamente el salario mínimo general aplicable a tu zona?</label>
+    <select id="bn-minimo" value={minimo} onChange={e => editar(setMinimo)(e.target.value)} style={styles.select}>
+      <option value="">Selecciona una respuesta</option><option value="si">Sí</option><option value="no">No</option>
+    </select>
+    <label className="calc-check"><input type="checkbox" checked={confirmado} onChange={e => editar(setConfirmado)(e.target.checked)} /> Confirmo que es un mes completo ordinario con un solo empleador.</label>
+    <p className="calc-help">Enero queda fuera porque el subsidio para el empleo usa una transición distinta antes de la UMA 2026.</p>
+    <p id={errorId} role="alert" className="calc-error">{error}</p>
+    <Btn>Calcular neto después de ISR e IMSS</Btn>
+    <div aria-live="polite" aria-atomic="true">
+      {resultado && <ResultBox>
+        <ResultLine label="Percepciones brutas" value={fmt(resultado.bruto)} />
+        <ResultLine label="ISR mensual estimado" value={'− ' + fmt(resultado.retenido)} color="#A94442" />
+        <ResultLine label="Cuota obrera IMSS" value={'− ' + fmt(resultado.cuotaObrera)} color="#A94442" />
+        <Divider />
+        <ResultLine label="Neto después de ISR e IMSS" value={fmt(resultado.netoDespuesISRIMSS)} bold color="#28735A" />
+        {!resultado.soloMinimo && <ResultLine label="SBC diario aplicado" value={fmt(resultado.sbcAplicado)} />}
+        <ResultLine label="Días cotizados" value={resultado.diasCotizados} />
+        <Note>No incluye Infonavit, Fonacot, préstamos, pensión alimenticia, caja de ahorro ni otras deducciones de tu recibo. El SBC se limita a 25 UMA para este cálculo.</Note>
+      </ResultBox>}
+    </div>
+  </form>;
 }
 
 function CalcVacaciones() {
@@ -761,7 +686,7 @@ function CalcPension() {
         <ResultBox>
           <ResultLine label="Semanas cotizadas" value={result.sc} />
           <ResultLine label={`Mínimo requerido (2026)`} value={`${result.minSemanas} semanas`} />
-          <ResultLine label="¿Cumples el mínimo de semanas?" value={result.cumpleMinimo ? '✅ Sí' : `❌ Faltan ${result.faltanSemanas} semanas`} color={result.cumpleMinimo ? '#28735A' : '#A94442'} />
+          <ResultLine label="¿Cumples el mínimo de semanas?" value={result.cumpleMinimo ? 'Sí' : `Faltan ${result.faltanSemanas} semanas`} color={result.cumpleMinimo ? '#28735A' : '#A94442'} />
           <Divider />
           <ResultLine label="Tipo de retiro según tu edad" value={
             result.tipoRetiro === 'vejez' ? 'Vejez (65 años o más)' :
@@ -782,9 +707,7 @@ function CalcPension() {
 // COMPONENTES UI
 // ═══════════════════════════════════════════════════════════════
 
-function CalculoSuspendido({ id }) {
-  return <div role="status"><p>{regulatoryData.calculators[id].reviewReason}</p><p>La generación de importes está suspendida mientras corregimos estos puntos. Puedes consultar el alcance y las fuentes a continuación.</p><button disabled>Importes en revisión</button></div>;
-}
+
 
 function Field({ label, value, onChange, type = 'text', placeholder = '', help, error, errorId }) {
   const id = useId();
@@ -831,7 +754,7 @@ function Btn({ onClick, children }) {
 
 function ResultBox({ children }) {
   const compartirWhatsApp = () => {
-    const texto = encodeURIComponent('Acabo de calcular mis finanzas gratis en MiLana 💰 Pruébalo tú también: https://www.milanaaqui.mx');
+    const texto = encodeURIComponent('Acabo de usar una calculadora de MiLana: https://www.milanaaqui.mx');
     window.open(`https://wa.me/?text=${texto}`, '_blank', 'noopener,noreferrer');
   };
   return (
@@ -846,7 +769,7 @@ function ResultBox({ children }) {
         fontWeight:600,cursor:'pointer',display:'flex',alignItems:'center',
         justifyContent:'center',gap:6
       }}>
-        📲 Compartir por WhatsApp
+        Compartir por WhatsApp
       </button>
     </div>
   );
@@ -903,42 +826,23 @@ function Note({ children }) {
   );
 }
 
-const FICHA_ICONOS = {
-  verified: () => (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-  ),
-  'needs-review': () => (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-  ),
-  blocked: () => (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-  ),
-};
-
-const FICHA_ESTILOS = {
-  verified: { label: 'Verificado', status: '#18794e', bg: '#edf8f2', border: '#b7e4cc', lastLabel: 'Última verificación', closing: 'Fuentes y fundamento revisados para el periodo indicado.' },
-  'needs-review': { label: 'Pendiente de verificación', status: '#8a5a00', bg: '#fff8e6', border: '#efd99b', lastLabel: 'Última revisión', closing: 'La base normativa de este cálculo aún está en proceso de verificación.' },
-  blocked: { label: 'Cálculo en revisión', status: '#b42318', bg: '#fff1f0', border: '#f1b8b3', lastLabel: 'Revisión del cálculo', closing: 'Este cálculo está en revisión y sus resultados pueden cambiar.' },
-};
-
 function FichaConfianza({ id }) {
-  const data=regulatoryData.calculators[id];
+  const data = regulatoryData.calculators[id];
   if (!data) return null;
-  const primary=(data.sources||[]).filter(s=>s.url && s.document && s.reference);
-  const complete=data.calculationReviewedAt && data.verificationScope && primary.length && data.referenceCases?.length;
-  const verified=data.verificationStatus==='verified' && complete;
-  const label=verified ? 'Cálculo revisado para el alcance indicado' : data.publicLabel || 'Revisión parcial';
-  return <section style={{marginTop:18}} aria-label="Estado de revisión">
-    <p style={{fontWeight:600,color:verified?'#18794e':'#8a5a00'}}>{label}</p>
+  const primary = (data.sources || []).filter(s => s.url && s.document && s.reference);
+  return <section className="calculator-trust" aria-label="Comprobación y fuentes">
+    <div className="calculator-trust-head">
+      <span className="calculator-trust-dot" aria-hidden="true"></span>
+      <div><strong>{data.publicLabel || 'Cálculo comprobado'}</strong><span> · {data.period}</span></div>
+    </div>
     <p>{data.reviewReason}</p>
-    <Details summary="Alcance, revisión y fuentes">
+    <Details summary="Alcance, comprobación y fuentes">
       <p><strong>Alcance:</strong> {data.verificationScope}</p>
-      <p><strong>Periodo:</strong> {data.period}</p>
-      <p><strong>Consulta de fuentes:</strong> {data.sourceCheckedAt || 'Pendiente de comprobación completa'}</p>
-      <p><strong>Revisión del cálculo:</strong> {data.calculationReviewedAt || 'Pendiente; no equivale a la fecha de consulta de fuentes'}</p>
-      <ul>{(data.sources||[]).map((s,i)=><li key={i}>{s.url ? <a href={s.url} target="_blank" rel="noopener noreferrer">{s.institution}: {s.document}</a> : `${s.institution}: ${s.document}`} {s.reference && `(${s.reference})`}</li>)}</ul>
-      <p><strong>Revisar nuevamente:</strong> {data.nextReview}</p>
-      <p>Información orientativa; no determina un derecho individual ni sustituye asesoría profesional.</p>
+      <p><strong>Fuentes consultadas:</strong> {data.sourceCheckedAt || data.verifiedAt}</p>
+      <p><strong>Cálculo comprobado:</strong> {data.calculationReviewedAt || data.verifiedAt}</p>
+      <ul>{primary.map((s,i)=><li key={i}><a href={s.url} target="_blank" rel="noopener noreferrer">{s.institution}: {s.document}</a> {s.reference && '(' + s.reference + ')'}</li>)}</ul>
+      <p><strong>Próxima comprobación:</strong> {data.nextReview}</p>
+      <p>La herramienta se limita al alcance descrito; no decide por sí sola derechos o hechos que requieren documentos del caso.</p>
     </Details>
   </section>;
 }
@@ -1502,11 +1406,13 @@ const CALCULADORAS = [
   { id: 'bruto-neto', nombre: 'Bruto a Neto', desc: 'Salario neto real', comp: CalcBrutoNeto },
   { id: 'vacaciones', nombre: 'Vacaciones', desc: 'Días según antigüedad', comp: CalcVacaciones },
   { id: 'infonavit', nombre: 'Infonavit', desc: 'Simulador de crédito', comp: CalcInfonavit },
-  { id: 'pension', nombre: 'Pensión IMSS', desc: 'Estimación Ley 97', comp: CalcPension },
+  { id: 'pension', nombre: 'Pensión IMSS', desc: 'Requisitos Ley 97', comp: CalcPension },
 ];
 
 const styles = {
-  grid2: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 8 }
+  grid2: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 10 },
+  fieldLabel: { display: 'block', fontSize: 13, fontWeight: 600, color: 'var(--ml-slate-600)', margin: '14px 0 6px' },
+  select: { display: 'block', width: '100%', minHeight: 48, padding: '11px 12px', margin: '0 0 14px', border: '2px solid var(--ml-slate-200)', borderRadius: 'var(--ml-radius-input)', background: 'white', color: 'var(--ml-slate-900)', fontSize: 15 },
 };
 
 
@@ -1548,7 +1454,7 @@ const CALC_META = {
   finiquito:  { tag: 'Trabajo',      largo: 'Estima lo que corresponde al cerrar una relación laboral y revisa qué integra el cálculo.' },
   isr:        { tag: 'Impuestos',    largo: 'Calcula la retención estimada y entiende de dónde sale.' },
   aguinaldo:  { tag: 'Prestaciones', largo: 'Revisa tu monto proporcional o anual con datos claros.' },
-  'bruto-neto':{ tag: 'Sueldo',      largo: 'Visualiza cuánto llega realmente a tu cuenta y qué se descuenta.' },
+  'bruto-neto':{ tag: 'Sueldo',      largo: 'Estima lo que queda después de ISR e IMSS usando bases separadas de nómina.' },
   resico:     { tag: 'Impuestos',    largo: 'Estima el ISR del régimen simplificado con fundamento visible.' },
   liquidacion:{ tag: 'Trabajo',      largo: 'Calcula los conceptos de un despido injustificado y qué los integra.' },
   ptu:        { tag: 'Prestaciones', largo: 'Revisa el 10% de utilidades que corresponde repartir.' },

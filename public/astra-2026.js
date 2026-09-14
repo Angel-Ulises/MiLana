@@ -94,10 +94,6 @@
     });
   }
 
-  function statusForCard(article) {
-    const text = (qs('h3', article)?.textContent || '').toLowerCase();
-    return ['bruto a neto', 'finiquito', 'liquidación'].some(x => text.includes(x));
-  }
 
   function setupHome() {
     const hero = qs('.hero');
@@ -130,10 +126,6 @@
       cards.filter(c => !ordered.includes(c)).forEach(c => ordered.push(c));
       ordered.forEach((card, i) => {
         card.style.order = String(i); if (i >= 6) card.classList.add('astra-extra-calc');
-        if (statusForCard(card) && !qs('.astra-review-label', card)) {
-          const badge = document.createElement('span'); badge.className = 'astra-review-label'; badge.textContent = 'Importe en revisión';
-          qs('p', card)?.after(badge);
-        }
       });
       calculators.dataset.astraExpanded = 'false';
       if (showAll) {
@@ -165,23 +157,14 @@
     const purposes = {
       'Aguinaldo': 'Estima tu aguinaldo completo o proporcional. Revisa el desglose y los supuestos antes de compararlo con tu recibo.',
       'ISR': 'Estima la retención de un mes completo ordinario de 2026 dentro del alcance indicado. Revisa los supuestos antes de compararla con tu recibo.',
-      'Bruto a Neto': 'Consulta el alcance de esta herramienta. El importe permanece en revisión hasta cerrar correctamente el componente IMSS.',
-      'Finiquito': 'Revisa qué conceptos forman un finiquito y el estado de la revisión. El importe permanece suspendido mientras se corrigen fechas, antigüedad y saldos.',
-      'Liquidación': 'Revisa los conceptos y supuestos jurídicos de una liquidación. El importe permanece suspendido hasta modelar correctamente los escenarios aplicables.'
+      'Bruto a Neto': 'Estima tu neto después de ISR e IMSS usando por separado el bruto, la base gravable y el SBC diario.',
+      'Finiquito': 'Estima las prestaciones devengadas y, cuando corresponda, la prima de antigüedad con fechas y prestaciones declaradas.',
+      'Liquidación': 'Estima un escenario para relación por tiempo indeterminado y decide explícitamente si quieres incluir los veinte días por año.'
     };
     const purpose = qs('.calculator-hero-copy p:last-of-type', hero);
     if (purpose && purposes[title]) purpose.textContent = purposes[title];
 
-    const jump = document.createElement('a');
-    jump.href = '#calculo'; jump.className = 'astra-jump-to-calc'; jump.textContent = 'Ir al cálculo';
-    qs('.calculator-hero-copy', hero)?.appendChild(jump); main.id = 'calculo';
-
-    const media = qs('.calculator-hero-media', hero), comp = main.firstElementChild;
-    if (media && comp) {
-      const mobile = document.createElement('div'); mobile.className = 'astra-mobile-photo';
-      const picture = qs('picture, img', media); if (picture) mobile.appendChild(picture.cloneNode(true));
-      if (mobile.childNodes.length) comp.after(mobile);
-    }
+    main.id = 'calculo';
 
     qsa('input[type="number"]', main).forEach(input => input.setAttribute('inputmode', 'decimal'));
     qsa('input[type="date"]', main).forEach(input => {
@@ -193,16 +176,9 @@
         input.setAttribute('aria-describedby', hint.id); input.after(hint);
       }
     });
-    qsa('form', main).forEach(form => form.addEventListener('submit', () => {
-      track('calculation_submit', { calculator: safePath().split('/').at(-1) || 'unknown' });
-      setTimeout(() => qs('[aria-invalid="true"]', form)?.focus(), 0);
-    }));
     const firstInput = qs('input, select', main);
     firstInput?.addEventListener('focus', () => track('calculator_start', { calculator: safePath().split('/').at(-1) || 'unknown' }), { once: true });
     qsa('.ml-result, [aria-live]', main).forEach(result => result.setAttribute('aria-live', 'polite'));
-    qsa('details', main).forEach(d => d.addEventListener('toggle', () => {
-      if (d.open) track('trust_open', { calculator: safePath().split('/').at(-1) || 'unknown' });
-    }));
   }
 
   function setupFooter() {

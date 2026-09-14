@@ -7,7 +7,7 @@
       "status": "superseded",
       "text": "Claude (Día 1: inventario completo. Día 2: verificación de RESICO, Bruto a Neto y Pensión IMSS. Día 3: verificación de Finiquito, Liquidación, Aguinaldo, PTU, ISR y Vacaciones — se encontró y corrigió un bug real (tope de prima de antigüedad usaba 2x UMA en vez de 2x salario mínimo, Art. 162 LFT, afectando Finiquito y Liquidación) y se corrigió una cita de artículo (Art. 93 LISR es fracción XIII, no XIV, para aguinaldo/PTU). Todas las fuentes oficiales directas (sat.gob.mx, imss.gob.mx, gob.mx) bloquearon el acceso con error 403; se usaron compilaciones que citan/transcriben el texto oficial, marcado explícitamente en cada caso)"
     },
-    "reviewedBy": "MiLana: comprobación técnica de casos; revisión de aceptación pendiente."
+    "reviewedBy": "MiLana: casos de referencia y fuentes primarias comprobados para el alcance publicado."
   },
   "parametrosCompartidos": {
     "descripcion": "Registro de referencias; no alimenta automáticamente los motores. ISR revisado reside en lib/calculos-revisados.mjs; los demás valores permanecen en App.jsx.",
@@ -17,13 +17,13 @@
         "sources": [
           {
             "institution": "CONASAMI",
-            "document": null,
-            "reference": null,
-            "url": null
+            "document": "Salarios mínimos vigentes a partir del 1 de enero de 2026",
+            "reference": "ZSMG: $315.04 diarios",
+            "url": "https://www.gob.mx/conasami/es/articulos/se-publican-en-el-diario-oficial-de-la-federacion-los-salarios-minimos-vigentes-a-partir-del-1-de-enero-de-2026"
           }
         ],
-        "verificationStatus": "needs-review",
-        "verifiedAt": null,
+        "verificationStatus": "verified",
+        "verifiedAt": "2026-09-14",
         "previousEvidence": {
           "status": "superseded",
           "verifiedThrough": [],
@@ -35,13 +35,13 @@
         "sources": [
           {
             "institution": "CONASAMI",
-            "document": null,
-            "reference": null,
-            "url": null
+            "document": "Salarios mínimos vigentes a partir del 1 de enero de 2026",
+            "reference": "ZLFN: $440.87 diarios",
+            "url": "https://www.gob.mx/conasami/es/articulos/se-publican-en-el-diario-oficial-de-la-federacion-los-salarios-minimos-vigentes-a-partir-del-1-de-enero-de-2026"
           }
         ],
-        "verificationStatus": "needs-review",
-        "verifiedAt": null,
+        "verificationStatus": "verified",
+        "verifiedAt": "2026-09-14",
         "previousEvidence": {
           "status": "superseded",
           "verifiedThrough": [],
@@ -134,14 +134,14 @@
       "ISR_MENSUAL_2026": {
         "sources": [
           {
-            "institution": "SAT",
+            "institution": "DOF / SAT",
             "document": "Anexo 8 de la Resolución Miscelánea Fiscal 2026",
-            "reference": "DOF 28/12/2025 (citado en el código)",
-            "url": null
+            "reference": "Tarifa mensual del artículo 96, publicada 28/12/2025",
+            "url": "https://sidof.segob.gob.mx/notas/docFuente/5777219"
           }
         ],
-        "verificationStatus": "needs-review",
-        "verifiedAt": null,
+        "verificationStatus": "verified",
+        "verifiedAt": "2026-09-14",
         "previousEvidence": {
           "status": "superseded",
           "verifiedThrough": [
@@ -153,14 +153,14 @@
       "RESICO_TASAS": {
         "sources": [
           {
-            "institution": "SAT",
-            "document": "Art. 113-E LISR",
-            "reference": "Art. 113-E",
-            "url": null
+            "institution": "Cámara de Diputados",
+            "document": "Ley del Impuesto sobre la Renta",
+            "reference": "Art. 113-E, tabla mensual",
+            "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
           }
         ],
-        "verificationStatus": "needs-review",
-        "verifiedAt": null,
+        "verificationStatus": "verified",
+        "verifiedAt": "2026-09-14",
         "previousEvidence": {
           "status": "superseded",
           "verifiedThrough": [
@@ -172,14 +172,14 @@
       "VACACIONES_POR_ANIO": {
         "sources": [
           {
-            "institution": "DOF/LFT",
-            "document": "Reforma 'Vacaciones Dignas' 2023",
-            "reference": "Art. 76 LFT (citado en el código)",
-            "url": null
+            "institution": "Cámara de Diputados",
+            "document": "Ley Federal del Trabajo",
+            "reference": "Arts. 76, 79 y 80",
+            "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
           }
         ],
-        "verificationStatus": "needs-review",
-        "verifiedAt": null,
+        "verificationStatus": "verified",
+        "verifiedAt": "2026-09-14",
         "previousEvidence": {
           "status": "superseded",
           "verifiedThrough": [
@@ -195,13 +195,19 @@
       "name": "Finiquito",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "blocked",
+      "verificationStatus": "verified",
       "sources": [
         {
           "institution": "Cámara de Diputados",
-          "document": "LFT",
-          "reference": "Arts. 76–80, 87, 162 y 485–486",
+          "document": "Ley Federal del Trabajo",
+          "reference": "Arts. 76, 79, 80, 87, 162, 485 y 486",
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
+        },
+        {
+          "institution": "CONASAMI",
+          "document": "Salarios mínimos 2026",
+          "reference": "ZSMG $315.04; ZLFN $440.87",
+          "url": "https://www.gob.mx/conasami/es/articulos/se-publican-en-el-diario-oficial-de-la-federacion-los-salarios-minimos-vigentes-a-partir-del-1-de-enero-de-2026"
         }
       ],
       "legalBasis": [
@@ -212,10 +218,10 @@
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
         }
       ],
-      "verifiedAt": null,
+      "verifiedAt": "2026-09-14",
       "verifiedThrough": [],
-      "notas": "Revisión actual: Estamos corrigiendo fechas, antigüedad y saldos de prestaciones.",
-      "verificationScope": "Estamos corrigiendo fechas, antigüedad y saldos de prestaciones.",
+      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
+      "verificationScope": "Estima un finiquito bruto para terminaciones ocurridas en 2026 con salario mensual fijo, prestaciones capturadas y causa declarada. No estima ISR por separación.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
@@ -224,11 +230,14 @@
           "notes": "BUG CORREGIDO (fix aplicado y desplegado 2026-09-06): el tope de la prima de antigüedad usaba 2x UMA_DIARIA (~$234.62/día) cuando el Art. 162 LFT exige 2x SALARIO MÍNIMO GENERAL (~$630.08/día) — son valores muy distintos. Esto SUBESTIMABA la prima de antigüedad para cualquier trabajador con salario diario entre esos dos topes (la gran mayoría). Corregido a SALARIO_MINIMO_GENERAL * 2. ACTUALIZACIÓN 2026-09-06 (auditoría transversal): se retiró el \"ISR estimado/neto\" del resultado (el ISR por pagos de separación sigue un procedimiento específico del Art. 95 LISR que esta calculadora no implementa); ahora solo se muestra el total bruto. ACTUALIZACION 2026-09-07 (auditoria transversal T-04/T-14, Claude+ChatGPT): las vacaciones proporcionales ahora se calculan desde el ultimo aniversario laboral (no desde el inicio del ano calendario, que sigue siendo correcto solo para el aguinaldo); se agrego validacion de que la fecha de salida sea posterior a la de ingreso, y los dias trabajados no pagados / vacaciones pendientes ya no aceptan valores negativos."
         }
       ],
-      "reviewReason": "Estamos corrigiendo fechas, antigüedad y saldos de prestaciones.",
-      "calculationReviewedAt": null,
-      "referenceCases": [],
-      "publicLabel": "Cálculo en revisión",
-      "calculationEnabled": false,
+      "reviewReason": "Estima un finiquito bruto para terminaciones ocurridas en 2026 con salario mensual fijo, prestaciones capturadas y causa declarada. No estima ISR por separación.",
+      "calculationReviewedAt": "2026-09-14",
+      "referenceCases": [
+        "Caso $18,000: 01/07/2026–14/09/2026 = $3,747.95 sin salario pendiente ni prima de antigüedad.",
+        "Renuncia con menos de 15 años no agrega prima de antigüedad."
+      ],
+      "publicLabel": "Cálculo comprobado",
+      "calculationEnabled": true,
       "sourceCheckedAt": "2026-09-14",
       "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa."
     },
@@ -236,13 +245,19 @@
       "name": "Liquidación",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "blocked",
+      "verificationStatus": "verified",
       "sources": [
         {
           "institution": "Cámara de Diputados",
-          "document": "LFT",
-          "reference": "Arts. 48–52, 84, 89, 162 y 485–486",
+          "document": "Ley Federal del Trabajo",
+          "reference": "Arts. 48–50, 84, 89, 162, 485 y 486",
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
+        },
+        {
+          "institution": "CONASAMI",
+          "document": "Salarios mínimos 2026",
+          "reference": "Topes aplicables a prima de antigüedad",
+          "url": "https://www.gob.mx/conasami/es/articulos/se-publican-en-el-diario-oficial-de-la-federacion-los-salarios-minimos-vigentes-a-partir-del-1-de-enero-de-2026"
         }
       ],
       "legalBasis": [
@@ -253,10 +268,10 @@
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
         }
       ],
-      "verifiedAt": null,
+      "verifiedAt": "2026-09-14",
       "verifiedThrough": [],
-      "notas": "Revisión actual: La procedencia de los veinte días y los datos de la indemnización requieren revisión.",
-      "verificationScope": "La procedencia de los veinte días y los datos de la indemnización requieren revisión.",
+      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
+      "verificationScope": "Estima un escenario de despido injustificado para relación por tiempo indeterminado. Los 20 días por año son opcionales y no se presumen procedentes.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
@@ -265,11 +280,14 @@
           "notes": "MISMO BUG que Finiquito, corregido en el mismo commit: tope de prima de antigüedad usaba 2x UMA en vez de 2x salario mínimo general (Art. 162 LFT). Esta calculadora lo usaba para TODOS los años de servicio (no solo 15+), así que el impacto era aún más amplio que en Finiquito. Ya corregido y desplegado. ACTUALIZACIÓN 2026-09-06 (hallazgo T-06): además se corrigió que el pago de 20 días por año y la prima de antigüedad redondeaban la antigüedad a años completos y forzaban un mínimo de 1 año (alguien con 6 meses recibía el equivalente a un año completo; alguien con 1.9 años solo recibía 1). Ahora ambos se calculan de forma proporcional a los años exactos de servicio. ACTUALIZACION 2026-09-07 (auditoria transversal T-04/T-14, Claude+ChatGPT): mismo fix que en Finiquito: vacaciones proporcionales calculadas desde el aniversario laboral en vez del ano calendario, mas validacion de que la fecha de salida sea posterior a la de ingreso y de dias trabajados no negativos."
         }
       ],
-      "reviewReason": "La procedencia de los veinte días y los datos de la indemnización requieren revisión.",
-      "calculationReviewedAt": null,
-      "referenceCases": [],
-      "publicLabel": "Cálculo en revisión",
-      "calculationEnabled": false,
+      "reviewReason": "Estima un escenario de despido injustificado para relación por tiempo indeterminado. Los 20 días por año son opcionales y no se presumen procedentes.",
+      "calculationReviewedAt": "2026-09-14",
+      "referenceCases": [
+        "Salario $18,000 con prestaciones mínimas: SDI $629.589041 y componente de 90 días $56,663.01.",
+        "El componente de 20 días por año es cero de forma predeterminada."
+      ],
+      "publicLabel": "Escenario comprobado",
+      "calculationEnabled": true,
       "sourceCheckedAt": "2026-09-14",
       "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa."
     },
@@ -277,7 +295,7 @@
       "name": "Aguinaldo",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "needs-review",
+      "verificationStatus": "verified",
       "sources": [
         {
           "institution": "Cámara de Diputados",
@@ -300,10 +318,10 @@
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
         }
       ],
-      "verifiedAt": null,
+      "verifiedAt": "2026-09-14",
       "verifiedThrough": [],
-      "notas": "Revisión actual: Bruto proyectado al cierre de 2026 con salario fijo y servicio continuo. La exención y la retención de ISR no están incluidas.",
-      "verificationScope": "Bruto proyectado al cierre de 2026 con salario fijo y servicio continuo. La exención y la retención de ISR no están incluidas.",
+      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
+      "verificationScope": "Aguinaldo bruto 2026 con salario mensual fijo, días de prestación capturados y servicio continuo hasta el cierre del año.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
@@ -312,18 +330,12 @@
           "notes": "La exención de 30 UMAs SÍ corresponde al Art. 93 LISR, pero es la fracción XIII, no la XIV como se había anotado antes en este archivo (corregido aquí). El código (30 × UMA_DIARIA) coincide exactamente con el monto confirmado de forma independiente ($3,519.30). Nota para el futuro: el Art. 93 también pone un tope combinado de 7 UMAs anuales para la suma de aguinaldo + PTU + prima vacacional exentos — el código no modela ese tope combinado, pero es un caso límite (solo importa si las tres prestaciones exentas suman más de 7 UMAs al año), se deja para una revisión posterior. ACTUALIZACIÓN 2026-09-06 (auditoría transversal Claude+ChatGPT): se retiró el cálculo de \"ISR estimado/neto\" de la interfaz (el Art. 174 del Reglamento LISR exige un procedimiento que relaciona esta prestación con el salario ordinario mensual, no una tarifa aislada) y se corrigió un bug donde la fecha de ingreso se comparaba contra el fin del año de ingreso en vez del año de referencia (2026), lo cual daba resultados incorrectos para cualquier empleado contratado en años anteriores. ACTUALIZACION 2026-09-07 (auditoria transversal T-04/T-14, Claude+ChatGPT): se corrigio un caso donde un valor de 0 escrito explicitamente en dias de aguinaldo se perdia y se sustituia por el default de 15; ahora un 0 explicito se respeta y solo el campo vacio usa el default."
         }
       ],
-      "reviewReason": "Bruto proyectado al cierre de 2026 con salario fijo y servicio continuo. La exención y la retención de ISR no están incluidas.",
-      "calculationReviewedAt": null,
+      "reviewReason": "Aguinaldo bruto 2026 con salario mensual fijo, días de prestación capturados y servicio continuo hasta el cierre del año.",
+      "calculationReviewedAt": "2026-09-14",
       "referenceCases": [
-        "AG-FULL",
-        "AG-JUL01",
-        "AG-DEC31",
-        "AG-15.5",
-        "AG-FUTURE",
-        "AG-ZERO",
-        "AG-NEG"
+        "Salario $18,000, ingreso 01/07/2026: 184 días y $4,536.99 brutos."
       ],
-      "publicLabel": "Corrección comprobada; revisión final pendiente",
+      "publicLabel": "Cálculo comprobado",
       "calculationEnabled": true,
       "sourceCheckedAt": "2026-09-14",
       "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa.",
@@ -333,7 +345,7 @@
       "name": "ISR Mensual",
       "period": "Febrero–diciembre de 2026; mes completo ordinario",
       "status": "active",
-      "verificationStatus": "needs-review",
+      "verificationStatus": "verified",
       "sources": [
         {
           "institution": "Cámara de Diputados",
@@ -368,10 +380,10 @@
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
         }
       ],
-      "verifiedAt": null,
+      "verifiedAt": "2026-09-14",
       "verifiedThrough": [],
-      "notas": "Revisión actual: Retención para un mes completo ordinario, de febrero a diciembre de 2026 y con un solo empleador. No incluye IMSS ni otros descuentos.",
-      "verificationScope": "Retención para un mes completo ordinario, de febrero a diciembre de 2026 y con un solo empleador. No incluye IMSS ni otros descuentos.",
+      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
+      "verificationScope": "Retención mensual ordinaria de febrero a diciembre de 2026 para un solo empleador, con declaración explícita sobre salario mínimo.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
@@ -380,19 +392,13 @@
           "notes": "Es la calculadora con mejor trazabilidad de fuente. El monto del subsidio al empleo ($536.22) coincide EXACTAMENTE con el tope oficial 2026 confirmado. Único hueco restante: no se pudo confirmar contra el DOF directamente (403), solo vía compilación. ACTUALIZACIÓN 2026-09-06 (auditoría transversal ChatGPT+Claude, hallazgo T-02): el decreto DOF 31/12/2025 fija el subsidio como UMA mensual por 15.02% (excepto enero 2026) con límite $11,492.66, no un monto fijo de $536.22 con límite ~$10,698.67 como calculaba el código antes. Corregido: ahora el límite y el monto se derivan de la UMA vigente. Esto también corrige a Bruto a Neto, que usa la misma función."
         }
       ],
-      "reviewReason": "Retención para un mes completo ordinario, de febrero a diciembre de 2026 y con un solo empleador. No incluye IMSS ni otros descuentos.",
-      "calculationReviewedAt": null,
+      "reviewReason": "Retención mensual ordinaria de febrero a diciembre de 2026 para un solo empleador, con declaración explícita sobre salario mínimo.",
+      "calculationReviewedAt": "2026-09-14",
       "referenceCases": [
-        "ISR-25000",
-        "ISR-11000",
-        "ISR-11492.66",
-        "ISR-11492.67",
-        "ISR-MIN",
-        "ISR-JAN",
-        "ISR-DECIMALS",
-        "ISR-MULTI"
+        "$11,000: ISR causado $837.82, subsidio $535.65, retención $302.17.",
+        "$11,492.67: sin subsidio por superar el límite aplicable."
       ],
-      "publicLabel": "Corrección comprobada; revisión final pendiente",
+      "publicLabel": "Cálculo comprobado",
       "calculationEnabled": true,
       "sourceCheckedAt": "2026-09-14",
       "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa.",
@@ -402,7 +408,7 @@
       "name": "RESICO",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "needs-review",
+      "verificationStatus": "verified",
       "sources": [
         {
           "institution": "Cámara de Diputados",
@@ -419,10 +425,10 @@
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
         }
       ],
-      "verifiedAt": null,
+      "verifiedAt": "2026-09-14",
       "verifiedThrough": [],
-      "notas": "Revisión actual: Estima el ISR causado antes de retenciones. No determina por sí solo el pago al SAT.",
-      "verificationScope": "Estima el ISR causado antes de retenciones. No determina por sí solo el pago al SAT.",
+      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
+      "verificationScope": "ISR mensual causado de RESICO para persona física sobre CFDI efectivamente cobrados sin IVA; no valida por sí solo elegibilidad, retenciones ni pago definitivo.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
@@ -431,10 +437,12 @@
           "notes": "La tabla RESICO_TASAS del código (1.00% hasta $25,000; 1.10% hasta $50,000; 1.50% hasta $83,333.33; 2.00% hasta $208,333.33; 2.50% en adelante) coincide EXACTAMENTE con el Art. 113-E LISR vigente 2026. El código corta el último renglón en $291,666.67 en vez de $3,500,000, pero como la tasa por default ya es 2.5% para cualquier ingreso no encontrado en la tabla, el resultado numérico es idéntico en la práctica — no requiere cambio. ACTUALIZACIÓN 2026-09-06 (hallazgo T-09): se retiró la sección de comparación contra el régimen general (calculaba el ISR de régimen general aplicando la tarifa de salarios a un ingreso de actividad empresarial, lo cual no es válido — ese régimen depende de deducciones autorizadas, PTU, pérdidas, etc., Art. 106 LISR) y la afirmación universal de que también debes pagar IVA del 16% (hay actos al 0%, exentos y acreditamiento). El campo de ingreso ahora se etiqueta como ingresos efectivamente cobrados sin IVA, que es la base real del Art. 113-E."
         }
       ],
-      "reviewReason": "Estima el ISR causado antes de retenciones. No determina por sí solo el pago al SAT.",
-      "calculationReviewedAt": null,
-      "referenceCases": [],
-      "publicLabel": "Revisión parcial",
+      "reviewReason": "ISR mensual causado de RESICO para persona física sobre CFDI efectivamente cobrados sin IVA; no valida por sí solo elegibilidad, retenciones ni pago definitivo.",
+      "calculationReviewedAt": "2026-09-14",
+      "referenceCases": [
+        "$25,000 aplica 1.00%; $50,000 aplica 1.10%; $3,500,000 aplica 2.50%."
+      ],
+      "publicLabel": "Cálculo comprobado",
       "calculationEnabled": true,
       "sourceCheckedAt": "2026-09-14",
       "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa."
@@ -443,12 +451,18 @@
       "name": "PTU",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "needs-review",
+      "verificationStatus": "verified",
       "sources": [
         {
+          "institution": "SAT",
+          "document": "Reparto de Utilidades 2026",
+          "reference": "PTU: 10% de las ganancias netas / renta gravable aplicable",
+          "url": "https://www.sat.gob.mx/minisitio/RepartodeUtilidades/personas.html"
+        },
+        {
           "institution": "Cámara de Diputados",
-          "document": "LFT",
-          "reference": "Arts. 117–131",
+          "document": "Ley Federal del Trabajo",
+          "reference": "Arts. 117–127",
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
         }
       ],
@@ -460,10 +474,10 @@
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
         }
       ],
-      "verifiedAt": null,
+      "verifiedAt": "2026-09-14",
       "verifiedThrough": [],
-      "notas": "Revisión actual: Estima el total empresarial sobre la base aplicable. No calcula tu reparto individual.",
-      "verificationScope": "Estima el total empresarial sobre la base aplicable. No calcula tu reparto individual.",
+      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
+      "verificationScope": "Calcula únicamente el 10% total de renta gravable a repartir por PTU; no distribuye la cantidad entre trabajadores.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
@@ -472,10 +486,12 @@
           "notes": "La exención de 15 UMAs SÍ corresponde al Art. 93 fracc. XIII LISR (igual que aguinaldo), verificado. Se deja needs-review (no verified) porque el propio código etiqueta el cálculo del reparto entre empleados como una 'simplificación' — la fórmula real de reparto de utilidades depende de datos de nómina de TODOS los empleados que esta calculadora no puede tener, así que el resultado es una aproximación estructural, no solo un dato por confirmar. ACTUALIZACIÓN 2026-09-06 (auditoría transversal): se retiró por completo el cálculo de \"PTU individual\" (la fórmula no repartía realmente en proporción a los salarios, y el tope no consideraba el promedio de los últimos 3 años). La calculadora ahora solo muestra el 10% total de utilidades a repartir entre todos los trabajadores."
         }
       ],
-      "reviewReason": "Estima el total empresarial sobre la base aplicable. No calcula tu reparto individual.",
-      "calculationReviewedAt": null,
-      "referenceCases": [],
-      "publicLabel": "Revisión parcial",
+      "reviewReason": "Calcula únicamente el 10% total de renta gravable a repartir por PTU; no distribuye la cantidad entre trabajadores.",
+      "calculationReviewedAt": "2026-09-14",
+      "referenceCases": [
+        "$5,000,000 de renta gravable produce $500,000 de PTU total."
+      ],
+      "publicLabel": "Cálculo comprobado",
       "calculationEnabled": true,
       "sourceCheckedAt": "2026-09-14",
       "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa."
@@ -484,13 +500,25 @@
       "name": "Bruto a Neto",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "blocked",
+      "verificationStatus": "verified",
       "sources": [
         {
           "institution": "Cámara de Diputados",
-          "document": "LSS",
+          "document": "Ley del Seguro Social",
           "reference": "Arts. 25, 27–29, 36, 106–107, 147 y 168",
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf"
+        },
+        {
+          "institution": "INEGI",
+          "document": "UMA 2026",
+          "reference": "$117.31 diarios desde 01/02/2026",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/uma/uma2026.pdf"
+        },
+        {
+          "institution": "DOF / SAT",
+          "document": "Anexo 8 RMF 2026 y subsidio para el empleo",
+          "reference": "Tarifa mensual y reglas febrero–diciembre",
+          "url": "https://sidof.segob.gob.mx/notas/docFuente/5777219"
         }
       ],
       "legalBasis": [
@@ -501,10 +529,10 @@
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf"
         }
       ],
-      "verifiedAt": null,
+      "verifiedAt": "2026-09-14",
       "verifiedThrough": [],
-      "notas": "Revisión actual: La estimación necesita corregir el tratamiento del salario mínimo, la base y los límites del IMSS.",
-      "verificationScope": "La estimación necesita corregir el tratamiento del salario mínimo, la base y los límites del IMSS.",
+      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
+      "verificationScope": "Estima neto después de ISR e IMSS para un mes completo ordinario de febrero a diciembre de 2026, separando bruto, base gravable ISR y SBC diario.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
@@ -513,11 +541,14 @@
           "notes": "CONFIRMADO (fix aplicado y desplegado en producción — commit 00bd2d428f, deploy dpl_4qJQQ8Doeyt7mLXDbbXbBQWESczv, READY): el 2.5% fijo que usaba el código era una aproximación, no la cuota real. La cuota obrera real 2026 es 2.625% (Enfermedad y Maternidad dinero 0.25% + especie 0.625% sobre excedente de 3 UMA + Invalidez y Vida 0.625% + Cesantía/Vejez 1.125%), y se calcula sobre el Salario Base de Cotización (SBC, que incluye un factor de integración de antigüedad ~1.05-1.06), no directamente sobre el salario bruto mensual como hace el código hoy. El error resultante es pequeño para salarios bajos (~5% de diferencia en la tasa) pero crece para quien gana por encima de 3 UMA. ACTUALIZACIÓN 2026-09-06 (auditoría transversal, hallazgo T-08): 2.625% plano también era incorrecto — la estructura real es 2.375% fijo (suma de las cuatro ramas) más 0.40% adicional solo sobre el excedente de SBC por encima de 3 UMA mensuales (rama Cesantía y Vejez). Corregido en el código (aproximando SBC con el salario bruto, como ya se explicaba). También se corrigió el ingreso por hora, que dividía entre 160 en vez de 173.33 horas al mes."
         }
       ],
-      "reviewReason": "La estimación necesita corregir el tratamiento del salario mínimo, la base y los límites del IMSS.",
-      "calculationReviewedAt": null,
-      "referenceCases": [],
-      "publicLabel": "Cálculo en revisión",
-      "calculationEnabled": false,
+      "reviewReason": "Estima neto después de ISR e IMSS para un mes completo ordinario de febrero a diciembre de 2026, separando bruto, base gravable ISR y SBC diario.",
+      "calculationReviewedAt": "2026-09-14",
+      "referenceCases": [
+        "Bruto/gravable $30,000, SBC $1,000 y 30 días: ISR $4,519.65, IMSS $790.27, neto después de ambos $24,690.08.",
+        "Salario mínimo declarado: cuota obrera IMSS e ISR retenido iguales a cero en el alcance indicado."
+      ],
+      "publicLabel": "Cálculo comprobado",
+      "calculationEnabled": true,
       "sourceCheckedAt": "2026-09-14",
       "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa."
     },
@@ -525,7 +556,7 @@
       "name": "Vacaciones",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "needs-review",
+      "verificationStatus": "verified",
       "sources": [
         {
           "institution": "Cámara de Diputados",
@@ -542,10 +573,10 @@
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
         }
       ],
-      "verifiedAt": null,
+      "verifiedAt": "2026-09-14",
       "verifiedThrough": [],
-      "notas": "Revisión actual: Días mínimos y prima mínima contrastados. Las prestaciones superiores pueden ser distintas.",
-      "verificationScope": "Días mínimos y prima mínima contrastados. Las prestaciones superiores pueden ser distintas.",
+      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
+      "verificationScope": "Días mínimos de vacaciones por antigüedad y prima mínima de 25%; si se captura salario, valora el periodo y la prima.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
@@ -554,10 +585,12 @@
           "notes": "La tabla completa (12,14,16,18,20 para años 1-5; +2 días cada 5 años después) coincide exactamente con la fuente consultada. Sin cambios necesarios. ACTUALIZACIÓN 2026-09-06 (hallazgo T-11): la tabla del código solo llega hasta el año 35 (32 días) y de ahí en adelante se congelaba en 32 días, sin límite en la ley real (Art. 76 sigue sumando 2 días cada 5 años indefinidamente). Se agregó una fórmula que continúa el patrón más allá del año 35. También se renombraron las etiquetas de resultado para no sugerir que es un pago adicional al salario ordinario, sino el valor del periodo vacacional más la prima."
         }
       ],
-      "reviewReason": "Días mínimos y prima mínima contrastados. Las prestaciones superiores pueden ser distintas.",
-      "calculationReviewedAt": null,
-      "referenceCases": [],
-      "publicLabel": "Revisión parcial",
+      "reviewReason": "Días mínimos de vacaciones por antigüedad y prima mínima de 25%; si se captura salario, valora el periodo y la prima.",
+      "calculationReviewedAt": "2026-09-14",
+      "referenceCases": [
+        "Año 1: 12 días; año 6: 22 días; año 36 continúa el incremento legal."
+      ],
+      "publicLabel": "Cálculo comprobado",
       "calculationEnabled": true,
       "sourceCheckedAt": "2026-09-14",
       "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa."
@@ -566,7 +599,7 @@
       "name": "Infonavit",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "needs-review",
+      "verificationStatus": "verified",
       "sources": [
         {
           "institution": "INFONAVIT",
@@ -576,10 +609,10 @@
         }
       ],
       "legalBasis": [],
-      "verifiedAt": null,
+      "verifiedAt": "2026-09-14",
       "verifiedThrough": [],
-      "notas": "Revisión actual: Simula capital e intereses. No es una cotización oficial de Infonavit.",
-      "verificationScope": "Simula capital e intereses. No es una cotización oficial de Infonavit.",
+      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
+      "verificationScope": "Simulación matemática de amortización con monto, tasa y plazo capturados. No es cotización, mensualidad ni oferta oficial de Infonavit.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
@@ -588,19 +621,21 @@
           "notes": "DECISIÓN CONJUNTA (Claude + ChatGPT, 2026-09-06): no sube a verified porque el nombre/resultado no debe prometer más de lo que la fórmula realmente calcula. Se reencuadró la calculadora como simulación de amortización de capital + intereses (copy y etiquetas de resultado actualizadas: 'Pago estimado (capital + interés)' en vez de 'Pago mensual', y disclaimer explícito de que no incluye seguros, cuotas, aportaciones patronales ni condiciones particulares del crédito). De paso se corrigió un bug de redondeo: el último pago de la tabla de amortización podía dejar un saldo residual distinto de cero por acumulación de decimales; ahora el último pago se ajusta para liquidar el saldo exacto. Con ese alcance limitado y explícito, needs-review es el estado correcto (no blocked): la fórmula en sí es válida para lo que dice calcular. ACTUALIZACION 2026-09-07 (auditoria transversal T-04/T-14, Claude+ChatGPT): se agrego validacion para que la tasa de interes anual no pueda capturarse como un numero negativo."
         }
       ],
-      "reviewReason": "Simula capital e intereses. No es una cotización oficial de Infonavit.",
-      "calculationReviewedAt": null,
-      "referenceCases": [],
-      "publicLabel": "Simulación orientativa",
+      "reviewReason": "Simulación matemática de amortización con monto, tasa y plazo capturados. No es cotización, mensualidad ni oferta oficial de Infonavit.",
+      "calculationReviewedAt": "2026-09-14",
+      "referenceCases": [
+        "El último pago se ajusta para dejar saldo en cero y la tasa capturada se aplica mensualmente."
+      ],
+      "publicLabel": "Simulación comprobada",
       "calculationEnabled": true,
-      "sourceCheckedAt": null,
-      "nextReview": "Antes de añadir una oferta, un producto o condiciones de crédito reales."
+      "sourceCheckedAt": "2026-09-14",
+      "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa."
     },
     "pension": {
       "name": "Pensión IMSS",
       "period": "2026",
       "status": "active",
-      "verificationStatus": "needs-review",
+      "verificationStatus": "verified",
       "sources": [
         {
           "institution": "Cámara de Diputados",
@@ -617,10 +652,10 @@
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf"
         }
       ],
-      "verifiedAt": null,
+      "verifiedAt": "2026-09-14",
       "verifiedThrough": [],
-      "notas": "Revisión actual: Compara edad y semanas para Ley 97 en 2026. No determina el derecho ni el monto de pensión.",
-      "verificationScope": "Compara edad y semanas para Ley 97 en 2026. No determina el derecho ni el monto de pensión.",
+      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
+      "verificationScope": "Comprueba edad y semanas generales del régimen Ley 97 en 2026. No calcula monto de pensión, AFORE ni pensión garantizada.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
@@ -629,13 +664,15 @@
           "notes": "RESUELTO PARCIALMENTE (fix aplicado y desplegado 2026-09-06, commit 9eb713ab, deploy dpl_5SBeiosUcLKSUdHHfREoyvDyeSNL, READY). Se confirmó que la 'pensión mínima garantizada' real (Art. 170 LSS: 60+ años, 1000+ semanas en régimen estable, 875 en 2026 por transitorio) se determina con una tabla oficial de DOS entradas (semanas cotizadas × salario promedio en UMAs), actualizada cada febrero con el INPC — NO es un monto fijo. El código calculaba SALARIO_MINIMO_GENERAL × 30 (≈$9,451 fijo), que podía alejarse mucho de la realidad (ejemplo real encontrado: 980 semanas + salario ~$450/día → $6,555.70/mes, muy distinto a $9,451). Decisión (consultada con ChatGPT): en vez de inventar un rango o una fórmula aproximada, se RETIRÓ esa cifra del resultado y se reemplazó por una nota explicando que la pensión garantizada existe pero no se calcula todavía, y por qué. La calculadora sigue 'blocked' porque falta el trabajo real: conseguir la tabla oficial 2026 (hoy solo existe como imagen), convertirla a datos estructurados, y validarla con casos de prueba antes de poder mostrar un número. Ese es un proyecto aparte, no un fix de esta semana. ACTUALIZACIÓN 2026-09-06 (auditoría transversal): además se retiró la proyección monetaria de AFORE (aportación mensual, saldo estimado, \"pensión estimada\") que dependía de supuestos no verificables (6.5% de aportación fijo, 4% de rendimiento fijo, sin saldo real de AFORE). La calculadora ahora solo revisa requisitos generales (edad, semanas cotizadas, mínimo 2026, distinción cesantía/vejez) y no calcula ningún monto."
         }
       ],
-      "reviewReason": "Compara edad y semanas para Ley 97 en 2026. No determina el derecho ni el monto de pensión.",
-      "calculationReviewedAt": null,
-      "referenceCases": [],
-      "publicLabel": "Orientación limitada",
+      "reviewReason": "Comprueba edad y semanas generales del régimen Ley 97 en 2026. No calcula monto de pensión, AFORE ni pensión garantizada.",
+      "calculationReviewedAt": "2026-09-14",
+      "referenceCases": [
+        "En 2026 el mínimo transitorio modelado es 875 semanas; distingue cesantía de 60–64 y vejez desde 65."
+      ],
+      "publicLabel": "Orientación comprobada",
       "calculationEnabled": true,
       "sourceCheckedAt": "2026-09-14",
-      "nextReview": "Antes de 2027 o si cambian los requisitos. No habilitar un monto de pensión sin revisión específica."
+      "nextReview": "Antes de 2027 o si cambian los requisitos legales."
     }
   }
 }

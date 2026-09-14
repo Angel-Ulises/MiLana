@@ -7,14 +7,14 @@
   },
   "paginas": [
     {"id":"finiquito","slug":"finiquito","titulo":"Calculadora de finiquito 2026 | México | MiLana","descripcion":"Estima un finiquito bruto 2026 con salario pendiente, aguinaldo, vacaciones, prima vacacional y prima de antigüedad cuando corresponde al supuesto declarado."},
-    {"id":"liquidacion","slug":"liquidacion","titulo":"Calculadora de liquidación 2026 | Despido injustificado | MiLana","descripcion":"Estima un escenario de liquidación para relación por tiempo indeterminado y separa prestaciones, tres meses, prima de antigüedad y el supuesto opcional de 20 días por año."},
-    {"id":"aguinaldo","slug":"aguinaldo","titulo":"Calculadora de aguinaldo 2026 | Proporcional o completo | MiLana","descripcion":"Calcula tu aguinaldo bruto completo o proporcional con salario, fecha y días de prestación, conforme al alcance y fuentes publicados."},
-    {"id":"isr","slug":"isr","titulo":"Calculadora de ISR mensual 2026 | Retención de nómina | MiLana","descripcion":"Estima la retención mensual ordinaria de ISR de febrero a diciembre de 2026 y explica tarifa, subsidio, alcance y fuentes."},
+    {"id":"liquidacion","slug":"liquidacion","titulo":"Calculadora de liquidación 2026 | México | MiLana","descripcion":"Estima una liquidación por despido injustificado y separa prestaciones, tres meses, prima de antigüedad y el supuesto opcional de 20 días por año."},
+    {"id":"aguinaldo","slug":"aguinaldo","titulo":"Calculadora de aguinaldo 2026 | México | MiLana","descripcion":"Calcula tu aguinaldo bruto completo o proporcional con salario, fecha y días de prestación, conforme al alcance y fuentes publicados."},
+    {"id":"isr","slug":"isr","titulo":"Calculadora de ISR 2026 | Nómina mensual | MiLana","descripcion":"Estima la retención mensual ordinaria de ISR de febrero a diciembre de 2026 y explica tarifa, subsidio, alcance y fuentes."},
     {"id":"resico","slug":"resico","titulo":"Calculadora RESICO 2026 | Personas físicas | MiLana","descripcion":"Estima el ISR de RESICO para personas físicas a partir de ingresos efectivamente cobrados sin IVA, usando la tabla del artículo 113-E."},
     {"id":"ptu","slug":"ptu","titulo":"Calculadora de PTU 2026 | Reparto de utilidades | MiLana","descripcion":"Calcula el monto total de PTU a repartir a partir de la utilidad fiscal capturada y entiende por qué el reparto individual requiere más datos."},
     {"id":"bruto-neto","slug":"bruto-a-neto","titulo":"Calculadora de sueldo bruto a neto 2026 | México | MiLana","descripcion":"Estima el neto después de ISR e IMSS usando por separado sueldo bruto, ingreso gravable, SBC diario y días cotizados."},
     {"id":"vacaciones","slug":"vacaciones","titulo":"Calculadora de vacaciones 2026 | Vacaciones Dignas | MiLana","descripcion":"Consulta los días de vacaciones por antigüedad y estima la prima vacacional conforme al salario y la prestación capturados."},
     {"id":"infonavit","slug":"infonavit","titulo":"Simulador de crédito Infonavit 2026 | Amortización | MiLana","descripcion":"Simula capital e intereses con los datos capturados. No sustituye las condiciones, seguros, cuotas o estados de cuenta oficiales de tu crédito."},
-    {"id":"pension","slug":"pension-imss","titulo":"Pensión IMSS Ley 97 2026 | Requisitos de cesantía y vejez | MiLana","descripcion":"Revisa edad y semanas dentro del alcance Ley 97 y entiende qué información adicional necesitas antes de confiar en una proyección de monto."}
+    {"id":"pension","slug":"pension-imss","titulo":"Pensión IMSS Ley 97 2026 | Requisitos | MiLana","descripcion":"Revisa edad y semanas dentro del alcance Ley 97 y entiende qué información adicional necesitas antes de confiar en una proyección de monto."}
   ]
 }

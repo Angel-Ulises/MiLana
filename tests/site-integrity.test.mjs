@@ -90,6 +90,17 @@ test('robots publica el sitemap canónico', () => {
   assert.match(robots, /Sitemap: https:\/\/www\.milanaaqui\.mx\/sitemap\.xml/);
 });
 
+test('el bucle de compartir calculadoras es sintácticamente válido y no serializa resultados', () => {
+  const js = read('public/final-2026.js');
+  assert.doesNotThrow(() => new Function(js));
+  assert.ok(js.includes('data-milana-share') || js.includes('milanaShare'));
+  assert.ok(js.includes('navigator.share'));
+  assert.ok(js.includes('navigator.clipboard'));
+  assert.ok(js.includes('share_calculator'));
+  assert.ok(!js.includes('resultado='));
+  assert.ok(!js.includes('salario='));
+});
+
 test('no quedan mensajes públicos de canal o importes pendientes', () => {
   const files = ['public/contacto/index.html','public/privacidad/index.html','public/sobre/index.html'];
   for (const file of files) {

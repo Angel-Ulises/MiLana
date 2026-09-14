@@ -1,0 +1,458 @@
+{
+  "date": "2026-09-14",
+  "notice": "Casos ficticios independientes. Los casos condicionales no habilitan publicación. El diagnóstico observado se guarda aparte.",
+  "cases": [
+    {
+      "id": "ISR-25000",
+      "tool": "isr",
+      "kind": "normal",
+      "inputs": {
+        "taxable_monthly": "25000",
+        "period": "2026-09",
+        "single_employer": true,
+        "only_area_general_minimum": false
+      },
+      "expected": {
+        "caused": "3451.65",
+        "subsidy_applied": "0.00",
+        "withholding": "3451.65"
+      },
+      "basis": "S1 apartado V + S2 art. Segundo + S3; cálculo Decimal independiente",
+      "status": "reference"
+    },
+    {
+      "id": "ISR-11000",
+      "tool": "isr",
+      "kind": "boundary",
+      "inputs": {
+        "taxable_monthly": "11000",
+        "period": "2026-09",
+        "single_employer": true,
+        "only_area_general_minimum": false
+      },
+      "expected": {
+        "caused": "837.82",
+        "subsidy_applied": "535.65",
+        "withholding": "302.17"
+      },
+      "basis": "S1 apartado V + S2 art. Segundo + S3; cálculo Decimal independiente",
+      "status": "reference"
+    },
+    {
+      "id": "ISR-11492.66",
+      "tool": "isr",
+      "kind": "boundary",
+      "inputs": {
+        "taxable_monthly": "11492.66",
+        "period": "2026-09",
+        "single_employer": true,
+        "only_area_general_minimum": false
+      },
+      "expected": {
+        "caused": "891.42",
+        "subsidy_applied": "535.65",
+        "withholding": "355.77"
+      },
+      "basis": "S1 apartado V + S2 art. Segundo + S3; cálculo Decimal independiente",
+      "status": "reference"
+    },
+    {
+      "id": "ISR-11492.67",
+      "tool": "isr",
+      "kind": "boundary",
+      "inputs": {
+        "taxable_monthly": "11492.67",
+        "period": "2026-09",
+        "single_employer": true,
+        "only_area_general_minimum": false
+      },
+      "expected": {
+        "caused": "891.42",
+        "subsidy_applied": "0.00",
+        "withholding": "891.42"
+      },
+      "basis": "S1 apartado V + S2 art. Segundo + S3; cálculo Decimal independiente",
+      "status": "reference"
+    },
+    {
+      "id": "ISR-MIN",
+      "tool": "isr",
+      "kind": "boundary",
+      "inputs": {
+        "taxable_monthly": "9451.20",
+        "period": "2026-09",
+        "single_employer": true,
+        "only_area_general_minimum": true
+      },
+      "expected": {
+        "withholding": "0.00"
+      },
+      "basis": "S4 art.96; supuesto declarado, no inferido del importe",
+      "status": "reference"
+    },
+    {
+      "id": "ISR-JAN",
+      "tool": "isr",
+      "kind": "outside_scope",
+      "inputs": {
+        "period": "2026-01"
+      },
+      "expected": {
+        "result": null,
+        "message_required": true
+      },
+      "basis": "Alcance del primer parche: febrero–diciembre, empleador único, dos decimales",
+      "status": "reference"
+    },
+    {
+      "id": "ISR-DECIMALS",
+      "tool": "isr",
+      "kind": "outside_scope",
+      "inputs": {
+        "taxable_monthly": "7168.515"
+      },
+      "expected": {
+        "result": null,
+        "message_required": true
+      },
+      "basis": "Alcance del primer parche: febrero–diciembre, empleador único, dos decimales",
+      "status": "reference"
+    },
+    {
+      "id": "ISR-MULTI",
+      "tool": "isr",
+      "kind": "outside_scope",
+      "inputs": {
+        "single_employer": false
+      },
+      "expected": {
+        "result": null,
+        "message_required": true
+      },
+      "basis": "Alcance del primer parche: febrero–diciembre, empleador único, dos decimales",
+      "status": "reference"
+    },
+    {
+      "id": "AG-FULL",
+      "tool": "aguinaldo",
+      "kind": "normal",
+      "inputs": {
+        "monthly_salary": "18000",
+        "benefit_days": "15",
+        "service_days_including_endpoints": 365,
+        "year": 2026
+      },
+      "expected": {
+        "gross": "9000.00",
+        "identical_in_utc_and_mexico": true
+      },
+      "basis": "S6 art.87; escenario de servicio continuo y fechas civiles explícitas",
+      "status": "reference"
+    },
+    {
+      "id": "AG-JUL01",
+      "tool": "aguinaldo",
+      "kind": "boundary",
+      "inputs": {
+        "monthly_salary": "18000",
+        "benefit_days": "15",
+        "service_days_including_endpoints": 184,
+        "year": 2026
+      },
+      "expected": {
+        "gross": "4536.99",
+        "identical_in_utc_and_mexico": true
+      },
+      "basis": "S6 art.87; escenario de servicio continuo y fechas civiles explícitas",
+      "status": "reference"
+    },
+    {
+      "id": "AG-DEC31",
+      "tool": "aguinaldo",
+      "kind": "boundary",
+      "inputs": {
+        "monthly_salary": "18000",
+        "benefit_days": "15",
+        "service_days_including_endpoints": 1,
+        "year": 2026
+      },
+      "expected": {
+        "gross": "24.66",
+        "identical_in_utc_and_mexico": true
+      },
+      "basis": "S6 art.87; escenario de servicio continuo y fechas civiles explícitas",
+      "status": "reference"
+    },
+    {
+      "id": "AG-15.5",
+      "tool": "aguinaldo",
+      "kind": "boundary",
+      "inputs": {
+        "monthly_salary": "18000",
+        "benefit_days": "15.5",
+        "service_days_including_endpoints": 365
+      },
+      "expected": {
+        "gross": "9300.00"
+      },
+      "basis": "Prestación superior declarada: no truncar decimales",
+      "status": "reference"
+    },
+    {
+      "id": "AG-FUTURE",
+      "tool": "aguinaldo",
+      "kind": "outside_scope",
+      "inputs": {
+        "entry_date": "2027-01-01"
+      },
+      "expected": {
+        "result": null,
+        "message_required": true
+      },
+      "basis": "Validación del alcance 2026 y mínimo de prestación",
+      "status": "reference"
+    },
+    {
+      "id": "AG-ZERO",
+      "tool": "aguinaldo",
+      "kind": "outside_scope",
+      "inputs": {
+        "benefit_days": "0"
+      },
+      "expected": {
+        "result": null,
+        "message_required": true
+      },
+      "basis": "Validación del alcance 2026 y mínimo de prestación",
+      "status": "reference"
+    },
+    {
+      "id": "AG-NEG",
+      "tool": "aguinaldo",
+      "kind": "outside_scope",
+      "inputs": {
+        "benefit_days": "-15"
+      },
+      "expected": {
+        "result": null,
+        "message_required": true
+      },
+      "basis": "Validación del alcance 2026 y mínimo de prestación",
+      "status": "reference"
+    },
+    {
+      "id": "FIN-NORMAL",
+      "tool": "finiquito",
+      "kind": "normal",
+      "inputs": {
+        "monthly_salary": "18000",
+        "entry_date": "2026-07-01",
+        "last_worked_date": "2026-09-14",
+        "continuous_service": true,
+        "unpaid_days": 0,
+        "prior_vacation_balance": 0,
+        "resignation": true
+      },
+      "expected": {
+        "days": 76,
+        "aguinaldo": "1873.97",
+        "vacation_pay": "1499.18",
+        "vacation_bonus": "374.79",
+        "seniority_premium": "0.00",
+        "total_gross": "3747.95"
+      },
+      "basis": "S6; escenario fijo con extremos incluidos. No usar como fórmula universal",
+      "status": "reference"
+    },
+    {
+      "id": "FIN-15Y",
+      "tool": "finiquito",
+      "kind": "boundary",
+      "inputs": {
+        "monthly_salary": "18000",
+        "entry_date": "2011-09-18",
+        "last_worked_date": "2026-09-14",
+        "voluntary_resignation": true
+      },
+      "expected": {
+        "completed_calendar_years": 14,
+        "seniority_premium": "0.00"
+      },
+      "basis": "S6 art.162 III; todavía faltan varios días para aniversario 15",
+      "status": "reference"
+    },
+    {
+      "id": "FIN-ZONE",
+      "tool": "finiquito",
+      "kind": "outside_scope",
+      "inputs": {
+        "work_area": "ZLFN",
+        "years": 16
+      },
+      "expected": {
+        "must_not_silently_apply_general_area_cap": true
+      },
+      "basis": "S6 art.486. Falta selección geográfica en motor actual",
+      "status": "reference"
+    },
+    {
+      "id": "LIQ-COMPONENT",
+      "tool": "liquidacion",
+      "kind": "normal",
+      "inputs": {
+        "monthly_salary": "18000",
+        "assumed_integration": {
+          "aguinaldo_days": 15,
+          "vacation_days": 12,
+          "vacation_bonus_rate": "0.25"
+        },
+        "ninety_day_indemnity_legally_applicable": true
+      },
+      "expected": {
+        "sdi_unrounded": "629.5890410958904109589041094",
+        "ninety_day_component": "56663.01"
+      },
+      "basis": "Aritmética independiente bajo supuesto jurídico explícito; no certifica un total ni base real de un caso",
+      "status": "conditional_component_only"
+    },
+    {
+      "id": "LIQ-20D",
+      "tool": "liquidacion",
+      "kind": "boundary",
+      "inputs": {
+        "twenty_days_legally_applicable": false
+      },
+      "expected": {
+        "twenty_day_component": "0.00"
+      },
+      "basis": "S6 arts.48–52; separar escenario, no conceder concepto automáticamente",
+      "status": "reference"
+    },
+    {
+      "id": "LIQ-FIXED",
+      "tool": "liquidacion",
+      "kind": "outside_scope",
+      "inputs": {
+        "contract": "fixed_term"
+      },
+      "expected": {
+        "must_not_use_indefinite_contract_formula": true
+      },
+      "basis": "S6 art.50 I/II",
+      "status": "reference"
+    },
+    {
+      "id": "NET-NORMAL",
+      "tool": "bruto-neto",
+      "kind": "normal",
+      "inputs": {
+        "sbc_daily": "1000",
+        "contribution_days": 30,
+        "above_minimum": true,
+        "assumed_uma_daily": "117.31"
+      },
+      "expected": {
+        "worker_imss_component": "790.27"
+      },
+      "basis": "S5 tasas y transitorio; aritmética con UMA declarada. Falta cerrar documento operativo y recibo independiente",
+      "status": "conditional_not_release_gate"
+    },
+    {
+      "id": "NET-MIN",
+      "tool": "bruto-neto",
+      "kind": "boundary",
+      "inputs": {
+        "monthly_salary": "9451.20",
+        "daily_wage_is_area_minimum": true,
+        "only_minimum_salary_income": true
+      },
+      "expected": {
+        "worker_imss_deduction": "0.00",
+        "isr_withholding": "0.00",
+        "net_before_other_deductions": "9451.20"
+      },
+      "basis": "S5 art.36 y S4 art.96; 30 días a mínimo declarado",
+      "status": "reference"
+    },
+    {
+      "id": "NET-HIGH",
+      "tool": "bruto-neto",
+      "kind": "outside_scope",
+      "inputs": {
+        "gross_monthly": "100000",
+        "sbc_unknown": true
+      },
+      "expected": {
+        "must_not_certify_imss_from_gross_only": true,
+        "must_apply_validated_contribution_cap": true
+      },
+      "basis": "S5 arts.27–29. Falta base, periodo y cierre operativo",
+      "status": "reference"
+    },
+    {
+      "id": "VAC-1",
+      "tool": "vacaciones",
+      "kind": "boundary",
+      "inputs": {
+        "completed_years": 1
+      },
+      "expected": {
+        "minimum_days": 12
+      },
+      "basis": "S6 art.76",
+      "status": "reference"
+    },
+    {
+      "id": "VAC-5",
+      "tool": "vacaciones",
+      "kind": "boundary",
+      "inputs": {
+        "completed_years": 5
+      },
+      "expected": {
+        "minimum_days": 20
+      },
+      "basis": "S6 art.76",
+      "status": "reference"
+    },
+    {
+      "id": "VAC-6",
+      "tool": "vacaciones",
+      "kind": "boundary",
+      "inputs": {
+        "completed_years": 6
+      },
+      "expected": {
+        "minimum_days": 22
+      },
+      "basis": "S6 art.76",
+      "status": "reference"
+    },
+    {
+      "id": "VAC-35",
+      "tool": "vacaciones",
+      "kind": "boundary",
+      "inputs": {
+        "completed_years": 35
+      },
+      "expected": {
+        "minimum_days": 32
+      },
+      "basis": "S6 art.76",
+      "status": "reference"
+    },
+    {
+      "id": "VAC-36",
+      "tool": "vacaciones",
+      "kind": "boundary",
+      "inputs": {
+        "completed_years": 36
+      },
+      "expected": {
+        "minimum_days": 34
+      },
+      "basis": "S6 art.76",
+      "status": "reference"
+    }
+  ]
+}

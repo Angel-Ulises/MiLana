@@ -49,21 +49,26 @@ function mejorar(slug) {
     html = html.replace('</head>', '<link rel="icon" type="image/svg+xml" href="/favicon.svg"></head>');
   }
 
-  // Las guías son piezas editoriales de MiLana. Article describe el contenido real;
-  // BreadcrumbList refleja la navegación visible Inicio > Aprende > guía.
+  // Estas páginas son guías estáticas revisadas periódicamente. WebPage expresa
+  // ese hecho sin inventar una fecha de publicación original ni exigir campos de
+  // noticia/artículo que no forman parte del contenido visible. BreadcrumbList
+  // refleja la navegación real Inicio > Aprende > guía.
   const datos = {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'Article',
-        headline: h1,
+        '@type': 'WebPage',
         name: titulo,
+        headline: h1,
         description: descripcion,
         url: canonical,
-        mainEntityOfPage: canonical,
         inLanguage: 'es-MX',
         dateModified: '2026-09-14',
-        author: { '@type': 'Organization', name: 'MiLana', url: `${ORIGEN}/` },
+        isPartOf: {
+          '@type': 'WebSite',
+          name: 'MiLana',
+          url: `${ORIGEN}/`,
+        },
         publisher: {
           '@type': 'Organization',
           name: 'MiLana',
@@ -94,4 +99,4 @@ function mejorar(slug) {
 }
 
 GUIAS.forEach(mejorar);
-console.log(`SEO de guías: ${GUIAS.length} páginas con favicon, Article y BreadcrumbList.`);
+console.log(`SEO de guías: ${GUIAS.length} páginas con favicon, WebPage y BreadcrumbList.`);

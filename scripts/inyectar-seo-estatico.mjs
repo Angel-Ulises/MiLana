@@ -5,8 +5,10 @@ const RAIZ = resolve(new URL('..', import.meta.url).pathname);
 const DIST = resolve(RAIZ, 'dist');
 const catalogo = JSON.parse(readFileSync(resolve(RAIZ, 'src/data/paginas.json'), 'utf8'));
 const contenido = JSON.parse(readFileSync(resolve(RAIZ, 'src/data/contenido-calculadoras.json'), 'utf8'));
+const casos = JSON.parse(readFileSync(resolve(RAIZ, 'public/casos-calculadoras.json'), 'utf8'));
 const { origen, nombre } = catalogo.sitio;
 const logoUrl = `${origen}/logo-milana.svg`;
+const moneda = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' });
 
 const escapar = (valor) => String(valor ?? '')
   .replace(/&/g, '&amp;')
@@ -21,6 +23,20 @@ function enlazar(destino) {
   return pagina ? `/calculadoras/${pagina.slug}` : '/#calculadoras';
 }
 
+function casoCalculadora(pagina) {
+  const caso = casos[pagina.slug];
+  if (!caso) return '';
+  const entradas = Array.isArray(caso.entradas) ? caso.entradas : [];
+  const resultados = Array.isArray(caso.resultados) ? caso.resultados : [];
+  return `<section data-static-case="${escapar(pagina.slug)}">
+          <h2>Caso resuelto: ${escapar(caso.titulo)}</h2>
+          <p>${escapar(caso.resumen)}</p>
+          ${entradas.length ? `<h3>Datos del ejemplo</h3><ul>${entradas.map((item) => `<li>${escapar(item)}</li>`).join('')}</ul>` : ''}
+          ${resultados.length ? `<h3>Resultado del ejemplo</h3><ul>${resultados.map((item) => `<li>${escapar(item.etiqueta)}: <strong>${escapar(moneda.format(Number(item.valor)))}</strong></li>`).join('')}</ul>` : ''}
+          <p>${escapar(caso.nota)}</p>
+        </section>`;
+}
+
 function cuerpoCalculadora(pagina) {
   const dato = contenido[pagina.id];
   if (!dato) throw new Error(`Falta contenido editorial para ${pagina.id}`);
@@ -33,6 +49,7 @@ function cuerpoCalculadora(pagina) {
         <h1>${escapar(tituloCorto(pagina))}</h1>
         <p>${escapar(dato.proposito)}</p>
 
+        ${casoCalculadora(pagina)}
         <section>
           <h2>Cómo leer tu resultado</h2>
           <p>${escapar(dato.interpretacion)}</p>
@@ -125,4 +142,4 @@ for (const pagina of catalogo.paginas) {
   inyectar(resolve(DIST, 'calculadoras', pagina.slug, 'index.html'), cuerpoCalculadora(pagina));
 }
 
-console.log(`SEO estático: portada + ${catalogo.paginas.length} calculadoras con H1, contenido y enlaces internos.`);
+console.log(`SEO estático: portada + ${catalogo.paginas.length} calculadoras con H1, contenido, casos verificados y enlaces internos.`);

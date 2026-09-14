@@ -26,26 +26,10 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿MiLana es gratis?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Sí, todas las calculadoras de MiLana son gratuitas y no requieren registro." }
-        },
-        {
-          "@type": "Question",
-          "name": "¿De dónde salen los datos de las calculadoras?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Los cálculos se basan en fuentes oficiales y cada herramienta muestra su alcance y estado de revisión." }
-        },
-        {
-          "@type": "Question",
-          "name": "¿MiLana guarda los datos que escribo en las calculadoras?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Los valores que escribes se procesan en tu navegador para realizar el cálculo y no se envían a un servidor propio de MiLana para calcular el resultado." }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Los resultados de MiLana son un cálculo legal definitivo?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. Son estimaciones informativas con un alcance declarado; para casos individuales puede ser necesaria una revisión profesional u oficial." }
-        }
+        {"@type":"Question","name":"¿MiLana es gratis?","acceptedAnswer":{"@type":"Answer","text":"Sí, todas las calculadoras de MiLana son gratuitas y no requieren registro."}},
+        {"@type":"Question","name":"¿De dónde salen los datos de las calculadoras?","acceptedAnswer":{"@type":"Answer","text":"Los cálculos se basan en fuentes oficiales y cada herramienta muestra su alcance y estado de revisión."}},
+        {"@type":"Question","name":"¿MiLana guarda los datos que escribo en las calculadoras?","acceptedAnswer":{"@type":"Answer","text":"Los valores que escribes se procesan en tu navegador para realizar el cálculo y no se envían a un servidor propio de MiLana para calcular el resultado."}},
+        {"@type":"Question","name":"¿Los resultados de MiLana son un cálculo legal definitivo?","acceptedAnswer":{"@type":"Answer","text":"No. Son estimaciones informativas con un alcance declarado; para casos individuales puede ser necesaria una revisión profesional u oficial."}}
       ]
     }
     </script>
@@ -53,22 +37,14 @@
       (function () {
         var prod = location.hostname === 'milanaaqui.mx' || location.hostname === 'www.milanaaqui.mx';
         if (!prod) return;
-
         window.dataLayer = window.dataLayer || [];
         window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
         window.gtag('js', new Date());
         window.gtag('config', 'G-M4819QE19R');
-
-        var analytics = document.createElement('script');
-        analytics.async = true;
-        analytics.src = 'https://www.googletagmanager.com/gtag/js?id=G-M4819QE19R';
-        document.head.appendChild(analytics);
-
-        var ads = document.createElement('script');
-        ads.async = true;
-        ads.crossOrigin = 'anonymous';
-        ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1798685613618592';
-        document.head.appendChild(ads);
+        var analytics = document.createElement('script'); analytics.async = true;
+        analytics.src = 'https://www.googletagmanager.com/gtag/js?id=G-M4819QE19R'; document.head.appendChild(analytics);
+        var ads = document.createElement('script'); ads.async = true; ads.crossOrigin = 'anonymous';
+        ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1798685613618592'; document.head.appendChild(ads);
       })();
     </script>
   </head>
@@ -76,5 +52,6 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script defer src="/astra-2026.js"></script>
+    <script defer src="/astra-content-2026.js"></script>
   </body>
 </html>

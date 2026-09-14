@@ -167,7 +167,7 @@ function CalcFiniquito() {
         {resultado.aplicaPrimaAntiguedad && <ResultLine label="Prima de antigüedad estimada" value={fmt(resultado.primaAntiguedad)} />}
         <Divider />
         <ResultLine label="Total bruto estimado" value={fmt(resultado.totalBruto)} bold color="#28735A" />
-        <Note>El total es bruto y no incluye una estimación de ISR por separación. Usa salario fijo y las prestaciones que capturaste; comisiones, bonos u otros conceptos integrables requieren revisión específica.</Note>
+        <Note>El total es bruto y no incluye una estimación de ISR por separación. Usa salario fijo y las prestaciones que capturaste; comisiones, bonos u otros conceptos integrables requieren un cálculo adicional con sus propios datos.</Note>
       </ResultBox>}
     </div>
   </form>;

@@ -1,21 +1,21 @@
 {
-  "_nota": "Procedencia de cada fotografia de MiLana. Los archivos master (.jpg de varios MB) NO se versionan: pesan demasiado y se pueden volver a obtener desde aqui. Con este archivo cualquiera reconstruye assets-master/ y despues corre `npm run imagenes` para regenerar public/images/gen/.",
+  "_nota": "Procedencia de cada fotografia de MiLana. Los masters locales grandes no se versionan. El hero de Inicio 2026-09-14 se sirve responsivamente desde el CDN original de Pexels y queda documentado aquí para trazabilidad.",
   "licencia": {
     "plataforma": "Pexels",
-    "resumen": "Uso gratuito, personal y comercial, sin atribucion obligatoria. Se conserva el credito de todas formas por trazabilidad.",
+    "resumen": "Uso gratuito, personal y comercial, sin atribucion obligatoria. Se conserva el credito por trazabilidad.",
     "terminos": "https://www.pexels.com/license/",
     "criterio_milana": "Sin marcas ni logotipos visibles, sin pantallas con texto legible, sin billetes como protagonista, fotografia documental y no pose de catalogo."
   },
   "recorte": {
-    "_nota": "Cinco fotos venian en vertical y el diseno las pide en 3:2 horizontal. El encuadre lo decidio ChatGPT foto por foto; aqui queda el recorte exacto aplicado sobre el master original. Los verticales originales se conservan fuera del repo por si despues sirven para recortes moviles.",
+    "_nota": "Las fotos verticales de calculadoras conservan recortes 3:2 y variantes móviles cuando aplica.",
     "formato": "x, y, ancho, alto en pixeles del master original"
   },
   "fotos": [
-    { "id": "inicio", "uso": "Hero del Inicio", "pexels": 9869384, "fotografo": "Ron Lach", "pagina": "https://www.pexels.com/photo/couple-working-together-at-home-9869384/", "master": "4973x3315", "recorte": null, "focal": { "desktop": "72% 44%", "tablet": "68% 44%", "movil": "64% 42%" } },
+    { "id": "inicio", "uso": "Hero del Inicio", "pexels": 6963026, "fotografo": "Mikhail Nilov", "pagina": "https://www.pexels.com/photo/a-couple-looking-at-the-laptop-together-6963026/", "master": "Pexels CDN, original horizontal", "recorte": null, "focal": { "desktop": "52% 48%", "tablet": "52% 48%", "movil": "52% 48%" }, "_nota": "Sustituye la toma anterior: la profundidad de campo de la foto anterior y los degradados del hero se percibían borrosos, especialmente en móvil. Se sirve con srcset responsivo desde Pexels." },
     { "id": "finiquito", "uso": "/calculadoras/finiquito", "pexels": 6177617, "fotografo": "Cup of Couple", "pagina": "https://www.pexels.com/photo/crop-person-with-documents-in-modern-office-6177617/", "master": "4480x6720", "recorte": [0, 1866, 4480, 2987], "focal": "65% 48%" },
     { "id": "liquidacion", "uso": "/calculadoras/liquidacion", "pexels": 7581013, "fotografo": "RDNE Stock project", "pagina": "https://www.pexels.com/photo/man-holding-some-papers-7581013/", "master": "4097x6145", "recorte": [0, 600, 4097, 2731], "focal": "68% 45%" },
     { "id": "aguinaldo", "uso": "/calculadoras/aguinaldo", "pexels": 4308013, "fotografo": "Ketut Subiyanto", "pagina": "https://www.pexels.com/photo/happy-couple-looking-at-paperwork-4308013/", "master": "5911x3941", "recorte": null, "focal": "65% 52%" },
-    { "id": "isr", "uso": "/calculadoras/isr", "pexels": 8297024, "fotografo": "Mikhail Nilov", "pagina": "https://www.pexels.com/photo/calculator-beside-a-laptop-on-a-wooden-surface-8297024/", "master": "6000x4000", "recorte": null, "focal": "66% 48%", "_nota": "Sustituye a la 6964340, descartada por ChatGPT: su composicion vertical obligaba a elegir entre el rostro y la accion." },
+    { "id": "isr", "uso": "/calculadoras/isr", "pexels": 8297024, "fotografo": "Mikhail Nilov", "pagina": "https://www.pexels.com/photo/calculator-beside-a-laptop-on-a-wooden-surface-8297024/", "master": "6000x4000", "recorte": null, "focal": "66% 48%", "_nota": "Sustituye a la 6964340, descartada por su composicion vertical." },
     { "id": "resico", "uso": "/calculadoras/resico", "pexels": 7223023, "fotografo": "MART PRODUCTION", "pagina": "https://www.pexels.com/photo/a-woman-in-a-brown-blazer-working-on-her-laptop-7223023/", "master": "5989x3993", "recorte": null, "focal": "68% 44%" },
     { "id": "ptu", "uso": "/calculadoras/ptu", "pexels": 8152735, "fotografo": "Pavel Danilyuk", "pagina": "https://www.pexels.com/photo/people-doing-paperwork-at-a-desk-8152735/", "master": "5256x3509", "recorte": null, "focal": "67% 48%" },
     { "id": "bruto-neto", "uso": "/calculadoras/bruto-a-neto", "pexels": 8297020, "fotografo": "Mikhail Nilov", "pagina": "https://www.pexels.com/photo/a-person-examining-documents-8297020/", "master": "4000x6000", "recorte": [0, 1666, 4000, 2667], "focal": "64% 52%" },

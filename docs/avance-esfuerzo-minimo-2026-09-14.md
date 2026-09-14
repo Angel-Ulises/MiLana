@@ -24,3 +24,11 @@ Corte: 14/09/2026. Base main: 64cdc90b783857cc46b2909d22974a433ae7fc05.
 Ajustar a esfuerzo alto para T02 y T03: contrastar fuentes, fórmulas y estados públicos antes de promover herramientas. T05 y maquetación visual se ejecutarán después con esfuerzo medio/bajo según sus dependencias. T06, T07 y hosting no se improvisan durante este bloque.
 
 Plan completo: https://github.com/Angel-Ulises/MiLana/tree/docs/estrategia-milana-2026-09-14/docs/estrategia/2026-09-14
+
+## Verificación realizada
+
+- Vercel: compilación correcta del proyecto mi-lana-pn2f para el commit c3c3f9aa1cfc29034df88761ed67e8317704c80c.
+- Navegador: desde Aguinaldo, el enlace Calculadoras del encabezado y el breadcrumb llegan a /#calculadoras; destino a 87.9 px con encabezado de 72 px.
+- Carga directa de /#aprende: después del render, destino a 87.8 px; ancla restaurada.
+- PR #6 en borrador; no fusionado ni publicado en producción. No se verificaron fórmulas en este bloque.
+- Dos proyectos adicionales de Vercel reportan falta de una cuenta GitHub conectada. El proyecto actual mi-lana-pn2f sí está Ready; revisar las conexiones duplicadas durante el bloque de hosting, sin modificarlas aquí.

@@ -34,6 +34,7 @@ const rutasSitemap = [
   '/aprende/vacaciones-prima-vacacional',
   '/aprende/resico-ingresos-cobrados',
   '/aprende/pension-imss-ley-97',
+  '/widgets',
   '/sobre',
   '/metodo',
   '/contacto',
@@ -71,9 +72,10 @@ test('el build genera sitemap final sin lastmod artificial', () => {
   const script = read('scripts/generar-sitemap-final.mjs');
   assert.ok(!script.includes('<lastmod>'));
   assert.ok(script.includes('/aprende/finiquito-vs-liquidacion'));
+  assert.ok(script.includes('/widgets'));
 });
 
-test('el sitemap fuente contiene exactamente las 26 rutas públicas esperadas', () => {
+test('el sitemap fuente contiene exactamente las 27 rutas públicas esperadas', () => {
   const sitemap = read('public/sitemap.xml');
   assert.ok(!sitemap.includes('<lastmod>'));
   const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);

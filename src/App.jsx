@@ -1693,6 +1693,17 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
     return () => window.removeEventListener('popstate', alNavegar);
   }, []);
 
+  // La portada se monta con React: restaurar el ancla después del render.
+  useEffect(() => {
+    if (window.location.pathname !== '/') return;
+    const id = window.location.hash.slice(1);
+    if (!['situaciones', 'calculadoras', 'aprende', 'fuentes'].includes(id)) return;
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(id)?.scrollIntoView({ block: 'start', behavior: 'instant' });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
   const [cerrando, setCerrando] = useState(false);
   const cerrarCalc = () => { setCerrando(true); setTimeout(() => { setActiva(null); setCerrando(false); }, 180); };
 
@@ -1717,12 +1728,12 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             <span className="brand-name">MiLana</span>
           </a>
           <nav className="desktop-nav" aria-label="Principal">
-            <a href="#situaciones">Tu situación</a>
-            <a href="#calculadoras">Calculadoras</a>
-            <a href="#aprende">Aprende</a>
-            <a href="#fuentes">Fuentes</a>
+            <a href="/#situaciones">Tu situación</a>
+            <a href="/#calculadoras">Calculadoras</a>
+            <a href="/#aprende">Aprende</a>
+            <a href="/#fuentes">Fuentes</a>
           </nav>
-          <a className="header-cta" href="#situaciones">Empezar</a>
+          <a className="header-cta" href="/#situaciones">Empezar</a>
         </div>
       </header>
 
@@ -1743,7 +1754,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                 <nav aria-label="Ruta de navegación" style={{fontSize:13,color:'var(--ml-soft)',marginBottom:18}}>
                   <a href="/" onClick={(e) => { e.preventDefault(); cerrarCalc(); }} style={{color:'var(--ml-blue)',textDecoration:'none'}}>Inicio</a>
                   <span aria-hidden="true"> / </span>
-                  <a href="/#calculadoras" onClick={(e) => { e.preventDefault(); cerrarCalc(); }} style={{color:'var(--ml-blue)',textDecoration:'none'}}>Calculadoras</a>
+                  <a href="/#calculadoras" style={{color:'var(--ml-blue)',textDecoration:'none'}}>Calculadoras</a>
                 </nav>
                 <div className="calculator-hero-icon" style={{display:'flex',alignItems:'center',gap:10}}>
                   <CalculatorIcon id={calc.id} />
@@ -1790,8 +1801,8 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                 <h1>Entiende lo que tienes. Decide lo que sigue.</h1>
                 <p className="hero-lede">MiLana reúne calculadoras, explicaciones y datos oficiales para ayudarte a pasar de la duda a una decisión concreta, sin lenguaje de banco y sin promesas fáciles.</p>
                 <div className="hero-actions">
-                  <a className="btn btn-primary" href="#situaciones">Explorar mi situación</a>
-                  <a className="btn btn-secondary" href="#calculadoras">Ver calculadoras</a>
+                  <a className="btn btn-primary" href="/#situaciones">Explorar mi situación</a>
+                  <a className="btn btn-secondary" href="/#calculadoras">Ver calculadoras</a>
                 </div>
                 <div className="hero-proof" aria-label="Señales de confianza">
                   <span>Datos 2026</span>

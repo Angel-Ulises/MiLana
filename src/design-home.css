@@ -31,6 +31,8 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+/* Dejar la sección visible debajo del encabezado fijo. */
+#situaciones, #calculadoras, #aprende, #fuentes { scroll-margin-top: 88px; }
 body {
   margin: 0;
   color: var(--ml-text);

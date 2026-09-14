@@ -1,0 +1,245 @@
+/* MiLana — ejecución visual Astra 2026-09-14
+   Capa reversible: no contiene fórmulas ni datos regulatorios. */
+
+:focus-visible {
+  outline: 3px solid #2D6CAA;
+  outline-offset: 3px;
+}
+
+html { scroll-padding-top: 88px; }
+
+/* Header y navegación móvil */
+.astra-menu-button {
+  display: none;
+  min-width: 48px;
+  min-height: 44px;
+  border: 1px solid var(--ml-border, #D9E1E8);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ml-ink, #13263B);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.astra-mobile-menu {
+  position: absolute;
+  top: 72px;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  padding: 14px 20px 20px;
+  border-bottom: 1px solid var(--ml-border, #D9E1E8);
+  background: rgba(255,255,255,.98);
+  box-shadow: 0 14px 30px rgba(19,38,59,.10);
+}
+.astra-mobile-menu[hidden] { display: none !important; }
+.astra-mobile-menu a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 6px;
+  border-bottom: 1px solid #EEF2F5;
+  color: var(--ml-ink, #13263B);
+  font-weight: 650;
+}
+
+/* Hero: abierto, no tarjeta; catálogo visible antes */
+.hero-grid {
+  min-height: min(620px, calc(100vh - 72px));
+  padding-top: 56px;
+  padding-bottom: 48px;
+}
+.hero-media { animation: astraHeroImage 240ms ease-out both; }
+@keyframes astraHeroImage { from { opacity: .9; } to { opacity: 1; } }
+
+.astra-deferred-path { display: none !important; }
+
+/* Catálogo principal */
+.calculators { padding-top: 72px; }
+.calculator-grid { align-items: stretch; }
+.calculator-card {
+  transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+.calculator-card:hover { transform: translateY(-2px); }
+.astra-review-label {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 14px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #FFF6E8;
+  color: #8A5A00;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 750;
+  letter-spacing: .02em;
+}
+.calculators[data-astra-expanded="false"] .astra-extra-calc { display: none; }
+
+/* Situaciones compactas */
+.situations { padding-top: 64px; }
+.situation-card {
+  min-height: 230px;
+  padding: 22px;
+  border-radius: 16px;
+  transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+.situation-card:hover { transform: translateY(-2px); }
+.situation-card h3 { margin-top: 20px; }
+
+/* Botones e interacción */
+.btn,
+.ml-btn,
+button,
+a { -webkit-tap-highlight-color: transparent; }
+.btn:active,
+.ml-btn:active,
+.header-cta:active,
+.astra-menu-button:active {
+  transform: scale(.99);
+  transition-duration: 90ms;
+}
+
+/* Plantilla de calculadora */
+.calculator-hero h1 {
+  font-size: clamp(44px, 4.1vw, 48px);
+  line-height: 1.02;
+}
+.calculator-hero-copy > p {
+  max-width: 68ch;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.astra-jump-to-calc {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 14px;
+  color: var(--ml-blue, #2D6CAA);
+  font-size: 14px;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.calculator-main form,
+.calculator-main > div:first-child {
+  width: 100%;
+  max-width: 760px;
+}
+.calculator-main input,
+.calculator-main select,
+.calculator-main button {
+  min-height: 48px;
+}
+.astra-field-hint {
+  margin: 6px 0 0;
+  color: var(--ml-muted, #5E6B78);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.astra-mobile-photo { display: none; }
+
+/* Resultado: monto final inmediato; solo opacidad */
+.ml-result { animation: astraResultIn 160ms ease-out both !important; }
+@keyframes astraResultIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Footer de confianza */
+.astra-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-top: 18px;
+}
+.astra-footer-links a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Entrada de secciones: máximo 8 px, una sola vez */
+.astra-reveal-pending {
+  opacity: .001;
+  transform: translateY(8px);
+}
+.astra-reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 220ms ease-out, transform 220ms ease-out;
+}
+
+@media (max-width: 1023px) {
+  .hero-grid {
+    min-height: auto;
+    padding-top: 44px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .desktop-nav,
+  .header-cta { display: none !important; }
+  .astra-menu-button { display: inline-flex; align-items: center; justify-content: center; }
+  .header-inner { gap: 12px; }
+
+  .hero-grid { gap: 28px; }
+  .hero-media-wrap { min-height: 180px; }
+  .hero-media { min-height: 180px; }
+  .hero-actions { display: grid; grid-template-columns: 1fr; }
+  .hero-actions .btn { width: 100%; }
+
+  .split-head,
+  .learn-grid,
+  .trust-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .situation-grid,
+  .calculator-grid { grid-template-columns: 1fr !important; }
+  .section { padding-top: 64px; padding-bottom: 64px; }
+}
+
+@media (max-width: 639px) {
+  .calculator-hero h1 { font-size: clamp(34px, 10vw, 38px); }
+  .calculator-hero-media { display: none !important; }
+  .astra-mobile-photo {
+    display: block;
+    margin: 24px 0 30px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #F2F7FB;
+  }
+  .astra-mobile-photo img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .calculator-main { padding-top: 24px !important; }
+  .calculator-main form,
+  .calculator-main > div:first-child { max-width: 100%; }
+}
+
+@media (max-width: 390px) {
+  .hero-grid { padding-top: 32px; padding-bottom: 32px; }
+  .hero-media-wrap,
+  .hero-media { min-height: 160px; }
+  .astra-mobile-photo img { height: 160px; }
+}
+
+/* El contenido no depende de la animación. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .astra-reveal-pending,
+  .astra-reveal-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .btn:active,
+  .ml-btn:active,
+  .header-cta:active,
+  .astra-menu-button:active,
+  .calculator-card:hover,
+  .situation-card:hover { transform: none !important; }
+}

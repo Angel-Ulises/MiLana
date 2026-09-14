@@ -1,0 +1,58 @@
+name: Cierre calculadoras 2026
+
+on:
+  push:
+    branches:
+      - fix/cierre-calculadoras-visual-2026-09-14
+    paths:
+      - .github/workflows/cierre-calculadoras.yml
+      - scripts/cierre-calculadoras.mjs
+      - scripts/preparar-cierre.py
+
+permissions:
+  contents: write
+
+jobs:
+  aplicar-y-validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/cierre-calculadoras-visual-2026-09-14
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Preparar script
+        run: python3 scripts/preparar-cierre.py
+
+      - name: Aplicar cierre integral
+        run: node scripts/cierre-calculadoras.mjs
+
+      - name: Ejecutar pruebas
+        run: npm test
+
+      - name: Compilar sitio
+        run: npm run build
+
+      - name: Comprobar que no quedan estados públicos de suspensión
+        run: |
+          ! grep -RniE "Importes en revisión|Cálculo en revisión|generación de importes está suspendida|importe permanece suspendido" src public --exclude-dir=images
+
+      - name: Commit de cambios validados
+        run: |
+          git config user.name "MiLana automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add src public tests package.json docs
+          if git diff --cached --quiet; then
+            echo "No hay cambios que confirmar"
+            exit 0
+          fi
+          git commit -m "Cerrar cálculos pendientes y corregir experiencia móvil"
+          git push origin HEAD:fix/cierre-calculadoras-visual-2026-09-14

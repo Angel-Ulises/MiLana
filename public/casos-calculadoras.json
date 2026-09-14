@@ -1,0 +1,107 @@
+{
+  "_nota": "Casos editoriales 2026 calculados con el mismo motor de MiLana. Son ejemplos, no datos del usuario ni asesoría individual.",
+  "finiquito": {
+    "titulo": "Ejemplo: renuncia con sueldo de $18,000 mensuales",
+    "resumen": "Una persona ingresó el 1 de enero de 2024 y renuncia el 30 de septiembre de 2026. No tiene salario ni vacaciones previamente adquiridas pendientes y usa las prestaciones mínimas capturadas por la herramienta.",
+    "entradas": [
+      "Salario mensual fijo: $18,000",
+      "Ingreso: 1 de enero de 2024",
+      "Salida: 30 de septiembre de 2026",
+      "Aguinaldo: 15 días · prima vacacional: 25%",
+      "Causa: renuncia voluntaria"
+    ],
+    "resultados": [
+      { "etiqueta": "Aguinaldo proporcional", "valor": 6731.506849315068 },
+      { "etiqueta": "Vacaciones proporcionales", "valor": 7180.27397260274 },
+      { "etiqueta": "Prima vacacional", "valor": 1795.068493150685 },
+      { "etiqueta": "Total bruto estimado", "valor": 15706.849315068494 }
+    ],
+    "nota": "Este ejemplo no incluye ISR, bonos, comisiones, prestaciones superiores a ley ni otros conceptos que puedan existir en un caso real.",
+    "verificacion": {
+      "tipo": "finiquito",
+      "argumentos": {
+        "salarioMensual": "18000",
+        "fechaIngreso": "2024-01-01",
+        "fechaSalida": "2026-09-30",
+        "diasTrabajadosNoPagados": "0",
+        "vacacionesPendientes": "0",
+        "causa": "renuncia",
+        "zona": "general",
+        "diasAguinaldo": "15",
+        "primaVacacionalPct": "25",
+        "diasVacacionesAnuales": ""
+      },
+      "campo": "totalBruto",
+      "esperado": 15706.849315068494
+    }
+  },
+  "aguinaldo": {
+    "titulo": "Ejemplo: $18,000 mensuales y año completo",
+    "resumen": "Con un salario mensual fijo de $18,000, 15 días de aguinaldo y servicio durante todo 2026, el salario diario usado por el ejemplo es de $600.",
+    "entradas": [
+      "Salario mensual: $18,000",
+      "Prestación: 15 días de aguinaldo",
+      "Periodo: año completo 2026"
+    ],
+    "resultados": [
+      { "etiqueta": "Aguinaldo bruto estimado", "valor": 9000 }
+    ],
+    "nota": "Es un monto bruto. Esta calculadora no descuenta ISR del aguinaldo ni modela prestaciones superiores a las capturadas.",
+    "verificacion": {
+      "tipo": "aguinaldo",
+      "argumentos": { "salario": "18000", "dias": "15", "ingreso": "", "anioCompleto": true },
+      "campo": "bruto",
+      "esperado": 9000
+    }
+  },
+  "isr": {
+    "titulo": "Ejemplo: ingreso mensual gravable de $20,000",
+    "resumen": "Para un mes completo de 2026 con un solo empleador y sin aplicar el supuesto exclusivo de salario mínimo, MiLana ubica $20,000 en la tarifa mensual vigente que usa la herramienta.",
+    "entradas": [
+      "Ingreso gravable del mes: $20,000",
+      "Periodo del ejemplo: septiembre de 2026",
+      "Un solo empleador"
+    ],
+    "resultados": [
+      { "etiqueta": "ISR retenido estimado", "valor": 2383.65236 },
+      { "etiqueta": "Ingreso después de ISR", "valor": 17616.34764 }
+    ],
+    "nota": "No representa un recibo de nómina completo: IMSS, otras deducciones, percepciones exentas y situaciones fiscales distintas se revisan por separado.",
+    "verificacion": {
+      "tipo": "isr",
+      "argumentos": { "ingreso": "20000", "soloMinimo": false, "periodo": "2026-09", "empleadorUnico": true },
+      "campo": "retenido",
+      "esperado": 2383.65236
+    }
+  },
+  "bruto-a-neto": {
+    "titulo": "Ejemplo: $20,000 brutos con bases iguales para ISR e IMSS",
+    "resumen": "Este escenario didáctico usa $20,000 de percepciones brutas, $20,000 de ingreso gravable para ISR, SBC diario de $666.67 y 30 días cotizados. Solo resta ISR e IMSS obrero.",
+    "entradas": [
+      "Percepciones brutas: $20,000",
+      "Ingreso gravable ISR: $20,000",
+      "SBC diario: $666.67",
+      "Días cotizados: 30"
+    ],
+    "resultados": [
+      { "etiqueta": "ISR estimado", "valor": 2383.65236 },
+      { "etiqueta": "Cuota obrera IMSS estimada", "valor": 512.771175 },
+      { "etiqueta": "Neto después de ISR e IMSS", "valor": 17103.576465 }
+    ],
+    "nota": "Un recibo real puede tener otras deducciones y bases diferentes. El ejemplo muestra por qué bruto, gravable para ISR y SBC no deben confundirse.",
+    "verificacion": {
+      "tipo": "bruto-neto",
+      "argumentos": {
+        "brutoMensual": "20000",
+        "ingresoGravableISR": "20000",
+        "sbcDiario": "666.67",
+        "diasCotizados": "30",
+        "soloMinimo": false,
+        "periodo": "2026-09",
+        "empleadorUnico": true
+      },
+      "campo": "netoDespuesISRIMSS",
+      "esperado": 17103.576465
+    }
+  }
+}

@@ -1,4 +1,9 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/guias", "destination": "/aprende", "permanent": true },
+    { "source": "/guias/aguinaldo-2026", "destination": "/aprende/aguinaldo-bruto-neto", "permanent": true },
+    { "source": "/guias/bruto-neto-recibo", "destination": "/aprende/leer-recibo-nomina", "permanent": true }
+  ]
 }

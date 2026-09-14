@@ -155,7 +155,7 @@
     ],
     "siguientes": [
       {
-        "texto": "Revisa cómo cambia el monto después de considerar ISR",
+        "texto": "Consulta el ISR del sueldo mensual ordinario; no calcula el ISR del aguinaldo",
         "destino": "isr"
       },
       {
@@ -219,7 +219,7 @@
         "destino": "aguinaldo"
       },
       {
-        "texto": "Comprueba cómo se relaciona tu salario bruto con lo que realmente recibes",
+        "texto": "Consulta las diferencias entre bruto y neto y el estado de revisión",
         "destino": "bruto-neto"
       }
     ]
@@ -267,7 +267,7 @@
     ],
     "siguientes": [
       {
-        "texto": "Estima cuánto queda de tu sueldo después de ISR y cuota obrera del IMSS",
+        "texto": "Consulta el alcance y la revisión pendiente de Bruto a Neto",
         "destino": "bruto-neto"
       },
       {

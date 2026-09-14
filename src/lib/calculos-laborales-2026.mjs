@@ -57,9 +57,13 @@ function datosServicio(fechaIngreso, fechaSalida) {
   const ultimoAniversario = aniversario(ingreso, ingreso.y + completos);
   const siguienteAniversario = aniversario(ingreso, ingreso.y + completos + 1);
   const diasCiclo = Math.max(1, Math.round((siguienteAniversario - ultimoAniversario) / DIA));
-  const diasCicloActual = Math.floor((salida.ms - ultimoAniversario) / DIA) + 1;
+  const diasTranscurridosCiclo = Math.max(0, Math.floor((salida.ms - ultimoAniversario) / DIA));
+  // Para prestaciones proporcionales por días sí se cuenta el último día trabajado.
+  // Para antigüedad, en cambio, el propio aniversario representa exactamente el
+  // número de años completos: no se suma artificialmente un día de fracción.
+  const diasCicloActual = diasTranscurridosCiclo + 1;
   const diasServicio = Math.floor((salida.ms - ingreso.ms) / DIA) + 1;
-  const aniosEquivalentes = completos + (diasCicloActual / diasCiclo);
+  const aniosEquivalentes = completos + (diasTranscurridosCiclo / diasCiclo);
 
   const inicioAguinaldo = Math.max(ingreso.ms, Date.UTC(2026, 0, 1));
   const diasAguinaldo = Math.floor((salida.ms - inicioAguinaldo) / DIA) + 1;

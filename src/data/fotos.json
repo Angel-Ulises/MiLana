@@ -1,7 +1,7 @@
 {
-  "_nota": "Punto focal de cada fotografia, decidido por ChatGPT foto por foto. No son CSS global: el componente los recibe como datos y los aplica con object-position, porque el encuadre correcto depende de donde esta el sujeto en cada imagen. 'movil' apunta al master vertical original cuando existe: en una franja de 230px de alto a 100vw, el recorte 3:2 de escritorio pierde demasiado, y para eso se guardaron los verticales. La procedencia, licencia y recorte de cada foto viven en assets-master/FUENTES.json.",
+  "_nota": "Punto focal de cada fotografia, decidido foto por foto. No son CSS global: el componente los recibe como datos y los aplica con object-position. 'movil' apunta al master vertical original cuando existe. La procedencia, licencia y recorte viven en assets-master/FUENTES.json.",
   "fotos": {
-    "inicio":      { "focal": "72% 44%", "focalTablet": "68% 44%", "focalMovil": "64% 42%" },
+    "inicio":      { "focal": "52% 48%", "focalTablet": "52% 48%", "focalMovil": "52% 48%" },
     "finiquito":   { "focal": "65% 48%", "movil": "finiquito-movil" },
     "liquidacion": { "focal": "68% 45%", "movil": "liquidacion-movil" },
     "aguinaldo":   { "focal": "65% 52%" },

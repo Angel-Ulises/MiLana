@@ -6,14 +6,12 @@ on:
       - fix/cierre-calculadoras-visual-2026-09-14
     paths:
       - .github/workflows/cierre-calculadoras.yml
-      - scripts/cierre-calculadoras.mjs
-      - scripts/preparar-cierre.py
 
 permissions:
   contents: write
 
 jobs:
-  aplicar-y-validar:
+  validar-cierre-final:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,11 +26,18 @@ jobs:
       - name: Instalar dependencias
         run: npm install --no-audit --no-fund
 
-      - name: Preparar script
-        run: python3 scripts/preparar-cierre.py
-
-      - name: Aplicar cierre integral
-        run: node scripts/cierre-calculadoras.mjs
+      - name: Limpiar una frase heredada del resultado
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/App.jsx')
+          s = p.read_text(encoding='utf-8')
+          old = 'comisiones, bonos u otros conceptos integrables requieren revisión específica.'
+          new = 'comisiones, bonos u otros conceptos integrables requieren un cálculo adicional con sus propios datos.'
+          if old in s:
+              s = s.replace(old, new)
+              p.write_text(s, encoding='utf-8')
+          PY
 
       - name: Ejecutar pruebas
         run: npm test
@@ -40,18 +45,18 @@ jobs:
       - name: Compilar sitio
         run: npm run build
 
-      - name: Comprobar que no quedan estados públicos de suspensión
+      - name: Comprobar que no quedan mensajes públicos de suspensión
         run: |
-          ! grep -RniE "Importes en revisión|Cálculo en revisión|generación de importes está suspendida|importe permanece suspendido" src public --exclude-dir=images
+          ! grep -RniE "Importes en revisión|Cálculo en revisión|generación de importes está suspendida|importe permanece suspendido|requieren revisión específica" src public --exclude-dir=images
 
-      - name: Commit de cambios validados
+      - name: Guardar limpieza validada
         run: |
           git config user.name "MiLana automation"
           git config user.email "actions@users.noreply.github.com"
-          git add src public tests package.json docs
+          git add src/App.jsx
           if git diff --cached --quiet; then
-            echo "No hay cambios que confirmar"
+            echo "No hay limpieza adicional que confirmar"
             exit 0
           fi
-          git commit -m "Cerrar cálculos pendientes y corregir experiencia móvil"
+          git commit -m "Afinar mensaje final de finiquito"
           git push origin HEAD:fix/cierre-calculadoras-visual-2026-09-14

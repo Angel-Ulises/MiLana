@@ -17,11 +17,11 @@ Propósito: llevar a una persona con duda sobre proporcionalidad a una explicaci
 
 Destino canónico: `https://www.milanaaqui.mx/guias/aguinaldo-2026`
 
-Métrica útil: `guide_open` y posterior `guide_to_calculator` cuando la persona decide probar el caso; no medir salario ni importe.
+Métrica útil: `page_view` de la guía y `next_step_click` hacia la calculadora cuando la persona decide probar el caso. No medir salario, fecha laboral ni importe.
 
 Adaptación A:
 
-> ¿Entraste a trabajar a mitad de año? Tu aguinaldo no se calcula contando “meses completos”. En MiLana usamos días civiles del periodo y mostramos el supuesto antes del resultado. La guía incluye un caso ficticio con salario de $18,000 y entrada el 1 de julio para que puedas reproducir el cálculo y compararlo con tu recibo.
+> ¿Entraste a trabajar a mitad de año? Tu aguinaldo no se calcula contando “meses completos”. En MiLana usamos días civiles del periodo y mostramos el supuesto antes del resultado. La guía incluye un caso ficticio para que puedas reproducir el cálculo y compararlo con tu recibo.
 
 Adaptación B:
 
@@ -35,7 +35,7 @@ Propósito: explicar qué partes deben distinguirse antes de aceptar una calcula
 
 Destino canónico: `https://www.milanaaqui.mx/guias/bruto-neto-recibo`
 
-Métrica útil: `guide_open` y `guide_to_calculator`; no registrar sueldo, SBC o monto del resultado.
+Métrica prevista: `page_view` de la guía y `next_step_click` hacia una herramienta relacionada. La instrumentación de esta guía debe verificarse antes de distribuirla; no se registra sueldo, SBC o monto del resultado.
 
 Adaptación A:
 

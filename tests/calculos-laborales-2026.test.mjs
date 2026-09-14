@@ -34,14 +34,15 @@ test('finiquito: renuncia antes de 15 años no agrega prima de antigüedad', () 
   assert.equal(r.primaAntiguedad, 0);
 });
 
-test('finiquito: renuncia con 15 años sí aplica prima y respeta el tope de zona', () => {
+test('finiquito: aniversario de 15 años cuenta exactamente 15 años para prima', () => {
   const r = calcularFiniquito2026({
     salarioMensual: '60000', fechaIngreso: '2011-09-14', fechaSalida: '2026-09-14',
     causa: 'renuncia', zona: 'general', diasAguinaldo: '15', primaVacacionalPct: '25',
   });
   assert.equal(r.aniosCompletos, 15);
-  assert.ok(r.primaAntiguedad > 0);
+  assert.equal(r.aniosEquivalentes, 15);
   cerca(r.topePrimaDiario, 630.08);
+  cerca(r.primaAntiguedad, 113414.40);
 });
 
 test('liquidación: 90 días usa salario diario integrado y 20 días no se agregan por defecto', () => {

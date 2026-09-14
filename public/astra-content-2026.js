@@ -1,5 +1,15 @@
 (() => {
+  const ensureMeasurement = () => {
+    if (document.querySelector('script[data-astra-measurement]')) return;
+    const script = document.createElement('script');
+    script.defer = true;
+    script.src = '/astra-measurement-2026.js';
+    script.dataset.astraMeasurement = 'true';
+    document.head.appendChild(script);
+  };
+
   const apply = () => {
+    ensureMeasurement();
     const learn = document.querySelector('#aprende');
     if (learn && learn.dataset.astraGuides !== 'true') {
       learn.dataset.astraGuides = 'true';

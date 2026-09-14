@@ -1,0 +1,301 @@
+{
+  "timezone": "America/Mexico_City",
+  "sourceCommit": "64cdc90b783857cc46b2909d22974a433ae7fc05",
+  "results": [
+    {
+      "case": "ISR y neto",
+      "salary": "25000",
+      "isr": 3451.6523599999996,
+      "subsidio": 0,
+      "netISR": 3451.6523599999996,
+      "imss": 650.95536
+    },
+    {
+      "case": "ISR y neto",
+      "salary": "10000",
+      "isr": 192.795024,
+      "subsidio": 536.22,
+      "netISR": 193.36878000000002,
+      "imss": 237.5
+    },
+    {
+      "case": "ISR y neto",
+      "salary": "11000",
+      "isr": 837.815024,
+      "subsidio": 0,
+      "netISR": 302.16877999999997,
+      "imss": 262.45536
+    },
+    {
+      "case": "ISR y neto",
+      "salary": "11492.66",
+      "isr": 891.416432,
+      "subsidio": 0,
+      "netISR": 355.77018799999996,
+      "imss": 276.126675
+    },
+    {
+      "case": "ISR y neto",
+      "salary": "11492.67",
+      "isr": 891.41752,
+      "subsidio": 0,
+      "netISR": 891.41752,
+      "imss": 276.1269525
+    },
+    {
+      "case": "ISR y neto",
+      "salary": "9451.20",
+      "isr": 133.08558400000004,
+      "subsidio": 536.22,
+      "netISR": 133.65934000000004,
+      "imss": 224.466
+    },
+    {
+      "case": "ISR y neto",
+      "salary": "100000",
+      "isr": 23736.083,
+      "subsidio": 0,
+      "netISR": 23736.083,
+      "imss": 2732.20536
+    },
+    {
+      "case": "ISR y neto",
+      "salary": "7168.515",
+      "isr": 0,
+      "subsidio": 536.22,
+      "netISR": 0,
+      "imss": 170.25223125000002
+    },
+    {
+      "case": "aguinaldo",
+      "date": "",
+      "days": 365,
+      "amount": 9000
+    },
+    {
+      "case": "aguinaldo",
+      "date": "2026-01-01",
+      "days": 365,
+      "amount": 9000
+    },
+    {
+      "case": "aguinaldo",
+      "date": "2026-07-01",
+      "days": 183,
+      "amount": 4512.328767123288
+    },
+    {
+      "case": "aguinaldo",
+      "date": "2026-12-31",
+      "days": 0,
+      "amount": 0
+    },
+    {
+      "case": "aguinaldo",
+      "date": "2027-01-01",
+      "days": -1,
+      "amount": -24.65753424657534
+    },
+    {
+      "case": "dias prestacion",
+      "days": "0",
+      "amount": 0
+    },
+    {
+      "case": "dias prestacion",
+      "days": "-15",
+      "amount": -9000
+    },
+    {
+      "case": "dias prestacion",
+      "days": "15.5",
+      "amount": 9000
+    },
+    {
+      "case": "separacion",
+      "entry": "2026-07-01",
+      "departure": "2026-09-14",
+      "finiquito": {
+        "sd": 600,
+        "pagoSalario": 0,
+        "dt": 0,
+        "aguinaldo": 1849.3150684931506,
+        "diasAnio": 75,
+        "vacDias": 12,
+        "vacProporcionales": 2.4986301369863013,
+        "pagoVacaciones": 1499.1780821917807,
+        "primaVac": 374.7945205479452,
+        "primaAnt": 0,
+        "aniosCompletos": 0,
+        "bruto": 3723.2876712328766
+      },
+      "liquidacion": {
+        "sd": 600,
+        "sdi": 629.5890410958905,
+        "factorIntegracion": 1.0493150684931507,
+        "dt": 0,
+        "pagoSalario": 0,
+        "aguinaldo": 1849.3150684931506,
+        "diasAnio": 75,
+        "vacProporcionales": 2.4986301369863013,
+        "pagoVacaciones": 1499.1780821917807,
+        "primaVac": 374.7945205479452,
+        "indem90": 56663.013698630144,
+        "indem20": 2587.3522236817416,
+        "primaAnt": 1479.4520547945206,
+        "aniosCompletos": 0,
+        "anios": 0.2054794520547945,
+        "brutoFiniquito": 3723.2876712328766,
+        "brutoLiquidacion": 60729.81797710641,
+        "brutoTotal": 64453.10564833929
+      }
+    },
+    {
+      "case": "separacion",
+      "entry": "2011-09-18",
+      "departure": "2026-09-14",
+      "finiquito": {
+        "sd": 600,
+        "pagoSalario": 0,
+        "dt": 0,
+        "aguinaldo": 6312.328767123287,
+        "diasAnio": 256,
+        "vacDias": 26,
+        "vacProporcionales": 25.786301369863015,
+        "pagoVacaciones": 15471.78082191781,
+        "primaVac": 3867.9452054794524,
+        "primaAnt": 108000,
+        "aniosCompletos": 15,
+        "bruto": 133652.05479452055
+      },
+      "liquidacion": {
+        "sd": 600,
+        "sdi": 635.3424657534246,
+        "factorIntegracion": 1.058904109589041,
+        "dt": 0,
+        "pagoSalario": 0,
+        "aguinaldo": 6312.328767123287,
+        "diasAnio": 256,
+        "vacProporcionales": 25.786301369863015,
+        "pagoVacaciones": 15471.78082191781,
+        "primaVac": 3867.9452054794524,
+        "indem90": 57180.82191780821,
+        "indem20": 190602.7397260274,
+        "primaAnt": 108000,
+        "aniosCompletos": 15,
+        "anios": 15,
+        "brutoFiniquito": 25652.05479452055,
+        "brutoLiquidacion": 355783.5616438356,
+        "brutoTotal": 381435.61643835617
+      }
+    },
+    {
+      "case": "separacion",
+      "entry": "2025-09-14",
+      "departure": "2026-09-14",
+      "finiquito": {
+        "sd": 600,
+        "pagoSalario": 0,
+        "dt": 0,
+        "aguinaldo": 6312.328767123287,
+        "diasAnio": 256,
+        "vacDias": 14,
+        "vacProporcionales": 0.038356164383561646,
+        "pagoVacaciones": 23.013698630136986,
+        "primaVac": 5.7534246575342465,
+        "primaAnt": 0,
+        "aniosCompletos": 1,
+        "bruto": 6341.095890410958
+      },
+      "liquidacion": {
+        "sd": 600,
+        "sdi": 630.4109589041095,
+        "factorIntegracion": 1.0506849315068492,
+        "dt": 0,
+        "pagoSalario": 0,
+        "aguinaldo": 6312.328767123287,
+        "diasAnio": 256,
+        "vacProporcionales": 0.038356164383561646,
+        "pagoVacaciones": 23.013698630136986,
+        "primaVac": 5.7534246575342465,
+        "indem90": 56736.986301369856,
+        "indem20": 12608.21917808219,
+        "primaAnt": 7200,
+        "aniosCompletos": 1,
+        "anios": 1,
+        "brutoFiniquito": 6341.095890410958,
+        "brutoLiquidacion": 76545.20547945205,
+        "brutoTotal": 82886.30136986301
+      }
+    },
+    {
+      "case": "separacion",
+      "entry": "2026-09-14",
+      "departure": "2026-09-14",
+      "finiquito": null,
+      "liquidacion": null
+    }
+  ],
+  "states": [
+    {
+      "id": "finiquito",
+      "declared": "verified",
+      "visible": "verified",
+      "sourceURLs": 0
+    },
+    {
+      "id": "liquidacion",
+      "declared": "verified",
+      "visible": "verified",
+      "sourceURLs": 0
+    },
+    {
+      "id": "aguinaldo",
+      "declared": "verified",
+      "visible": "verified",
+      "sourceURLs": 0
+    },
+    {
+      "id": "isr",
+      "declared": "verified",
+      "visible": "needs-review",
+      "sourceURLs": 0
+    },
+    {
+      "id": "resico",
+      "declared": "verified",
+      "visible": "verified",
+      "sourceURLs": 1
+    },
+    {
+      "id": "ptu",
+      "declared": "needs-review",
+      "visible": "needs-review",
+      "sourceURLs": 0
+    },
+    {
+      "id": "bruto-neto",
+      "declared": "needs-review",
+      "visible": "needs-review",
+      "sourceURLs": 0
+    },
+    {
+      "id": "vacaciones",
+      "declared": "verified",
+      "visible": "verified",
+      "sourceURLs": 0
+    },
+    {
+      "id": "infonavit",
+      "declared": "needs-review",
+      "visible": "needs-review",
+      "sourceURLs": 1
+    },
+    {
+      "id": "pension",
+      "declared": "blocked",
+      "visible": "blocked",
+      "sourceURLs": 1
+    }
+  ]
+}

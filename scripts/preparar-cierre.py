@@ -10,6 +10,8 @@ repls = {
     "<ResultLine label={`Indemnización de 3 meses (SDI ${fmt(resultado.salarioDiarioIntegrado)}/día)`}": "<ResultLine label={'Indemnización de 3 meses (SDI ' + fmt(resultado.salarioDiarioIntegrado) + '/día)'}",
     "value={`2026-${String(i+2).padStart(2,'0')}`}": "value={'2026-' + String(i+2).padStart(2,'0')}",
     "{s.reference && `(${s.reference})`}": "{s.reference && '(' + s.reference + ')'}",
+    "<ResultLine label=\"ISR mensual estimado\" value={`− ${fmt(resultado.retenido)}`}": "<ResultLine label=\"ISR mensual estimado\" value={'− ' + fmt(resultado.retenido)}",
+    "<ResultLine label=\"Cuota obrera IMSS\" value={`− ${fmt(resultado.cuotaObrera)}`}": "<ResultLine label=\"Cuota obrera IMSS\" value={'− ' + fmt(resultado.cuotaObrera)}",
 }
 for a,b in repls.items():
     if a not in s:

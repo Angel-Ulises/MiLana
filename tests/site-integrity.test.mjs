@@ -103,6 +103,30 @@ test('el bucle de compartir calculadoras es sintácticamente válido y no serial
   assert.ok(!js.includes('salario='));
 });
 
+test('la medición común cubre páginas estáticas sin capturar valores financieros', () => {
+  const pkg = JSON.parse(read('package.json'));
+  assert.match(pkg.scripts.build, /inyectar-analytics-estaticos/);
+  const js = read('public/milana-analytics.js');
+  assert.doesNotThrow(() => new Function(js));
+  assert.ok(js.includes('calculator_view'));
+  assert.ok(js.includes('calculator_submit'));
+  assert.ok(js.includes('internal_to_calculator'));
+  assert.ok(!js.includes('FormData'));
+  assert.ok(!js.includes('localStorage'));
+  assert.ok(!js.includes('sessionStorage'));
+  assert.ok(!js.includes('.value'));
+  const inyector = read('scripts/inyectar-analytics-estaticos.mjs');
+  assert.ok(inyector.includes('/milana-analytics.js'));
+});
+
+test('la guía de finiquito responde intención 2026 y enlaza ambas calculadoras', () => {
+  const html = read('public/aprende/finiquito-vs-liquidacion/index.html');
+  assert.match(html, /Finiquito o liquidación 2026/);
+  assert.ok(html.includes('/calculadoras/finiquito'));
+  assert.ok(html.includes('/calculadoras/liquidacion'));
+  assert.ok(html.includes('/situaciones/terminar-relacion-laboral'));
+});
+
 test('no quedan mensajes públicos de canal o importes pendientes', () => {
   const files = ['public/contacto/index.html','public/privacidad/index.html','public/sobre/index.html'];
   for (const file of files) {

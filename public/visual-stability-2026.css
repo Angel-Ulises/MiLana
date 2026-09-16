@@ -1,0 +1,192 @@
+/* MiLana — estabilidad visual y legibilidad, 15/09/2026
+   Capa de corrección para evitar saltos de layout, FOUC perceptible y texto
+   sobre fotografía con contraste insuficiente. No toca cálculos ni contenido. */
+
+/* La portada conserva su orden final desde el primer render, sin depender de
+   que JavaScript mueva nodos después de pintar la página. */
+main:has(> .hero) {
+  display: flex;
+  flex-direction: column;
+}
+main:has(> .hero) > .hero { order: 0; }
+main:has(> .hero) > .calculators { order: 1; }
+main:has(> .hero) > .situations { order: 2; }
+main:has(> .hero) > .learn-section { order: 3; }
+main:has(> .hero) > .trust-band { order: 4; }
+main:has(> .hero) > .path-section { display: none !important; }
+
+/* La foto de portada ya existe optimizada en el sitio. Nunca debe esperar a
+   una mutación JS ni quedar oculta mientras cambia a otra URL. */
+.hero-media img {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  image-rendering: auto;
+}
+
+/* Quita la animación de entrada que podía revelar primero el DOM y luego
+   esconder/reaparecer secciones. */
+.astra-reveal-pending,
+.astra-reveal-in {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Mejor contraste del texto editorial. */
+.hero-lede,
+.calculator-purpose {
+  color: #3E5265 !important;
+}
+
+@media (min-width: 1024px) {
+  .hero-grid {
+    min-height: 620px !important;
+    padding-top: 56px !important;
+    padding-bottom: 52px !important;
+  }
+
+  .hero-copy {
+    width: min(52%, 610px) !important;
+    max-width: 610px !important;
+    padding: 34px 68px 34px 0 !important;
+    position: relative;
+    z-index: 5;
+    background: linear-gradient(
+      90deg,
+      #FBF8F2 0%,
+      rgb(251 248 242 / 0.99) 67%,
+      rgb(251 248 242 / 0.82) 82%,
+      rgb(251 248 242 / 0) 100%
+    );
+  }
+
+  .hero h1 {
+    max-width: 600px !important;
+    font-size: clamp(52px, 4.65vw, 68px) !important;
+    line-height: .99 !important;
+    letter-spacing: -.035em !important;
+    text-wrap: balance;
+  }
+
+  .hero-lede {
+    max-width: 550px !important;
+    font-size: 18px !important;
+    line-height: 1.55 !important;
+  }
+
+  .hero-media-wrap {
+    width: min(58vw, 900px) !important;
+  }
+
+  .hero-media {
+    top: 0 !important;
+    right: -24px !important;
+    bottom: 0 !important;
+    left: -96px !important;
+  }
+
+  .hero-media::before {
+    background: linear-gradient(
+      90deg,
+      #FBF8F2 0%,
+      rgb(251 248 242 / 0.98) 19%,
+      rgb(251 248 242 / 0.82) 31%,
+      rgb(251 248 242 / 0.48) 43%,
+      rgb(251 248 242 / 0.16) 54%,
+      rgb(251 248 242 / 0) 64%
+    ) !important;
+  }
+
+  .hero-media::after { background: none !important; }
+
+  /* Alinea formulario y encabezado de cada calculadora sobre la misma guía
+     vertical en escritorio. Antes el H1 arrancaba a la izquierda y el
+     formulario aparecía desplazado hacia el centro. */
+  .calculator-main.shell {
+    width: min(720px, calc(100% - 64px)) !important;
+    max-width: 720px !important;
+    margin-left: max(32px, calc((100vw - 1280px) / 2)) !important;
+    margin-right: auto !important;
+  }
+
+  .calculator-hero-media::after {
+    background: linear-gradient(
+      90deg,
+      #FBF8F2 0%,
+      rgb(251 248 242 / 0.96) 10%,
+      rgb(251 248 242 / 0.74) 22%,
+      rgb(251 248 242 / 0.34) 34%,
+      rgb(251 248 242 / 0) 46%
+    ) !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1180px) {
+  .hero-copy {
+    width: 54% !important;
+    padding-right: 50px !important;
+  }
+  .hero h1 {
+    font-size: clamp(48px, 5vw, 58px) !important;
+  }
+  .hero-media-wrap {
+    width: 54vw !important;
+  }
+  .hero-media {
+    left: -40px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-copy {
+    background: #FBF8F2 !important;
+  }
+  .hero-media-wrap,
+  .hero-media {
+    min-height: 360px !important;
+  }
+  .hero-media::before {
+    background: linear-gradient(
+      180deg,
+      #FBF8F2 0%,
+      rgb(251 248 242 / 0.50) 9%,
+      rgb(251 248 242 / 0) 23%
+    ) !important;
+  }
+  .calculator-main.shell {
+    margin-inline: auto !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-grid { padding-top: 34px !important; }
+  .hero-copy { padding-bottom: 24px !important; }
+  .hero h1 {
+    font-size: clamp(41px, 11.4vw, 50px) !important;
+    line-height: .99 !important;
+  }
+  .hero-lede {
+    margin-top: 18px !important;
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+  }
+  .hero-media-wrap,
+  .hero-media {
+    min-height: 285px !important;
+  }
+  .hero-media::before,
+  .hero-media::after,
+  .calculator-hero-media::after {
+    background: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-media img,
+  .calculator-card,
+  .article-row {
+    transition: none !important;
+    animation: none !important;
+  }
+}

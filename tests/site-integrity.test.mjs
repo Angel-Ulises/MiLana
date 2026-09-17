@@ -77,6 +77,18 @@ test('el hero y las anclas usan la corrección visual nueva', () => {
   assert.match(overrides, /scroll-margin-top:\s*12px/);
 });
 
+test('el movimiento premium es progresivo y respeta reducir movimiento', () => {
+  const mejoras = read('src/siteEnhancements.jsx');
+  const overrides = read('src/site-overrides.css');
+  const staticCss = read('public/static-2026.css');
+  assert.ok(mejoras.includes('IntersectionObserver'));
+  assert.ok(mejoras.includes('ml-premium-reveal'));
+  assert.ok(overrides.includes('@media (prefers-reduced-motion: reduce)'));
+  assert.ok(overrides.includes('translateY(-6px)'));
+  assert.ok(staticCss.includes('mlStaticIn'));
+  assert.ok(staticCss.includes('prefers-reduced-motion:reduce'));
+});
+
 test('el build genera sitemap final sin lastmod artificial', () => {
   const pkg = JSON.parse(read('package.json'));
   assert.match(pkg.scripts.build, /generar-sitemap-final/);

@@ -164,3 +164,36 @@ html { scroll-padding-top: 0 !important; }
     transition: none !important;
   }
 }
+
+/* Regla visual de fotografía: el fundido solo resuelve el pequeño solape entre
+   texto y foto. Nunca debe avanzar sobre rostros, manos, documentos o la acción
+   principal. Esta capa se carga después de los CSS legacy y por eso es la regla
+   efectiva en producción. */
+@media (min-width: 1024px) {
+  .calculator-hero-media::after {
+    background: linear-gradient(
+      90deg,
+      #FBF8F2 0%,
+      rgb(251 248 242 / 0.90) 4%,
+      rgb(251 248 242 / 0.44) 9%,
+      rgb(251 248 242 / 0.10) 14%,
+      rgb(251 248 242 / 0) 16%
+    ) !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .calculator-hero-media::after {
+    background: linear-gradient(
+      180deg,
+      #FBF8F2 0%,
+      rgb(251 248 242 / 0.62) 5%,
+      rgb(251 248 242 / 0.18) 11%,
+      rgb(251 248 242 / 0) 18%
+    ) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .calculator-hero-media::after { background: none !important; }
+}

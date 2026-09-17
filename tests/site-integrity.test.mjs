@@ -54,11 +54,12 @@ test('la portada usa metadata visible y no FAQ invisible', () => {
   assert.ok(html.includes('final-2026.css'));
 });
 
-test('hay canal público de correcciones sin pedir datos personales', () => {
+test('hay canal de correcciones de MiLana sin exponer el repositorio personal', () => {
   const html = read('public/contacto/index.html');
-  assert.ok(html.includes('/issues/new'));
-  assert.match(html, /No publiques RFC/);
-  assert.ok(html.includes('contacto.milanaaqui@gmail.com'));
+  assert.ok(html.includes('mailto:contacto.milanaaqui@gmail.com'));
+  assert.ok(!html.includes('github.com/Angel-Ulises'));
+  assert.ok(!html.includes('/issues/new'));
+  assert.match(html, /No envíes RFC/);
 });
 
 test('la nueva fuente del hero está documentada', () => {
@@ -72,6 +73,7 @@ test('el hero y las anclas usan la corrección visual nueva', () => {
   const overrides = read('src/site-overrides.css');
   assert.ok(mejoras.includes("HERO_PEXELS_ID = '7129713'"));
   assert.ok(mejoras.includes('contacto.milanaaqui@gmail.com'));
+  assert.match(overrides, /scroll-padding-top:\s*0\s*!important/);
   assert.match(overrides, /scroll-margin-top:\s*12px/);
 });
 

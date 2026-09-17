@@ -1,0 +1,19 @@
+/* Corrección de navegación interna: el id vive en secciones con padding.
+   Un scroll-margin grande sumaba el alto del header + el padding de la sección,
+   dejando un hueco visual enorme. Con este margen el primer contenido visible
+   queda inmediatamente debajo del encabezado sticky. */
+#situaciones,
+#calculadoras,
+#aprende,
+#fuentes {
+  scroll-margin-top: 12px;
+}
+
+@media (max-width: 640px) {
+  #situaciones,
+  #calculadoras,
+  #aprende,
+  #fuentes {
+    scroll-margin-top: 8px;
+  }
+}

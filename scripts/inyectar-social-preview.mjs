@@ -47,7 +47,7 @@ function aplicar(archivo, { imagen, alt }) {
 }
 
 aplicar(resolve(DIST, 'index.html'), {
-  imagen: `${origen}/images/gen/inicio-1440.jpg`,
+  imagen: 'https://images.pexels.com/photos/7129713/pexels-photo-7129713.jpeg?auto=compress&cs=tinysrgb&w=1440',
   alt: 'MiLana: calculadoras de sueldo, prestaciones e impuestos para México',
 });
 

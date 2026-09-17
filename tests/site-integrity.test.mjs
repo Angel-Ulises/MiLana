@@ -58,12 +58,21 @@ test('hay canal público de correcciones sin pedir datos personales', () => {
   const html = read('public/contacto/index.html');
   assert.ok(html.includes('/issues/new'));
   assert.match(html, /No publiques RFC/);
+  assert.ok(html.includes('contacto.milanaaqui@gmail.com'));
 });
 
 test('la nueva fuente del hero está documentada', () => {
   const fuentes = read('assets-master/FUENTES.json');
-  assert.ok(fuentes.includes('6963026'));
-  assert.ok(fuentes.includes('Mikhail Nilov'));
+  assert.ok(fuentes.includes('7129713'));
+  assert.ok(fuentes.includes('Michael Burrows'));
+});
+
+test('el hero y las anclas usan la corrección visual nueva', () => {
+  const mejoras = read('src/siteEnhancements.jsx');
+  const overrides = read('src/site-overrides.css');
+  assert.ok(mejoras.includes("HERO_PEXELS_ID = '7129713'"));
+  assert.ok(mejoras.includes('contacto.milanaaqui@gmail.com'));
+  assert.match(overrides, /scroll-margin-top:\s*12px/);
 });
 
 test('el build genera sitemap final sin lastmod artificial', () => {

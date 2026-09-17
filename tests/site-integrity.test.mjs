@@ -109,7 +109,12 @@ test('el bucle de compartir calculadoras es sintácticamente válido y no serial
   assert.ok(js.includes('data-milana-share') || js.includes('milanaShare'));
   assert.ok(js.includes('navigator.share'));
   assert.ok(js.includes('navigator.clipboard'));
+  assert.ok(js.includes("document.execCommand('copy')"));
+  assert.ok(js.includes("window.prompt('Copia este enlace:'"));
+  assert.ok(js.includes('Tus datos y resultados no se incluyen'));
+  assert.ok(js.includes('location.origin+location.pathname'));
   assert.ok(js.includes('share_calculator'));
+  assert.ok(!js.includes('location.search'));
   assert.ok(!js.includes('resultado='));
   assert.ok(!js.includes('salario='));
 });

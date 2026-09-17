@@ -21,6 +21,29 @@ function actualizarHero() {
   img.dataset.heroMilana = HERO_PEXELS_ID;
 }
 
+const CALCULATOR_PHOTO_OVERRIDES = {
+  finiquito: { pexelsId: '10376251', focal: '58% 50%' }
+};
+
+function pexelsUrl(id, width) {
+  return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
+}
+
+function actualizarFotoCalculadora() {
+  const slug = window.location.pathname.split('/').filter(Boolean).at(-1);
+  const config = CALCULATOR_PHOTO_OVERRIDES[slug];
+  if (!config) return;
+  const picture = document.querySelector('.calculator-hero-media picture');
+  const img = picture?.querySelector('img');
+  if (!picture || !img || img.dataset.heroPexels === config.pexelsId) return;
+  picture.querySelectorAll('source').forEach((source) => source.remove());
+  img.src = pexelsUrl(config.pexelsId, 1440);
+  img.srcset = HERO_WIDTHS.map((width) => `${pexelsUrl(config.pexelsId, width)} ${width}w`).join(', ');
+  img.sizes = '(max-width: 1023px) 100vw, min(48vw, 760px)';
+  img.style.objectPosition = config.focal;
+  img.dataset.heroPexels = config.pexelsId;
+}
+
 function asegurarCorreo() {
   const bloque = document.querySelector('.site-footer .footer-inner > div');
   if (!bloque || bloque.querySelector('[data-milana-contacto]')) return;
@@ -79,6 +102,7 @@ export default function SiteEnhancements() {
 
     const aplicar = () => {
       actualizarHero();
+      actualizarFotoCalculadora();
       asegurarCorreo();
       prepararMovimiento().forEach((node) => revealObserver?.observe(node));
     };

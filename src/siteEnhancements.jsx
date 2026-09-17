@@ -36,18 +36,63 @@ function asegurarCorreo() {
   bloque.append(p);
 }
 
+const REVEAL_SELECTOR = [
+  '.section-head',
+  '.situation-card',
+  '.calculator-card',
+  '.path-step',
+  '.learn-copy',
+  '.article-row',
+  '.trust-grid > div',
+  '.calculator-hero-copy',
+  '.calculator-main > *'
+].join(',');
+
+function prepararMovimiento(root = document) {
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const nodes = [...root.querySelectorAll(REVEAL_SELECTOR)].filter((node) => !node.dataset.mlMotion);
+  nodes.forEach((node, index) => {
+    node.dataset.mlMotion = 'true';
+    node.style.setProperty('--ml-reveal-delay', `${Math.min(index % 6, 5) * 55}ms`);
+    if (reduce) {
+      node.classList.add('ml-premium-in');
+      return;
+    }
+    node.classList.add('ml-premium-reveal');
+  });
+  return nodes;
+}
+
 export default function SiteEnhancements() {
   useEffect(() => {
+    let revealObserver;
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce && 'IntersectionObserver' in window) {
+      revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('ml-premium-in');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    }
+
     const aplicar = () => {
       actualizarHero();
       asegurarCorreo();
+      prepararMovimiento().forEach((node) => revealObserver?.observe(node));
     };
     aplicar();
+    document.documentElement.classList.add('ml-premium-motion-ready');
+
     const root = document.getElementById('root');
-    if (!root) return undefined;
+    if (!root) return () => revealObserver?.disconnect();
     const observer = new MutationObserver(aplicar);
     observer.observe(root, { childList: true, subtree: true });
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      revealObserver?.disconnect();
+    };
   }, []);
 
   return null;

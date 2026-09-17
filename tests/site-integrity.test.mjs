@@ -89,6 +89,21 @@ test('el movimiento premium es progresivo y respeta reducir movimiento', () => {
   assert.ok(staticCss.includes('prefers-reduced-motion:reduce'));
 });
 
+test('los heroes de calculadora no lavan la acción principal', () => {
+  const mejoras = read('src/siteEnhancements.jsx');
+  const overrides = read('src/site-overrides.css');
+  const fuentes = read('assets-master/FUENTES.json');
+  assert.ok(mejoras.includes("pexelsId: '10376251'"));
+  assert.ok(mejoras.includes('actualizarFotoCalculadora'));
+  assert.ok(overrides.includes('rgb(251 248 242 / 0) 16%'));
+  assert.ok(overrides.includes('rgb(251 248 242 / 0) 18%'));
+  assert.ok(overrides.includes('.calculator-hero-media::after'));
+  assert.ok(overrides.includes('background: none !important'));
+  assert.ok(fuentes.includes('10376251'));
+  const catalogo = JSON.parse(fuentes);
+  assert.equal(catalogo.fotos.find((foto) => foto.id === 'finiquito')?.pexels, 10376251);
+});
+
 test('el build genera sitemap final sin lastmod artificial', () => {
   const pkg = JSON.parse(read('package.json'));
   assert.match(pkg.scripts.build, /generar-sitemap-final/);

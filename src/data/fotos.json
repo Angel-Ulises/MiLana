@@ -1,7 +1,7 @@
 {
   "_nota": "Punto focal de cada fotografia, decidido foto por foto. No son CSS global: el componente los recibe como datos y los aplica con object-position. 'movil' apunta al master vertical original cuando existe. La procedencia, licencia y recorte viven en assets-master/FUENTES.json.",
   "fotos": {
-    "inicio":      { "focal": "52% 48%", "focalTablet": "52% 48%", "focalMovil": "52% 48%" },
+    "inicio":      { "focal": "68% 46%", "focalTablet": "66% 46%", "focalMovil": "62% 46%" },
     "finiquito":   { "focal": "65% 48%", "movil": "finiquito-movil" },
     "liquidacion": { "focal": "68% 45%", "movil": "liquidacion-movil" },
     "aguinaldo":   { "focal": "65% 52%" },

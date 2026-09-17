@@ -1,3 +1,8 @@
+/* El home ya tiene suficiente espacio interno en cada sección.
+   Astra añadía 88px de scroll-padding global y ese offset se sumaba al
+   padding de la sección, creando el hueco que se veía tras navegar por hash. */
+html { scroll-padding-top: 0 !important; }
+
 /* Corrección de navegación interna: el id vive en secciones con padding.
    Un scroll-margin grande sumaba el alto del header + el padding de la sección,
    dejando un hueco visual enorme. Con este margen el primer contenido visible

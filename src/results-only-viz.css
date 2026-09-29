@@ -1,0 +1,5 @@
+/* Visualizaciones solo después de una simulación.
+   No mostrar gráficos sobre fotografías ni en el hero. */
+.ml-hero-data-viz {
+  display: none !important;
+}

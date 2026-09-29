@@ -40,18 +40,21 @@
 
 .ml-viz-track {
   display: flex;
-  gap: 2px;
 }
 
 .ml-viz-segment {
   display: block;
   min-width: 3px;
   height: 100%;
-  border-radius: 999px;
+  border-radius: 0;
   transform-origin: left center;
   animation: mlVizGrow .72s cubic-bezier(.22, .78, .22, 1) both;
   animation-delay: var(--ml-viz-delay, 0ms);
 }
+
+.ml-viz-segment:first-child { border-radius: 999px 0 0 999px; }
+.ml-viz-segment:last-child { border-radius: 0 999px 999px 0; }
+.ml-viz-segment + .ml-viz-segment { box-shadow: inset 1px 0 rgba(255,255,255,.65); }
 
 .ml-viz-one { background: var(--ml-blue-600, #2D6CAA); }
 .ml-viz-two { background: var(--ml-green-600, #28735A); }

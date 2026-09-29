@@ -1,0 +1,277 @@
+/* MiLana — motion + visualización de datos
+   Capa progresiva: no cambia fórmulas ni contenido del cálculo. */
+
+.ml-result-viz {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid color-mix(in srgb, var(--ml-blue-100, #DCEAF7) 78%, white);
+}
+
+.ml-viz-head {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.ml-viz-title {
+  color: var(--ml-slate-900, #13263B);
+  font-size: 14px;
+  line-height: 1.35;
+  letter-spacing: -.01em;
+}
+
+.ml-viz-copy {
+  margin: 0;
+  max-width: 58ch;
+  color: var(--ml-slate-600, #5E6B78);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.ml-viz-track,
+.ml-progress-track {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(122, 135, 148, .16);
+}
+
+.ml-viz-track {
+  display: flex;
+}
+
+.ml-viz-segment {
+  display: block;
+  min-width: 3px;
+  height: 100%;
+  border-radius: 0;
+  transform-origin: left center;
+  animation: mlVizGrow .72s cubic-bezier(.22, .78, .22, 1) both;
+  animation-delay: var(--ml-viz-delay, 0ms);
+}
+
+.ml-viz-segment:first-child { border-radius: 999px 0 0 999px; }
+.ml-viz-segment:last-child { border-radius: 0 999px 999px 0; }
+.ml-viz-segment + .ml-viz-segment { box-shadow: inset 1px 0 rgba(255,255,255,.65); }
+
+.ml-viz-one { background: var(--ml-blue-600, #2D6CAA); }
+.ml-viz-two { background: var(--ml-green-600, #28735A); }
+.ml-viz-three { background: #7A8794; }
+.ml-viz-four { background: #9B6723; }
+.ml-viz-five { background: #5D6FA3; }
+.ml-viz-six { background: #6B8C7F; }
+
+.ml-viz-legend {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 18px;
+  margin-top: 14px;
+}
+
+.ml-viz-legend-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.ml-viz-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.ml-viz-legend-copy {
+  min-width: 0;
+  display: grid;
+}
+
+.ml-viz-label {
+  overflow: hidden;
+  color: var(--ml-slate-600, #5E6B78);
+  font-size: 11px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ml-viz-value {
+  margin-top: 1px;
+  color: var(--ml-slate-900, #13263B);
+  font-size: 12.5px;
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+}
+
+.ml-viz-percent {
+  color: var(--ml-soft, #7A8794);
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ml-progress-track {
+  height: 10px;
+}
+
+.ml-progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--ml-blue-600, #2D6CAA), var(--ml-green-600, #28735A));
+  transform-origin: left center;
+  animation: mlVizGrow .8s cubic-bezier(.22, .78, .22, 1) both;
+}
+
+.ml-progress-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 8px;
+  color: var(--ml-soft, #7A8794);
+  font-size: 11px;
+}
+
+.ml-progress-foot strong {
+  color: var(--ml-slate-900, #13263B);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Gráfico abstracto del hero: comunica “datos → cálculo → decisión”
+   sin fingir una métrica o serie financiera real. */
+.ml-hero-data-viz {
+  position: absolute;
+  z-index: 5;
+  right: clamp(24px, 4vw, 68px);
+  bottom: clamp(44px, 9vh, 86px);
+  width: clamp(188px, 18vw, 248px);
+  opacity: .92;
+  filter: drop-shadow(0 12px 24px rgba(19, 38, 59, .16));
+}
+
+.ml-hero-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.ml-hero-gridline {
+  fill: none;
+  stroke: rgba(255,255,255,.40);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+}
+
+.ml-hero-line {
+  fill: none;
+  stroke: rgba(255,255,255,.96);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 360;
+  stroke-dashoffset: 360;
+  animation: mlHeroDraw 1.25s cubic-bezier(.2,.8,.2,1) .2s forwards;
+}
+
+.ml-hero-dot {
+  fill: #FFFFFF;
+  stroke: rgba(45,108,170,.82);
+  stroke-width: 3;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mlHeroDot .38s cubic-bezier(.2,.9,.25,1.25) var(--ml-dot-delay, 700ms) forwards;
+}
+
+.ml-hero-viz-label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  margin-top: -4px;
+  color: rgba(255,255,255,.96);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(19,38,59,.28);
+}
+
+.ml-hero-viz-label i {
+  font-style: normal;
+  opacity: .72;
+}
+
+@keyframes mlVizGrow {
+  from { transform: scaleX(0); opacity: .42; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes mlHeroDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes mlHeroDot {
+  from { opacity: 0; transform: scale(.45); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 1023px) {
+  .ml-hero-data-viz {
+    right: 28px;
+    bottom: 54px;
+    width: 220px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ml-result-viz {
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+
+  .ml-viz-track {
+    height: 10px;
+  }
+
+  .ml-viz-legend {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .ml-viz-legend-row {
+    grid-template-columns: 8px minmax(0, 1fr) 38px;
+  }
+
+  .ml-viz-label {
+    white-space: normal;
+  }
+
+  .ml-hero-data-viz {
+    right: 16px;
+    bottom: 34px;
+    width: min(184px, 50vw);
+    opacity: .88;
+  }
+
+  .ml-hero-viz-label {
+    gap: 5px;
+    font-size: 8.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-viz-segment,
+  .ml-progress-fill,
+  .ml-hero-line,
+  .ml-hero-dot {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    stroke-dashoffset: 0;
+  }
+}

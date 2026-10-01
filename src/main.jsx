@@ -9,6 +9,8 @@ import CareerProfessionPages, { esRutaProfesion } from './careerProfessionPages.
 import OccupationComparePage, { esRutaOcupaciones } from './occupationComparePage.jsx'
 import OccupationEntry from './occupationEntry.jsx'
 import CareerComparePage, { esRutaCompararCarreras } from './careerComparePage.jsx'
+import StatePages, { esRutaEstado } from './statePages.jsx'
+import StateEntry from './stateEntry.jsx'
 import FinancePages, { esRutaFinanzas } from './financePages.jsx'
 import AdvisorPage, { esRutaAsesor } from './advisorPage.jsx'
 import AdvisorEntry from './advisorEntry.jsx'
@@ -26,6 +28,8 @@ import './career-integration.css'
 import './career-profession-pages.css'
 import './occupation-compare.css'
 import './career-compare.css'
+import './state-pages.css'
+import './state-entry.css'
 import './finance-pages.css'
 import './advisor-page.css'
 import './economy-pages.css'
@@ -34,6 +38,7 @@ import './route-motion.css'
 const profesion = esRutaProfesion()
 const ocupaciones = esRutaOcupaciones()
 const compararCarreras = esRutaCompararCarreras()
+const estados = esRutaEstado()
 const carrera = esRutaCarreras()
 const asesor = esRutaAsesor()
 const finanzas = esRutaFinanzas()
@@ -55,6 +60,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       ) : compararCarreras ? (
         <>
           <CareerComparePage />
+          <RouteMotion />
+        </>
+      ) : estados ? (
+        <>
+          <StatePages />
           <RouteMotion />
         </>
       ) : carrera ? (
@@ -86,6 +96,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </>
       )}
       <OccupationEntry />
+      <StateEntry />
       <AdvisorEntry />
       <EconomyNavigation />
     </>

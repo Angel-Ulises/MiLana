@@ -1,0 +1,63 @@
+import { useMemo, useState } from 'react';
+import datos from './data/estados.json';
+
+const dinero = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(Number(n) || 0);
+const numero = (n) => new Intl.NumberFormat('es-MX').format(Number(n) || 0);
+
+export function esRutaEstado() {
+  if (typeof window === 'undefined') return false;
+  return /^\/estados(?:\/[^/]+)?\/?$/.test(window.location.pathname);
+}
+
+function slugActual() {
+  if (typeof window === 'undefined') return '';
+  return window.location.pathname.split('/').filter(Boolean)[1] || '';
+}
+
+function Header() {
+  return <header className="site-header"><div className="shell header-inner"><a className="brand" href="/" aria-label="MiLana, inicio"><span className="brand-mark" aria-hidden="true">M</span><span className="brand-name">MiLana</span></a><nav className="desktop-nav" aria-label="Principal"><a href="/carreras">Carreras</a><a href="/estados">Estados</a><a href="/finanzas">Finanzas</a><a href="/economia">Economía</a></nav><a className="header-cta" href="/finanzas/mi-situacion">Mi situación</a></div></header>;
+}
+
+function Footer() {
+  return <footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>{datos.fuente.nombre}. {datos.fuente.periodo}.</p><p>{datos.nota}</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer>;
+}
+
+function Selector({ value = '' }) {
+  const [seleccion, setSeleccion] = useState(value);
+  const ir = () => { if (seleccion) window.location.href = `/estados/${seleccion}`; };
+  return <div className="state-selector"><label><span>Elige tu estado</span><select value={seleccion} onChange={(e) => setSeleccion(e.target.value)}><option value="">Selecciona una entidad</option>{datos.estados.map((e) => <option key={e.slug} value={e.slug}>{e.estado}</option>)}</select></label><button type="button" onClick={ir} disabled={!seleccion}>Ver panorama <span>→</span></button></div>;
+}
+
+function Hub() {
+  const orden = useMemo(() => [...datos.estados].sort((a,b) => a.estado.localeCompare(b.estado,'es-MX')), []);
+  return <div className="state-pages"><Header /><main><section className="state-hero"><div className="shell"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><span>Estados</span></nav><p className="eyebrow">México · 32 entidades</p><h1>Tu estado cambia el contexto financiero.</h1><p>El promedio profesional nacional sirve como referencia, pero los ingresos y el tamaño del mercado laboral cambian entre entidades. Elige tu estado para partir de datos del mismo corte oficial.</p><Selector /><div className="state-proof"><span>ENOE 2026-T2</span><span>STPS</span><span>INEGI</span><span>32 entidades</span></div></div></section><section className="state-directory"><div className="shell"><div className="state-directory-head"><div><p className="eyebrow">Panorama nacional</p><h2>Explora cualquier estado.</h2></div><p>Las tarjetas muestran ingreso mensual promedio de profesionistas ocupados y tamaño de la población profesional. No equivalen a costo de vida ni a una oferta salarial.</p></div><div className="state-grid">{orden.map((e) => <a key={e.slug} href={`/estados/${e.slug}`}><span>{e.estado}</span><strong>{dinero(e.ingreso)}<small>/mes</small></strong><p>{numero(e.ocupados)} profesionistas ocupados</p><b>Ver estado →</b></a>)}</div></div></section></main><Footer /></div>;
+}
+
+function Detail({ estado }) {
+  const ordenIngreso = useMemo(() => [...datos.estados].sort((a,b) => b.ingreso - a.ingreso), []);
+  const ordenOcupados = useMemo(() => [...datos.estados].sort((a,b) => b.ocupados - a.ocupados), []);
+  const rankIngreso = ordenIngreso.findIndex((e) => e.slug === estado.slug) + 1;
+  const rankOcupados = ordenOcupados.findIndex((e) => e.slug === estado.slug) + 1;
+  const diferencia = estado.ingreso - datos.promedioNacional;
+  const diferenciaPct = (diferencia / datos.promedioNacional) * 100;
+  const cercanos = [...datos.estados].filter((e) => e.slug !== estado.slug).sort((a,b) => Math.abs(a.ingreso - estado.ingreso) - Math.abs(b.ingreso - estado.ingreso)).slice(0,4);
+
+  return <div className="state-pages"><Header /><main><section className="state-detail-hero"><div className="shell"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/estados">Estados</a><span>/</span><span>{estado.estado}</span></nav><p className="eyebrow">{estado.estado} · {datos.actualizado}</p><h1>Trabajo, salarios y decisiones de dinero en {estado.estado}.</h1><p>Esta página parte del panorama profesional estatal publicado por el Observatorio Laboral. Conforme MiLana incorpore nuevas fuentes oficiales compatibles, aquí se sumarán más indicadores locales sin mezclar periodos ni poblaciones.</p><Selector value={estado.slug} /></div></section>
+
+  <section className="state-metrics"><div className="shell"><div className="state-metric-grid"><article><span>Ingreso profesional promedio</span><strong>{dinero(estado.ingreso)}</strong><p>{diferencia >= 0 ? '+' : ''}{diferenciaPct.toFixed(1)}% frente al promedio profesional nacional de {dinero(datos.promedioNacional)}.</p></article><article><span>Profesionistas ocupados</span><strong>{numero(estado.ocupados)}</strong><p>Personas ocupadas con formación profesional en el corte publicado.</p></article><article><span>Posición por ingreso promedio</span><strong>{rankIngreso}<small> de 32</small></strong><p>Orden descriptivo entre entidades con el mismo corte ENOE.</p></article><article><span>Posición por profesionistas ocupados</span><strong>{rankOcupados}<small> de 32</small></strong><p>Describe tamaño de la población profesional, no vacantes abiertas.</p></article></div><aside className="state-source"><span>Fuente actual</span><div><strong>{datos.fuente.nombre}</strong><p>{datos.fuente.periodo}. {datos.nota}</p></div></aside></div></section>
+
+  <section className="state-meaning"><div className="shell state-meaning-grid"><div><p className="eyebrow">Qué sí puedes concluir</p><h2>Tu ubicación sí cambia la referencia.</h2><p>El ingreso profesional promedio de {estado.estado} se puede comparar con el promedio nacional porque ambos provienen del mismo corte. También podemos comparar el tamaño observado de la población profesional entre entidades.</p><p>Eso no significa que todas las carreras paguen lo mismo dentro del estado, ni que el promedio estatal mida renta, transporte, informalidad o costo de vida.</p></div><div className="state-checks"><article><span>Dato compatible</span><strong>Estado vs. México</strong><p>Mismo corte ENOE 2026-T2.</p></article><article><span>No inferimos</span><strong>Salario por carrera dentro del estado</strong><p>No lo publicamos hasta tener una fuente oficial con ese cruce.</p></article><article><span>No confundimos</span><strong>Ocupados con vacantes</strong><p>La población ocupada describe mercado observado, no contrataciones abiertas.</p></article></div></div></section>
+
+  <section className="state-actions"><div className="shell"><div className="state-actions-head"><div><p className="eyebrow">Aterriza el dato</p><h2>Del promedio estatal a una decisión personal.</h2></div><p>El dato estatal es contexto. Tus números personales empiezan en las herramientas.</p></div><div className="state-action-grid"><a href="/carreras"><span>01</span><h3>Explorar carreras</h3><p>Compara profesiones con datos nacionales y contexto metodológico.</p><b>→</b></a><a href="/carreras/comparar"><span>02</span><h3>Comparar dos carreras</h3><p>Usa el mismo corte para ingreso y población profesional.</p><b>→</b></a><a href="/calculadoras/bruto-a-neto"><span>03</span><h3>Calcular sueldo neto</h3><p>Aterriza una cifra salarial a ISR e IMSS estimados.</p><b>→</b></a><a href="/finanzas/mi-situacion"><span>04</span><h3>Analizar mi situación</h3><p>Ingreso, gastos, deuda, fondo y metas sin guardar tus datos.</p><b>→</b></a></div></div></section>
+
+  <section className="state-near"><div className="shell"><div className="state-near-head"><p className="eyebrow">Ingresos estatales cercanos</p><h2>Compara entidades con promedios similares.</h2></div><div className="state-near-grid">{cercanos.map((e) => <a key={e.slug} href={`/estados/${e.slug}`}><span>{e.estado}</span><strong>{dinero(e.ingreso)}/mes</strong><p>{numero(e.ocupados)} profesionistas ocupados</p></a>)}</div></div></section>
+  </main><Footer /></div>;
+}
+
+export default function StatePages() {
+  const slug = slugActual();
+  if (!slug) return <Hub />;
+  const estado = datos.estados.find((e) => e.slug === slug);
+  if (!estado) return <div className="state-pages"><Header /><main className="state-not-found"><h1>Estado no encontrado</h1><p>Elige una de las 32 entidades disponibles.</p><a href="/estados">Ver todos los estados</a></main><Footer /></div>;
+  return <Detail estado={estado} />;
+}

@@ -119,6 +119,15 @@ test('doble /preparar reutiliza un PR abierto y cada intento nuevo usa branch ú
   assert.match(workflow, /steps\.existing\.outputs\.found != 'true'/);
 });
 
+test('preparación mantiene un único semáforo compacto en el Issue', () => {
+  const workflow = readFileSync(new URL('../.github/workflows/radar-promote.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /radar-source-status/);
+  assert.match(workflow, /BLOQUEADO EN PREPARACIÓN/);
+  assert.match(workflow, /EN REVISIÓN AUTOMÁTICA/);
+  assert.match(workflow, /updateComment/);
+  assert.match(workflow, /Estado público:\*\* no publicado/);
+});
+
 test('workflow de ciclo de vida solo actúa sobre PRs técnicos del bot y distingue merge de descarte', () => {
   const workflow = readFileSync(new URL('../.github/workflows/radar-promotion-lifecycle.yml', import.meta.url), 'utf8');
   assert.match(workflow, /pull_request:/);
@@ -127,8 +136,9 @@ test('workflow de ciclo de vida solo actúa sobre PRs técnicos del bot y distin
   assert.match(workflow, /github\.event\.pull_request\.head\.repo\.full_name == github\.repository/);
   assert.match(workflow, /github\.event\.pull_request\.user\.login == 'github-actions\[bot\]'/);
   assert.match(workflow, /pr\.merged === true/);
-  assert.match(workflow, /Publicado mediante PR/);
-  assert.match(workflow, /se cerró sin merge/);
+  assert.match(workflow, /## ✅ PUBLICADO/);
+  assert.match(workflow, /## ⚪ DESCARTADO/);
+  assert.match(workflow, /radar-source-status/);
   assert.match(workflow, /state: 'closed'/);
   assert.match(workflow, /state: 'open'/);
   assert.match(workflow, /git\.deleteRef/);

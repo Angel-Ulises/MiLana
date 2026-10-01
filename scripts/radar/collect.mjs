@@ -18,6 +18,15 @@ const outIndex = args.indexOf('--output');
 const output = outIndex >= 0 ? args[outIndex + 1] : resolve(ROOT, 'tmp/radar-candidates.json');
 const timeoutMs = Number(process.env.RADAR_FETCH_TIMEOUT_MS || 15000);
 
+function todayInMexico(now = new Date()) {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Mexico_City',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(now);
+  const byType = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${byType.year}-${byType.month}-${byType.day}`;
+}
+
 async function fetchText(url) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -46,6 +55,7 @@ function parseByKind(body, source) {
 
 const health = [];
 const candidates = [];
+const notAfter = todayInMexico();
 
 for (const source of registry.sources) {
   try {
@@ -54,7 +64,7 @@ for (const source of registry.sources) {
     if (!items.length) throw new Error('La fuente respondió, pero el parser no encontró entradas');
 
     const fresh = items
-      .map((item) => buildCandidate(item, source, registry.notBefore))
+      .map((item) => buildCandidate(item, source, registry.notBefore, notAfter))
       .filter(Boolean)
       .filter((candidate) => !candidateLooksPublished(candidate, economia));
 
@@ -77,6 +87,7 @@ const payload = {
   generatedAt: new Date().toISOString(),
   mode: 'candidate-only',
   notBefore: registry.notBefore,
+  notAfter,
   maxCandidatesPerRun: registry.maxCandidatesPerRun,
   candidateCount: deduped.length,
   candidates: deduped,
@@ -86,7 +97,7 @@ const payload = {
 await mkdir(dirname(resolve(output)), { recursive: true });
 await writeFile(resolve(output), `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
 
-console.log(`Radar: ${deduped.length} candidatos; ${health.filter((x) => x.ok).length}/${health.length} fuentes sanas.`);
+console.log(`Radar: ${deduped.length} candidatos; ${health.filter((x) => x.ok).length}/${health.length} fuentes sanas; corte ${notAfter}.`);
 for (const source of health) {
   console.log(`${source.ok ? 'OK' : 'FAIL'} ${source.sourceId}${source.ok ? ` · ${source.parsedItems} entradas · ${source.freshCandidates} nuevas` : ` · ${source.error}`}`);
 }

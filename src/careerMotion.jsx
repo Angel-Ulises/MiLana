@@ -9,6 +9,8 @@ const SELECTOR = [
   '.career-state-table',
   '.career-source',
   '.career-next-grid a',
+  '.career-profession-grid > a',
+  '.career-profession-more a',
 ].join(',');
 
 export default function CareerMotion() {

@@ -84,12 +84,26 @@ test('revisor bloquea borrado de una nota previa', () => {
   assert.ok(report.blockers.some((item) => item.includes(`Se eliminó el artículo existente ${removedSlug}`)));
 });
 
-test('workflow del revisor solo corre para branches radar/promotion y no escribe contenido', () => {
+test('workflow del revisor solo corre para PRs técnicos del bot y no escribe contenido', () => {
   const workflow = readFileSync(new URL('../.github/workflows/radar-review.yml', import.meta.url), 'utf8');
-  assert.match(workflow, /startsWith\(github\.head_ref, 'radar\/promotion-'\)/);
+  assert.match(workflow, /startsWith\(github\.event\.pull_request\.head\.ref, 'radar\/promotion-'\)/);
+  assert.match(workflow, /github\.event\.pull_request\.head\.repo\.full_name == github\.repository/);
+  assert.match(workflow, /github\.event\.pull_request\.user\.login == 'github-actions\[bot\]'/);
   assert.match(workflow, /^\s+contents:\s*read\s*$/m);
   assert.doesNotMatch(workflow, /^\s+contents:\s*write\s*$/m);
   assert.match(workflow, /pull-requests:\s*write/);
+  assert.match(workflow, /issues:\s*write/);
   assert.match(workflow, /Bloquear check si hay guardas incumplidas/);
   assert.doesNotMatch(workflow, /git\s+push|merge_pull_request|draft:\s*false/i);
+});
+
+test('revisor actualiza un semáforo compacto en el Issue origen', () => {
+  const workflow = readFileSync(new URL('../.github/workflows/radar-review.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /Actualizar semáforo en el Issue origen/);
+  assert.match(workflow, /radar-source-status/);
+  assert.match(workflow, /LISTO PARA REVISIÓN HUMANA/);
+  assert.match(workflow, /## 🔴 BLOQUEADO/);
+  assert.match(workflow, /Estado público:\*\* todavía no publicado/);
+  assert.match(workflow, /updateComment/);
+  assert.match(workflow, /blockers\.slice\(0, 5\)/);
 });

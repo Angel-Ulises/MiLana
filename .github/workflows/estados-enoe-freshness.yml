@@ -46,7 +46,7 @@ jobs:
           SOURCE_URL: ${{ steps.check.outputs.url }}
         run: |
           TITLE="[Estados] ENOE ${PERIOD} disponible para actualizar"
-          EXISTING="$(gh issue list --state open --search "${TITLE} in:title" --json number,title --jq '.[] | select(.title == env.TITLE) | .number' 2>/dev/null || true)"
+          EXISTING="$(gh issue list --state open --search "${TITLE} in:title" --json number,title --jq ".[] | select(.title == \"$TITLE\") | .number" 2>/dev/null | head -n1 || true)"
           if [ -n "$EXISTING" ]; then
             echo "La alerta ya existe: #$EXISTING"
             exit 0

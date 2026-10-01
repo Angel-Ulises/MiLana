@@ -18,6 +18,7 @@ const rutas = [
   ...rutasCarreras,
   ...rutasProfesiones,
   '/carreras/ocupaciones',
+  '/carreras/comparar',
   ...rutasFinanzas,
   '/finanzas/mi-situacion',
   ...rutasEconomia,

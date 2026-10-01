@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "notBefore": "2026-10-01",
   "maxCandidatesPerRun": 5,
   "sources": [
@@ -14,7 +14,16 @@
       "tools": ["/finanzas/presupuesto", "/carreras"],
       "whyItMatters": "La inflación cambia el poder de compra de los ingresos y puede afectar de forma distinta cada presupuesto.",
       "audience": "Hogares, trabajadores y personas que comparan aumentos de ingreso con el crecimiento de sus gastos.",
-      "cadence": "mensual"
+      "cadence": "mensual",
+      "promotion": {
+        "publicSourceId": "inegi-inpc",
+        "publicSourceName": "INEGI — Índice Nacional de Precios al Consumidor",
+        "publicSourceUrl": "https://www.inegi.org.mx/temas/inpc/",
+        "slugPrefix": "inflacion-mensual",
+        "dataLabel": "inflación anual",
+        "photoId": "6963848",
+        "photoAlt": "Persona revisando gastos y presupuesto con una calculadora"
+      }
     },
     {
       "id": "inegi-inpc-quincenal",
@@ -27,7 +36,16 @@
       "tools": ["/finanzas/presupuesto", "/finanzas/ahorro"],
       "whyItMatters": "La lectura quincenal permite detectar cambios recientes en precios sin asumir que todas las categorías suben al mismo ritmo.",
       "audience": "Personas que quieren entender cómo el entorno de precios se relaciona con su presupuesto y capacidad de ahorro.",
-      "cadence": "quincenal"
+      "cadence": "quincenal",
+      "promotion": {
+        "publicSourceId": "inegi-inpc",
+        "publicSourceName": "INEGI — Índice Nacional de Precios al Consumidor",
+        "publicSourceUrl": "https://www.inegi.org.mx/temas/inpc/",
+        "slugPrefix": "inflacion-quincenal",
+        "dataLabel": "inflación anual",
+        "photoId": "6963848",
+        "photoAlt": "Persona revisando gastos y presupuesto con una calculadora"
+      }
     },
     {
       "id": "inegi-consumo",
@@ -40,7 +58,16 @@
       "tools": ["/finanzas/presupuesto", "/finanzas/fondo-emergencia"],
       "whyItMatters": "El consumo de los hogares ayuda a leer si el gasto agregado se acelera o modera, pero no sustituye los números de una familia.",
       "audience": "Hogares, trabajadores y pequeños negocios que buscan contexto sobre el ritmo del gasto de las familias.",
-      "cadence": "mensual"
+      "cadence": "mensual",
+      "promotion": {
+        "publicSourceId": "inegi-consumo-mensual",
+        "publicSourceName": "INEGI — Indicador mensual del consumo privado en el mercado interior",
+        "publicSourceUrl": "https://www.inegi.org.mx/servicios/xml/IMCPMI_M_O.xml",
+        "slugPrefix": "consumo-privado",
+        "dataLabel": "variación anual",
+        "photoId": "6963848",
+        "photoAlt": "Persona organizando compras y gastos desde una laptop"
+      }
     },
     {
       "id": "inegi-desocupacion",
@@ -53,7 +80,16 @@
       "tools": ["/carreras", "/carreras/por-estado"],
       "whyItMatters": "El mercado laboral agregado da contexto a búsqueda de empleo y salarios, aunque no describe una profesión o ciudad por sí solo.",
       "audience": "Estudiantes, trabajadores y personas que evalúan cambiar de empleo, carrera o ubicación.",
-      "cadence": "mensual"
+      "cadence": "mensual",
+      "promotion": {
+        "publicSourceId": "inegi-desocupacion",
+        "publicSourceName": "INEGI — Tasa de desocupación",
+        "publicSourceUrl": "https://www.inegi.org.mx/servicios/xml/DESUNI_M_O.xml",
+        "slugPrefix": "desocupacion",
+        "dataLabel": "tasa de desocupación",
+        "photoId": "3184291",
+        "photoAlt": "Vista urbana contemporánea de una ciudad mexicana"
+      }
     },
     {
       "id": "banxico-politica",
@@ -66,7 +102,16 @@
       "tools": ["/finanzas/deuda-y-credito", "/finanzas/ahorro", "/finanzas/vivienda"],
       "whyItMatters": "La tasa objetivo influye en el entorno financiero, pero no cambia automáticamente el costo o rendimiento de cada producto.",
       "audience": "Personas que comparan crédito, refinanciamiento, ahorro o decisiones de vivienda.",
-      "cadence": "según calendario de decisiones"
+      "cadence": "según calendario de decisiones",
+      "promotion": {
+        "publicSourceId": "banxico-politica",
+        "publicSourceName": "Banco de México — decisiones de política monetaria",
+        "publicSourceUrl": "https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/anuncios-politica-monetaria-t.html",
+        "slugPrefix": "banxico-politica",
+        "dataLabel": "tasa objetivo",
+        "photoId": "13196409",
+        "photoAlt": "Edificios de un distrito financiero moderno"
+      }
     },
     {
       "id": "banxico-regional",
@@ -79,7 +124,16 @@
       "tools": ["/carreras/por-estado", "/carreras"],
       "whyItMatters": "La actividad, el empleo y la productividad pueden comportarse de forma distinta entre regiones y sectores.",
       "audience": "Trabajadores, estudiantes y personas que comparan oportunidades laborales o económicas entre estados.",
-      "cadence": "trimestral"
+      "cadence": "trimestral",
+      "promotion": {
+        "publicSourceId": "banxico-regional",
+        "publicSourceName": "Banco de México — Reporte sobre las economías regionales",
+        "publicSourceUrl": "https://www.banxico.org.mx/publicaciones-y-prensa/reportes-sobre-las-economias-regionales/reportes-economias-regionales.html",
+        "slugPrefix": "economias-regionales",
+        "dataLabel": "reporte regional",
+        "photoId": "3184291",
+        "photoAlt": "Vista urbana contemporánea de una ciudad mexicana"
+      }
     }
   ]
 }

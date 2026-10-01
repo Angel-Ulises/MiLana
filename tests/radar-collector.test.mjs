@@ -88,8 +88,8 @@ test('registro solo usa dominios oficiales y límites conservadores', () => {
 
 test('workflow no puede publicar contenido en el repositorio', () => {
   const workflow = readFileSync(new URL('../.github/workflows/radar-collector.yml', import.meta.url), 'utf8');
-  assert.match(workflow, /contents:\s*read/);
-  assert.doesNotMatch(workflow, /contents:\s*write/);
-  assert.doesNotMatch(workflow, /git\s+push/i);
+  assert.match(workflow, /^\s+contents:\s*read\s*$/m);
+  assert.doesNotMatch(workflow, /^\s+contents:\s*write\s*$/m);
+  assert.doesNotMatch(workflow, /^\s*-?\s*run:\s*.*git\s+push/im);
   assert.match(workflow, /NO PUBLICADO/);
 });

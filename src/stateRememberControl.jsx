@@ -12,21 +12,27 @@ export default function StateRememberControl() {
     if (!path.startsWith('/estados')) return undefined;
     const slugRuta = path.split('/').filter(Boolean)[1] || '';
     let intentos = 0;
-    let select;
+    let select = null;
+    let cambio = null;
+    let timer = null;
+
     const buscar = () => {
       const nodo = document.querySelector('.state-selector');
-      select = nodo?.querySelector('select');
+      select = nodo?.querySelector('select') || null;
       if (nodo && select) {
         setTarget(nodo);
         setSeleccion(slugRuta || select.value || '');
-        const cambio = () => setSeleccion(select.value || '');
+        cambio = () => setSeleccion(select?.value || '');
         select.addEventListener('change', cambio);
-        nodo.__milanaStateChange = cambio;
-      } else if (++intentos < 30) window.setTimeout(buscar, 100);
+      } else if (++intentos < 30) {
+        timer = window.setTimeout(buscar, 100);
+      }
     };
+
     buscar();
     return () => {
-      if (select && target?.__milanaStateChange) select.removeEventListener('change', target.__milanaStateChange);
+      if (timer) window.clearTimeout(timer);
+      if (select && cambio) select.removeEventListener('change', cambio);
     };
   }, []);
 

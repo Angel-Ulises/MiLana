@@ -6,8 +6,8 @@ import {
   parseInegiSeries,
   parseBanxicoList,
   buildCandidate,
-  candidateLooksPublished,
 } from './collector-lib.mjs';
+import { candidateAlreadyPublished } from './published-dedupe.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const registry = JSON.parse(await readFile(resolve(ROOT, 'src/data/radar-sources.json'), 'utf8'));
@@ -66,7 +66,7 @@ for (const source of registry.sources) {
     const fresh = items
       .map((item) => buildCandidate(item, source, registry.notBefore, notAfter))
       .filter(Boolean)
-      .filter((candidate) => !candidateLooksPublished(candidate, economia));
+      .filter((candidate) => !candidateAlreadyPublished(candidate, economia, source));
 
     candidates.push(...fresh);
     health.push({ sourceId: source.id, ok: true, parsedItems: items.length, freshCandidates: fresh.length });

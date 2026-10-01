@@ -1,0 +1,73 @@
+/* Enlaces del explorador: algunos chips ya son rutas reales, otros quedan
+   como temas futuros. Se ven iguales para no convertir la sección en un menú
+   ruidoso; el enlace revela interacción con hover/focus. */
+.ml-discovery-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  color: var(--ml-blue, #2D6CAA);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 760;
+}
+
+.ml-discovery-entry span {
+  display: inline-block;
+  transition: transform 220ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.mlq-branches a {
+  padding: 7px 10px;
+  border: 1px solid #D3E1EC;
+  border-radius: 999px;
+  background: #F4F9FD;
+  color: #315E84;
+  font-size: 11.5px;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    transform 180ms cubic-bezier(.22, 1, .36, 1),
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.mlq-branches a:focus-visible,
+.ml-discovery-entry:focus-visible {
+  outline: 3px solid rgba(45,108,170,.25);
+  outline-offset: 3px;
+}
+
+/* Entrada progresiva en páginas de carreras. */
+.career-reveal {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition:
+    opacity 520ms cubic-bezier(.22, 1, .36, 1) var(--career-delay, 0ms),
+    transform 520ms cubic-bezier(.22, 1, .36, 1) var(--career-delay, 0ms);
+}
+
+.career-reveal.career-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .ml-discovery-entry:hover span { transform: translateX(5px); }
+  .mlq-branches a:hover {
+    transform: translateY(-2px);
+    border-color: rgba(45,108,170,.38);
+    background: #EDF6FC;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-discovery-entry span,
+  .mlq-branches a,
+  .career-reveal,
+  .career-reveal.career-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

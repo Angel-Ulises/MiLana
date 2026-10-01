@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -41,4 +41,13 @@ html=html.replace('</head>',`    <script type="application/ld+json">${JSON.strin
 const cuerpo=`<div id="root"><main data-static-seo="carrera-ocupacion"><nav aria-label="Ruta"><a href="/">Inicio</a> / <a href="/carreras">Carreras</a> / Ocupaciones</nav><h1>Lo que estudias y el trabajo que desempeñas no son la misma estadística</h1><p>El Observatorio Laboral agrupa profesionistas por formación; Data México agrupa personas por ocupación desempeñada. MiLana muestra ambas capas sin tratarlas como equivalentes.</p><h2>Por qué importa la diferencia</h2><ul><li>Una carrera puede llevar a varias ocupaciones.</li><li>Una ocupación puede incluir personas con formaciones distintas.</li><li>Población ocupada no equivale a vacantes abiertas.</li><li>Los promedios salariales de ambas fuentes no deben restarse como si fueran la misma muestra.</li></ul>${lista}<h2>Fuentes y alcance</h2><p><strong>Carrera:</strong> ${esc(profesiones.fuenteGeneral)}. ${esc(profesiones.nota)}</p><p><strong>Ocupación:</strong> ${esc(ocupaciones.fuente.nombre)}. ${esc(ocupaciones.fuente.nota)}</p><p><a href="/calculadoras/bruto-a-neto">Aterrizar un salario a neto</a> · <a href="/finanzas/mi-situacion">Analizar mi situación</a></p></main></div>`;
 html=html.replace(/<div id="root">[\s\S]*?<\/div>/i,cuerpo);
 const destino=resolve(DIST,'carreras','ocupaciones','index.html'); mkdirSync(dirname(destino),{recursive:true}); writeFileSync(destino,html,'utf8');
+
+const hubPath=resolve(DIST,'carreras','index.html');
+if(existsSync(hubPath)){
+  let hub=readFileSync(hubPath,'utf8');
+  if(!hub.includes('href="/carreras/ocupaciones"')){
+    hub=hub.replace('</ul><h2>¿Cuánto gana una profesión?</h2>', '<li><a href="/carreras/ocupaciones">¿Cuál es la diferencia entre carrera estudiada y ocupación real?</a></li></ul><h2>¿Cuánto gana una profesión?</h2>');
+    writeFileSync(hubPath,hub,'utf8');
+  }
+}
 console.log(`ocupaciones: ${pares.length} pares carrera↔ocupación generados`);

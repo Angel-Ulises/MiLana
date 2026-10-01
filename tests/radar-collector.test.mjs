@@ -10,6 +10,7 @@ import {
   signalType,
   candidateKey,
   normalizeDate,
+  extractFact,
 } from '../scripts/radar/collector-lib.mjs';
 
 const registry = JSON.parse(readFileSync(new URL('../src/data/radar-sources.json', import.meta.url), 'utf8'));
@@ -77,6 +78,11 @@ test('parser Banxico tolera HTML y detecta filas con fecha', () => {
   assert.match(items[0].title, /6.50/);
 });
 
+test('extrae porcentajes escritos como “por ciento” en Banxico', () => {
+  assert.equal(extractFact('La tasa se mantiene en 6.50 por ciento'), '6.50%');
+  assert.equal(extractFact('Inflación anual de 3,42 %'), '3.42%');
+});
+
 test('candidato aplica fecha mínima, relevancia y herramientas', () => {
   const s = source('inegi-inpc-mensual');
   const recent = buildCandidate({
@@ -102,6 +108,24 @@ test('candidato aplica fecha mínima, relevancia y herramientas', () => {
     publishedAt: '2026-09-24',
   }, s, registry.notBefore);
   assert.equal(old, null);
+});
+
+test('candidato respeta un corte superior y no convierte calendario futuro en publicación', () => {
+  const s = source('banxico-politica');
+  const item = {
+    sourceId: s.id,
+    institution: s.institution,
+    sourceName: s.name,
+    sourceUrl: s.url,
+    externalId: '05/11/26:tasa',
+    title: 'El objetivo para la Tasa de Interés Interbancaria a 1 día se mantiene en 6.50 por ciento',
+    summary: 'El objetivo se mantiene en 6.50 por ciento',
+    publishedAt: '2026-11-05',
+  };
+  assert.equal(buildCandidate(item, s, registry.notBefore, '2026-10-01'), null);
+  const allowed = buildCandidate({ ...item, publishedAt: '2026-10-01', externalId: '01/10/26:tasa' }, s, registry.notBefore, '2026-10-01');
+  assert.ok(allowed);
+  assert.equal(allowed.detectedFact, '6.50%');
 });
 
 test('candidato INEGI preliminar conserva periodo, valor y estatus en el preborrador', () => {
@@ -167,12 +191,13 @@ test('registro solo usa dominios oficiales y límites conservadores', () => {
   }
 });
 
-test('workflow no puede publicar contenido en el repositorio', () => {
+test('workflow recolector no puede publicar contenido en el repositorio', () => {
   const workflow = readFileSync(new URL('../.github/workflows/radar-collector.yml', import.meta.url), 'utf8');
   assert.match(workflow, /^\s+contents:\s*read\s*$/m);
   assert.doesNotMatch(workflow, /^\s+contents:\s*write\s*$/m);
   assert.doesNotMatch(workflow, /^\s*-?\s*run:\s*.*git\s+push/im);
   assert.match(workflow, /NO PUBLICADO/);
   assert.match(workflow, /Preborrador estructural/);
-  assert.match(workflow, /needs-review|Estado/);
+  assert.match(workflow, /radar-payload:/);
+  assert.match(workflow, /\/preparar/);
 });

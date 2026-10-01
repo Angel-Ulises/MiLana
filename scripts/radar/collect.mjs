@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   parseFeed,
+  parseInegiSeries,
   parseBanxicoList,
   buildCandidate,
   candidateLooksPublished,
@@ -38,6 +39,7 @@ async function fetchText(url) {
 
 function parseByKind(body, source) {
   if (source.kind === 'rss') return parseFeed(body, source);
+  if (source.kind === 'inegi-series') return parseInegiSeries(body, source);
   if (source.kind === 'banxico-list') return parseBanxicoList(body, source);
   throw new Error(`Tipo de fuente no soportado: ${source.kind}`);
 }
@@ -49,13 +51,7 @@ for (const source of registry.sources) {
   try {
     const body = await fetchText(source.url);
     const items = parseByKind(body, source);
-    if (!items.length) {
-      if (source.institution === 'INEGI') {
-        const sample = body.slice(0, 900).replace(/\s+/g, ' ').trim();
-        console.log(`INEGI_SCHEMA ${source.id}: ${sample}`);
-      }
-      throw new Error('La fuente respondió, pero el parser no encontró entradas');
-    }
+    if (!items.length) throw new Error('La fuente respondió, pero el parser no encontró entradas');
 
     const fresh = items
       .map((item) => buildCandidate(item, source, registry.notBefore))

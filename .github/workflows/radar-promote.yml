@@ -171,7 +171,7 @@ jobs:
                   '- [ ] Revisar la vista previa de Vercel en móvil y escritorio.',
                   '- [ ] Solo después, marcar el PR como listo y hacer merge manual.',
                   '',
-                  '_Este workflow no activa auto-merge ni escribe directamente en `main`._'
+                  '_Este workflow no fusiona Pull Requests automáticamente ni escribe directamente en `main`._'
                 ].join('\n')
               });
               pr = created.data;

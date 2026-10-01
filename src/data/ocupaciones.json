@@ -1,0 +1,59 @@
+{
+  "actualizado": "2026-T1",
+  "fuente": {
+    "nombre": "Data México — Secretaría de Economía",
+    "institucion": "Secretaría de Economía",
+    "nota": "Los perfiles ocupacionales describen el trabajo desempeñado, no la carrera estudiada. Data México advierte en sus perfiles que algunas estimaciones salariales tienen baja precisión estadística y no deben usarse como conclusiones individuales."
+  },
+  "reglasEditoriales": [
+    "No presentar salario ocupacional como sueldo de egresado por carrera.",
+    "No presentar población ocupada como vacantes disponibles.",
+    "Mostrar siempre periodo, tamaño de fuerza laboral e informalidad junto al salario cuando sea relevante.",
+    "Conservar advertencias de precisión estadística de la fuente.",
+    "No mezclar métricas de Data México con Observatorio Laboral sin etiquetar claramente carrera vs. ocupación."
+  ],
+  "ocupaciones": [
+    {
+      "slug": "desarrolladores-analistas-software-multimedia",
+      "codigo": "2271",
+      "nombre": "Desarrolladores y Analistas de Software y Multimedia",
+      "periodo": "2026-T1",
+      "ocupados": 390000,
+      "ingresoMensual": 11000,
+      "informalidadPct": 14.2,
+      "edadPromedio": 36.1,
+      "horasSemanales": 39,
+      "escolaridadPromedio": 16.5,
+      "precisionSalarial": "baja",
+      "urlFuente": "https://www.economia.gob.mx/datamexico/es/profile/occupation/desarrolladores-y-analistas-de-software-y-multimedia"
+    },
+    {
+      "slug": "medicos-generales-familiares",
+      "codigo": "2411",
+      "nombre": "Médicos Generales y Familiares",
+      "periodo": "2026-T1",
+      "ocupados": 238000,
+      "ingresoMensual": 10800,
+      "informalidadPct": 19.3,
+      "edadPromedio": 43,
+      "horasSemanales": 39.7,
+      "escolaridadPromedio": 17.5,
+      "precisionSalarial": "baja",
+      "urlFuente": "https://www.economia.gob.mx/datamexico/es/profile/occupation/medicos-generales-y-familiares"
+    },
+    {
+      "slug": "abogados",
+      "codigo": "2135",
+      "nombre": "Abogados",
+      "periodo": "2026-T1",
+      "ocupados": 445000,
+      "ingresoMensual": 11100,
+      "informalidadPct": 21.8,
+      "edadPromedio": 42.7,
+      "horasSemanales": 37.5,
+      "escolaridadPromedio": 16.8,
+      "precisionSalarial": "baja",
+      "urlFuente": "https://economia.gob.mx/datamexico/es/profile/occupation/abogados"
+    }
+  ]
+}

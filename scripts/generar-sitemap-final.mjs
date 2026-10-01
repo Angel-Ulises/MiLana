@@ -4,11 +4,13 @@ const paginas = JSON.parse(readFileSync('src/data/paginas.json','utf8'));
 const situaciones = JSON.parse(readFileSync('src/data/situaciones.json','utf8')).situaciones;
 const carreras = JSON.parse(readFileSync('src/data/carreras.json','utf8')).paginas;
 const profesiones = JSON.parse(readFileSync('src/data/profesiones.json','utf8')).profesiones;
+const estados = JSON.parse(readFileSync('src/data/estados.json','utf8')).estados;
 const finanzas = JSON.parse(readFileSync('src/data/finanzas.json','utf8')).paginas;
 const economia = JSON.parse(readFileSync('src/data/economia.json','utf8'));
 const origen = paginas.sitio.origen;
 const rutasCarreras = carreras.map(p => p.slug ? `/carreras/${p.slug}` : '/carreras');
 const rutasProfesiones = profesiones.map(p => `/carreras/profesion/${p.slug}`);
+const rutasEstados = ['/estados', ...estados.map(e => `/estados/${e.slug}`)];
 const rutasFinanzas = finanzas.map(p => p.slug ? `/finanzas/${p.slug}` : '/finanzas');
 const rutasEconomia = ['/economia', ...economia.articulos.map(a => `/economia/${a.slug}`)];
 const rutas = [
@@ -19,6 +21,7 @@ const rutas = [
   ...rutasProfesiones,
   '/carreras/ocupaciones',
   '/carreras/comparar',
+  ...rutasEstados,
   ...rutasFinanzas,
   '/finanzas/mi-situacion',
   ...rutasEconomia,
@@ -33,8 +36,8 @@ const rutas = [
   '/sobre', '/metodo', '/contacto', '/privacidad', '/financiamiento'
 ];
 const prioridad = ruta => ruta === '/' ? '1.0'
-  : ruta === '/carreras' || ruta === '/finanzas' || ruta === '/economia' ? '0.9'
-  : ruta.startsWith('/calculadoras/') || ruta.startsWith('/situaciones/') || ruta.startsWith('/carreras/') || ruta.startsWith('/finanzas/') || ruta.startsWith('/economia/') ? '0.9'
+  : ruta === '/carreras' || ruta === '/finanzas' || ruta === '/economia' || ruta === '/estados' ? '0.9'
+  : ruta.startsWith('/calculadoras/') || ruta.startsWith('/situaciones/') || ruta.startsWith('/carreras/') || ruta.startsWith('/estados/') || ruta.startsWith('/finanzas/') || ruta.startsWith('/economia/') ? '0.9'
   : ruta.startsWith('/aprende') ? '0.8'
   : ruta === '/widgets' ? '0.6' : '0.5';
 const frecuencia = ruta => ruta === '/' || ruta.startsWith('/economia') ? 'weekly' : 'monthly';

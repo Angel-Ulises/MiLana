@@ -11,14 +11,18 @@ on:
       - 'scripts/radar/**'
       - 'src/data/radar-sources.json'
       - 'tests/radar-collector.test.mjs'
+      - 'tests/radar-promotion.test.mjs'
       - '.github/workflows/radar-collector.yml'
+      - '.github/workflows/radar-promote.yml'
   pull_request:
     branches: [main]
     paths:
       - 'scripts/radar/**'
       - 'src/data/radar-sources.json'
       - 'tests/radar-collector.test.mjs'
+      - 'tests/radar-promotion.test.mjs'
       - '.github/workflows/radar-collector.yml'
+      - '.github/workflows/radar-promote.yml'
 
 concurrency:
   group: radar-economico-collector-${{ github.ref }}
@@ -38,6 +42,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - name: Pruebas unitarias
+        run: npm test
 
       - name: Recolectar fuentes oficiales
         run: node scripts/radar/collect.mjs --output tmp/radar-candidates.json
@@ -75,6 +82,7 @@ jobs:
               const marker = `<!-- radar-key:${candidate.key} -->`;
               if (bodies.includes(marker)) continue;
 
+              const machinePayload = Buffer.from(JSON.stringify(candidate), 'utf8').toString('base64');
               const draft = candidate.editorial?.draft || {};
               const tools = (draft.tools || candidate.editorial.tools || []).map((href) => `- ${href}`).join('\n');
               const fact = candidate.detectedFact ? `\n**Dato detectado automáticamente:** ${candidate.detectedFact}` : '';
@@ -82,6 +90,7 @@ jobs:
               const dataStatus = draft.dataStatus ? `\n**Estatus del dato:** ${draft.dataStatus}` : '';
               const body = [
                 marker,
+                `<!-- radar-payload:${machinePayload} -->`,
                 '## Candidato automático del Radar económico',
                 '',
                 '> **NO PUBLICADO.** Este Issue registra y preestructura una novedad oficial para revisión editorial.',
@@ -121,6 +130,11 @@ jobs:
                 '### Herramientas MiLana candidatas',
                 tools || '- Sin herramienta asignada',
                 '',
+                '## Promoción controlada',
+                '',
+                'Si la fuente y el dato ya fueron revisados, el propietario del repositorio puede comentar exactamente `/preparar`.',
+                'Ese comando solo prepara un **Pull Request en borrador** con validaciones adicionales. No publica ni hace merge a `main`.',
+                '',
                 '### Guardas antes de publicar',
                 '- [ ] Abrir la fuente oficial y verificar el dato completo, fecha, periodo y alcance.',
                 '- [ ] Confirmar si el dato es observado, preliminar, estimado o una decisión institucional.',
@@ -132,7 +146,7 @@ jobs:
                 '',
                 `**Estado:** ${candidate.status}`,
                 '',
-                '_El workflow no tiene permiso `contents: write`: no puede publicarlo por sí solo._'
+                '_Este workflow recolector conserva `contents: read`: por sí solo no puede publicar ni modificar contenido._'
               ].filter(Boolean).join('\n');
 
               await github.rest.issues.create({

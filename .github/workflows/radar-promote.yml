@@ -1,0 +1,189 @@
+name: Radar económico — preparar promoción controlada
+
+on:
+  issue_comment:
+    types: [created]
+
+concurrency:
+  group: radar-promocion-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  preparar:
+    if: >-
+      github.event.issue.pull_request == null &&
+      github.event.issue.user.login == 'github-actions[bot]' &&
+      github.actor == github.repository_owner &&
+      github.event.comment.body == '/preparar'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Checkout de main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Construir y validar propuesta
+        run: >-
+          node scripts/radar/promote.mjs
+          --event "$GITHUB_EVENT_PATH"
+          --economia src/data/economia.json
+          --registry src/data/radar-sources.json
+          --output tmp/radar-promotion.json
+          --next tmp/economia.next.json
+
+      - name: Reportar validación
+        id: report
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('tmp/radar-promotion.json', 'utf8'));
+            core.setOutput('ok', report.ok ? 'true' : 'false');
+            core.setOutput('candidate_key', report.candidateKey || 'sin-clave');
+            core.setOutput('article_slug', report.article?.slug || 'sin-slug');
+
+            if (!report.ok) {
+              const blockers = (report.blockers || []).map((item) => `- ${item}`).join('\n') || '- Validación desconocida';
+              const warnings = (report.warnings || []).map((item) => `- ${item}`).join('\n');
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: [
+                  '## Promoción bloqueada',
+                  '',
+                  'No se creó ningún branch ni Pull Request. El contenido público sigue sin cambios.',
+                  '',
+                  '### Bloqueos',
+                  blockers,
+                  warnings ? `\n### Advertencias\n${warnings}` : '',
+                ].filter(Boolean).join('\n')
+              });
+            }
+
+      - name: Preparar nombre de branch
+        if: steps.report.outputs.ok == 'true'
+        id: branch
+        shell: bash
+        run: |
+          KEY="${{ steps.report.outputs.candidate_key }}"
+          SHORT_KEY="${KEY:0:10}"
+          BRANCH="radar/promotion-${{ github.event.issue.number }}-${SHORT_KEY}"
+          echo "name=$BRANCH" >> "$GITHUB_OUTPUT"
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Ejecutar pruebas de promoción
+        if: steps.report.outputs.ok == 'true' && steps.branch.outputs.exists == 'false'
+        run: |
+          cp tmp/economia.next.json src/data/economia.json
+          npm test
+          git diff --check
+
+      - name: Crear branch de propuesta
+        if: steps.report.outputs.ok == 'true' && steps.branch.outputs.exists == 'false'
+        shell: bash
+        run: |
+          BRANCH="${{ steps.branch.outputs.name }}"
+          git switch -c "$BRANCH"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/economia.json
+          git commit -m "Prepara candidato Radar #${{ github.event.issue.number }} para revisión"
+          git push --set-upstream origin "$BRANCH"
+
+      - name: Abrir o reutilizar Pull Request en borrador
+        if: steps.report.outputs.ok == 'true'
+        uses: actions/github-script@v7
+        env:
+          PROMOTION_BRANCH: ${{ steps.branch.outputs.name }}
+        with:
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('tmp/radar-promotion.json', 'utf8'));
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const branch = process.env.PROMOTION_BRANCH;
+
+            const existing = await github.rest.pulls.list({
+              owner,
+              repo,
+              state: 'open',
+              head: `${owner}:${branch}`,
+              per_page: 10,
+            });
+
+            let pr;
+            if (existing.data.length) {
+              pr = existing.data[0];
+            } else {
+              const warnings = (report.warnings || []).map((item) => `- ${item}`).join('\n') || '- Ninguna';
+              const article = report.article || {};
+              const created = await github.rest.pulls.create({
+                owner,
+                repo,
+                head: branch,
+                base: 'main',
+                draft: true,
+                title: `[Radar] ${article.titulo || article.slug}`,
+                body: [
+                  `Closes #${context.issue.number}`,
+                  '',
+                  '## Promoción controlada del Radar',
+                  '',
+                  '> **BORRADOR. NO PUBLICAR SIN REVISIÓN HUMANA.**',
+                  '',
+                  `**Candidato:** ${report.candidateKey}`,
+                  `**Fuente:** ${report.sourceId}`,
+                  `**Slug propuesto:** /economia/${article.slug}`,
+                  `**Fecha:** ${article.fecha}`,
+                  `**Dato principal:** ${article.datoPrincipal} — ${article.datoEtiqueta}`,
+                  '',
+                  '### Validaciones automáticas superadas',
+                  '- Fuente oficial en allowlist INEGI/Banco de México.',
+                  '- Fecha no futura.',
+                  '- Candidato `needs-review` y no promovido previamente.',
+                  '- Slug no duplicado.',
+                  '- Periodo/estatus conservados cuando existen.',
+                  '- Dos enlaces internos dentro de la allowlist de MiLana.',
+                  '- Longitud editorial mínima comprobada.',
+                  '- `npm test` y `git diff --check` ejecutados antes del push.',
+                  '',
+                  '### Advertencias',
+                  warnings,
+                  '',
+                  '### Revisión humana obligatoria antes de merge',
+                  '- [ ] Abrir de nuevo la fuente oficial y confirmar cifra, periodo y alcance.',
+                  '- [ ] Revisar título y copy para que no sobreinterpreten causalidad.',
+                  '- [ ] Confirmar que la foto temática sigue siendo apropiada.',
+                  '- [ ] Revisar la vista previa de Vercel en móvil y escritorio.',
+                  '- [ ] Solo después, marcar el PR como listo y hacer merge manual.',
+                  '',
+                  '_Este workflow no fusiona Pull Requests automáticamente ni escribe directamente en `main`._'
+                ].join('\n')
+              });
+              pr = created.data;
+            }
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: context.issue.number,
+              body: [
+                `Borrador preparado: #${pr.number} — ${pr.html_url}`,
+                '',
+                '**Todavía no está publicado.** El PR permanece en borrador y requiere revisión/merge manual.'
+              ].join('\n')
+            });

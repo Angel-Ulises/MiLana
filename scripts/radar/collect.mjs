@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   parseFeed,
+  parseInegiSeries,
   parseBanxicoList,
   buildCandidate,
   candidateLooksPublished,
@@ -38,6 +39,7 @@ async function fetchText(url) {
 
 function parseByKind(body, source) {
   if (source.kind === 'rss') return parseFeed(body, source);
+  if (source.kind === 'inegi-series') return parseInegiSeries(body, source);
   if (source.kind === 'banxico-list') return parseBanxicoList(body, source);
   throw new Error(`Tipo de fuente no soportado: ${source.kind}`);
 }

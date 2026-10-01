@@ -39,9 +39,20 @@ function tag(block, names) {
   return '';
 }
 
+function tagLang(block, name, lang) {
+  const re = new RegExp(`<${name}[^>]*xml:lang=["']${lang}["'][^>]*>([\\s\\S]*?)<\\/${name}>`, 'i');
+  return stripHtml(block.match(re)?.[1] || '');
+}
+
 function attr(block, tagName, attrName) {
   const re = new RegExp(`<${tagName}[^>]*${attrName}=["']([^"']+)["'][^>]*>`, 'i');
   return block.match(re)?.[1] || '';
+}
+
+function attrsFromTag(tagText) {
+  const attrs = {};
+  for (const match of tagText.matchAll(/([\w:-]+)=["']([^"']*)["']/g)) attrs[match[1]] = decodeEntities(match[2]);
+  return attrs;
 }
 
 export function normalizeDate(value) {
@@ -96,6 +107,41 @@ export function parseFeed(xml, source) {
       rawPublishedAt: publishedRaw,
     };
   }).filter((item) => item.title || item.summary);
+}
+
+export function parseInegiSeries(xml, source) {
+  const metadata = xml.match(/<METADATA\b[^>]*>([\s\S]*?)<\/METADATA>/i)?.[1] || '';
+  const nemonic = tag(metadata, ['Nemonic']) || source.id;
+  const name = tagLang(metadata, 'Name', 'es') || tag(metadata, ['Name']) || source.name;
+  const unit = tagLang(metadata, 'Unit', 'es') || tag(metadata, ['Unit']);
+  const lastUpdateRaw = tag(metadata, ['LastUpdate', 'CreationDate']);
+  const decimalsRaw = tag(metadata, ['NoOfDecimals']);
+  const decimals = Number.isFinite(Number(decimalsRaw)) ? Math.max(0, Math.min(6, Number(decimalsRaw))) : 3;
+  const publishedAt = normalizeDate(lastUpdateRaw);
+  const isPercent = /porcent|variaci[oó]n/i.test(unit) || /inflaci[oó]n|desocupaci[oó]n|variaci[oó]n anual/i.test(name);
+
+  const observations = [...xml.matchAll(/<Obs\b([^>]*)\/?\s*>/gi)].map((match) => attrsFromTag(match[1]));
+  return observations.map((obs) => {
+    const numeric = Number(obs.CurrentValue);
+    if (!obs.TimePeriod || !Number.isFinite(numeric)) return null;
+    const rounded = numeric.toFixed(decimals).replace(/\.0+$|(?<=\.[0-9]*?)0+$/g, '');
+    const status = obs.ValueStatus ? ` · estatus: ${obs.ValueStatus}` : '';
+    const suffix = isPercent ? '%' : unit ? ` ${unit}` : '';
+    return {
+      sourceId: source.id,
+      institution: source.institution,
+      sourceName: source.name,
+      sourceUrl: source.url,
+      externalId: `${nemonic}:${obs.TimePeriod}:${rounded}`,
+      title: name,
+      summary: `${name}. Periodo ${obs.TimePeriod}: ${rounded}${suffix}${status}.`,
+      publishedAt,
+      rawPublishedAt: lastUpdateRaw,
+      period: obs.TimePeriod,
+      value: numeric,
+      valueStatus: obs.ValueStatus || null,
+    };
+  }).filter(Boolean);
 }
 
 export function parseBanxicoList(html, source) {

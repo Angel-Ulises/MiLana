@@ -1,0 +1,64 @@
+name: Estados — vigilar nueva ENOE trimestral
+
+on:
+  schedule:
+    - cron: '20 16 * * 3'
+  workflow_dispatch:
+
+concurrency:
+  group: estados-enoe-freshness
+  cancel-in-progress: true
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Revisar calendario y publicación oficial
+        id: check
+        run: |
+          node scripts/estados/check-enoe-update.mjs > /tmp/enoe-state.json
+          cat /tmp/enoe-state.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('/tmp/enoe-state.json','utf8'));
+          const out = process.env.GITHUB_OUTPUT;
+          fs.appendFileSync(out, `available=${data.nuevaPublicacion ? 'true' : 'false'}\n`);
+          fs.appendFileSync(out, `period=${data.proximoPeriodo}\n`);
+          fs.appendFileSync(out, `url=${data.url}\n`);
+          NODE
+
+      - name: Abrir alerta única de actualización
+        if: steps.check.outputs.available == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PERIOD: ${{ steps.check.outputs.period }}
+          SOURCE_URL: ${{ steps.check.outputs.url }}
+        run: |
+          TITLE="[Estados] ENOE ${PERIOD} disponible para actualizar"
+          EXISTING="$(gh issue list --state open --search "${TITLE} in:title" --json number,title --jq '.[] | select(.title == env.TITLE) | .number' 2>/dev/null || true)"
+          if [ -n "$EXISTING" ]; then
+            echo "La alerta ya existe: #$EXISTING"
+            exit 0
+          fi
+          cat > /tmp/body.md <<EOF
+          INEGI ya publicó una ENOE trimestral posterior al corte estatal vigente de MiLana.
+
+          - **Nuevo periodo esperado:** ${PERIOD}
+          - **Fuente detectada:** ${SOURCE_URL}
+          - **Acción:** revisar el cuadro estatal completo, validar las 32 entidades y actualizar \`src/data/mercadoLaboralEstados.json\` mediante PR.
+          - **Regla:** esta alerta **no modifica ni publica cifras automáticamente**.
+
+          Antes del merge, comparar población, denominadores, notas metodológicas y valores nacionales contra el documento oficial.
+          EOF
+          gh issue create --title "$TITLE" --body-file /tmp/body.md

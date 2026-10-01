@@ -6,6 +6,8 @@ import {
   parseInegiSeries,
   parseBanxicoList,
   buildCandidate,
+  buildEditorialDraft,
+  signalType,
   candidateKey,
   normalizeDate,
 } from '../scripts/radar/collector-lib.mjs';
@@ -52,6 +54,7 @@ test('parser de serie INEGI entiende METADATA y Obs reales', () => {
   assert.equal(items[0].publishedAt, '2026-09-24');
   assert.equal(items[0].period, '2026/09/01');
   assert.equal(items[0].value, 3.42);
+  assert.equal(items[0].valueText, '3.42%');
   assert.match(items[0].summary, /3\.42%/);
   assert.match(items[0].title, /Inflación quincenal/);
 });
@@ -61,6 +64,7 @@ test('parser INEGI conserva estatus preliminar', () => {
   const items = parseInegiSeries(xml, source('inegi-consumo'));
   assert.equal(items[0].publishedAt, '2026-10-05');
   assert.equal(items[0].valueStatus, 'Preliminar');
+  assert.equal(items[0].valueText, '1.2%');
   assert.match(items[0].summary, /1\.2%/);
   assert.match(items[0].summary, /Preliminar/);
 });
@@ -89,6 +93,7 @@ test('candidato aplica fecha mínima, relevancia y herramientas', () => {
   assert.equal(recent.status, 'needs-review');
   assert.equal(recent.detectedFact, '3.50%');
   assert.ok(recent.editorial.tools.includes('/finanzas/presupuesto'));
+  assert.ok(recent.editorial.draft);
 
   const old = buildCandidate({
     sourceId: s.id,
@@ -97,6 +102,53 @@ test('candidato aplica fecha mínima, relevancia y herramientas', () => {
     publishedAt: '2026-09-24',
   }, s, registry.notBefore);
   assert.equal(old, null);
+});
+
+test('candidato INEGI preliminar conserva periodo, valor y estatus en el preborrador', () => {
+  const s = source('inegi-consumo');
+  const xml = `<DATASET><METADATA><Nemonic>IMCPMI_M_O</Nemonic><Name xml:lang="es">Indicador mensual del consumo privado en el mercado interior, Variación anual</Name><Unit xml:lang="es">Variación Porcentual</Unit><NoOfDecimals>1</NoOfDecimals><LastUpdate>05/10/2026</LastUpdate></METADATA><SERIE><Obs TimePeriod="2026/07" CurrentValue="1.249" ValueStatus="Preliminar" /></SERIE></DATASET>`;
+  const item = parseInegiSeries(xml, s)[0];
+  const candidate = buildCandidate(item, s, registry.notBefore);
+
+  assert.ok(candidate);
+  assert.equal(candidate.status, 'needs-review');
+  assert.equal(candidate.signalType, 'dato-estadistico-preliminar');
+  assert.equal(candidate.period, '2026/07');
+  assert.equal(candidate.value, 1.249);
+  assert.equal(candidate.valueStatus, 'Preliminar');
+  assert.equal(candidate.detectedFact, '1.2%');
+  assert.equal(candidate.editorial.draft.dataStatus, 'Preliminar');
+  assert.match(candidate.editorial.draft.whatHappened, /2026\/07/);
+  assert.match(candidate.editorial.draft.whatHappened, /1\.2%/);
+  assert.match(candidate.editorial.draft.whatHappened, /Preliminar/);
+  assert.match(candidate.editorial.draft.actionFrame, /\/finanzas\/presupuesto/);
+  assert.ok(candidate.editorial.draft.whyItMatters.length > 40);
+  assert.ok(candidate.editorial.draft.audience.length > 40);
+});
+
+test('Banxico se clasifica como decisión institucional y genera preborrador distinto', () => {
+  const s = source('banxico-politica');
+  const item = {
+    sourceId: s.id,
+    institution: s.institution,
+    sourceName: s.name,
+    sourceUrl: s.url,
+    externalId: '05/11/26:tasa',
+    title: 'El objetivo para la Tasa de Interés Interbancaria a 1 día se mantiene en 6.50 por ciento',
+    summary: 'El objetivo para la Tasa de Interés Interbancaria a 1 día se mantiene en 6.50 por ciento',
+    publishedAt: '2026-11-05',
+  };
+  assert.equal(signalType(item, s), 'decision-politica-monetaria');
+  const draft = buildEditorialDraft(item, s, '6.50%');
+  assert.equal(draft.signalType, 'decision-politica-monetaria');
+  assert.match(draft.whatHappened, /Banco de México/);
+  assert.match(draft.whatHappened, /2026-11-05/);
+  assert.match(draft.whatHappened, /6\.50%/);
+  assert.ok(draft.tools.includes('/finanzas/deuda-y-credito'));
+
+  const candidate = buildCandidate(item, s, registry.notBefore);
+  assert.equal(candidate.status, 'needs-review');
+  assert.equal(candidate.signalType, 'decision-politica-monetaria');
 });
 
 test('clave de candidato es determinista', () => {
@@ -121,4 +173,6 @@ test('workflow no puede publicar contenido en el repositorio', () => {
   assert.doesNotMatch(workflow, /^\s+contents:\s*write\s*$/m);
   assert.doesNotMatch(workflow, /^\s*-?\s*run:\s*.*git\s+push/im);
   assert.match(workflow, /NO PUBLICADO/);
+  assert.match(workflow, /Preborrador estructural/);
+  assert.match(workflow, /needs-review|Estado/);
 });

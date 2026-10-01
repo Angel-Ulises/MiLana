@@ -12,6 +12,7 @@ jobs:
   preparar:
     if: >-
       github.event.issue.pull_request == null &&
+      github.event.issue.state == 'open' &&
       github.event.issue.user.login == 'github-actions[bot]' &&
       github.actor == github.repository_owner &&
       github.event.comment.body == '/preparar'
@@ -21,17 +22,55 @@ jobs:
       pull-requests: write
       issues: write
     steps:
+      - name: Detectar propuesta abierta existente
+        id: existing
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const prefix = `radar/promotion-${context.issue.number}-`;
+            const pulls = await github.paginate(github.rest.pulls.list, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100,
+            });
+            const existing = pulls.find((pr) =>
+              pr.head?.repo?.full_name === `${owner}/${repo}` &&
+              pr.head?.ref?.startsWith(prefix)
+            );
+
+            core.setOutput('found', existing ? 'true' : 'false');
+            if (existing) {
+              core.setOutput('number', String(existing.number));
+              core.setOutput('url', existing.html_url);
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: context.issue.number,
+                body: [
+                  `Ya existe una propuesta abierta para este candidato: #${existing.number} — ${existing.html_url}`,
+                  '',
+                  '**No se creó otro branch ni otro Pull Request.** Revisa esa propuesta existente.'
+                ].join('\n')
+              });
+            }
+
       - name: Checkout de main
+        if: steps.existing.outputs.found != 'true'
         uses: actions/checkout@v4
         with:
           ref: main
 
       - name: Node
+        if: steps.existing.outputs.found != 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Construir y validar propuesta
+        if: steps.existing.outputs.found != 'true'
         run: >-
           node scripts/radar/promote.mjs
           --event "$GITHUB_EVENT_PATH"
@@ -41,6 +80,7 @@ jobs:
           --next tmp/economia.next.json
 
       - name: Reportar validación
+        if: steps.existing.outputs.found != 'true'
         id: report
         uses: actions/github-script@v7
         with:
@@ -71,13 +111,13 @@ jobs:
             }
 
       - name: Preparar nombre de branch
-        if: steps.report.outputs.ok == 'true'
+        if: steps.existing.outputs.found != 'true' && steps.report.outputs.ok == 'true'
         id: branch
         shell: bash
         run: |
           KEY="${{ steps.report.outputs.candidate_key }}"
           SHORT_KEY="${KEY:0:10}"
-          BRANCH="radar/promotion-${{ github.event.issue.number }}-${SHORT_KEY}"
+          BRANCH="radar/promotion-${{ github.event.issue.number }}-${SHORT_KEY}-${{ github.event.comment.id }}"
           echo "name=$BRANCH" >> "$GITHUB_OUTPUT"
           if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
@@ -86,14 +126,14 @@ jobs:
           fi
 
       - name: Ejecutar pruebas de promoción
-        if: steps.report.outputs.ok == 'true' && steps.branch.outputs.exists == 'false'
+        if: steps.existing.outputs.found != 'true' && steps.report.outputs.ok == 'true' && steps.branch.outputs.exists == 'false'
         run: |
           cp tmp/economia.next.json src/data/economia.json
           npm test
           git diff --check
 
       - name: Crear branch de propuesta
-        if: steps.report.outputs.ok == 'true' && steps.branch.outputs.exists == 'false'
+        if: steps.existing.outputs.found != 'true' && steps.report.outputs.ok == 'true' && steps.branch.outputs.exists == 'false'
         shell: bash
         run: |
           BRANCH="${{ steps.branch.outputs.name }}"
@@ -105,7 +145,7 @@ jobs:
           git push --set-upstream origin "$BRANCH"
 
       - name: Abrir o reutilizar Pull Request en borrador
-        if: steps.report.outputs.ok == 'true'
+        if: steps.existing.outputs.found != 'true' && steps.report.outputs.ok == 'true'
         uses: actions/github-script@v7
         env:
           PROMOTION_BRANCH: ${{ steps.branch.outputs.name }}

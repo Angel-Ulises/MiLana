@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export default function OccupationEntry() {
@@ -18,14 +18,24 @@ export default function OccupationEntry() {
 
   if (!target) return null;
   return createPortal(
-    <a className="career-route career-route-occupation" href="/carreras/ocupaciones">
-      <span>05</span>
-      <div>
-        <h3>¿Lo que estudias es lo mismo que el trabajo que haces?</h3>
-        <p>Compara carrera estudiada y ocupación real sin mezclar sus salarios, poblaciones ni periodos.</p>
-      </div>
-      <b>↗</b>
-    </a>,
+    <Fragment>
+      <a className="career-route career-route-occupation" href="/carreras/ocupaciones">
+        <span>05</span>
+        <div>
+          <h3>¿Lo que estudias es lo mismo que el trabajo que haces?</h3>
+          <p>Compara carrera estudiada y ocupación real sin mezclar sus salarios, poblaciones ni periodos.</p>
+        </div>
+        <b>↗</b>
+      </a>
+      <a className="career-route career-route-compare" href="/carreras/comparar">
+        <span>06</span>
+        <div>
+          <h3>Quiero comparar dos carreras</h3>
+          <p>Pon dos perfiles lado a lado con el mismo corte y distingue ingreso promedio de tamaño del mercado.</p>
+        </div>
+        <b>↗</b>
+      </a>
+    </Fragment>,
     target,
   );
 }

@@ -1,0 +1,141 @@
+name: Radar económico — detectar candidatos
+
+on:
+  schedule:
+    # 07:20, 11:20 y 16:20 aprox. en Ciudad de México mientras rige UTC-6.
+    - cron: '20 13,17,22 * * 1-5'
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/radar/**'
+      - 'src/data/radar-sources.json'
+      - 'tests/radar-collector.test.mjs'
+      - '.github/workflows/radar-collector.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/radar/**'
+      - 'src/data/radar-sources.json'
+      - 'tests/radar-collector.test.mjs'
+      - '.github/workflows/radar-collector.yml'
+
+concurrency:
+  group: radar-economico-collector-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  detectar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Recolectar fuentes oficiales
+        run: node scripts/radar/collect.mjs --output tmp/radar-candidates.json
+
+      - name: Guardar diagnóstico
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: radar-candidates
+          path: tmp/radar-candidates.json
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Crear candidatos de revisión sin publicar
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const payload = JSON.parse(fs.readFileSync('tmp/radar-candidates.json', 'utf8'));
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const allIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner, repo, state: 'all', per_page: 100
+            });
+            const bodies = allIssues.map((issue) => issue.body || '').join('\n');
+
+            for (const candidate of payload.candidates) {
+              const marker = `<!-- radar-key:${candidate.key} -->`;
+              if (bodies.includes(marker)) continue;
+
+              const tools = (candidate.editorial.tools || []).map((href) => `- ${href}`).join('\n');
+              const fact = candidate.detectedFact ? `\n**Dato detectado automáticamente:** ${candidate.detectedFact}` : '';
+              const body = [
+                marker,
+                '## Candidato automático del Radar económico',
+                '',
+                '> **NO PUBLICADO.** Este Issue solo registra una novedad oficial para revisión editorial.',
+                '',
+                `**Institución:** ${candidate.institution}`,
+                `**Fuente:** ${candidate.sourceName}`,
+                `**Fecha de publicación detectada:** ${candidate.publishedAt}`,
+                `**Categoría:** ${candidate.category}`,
+                `**URL oficial:** ${candidate.sourceUrl}`,
+                fact,
+                '',
+                '### Título detectado',
+                candidate.title,
+                '',
+                '### Resumen recibido de la fuente',
+                candidate.summary || '_Sin resumen estructurado; abrir la fuente antes de redactar._',
+                '',
+                '### Por qué podría importar',
+                candidate.editorial.whyItMatters,
+                '',
+                '### A quién podría afectar',
+                candidate.editorial.audience,
+                '',
+                '### Herramientas MiLana candidatas',
+                tools || '- Sin herramienta asignada',
+                '',
+                '### Guardas antes de publicar',
+                '- [ ] Abrir la fuente oficial y verificar el dato completo, fecha y alcance.',
+                '- [ ] Diferenciar dato observado, estimación, revisión y expectativa.',
+                '- [ ] Redactar “qué pasó → por qué importa → a quién afecta → qué herramienta ayuda”.',
+                '- [ ] Evitar consejo financiero personalizado, causalidad no demostrada o lenguaje alarmista.',
+                '- [ ] Confirmar que no existe ya una pieza equivalente en `/economia`.',
+                '- [ ] Solo después, añadir una pieza revisada a `src/data/economia.json`.',
+                '',
+                `**Estado:** ${candidate.status}`,
+                '',
+                '_El workflow no tiene permiso `contents: write`: no puede publicarlo por sí solo._'
+              ].filter(Boolean).join('\n');
+
+              await github.rest.issues.create({
+                owner,
+                repo,
+                title: `[Radar candidato] ${candidate.title.slice(0, 120)}`,
+                body,
+              });
+            }
+
+            for (const source of payload.health.filter((item) => !item.ok)) {
+              const marker = `<!-- radar-health:${source.sourceId} -->`;
+              const openHealth = allIssues.find((issue) => issue.state === 'open' && (issue.body || '').includes(marker));
+              if (openHealth) continue;
+              await github.rest.issues.create({
+                owner,
+                repo,
+                title: `[Radar salud] Revisar fuente ${source.sourceId}`,
+                body: [
+                  marker,
+                  '## El recolector no pudo leer una fuente oficial',
+                  '',
+                  `**Fuente:** ${source.sourceId}`,
+                  `**Error:** ${source.error}`,
+                  '',
+                  'Esto no publica nada y no bloquea las demás fuentes. Revisar si cambió el endpoint, el formato o si fue un fallo temporal.',
+                ].join('\n'),
+              });
+            }

@@ -17,6 +17,7 @@ const rutas = [
   ...situaciones.map(s => `/situaciones/${s.slug}`),
   ...rutasCarreras,
   ...rutasProfesiones,
+  '/carreras/ocupaciones',
   ...rutasFinanzas,
   '/finanzas/mi-situacion',
   ...rutasEconomia,

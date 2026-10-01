@@ -5,12 +5,17 @@
     "institucion": "Secretaría de Economía",
     "nota": "Los perfiles ocupacionales describen el trabajo desempeñado, no la carrera estudiada. Data México advierte en sus perfiles que algunas estimaciones salariales tienen baja precisión estadística y no deben usarse como conclusiones individuales."
   },
+  "comparacion": {
+    "titulo": "Lo que estudias vs. el trabajo que desempeñas",
+    "nota": "Observatorio Laboral agrupa personas por formación profesional; Data México agrupa personas por ocupación desempeñada. Sus promedios no son intercambiables ni deben restarse para concluir que una carrera o empleo paga mejor."
+  },
   "reglasEditoriales": [
     "No presentar salario ocupacional como sueldo de egresado por carrera.",
     "No presentar población ocupada como vacantes disponibles.",
     "Mostrar siempre periodo, tamaño de fuerza laboral e informalidad junto al salario cuando sea relevante.",
     "Conservar advertencias de precisión estadística de la fuente.",
-    "No mezclar métricas de Data México con Observatorio Laboral sin etiquetar claramente carrera vs. ocupación."
+    "No mezclar métricas de Data México con Observatorio Laboral sin etiquetar claramente carrera vs. ocupación.",
+    "No calcular una brecha salarial entre carrera y ocupación porque las poblaciones, clasificaciones y periodos no son equivalentes."
   ],
   "ocupaciones": [
     {
@@ -25,6 +30,8 @@
       "horasSemanales": 39,
       "escolaridadPromedio": 16.5,
       "precisionSalarial": "baja",
+      "carreraRelacionadaSlug": "ciencias-computacion",
+      "carreraRelacionadaNombre": "Ciencias de la computación",
       "urlFuente": "https://www.economia.gob.mx/datamexico/es/profile/occupation/desarrolladores-y-analistas-de-software-y-multimedia"
     },
     {
@@ -39,6 +46,8 @@
       "horasSemanales": 39.7,
       "escolaridadPromedio": 17.5,
       "precisionSalarial": "baja",
+      "carreraRelacionadaSlug": "medicina",
+      "carreraRelacionadaNombre": "Medicina",
       "urlFuente": "https://www.economia.gob.mx/datamexico/es/profile/occupation/medicos-generales-y-familiares"
     },
     {
@@ -53,7 +62,73 @@
       "horasSemanales": 37.5,
       "escolaridadPromedio": 16.8,
       "precisionSalarial": "baja",
+      "carreraRelacionadaSlug": "derecho",
+      "carreraRelacionadaNombre": "Derecho",
       "urlFuente": "https://economia.gob.mx/datamexico/es/profile/occupation/abogados"
+    },
+    {
+      "slug": "contadores-auditores",
+      "codigo": "2121",
+      "nombre": "Contadores y Auditores",
+      "periodo": "2026-T1",
+      "ocupados": 470000,
+      "ingresoMensual": 8940,
+      "informalidadPct": 9.3,
+      "edadPromedio": 41.5,
+      "horasSemanales": 38.1,
+      "escolaridadPromedio": 16.5,
+      "precisionSalarial": "baja",
+      "carreraRelacionadaSlug": "contabilidad",
+      "carreraRelacionadaNombre": "Contabilidad y fiscalización",
+      "urlFuente": "https://www.economia.gob.mx/datamexico/es/profile/occupation/contadores-y-auditores"
+    },
+    {
+      "slug": "psicologos",
+      "codigo": "2142",
+      "nombre": "Psicólogos",
+      "periodo": "2026-T1",
+      "ocupados": 159000,
+      "ingresoMensual": 10500,
+      "informalidadPct": 32.1,
+      "edadPromedio": 38.3,
+      "horasSemanales": 29.6,
+      "escolaridadPromedio": 17,
+      "precisionSalarial": "baja",
+      "carreraRelacionadaSlug": "psicologia",
+      "carreraRelacionadaNombre": "Psicología",
+      "urlFuente": "https://www.economia.gob.mx/datamexico/es/profile/occupation/psicologos"
+    },
+    {
+      "slug": "arquitectos-planificadores-urbanos-transporte",
+      "codigo": "2263",
+      "nombre": "Arquitectos, Planificadores Urbanos y del Transporte",
+      "periodo": "2026-T1",
+      "ocupados": 151000,
+      "ingresoMensual": 9690,
+      "informalidadPct": 24.3,
+      "edadPromedio": 39.2,
+      "horasSemanales": 38.1,
+      "escolaridadPromedio": 16.6,
+      "precisionSalarial": "baja",
+      "carreraRelacionadaSlug": "arquitectura",
+      "carreraRelacionadaNombre": "Arquitectura y urbanismo",
+      "urlFuente": "https://www.economia.gob.mx/datamexico/es/profile/occupation/arquitectos-planificadores-urbanos-y-del-transporte"
+    },
+    {
+      "slug": "ingenieros-civiles-construccion",
+      "codigo": "2261",
+      "nombre": "Ingenieros Civiles y de la Construcción",
+      "periodo": "2026-T1",
+      "ocupados": 70300,
+      "ingresoMensual": 8450,
+      "informalidadPct": 18.7,
+      "edadPromedio": 41.1,
+      "horasSemanales": 43.9,
+      "escolaridadPromedio": 16.6,
+      "precisionSalarial": "baja",
+      "carreraRelacionadaSlug": "ingenieria-civil",
+      "carreraRelacionadaNombre": "Construcción e ingeniería civil",
+      "urlFuente": "https://www.economia.gob.mx/datamexico/es/profile/occupation/ingenieros-civiles-y-de-la-construccion"
     }
   ]
 }

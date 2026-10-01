@@ -95,9 +95,10 @@ test('todas las fuentes del Radar tienen metadatos de promoción cerrados', () =
   }
 });
 
-test('workflow de promoción exige propietario + Issue del bot + comando exacto y solo abre draft PR', () => {
+test('workflow de promoción exige propietario + Issue abierto del bot + comando exacto y solo abre draft PR', () => {
   const workflow = readFileSync(new URL('../.github/workflows/radar-promote.yml', import.meta.url), 'utf8');
   assert.match(workflow, /issue_comment:/);
+  assert.match(workflow, /github\.event\.issue\.state == 'open'/);
   assert.match(workflow, /github\.event\.issue\.user\.login == 'github-actions\[bot\]'/);
   assert.match(workflow, /github\.actor == github\.repository_owner/);
   assert.match(workflow, /github\.event\.comment\.body == '\/preparar'/);
@@ -106,6 +107,33 @@ test('workflow de promoción exige propietario + Issue del bot + comando exacto 
   assert.match(workflow, /Closes #/);
   assert.doesNotMatch(workflow, /git\s+push[^\n]*\bmain\b/i);
   assert.doesNotMatch(workflow, /merge_pull_request|enablePullRequestAutoMerge|auto-merge/i);
+});
+
+test('doble /preparar reutiliza un PR abierto y cada intento nuevo usa branch único', () => {
+  const workflow = readFileSync(new URL('../.github/workflows/radar-promote.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /Detectar propuesta abierta existente/);
+  assert.match(workflow, /state:\s*'open'/);
+  assert.match(workflow, /startsWith\(prefix\)/);
+  assert.match(workflow, /No se creó otro branch ni otro Pull Request/);
+  assert.match(workflow, /github\.event\.comment\.id/);
+  assert.match(workflow, /steps\.existing\.outputs\.found != 'true'/);
+});
+
+test('workflow de ciclo de vida solo actúa sobre PRs técnicos del bot y distingue merge de descarte', () => {
+  const workflow = readFileSync(new URL('../.github/workflows/radar-promotion-lifecycle.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /pull_request:/);
+  assert.match(workflow, /types:\s*\[closed\]/);
+  assert.match(workflow, /startsWith\(github\.event\.pull_request\.head\.ref, 'radar\/promotion-'\)/);
+  assert.match(workflow, /github\.event\.pull_request\.head\.repo\.full_name == github\.repository/);
+  assert.match(workflow, /github\.event\.pull_request\.user\.login == 'github-actions\[bot\]'/);
+  assert.match(workflow, /pr\.merged === true/);
+  assert.match(workflow, /Publicado mediante PR/);
+  assert.match(workflow, /se cerró sin merge/);
+  assert.match(workflow, /state: 'closed'/);
+  assert.match(workflow, /state: 'open'/);
+  assert.match(workflow, /git\.deleteRef/);
+  assert.match(workflow, /heads\/\$\{branch\}/);
+  assert.doesNotMatch(workflow, /git\s+push[^\n]*\bmain\b/i);
 });
 
 test('recolector incrusta payload pero conserva contents read', () => {

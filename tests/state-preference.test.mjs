@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { STATE_PREFERENCE_KEY, borrarEstadoGuardado, estadoPermitido, guardarEstado, leerEstadoGuardado, obtenerEstado } from '../src/lib/statePreference.js';
+import { STATE_PREFERENCE_KEY, STATE_SLUGS, borrarEstadoGuardado, estadoPermitido, guardarEstado, leerEstadoGuardado } from '../src/lib/statePreference.js';
+
+const catalogo = JSON.parse(readFileSync('src/data/estados.json','utf8'));
 
 function storageFalso() {
   const mapa = new Map();
@@ -13,12 +15,13 @@ function storageFalso() {
   };
 }
 
-test('solo permite slugs de las 32 entidades', () => {
+test('allowlist coincide exactamente con las 32 entidades del catálogo', () => {
+  assert.equal(STATE_SLUGS.length, 32);
+  assert.deepEqual(new Set(STATE_SLUGS), new Set(catalogo.estados.map((e) => e.slug)));
   assert.equal(estadoPermitido('jalisco'), true);
   assert.equal(estadoPermitido('nuevo-leon'), true);
   assert.equal(estadoPermitido('mi-casa'), false);
   assert.equal(estadoPermitido('../nuevo-leon'), false);
-  assert.equal(obtenerEstado('oaxaca')?.estado, 'Oaxaca');
 });
 
 test('preferencia es opt-in, local y se puede borrar', () => {

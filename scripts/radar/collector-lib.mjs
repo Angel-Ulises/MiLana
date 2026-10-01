@@ -199,8 +199,11 @@ export function isRelevant(item, source) {
 
 export function extractFact(text = '') {
   const clean = stripHtml(text);
-  const percent = clean.match(/-?\d+(?:[.,]\d+)?\s*%/);
-  if (percent) return percent[0].replace(',', '.');
+  const percent = clean.match(/-?\d+(?:[.,]\d+)?\s*(?:%|por ciento)/i);
+  if (percent) {
+    const numeric = percent[0].match(/-?\d+(?:[.,]\d+)?/)?.[0] || percent[0];
+    return `${numeric.replace(',', '.')}%`;
+  }
   const basis = clean.match(/-?\d+(?:[.,]\d+)?\s*(?:puntos?\s+base|pb)/i);
   if (basis) return basis[0];
   return null;
@@ -245,8 +248,9 @@ export function buildEditorialDraft(item, source, fact = null) {
   };
 }
 
-export function buildCandidate(item, source, notBefore) {
+export function buildCandidate(item, source, notBefore, notAfter = null) {
   if (!item.publishedAt || item.publishedAt < notBefore) return null;
+  if (notAfter && item.publishedAt > notAfter) return null;
   if (!isRelevant(item, source)) return null;
   const fact = item.valueText || extractFact(`${item.title} ${item.summary}`);
   const draft = buildEditorialDraft(item, source, fact);

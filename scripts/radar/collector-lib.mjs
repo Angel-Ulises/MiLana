@@ -139,6 +139,7 @@ export function parseInegiSeries(xml, source) {
       rawPublishedAt: lastUpdateRaw,
       period: obs.TimePeriod,
       value: numeric,
+      valueText: `${rounded}${suffix}`,
       valueStatus: obs.ValueStatus || null,
     };
   }).filter(Boolean);
@@ -205,10 +206,50 @@ export function extractFact(text = '') {
   return null;
 }
 
+export function signalType(item, source) {
+  if (source.kind === 'inegi-series') return item.valueStatus ? 'dato-estadistico-preliminar' : 'dato-estadistico-observado';
+  if (source.id === 'banxico-politica') return 'decision-politica-monetaria';
+  if (source.id === 'banxico-regional') return 'reporte-economico-regional';
+  return 'publicacion-oficial';
+}
+
+export function buildEditorialDraft(item, source, fact = null) {
+  const type = signalType(item, source);
+  const period = item.period || null;
+  const status = item.valueStatus || (source.kind === 'inegi-series' ? 'Publicado' : null);
+  const factText = item.valueText || fact;
+
+  let whatHappened;
+  if (source.kind === 'inegi-series') {
+    whatHappened = `${source.institution} actualizó ${item.title}. Para el periodo ${period || 'reportado'}, el valor publicado es ${factText || 'visible en la serie oficial'}${item.valueStatus ? ` y aparece con estatus ${item.valueStatus}` : ''}.`;
+  } else {
+    whatHappened = `${source.institution} publicó una actualización el ${item.publishedAt}: ${item.title}.${factText ? ` Entre los datos visibles aparece ${factText}.` : ''}`;
+  }
+
+  const primaryTool = source.tools?.[0] || null;
+  const secondaryTool = source.tools?.[1] || null;
+  const actionFrame = primaryTool
+    ? `Usa el dato como contexto y contrástalo con tus propios números en ${primaryTool}${secondaryTool ? `; si aplica, continúa con ${secondaryTool}` : ''}. No asumas que el dato agregado determina por sí solo una decisión personal.`
+    : 'Usa el dato como contexto y verifica la fuente oficial antes de convertirlo en una decisión personal.';
+
+  return {
+    signalType: type,
+    period,
+    dataStatus: status,
+    detectedFact: factText || null,
+    whatHappened,
+    whyItMatters: source.whyItMatters,
+    audience: source.audience,
+    actionFrame,
+    tools: source.tools || [],
+  };
+}
+
 export function buildCandidate(item, source, notBefore) {
   if (!item.publishedAt || item.publishedAt < notBefore) return null;
   if (!isRelevant(item, source)) return null;
-  const fact = extractFact(`${item.title} ${item.summary}`);
+  const fact = item.valueText || extractFact(`${item.title} ${item.summary}`);
+  const draft = buildEditorialDraft(item, source, fact);
   return {
     key: candidateKey(item),
     status: 'needs-review',
@@ -221,10 +262,15 @@ export function buildCandidate(item, source, notBefore) {
     summary: item.summary || item.title || '',
     category: source.category,
     detectedFact: fact,
+    period: item.period || null,
+    value: Number.isFinite(item.value) ? item.value : null,
+    valueStatus: item.valueStatus || null,
+    signalType: draft.signalType,
     editorial: {
       whyItMatters: source.whyItMatters,
       audience: source.audience,
       tools: source.tools,
+      draft,
       rule: 'No publicar automáticamente. Verificar el dato en la fuente oficial y redactar con contexto antes de pasar a economia.json.',
     },
   };

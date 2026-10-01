@@ -1,6 +1,7 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "ignoreCommand": "node scripts/vercel-ignore-build.mjs",
   "redirects": [
     { "source": "/guias", "destination": "/aprende", "permanent": true },
     { "source": "/guias/aguinaldo-2026", "destination": "/aprende/aguinaldo-bruto-neto", "permanent": true },

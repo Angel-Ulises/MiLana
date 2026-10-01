@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { borrarEstadoGuardado, guardarEstado, leerEstadoGuardado, obtenerEstado } from './lib/statePreference.js';
+import datos from './data/estados.json';
+import { borrarEstadoGuardado, guardarEstado, leerEstadoGuardado } from './lib/statePreference.js';
 
 export default function StateRememberControl() {
   const [target, setTarget] = useState(null);
@@ -37,7 +38,7 @@ export default function StateRememberControl() {
   }, []);
 
   if (!target || !seleccion) return null;
-  const info = obtenerEstado(seleccion);
+  const info = datos.estados.find((e) => e.slug === seleccion);
   if (!info) return null;
   const activo = guardado === seleccion;
 

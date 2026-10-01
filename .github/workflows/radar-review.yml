@@ -11,11 +11,15 @@ concurrency:
 
 jobs:
   revisar:
-    if: startsWith(github.head_ref, 'radar/promotion-')
+    if: >-
+      startsWith(github.event.pull_request.head.ref, 'radar/promotion-') &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login == 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: write
+      issues: write
     steps:
       - name: Checkout del PR
         uses: actions/checkout@v4
@@ -72,6 +76,70 @@ jobs:
               await github.rest.issues.updateComment({ owner, repo, comment_id: previous.id, body });
             } else {
               await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+
+      - name: Actualizar semáforo en el Issue origen
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          RADAR_OK: ${{ steps.audit.outputs.ok }}
+        with:
+          script: |
+            const fs = require('fs');
+            const { owner, repo } = context.repo;
+            const pr = context.payload.pull_request;
+            const match = String(pr.head.ref || '').match(/^radar\/promotion-(\d+)-/);
+            if (!match) {
+              core.setFailed(`No pude recuperar el Issue origen desde ${pr.head.ref}`);
+              return;
+            }
+
+            const issueNumber = Number(match[1]);
+            const marker = '<!-- radar-source-status -->';
+            const ok = process.env.RADAR_OK === 'true';
+            let blockers = [];
+            if (fs.existsSync('tmp/radar-review.json')) {
+              try {
+                blockers = JSON.parse(fs.readFileSync('tmp/radar-review.json', 'utf8')).blockers || [];
+              } catch (error) {
+                core.warning(`No pude leer radar-review.json: ${error.message}`);
+              }
+            }
+
+            const body = ok
+              ? [
+                  marker,
+                  '## 🟢 LISTO PARA REVISIÓN HUMANA',
+                  '',
+                  `PR técnico: #${pr.number} — ${pr.html_url}`,
+                  '',
+                  '**Automático:** pruebas del repositorio y guardas del Radar aprobadas.',
+                  '**Tu revisión:** confirma fuente/cifra, copy, foto y vista previa antes del merge.',
+                  '',
+                  '**Estado público:** todavía no publicado.'
+                ].join('\n')
+              : [
+                  marker,
+                  '## 🔴 BLOQUEADO',
+                  '',
+                  `PR técnico: #${pr.number} — ${pr.html_url}`,
+                  '',
+                  '**No fusionar.** La revisión automática no terminó limpia.',
+                  '',
+                  blockers.length ? '### Bloqueos detectados' : 'Revisa el dictamen del PR o el log del workflow para identificar el fallo.',
+                  ...blockers.slice(0, 5).map((item) => `- ${item}`),
+                  '',
+                  '**Estado público:** no publicado.'
+                ].filter(Boolean).join('\n');
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number: issueNumber, per_page: 100
+            });
+            const previous = comments.find((comment) => (comment.body || '').includes(marker));
+            if (previous) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: previous.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number: issueNumber, body });
             }
 
       - name: Bloquear check si hay guardas incumplidas

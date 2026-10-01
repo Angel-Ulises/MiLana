@@ -1,0 +1,105 @@
+{
+  "actualizado": "2026-T2",
+  "fuente": "Observatorio Laboral (STPS), con cifras de la ENOE de INEGI al segundo trimestre de 2026",
+  "nota": "Ingreso mensual promedio no equivale a sueldo inicial, vacantes disponibles ni garantía de ingreso individual. La cantidad de profesionistas ocupados no equivale por sí sola a demanda empresarial.",
+  "paginas": [
+    {
+      "id": "carreras",
+      "slug": "",
+      "titulo": "Carreras, empleos y salarios en México 2026 | MiLana",
+      "descripcion": "Explora ingresos, ocupación profesional y diferencias por estado con datos laborales de México, y conecta cada cifra con herramientas de finanzas personales."
+    },
+    {
+      "id": "mejor-pagadas",
+      "slug": "mejor-pagadas",
+      "titulo": "Carreras mejor pagadas en México 2026 | MiLana",
+      "descripcion": "Consulta las carreras con mayor ingreso promedio mensual reportado por el Observatorio Laboral y entiende cómo leer el dato antes de elegir una carrera."
+    },
+    {
+      "id": "mas-demandadas",
+      "slug": "mas-demandadas",
+      "titulo": "Carreras más demandadas en México 2026: qué sí mide el dato | MiLana",
+      "descripcion": "Revisa las carreras con más profesionistas ocupados en México y por qué ocupación, demanda de vacantes e ingreso son métricas distintas."
+    },
+    {
+      "id": "por-estado",
+      "slug": "por-estado",
+      "titulo": "Sueldos de profesionistas por estado en México 2026 | MiLana",
+      "descripcion": "Compara ingreso promedio mensual y número de profesionistas ocupados por estado con datos de la ENOE al segundo trimestre de 2026."
+    },
+    {
+      "id": "menor-ingreso",
+      "slug": "peor-pagadas",
+      "titulo": "Carreras peor pagadas en México 2026: cómo comparar ingresos | MiLana",
+      "descripcion": "Consulta carreras con ingresos promedio bajos dentro de los datos profesionales disponibles y compara sueldo, ocupación y afinidad laboral antes de decidir."
+    }
+  ],
+  "mejorPagadas": [
+    {"carrera":"Finanzas, banca y seguros","ingreso":29216,"ocupados":84677},
+    {"carrera":"Diseño","ingreso":26941,"ocupados":42817},
+    {"carrera":"Medicina","ingreso":25776,"ocupados":292286},
+    {"carrera":"Ingeniería de vehículos de motor, barcos y aeronaves","ingreso":24061,"ocupados":48772},
+    {"carrera":"Electricidad y generación de energía","ingreso":22973,"ocupados":56221},
+    {"carrera":"Química","ingreso":22778,"ocupados":38913},
+    {"carrera":"Minería y extracción","ingreso":22761,"ocupados":26361},
+    {"carrera":"Arquitectura y urbanismo","ingreso":22655,"ocupados":210906},
+    {"carrera":"Ciencias políticas","ingreso":22588,"ocupados":83293},
+    {"carrera":"Electrónica y tecnología de telecomunicaciones","ingreso":22229,"ocupados":294546}
+  ],
+  "masOcupadas": [
+    {"carrera":"Administración y gestión de empresas","ocupados":1021925,"ingreso":19451},
+    {"carrera":"Derecho","ocupados":752895,"ingreso":21107},
+    {"carrera":"Contabilidad y fiscalización","ocupados":678464,"ingreso":19220},
+    {"carrera":"Ciencias de la computación","ocupados":666463,"ingreso":21413},
+    {"carrera":"Ingeniería mecánica, electrónica y tecnología","ocupados":493181,"ingreso":20244},
+    {"carrera":"Enfermería y cuidados","ocupados":381354,"ingreso":16954},
+    {"carrera":"Ciencias de la educación","ocupados":360110,"ingreso":16654},
+    {"carrera":"Psicología","ocupados":326160,"ingreso":16136}
+  ],
+  "menorIngreso": [
+    {"carrera":"Didáctica, pedagogía y currículo","ingreso":14289,"ocupados":210028},
+    {"carrera":"Trabajo y atención social","ingreso":14470,"ocupados":68560},
+    {"carrera":"Formación docente en educación básica, nivel primaria","ingreso":14974,"ocupados":274397},
+    {"carrera":"Formación docente en educación básica, nivel secundaria","ingreso":15142,"ocupados":116916},
+    {"carrera":"Formación docente en educación física, artística o tecnológica","ingreso":15185,"ocupados":79001},
+    {"carrera":"Formación docente en educación básica, nivel preescolar","ingreso":15275,"ocupados":125987},
+    {"carrera":"Formación docente en otros servicios educativos","ingreso":15581,"ocupados":39774},
+    {"carrera":"Terapia y rehabilitación","ingreso":15583,"ocupados":86241},
+    {"carrera":"Psicología","ingreso":16136,"ocupados":326160},
+    {"carrera":"Lenguas extranjeras","ingreso":16426,"ocupados":38897}
+  ],
+  "estados": [
+    {"estado":"Aguascalientes","ocupados":126447,"ingreso":20792},
+    {"estado":"Baja California","ocupados":279806,"ingreso":21383},
+    {"estado":"Baja California Sur","ocupados":78107,"ingreso":24391},
+    {"estado":"Campeche","ocupados":68134,"ingreso":18012},
+    {"estado":"Chiapas","ocupados":227499,"ingreso":15762},
+    {"estado":"Chihuahua","ocupados":313710,"ingreso":20216},
+    {"estado":"Ciudad de México","ocupados":1293395,"ingreso":27044},
+    {"estado":"Coahuila","ocupados":298186,"ingreso":19673},
+    {"estado":"Colima","ocupados":69488,"ingreso":20118},
+    {"estado":"Durango","ocupados":129332,"ingreso":16811},
+    {"estado":"Estado de México","ocupados":1376226,"ingreso":17675},
+    {"estado":"Guanajuato","ocupados":355360,"ingreso":18362},
+    {"estado":"Guerrero","ocupados":149372,"ingreso":14694},
+    {"estado":"Hidalgo","ocupados":145713,"ingreso":18098},
+    {"estado":"Jalisco","ocupados":623804,"ingreso":17118},
+    {"estado":"Michoacán","ocupados":258229,"ingreso":16386},
+    {"estado":"Morelos","ocupados":117535,"ingreso":14196},
+    {"estado":"Nayarit","ocupados":90794,"ingreso":16935},
+    {"estado":"Nuevo León","ocupados":586492,"ingreso":26152},
+    {"estado":"Oaxaca","ocupados":166420,"ingreso":16301},
+    {"estado":"Puebla","ocupados":356538,"ingreso":16725},
+    {"estado":"Querétaro","ocupados":257647,"ingreso":20788},
+    {"estado":"Quintana Roo","ocupados":138041,"ingreso":18769},
+    {"estado":"San Luis Potosí","ocupados":175233,"ingreso":19234},
+    {"estado":"Sinaloa","ocupados":301939,"ingreso":18454},
+    {"estado":"Sonora","ocupados":268225,"ingreso":20482},
+    {"estado":"Tabasco","ocupados":138778,"ingreso":16285},
+    {"estado":"Tamaulipas","ocupados":290466,"ingreso":17762},
+    {"estado":"Tlaxcala","ocupados":69418,"ingreso":15691},
+    {"estado":"Veracruz","ocupados":382677,"ingreso":16271},
+    {"estado":"Yucatán","ocupados":174893,"ingreso":19650},
+    {"estado":"Zacatecas","ocupados":95072,"ingreso":17064}
+  ]
+}

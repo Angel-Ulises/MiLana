@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "notBefore": "2026-10-01",
+  "maxCandidatesPerRun": 5,
+  "sources": [
+    {
+      "id": "inegi-inpc-mensual",
+      "institution": "INEGI",
+      "name": "INPC — inflación anual mensual",
+      "kind": "rss",
+      "url": "https://www.inegi.org.mx/servicios/feedsnoticias/INPCA_M_O.xml",
+      "category": "Inflación",
+      "keywords": ["inflación", "inpc", "precios al consumidor"],
+      "tools": ["/finanzas/presupuesto", "/carreras"],
+      "whyItMatters": "La inflación cambia el poder de compra de los ingresos y puede afectar de forma distinta cada presupuesto.",
+      "audience": "Hogares, trabajadores y personas que comparan aumentos de ingreso con el crecimiento de sus gastos.",
+      "cadence": "mensual"
+    },
+    {
+      "id": "inegi-inpc-quincenal",
+      "institution": "INEGI",
+      "name": "INPC — inflación anual quincenal",
+      "kind": "rss",
+      "url": "https://www.inegi.org.mx/servicios/feedsnoticias/INPCVI_Q_O.xml",
+      "category": "Inflación",
+      "keywords": ["inflación", "inpc", "quincena", "precios al consumidor"],
+      "tools": ["/finanzas/presupuesto", "/finanzas/ahorro"],
+      "whyItMatters": "La lectura quincenal permite detectar cambios recientes en precios sin asumir que todas las categorías suben al mismo ritmo.",
+      "audience": "Personas que quieren entender cómo el entorno de precios se relaciona con su presupuesto y capacidad de ahorro.",
+      "cadence": "quincenal"
+    },
+    {
+      "id": "inegi-consumo",
+      "institution": "INEGI",
+      "name": "Consumo privado en el mercado interior",
+      "kind": "rss",
+      "url": "https://www.inegi.org.mx/servicios/feedsnoticias/IMCPMI_M_O.xml",
+      "category": "Economía cotidiana",
+      "keywords": ["consumo privado", "consumo", "mercado interior"],
+      "tools": ["/finanzas/presupuesto", "/finanzas/fondo-emergencia"],
+      "whyItMatters": "El consumo de los hogares ayuda a leer si el gasto agregado se acelera o modera, pero no sustituye los números de una familia.",
+      "audience": "Hogares, trabajadores y pequeños negocios que buscan contexto sobre el ritmo del gasto de las familias.",
+      "cadence": "mensual"
+    },
+    {
+      "id": "inegi-desocupacion",
+      "institution": "INEGI",
+      "name": "Tasa de desocupación",
+      "kind": "rss",
+      "url": "https://www.inegi.org.mx/servicios/feedsnoticias/DESUNI_M_O.xml",
+      "category": "Empleo y salarios",
+      "keywords": ["desocupación", "empleo", "mercado laboral", "población económicamente activa"],
+      "tools": ["/carreras", "/carreras/por-estado"],
+      "whyItMatters": "El mercado laboral agregado da contexto a búsqueda de empleo y salarios, aunque no describe una profesión o ciudad por sí solo.",
+      "audience": "Estudiantes, trabajadores y personas que evalúan cambiar de empleo, carrera o ubicación.",
+      "cadence": "mensual"
+    },
+    {
+      "id": "banxico-politica",
+      "institution": "Banco de México",
+      "name": "Decisiones de política monetaria",
+      "kind": "banxico-list",
+      "url": "https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/anuncios-politica-monetaria-t.html",
+      "category": "Tasas y crédito",
+      "keywords": ["tasa", "interés", "política monetaria", "objetivo"],
+      "tools": ["/finanzas/deuda-y-credito", "/finanzas/ahorro", "/finanzas/vivienda"],
+      "whyItMatters": "La tasa objetivo influye en el entorno financiero, pero no cambia automáticamente el costo o rendimiento de cada producto.",
+      "audience": "Personas que comparan crédito, refinanciamiento, ahorro o decisiones de vivienda.",
+      "cadence": "según calendario de decisiones"
+    },
+    {
+      "id": "banxico-regional",
+      "institution": "Banco de México",
+      "name": "Reportes sobre las economías regionales",
+      "kind": "banxico-list",
+      "url": "https://www.banxico.org.mx/publicaciones-y-prensa/reportes-sobre-las-economias-regionales/reportes-economias-regionales.html",
+      "category": "Empleo y regiones",
+      "keywords": ["economías regionales", "regional", "empleo", "actividad", "productividad"],
+      "tools": ["/carreras/por-estado", "/carreras"],
+      "whyItMatters": "La actividad, el empleo y la productividad pueden comportarse de forma distinta entre regiones y sectores.",
+      "audience": "Trabajadores, estudiantes y personas que comparan oportunidades laborales o económicas entre estados.",
+      "cadence": "trimestral"
+    }
+  ]
+}

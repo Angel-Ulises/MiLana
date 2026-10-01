@@ -1,7 +1,14 @@
-import estados from '../data/estados.json';
-
 export const STATE_PREFERENCE_KEY = 'milana_estado_contexto_v1';
-const slugs = new Set(estados.estados.map((e) => e.slug));
+
+export const STATE_SLUGS = Object.freeze([
+  'aguascalientes', 'baja-california', 'baja-california-sur', 'campeche', 'chiapas', 'chihuahua',
+  'ciudad-de-mexico', 'coahuila', 'colima', 'durango', 'estado-de-mexico', 'guanajuato', 'guerrero',
+  'hidalgo', 'jalisco', 'michoacan', 'morelos', 'nayarit', 'nuevo-leon', 'oaxaca', 'puebla', 'queretaro',
+  'quintana-roo', 'san-luis-potosi', 'sinaloa', 'sonora', 'tabasco', 'tamaulipas', 'tlaxcala', 'veracruz',
+  'yucatan', 'zacatecas',
+]);
+
+const slugs = new Set(STATE_SLUGS);
 
 export function estadoPermitido(slug) {
   return typeof slug === 'string' && slugs.has(slug);
@@ -33,8 +40,4 @@ export function borrarEstadoGuardado(storage = globalThis?.localStorage) {
   } catch {
     return false;
   }
-}
-
-export function obtenerEstado(slug) {
-  return estados.estados.find((e) => e.slug === slug) || null;
 }

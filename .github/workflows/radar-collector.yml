@@ -43,6 +43,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Pruebas unitarias
+        run: npm test
+
       - name: Recolectar fuentes oficiales
         run: node scripts/radar/collect.mjs --output tmp/radar-candidates.json
 

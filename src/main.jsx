@@ -7,6 +7,7 @@ import FinanceExpansion from './financeExpansion.jsx'
 import CareerPages, { esRutaCarreras } from './careerPages.jsx'
 import CareerProfessionPages, { esRutaProfesion } from './careerProfessionPages.jsx'
 import OccupationComparePage, { esRutaOcupaciones } from './occupationComparePage.jsx'
+import OccupationEntry from './occupationEntry.jsx'
 import FinancePages, { esRutaFinanzas } from './financePages.jsx'
 import AdvisorPage, { esRutaAsesor } from './advisorPage.jsx'
 import AdvisorEntry from './advisorEntry.jsx'
@@ -76,6 +77,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <FinanceExpansion />
         </>
       )}
+      <OccupationEntry />
       <AdvisorEntry />
       <EconomyNavigation />
     </>

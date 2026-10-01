@@ -11,6 +11,7 @@ import OccupationEntry from './occupationEntry.jsx'
 import CareerComparePage, { esRutaCompararCarreras } from './careerComparePage.jsx'
 import StatePages, { esRutaEstado } from './statePages.jsx'
 import StateEntry from './stateEntry.jsx'
+import StateRememberControl from './stateRememberControl.jsx'
 import FinancePages, { esRutaFinanzas } from './financePages.jsx'
 import AdvisorPage, { esRutaAsesor } from './advisorPage.jsx'
 import AdvisorEntry from './advisorEntry.jsx'
@@ -98,6 +99,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       )}
       <OccupationEntry />
       <StateEntry />
+      <StateRememberControl />
       <AdvisorEntry />
       <EconomyNavigation />
     </>

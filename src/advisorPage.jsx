@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { crearRadiografiaFinanciera, crearEscenariosIngreso, crearRutaAsesor } from './lib/advisorCore.js';
+import AdvisorProfessionContext from './advisorProfessionContext.jsx';
 
 const dinero = (n) => new Intl.NumberFormat('es-MX', {
   style: 'currency', currency: 'MXN', maximumFractionDigits: 0,
@@ -39,7 +40,9 @@ export default function AdvisorPage() {
     <Header />
     <section className="advisor-hero"><div className="shell"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/finanzas">Finanzas</a><span>/</span><span>Mi situación</span></nav><p className="eyebrow">Asesor MiLana · versión 1</p><h1>Cuéntame tus números. MiLana conecta lo que significan.</h1><p>No es un chat que adivina. Esta primera versión usa reglas visibles para ordenar flujo mensual, deuda, respaldo y una meta. Los cálculos ocurren en tu navegador y no eligen inversiones por ti.</p><div className="advisor-proof"><span>Sin cuenta</span><span>Sin guardar contraseñas</span><span>Sin seleccionar productos</span></div></div></section>
 
-    <main className="advisor-main"><section className="shell advisor-layout">
+    <main className="advisor-main">
+      <div className="shell"><AdvisorProfessionContext /></div>
+      <section className="shell advisor-layout">
       <form className="advisor-form" onSubmit={(e) => e.preventDefault()}>
         <div className="advisor-form-head"><p className="eyebrow">Tu fotografía mensual</p><h2>Empieza con lo que ya sabes.</h2><p>Puedes dejar campos vacíos. MiLana solo calcula con lo que captures.</p></div>
         <Campo label="Ingreso neto mensual" value={form.ingresoNeto} onChange={set('ingresoNeto')} help="Lo que realmente llega a tu cuenta." />

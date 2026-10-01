@@ -34,41 +34,50 @@ jobs:
             const issueNumber = Number(match[1]);
             const issue = await github.rest.issues.get({ owner, repo, issue_number: issueNumber });
             const merged = pr.merged === true;
+            const marker = '<!-- radar-source-status -->';
+            let body;
 
             if (merged) {
               const slugMatch = String(pr.body || '').match(/\*\*Slug propuesto:\*\*\s+(\/economia\/[a-z0-9-]+)/i);
               const publicPath = slugMatch?.[1] || null;
               const publicUrl = publicPath ? `https://www.milanaaqui.mx${publicPath}` : null;
-              await github.rest.issues.createComment({
-                owner,
-                repo,
-                issue_number: issueNumber,
-                body: [
-                  `Publicado mediante PR #${pr.number}.`,
-                  publicUrl ? `Ruta pública: ${publicUrl}` : 'La propuesta fue fusionada a `main`; no pude extraer la ruta pública del cuerpo del PR.',
-                  '',
-                  'El candidato queda cerrado y el Radar lo reconocerá por `radarKey` para no proponerlo de nuevo.'
-                ].join('\n')
-              });
+              body = [
+                marker,
+                '## ✅ PUBLICADO',
+                '',
+                `PR fusionado: #${pr.number} — ${pr.html_url}`,
+                publicUrl ? `Ruta pública: ${publicUrl}` : 'La propuesta fue fusionada a `main`; no pude extraer la ruta pública del cuerpo del PR.',
+                '',
+                'El Radar reconocerá este candidato por `radarKey` y no deberá proponerlo de nuevo.'
+              ].join('\n');
 
               if (issue.data.state !== 'closed') {
                 await github.rest.issues.update({ owner, repo, issue_number: issueNumber, state: 'closed' });
               }
             } else {
-              await github.rest.issues.createComment({
-                owner,
-                repo,
-                issue_number: issueNumber,
-                body: [
-                  `La propuesta #${pr.number} se cerró sin merge. **El candidato no fue publicado.**`,
-                  '',
-                  'El branch técnico se descarta. Si quieres volver a intentarlo desde el `main` actual, comenta nuevamente `/preparar` en este Issue.'
-                ].join('\n')
-              });
+              body = [
+                marker,
+                '## ⚪ DESCARTADO',
+                '',
+                `PR cerrado sin merge: #${pr.number} — ${pr.html_url}`,
+                '',
+                '**Estado público:** no publicado.',
+                'El branch técnico se descarta. Si quieres intentarlo de nuevo desde el `main` actual, comenta `/preparar` en este Issue.'
+              ].join('\n');
 
               if (issue.data.state === 'closed') {
                 await github.rest.issues.update({ owner, repo, issue_number: issueNumber, state: 'open' });
               }
+            }
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number: issueNumber, per_page: 100
+            });
+            const previous = comments.find((comment) => (comment.body || '').includes(marker));
+            if (previous) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: previous.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number: issueNumber, body });
             }
 
             try {

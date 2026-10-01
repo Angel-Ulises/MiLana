@@ -34,7 +34,7 @@ test('la UI estatal distingue promedios, vacantes y costo de vida', () => {
 
 test('cada estado recibe HTML estático, canonical y sitemap', () => {
   assert.match(generador, /datos\.estados\.forEach\(construirEstado\)/);
-  assert.match(generador, /rel=\\"canonical/);
+  assert.match(generador, /rel="canonical"/);
   assert.match(generador, /BreadcrumbList/);
   assert.match(sitemap, /\/estados/);
   assert.match(sitemap, /estados\.map\(e => `\/estados\/\$\{e\.slug\}`\)/);

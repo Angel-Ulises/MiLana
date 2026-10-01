@@ -1,0 +1,64 @@
+{
+  "actualizado": "2026-10-01",
+  "paginas": [
+    {
+      "id": "finanzas",
+      "slug": "",
+      "titulo": "Finanzas personales en México | MiLana",
+      "descripcion": "Organiza ingreso, gastos, ahorro, deuda y vivienda con herramientas claras, supuestos visibles y fuentes de educación financiera para México."
+    },
+    {
+      "id": "presupuesto",
+      "slug": "presupuesto",
+      "titulo": "Calculadora de presupuesto mensual | MiLana",
+      "descripcion": "Compara ingreso neto, gastos esenciales, gastos variables y pagos de deuda para entender cuánto dinero queda disponible cada mes."
+    },
+    {
+      "id": "fondo-emergencia",
+      "slug": "fondo-emergencia",
+      "titulo": "Calculadora de fondo de emergencia | MiLana",
+      "descripcion": "Estima una meta de 3 a 6 meses de gastos esenciales y calcula cuánto tardarías en construirla con una aportación mensual elegida por ti."
+    },
+    {
+      "id": "deuda-credito",
+      "slug": "deuda-y-credito",
+      "titulo": "Deuda y crédito: cuánto de tu ingreso ya está comprometido | MiLana",
+      "descripcion": "Calcula qué proporción de tu ingreso neto se destina a pagos de deuda y revisa qué conceptos comparar antes de contratar un crédito."
+    },
+    {
+      "id": "ahorro",
+      "slug": "ahorro",
+      "titulo": "Calculadora de meta de ahorro | MiLana",
+      "descripcion": "Define una meta, registra lo que ya tienes y calcula cuántos meses tomaría alcanzarla con una aportación mensual constante, sin asumir rendimientos."
+    },
+    {
+      "id": "vivienda",
+      "slug": "vivienda",
+      "titulo": "Vivienda: antes de rentar o comprar | MiLana",
+      "descripcion": "Ordena ingreso, ahorro, deuda y vivienda antes de comparar renta, compra o un crédito Infonavit."
+    }
+  ],
+  "fuentes": {
+    "presupuesto": {
+      "nombre": "CONDUSEF — Cómo elaborar un presupuesto básico",
+      "fecha": "2026",
+      "url": "https://www.gob.mx/condusef/es/articulos/como-elaborar-un-presupuesto-basico"
+    },
+    "fondo": {
+      "nombre": "CONDUSEF — Fondo de emergencia: tu mejor aliado en los momentos difíciles",
+      "fecha": "18 de febrero de 2026",
+      "url": "https://www.gob.mx/condusef/articulos/fondo-de-emergencia-tu-mejor-aliado-en-los-momentos-dificiles"
+    },
+    "credito": {
+      "nombre": "CONDUSEF — Qué debes saber de una tarjeta de crédito",
+      "fecha": "referencia conceptual",
+      "url": "https://www.gob.mx/condusef/articulos/que-debes-saber-de-una-tarjeta-de-credito"
+    },
+    "ahorro": {
+      "nombre": "CONDUSEF — Págate a ti primero",
+      "fecha": "2026",
+      "url": "https://www.gob.mx/condusef/articulos/pagate-a-ti-primero"
+    }
+  },
+  "nota": "MiLana ofrece estimaciones informativas. No sustituye una evaluación de crédito, asesoría financiera personalizada ni condiciones contractuales de una institución."
+}

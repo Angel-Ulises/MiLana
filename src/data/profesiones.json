@@ -1,0 +1,143 @@
+{
+  "actualizado": "2026-T2",
+  "promedioNacional": 19494,
+  "fuenteGeneral": "Observatorio Laboral (STPS), con cifras de la ENOE de INEGI al segundo trimestre de 2026",
+  "nota": "Los ingresos son promedios mensuales de profesionistas ocupados. No equivalen a sueldo inicial, oferta salarial vigente ni ingreso garantizado.",
+  "profesiones": [
+    {
+      "slug": "finanzas-banca-seguros",
+      "nombre": "Finanzas, banca y seguros",
+      "consulta": "¿Cuánto gana alguien de Finanzas, banca y seguros en México?",
+      "ingreso": 29216,
+      "ocupados": 84677,
+      "hombres": 63.0,
+      "mujeres": 37.0,
+      "area": "Económico Administrativas",
+      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
+    },
+    {
+      "slug": "medicina",
+      "nombre": "Medicina",
+      "consulta": "¿Cuánto gana un médico en México?",
+      "ingreso": 25776,
+      "ocupados": 292286,
+      "hombres": 51.4,
+      "mujeres": 48.6,
+      "area": "Ciencias de la Salud",
+      "afinidad": 97.4,
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Biologia.html"
+    },
+    {
+      "slug": "diseno",
+      "nombre": "Diseño",
+      "consulta": "¿Cuánto gana un diseñador en México?",
+      "ingreso": 26941,
+      "ocupados": 42817,
+      "hombres": 39.6,
+      "mujeres": 60.4,
+      "area": "Artes",
+      "cuentaPropia": 17.6,
+      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Artes.html"
+    },
+    {
+      "slug": "ciencias-computacion",
+      "nombre": "Ciencias de la computación",
+      "consulta": "¿Cuánto gana un profesionista de computación en México?",
+      "ingreso": 21413,
+      "ocupados": 666463,
+      "hombres": 72.2,
+      "mujeres": 27.8,
+      "area": "Ingenierías y tecnologías",
+      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Ingenierias.html"
+    },
+    {
+      "slug": "derecho",
+      "nombre": "Derecho",
+      "consulta": "¿Cuánto gana un abogado en México?",
+      "ingreso": 21107,
+      "ocupados": 752895,
+      "hombres": 56.8,
+      "mujeres": 43.2,
+      "area": "Ciencias Sociales",
+      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Sociales.html"
+    },
+    {
+      "slug": "contabilidad",
+      "nombre": "Contabilidad y fiscalización",
+      "consulta": "¿Cuánto gana un contador en México?",
+      "ingreso": 19220,
+      "ocupados": 678464,
+      "hombres": 47.9,
+      "mujeres": 52.1,
+      "area": "Económico Administrativas",
+      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
+    },
+    {
+      "slug": "administracion",
+      "nombre": "Administración y gestión de empresas",
+      "consulta": "¿Cuánto gana un administrador de empresas en México?",
+      "ingreso": 19451,
+      "ocupados": 1021925,
+      "hombres": 48.1,
+      "mujeres": 51.9,
+      "area": "Económico Administrativas",
+      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
+    },
+    {
+      "slug": "psicologia",
+      "nombre": "Psicología",
+      "consulta": "¿Cuánto gana un psicólogo en México?",
+      "ingreso": 16136,
+      "ocupados": 326160,
+      "hombres": 26.2,
+      "mujeres": 73.8,
+      "area": "Ciencias de la Salud",
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Biologia.html"
+    },
+    {
+      "slug": "arquitectura",
+      "nombre": "Arquitectura y urbanismo",
+      "consulta": "¿Cuánto gana un arquitecto en México?",
+      "ingreso": 22655,
+      "ocupados": 210906,
+      "hombres": 69.7,
+      "mujeres": 30.3,
+      "area": "Arquitectura y urbanismo",
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Panorama_arquitectura.html"
+    },
+    {
+      "slug": "enfermeria",
+      "nombre": "Enfermería y cuidados",
+      "consulta": "¿Cuánto gana un profesional de enfermería en México?",
+      "ingreso": 16954,
+      "ocupados": 381354,
+      "hombres": 21.1,
+      "mujeres": 78.9,
+      "area": "Ciencias de la Salud",
+      "subordinados": 98.5,
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Biologia.html"
+    },
+    {
+      "slug": "ingenieria-civil",
+      "nombre": "Construcción e ingeniería civil",
+      "consulta": "¿Cuánto gana un ingeniero civil en México?",
+      "ingreso": 22072,
+      "ocupados": 166463,
+      "hombres": 90.1,
+      "mujeres": 9.9,
+      "area": "Ingenierías",
+      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Ingenierias.html"
+    },
+    {
+      "slug": "mercadotecnia",
+      "nombre": "Mercadotecnia y publicidad",
+      "consulta": "¿Cuánto gana un profesionista de mercadotecnia en México?",
+      "ingreso": 21166,
+      "ocupados": 161129,
+      "hombres": 44.4,
+      "mujeres": 55.6,
+      "area": "Económico Administrativas",
+      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
+    }
+  ]
+}

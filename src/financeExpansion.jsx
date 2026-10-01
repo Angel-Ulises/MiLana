@@ -18,7 +18,7 @@ const PREGUNTAS = [
     ramas: [
       { texto: 'Mejor pagadas en México', href: '/carreras/mejor-pagadas' },
       { texto: 'Sueldos por estado', href: '/carreras/por-estado' },
-      'Ingenierías mejor pagadas',
+      { texto: 'Ingeniería civil', href: '/carreras/profesion/ingenieria-civil' },
       { texto: 'Comparar sueldo bruto vs. neto', href: '/calculadoras/bruto-a-neto' },
     ],
     accion: '/carreras/mejor-pagadas',
@@ -42,10 +42,15 @@ const PREGUNTAS = [
     id: 'profesion',
     tag: 'Salarios',
     pregunta: '¿Cuánto gana una profesión específica?',
-    texto: 'Busca la ocupación y continúa hacia ingreso neto, prestaciones, ahorro y vivienda.',
-    ramas: ['Ingeniería', 'Medicina', 'Contaduría', 'Tecnología y software'],
+    texto: 'Busca la ocupación y continúa hacia ingreso neto, presupuesto, ahorro y vivienda.',
+    ramas: [
+      { texto: 'Medicina', href: '/carreras/profesion/medicina' },
+      { texto: 'Contaduría', href: '/carreras/profesion/contabilidad' },
+      { texto: 'Derecho', href: '/carreras/profesion/derecho' },
+      { texto: 'Tecnología y software', href: '/carreras/profesion/ciencias-computacion' },
+    ],
     accion: '/carreras',
-    accionTexto: 'Explorar carreras y salarios',
+    accionTexto: 'Explorar todos los perfiles',
   },
   {
     id: 'sin-universidad',
@@ -77,21 +82,21 @@ const PREGUNTAS = [
     texto: 'Conecta sueldo, impuestos, vivienda, deuda, ahorro y metas en una sola ruta.',
     ramas: [
       { texto: 'Ingreso neto', href: '/calculadoras/bruto-a-neto' },
-      { texto: 'Renta y vivienda', href: '/calculadoras/infonavit' },
-      'Ahorro mensual',
-      'Capacidad de crédito',
+      { texto: 'Presupuesto mensual', href: '/finanzas/presupuesto' },
+      { texto: 'Ahorro mensual', href: '/finanzas/ahorro' },
+      { texto: 'Deuda y crédito', href: '/finanzas/deuda-y-credito' },
     ],
-    accion: '/calculadoras/bruto-a-neto',
-    accionTexto: 'Empezar por mi ingreso neto',
+    accion: '/finanzas/presupuesto',
+    accionTexto: 'Ordenar mis números',
   },
 ];
 
 const AREAS = [
   { titulo: 'Trabajo y salarios', texto: 'Carreras, profesiones, demanda, prestaciones y cambios de empleo.', href: '/carreras', clave: '01' },
   { titulo: 'Impuestos', texto: 'ISR, RESICO y decisiones que cambian lo que realmente recibes.', href: '/calculadoras/isr', clave: '02' },
-  { titulo: 'Vivienda', texto: 'Renta, compra, Infonavit y capacidad real de pago.', href: '/calculadoras/infonavit', clave: '03' },
-  { titulo: 'Deuda y crédito', texto: 'Entender costo, mensualidad, plazo y cuándo una deuda te limita.', href: '#ml-editorial', clave: '04' },
-  { titulo: 'Ahorro e inversión', texto: 'Metas, colchón, rendimiento y decisiones con horizonte claro.', href: '#ml-editorial', clave: '05' },
+  { titulo: 'Vivienda', texto: 'Renta, compra, Infonavit y capacidad real de pago.', href: '/finanzas/vivienda', clave: '03' },
+  { titulo: 'Deuda y crédito', texto: 'Entender costo, mensualidad, plazo y cuánto ingreso ya está comprometido.', href: '/finanzas/deuda-y-credito', clave: '04' },
+  { titulo: 'Ahorro', texto: 'Metas, fondo de emergencia y decisiones con horizonte claro.', href: '/finanzas/ahorro', clave: '05' },
   { titulo: 'Retiro', texto: 'Pensión, semanas, ahorro de largo plazo y escenarios futuros.', href: '/calculadoras/pension-imss', clave: '06' },
 ];
 
@@ -100,16 +105,19 @@ const EDITORIAL = [
     tipo: 'Economía cotidiana',
     titulo: 'Inflación, tasas y crédito: qué cambia en tu bolsillo',
     texto: 'La economía importa cuando cambia tu mensualidad, tu ahorro o el precio de lo que compras.',
+    href: '/finanzas/deuda-y-credito',
   },
   {
     tipo: 'Trabajo',
     titulo: 'Empleo y salarios, sin perder el contexto regional',
-    texto: 'Lecturas para entender qué sectores crecen, dónde hay demanda y qué significa para tu ingreso.',
+    texto: 'Datos para entender tamaño del mercado, ingresos y diferencias entre estados sin mezclar métricas.',
+    href: '/carreras',
   },
   {
     tipo: 'Vivienda',
     titulo: 'Costo de vida, renta y compra de vivienda',
-    texto: 'Datos y explicaciones conectados con herramientas para aterrizar una decisión a números propios.',
+    texto: 'Contexto conectado con ingreso, presupuesto, respaldo y herramientas para aterrizar una decisión.',
+    href: '/finanzas/vivienda',
   },
 ];
 
@@ -133,7 +141,7 @@ function asegurarNavegacion() {
   carreras.textContent = 'Carreras';
   carreras.dataset.mlFinanceNav = 'true';
   const finanzas = document.createElement('a');
-  finanzas.href = '/#ml-finanzas';
+  finanzas.href = '/finanzas';
   finanzas.textContent = 'Finanzas';
   finanzas.dataset.mlFinanceNav = 'true';
   nav.insertBefore(carreras, nav.children[2] || null);
@@ -194,7 +202,7 @@ function FinanceContent() {
               <p className="eyebrow">Tu vida financiera, conectada</p>
               <h2>MiLana crece de calculadora a mapa de decisiones.</h2>
             </div>
-            <p>No queremos una colección de artículos sueltos. Cada tema debe llevar a una herramienta, una comparación o una siguiente pregunta útil.</p>
+            <p>Cada tema debe llevar a una herramienta, una comparación o una siguiente pregunta útil. Ya no son tarjetas de destino: son rutas reales.</p>
           </div>
           <div className="ml-money-grid">
             {AREAS.map((area) => (
@@ -208,11 +216,11 @@ function FinanceContent() {
           </div>
           <div className="ml-advisor-strip">
             <div>
-              <span className="ml-advisor-kicker">Próxima evolución</span>
+              <span className="ml-advisor-kicker">Empieza a tomar forma</span>
               <h3>“Gano $28,000. ¿Qué puedo hacer con eso?”</h3>
-              <p>La meta es que MiLana conecte ingreso neto, gastos, ahorro, deuda y vivienda con herramientas mexicanas, sin esconder supuestos.</p>
+              <p>Presupuesto, fondo de emergencia, deuda, ahorro y vivienda ya pueden conectarse en una secuencia de decisiones.</p>
             </div>
-            <a href="/calculadoras/bruto-a-neto">Empezar por mi sueldo <span>→</span></a>
+            <a href="/finanzas/presupuesto">Ordenar mi dinero <span>→</span></a>
           </div>
         </div>
       </section>
@@ -222,24 +230,25 @@ function FinanceContent() {
           <article className="ml-editorial-feature">
             <img src={foto(PEXELS.economia, 1400)} srcSet={`${foto(PEXELS.economia, 700)} 700w, ${foto(PEXELS.economia, 1400)} 1400w`} sizes="(max-width: 900px) 92vw, 56vw" alt="Edificios modernos del distrito financiero de Ciudad de México" loading="lazy" />
             <div className="ml-editorial-overlay">
-              <p className="eyebrow">Economía, sin ruido</p>
+              <p className="eyebrow">Radar económico</p>
               <h2>Lo que pasa afuera, explicado por lo que cambia para ti.</h2>
-              <p>Inflación, tasas, empleo, vivienda y actividad económica con contexto y rutas hacia herramientas de MiLana.</p>
+              <p>Esta será la capa de actualidad: evento → contexto → impacto personal → herramienta. No reemplaza la sección Aprende.</p>
             </div>
           </article>
           <div className="ml-editorial-list">
             <div className="ml-editorial-list-head">
-              <span>Análisis y actualidad</span>
-              <a href="/aprende/">Ver explicaciones <span>→</span></a>
+              <span>Economía y actualidad</span>
+              <b className="ml-editorial-method">Contexto → impacto → herramienta</b>
             </div>
             {EDITORIAL.map((nota) => (
-              <article className="ml-editorial-row" key={nota.titulo}>
+              <a className="ml-editorial-row ml-editorial-row-link" key={nota.titulo} href={nota.href}>
                 <span>{nota.tipo}</span>
                 <h3>{nota.titulo}</h3>
                 <p>{nota.texto}</p>
-              </article>
+                <b>Explorar →</b>
+              </a>
             ))}
-            <p className="ml-editorial-note">Las noticias se incorporarán con fecha, fuente y contexto visibles. MiLana no presentará titulares automáticos como recomendación financiera.</p>
+            <p className="ml-editorial-note">Las noticias se incorporarán después con fecha, fuente, vigencia y contexto visibles. MiLana no presentará titulares automáticos como recomendación financiera.</p>
           </div>
         </div>
       </section>

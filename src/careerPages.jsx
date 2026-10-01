@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import datos from './data/carreras.json';
+import profesiones from './data/profesiones.json';
 
 const PEXELS = {
   hub: '6147267',
@@ -37,7 +38,7 @@ function Header() {
         </a>
         <nav className="desktop-nav" aria-label="Principal">
           <a href="/carreras">Carreras</a>
-          <a href="/#ml-finanzas">Finanzas</a>
+          <a href="/finanzas">Finanzas</a>
           <a href="/#calculadoras">Calculadoras</a>
           <a href="/aprende/">Aprende</a>
         </nav>
@@ -91,7 +92,7 @@ function Hero({ eyebrow, title, lede, image = PEXELS.salarios, imageAlt }) {
           </div>
         </div>
         <figure className="career-hero-media">
-          <img src={pexels(image)} srcSet={`${pexels(image, 720)} 720w, ${pexels(image, 1400)} 1400w`} sizes="(max-width: 900px) 100vw, 48vw" alt={imageAlt} />
+          <img src={pexels(image)} srcSet={`${pexels(image, 720)} 720w, ${pexels(image, 1400)} 1400w`} sizes="(max-width: 900px) 100vw, 48vw" alt={imageAlt} loading="eager" />
         </figure>
       </div>
     </section>
@@ -141,6 +142,7 @@ function Hub() {
     { n: '03', titulo: '¿Dónde ganan más los profesionistas?', texto: 'Compara los 32 estados y aterriza la conversación a tu ubicación.', href: '/carreras/por-estado' },
     { n: '04', titulo: '¿Qué carreras reportan menor ingreso?', texto: 'Mira el otro extremo de la distribución y qué contexto falta antes de elegir.', href: '/carreras/peor-pagadas' },
   ];
+  const perfiles = profesiones.profesiones.slice(0, 8);
   return (
     <>
       <Hero eyebrow="Carreras · Trabajo · Dinero" title="Elegir carrera también es una decisión financiera." lede="Compara ingresos, tamaño del mercado laboral y diferencias regionales con datos públicos. Después convierte esas cifras en ingreso neto, ahorro y decisiones de vida." image={PEXELS.hub} imageAlt="Estudiantes universitarios colaborando frente a una laptop" />
@@ -174,6 +176,19 @@ function Hub() {
               <article><span>Ingreso profesional en Nuevo León</span><strong>$26,152</strong><p>Promedio mensual estatal</p></article>
             </div>
             <Fuente />
+          </div>
+        </section>
+
+        <section className="career-profession-directory">
+          <div className="shell">
+            <div className="career-profession-head">
+              <div><p className="eyebrow">Preguntas concretas</p><h2>¿Cuánto gana una profesión específica?</h2></div>
+              <p>Cada perfil usa el mismo corte 2026 y separa ingreso promedio, población ocupada y contexto. No convierte el promedio en sueldo inicial.</p>
+            </div>
+            <div className="career-profession-grid">
+              {perfiles.map((p) => <a key={p.slug} href={`/carreras/profesion/${p.slug}`}><span>{p.area}</span><h3>{p.nombre}</h3><strong>{dinero(p.ingreso)}/mes</strong><p>{numero(p.ocupados)} profesionistas ocupados</p><b>Ver perfil →</b></a>)}
+            </div>
+            <div className="career-profession-more">{profesiones.profesiones.slice(8).map((p) => <a key={p.slug} href={`/carreras/profesion/${p.slug}`}>{p.nombre}<span>→</span></a>)}</div>
           </div>
         </section>
 

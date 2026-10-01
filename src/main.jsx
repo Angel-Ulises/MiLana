@@ -12,6 +12,7 @@ import CareerComparePage, { esRutaCompararCarreras } from './careerComparePage.j
 import StatePages, { esRutaEstado } from './statePages.jsx'
 import StateEntry from './stateEntry.jsx'
 import StateRememberControl from './stateRememberControl.jsx'
+import StateHousing from './stateHousing.jsx'
 import FinancePages, { esRutaFinanzas } from './financePages.jsx'
 import AdvisorPage, { esRutaAsesor } from './advisorPage.jsx'
 import AdvisorEntry from './advisorEntry.jsx'
@@ -31,6 +32,7 @@ import './occupation-compare.css'
 import './career-compare.css'
 import './state-pages.css'
 import './state-labor.css'
+import './state-housing.css'
 import './state-entry.css'
 import './finance-pages.css'
 import './advisor-page.css'
@@ -100,6 +102,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <OccupationEntry />
       <StateEntry />
       <StateRememberControl />
+      <StateHousing />
       <AdvisorEntry />
       <EconomyNavigation />
     </>

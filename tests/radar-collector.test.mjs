@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
   parseFeed,
+  parseInegiSeries,
   parseBanxicoList,
   buildCandidate,
   candidateKey,
@@ -21,7 +22,7 @@ test('normaliza fechas de feeds y páginas oficiales', () => {
   assert.equal(normalizeDate('2026-10-02T12:00:00Z'), '2026-10-02');
 });
 
-test('parser RSS extrae título, fecha, enlace y resumen', () => {
+test('parser RSS genérico extrae título, fecha, enlace y resumen', () => {
   const xml = `<?xml version="1.0"?><rss><channel><item>
     <title>Inflación anual se ubica en 3.50%</title>
     <link>https://www.inegi.org.mx/ejemplo</link>
@@ -34,6 +35,34 @@ test('parser RSS extrae título, fecha, enlace y resumen', () => {
   assert.equal(items[0].publishedAt, '2026-10-08');
   assert.match(items[0].title, /3.50%/);
   assert.equal(items[0].sourceUrl, 'https://www.inegi.org.mx/ejemplo');
+});
+
+test('parser de serie INEGI entiende METADATA y Obs reales', () => {
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+  <DATASET><METADATA>
+    <Nemonic>INPCVI_Q_O</Nemonic>
+    <Name xml:lang="es">Índice de precios al consumidor (INPC). Inflación quincenal, interanual</Name>
+    <Unit xml:lang="es">Variación Porcentual</Unit>
+    <Freq xml:lang="es">Quincenal</Freq>
+    <NoOfDecimals>3</NoOfDecimals>
+    <LastUpdate>24/09/2026</LastUpdate>
+  </METADATA><SERIE><Obs TimePeriod="2026/09/01" CurrentValue="3.41999999999999990000" /></SERIE></DATASET>`;
+  const items = parseInegiSeries(xml, source('inegi-inpc-quincenal'));
+  assert.equal(items.length, 1);
+  assert.equal(items[0].publishedAt, '2026-09-24');
+  assert.equal(items[0].period, '2026/09/01');
+  assert.equal(items[0].value, 3.42);
+  assert.match(items[0].summary, /3\.42%/);
+  assert.match(items[0].title, /Inflación quincenal/);
+});
+
+test('parser INEGI conserva estatus preliminar', () => {
+  const xml = `<DATASET><METADATA><Nemonic>IMCPMI_M_O</Nemonic><Name xml:lang="es">Indicador mensual del consumo privado en el mercado interior, Variación anual</Name><Unit xml:lang="es">Variación Porcentual</Unit><NoOfDecimals>1</NoOfDecimals><LastUpdate>05/10/2026</LastUpdate></METADATA><SERIE><Obs TimePeriod="2026/07" CurrentValue="1.249" ValueStatus="Preliminar" /></SERIE></DATASET>`;
+  const items = parseInegiSeries(xml, source('inegi-consumo'));
+  assert.equal(items[0].publishedAt, '2026-10-05');
+  assert.equal(items[0].valueStatus, 'Preliminar');
+  assert.match(items[0].summary, /1\.2%/);
+  assert.match(items[0].summary, /Preliminar/);
 });
 
 test('parser Banxico tolera HTML y detecta filas con fecha', () => {

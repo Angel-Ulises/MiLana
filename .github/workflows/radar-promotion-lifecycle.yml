@@ -1,0 +1,87 @@
+name: Radar económico — cerrar ciclo de promoción
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  cerrar-ciclo:
+    if: >-
+      startsWith(github.event.pull_request.head.ref, 'radar/promotion-') &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login == 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
+      issues: write
+    steps:
+      - name: Sincronizar Issue y limpiar branch técnico
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const pr = context.payload.pull_request;
+            const branch = pr.head.ref;
+            const match = branch.match(/^radar\/promotion-(\d+)-/);
+
+            if (!match) {
+              core.setFailed(`No pude recuperar el Issue origen desde el branch ${branch}`);
+              return;
+            }
+
+            const issueNumber = Number(match[1]);
+            const issue = await github.rest.issues.get({ owner, repo, issue_number: issueNumber });
+            const merged = pr.merged === true;
+
+            if (merged) {
+              const slugMatch = String(pr.body || '').match(/\*\*Slug propuesto:\*\*\s+(\/economia\/[a-z0-9-]+)/i);
+              const publicPath = slugMatch?.[1] || null;
+              const publicUrl = publicPath ? `https://www.milanaaqui.mx${publicPath}` : null;
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: issueNumber,
+                body: [
+                  `Publicado mediante PR #${pr.number}.`,
+                  publicUrl ? `Ruta pública: ${publicUrl}` : 'La propuesta fue fusionada a `main`; no pude extraer la ruta pública del cuerpo del PR.',
+                  '',
+                  'El candidato queda cerrado y el Radar lo reconocerá por `radarKey` para no proponerlo de nuevo.'
+                ].join('\n')
+              });
+
+              if (issue.data.state !== 'closed') {
+                await github.rest.issues.update({ owner, repo, issue_number: issueNumber, state: 'closed' });
+              }
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: issueNumber,
+                body: [
+                  `La propuesta #${pr.number} se cerró sin merge. **El candidato no fue publicado.**`,
+                  '',
+                  'El branch técnico se descarta. Si quieres volver a intentarlo desde el `main` actual, comenta nuevamente `/preparar` en este Issue.'
+                ].join('\n')
+              });
+
+              if (issue.data.state === 'closed') {
+                await github.rest.issues.update({ owner, repo, issue_number: issueNumber, state: 'open' });
+              }
+            }
+
+            try {
+              await github.rest.git.deleteRef({
+                owner,
+                repo,
+                ref: `heads/${branch}`,
+              });
+              core.info(`Branch técnico eliminado: ${branch}`);
+            } catch (error) {
+              if (error.status === 404 || error.status === 422) {
+                core.warning(`El branch ${branch} ya no existe o no pudo eliminarse porque su estado cambió.`);
+              } else {
+                throw error;
+              }
+            }

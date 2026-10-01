@@ -68,7 +68,14 @@ const REVEAL_SELECTOR = [
   '.article-row',
   '.trust-grid > div',
   '.calculator-hero-copy',
-  '.calculator-main > *'
+  '.calculator-main > *',
+  '.ml-discovery-copy',
+  '.mlq-card',
+  '.ml-money-head',
+  '.ml-money-card',
+  '.ml-advisor-strip',
+  '.ml-editorial-feature',
+  '.ml-editorial-row'
 ].join(',');
 
 function prepararMovimiento(root = document) {

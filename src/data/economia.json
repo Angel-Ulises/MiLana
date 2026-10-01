@@ -1,0 +1,112 @@
+{
+  "actualizado": "2026-10-01",
+  "nota": "El Radar económico de MiLana resume publicaciones oficiales y explica posibles canales de impacto. No convierte una noticia en recomendación financiera personalizada.",
+  "fuentes": [
+    {
+      "id": "banxico-politica",
+      "nombre": "Banco de México — decisiones de política monetaria",
+      "url": "https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/anuncios-politica-monetaria-t.html",
+      "cadencia": "calendario de decisiones",
+      "proximaRevision": "2026-11-05"
+    },
+    {
+      "id": "inegi-inpc",
+      "nombre": "INEGI — Índice Nacional de Precios al Consumidor",
+      "url": "https://www.inegi.org.mx/temas/inpc/",
+      "cadencia": "quincenal y mensual",
+      "proximaRevision": "2026-10-08"
+    },
+    {
+      "id": "inegi-consumo",
+      "nombre": "INEGI — Indicador Oportuno del Consumo Privado",
+      "url": "https://www.inegi.org.mx/app/saladeprensa/noticia/11179",
+      "cadencia": "mensual",
+      "proximaRevision": "2026-10"
+    },
+    {
+      "id": "banxico-regional",
+      "nombre": "Banco de México — Reporte sobre las economías regionales",
+      "url": "https://www.banxico.org.mx/publicaciones-y-prensa/reportes-sobre-las-economias-regionales/reportes-economias-regionales.html",
+      "cadencia": "trimestral",
+      "proximaRevision": "2026-12"
+    }
+  ],
+  "articulos": [
+    {
+      "slug": "banxico-mantiene-tasa-650-septiembre-2026",
+      "categoria": "Tasas y crédito",
+      "fecha": "2026-09-24",
+      "titulo": "Banxico mantiene la tasa objetivo en 6.50%: qué cambia y qué no",
+      "descripcion": "Banco de México mantuvo la tasa objetivo en 6.50% el 24 de septiembre de 2026. MiLana explica por qué importa para crédito, ahorro y decisiones de corto plazo.",
+      "datoPrincipal": "6.50%",
+      "datoEtiqueta": "tasa objetivo",
+      "fotoId": "13196409",
+      "fotoAlt": "Edificios de un distrito financiero moderno",
+      "fuenteId": "banxico-politica",
+      "fuenteFecha": "24 de septiembre de 2026",
+      "quePaso": "Banco de México mantuvo sin cambio en 6.50% el objetivo para la Tasa de Interés Interbancaria a un día. La decisión extendió el nivel observado desde junio y agosto de 2026. El calendario oficial marca el 5 de noviembre como la siguiente fecha programada para una decisión de política monetaria.",
+      "porQueImporta": "La tasa objetivo influye en el entorno de tasas de la economía, pero no fija de manera automática el costo de tu tarjeta, préstamo, hipoteca o rendimiento de ahorro. Cada producto depende además de riesgo, plazo, comisiones, competencia y condiciones de la institución.",
+      "aQuienAfecta": "Es especialmente relevante para personas que están comparando crédito, refinanciamiento o productos de ahorro de corto plazo. La señal útil no es asumir que una mensualidad bajará o subirá de inmediato, sino revisar si las condiciones nuevas realmente cambian frente a las que ya tienes.",
+      "queHacer": "Antes de contratar o mover una deuda, compara CAT, tasa, comisiones, seguros, plazo y monto total a pagar. Si estás ahorrando, compara liquidez, plazo y condiciones del producto en lugar de perseguir una sola tasa.",
+      "herramienta": {"texto": "Revisar deuda y crédito", "href": "/finanzas/deuda-y-credito"},
+      "herramientaSecundaria": {"texto": "Planear una meta de ahorro", "href": "/finanzas/ahorro"}
+    },
+    {
+      "slug": "inflacion-primera-quincena-septiembre-2026",
+      "categoria": "Inflación",
+      "fecha": "2026-09-24",
+      "titulo": "La inflación anual fue de 3.42% en la primera quincena de septiembre",
+      "descripcion": "INEGI reportó una inflación anual de 3.42% en la primera quincena de septiembre de 2026. MiLana la aterriza a presupuesto y poder de compra.",
+      "datoPrincipal": "3.42%",
+      "datoEtiqueta": "inflación anual",
+      "fotoId": "6963848",
+      "fotoAlt": "Persona revisando gastos y presupuesto con una calculadora",
+      "fuenteId": "inegi-inpc",
+      "fuenteFecha": "24 de septiembre de 2026",
+      "quePaso": "INEGI informó que el INPC aumentó 0.33% respecto a la quincena anterior y que la inflación anual se ubicó en 3.42% durante la primera quincena de septiembre. Como referencia mensual, agosto había cerrado con una inflación anual de 3.26%.",
+      "porQueImporta": "La inflación no significa que todos los precios suban exactamente 3.42%. Es un promedio de una canasta amplia y cada hogar enfrenta una mezcla distinta de vivienda, alimentos, transporte, salud y servicios. Por eso el efecto real debe verse en el presupuesto propio.",
+      "aQuienAfecta": "Afecta especialmente a hogares cuyos gastos esenciales crecen más rápido que sus ingresos. También importa al comparar aumentos salariales: un sueldo nominal mayor no siempre implica una mejora equivalente en poder de compra.",
+      "queHacer": "Revisa qué categorías de tu presupuesto cambiaron de verdad durante los últimos meses. Separa gastos esenciales de variables y compara el aumento de tu ingreso con el de tus gastos antes de concluir si tu situación mejoró o empeoró.",
+      "herramienta": {"texto": "Abrir presupuesto mensual", "href": "/finanzas/presupuesto"},
+      "herramientaSecundaria": {"texto": "Explorar salarios", "href": "/carreras"}
+    },
+    {
+      "slug": "consumo-privado-agosto-2026",
+      "categoria": "Economía cotidiana",
+      "fecha": "2026-09-17",
+      "titulo": "El indicador oportuno anticipa menor crecimiento anual del consumo privado en agosto",
+      "descripcion": "INEGI anticipó un crecimiento anual de 1.6% para julio y 0.9% para agosto de 2026 en el consumo privado. MiLana explica qué sí y qué no dice ese dato.",
+      "datoPrincipal": "0.9%",
+      "datoEtiqueta": "estimación anual para agosto",
+      "fotoId": "6963848",
+      "fotoAlt": "Persona organizando compras y gastos desde una laptop",
+      "fuenteId": "inegi-consumo",
+      "fuenteFecha": "17 de septiembre de 2026",
+      "quePaso": "El Indicador Oportuno del Consumo Privado de INEGI anticipó un incremento anual de 1.6% para julio y de 0.9% para agosto de 2026. Es una estimación oportuna y no debe confundirse con el dato definitivo de consumo privado.",
+      "porQueImporta": "El consumo de los hogares es una parte importante de la actividad económica. Una desaceleración puede reflejar un entorno de gasto más moderado, pero el indicador agregado no permite afirmar por sí solo que todas las familias estén gastando menos ni explica la causa.",
+      "aQuienAfecta": "Es útil como contexto para hogares, trabajadores y pequeños negocios que quieren entender si el gasto de las familias se está acelerando o moderando. Para una decisión personal, el dato nacional debe contrastarse con ingreso, deuda y gastos propios.",
+      "queHacer": "Usa el dato como contexto, no como señal para comprar o dejar de comprar. La decisión práctica es revisar tu flujo mensual y evitar que gasto financiado o compras impulsivas sustituyan capacidad de ahorro o fondo de emergencia.",
+      "herramienta": {"texto": "Ordenar mi presupuesto", "href": "/finanzas/presupuesto"},
+      "herramientaSecundaria": {"texto": "Construir fondo de emergencia", "href": "/finanzas/fondo-emergencia"}
+    },
+    {
+      "slug": "economias-regionales-segundo-trimestre-2026",
+      "categoria": "Empleo y regiones",
+      "fecha": "2026-09-10",
+      "titulo": "Banxico pone el foco regional en informalidad, acceso al empleo e inteligencia artificial",
+      "descripcion": "El Reporte sobre las Economías Regionales abril-junio de 2026 analizó informalidad, acceso al empleo e inteligencia artificial. MiLana conecta el contexto con trabajo y salarios.",
+      "datoPrincipal": "2T 2026",
+      "datoEtiqueta": "periodo analizado",
+      "fotoId": "3184291",
+      "fotoAlt": "Vista urbana contemporánea de una ciudad mexicana",
+      "fuenteId": "banxico-regional",
+      "fuenteFecha": "10 de septiembre de 2026",
+      "quePaso": "Banco de México publicó su Reporte sobre las Economías Regionales para abril-junio de 2026. Entre sus recuadros analíticos incluyó la concentración regional y sectorial del empleo informal, el acceso al empleo por condición de formalidad y género, y la opinión empresarial sobre adopción de inteligencia artificial y su impacto en empleo y productividad.",
+      "porQueImporta": "El mercado laboral mexicano no se comporta igual en todas las regiones ni sectores. Salario promedio, formalidad, productividad y oportunidades pueden cambiar de forma importante según ubicación y actividad económica.",
+      "aQuienAfecta": "Es relevante para estudiantes, trabajadores y personas que evalúan cambiar de profesión o ciudad. Un promedio nacional puede ocultar diferencias regionales que cambian la lectura de una carrera o un sueldo.",
+      "queHacer": "Compara primero el salario y tamaño del mercado laboral de tu profesión, y después revisa el contexto del estado. Evita usar un ranking nacional como si describiera automáticamente tu ciudad o una vacante específica.",
+      "herramienta": {"texto": "Comparar salarios por estado", "href": "/carreras/por-estado"},
+      "herramientaSecundaria": {"texto": "Explorar carreras y salarios", "href": "/carreras"}
+    }
+  ]
+}

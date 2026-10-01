@@ -13,6 +13,11 @@ const SELECTOR = [
   '.profession-distribution > div',
   '.profession-money-inner',
   '.profession-related-grid > a',
+  '.economy-card',
+  '.economy-source-list article',
+  '.economy-step',
+  '.economy-source',
+  '.economy-related-grid > a',
 ].join(',');
 
 export default function RouteMotion() {

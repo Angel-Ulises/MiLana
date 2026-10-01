@@ -5,9 +5,16 @@ on:
     # 07:20, 11:20 y 16:20 aprox. en Ciudad de México mientras rige UTC-6.
     - cron: '20 13,17,22 * * 1-5'
   workflow_dispatch: {}
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/radar/**'
+      - 'src/data/radar-sources.json'
+      - 'tests/radar-collector.test.mjs'
+      - '.github/workflows/radar-collector.yml'
 
 concurrency:
-  group: radar-economico-collector
+  group: radar-economico-collector-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:

@@ -6,6 +6,7 @@ import MotionDataViz from './motionDataViz.jsx'
 import FinanceExpansion from './financeExpansion.jsx'
 import CareerPages, { esRutaCarreras } from './careerPages.jsx'
 import CareerProfessionPages, { esRutaProfesion } from './careerProfessionPages.jsx'
+import OccupationComparePage, { esRutaOcupaciones } from './occupationComparePage.jsx'
 import FinancePages, { esRutaFinanzas } from './financePages.jsx'
 import AdvisorPage, { esRutaAsesor } from './advisorPage.jsx'
 import AdvisorEntry from './advisorEntry.jsx'
@@ -21,12 +22,14 @@ import './finance-expansion-v2.css'
 import './career-pages.css'
 import './career-integration.css'
 import './career-profession-pages.css'
+import './occupation-compare.css'
 import './finance-pages.css'
 import './advisor-page.css'
 import './economy-pages.css'
 import './route-motion.css'
 
 const profesion = esRutaProfesion()
+const ocupaciones = esRutaOcupaciones()
 const carrera = esRutaCarreras()
 const asesor = esRutaAsesor()
 const finanzas = esRutaFinanzas()
@@ -38,6 +41,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       {profesion ? (
         <>
           <CareerProfessionPages />
+          <RouteMotion />
+        </>
+      ) : ocupaciones ? (
+        <>
+          <OccupationComparePage />
           <RouteMotion />
         </>
       ) : carrera ? (

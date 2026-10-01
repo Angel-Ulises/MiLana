@@ -27,7 +27,7 @@ test('el corte estatal y el promedio nacional están declarados', () => {
 });
 
 test('la UI estatal distingue promedios, vacantes y costo de vida', () => {
-  assert.match(pagina, /no mide renta, transporte, informalidad o costo de vida/i);
+  assert.match(pagina, /promedio estatal mida renta, transporte, informalidad o costo de vida/i);
   assert.match(pagina, /no vacantes abiertas/i);
   assert.match(pagina, /No lo publicamos hasta tener una fuente oficial con ese cruce/i);
 });

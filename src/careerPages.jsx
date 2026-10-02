@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import datos from './data/carreras.json';
 import profesiones from './data/profesiones.json';
+import ocupacionesEstados from './data/stateOccupations.json';
 
 const PEXELS = {
   hub: '6147267',
@@ -233,11 +234,13 @@ function PorEstado() {
   const orden = useMemo(() => [...datos.estados].sort((a, b) => b.ingreso - a.ingreso), []);
   const [estado, setEstado] = useState('Nuevo León');
   const seleccionado = datos.estados.find((e) => e.estado === estado);
+  const mercadoEstado = ocupacionesEstados.states.find((e) => e.state === estado);
+  const trabajos = mercadoEstado?.occupations.slice(0, 5) ?? [];
   return (
     <>
       <Hero eyebrow="México por entidad" title="Sueldos de profesionistas por estado en 2026" lede="El lugar donde trabajas cambia el contexto salarial. Compara ingreso promedio y población profesional por entidad con la misma fuente y el mismo corte." image={PEXELS.estados} imageAlt="Vista urbana contemporánea de una ciudad mexicana" />
       <main className="career-detail-main">
-        <section className="career-state-section"><div className="shell"><div className="career-state-tool"><div><p className="eyebrow">Compara tu estado</p><h2>¿Dónde quieres mirar?</h2></div><label>Estado<select value={estado} onChange={(e) => setEstado(e.target.value)}>{datos.estados.map((e) => <option key={e.estado}>{e.estado}</option>)}</select></label></div>{seleccionado && <article className="career-state-focus"><span>{seleccionado.estado}</span><strong>{dinero(seleccionado.ingreso)}<small>/mes</small></strong><p>{numero(seleccionado.ocupados)} profesionistas ocupados</p><a href="/calculadoras/bruto-a-neto">¿Cuánto sería neto? <b>→</b></a></article>}<div className="career-state-table" role="table" aria-label="Ingreso promedio profesional por estado"><div className="career-state-row header" role="row"><span>Estado</span><span>Profesionistas ocupados</span><span>Ingreso mensual</span></div>{orden.map((e) => <div className={`career-state-row${e.estado === estado ? ' selected' : ''}`} role="row" key={e.estado}><span>{e.estado}</span><span>{numero(e.ocupados)}</span><strong>{dinero(e.ingreso)}</strong></div>)}</div><Fuente /></div></section>
+        <section className="career-state-section"><div className="shell"><div className="career-state-tool"><div><p className="eyebrow">Compara tu estado</p><h2>¿Dónde quieres mirar?</h2></div><label>Estado<select value={estado} onChange={(e) => setEstado(e.target.value)}>{datos.estados.map((e) => <option key={e.estado}>{e.estado}</option>)}</select></label></div>{seleccionado && <article className="career-state-focus"><span>{seleccionado.estado}</span><strong>{dinero(seleccionado.ingreso)}<small>/mes</small></strong><p>{numero(seleccionado.ocupados)} profesionistas ocupados</p><a href="/calculadoras/bruto-a-neto">¿Cuánto sería neto? <b>→</b></a></article>}{mercadoEstado && <section className="career-state-occupations" aria-labelledby="career-state-occupations-title"><div className="career-state-occupations-head"><div><p className="eyebrow">Trabajo observado · ENOE 2026-T1</p><h2 id="career-state-occupations-title">¿Qué trabajos concentran más personas en {estado}?</h2></div><p>Data México permite mirar ocupaciones dentro de cada entidad. <strong>Ocupación observada no significa carrera estudiada ni vacantes abiertas.</strong></p></div><div className="career-state-occupation-list">{trabajos.map((o, index) => <article key={o.occupationId}><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{o.occupation}</h3><p>{o.category} · {numero(o.records)} registros ENOE</p></div><strong>{numero(o.workforce)}<small> ocupados</small></strong></article>)}</div><a className="career-state-deep-link" href={`/estados/${mercadoEstado.slug}`}>Ver ficha laboral completa de {estado} <span>→</span></a></section>}<div className="career-state-table" role="table" aria-label="Ingreso promedio profesional por estado"><div className="career-state-row header" role="row"><span>Estado</span><span>Profesionistas ocupados</span><span>Ingreso mensual</span></div>{orden.map((e) => <div className={`career-state-row${e.estado === estado ? ' selected' : ''}`} role="row" key={e.estado}><span>{e.estado}</span><span>{numero(e.ocupados)}</span><strong>{dinero(e.ingreso)}</strong></div>)}</div><Fuente /></div></section>
       </main>
       <NextRoutes current="por-estado" />
     </>

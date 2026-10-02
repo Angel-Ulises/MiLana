@@ -45,6 +45,7 @@ import './state-entry.css'
 import './finance-pages.css'
 import './advisor-page.css'
 import './investment-readiness.css'
+import './investment-decision.css'
 import './economy-pages.css'
 import './route-motion.css'
 

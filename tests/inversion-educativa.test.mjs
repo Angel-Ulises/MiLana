@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { crearMapaPreparacionInversion, crearRadiografiaFinanciera } from '../src/lib/advisorCore.js';
+import { crearMapaPreparacionInversion, crearPlanDecisionInversion, crearRadiografiaFinanciera } from '../src/lib/advisorCore.js';
 
 const pagina = readFileSync('src/investmentReadinessPage.jsx','utf8');
 const entry = readFileSync('src/investmentEntry.jsx','utf8');
@@ -34,6 +34,35 @@ test('mapa previo nunca habilita recomendación ni ejecución aunque el contexto
   assert.equal(mapa.puedeEjecutarOperacion, false);
 });
 
+test('plan de decisión calcula escenarios de meta sin asumir rendimientos', () => {
+  const r = crearRadiografiaFinanciera({ ingresoNeto:40000, gastosEsenciales:15000, gastosVariables:5000, pagosDeuda:0, fondoActual:60000, metaObjetivo:240000, ahorroMetaActual:60000, horizonteMeses:36, objetivo:'inversion' });
+  const plan = crearPlanDecisionInversion(r);
+  assert.equal(plan.estado, 'comparar-escenarios');
+  assert.equal(plan.horizonte.id, 'medio');
+  assert.equal(plan.usaRendimientoSupuesto, false);
+  assert.equal(plan.puedeRecomendarProducto, false);
+  assert.equal(plan.puedeEjecutarOperacion, false);
+  assert.equal(plan.escenarios.find((e) => e.id === 'base').valor, 5000);
+  assert.ok(plan.escenarios.some((e) => e.id === 'plazo-menor'));
+  assert.ok(plan.escenarios.some((e) => e.id === 'meta-mayor'));
+});
+
+test('plan conserva faltantes en lugar de inventar meta o ahorro', () => {
+  const r = crearRadiografiaFinanciera({ ingresoNeto:30000, gastosEsenciales:12000, gastosVariables:4000, pagosDeuda:0, fondoActual:50000, horizonteMeses:24, objetivo:'inversion' });
+  const plan = crearPlanDecisionInversion(r);
+  assert.equal(plan.estado, 'completar-meta');
+  assert.equal(plan.escenarios.length, 0);
+  assert.ok(plan.faltantes.some((f) => f.id === 'meta-monto'));
+  assert.ok(plan.faltantes.some((f) => f.id === 'meta-ahorro'));
+});
+
+test('deuda existente aparece como información pendiente, no como orden de pagar o invertir', () => {
+  const r = crearRadiografiaFinanciera({ ingresoNeto:30000, gastosEsenciales:12000, gastosVariables:3000, pagosDeuda:4000, fondoActual:50000, metaObjetivo:100000, ahorroMetaActual:10000, horizonteMeses:24, objetivo:'inversion' });
+  const plan = crearPlanDecisionInversion(r);
+  assert.ok(plan.faltantes.some((f) => f.id === 'deuda-costo'));
+  assert.doesNotMatch(JSON.stringify(plan), /paga primero|debes invertir|invierte ahora/i);
+});
+
 test('el acceso desde Finanzas y Mi situación es educativo y no transaccional', () => {
   assert.match(entry, /\/finanzas\/inversion/);
   assert.match(entry, /Sin score, sin recomendación automática/i);
@@ -53,5 +82,7 @@ test('el contenido mantiene separadas educación y asesoría de inversión', () 
   assert.match(pagina, /Contenido educativo/i);
   assert.match(pagina, /No constituye asesoría de inversión/i);
   assert.match(pagina, /no selecciona CETES, fondos, acciones, ETF ni otro instrumento/i);
-  assert.match(pagina, /institución financiera sea quien abra la cuenta, haga KYC\/PLD, ejecute y custodie/i);
+  assert.match(pagina, /institución financiera debe abrir la cuenta, hacer KYC\/PLD, ejecutar y custodiar/i);
+  assert.match(pagina, /Escenarios aritméticos/i);
+  assert.match(pagina, /Sin rendimiento, sin pronóstico de mercado/i);
 });

@@ -23,6 +23,35 @@ const horizonteTexto = (meses) => {
   return 'más de 5 años';
 };
 
+const perfilHorizonte = (meses) => {
+  if (meses <= 0) {
+    return {
+      id: 'sin-definir',
+      etiqueta: 'Sin horizonte definido',
+      lectura: 'Sin una fecha aproximada no puede compararse cuánta liquidez debería conservarse ni cuánto tiempo existe para absorber variaciones.',
+    };
+  }
+  if (meses <= 12) {
+    return {
+      id: 'corto',
+      etiqueta: 'Horizonte corto · hasta 12 meses',
+      lectura: 'El tiempo para recuperar una caída o inmovilizar recursos es limitado. La liquidez y la estabilidad deben quedar explícitas al comparar alternativas.',
+    };
+  }
+  if (meses <= 60) {
+    return {
+      id: 'medio',
+      etiqueta: 'Horizonte medio · 1 a 5 años',
+      lectura: 'Existe más tiempo, pero siguen importando la fecha de uso, la liquidez, los costos y la posibilidad de necesitar el dinero antes de lo previsto.',
+    };
+  }
+  return {
+    id: 'largo',
+    etiqueta: 'Horizonte largo · más de 5 años',
+    lectura: 'Un plazo largo no elimina pérdidas ni riesgo. Hace especialmente importante entender variación, diversificación, costos acumulados e inflación.',
+  };
+};
+
 export function crearRadiografiaFinanciera(entrada = {}) {
   const ingresoNeto = numeroSeguro(entrada.ingresoNeto);
   const gastosEsenciales = numeroSeguro(entrada.gastosEsenciales);
@@ -72,7 +101,7 @@ export function crearRadiografiaFinanciera(entrada = {}) {
   };
 
   return {
-    version: 2,
+    version: 3,
     entrada: {
       ingresoNeto,
       gastosEsenciales,
@@ -192,6 +221,96 @@ export function crearMapaPreparacionInversion(radiografia) {
     puedeEjecutarOperacion: false,
     usaScore: false,
     nota: 'Este mapa organiza preguntas previas. No certifica que una persona esté lista para invertir y no sustituye perfilamiento, suitability ni asesoría regulada.',
+  };
+}
+
+export function crearPlanDecisionInversion(radiografia) {
+  const r = radiografia ?? crearRadiografiaFinanciera();
+  const c = r.capturado ?? {};
+  const mapa = crearMapaPreparacionInversion(r);
+  const horizonte = perfilHorizonte(r.meta?.horizonteMeses ?? 0);
+  const faltantes = [];
+
+  if (!c.metaObjetivo) {
+    faltantes.push({ id: 'meta-monto', titulo: 'Monto de la meta', detalle: 'Sin un monto objetivo no puede calcularse la brecha ni una aportación mensual de referencia.' });
+  }
+  if (!c.ahorroMetaActual) {
+    faltantes.push({ id: 'meta-ahorro', titulo: 'Ahorro ya dedicado a la meta', detalle: 'Captura 0 si confirmas que todavía no has separado dinero para esta meta.' });
+  }
+  if (!c.horizonteMeses) {
+    faltantes.push({ id: 'meta-horizonte', titulo: 'Fecha aproximada de uso', detalle: 'El horizonte permite convertir la brecha en una aportación mensual sin asumir rendimiento.' });
+  }
+  if (r.deuda?.pagosMensuales > 0) {
+    faltantes.push({ id: 'deuda-costo', titulo: 'Costo real de la deuda', detalle: 'Para una comparación posterior todavía harían falta tasa o CAT, saldo y plazo. El pago mensual por sí solo no basta.' });
+  }
+
+  const escenarios = [];
+  const metaCompleta = c.metaObjetivo && c.ahorroMetaActual && c.horizonteMeses;
+  if (metaCompleta) {
+    const faltante = r.meta.faltante;
+    const horizonteBase = Math.max(1, r.meta.horizonteMeses);
+    const horizonteReducido = Math.max(1, Math.floor(horizonteBase * 0.75));
+    const metaMayor = r.meta.monto * 1.10;
+    const faltanteMetaMayor = Math.max(0, metaMayor - r.meta.ahorroActual);
+    const disponibleEstresado = Math.max(0, r.flujo.disponible * 0.80);
+
+    escenarios.push({
+      id: 'base',
+      titulo: 'Plazo capturado',
+      valor: faltante / horizonteBase,
+      unidad: 'aporte-mensual',
+      detalle: `Cerrar una brecha de ${Math.round(faltante)} en ${horizonteBase} meses, sin rendimientos ni inflación.`,
+    });
+    escenarios.push({
+      id: 'plazo-menor',
+      titulo: 'Si el plazo fuera 25% menor',
+      valor: faltante / horizonteReducido,
+      unidad: 'aporte-mensual',
+      detalle: `Misma meta, pero en ${horizonteReducido} meses. Es una prueba matemática, no un pronóstico.`,
+    });
+    escenarios.push({
+      id: 'meta-mayor',
+      titulo: 'Si la meta costara 10% más',
+      valor: faltanteMetaMayor / horizonteBase,
+      unidad: 'aporte-mensual',
+      detalle: 'Mantiene el mismo horizonte y eleva solo el monto objetivo. No intenta estimar inflación real.',
+    });
+
+    if (r.flujo.disponible > 0) {
+      escenarios.push({
+        id: 'flujo-menor',
+        titulo: 'Si el flujo disponible bajara 20%',
+        valor: mesesParaMeta(faltante, disponibleEstresado),
+        unidad: 'meses-con-flujo',
+        detalle: 'Usa 80% del flujo disponible capturado como estrés simple y no supone rendimientos.',
+      });
+    }
+  }
+
+  const dimensiones = [
+    { id: 'liquidez', titulo: 'Liquidez', detalle: horizonte.id === 'corto' ? 'En un horizonte corto conviene hacer explícito qué parte del dinero no puede quedar inmovilizada.' : 'Define qué parte del dinero tendría que seguir disponible ante cambios de plan o emergencias.' },
+    { id: 'variacion', titulo: 'Variación y pérdidas temporales', detalle: 'Falta saber qué caída temporal podrías tolerar sin vender por presión o necesidad. MiLana no convierte esta respuesta en un perfil de riesgo regulatorio.' },
+    { id: 'costos', titulo: 'Costos totales', detalle: 'Compara comisiones, spreads, impuestos y costos de fondeo o retiro antes de evaluar cualquier producto.' },
+    { id: 'custodia', titulo: 'Custodia y ejecución', detalle: 'Debe quedar claro qué institución abre la cuenta, hace KYC/PLD, custodia activos y ejecuta órdenes.' },
+    { id: 'proteccion', titulo: 'Verificación', detalle: 'La institución, el canal y las condiciones deben poder verificarse en fuentes oficiales antes de mover dinero.' },
+  ];
+
+  const estado = mapa.estado === 'ordenar-base'
+    ? 'ordenar-base'
+    : !metaCompleta
+      ? 'completar-meta'
+      : 'comparar-escenarios';
+
+  return {
+    estado,
+    horizonte,
+    faltantes,
+    escenarios,
+    dimensiones,
+    puedeRecomendarProducto: false,
+    puedeEjecutarOperacion: false,
+    usaRendimientoSupuesto: false,
+    nota: 'Los escenarios son aritmética de flujo, monto y tiempo. No proyectan rendimiento, inflación, impuestos futuros ni comportamiento de mercado.',
   };
 }
 

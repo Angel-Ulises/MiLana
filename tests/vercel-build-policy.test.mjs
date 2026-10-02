@@ -40,7 +40,11 @@ test('solo omite Vercel cuando TODOS los cambios son internos', () => {
   assert.equal(shouldSkipVercelBuild([]), false);
 });
 
-test('vercel.json usa el detector versionado', () => {
+test('vercel.json conserva el detector y reduce previews de ramas de trabajo', () => {
   const config = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
   assert.equal(config.ignoreCommand, 'node scripts/vercel-ignore-build.mjs');
+  assert.equal(config.git.deploymentEnabled.main, true);
+  assert.equal(config.git.deploymentEnabled['chatgpt/*'], false);
+  assert.equal(config.git.deploymentEnabled['claude/*'], false);
+  assert.equal(config.git.deploymentEnabled['main'], true);
 });

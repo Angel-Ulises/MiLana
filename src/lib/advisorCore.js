@@ -3,10 +3,24 @@ const numeroSeguro = (valor) => {
   return Number.isFinite(numero) ? Math.max(0, numero) : 0;
 };
 
+const datoNumericoCapturado = (valor) => {
+  if (valor === undefined || valor === null) return false;
+  if (typeof valor === 'string' && valor.trim() === '') return false;
+  const numero = Number(valor);
+  return Number.isFinite(numero) && numero >= 0;
+};
+
 const mesesParaMeta = (faltante, aportacion) => {
   if (faltante <= 0) return 0;
   if (aportacion <= 0) return null;
   return Math.ceil(faltante / aportacion);
+};
+
+const horizonteTexto = (meses) => {
+  if (meses <= 0) return 'sin horizonte capturado';
+  if (meses <= 12) return 'hasta 12 meses';
+  if (meses <= 60) return 'entre 1 y 5 años';
+  return 'más de 5 años';
 };
 
 export function crearRadiografiaFinanciera(entrada = {}) {
@@ -19,6 +33,17 @@ export function crearRadiografiaFinanciera(entrada = {}) {
   const ahorroMetaActual = numeroSeguro(entrada.ahorroMetaActual);
   const horizonteMeses = Math.floor(numeroSeguro(entrada.horizonteMeses));
   const objetivo = typeof entrada.objetivo === 'string' ? entrada.objetivo.trim().toLowerCase() : '';
+
+  const capturado = {
+    ingresoNeto: datoNumericoCapturado(entrada.ingresoNeto),
+    gastosEsenciales: datoNumericoCapturado(entrada.gastosEsenciales),
+    gastosVariables: datoNumericoCapturado(entrada.gastosVariables),
+    pagosDeuda: datoNumericoCapturado(entrada.pagosDeuda),
+    fondoActual: datoNumericoCapturado(entrada.fondoActual),
+    metaObjetivo: datoNumericoCapturado(entrada.metaObjetivo),
+    ahorroMetaActual: datoNumericoCapturado(entrada.ahorroMetaActual),
+    horizonteMeses: datoNumericoCapturado(entrada.horizonteMeses) && horizonteMeses > 0,
+  };
 
   const gastoTotal = gastosEsenciales + gastosVariables + pagosDeuda;
   const disponible = ingresoNeto - gastoTotal;
@@ -47,7 +72,7 @@ export function crearRadiografiaFinanciera(entrada = {}) {
   };
 
   return {
-    version: 1,
+    version: 2,
     entrada: {
       ingresoNeto,
       gastosEsenciales,
@@ -59,6 +84,7 @@ export function crearRadiografiaFinanciera(entrada = {}) {
       ahorroMetaActual,
       horizonteMeses,
     },
+    capturado,
     flujo: {
       gastoTotal,
       disponible,
@@ -67,7 +93,7 @@ export function crearRadiografiaFinanciera(entrada = {}) {
     deuda: {
       pagosMensuales: pagosDeuda,
       proporcionIngresoPct: proporcionDeuda,
-      nota: 'Proporción descriptiva del ingreso neto; no es un límite de aprobación de crédito.',
+      nota: 'Proporción descriptiva del ingreso neto; no es un límite de aprobación de crédito ni permite saber el costo financiero de la deuda.',
     },
     emergencia: {
       referenciaTresMeses: fondoMinimo,
@@ -111,6 +137,64 @@ export function crearEscenariosIngreso(radiografia, incrementos = [10, 20, 30]) 
   });
 }
 
+export function crearMapaPreparacionInversion(radiografia) {
+  const r = radiografia ?? crearRadiografiaFinanciera();
+  const c = r.capturado ?? {};
+  const b = r.banderas ?? {};
+  const factores = [];
+
+  if (!c.ingresoNeto || !c.gastosEsenciales) {
+    factores.push({ id: 'flujo', estado: 'faltan-datos', titulo: 'Flujo mensual', detalle: 'Falta capturar ingreso neto y gastos esenciales para entender si existe dinero realmente disponible.' });
+  } else if (r.flujo.disponible <= 0) {
+    factores.push({ id: 'flujo', estado: 'revisar', titulo: 'Flujo mensual', detalle: 'Los rubros capturados no dejan flujo positivo. MiLana no convierte este escenario en una invitación a invertir.' });
+  } else {
+    factores.push({ id: 'flujo', estado: 'observado', titulo: 'Flujo mensual', detalle: `Los datos capturados dejan ${r.flujo.disponiblePct.toFixed(1)}% del ingreso neto disponible. Es una fotografía, no una recomendación de destino.` });
+  }
+
+  if (!c.gastosEsenciales || !c.fondoActual) {
+    factores.push({ id: 'liquidez', estado: 'faltan-datos', titulo: 'Respaldo y liquidez', detalle: 'Faltan gastos esenciales o fondo actual para comparar el respaldo con la referencia educativa de tres meses.' });
+  } else if (b.fondoDebajoTresMeses) {
+    factores.push({ id: 'liquidez', estado: 'revisar', titulo: 'Respaldo y liquidez', detalle: 'El fondo capturado está por debajo de la referencia educativa de tres meses de gastos esenciales.' });
+  } else {
+    factores.push({ id: 'liquidez', estado: 'observado', titulo: 'Respaldo y liquidez', detalle: 'El fondo capturado alcanza al menos la referencia educativa de tres meses. Eso no determina qué producto usar ni cuánto invertir.' });
+  }
+
+  if (!c.pagosDeuda) {
+    factores.push({ id: 'deuda', estado: 'faltan-datos', titulo: 'Costo de deuda', detalle: 'Falta confirmar si existen pagos de deuda. Aun con el monto mensual, harían falta tasa, CAT y plazo para comparar su costo.' });
+  } else if (r.deuda.pagosMensuales > 0) {
+    factores.push({ id: 'deuda', estado: 'revisar', titulo: 'Costo de deuda', detalle: `Hay pagos mensuales de deuda equivalentes a ${r.deuda.proporcionIngresoPct.toFixed(1)}% del ingreso. MiLana no puede decidir entre amortizar e invertir sin conocer costos y condiciones.` });
+  } else {
+    factores.push({ id: 'deuda', estado: 'observado', titulo: 'Costo de deuda', detalle: 'No se capturaron pagos mensuales de deuda. Esto no descarta saldos, pagos anuales u otras obligaciones.' });
+  }
+
+  if (!c.horizonteMeses) {
+    factores.push({ id: 'horizonte', estado: 'faltan-datos', titulo: 'Horizonte', detalle: 'Falta indicar cuándo podría necesitarse el dinero. El horizonte cambia qué riesgos y liquidez deben compararse.' });
+  } else {
+    factores.push({ id: 'horizonte', estado: 'observado', titulo: 'Horizonte', detalle: `El horizonte capturado es de ${r.meta.horizonteMeses} meses (${horizonteTexto(r.meta.horizonteMeses)}). MiLana no lo traduce automáticamente a un producto.` });
+  }
+
+  const hayFaltantes = factores.some((f) => f.estado === 'faltan-datos');
+  const basePorOrdenar = factores.some((f) => ['flujo', 'liquidez'].includes(f.id) && f.estado === 'revisar');
+  const deudaPorRevisar = factores.some((f) => f.id === 'deuda' && f.estado === 'revisar');
+  const estado = hayFaltantes ? 'faltan-datos' : basePorOrdenar ? 'ordenar-base' : deudaPorRevisar ? 'revisar-deuda' : 'contexto-educativo';
+
+  return {
+    estado,
+    factores,
+    preguntasAntesDeProducto: [
+      '¿Cuándo necesitarías este dinero y qué tan disponible debe permanecer?',
+      '¿Qué pérdidas temporales podrías tolerar sin abandonar tu plan?',
+      '¿Qué comisiones, impuestos, spreads o costos aplican?',
+      '¿Quién custodia el dinero y los valores y qué institución ejecuta la operación?',
+      '¿La institución y el producto pueden verificarse en fuentes oficiales?',
+    ],
+    puedeRecomendarProducto: false,
+    puedeEjecutarOperacion: false,
+    usaScore: false,
+    nota: 'Este mapa organiza preguntas previas. No certifica que una persona esté lista para invertir y no sustituye perfilamiento, suitability ni asesoría regulada.',
+  };
+}
+
 export function crearRutaAsesor(radiografia) {
   const b = radiografia?.banderas ?? {};
   const objetivo = radiografia?.meta?.tipo ?? '';
@@ -142,15 +226,15 @@ export function crearRutaAsesor(radiografia) {
 
   const unicas = [...new Map(acciones.map((accion) => [accion.id, accion])).values()]
     .sort((a, b2) => a.prioridad - b2.prioridad);
+  const inversion = crearMapaPreparacionInversion(radiografia);
 
   return {
     acciones: unicas,
     inversion: {
-      estado: b.flujoPositivo && !b.fondoDebajoTresMeses ? 'contexto-educativo-disponible' : 'solo-educacion',
-      motivo: b.flujoPositivo && !b.fondoDebajoTresMeses
-        ? 'El flujo capturado es positivo y el fondo alcanza la referencia educativa de tres meses. Esto no constituye una recomendación de invertir.'
-        : 'MiLana no debe convertir un flujo insuficiente o un fondo por debajo de la referencia educativa en una recomendación transaccional.',
-      puedeRecomendarProducto: false,
+      ...inversion,
+      motivo: inversion.estado === 'contexto-educativo'
+        ? 'Hay suficiente información capturada para mostrar educación sobre horizonte, liquidez, riesgo, costos y custodia; esto no habilita productos ni operaciones.'
+        : 'Antes de mostrar productos, MiLana mantiene visibles los datos faltantes o factores que requieren revisión.',
     },
   };
 }

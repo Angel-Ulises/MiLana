@@ -19,6 +19,8 @@ import SavedStateContext from './savedStateContext.jsx'
 import FinancePages, { esRutaFinanzas } from './financePages.jsx'
 import AdvisorPage, { esRutaAsesor } from './advisorPage.jsx'
 import AdvisorEntry from './advisorEntry.jsx'
+import InvestmentReadinessPage, { esRutaInversionEducativa } from './investmentReadinessPage.jsx'
+import InvestmentEntry from './investmentEntry.jsx'
 import EconomyPages, { esRutaEconomia } from './economyPages.jsx'
 import EconomyNavigation from './economyNavigation.jsx'
 import CareerMotion from './careerMotion.jsx'
@@ -42,6 +44,7 @@ import './saved-state-context.css'
 import './state-entry.css'
 import './finance-pages.css'
 import './advisor-page.css'
+import './investment-readiness.css'
 import './economy-pages.css'
 import './route-motion.css'
 
@@ -51,6 +54,7 @@ const compararCarreras = esRutaCompararCarreras()
 const compararEstados = esRutaCompararEstados()
 const estados = esRutaEstado()
 const carrera = esRutaCarreras()
+const inversion = esRutaInversionEducativa()
 const asesor = esRutaAsesor()
 const finanzas = esRutaFinanzas()
 const economia = esRutaEconomia()
@@ -88,6 +92,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <CareerPages />
           <CareerMotion />
         </>
+      ) : inversion ? (
+        <>
+          <InvestmentReadinessPage />
+          <RouteMotion />
+        </>
       ) : asesor ? (
         <>
           <AdvisorPage />
@@ -118,6 +127,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <StateCompareEntry />
       <SavedStateContext />
       <AdvisorEntry />
+      <InvestmentEntry />
       <EconomyNavigation />
     </>
   </React.StrictMode>,

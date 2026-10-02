@@ -20,7 +20,7 @@ test('las 32 entidades de carreras tienen contexto ocupacional verificable', () 
 });
 
 test('la UI separa ocupación, carrera y vacantes y enlaza la ficha estatal', () => {
-  assert.match(page, /stateOccupations\.json/);
+  assert.match(page, /stateOccupations\.browser\.js/);
   assert.match(page, /Ocupación observada no significa carrera estudiada ni vacantes abiertas/);
   assert.match(page, /Trabajo observado · ENOE 2026-T1/);
   assert.match(page, /href=\{`\/estados\/\$\{mercadoEstado\.slug\}`\}/);

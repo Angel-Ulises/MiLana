@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import datos from './data/carreras.json';
 import profesiones from './data/profesiones.json';
-import ocupacionesEstados from './data/stateOccupations.json';
+import ocupacionesEstados from './data/stateOccupations.browser.js';
 
 const PEXELS = {
   hub: '6147267',

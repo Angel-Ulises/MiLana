@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import data from './data/stateOccupations.json';
+import data from './data/stateOccupations.browser.js';
 
 const numero = (n) => new Intl.NumberFormat('es-MX').format(Number(n) || 0);
 const dinero = (n) => new Intl.NumberFormat('es-MX', { style:'currency', currency:'MXN', maximumFractionDigits:0 }).format(Number(n) || 0);

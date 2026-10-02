@@ -1,3 +1,5 @@
+:root { --ml-soft: #5E6B78; }
+
 /* MiLana — estabilidad visual y legibilidad, 15/09/2026
    Capa de corrección para evitar saltos de layout, FOUC perceptible y texto
    sobre fotografía con contraste insuficiente. No toca cálculos ni contenido. */
@@ -189,4 +191,28 @@ main:has(> .hero) > .path-section { display: none !important; }
     transition: none !important;
     animation: none !important;
   }
+}
+
+
+/* Reserva espacio únicamente cuando AdSense inserta un bloque real. Auto Ads
+   conserva su carga normal; estos mínimos reducen CLS sin crear slots falsos. */
+ins.adsbygoogle {
+  display: block;
+  min-height: 90px;
+}
+ins.adsbygoogle[data-ad-format="auto"],
+ins.adsbygoogle[data-ad-format="rectangle"],
+ins.adsbygoogle[data-ad-format="fluid"],
+ins.adsbygoogle[data-ad-format="autorelaxed"] {
+  min-height: 250px;
+}
+ins.adsbygoogle[data-ad-format="horizontal"] { min-height: 90px; }
+ins.adsbygoogle[data-ad-format="vertical"] { min-height: 600px; }
+
+@media (max-width: 640px) {
+  ins.adsbygoogle { min-height: 100px; }
+  ins.adsbygoogle[data-ad-format="auto"],
+  ins.adsbygoogle[data-ad-format="rectangle"],
+  ins.adsbygoogle[data-ad-format="fluid"],
+  ins.adsbygoogle[data-ad-format="autorelaxed"] { min-height: 250px; }
 }

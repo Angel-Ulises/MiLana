@@ -1,6 +1,7 @@
 export const CNBV_FUND_SAMPLE = {
   sourcePeriod: '2026-07-31',
   checkedAt: '2026-10-01',
+  reviewCadenceDays: 30,
   sourceLabel: 'CNBV · Portafolio de Información · Sector 52 · Reporte R1',
   sourceUrl: 'https://portafolioinfo.cnbv.gob.mx/Paginas/Reporte.aspx?s=52&t=2&st=0&ti=0&sti=0&n=0&tp=0',
   reportUrl: 'https://portafolioinfdoctos.cnbv.gob.mx/Documentacion/minfo/XLS/52/Reporte1/052_1G_R1_2026_S2.xlsm',

@@ -15,7 +15,7 @@ test('radiografía calcula flujo, deuda, fondo y meta sin rendimientos', () => {
     horizonteMeses: 30,
   });
 
-  assert.equal(r.version, 2);
+  assert.equal(r.version, 3);
   assert.equal(r.flujo.gastoTotal, 23000);
   assert.equal(r.flujo.disponible, 7000);
   assert.equal(r.deuda.proporcionIngresoPct, 10);

@@ -14,6 +14,7 @@ import StatePages, { esRutaEstado } from './statePages.jsx'
 import StateEntry from './stateEntry.jsx'
 import StateRememberControl from './stateRememberControl.jsx'
 import StateHousing from './stateHousing.jsx'
+import StateOccupations from './stateOccupations.jsx'
 import StateCompareEntry from './stateCompareEntry.jsx'
 import SavedStateContext from './savedStateContext.jsx'
 import FinancePages, { esRutaFinanzas } from './financePages.jsx'
@@ -42,6 +43,7 @@ import './career-compare.css'
 import './state-pages.css'
 import './state-labor.css'
 import './state-housing.css'
+import './state-occupations.css'
 import './state-compare.css'
 import './state-compare-entry.css'
 import './saved-state-context.css'
@@ -151,6 +153,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <StateEntry />
       <StateRememberControl />
       <StateHousing />
+      <StateOccupations />
       <StateCompareEntry />
       <SavedStateContext />
       <AdvisorEntry />

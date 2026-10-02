@@ -21,6 +21,7 @@ import AdvisorPage, { esRutaAsesor } from './advisorPage.jsx'
 import AdvisorEntry from './advisorEntry.jsx'
 import InvestmentReadinessPage, { esRutaInversionEducativa } from './investmentReadinessPage.jsx'
 import InvestmentInstrumentComparePage, { esRutaCompararInstrumentos } from './investmentInstrumentComparePage.jsx'
+import CetesReferencePage, { esRutaCetesReferencia } from './cetesReferencePage.jsx'
 import InvestmentEntry from './investmentEntry.jsx'
 import InvestmentCompareEntry from './investmentCompareEntry.jsx'
 import EconomyPages, { esRutaEconomia } from './economyPages.jsx'
@@ -50,6 +51,7 @@ import './investment-readiness.css'
 import './investment-decision.css'
 import './investment-debt-context.css'
 import './investment-instrument-compare.css'
+import './cetes-reference.css'
 import './economy-pages.css'
 import './route-motion.css'
 
@@ -59,6 +61,7 @@ const compararCarreras = esRutaCompararCarreras()
 const compararEstados = esRutaCompararEstados()
 const estados = esRutaEstado()
 const carrera = esRutaCarreras()
+const cetesReferencia = esRutaCetesReferencia()
 const compararInstrumentos = esRutaCompararInstrumentos()
 const inversion = esRutaInversionEducativa()
 const asesor = esRutaAsesor()
@@ -97,6 +100,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <>
           <CareerPages />
           <CareerMotion />
+        </>
+      ) : cetesReferencia ? (
+        <>
+          <CetesReferencePage />
+          <RouteMotion />
         </>
       ) : compararInstrumentos ? (
         <>

@@ -70,7 +70,8 @@ test('el acceso desde Finanzas y Mi situación es educativo y no transaccional',
 });
 
 test('inversión educativa tiene HTML estático, canonical, schema y sitemap', () => {
-  assert.match(generador, /finanzas.*inversion.*index\.html/s);
+  assert.match(generador, /destino:\['finanzas','inversion'\]/);
+  assert.match(generador, /resolve\(DIST, \.\.\.destino, 'index\.html'\)/);
   assert.match(generador, /rel="canonical"/);
   assert.match(generador, /WebApplication/);
   assert.match(generador, /No conecta cuentas bursátiles/i);

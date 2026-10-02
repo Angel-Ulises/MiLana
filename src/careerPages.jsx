@@ -41,7 +41,7 @@ function Header() {
           <a href="/carreras">Carreras</a>
           <a href="/finanzas">Finanzas</a>
           <a href="/#calculadoras">Calculadoras</a>
-          <a href="/aprende/">Aprende</a>
+          <a href="/aprende">Aprende</a>
         </nav>
         <a className="header-cta" href="/calculadoras/bruto-a-neto">Calcular sueldo</a>
       </div>

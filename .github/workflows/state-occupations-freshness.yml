@@ -1,0 +1,60 @@
+name: Data México — vigilar trimestre ocupacional
+
+on:
+  schedule:
+    - cron: '17 14 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Consultar siguiente trimestre oficial
+        id: freshness
+        run: |
+          set -euo pipefail
+          node scripts/states/data-mexico-occupations-freshness.mjs > /tmp/state-occ-freshness.json
+          cat /tmp/state-occ-freshness.json
+          echo "available=$(jq -r '.available' /tmp/state-occ-freshness.json)" >> "$GITHUB_OUTPUT"
+          echo "target_label=$(jq -r '.targetLabel' /tmp/state-occ-freshness.json)" >> "$GITHUB_OUTPUT"
+          echo "target_quarter=$(jq -r '.targetQuarter' /tmp/state-occ-freshness.json)" >> "$GITHUB_OUTPUT"
+          echo "state_count=$(jq -r '.stateCount' /tmp/state-occ-freshness.json)" >> "$GITHUB_OUTPUT"
+          echo "source_url=$(jq -r '.sourceUrl' /tmp/state-occ-freshness.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Abrir una sola alerta cuando las 32 entidades estén disponibles
+        if: steps.freshness.outputs.available == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_LABEL: ${{ steps.freshness.outputs.target_label }}
+          TARGET_QUARTER: ${{ steps.freshness.outputs.target_quarter }}
+          STATE_COUNT: ${{ steps.freshness.outputs.state_count }}
+          SOURCE_URL: ${{ steps.freshness.outputs.source_url }}
+        run: |
+          set -euo pipefail
+          TITLE="[Data México] Ocupaciones disponibles para $TARGET_LABEL"
+          ISSUE="$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')"
+          if [ -n "$ISSUE" ]; then
+            echo "Alerta ya abierta: #$ISSUE"
+            exit 0
+          fi
+          BODY=$(cat <<EOF
+          Data México ya respondió con **$STATE_COUNT entidades** para el trimestre **$TARGET_LABEL** (`$TARGET_QUARTER`) en el cubo ENOE usado por MiLana.
+
+          Fuente consultada:
+          $SOURCE_URL
+
+          Esto significa que el nuevo trimestre está disponible para revisión técnica. **No actualiza ni publica automáticamente** `stateOccupations.json`.
+
+          Siguiente paso:
+          1. regenerar el snapshot desde el API oficial;
+          2. verificar cobertura 32/32, IDs y campos;
+          3. revisar cambios llamativos antes de publicar;
+          4. abrir PR con el nuevo corte y dejar que CI valide todo.
+          EOF
+          )
+          gh issue create --title "$TITLE" --body "$BODY"

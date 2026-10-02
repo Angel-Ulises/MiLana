@@ -16,11 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Descargar R1 2026 S2
+      - name: Descargar R1 2026 S2 — sonda temporal
         run: |
           set -euo pipefail
           URL='https://portafolioinfdoctos.cnbv.gob.mx/Documentacion/minfo/XLS/52/Reporte1/052_1G_R1_2026_S2.xlsm'
-          curl -fL --retry 3 --retry-delay 3 "$URL" -o /tmp/cnbv-r1.xlsm
+          # Excepción SOLO para esta sonda: el host oficial presenta una cadena TLS
+          # que GitHub Actions no valida. La integración final no usará --insecure.
+          curl --insecure -fL --retry 3 --retry-delay 3 "$URL" -o /tmp/cnbv-r1.xlsm
           ls -lh /tmp/cnbv-r1.xlsm
           file /tmp/cnbv-r1.xlsm
       - name: Inspeccionar estructura XLSM

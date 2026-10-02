@@ -73,11 +73,12 @@ test('UI describe población ocupada sin convertirla en demanda o recomendación
   assert.doesNotMatch(page, /fetch\(|axios|XMLHttpRequest|WebSocket/i);
 });
 
-test('ocupaciones estatales se montan como capa modular y cargan CSS propio', () => {
+test('ocupaciones estatales se montan solo en fichas de estado y cargan CSS propio', () => {
   assert.match(main, /StateOccupations/);
   assert.match(main, /state-occupations\.css/);
   assert.match(page, /state-occupations-mount/);
-  assert.match(page, /\/estados\/\[\^\/\]\+/);
+  assert.match(page, /path === '\/estados\/comparar'/);
+  assert.match(page, /document\.querySelector\('\.state-labor'\)/);
 });
 
 test('HTML estático conserva ocupaciones y límites editoriales dentro de la ficha estatal', () => {

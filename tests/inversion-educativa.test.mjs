@@ -22,7 +22,7 @@ test('la UI pública no expone proveedores en evaluación ni secretos de integra
   assert.doesNotMatch(pagina, /fetch\(|XMLHttpRequest|axios|WebSocket/i);
   assert.match(pagina, /integración transaccional sigue apagada/i);
   assert.match(pagina, /no asigna un score/i);
-  assert.match(pagina, /no recomienda productos/i);
+  assert.match(pagina, /sin recomendar productos/i);
 });
 
 test('mapa previo nunca habilita recomendación ni ejecución aunque el contexto esté completo', () => {

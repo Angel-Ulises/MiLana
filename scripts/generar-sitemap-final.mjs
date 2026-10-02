@@ -24,6 +24,7 @@ const rutas = [
   ...rutasEstados,
   ...rutasFinanzas,
   '/finanzas/mi-situacion',
+  '/finanzas/inversion',
   ...rutasEconomia,
   '/aprende',
   '/aprende/finiquito-vs-liquidacion',

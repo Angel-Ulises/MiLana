@@ -144,6 +144,17 @@ function Hub() {
     { n: '04', titulo: '¿Qué carreras reportan menor ingreso?', texto: 'Mira el otro extremo de la distribución y qué contexto falta antes de elegir.', href: '/carreras/peor-pagadas' },
   ];
   const perfiles = profesiones.profesiones.slice(0, 8);
+  const preguntas = [
+    ['Ingresos', '¿Qué carreras pagan más en México?', '/carreras/mejor-pagadas'],
+    ['Mercado', '¿Cuáles concentran más profesionistas ocupados?', '/carreras/mas-demandadas'],
+    ['Estados', '¿Cuánto ganan los profesionistas en mi estado?', '/carreras/por-estado'],
+    ['Estados', '¿Qué trabajos concentran más personas en mi estado?', '/carreras/por-estado'],
+    ['Comparar', '¿Cómo comparo dos carreras sin elegir solo por sueldo?', '/carreras/comparar'],
+    ['Conceptos', '¿Carrera estudiada y ocupación son lo mismo?', '/carreras/ocupaciones'],
+    ['Profesión', '¿Cuánto gana alguien de Ciencias de la computación?', '/carreras/profesion/ciencias-computacion'],
+    ['Profesión', '¿Cuánto gana alguien de Derecho?', '/carreras/profesion/derecho'],
+    ['Ingreso real', '¿Cuánto quedaría neto de un sueldo?', '/calculadoras/bruto-a-neto'],
+  ];
   return (
     <>
       <Hero eyebrow="Carreras · Trabajo · Dinero" title="Elegir carrera también es una decisión financiera." lede="Compara ingresos, tamaño del mercado laboral y diferencias regionales con datos públicos. Después convierte esas cifras en ingreso neto, ahorro y decisiones de vida." image={PEXELS.hub} imageAlt="Estudiantes universitarios colaborando frente a una laptop" />
@@ -161,6 +172,18 @@ function Hub() {
                   <span>{r.n}</span><div><h3>{r.titulo}</h3><p>{r.texto}</p></div><b>↗</b>
                 </a>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="career-question-section" aria-labelledby="career-question-title">
+          <div className="shell">
+            <div className="career-question-head">
+              <div><p className="eyebrow">Preguntas que abren otras preguntas</p><h2 id="career-question-title">Explora como buscarías en Google.</h2></div>
+              <p>No necesitas conocer la estructura de MiLana. Elige una duda concreta y salta a la siguiente comparación sin perder el contexto.</p>
+            </div>
+            <div className="career-question-grid">
+              {preguntas.map(([tipo, pregunta, href]) => <a href={href} key={pregunta}><span>{tipo}</span><strong>{pregunta}</strong><b>→</b></a>)}
             </div>
           </div>
         </section>

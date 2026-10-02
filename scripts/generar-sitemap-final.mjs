@@ -10,7 +10,7 @@ const economia = JSON.parse(readFileSync('src/data/economia.json','utf8'));
 const origen = paginas.sitio.origen;
 const rutasCarreras = carreras.map(p => p.slug ? `/carreras/${p.slug}` : '/carreras');
 const rutasProfesiones = profesiones.map(p => `/carreras/profesion/${p.slug}`);
-const rutasEstados = ['/estados', ...estados.map(e => `/estados/${e.slug}`)];
+const rutasEstados = ['/estados', '/estados/comparar', ...estados.map(e => `/estados/${e.slug}`)];
 const rutasFinanzas = finanzas.map(p => p.slug ? `/finanzas/${p.slug}` : '/finanzas');
 const rutasEconomia = ['/economia', ...economia.articulos.map(a => `/economia/${a.slug}`)];
 const rutas = [

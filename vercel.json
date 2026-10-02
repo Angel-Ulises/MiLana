@@ -1,6 +1,14 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "chatgpt/*": false,
+      "claude/*": false
+    }
+  },
   "ignoreCommand": "node scripts/vercel-ignore-build.mjs",
   "redirects": [
     { "source": "/guias", "destination": "/aprende", "permanent": true },

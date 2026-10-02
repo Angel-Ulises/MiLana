@@ -11,8 +11,35 @@
   },
   "ignoreCommand": "node scripts/vercel-ignore-build.mjs",
   "redirects": [
-    { "source": "/guias", "destination": "/aprende", "permanent": true },
-    { "source": "/guias/aguinaldo-2026", "destination": "/aprende/aguinaldo-bruto-neto", "permanent": true },
-    { "source": "/guias/bruto-neto-recibo", "destination": "/aprende/leer-recibo-nomina", "permanent": true }
+    {
+      "source": "/guias",
+      "destination": "/aprende",
+      "permanent": true
+    },
+    {
+      "source": "/guias/aguinaldo-2026",
+      "destination": "/aprende/aguinaldo-bruto-neto",
+      "permanent": true
+    },
+    {
+      "source": "/guias/bruto-neto-recibo",
+      "destination": "/aprende/leer-recibo-nomina",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
   ]
 }

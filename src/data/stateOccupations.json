@@ -1,0 +1,3090 @@
+{
+  "period": "2026-T1",
+  "quarter": "20261",
+  "checkedAt": "2026-10-01",
+  "source": {
+    "name": "Data México — Secretaría de Economía",
+    "dataset": "ENOE / inegi_enoe",
+    "url": "https://www.economia.gob.mx/datamexico/api/data?Population+Classification=1&Quarter=20261&cube=inegi_enoe&drilldowns=State%2COccupation&measures=Workforce%2CMonthly+Wage%2CNumber+of+Records&parents=true&sparse=false&locale=es",
+    "note": "Población ocupada, salario mensual estimado y número de registros por ocupación. Ocupación no equivale a carrera estudiada, vacante abierta ni salario garantizado."
+  },
+  "selection": {
+    "criterion": "Mayor población ocupada observada dentro de cada entidad",
+    "limitPerState": 8,
+    "rankingIsRecommendation": false
+  },
+  "states": [
+    {
+      "slug": "aguascalientes",
+      "state": "Aguascalientes",
+      "dataMexicoState": "Aguascalientes",
+      "stateId": 1,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 43840,
+          "monthlyWage": 4644.64,
+          "records": 301
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 30991,
+          "monthlyWage": 3900.05,
+          "records": 222
+        },
+        {
+          "occupationId": 8211,
+          "occupation": "Ensambladores y Montadores de Herramientas, Maquinaria, Equipos y Productos Metálicos",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 82,
+          "group": "Ensambladores y Montadores de Herramientas, Maquinaria, Productos Metálicos y Electrónicos",
+          "workforce": 24834,
+          "monthlyWage": 5549.54,
+          "records": 159
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 21184,
+          "monthlyWage": 7065.69,
+          "records": 144
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 19055,
+          "monthlyWage": 10546.02,
+          "records": 160
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 16570,
+          "monthlyWage": 5305.71,
+          "records": 124
+        },
+        {
+          "occupationId": 3115,
+          "occupation": "Trabajadores de Apoyo en Actividades Administrativas Diversas",
+          "categoryId": 3,
+          "category": "Trabajadores Auxiliares en Actividades Administrativas",
+          "groupId": 31,
+          "group": "Secretarias, Capturistas, Cajeros y Trabajadores de Control de Archivo y Transporte",
+          "workforce": 15069,
+          "monthlyWage": 6915.44,
+          "records": 95
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 14742,
+          "monthlyWage": 7289.07,
+          "records": 94
+        }
+      ]
+    },
+    {
+      "slug": "baja-california",
+      "state": "Baja California",
+      "dataMexicoState": "Baja California",
+      "stateId": 2,
+      "occupations": [
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 84380,
+          "monthlyWage": 6801.22,
+          "records": 354
+        },
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 83626,
+          "monthlyWage": 7011.76,
+          "records": 344
+        },
+        {
+          "occupationId": 8133,
+          "occupation": "Operadores de Máquinas para la Elaboración y Ensamble de Productos de Plástico y Hule",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 81,
+          "group": "Operadores de Instalaciones y Maquinaria Industrial",
+          "workforce": 53490,
+          "monthlyWage": 8799.26,
+          "records": 221
+        },
+        {
+          "occupationId": 8212,
+          "occupation": "Ensambladores y Montadores de Partes Eléctricas y Electrónicas",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 82,
+          "group": "Ensambladores y Montadores de Herramientas, Maquinaria, Productos Metálicos y Electrónicos",
+          "workforce": 50647,
+          "monthlyWage": 9646.98,
+          "records": 205
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 48710,
+          "monthlyWage": 10896.88,
+          "records": 185
+        },
+        {
+          "occupationId": 5313,
+          "occupation": "Vigilantes y Guardias en Establecimientos",
+          "categoryId": 5,
+          "category": "Trabajadores en Servicios Personales y Vigilancia",
+          "groupId": 53,
+          "group": "Trabajadores en Servicios de Protección y Vigilancia",
+          "workforce": 47063,
+          "monthlyWage": 10518.53,
+          "records": 190
+        },
+        {
+          "occupationId": 3121,
+          "occupation": "Cajeros, Taquilleros y Receptores de Apuestas",
+          "categoryId": 3,
+          "category": "Trabajadores Auxiliares en Actividades Administrativas",
+          "groupId": 31,
+          "group": "Secretarias, Capturistas, Cajeros y Trabajadores de Control de Archivo y Transporte",
+          "workforce": 44171,
+          "monthlyWage": 8564.15,
+          "records": 181
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 41122,
+          "monthlyWage": 10353.38,
+          "records": 171
+        }
+      ]
+    },
+    {
+      "slug": "baja-california-sur",
+      "state": "Baja California Sur",
+      "dataMexicoState": "Baja California Sur",
+      "stateId": 3,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 20486,
+          "monthlyWage": 7612.93,
+          "records": 181
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 17622,
+          "monthlyWage": 10559.01,
+          "records": 141
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 16380,
+          "monthlyWage": 16710.11,
+          "records": 118
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 14399,
+          "monthlyWage": 22809.11,
+          "records": 121
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 14084,
+          "monthlyWage": 6891.52,
+          "records": 127
+        },
+        {
+          "occupationId": 3121,
+          "occupation": "Cajeros, Taquilleros y Receptores de Apuestas",
+          "categoryId": 3,
+          "category": "Trabajadores Auxiliares en Actividades Administrativas",
+          "groupId": 31,
+          "group": "Secretarias, Capturistas, Cajeros y Trabajadores de Control de Archivo y Transporte",
+          "workforce": 12470,
+          "monthlyWage": 10188.8,
+          "records": 105
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 12136,
+          "monthlyWage": 13479.03,
+          "records": 94
+        },
+        {
+          "occupationId": 5116,
+          "occupation": "Meseros",
+          "categoryId": 5,
+          "category": "Trabajadores en Servicios Personales y Vigilancia",
+          "groupId": 51,
+          "group": "Trabajadores en la Preparación y Servicio de Alimentos y Bebidas en Establecimientos",
+          "workforce": 11186,
+          "monthlyWage": 12176.26,
+          "records": 70
+        }
+      ]
+    },
+    {
+      "slug": "campeche",
+      "state": "Campeche",
+      "dataMexicoState": "Campeche",
+      "stateId": 4,
+      "occupations": [
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 20941,
+          "monthlyWage": 3478.7,
+          "records": 166
+        },
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 19919,
+          "monthlyWage": 4863.22,
+          "records": 345
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 19814,
+          "monthlyWage": 6373.03,
+          "records": 329
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 12606,
+          "monthlyWage": 4754.31,
+          "records": 245
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 12526,
+          "monthlyWage": 3464.8,
+          "records": 106
+        },
+        {
+          "occupationId": 6211,
+          "occupation": "Trabajadores en Actividades Pesqueras",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 62,
+          "group": "Trabajadores en Actividades Pesqueras, Forestales, Caza y Similares",
+          "workforce": 11604,
+          "monthlyWage": 8378.42,
+          "records": 80
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 10652,
+          "monthlyWage": 11820.04,
+          "records": 172
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 9930,
+          "monthlyWage": 7995.09,
+          "records": 177
+        }
+      ]
+    },
+    {
+      "slug": "chiapas",
+      "state": "Chiapas",
+      "dataMexicoState": "Chiapas",
+      "stateId": 7,
+      "occupations": [
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 325715,
+          "monthlyWage": 1267.17,
+          "records": 483
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 235756,
+          "monthlyWage": 2316.57,
+          "records": 377
+        },
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 133507,
+          "monthlyWage": 4346.87,
+          "records": 605
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 110887,
+          "monthlyWage": 6261.45,
+          "records": 439
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 83749,
+          "monthlyWage": 6727.66,
+          "records": 251
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 70297,
+          "monthlyWage": 10903.16,
+          "records": 223
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 56958,
+          "monthlyWage": 4194.81,
+          "records": 272
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 45091,
+          "monthlyWage": 9056.44,
+          "records": 244
+        }
+      ]
+    },
+    {
+      "slug": "chihuahua",
+      "state": "Chihuahua",
+      "dataMexicoState": "Chihuahua",
+      "stateId": 8,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 91887,
+          "monthlyWage": 7091.43,
+          "records": 320
+        },
+        {
+          "occupationId": 8212,
+          "occupation": "Ensambladores y Montadores de Partes Eléctricas y Electrónicas",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 82,
+          "group": "Ensambladores y Montadores de Herramientas, Maquinaria, Productos Metálicos y Electrónicos",
+          "workforce": 81434,
+          "monthlyWage": 8885.35,
+          "records": 336
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 59250,
+          "monthlyWage": 11529.16,
+          "records": 221
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 55143,
+          "monthlyWage": 7407.22,
+          "records": 220
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 43687,
+          "monthlyWage": 8312.3,
+          "records": 143
+        },
+        {
+          "occupationId": 8211,
+          "occupation": "Ensambladores y Montadores de Herramientas, Maquinaria, Equipos y Productos Metálicos",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 82,
+          "group": "Ensambladores y Montadores de Herramientas, Maquinaria, Productos Metálicos y Electrónicos",
+          "workforce": 41174,
+          "monthlyWage": 10269.15,
+          "records": 177
+        },
+        {
+          "occupationId": 3115,
+          "occupation": "Trabajadores de Apoyo en Actividades Administrativas Diversas",
+          "categoryId": 3,
+          "category": "Trabajadores Auxiliares en Actividades Administrativas",
+          "groupId": 31,
+          "group": "Secretarias, Capturistas, Cajeros y Trabajadores de Control de Archivo y Transporte",
+          "workforce": 39866,
+          "monthlyWage": 8796.76,
+          "records": 152
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 35828,
+          "monthlyWage": 10331.66,
+          "records": 145
+        }
+      ]
+    },
+    {
+      "slug": "ciudad-de-mexico",
+      "state": "Ciudad de México",
+      "dataMexicoState": "Ciudad de México",
+      "stateId": 9,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 258127,
+          "monthlyWage": 5686.05,
+          "records": 276
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 238385,
+          "monthlyWage": 5101.32,
+          "records": 247
+        },
+        {
+          "occupationId": 3115,
+          "occupation": "Trabajadores de Apoyo en Actividades Administrativas Diversas",
+          "categoryId": 3,
+          "category": "Trabajadores Auxiliares en Actividades Administrativas",
+          "groupId": 31,
+          "group": "Secretarias, Capturistas, Cajeros y Trabajadores de Control de Archivo y Transporte",
+          "workforce": 189274,
+          "monthlyWage": 5659.92,
+          "records": 178
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 173398,
+          "monthlyWage": 8737.99,
+          "records": 180
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 137856,
+          "monthlyWage": 5087.43,
+          "records": 162
+        },
+        {
+          "occupationId": 9512,
+          "occupation": "Vendedores Ambulantes de Artículos Diversos (Excluyendo los de Venta de Alimentos)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 95,
+          "group": "Vendedores Ambulantes",
+          "workforce": 119119,
+          "monthlyWage": 3152.43,
+          "records": 112
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 100386,
+          "monthlyWage": 5704.39,
+          "records": 104
+        },
+        {
+          "occupationId": 2271,
+          "occupation": "Desarrolladores y Analistas de Software y Multimedia",
+          "categoryId": 2,
+          "category": "Profesionistas y Técnicos",
+          "groupId": 22,
+          "group": "Investigadores y Especialistas en Ciencias Exactas, Biológicas, Ingeniería, Informática y en Telecomunicaciones",
+          "workforce": 92553,
+          "monthlyWage": 12727.97,
+          "records": 68
+        }
+      ]
+    },
+    {
+      "slug": "coahuila",
+      "state": "Coahuila",
+      "dataMexicoState": "Coahuila de Zaragoza",
+      "stateId": 5,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 82988,
+          "monthlyWage": 7150.33,
+          "records": 372
+        },
+        {
+          "occupationId": 8211,
+          "occupation": "Ensambladores y Montadores de Herramientas, Maquinaria, Equipos y Productos Metálicos",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 82,
+          "group": "Ensambladores y Montadores de Herramientas, Maquinaria, Productos Metálicos y Electrónicos",
+          "workforce": 64425,
+          "monthlyWage": 9980.1,
+          "records": 264
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 61468,
+          "monthlyWage": 8325.32,
+          "records": 267
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 42373,
+          "monthlyWage": 11478.98,
+          "records": 184
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 41546,
+          "monthlyWage": 6144.02,
+          "records": 182
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 37906,
+          "monthlyWage": 7500.73,
+          "records": 170
+        },
+        {
+          "occupationId": 5114,
+          "occupation": "Taqueros y Preparadores de Comida Rápida, Antojitos, Pizzas, Hot Dogs, Jugos, Café, Etcétera",
+          "categoryId": 5,
+          "category": "Trabajadores en Servicios Personales y Vigilancia",
+          "groupId": 51,
+          "group": "Trabajadores en la Preparación y Servicio de Alimentos y Bebidas en Establecimientos",
+          "workforce": 36293,
+          "monthlyWage": 8469.75,
+          "records": 166
+        },
+        {
+          "occupationId": 8201,
+          "occupation": "Supervisores en Procesos de Ensamblado y Montaje de Maquinaria, Herramientas y Productos Metálicos y Electrónicos",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 82,
+          "group": "Ensambladores y Montadores de Herramientas, Maquinaria, Productos Metálicos y Electrónicos",
+          "workforce": 35215,
+          "monthlyWage": 13510.81,
+          "records": 140
+        }
+      ]
+    },
+    {
+      "slug": "colima",
+      "state": "Colima",
+      "dataMexicoState": "Colima",
+      "stateId": 6,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 24943,
+          "monthlyWage": 5979.41,
+          "records": 353
+        },
+        {
+          "occupationId": 6114,
+          "occupation": "Trabajadores en el Cultivo de Frutales",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 19290,
+          "monthlyWage": 7914.49,
+          "records": 199
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 14543,
+          "monthlyWage": 7858.01,
+          "records": 207
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 14274,
+          "monthlyWage": 4970.46,
+          "records": 199
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 11490,
+          "monthlyWage": 13296.73,
+          "records": 142
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 8604,
+          "monthlyWage": 7882.76,
+          "records": 120
+        },
+        {
+          "occupationId": 5313,
+          "occupation": "Vigilantes y Guardias en Establecimientos",
+          "categoryId": 5,
+          "category": "Trabajadores en Servicios Personales y Vigilancia",
+          "groupId": 53,
+          "group": "Trabajadores en Servicios de Protección y Vigilancia",
+          "workforce": 7782,
+          "monthlyWage": 11478.79,
+          "records": 99
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 7705,
+          "monthlyWage": 12678.56,
+          "records": 99
+        }
+      ]
+    },
+    {
+      "slug": "durango",
+      "state": "Durango",
+      "dataMexicoState": "Durango",
+      "stateId": 10,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 48899,
+          "monthlyWage": 5940.51,
+          "records": 367
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 42676,
+          "monthlyWage": 7768.08,
+          "records": 301
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 30439,
+          "monthlyWage": 11465.55,
+          "records": 216
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 27302,
+          "monthlyWage": 6740.72,
+          "records": 161
+        },
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 22525,
+          "monthlyWage": 3823.92,
+          "records": 81
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 22055,
+          "monthlyWage": 12317.88,
+          "records": 173
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 21641,
+          "monthlyWage": 4576.63,
+          "records": 80
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 20538,
+          "monthlyWage": 4171.3,
+          "records": 156
+        }
+      ]
+    },
+    {
+      "slug": "estado-de-mexico",
+      "state": "Estado de México",
+      "dataMexicoState": "Estado de México",
+      "stateId": 15,
+      "occupations": [
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 608204,
+          "monthlyWage": 6944.7,
+          "records": 523
+        },
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 579720,
+          "monthlyWage": 5353.72,
+          "records": 564
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 335896,
+          "monthlyWage": 5923.52,
+          "records": 288
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 300231,
+          "monthlyWage": 10117.78,
+          "records": 247
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 256269,
+          "monthlyWage": 9712.6,
+          "records": 272
+        },
+        {
+          "occupationId": 3115,
+          "occupation": "Trabajadores de Apoyo en Actividades Administrativas Diversas",
+          "categoryId": 3,
+          "category": "Trabajadores Auxiliares en Actividades Administrativas",
+          "groupId": 31,
+          "group": "Secretarias, Capturistas, Cajeros y Trabajadores de Control de Archivo y Transporte",
+          "workforce": 252404,
+          "monthlyWage": 7512.42,
+          "records": 254
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 237538,
+          "monthlyWage": 9090.64,
+          "records": 226
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 203429,
+          "monthlyWage": 7720.79,
+          "records": 222
+        }
+      ]
+    },
+    {
+      "slug": "guanajuato",
+      "state": "Guanajuato",
+      "dataMexicoState": "Guanajuato",
+      "stateId": 11,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 212960,
+          "monthlyWage": 4449.04,
+          "records": 493
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 148054,
+          "monthlyWage": 4431.77,
+          "records": 377
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 106556,
+          "monthlyWage": 8659.29,
+          "records": 217
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 93078,
+          "monthlyWage": 4222.95,
+          "records": 253
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 73095,
+          "monthlyWage": 6783.66,
+          "records": 151
+        },
+        {
+          "occupationId": 8154,
+          "occupation": "Operadores de Máquinas en el Tratamiento del Cuero, Piel y la Elaboración de Calzado",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 81,
+          "group": "Operadores de Instalaciones y Maquinaria Industrial",
+          "workforce": 62324,
+          "monthlyWage": 8051.57,
+          "records": 340
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 62165,
+          "monthlyWage": 5724.36,
+          "records": 140
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 56156,
+          "monthlyWage": 6625.18,
+          "records": 169
+        }
+      ]
+    },
+    {
+      "slug": "guerrero",
+      "state": "Guerrero",
+      "dataMexicoState": "Guerrero",
+      "stateId": 12,
+      "occupations": [
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 142223,
+          "monthlyWage": 400.62,
+          "records": 319
+        },
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 96044,
+          "monthlyWage": 3534.25,
+          "records": 300
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 93507,
+          "monthlyWage": 5279.82,
+          "records": 272
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 90618,
+          "monthlyWage": 8707.01,
+          "records": 252
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 84404,
+          "monthlyWage": 2504.12,
+          "records": 185
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 54526,
+          "monthlyWage": 12002.64,
+          "records": 153
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 45593,
+          "monthlyWage": 4875.52,
+          "records": 191
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 42739,
+          "monthlyWage": 7674.0,
+          "records": 168
+        }
+      ]
+    },
+    {
+      "slug": "hidalgo",
+      "state": "Hidalgo",
+      "dataMexicoState": "Hidalgo",
+      "stateId": 13,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 103958,
+          "monthlyWage": 4896.68,
+          "records": 334
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 84661,
+          "monthlyWage": 8025.78,
+          "records": 247
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 82315,
+          "monthlyWage": 3421.81,
+          "records": 165
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 61073,
+          "monthlyWage": 10055.11,
+          "records": 135
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 57131,
+          "monthlyWage": 7483.49,
+          "records": 140
+        },
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 51444,
+          "monthlyWage": 1185.82,
+          "records": 115
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 45418,
+          "monthlyWage": 5087.24,
+          "records": 158
+        },
+        {
+          "occupationId": 7513,
+          "occupation": "Trabajadores en la Elaboración de Pan, Tortilla, Repostería, y otros Productos de Cereales y Harinas",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 75,
+          "group": "Trabajadores en la Elaboración y Procesamiento de Alimentos, Bebidas y Productos de Tabaco",
+          "workforce": 36228,
+          "monthlyWage": 7662.75,
+          "records": 93
+        }
+      ]
+    },
+    {
+      "slug": "jalisco",
+      "state": "Jalisco",
+      "dataMexicoState": "Jalisco",
+      "stateId": 14,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 284438,
+          "monthlyWage": 5528.42,
+          "records": 433
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 184544,
+          "monthlyWage": 5459.29,
+          "records": 277
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 146305,
+          "monthlyWage": 11003.63,
+          "records": 223
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 109233,
+          "monthlyWage": 5108.28,
+          "records": 173
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 96927,
+          "monthlyWage": 7359.41,
+          "records": 160
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 89322,
+          "monthlyWage": 6872.88,
+          "records": 93
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 80960,
+          "monthlyWage": 7970.24,
+          "records": 137
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 77900,
+          "monthlyWage": 6116.98,
+          "records": 114
+        }
+      ]
+    },
+    {
+      "slug": "michoacan",
+      "state": "Michoacán",
+      "dataMexicoState": "Michoacán de Ocampo",
+      "stateId": 16,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 180970,
+          "monthlyWage": 5147.51,
+          "records": 387
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 167798,
+          "monthlyWage": 7110.87,
+          "records": 248
+        },
+        {
+          "occupationId": 6114,
+          "occupation": "Trabajadores en el Cultivo de Frutales",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 153229,
+          "monthlyWage": 8376.84,
+          "records": 225
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 153115,
+          "monthlyWage": 8499.69,
+          "records": 351
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 75165,
+          "monthlyWage": 7639.66,
+          "records": 158
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 73900,
+          "monthlyWage": 12167.38,
+          "records": 183
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 68736,
+          "monthlyWage": 4008.79,
+          "records": 177
+        },
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 61805,
+          "monthlyWage": 2558.58,
+          "records": 102
+        }
+      ]
+    },
+    {
+      "slug": "morelos",
+      "state": "Morelos",
+      "dataMexicoState": "Morelos",
+      "stateId": 17,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 64249,
+          "monthlyWage": 2581.09,
+          "records": 344
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 50848,
+          "monthlyWage": 4171.4,
+          "records": 276
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 47513,
+          "monthlyWage": 2232.78,
+          "records": 274
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 40587,
+          "monthlyWage": 5416.69,
+          "records": 167
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 33189,
+          "monthlyWage": 9578.37,
+          "records": 174
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 29691,
+          "monthlyWage": 6981.9,
+          "records": 164
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 24852,
+          "monthlyWage": 5925.58,
+          "records": 140
+        },
+        {
+          "occupationId": 5114,
+          "occupation": "Taqueros y Preparadores de Comida Rápida, Antojitos, Pizzas, Hot Dogs, Jugos, Café, Etcétera",
+          "categoryId": 5,
+          "category": "Trabajadores en Servicios Personales y Vigilancia",
+          "groupId": 51,
+          "group": "Trabajadores en la Preparación y Servicio de Alimentos y Bebidas en Establecimientos",
+          "workforce": 21094,
+          "monthlyWage": 4758.13,
+          "records": 103
+        }
+      ]
+    },
+    {
+      "slug": "nayarit",
+      "state": "Nayarit",
+      "dataMexicoState": "Nayarit",
+      "stateId": 18,
+      "occupations": [
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 46346,
+          "monthlyWage": 8235.9,
+          "records": 307
+        },
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 45171,
+          "monthlyWage": 6487.99,
+          "records": 374
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 34554,
+          "monthlyWage": 10465.16,
+          "records": 279
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 16871,
+          "monthlyWage": 10498.76,
+          "records": 138
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 16473,
+          "monthlyWage": 14474.75,
+          "records": 140
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 16101,
+          "monthlyWage": 6083.86,
+          "records": 139
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 15221,
+          "monthlyWage": 12179.61,
+          "records": 145
+        },
+        {
+          "occupationId": 5313,
+          "occupation": "Vigilantes y Guardias en Establecimientos",
+          "categoryId": 5,
+          "category": "Trabajadores en Servicios Personales y Vigilancia",
+          "groupId": 53,
+          "group": "Trabajadores en Servicios de Protección y Vigilancia",
+          "workforce": 13346,
+          "monthlyWage": 9844.5,
+          "records": 111
+        }
+      ]
+    },
+    {
+      "slug": "nuevo-leon",
+      "state": "Nuevo León",
+      "dataMexicoState": "Nuevo León",
+      "stateId": 19,
+      "occupations": [
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 137424,
+          "monthlyWage": 8624.7,
+          "records": 275
+        },
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 135282,
+          "monthlyWage": 7678.54,
+          "records": 272
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 85584,
+          "monthlyWage": 13973.6,
+          "records": 177
+        },
+        {
+          "occupationId": 3115,
+          "occupation": "Trabajadores de Apoyo en Actividades Administrativas Diversas",
+          "categoryId": 3,
+          "category": "Trabajadores Auxiliares en Actividades Administrativas",
+          "groupId": 31,
+          "group": "Secretarias, Capturistas, Cajeros y Trabajadores de Control de Archivo y Transporte",
+          "workforce": 82644,
+          "monthlyWage": 6989.51,
+          "records": 159
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 76702,
+          "monthlyWage": 11959.03,
+          "records": 156
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 75615,
+          "monthlyWage": 10076.11,
+          "records": 162
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 69013,
+          "monthlyWage": 7686.57,
+          "records": 141
+        },
+        {
+          "occupationId": 3132,
+          "occupation": "Encargados y Trabajadores en Control de Almacén y Bodega",
+          "categoryId": 3,
+          "category": "Trabajadores Auxiliares en Actividades Administrativas",
+          "groupId": 31,
+          "group": "Secretarias, Capturistas, Cajeros y Trabajadores de Control de Archivo y Transporte",
+          "workforce": 68344,
+          "monthlyWage": 7346.23,
+          "records": 130
+        }
+      ]
+    },
+    {
+      "slug": "oaxaca",
+      "state": "Oaxaca",
+      "dataMexicoState": "Oaxaca",
+      "stateId": 20,
+      "occupations": [
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 211097,
+          "monthlyWage": 372.73,
+          "records": 485
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 158932,
+          "monthlyWage": 2121.8,
+          "records": 335
+        },
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 110539,
+          "monthlyWage": 3587.1,
+          "records": 390
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 94215,
+          "monthlyWage": 4675.97,
+          "records": 328
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 78593,
+          "monthlyWage": 8091.06,
+          "records": 224
+        },
+        {
+          "occupationId": 7513,
+          "occupation": "Trabajadores en la Elaboración de Pan, Tortilla, Repostería, y otros Productos de Cereales y Harinas",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 75,
+          "group": "Trabajadores en la Elaboración y Procesamiento de Alimentos, Bebidas y Productos de Tabaco",
+          "workforce": 70116,
+          "monthlyWage": 4254.2,
+          "records": 221
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 55046,
+          "monthlyWage": 10190.62,
+          "records": 190
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 39976,
+          "monthlyWage": 3375.24,
+          "records": 175
+        }
+      ]
+    },
+    {
+      "slug": "puebla",
+      "state": "Puebla",
+      "dataMexicoState": "Puebla",
+      "stateId": 21,
+      "occupations": [
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 224715,
+          "monthlyWage": 3565.23,
+          "records": 362
+        },
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 214916,
+          "monthlyWage": 3332.91,
+          "records": 461
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 156733,
+          "monthlyWage": 5004.1,
+          "records": 292
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 133634,
+          "monthlyWage": 6804.71,
+          "records": 250
+        },
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 130094,
+          "monthlyWage": 1373.38,
+          "records": 232
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 124913,
+          "monthlyWage": 3858.77,
+          "records": 288
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 93926,
+          "monthlyWage": 8801.07,
+          "records": 170
+        },
+        {
+          "occupationId": 9521,
+          "occupation": "Preparadores y Vendedores Ambulantes de Alimentos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 95,
+          "group": "Vendedores Ambulantes",
+          "workforce": 86610,
+          "monthlyWage": 4839.18,
+          "records": 187
+        }
+      ]
+    },
+    {
+      "slug": "queretaro",
+      "state": "Querétaro",
+      "dataMexicoState": "Querétaro",
+      "stateId": 22,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 60714,
+          "monthlyWage": 4318.53,
+          "records": 277
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 48033,
+          "monthlyWage": 3079.53,
+          "records": 204
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 40720,
+          "monthlyWage": 10211.48,
+          "records": 212
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 36907,
+          "monthlyWage": 5138.46,
+          "records": 187
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 32212,
+          "monthlyWage": 6009.14,
+          "records": 126
+        },
+        {
+          "occupationId": 8211,
+          "occupation": "Ensambladores y Montadores de Herramientas, Maquinaria, Equipos y Productos Metálicos",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 82,
+          "group": "Ensambladores y Montadores de Herramientas, Maquinaria, Productos Metálicos y Electrónicos",
+          "workforce": 32071,
+          "monthlyWage": 6660.43,
+          "records": 119
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 29369,
+          "monthlyWage": 6431.16,
+          "records": 128
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 29001,
+          "monthlyWage": 8127.79,
+          "records": 160
+        }
+      ]
+    },
+    {
+      "slug": "quintana-roo",
+      "state": "Quintana Roo",
+      "dataMexicoState": "Quintana Roo",
+      "stateId": 23,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 55386,
+          "monthlyWage": 6251.35,
+          "records": 248
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 43384,
+          "monthlyWage": 10142.36,
+          "records": 207
+        },
+        {
+          "occupationId": 5116,
+          "occupation": "Meseros",
+          "categoryId": 5,
+          "category": "Trabajadores en Servicios Personales y Vigilancia",
+          "groupId": 51,
+          "group": "Trabajadores en la Preparación y Servicio de Alimentos y Bebidas en Establecimientos",
+          "workforce": 33972,
+          "monthlyWage": 9901.54,
+          "records": 168
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 31268,
+          "monthlyWage": 14721.18,
+          "records": 152
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 26022,
+          "monthlyWage": 7486.69,
+          "records": 111
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 25050,
+          "monthlyWage": 6164.9,
+          "records": 122
+        },
+        {
+          "occupationId": 5111,
+          "occupation": "Cocineros",
+          "categoryId": 5,
+          "category": "Trabajadores en Servicios Personales y Vigilancia",
+          "groupId": 51,
+          "group": "Trabajadores en la Preparación y Servicio de Alimentos y Bebidas en Establecimientos",
+          "workforce": 23168,
+          "monthlyWage": 10811.16,
+          "records": 117
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 22602,
+          "monthlyWage": 6978.45,
+          "records": 93
+        }
+      ]
+    },
+    {
+      "slug": "san-luis-potosi",
+      "state": "San Luis Potosí",
+      "dataMexicoState": "San Luis Potosí",
+      "stateId": 24,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 83939,
+          "monthlyWage": 4574.36,
+          "records": 284
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 67301,
+          "monthlyWage": 4304.12,
+          "records": 245
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 62235,
+          "monthlyWage": 4186.34,
+          "records": 183
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 42162,
+          "monthlyWage": 9116.31,
+          "records": 159
+        },
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 39802,
+          "monthlyWage": 601.88,
+          "records": 125
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 37292,
+          "monthlyWage": 6402.64,
+          "records": 142
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 35215,
+          "monthlyWage": 9163.66,
+          "records": 140
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 31557,
+          "monthlyWage": 4542.86,
+          "records": 145
+        }
+      ]
+    },
+    {
+      "slug": "sinaloa",
+      "state": "Sinaloa",
+      "dataMexicoState": "Sinaloa",
+      "stateId": 25,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 92555,
+          "monthlyWage": 6536.86,
+          "records": 347
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 57442,
+          "monthlyWage": 7776.04,
+          "records": 186
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 44725,
+          "monthlyWage": 7903.97,
+          "records": 110
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 38527,
+          "monthlyWage": 5512.72,
+          "records": 141
+        },
+        {
+          "occupationId": 6112,
+          "occupation": "Trabajadores en el Cultivo de Hortalizas y Verduras",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 37048,
+          "monthlyWage": 6555.94,
+          "records": 82
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 34702,
+          "monthlyWage": 11239.35,
+          "records": 125
+        },
+        {
+          "occupationId": 5114,
+          "occupation": "Taqueros y Preparadores de Comida Rápida, Antojitos, Pizzas, Hot Dogs, Jugos, Café, Etcétera",
+          "categoryId": 5,
+          "category": "Trabajadores en Servicios Personales y Vigilancia",
+          "groupId": 51,
+          "group": "Trabajadores en la Preparación y Servicio de Alimentos y Bebidas en Establecimientos",
+          "workforce": 32414,
+          "monthlyWage": 7534.02,
+          "records": 110
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 31301,
+          "monthlyWage": 6915.71,
+          "records": 110
+        }
+      ]
+    },
+    {
+      "slug": "sonora",
+      "state": "Sonora",
+      "dataMexicoState": "Sonora",
+      "stateId": 26,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 66103,
+          "monthlyWage": 7263.0,
+          "records": 230
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 52892,
+          "monthlyWage": 6887.1,
+          "records": 179
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 49137,
+          "monthlyWage": 7325.62,
+          "records": 114
+        },
+        {
+          "occupationId": 7513,
+          "occupation": "Trabajadores en la Elaboración de Pan, Tortilla, Repostería, y otros Productos de Cereales y Harinas",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 75,
+          "group": "Trabajadores en la Elaboración y Procesamiento de Alimentos, Bebidas y Productos de Tabaco",
+          "workforce": 42602,
+          "monthlyWage": 7572.09,
+          "records": 120
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 35660,
+          "monthlyWage": 10752.82,
+          "records": 130
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 32968,
+          "monthlyWage": 12289.28,
+          "records": 114
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 32512,
+          "monthlyWage": 5690.92,
+          "records": 127
+        },
+        {
+          "occupationId": 8212,
+          "occupation": "Ensambladores y Montadores de Partes Eléctricas y Electrónicas",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 82,
+          "group": "Ensambladores y Montadores de Herramientas, Maquinaria, Productos Metálicos y Electrónicos",
+          "workforce": 31736,
+          "monthlyWage": 9070.78,
+          "records": 93
+        }
+      ]
+    },
+    {
+      "slug": "tabasco",
+      "state": "Tabasco",
+      "dataMexicoState": "Tabasco",
+      "stateId": 27,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 66261,
+          "monthlyWage": 5068.58,
+          "records": 289
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 43448,
+          "monthlyWage": 4507.86,
+          "records": 188
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 40760,
+          "monthlyWage": 3479.63,
+          "records": 186
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 37981,
+          "monthlyWage": 8164.27,
+          "records": 143
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 31738,
+          "monthlyWage": 3894.2,
+          "records": 93
+        },
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 29228,
+          "monthlyWage": 2784.34,
+          "records": 89
+        },
+        {
+          "occupationId": 7513,
+          "occupation": "Trabajadores en la Elaboración de Pan, Tortilla, Repostería, y otros Productos de Cereales y Harinas",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 75,
+          "group": "Trabajadores en la Elaboración y Procesamiento de Alimentos, Bebidas y Productos de Tabaco",
+          "workforce": 28518,
+          "monthlyWage": 4605.78,
+          "records": 108
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 27671,
+          "monthlyWage": 6656.96,
+          "records": 118
+        }
+      ]
+    },
+    {
+      "slug": "tamaulipas",
+      "state": "Tamaulipas",
+      "dataMexicoState": "Tamaulipas",
+      "stateId": 28,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 78005,
+          "monthlyWage": 6679.73,
+          "records": 326
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 65727,
+          "monthlyWage": 7945.69,
+          "records": 286
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 50789,
+          "monthlyWage": 11910.38,
+          "records": 201
+        },
+        {
+          "occupationId": 8212,
+          "occupation": "Ensambladores y Montadores de Partes Eléctricas y Electrónicas",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 82,
+          "group": "Ensambladores y Montadores de Herramientas, Maquinaria, Productos Metálicos y Electrónicos",
+          "workforce": 50677,
+          "monthlyWage": 10941.93,
+          "records": 218
+        },
+        {
+          "occupationId": 8341,
+          "occupation": "Conductores de Camiones, Camionetas y Automóviles de Carga",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 47350,
+          "monthlyWage": 13415.61,
+          "records": 203
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 44812,
+          "monthlyWage": 5156.87,
+          "records": 176
+        },
+        {
+          "occupationId": 8342,
+          "occupation": "Conductores de Autobuses, Camiones, Camionetas, Taxis y Automóviles de Pasajeros",
+          "categoryId": 8,
+          "category": "Operadores de Maquinaria Industrial, Ensambladores, Choferes y Conductores de Transporte",
+          "groupId": 83,
+          "group": "Conductores de Transporte y de Maquinaria Móvil",
+          "workforce": 37120,
+          "monthlyWage": 10881.99,
+          "records": 158
+        },
+        {
+          "occupationId": 3115,
+          "occupation": "Trabajadores de Apoyo en Actividades Administrativas Diversas",
+          "categoryId": 3,
+          "category": "Trabajadores Auxiliares en Actividades Administrativas",
+          "groupId": 31,
+          "group": "Secretarias, Capturistas, Cajeros y Trabajadores de Control de Archivo y Transporte",
+          "workforce": 33805,
+          "monthlyWage": 9075.19,
+          "records": 140
+        }
+      ]
+    },
+    {
+      "slug": "tlaxcala",
+      "state": "Tlaxcala",
+      "dataMexicoState": "Tlaxcala",
+      "stateId": 29,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 44191,
+          "monthlyWage": 3146.31,
+          "records": 357
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 32196,
+          "monthlyWage": 5445.67,
+          "records": 273
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 31069,
+          "monthlyWage": 6107.0,
+          "records": 258
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 27427,
+          "monthlyWage": 3111.11,
+          "records": 255
+        },
+        {
+          "occupationId": 7341,
+          "occupation": "Sastres y Modistos, Costureras y Confeccionadores de Prendas de Vestir",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 73,
+          "group": "Artesanos y Trabajadores en la Elaboración de Productos de Madera, Papel, Textiles y de Cuero y Piel",
+          "workforce": 25352,
+          "monthlyWage": 4419.33,
+          "records": 213
+        },
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 22586,
+          "monthlyWage": 832.96,
+          "records": 212
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 21039,
+          "monthlyWage": 8880.61,
+          "records": 169
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 20987,
+          "monthlyWage": 3460.98,
+          "records": 176
+        }
+      ]
+    },
+    {
+      "slug": "veracruz",
+      "state": "Veracruz",
+      "dataMexicoState": "Veracruz de Ignacio de la Llave",
+      "stateId": 30,
+      "occupations": [
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 315367,
+          "monthlyWage": 5153.17,
+          "records": 376
+        },
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 213784,
+          "monthlyWage": 5201.09,
+          "records": 465
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 167604,
+          "monthlyWage": 4676.5,
+          "records": 375
+        },
+        {
+          "occupationId": 6111,
+          "occupation": "Trabajadores en el Cultivo de Maíz Y/O Frijol",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 148752,
+          "monthlyWage": 1085.85,
+          "records": 180
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 141256,
+          "monthlyWage": 4452.96,
+          "records": 292
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 98995,
+          "monthlyWage": 9862.61,
+          "records": 219
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 98608,
+          "monthlyWage": 7757.07,
+          "records": 193
+        },
+        {
+          "occupationId": 5114,
+          "occupation": "Taqueros y Preparadores de Comida Rápida, Antojitos, Pizzas, Hot Dogs, Jugos, Café, Etcétera",
+          "categoryId": 5,
+          "category": "Trabajadores en Servicios Personales y Vigilancia",
+          "groupId": 51,
+          "group": "Trabajadores en la Preparación y Servicio de Alimentos y Bebidas en Establecimientos",
+          "workforce": 94972,
+          "monthlyWage": 4800.4,
+          "records": 192
+        }
+      ]
+    },
+    {
+      "slug": "yucatan",
+      "state": "Yucatán",
+      "dataMexicoState": "Yucatán",
+      "stateId": 31,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 87718,
+          "monthlyWage": 4698.01,
+          "records": 375
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 40755,
+          "monthlyWage": 10977.17,
+          "records": 178
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 40439,
+          "monthlyWage": 4651.36,
+          "records": 177
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 34916,
+          "monthlyWage": 8312.28,
+          "records": 172
+        },
+        {
+          "occupationId": 9621,
+          "occupation": "Barrenderos y Trabajadores de Limpieza (Excepto en Hoteles y Restaurantes)",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 34814,
+          "monthlyWage": 6231.38,
+          "records": 159
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 29941,
+          "monthlyWage": 7832.72,
+          "records": 125
+        },
+        {
+          "occupationId": 5114,
+          "occupation": "Taqueros y Preparadores de Comida Rápida, Antojitos, Pizzas, Hot Dogs, Jugos, Café, Etcétera",
+          "categoryId": 5,
+          "category": "Trabajadores en Servicios Personales y Vigilancia",
+          "groupId": 51,
+          "group": "Trabajadores en la Preparación y Servicio de Alimentos y Bebidas en Establecimientos",
+          "workforce": 29548,
+          "monthlyWage": 6971.77,
+          "records": 125
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 29089,
+          "monthlyWage": 3307.33,
+          "records": 113
+        }
+      ]
+    },
+    {
+      "slug": "zacatecas",
+      "state": "Zacatecas",
+      "dataMexicoState": "Zacatecas",
+      "stateId": 32,
+      "occupations": [
+        {
+          "occupationId": 4211,
+          "occupation": "Empleados de Ventas, Despachadores y Dependientes en Comercios",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 42,
+          "group": "Empleados de Ventas en Establecimientos",
+          "workforce": 51096,
+          "monthlyWage": 4565.25,
+          "records": 343
+        },
+        {
+          "occupationId": 9111,
+          "occupation": "Trabajadores de Apoyo en Actividades Agrícolas",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 91,
+          "group": "Trabajadores de Apoyo en Actividades Agropecuarias, Forestales, Pesca y Caza",
+          "workforce": 37764,
+          "monthlyWage": 5894.08,
+          "records": 167
+        },
+        {
+          "occupationId": 4111,
+          "occupation": "Comerciantes en Establecimientos",
+          "categoryId": 4,
+          "category": "Comerciantes, Empleados en Ventas y Agentes de Ventas",
+          "groupId": 41,
+          "group": "Comerciantes en Establecimientos",
+          "workforce": 30856,
+          "monthlyWage": 4328.68,
+          "records": 189
+        },
+        {
+          "occupationId": 9221,
+          "occupation": "Trabajadores de Apoyo en la Construcción",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 92,
+          "group": "Trabajadores de Apoyo en la Minería, Construcción e Industria",
+          "workforce": 28372,
+          "monthlyWage": 6742.88,
+          "records": 155
+        },
+        {
+          "occupationId": 7121,
+          "occupation": "Albañiles, Mamposteros y Afines",
+          "categoryId": 7,
+          "category": "Trabajadores Artesanales",
+          "groupId": 71,
+          "group": "Trabajadores en la Extracción y la Edificación de Construcciones",
+          "workforce": 26608,
+          "monthlyWage": 9632.12,
+          "records": 168
+        },
+        {
+          "occupationId": 9611,
+          "occupation": "Trabajadores Domésticos",
+          "categoryId": 9,
+          "category": "Trabajadores en Actividades Elementales y de Apoyo",
+          "groupId": 96,
+          "group": "Trabajadores Domésticos, de Limpieza, Planchadores y otros Trabajadores de Limpieza",
+          "workforce": 20775,
+          "monthlyWage": 3894.3,
+          "records": 144
+        },
+        {
+          "occupationId": 6121,
+          "occupation": "Trabajadores en la Cría de Ganado Bovino",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 16678,
+          "monthlyWage": 3558.05,
+          "records": 74
+        },
+        {
+          "occupationId": 6131,
+          "occupation": "Trabajadores que Combinan Actividades Agrícolas con Ganaderas",
+          "categoryId": 6,
+          "category": "Trabajadores en Actividades Agrícolas, Ganaderas, Forestales, Caza y Pesca",
+          "groupId": 61,
+          "group": "Trabajadores en Actividades Agrícolas y Ganaderas",
+          "workforce": 15907,
+          "monthlyWage": 5356.16,
+          "records": 74
+        }
+      ]
+    }
+  ]
+}

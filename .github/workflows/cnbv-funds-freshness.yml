@@ -1,0 +1,68 @@
+name: CNBV fondos — revisión de frescura
+
+on:
+  schedule:
+    - cron: '23 15 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Evaluar antigüedad de la revisión editorial
+        id: freshness
+        run: |
+          set -euo pipefail
+          node scripts/inversion/cnbv-funds-staleness.mjs > /tmp/cnbv-freshness.json
+          cat /tmp/cnbv-freshness.json
+          echo "needs_review=$(jq -r '.needsReview' /tmp/cnbv-freshness.json)" >> "$GITHUB_OUTPUT"
+          echo "checked_at=$(jq -r '.checkedAt' /tmp/cnbv-freshness.json)" >> "$GITHUB_OUTPUT"
+          echo "source_period=$(jq -r '.sourcePeriod' /tmp/cnbv-freshness.json)" >> "$GITHUB_OUTPUT"
+          echo "next_review=$(jq -r '.nextReviewDate' /tmp/cnbv-freshness.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Mantener una sola tarea de revisión
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NEEDS_REVIEW: ${{ steps.freshness.outputs.needs_review }}
+          CHECKED_AT: ${{ steps.freshness.outputs.checked_at }}
+          SOURCE_PERIOD: ${{ steps.freshness.outputs.source_period }}
+          NEXT_REVIEW: ${{ steps.freshness.outputs.next_review }}
+        run: |
+          set -euo pipefail
+          TITLE='[CNBV fondos] Revisar corte del Portafolio'
+          ISSUE="$(gh issue list --state open --search '"[CNBV fondos] Revisar corte del Portafolio" in:title' --json number --jq '.[0].number // empty')"
+
+          if [ "$NEEDS_REVIEW" = 'true' ]; then
+            if [ -z "$ISSUE" ]; then
+              BODY=$(cat <<EOF
+          La muestra regulatoria de fondos de MiLana requiere una nueva comprobación editorial.
+
+          - Última revisión editorial: **$CHECKED_AT**
+          - Corte publicado actualmente: **$SOURCE_PERIOD**
+          - Fuente: CNBV · Portafolio de Información · Sector 52 · Reporte R1
+
+          Esta tarea **no significa que CNBV haya publicado un corte nuevo**. Es un recordatorio por antigüedad porque los hosts del Portafolio presentan actualmente una cadena TLS que GitHub Actions no puede validar de forma segura.
+
+          Al revisar:
+          1. confirmar manualmente el corte más reciente en la fuente oficial;
+          2. si no cambió, actualizar únicamente `checkedAt` tras verificarlo;
+          3. si cambió, validar el nuevo R1 antes de sustituir datos;
+          4. nunca usar `--insecure`, `curl -k` ni desactivar TLS en un flujo productivo.
+
+          Este workflow no descarga XLSM, no modifica contenido y no publica cifras.
+          EOF
+          )
+              gh issue create --title "$TITLE" --body "$BODY"
+            fi
+          else
+            if [ -n "$ISSUE" ]; then
+              gh issue comment "$ISSUE" --body "Revisión editorial vigente. Próxima revisión programada a partir de **$NEXT_REVIEW**. Cierro esta tarea automáticamente; no se modificaron datos."
+              gh issue close "$ISSUE" --reason completed
+            fi
+          fi

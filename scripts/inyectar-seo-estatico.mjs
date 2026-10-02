@@ -87,6 +87,13 @@ function cuerpoInicio() {
         <p>MiLana reúne herramientas gratuitas para estimar y entender sueldo, ISR, aguinaldo, finiquito, liquidación, vacaciones, PTU, RESICO, Infonavit y pensión IMSS con alcance y fuentes visibles.</p>
         <h2>Calculadoras</h2>
         <ul>${calculadoras}</ul>
+        <h2>Explora MiLana por decisión</h2>
+        <ul>
+          <li><a href="/carreras">Carreras, empleos y salarios</a></li>
+          <li><a href="/estados">Trabajo, salarios y vivienda por estado</a></li>
+          <li><a href="/finanzas">Finanzas personales y herramientas de decisión</a></li>
+          <li><a href="/economia">Radar económico y contexto para tu dinero</a></li>
+        </ul>
         <h2>Aprende antes de decidir</h2>
         <ul>
           <li><a href="/aprende/finiquito-vs-liquidacion">Finiquito vs. liquidación</a></li>
@@ -96,6 +103,7 @@ function cuerpoInicio() {
           <li><a href="/aprende/resico-ingresos-cobrados">RESICO e ingresos cobrados</a></li>
           <li><a href="/aprende/pension-imss-ley-97">Pensión IMSS Ley 97</a></li>
         </ul>
+        <p><a href="/widgets">Calculadoras gratuitas para insertar en otros sitios</a>.</p>
       </main>
     </div>`;
 }

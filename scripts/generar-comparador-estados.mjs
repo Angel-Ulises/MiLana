@@ -26,4 +26,16 @@ const lista=estados.estados.map(e=>{const m=mercado.get(e.slug);const v=casas.ge
 const cuerpo=`<div id="root"><main data-static-seo="comparador-estados"><nav aria-label="Ruta"><a href="/">Inicio</a> / <a href="/estados">Estados</a> / Comparar</nav><h1>Compara dos estados de México con fuentes oficiales 2026</h1><p>El comparador reúne tres fotografías que se mantienen separadas: población profesional de OLA/STPS, mercado laboral general de ENOE/INEGI y vivienda adquirida con crédito hipotecario del Índice SHF.</p><h2>Qué puedes comparar</h2><ul><li>Ingreso profesional promedio y población profesional ocupada.</li><li>Participación, desocupación, informalidad, subocupación, trabajo asalariado y condiciones críticas.</li><li>Mediana y promedio de avalúos hipotecarios, además de apreciación interanual de vivienda.</li></ul><h2>Qué no hacemos</h2><p>MiLana no declara un estado ganador, no convierte estas cifras en una recomendación de mudanza y no divide precio de vivienda entre ingreso profesional: las poblaciones de esas fuentes son diferentes. Tampoco usamos estas métricas como sustituto de renta o costo de vida.</p><h2>Estados disponibles</h2><ul>${lista}</ul><p><strong>Fuentes:</strong> ${esc(estados.fuente.nombre)}; ${esc(laboral.fuente)}; ${esc(vivienda.fuente)}. Cortes 2026-T2.</p><p><a href="/finanzas/mi-situacion">Analizar mis números</a> · <a href="/finanzas/vivienda">Entender una decisión de vivienda</a></p></main></div>`;
 html=html.replace(/<div id="root">[\s\S]*?<\/div>/i,cuerpo);
 const destino=resolve(DIST,'estados','comparar','index.html');mkdirSync(dirname(destino),{recursive:true});writeFileSync(destino,html,'utf8');
-console.log(`comparador de estados: ${estados.estados.length} entidades disponibles`);
+
+const enlaceInterno='<p data-static-state-compare><a href="/estados/comparar">Comparar dos estados con las mismas fuentes →</a></p>';
+function enlazarEstado(ruta){
+  const archivo=resolve(DIST,ruta,'index.html');
+  let contenido=readFileSync(archivo,'utf8');
+  if(contenido.includes('data-static-state-compare')) return;
+  contenido=contenido.replace('</main></div>',`${enlaceInterno}</main></div>`);
+  writeFileSync(archivo,contenido,'utf8');
+}
+enlazarEstado('estados');
+estados.estados.forEach(e=>enlazarEstado(`estados/${e.slug}`));
+
+console.log(`comparador de estados: ${estados.estados.length} entidades disponibles + enlaces internos estatales`);

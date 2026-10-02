@@ -1,0 +1,42 @@
+name: Probe Data México — ocupaciones por estado
+
+on:
+  push:
+    branches:
+      - chatgpt/state-occupations-probe-20261001
+    paths:
+      - '.github/workflows/state-occupations-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Consultar ENOE 2026-T1 para Nuevo León
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 --retry-delay 2 --get \
+            'https://www.economia.gob.mx/datamexico/api/data' \
+            --data-urlencode 'Population Classification=1' \
+            --data-urlencode 'Quarter=20261' \
+            --data-urlencode 'State=19' \
+            --data-urlencode 'cube=inegi_enoe' \
+            --data-urlencode 'drilldowns=State,Occupation' \
+            --data-urlencode 'measures=Workforce,Monthly Wage,Number of Records' \
+            --data-urlencode 'parents=true' \
+            --data-urlencode 'sparse=false' \
+            --data-urlencode 'locale=es' \
+            -o /tmp/datamexico.json
+          echo "bytes=$(wc -c < /tmp/datamexico.json)"
+          python3 - <<'PY'
+          import json
+          p='/tmp/datamexico.json'
+          d=json.load(open(p))
+          print('keys', list(d.keys()))
+          rows=d.get('data', [])
+          print('rows', len(rows))
+          for row in sorted(rows, key=lambda r: float(r.get('Workforce') or 0), reverse=True)[:15]:
+              print(row)
+          PY

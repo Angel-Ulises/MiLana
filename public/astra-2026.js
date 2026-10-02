@@ -146,12 +146,12 @@
     links.className = 'astra-footer-links';
     links.setAttribute('aria-label', 'Información de MiLana');
     [
-      ['/aprende/','Aprende'],
-      ['/sobre/','Sobre MiLana'],
-      ['/metodo/','Método editorial'],
-      ['/contacto/','Contacto'],
-      ['/privacidad/','Privacidad'],
-      ['/financiamiento/','Cómo nos financiamos']
+      ['/aprende','Aprende'],
+      ['/sobre','Sobre MiLana'],
+      ['/metodo','Método editorial'],
+      ['/contacto','Contacto'],
+      ['/privacidad','Privacidad'],
+      ['/financiamiento','Cómo nos financiamos']
     ].forEach(([href,label]) => {
       const a = document.createElement('a');
       a.href = href;

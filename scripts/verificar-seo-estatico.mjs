@@ -66,17 +66,31 @@ for (const archivo of htmls(DIST)) {
   const titles = capturas(html, /<title>([\s\S]*?)<\/title>/gi);
   const h1s = [...html.matchAll(/<h1\b[^>]*>/gi)];
   const descriptions = capturas(html, /<meta\b[^>]*\bname=["']description["'][^>]*\bcontent=["']([^"']*)["'][^>]*>/gi);
+  const ogTitles = capturas(html, /<meta\b[^>]*\bproperty=["']og:title["'][^>]*\bcontent=["']([^"']*)["'][^>]*>/gi);
+  const ogDescriptions = capturas(html, /<meta\b[^>]*\bproperty=["']og:description["'][^>]*\bcontent=["']([^"']*)["'][^>]*>/gi);
+  const ogUrls = capturas(html, /<meta\b[^>]*\bproperty=["']og:url["'][^>]*\bcontent=["']([^"']*)["'][^>]*>/gi);
+  const twitterCards = capturas(html, /<meta\b[^>]*\bname=["']twitter:card["'][^>]*\bcontent=["']([^"']*)["'][^>]*>/gi);
+  const jsonLd = capturas(html, /<script\b[^>]*\btype=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi);
 
   if (noindex) errores.push(`${rel}: página indexable inesperadamente noindex`);
   if (titles.length !== 1 || !titles[0]) errores.push(`${rel}: debe tener exactamente 1 title no vacío`);
   if (h1s.length !== 1) errores.push(`${rel}: debe tener exactamente 1 H1`);
   if (descriptions.length !== 1 || !descriptions[0]) errores.push(`${rel}: debe tener exactamente 1 meta description no vacía`);
   if (canonical.length !== 1 || !canonical[0]) errores.push(`${rel}: debe tener exactamente 1 canonical`);
+  if (ogTitles.length !== 1 || !ogTitles[0]) errores.push(`${rel}: debe tener exactamente 1 og:title no vacío`);
+  if (ogDescriptions.length !== 1 || !ogDescriptions[0]) errores.push(`${rel}: debe tener exactamente 1 og:description no vacío`);
+  if (ogUrls.length !== 1 || !ogUrls[0]) errores.push(`${rel}: debe tener exactamente 1 og:url no vacío`);
+  if (twitterCards.length !== 1 || !twitterCards[0]) errores.push(`${rel}: debe tener exactamente 1 twitter:card no vacío`);
+  if (!jsonLd.length) errores.push(`${rel}: falta JSON-LD`);
+  for (const bloque of jsonLd) {
+    try { JSON.parse(bloque); } catch (error) { errores.push(`${rel}: JSON-LD inválido (${error.message})`); }
+  }
 
   if (titles.length === 1) registrar(titulos, titles[0], rel, 'title');
   if (descriptions.length === 1) registrar(descripciones, descriptions[0], rel, 'description');
   if (canonical.length === 1) {
     registrar(canonicals, canonical[0], rel, 'canonical');
+    if (ogUrls.length === 1 && ogUrls[0] !== canonical[0]) errores.push(`${rel}: og:url no coincide con canonical`);
     let url;
     try { url = new URL(canonical[0]); } catch { errores.push(`${rel}: canonical inválido ${canonical[0]}`); }
     if (url) {

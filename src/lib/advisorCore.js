@@ -180,8 +180,8 @@ export function crearMapaPreparacionInversion(radiografia) {
     factores.push({ id: 'flujo', estado: 'observado', titulo: 'Flujo mensual', detalle: `Los datos capturados dejan ${r.flujo.disponiblePct.toFixed(1)}% del ingreso neto disponible. Es una fotografía, no una recomendación de destino.` });
   }
 
-  if (!c.gastosEsenciales || !c.fondoActual) {
-    factores.push({ id: 'liquidez', estado: 'faltan-datos', titulo: 'Respaldo y liquidez', detalle: 'Faltan gastos esenciales o fondo actual para comparar el respaldo con la referencia educativa de tres meses.' });
+  if (!c.gastosEsenciales || r.entrada.gastosEsenciales <= 0 || !c.fondoActual) {
+    factores.push({ id: 'liquidez', estado: 'faltan-datos', titulo: 'Respaldo y liquidez', detalle: 'Hace falta un monto positivo de gastos esenciales y confirmar el fondo actual para comparar el respaldo con la referencia educativa de tres meses.' });
   } else if (b.fondoDebajoTresMeses) {
     factores.push({ id: 'liquidez', estado: 'revisar', titulo: 'Respaldo y liquidez', detalle: 'El fondo capturado está por debajo de la referencia educativa de tres meses de gastos esenciales.' });
   } else {
@@ -231,8 +231,9 @@ export function crearPlanDecisionInversion(radiografia) {
   const horizonte = perfilHorizonte(r.meta?.horizonteMeses ?? 0);
   const faltantes = [];
 
-  if (!c.metaObjetivo) {
-    faltantes.push({ id: 'meta-monto', titulo: 'Monto de la meta', detalle: 'Sin un monto objetivo no puede calcularse la brecha ni una aportación mensual de referencia.' });
+  const metaConMonto = (r.meta?.monto ?? 0) > 0;
+  if (!c.metaObjetivo || !metaConMonto) {
+    faltantes.push({ id: 'meta-monto', titulo: 'Monto de la meta', detalle: 'Sin un monto objetivo mayor a cero no puede calcularse una brecha ni una aportación mensual de referencia.' });
   }
   if (!c.ahorroMetaActual) {
     faltantes.push({ id: 'meta-ahorro', titulo: 'Ahorro ya dedicado a la meta', detalle: 'Captura 0 si confirmas que todavía no has separado dinero para esta meta.' });
@@ -245,7 +246,7 @@ export function crearPlanDecisionInversion(radiografia) {
   }
 
   const escenarios = [];
-  const metaCompleta = c.metaObjetivo && c.ahorroMetaActual && c.horizonteMeses;
+  const metaCompleta = c.metaObjetivo && metaConMonto && c.ahorroMetaActual && c.horizonteMeses;
   if (metaCompleta) {
     const faltante = r.meta.faltante;
     const horizonteBase = Math.max(1, r.meta.horizonteMeses);

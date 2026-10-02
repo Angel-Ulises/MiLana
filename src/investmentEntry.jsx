@@ -6,7 +6,7 @@ export default function InvestmentEntry() {
 
   useEffect(() => {
     const path = window.location.pathname.replace(/\/$/, '') || '/';
-    if (!path.startsWith('/finanzas') || path === '/finanzas/inversion') return undefined;
+    if (!path.startsWith('/finanzas') || path.startsWith('/finanzas/inversion')) return undefined;
     let intentos = 0;
     let timer = null;
     const buscar = () => {

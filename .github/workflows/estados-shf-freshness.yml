@@ -1,0 +1,65 @@
+name: Estados — vigilar nuevo Índice SHF trimestral
+
+on:
+  schedule:
+    - cron: '50 16 * * 3'
+  workflow_dispatch:
+
+concurrency:
+  group: estados-shf-freshness
+  cancel-in-progress: true
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Revisar página oficial de SHF
+        id: check
+        run: |
+          node .github/scripts/check-shf-update.mjs > /tmp/shf-state.json
+          cat /tmp/shf-state.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('/tmp/shf-state.json','utf8'));
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `available=${data.nuevaPublicacion ? 'true' : 'false'}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `period=${data.proximoPeriodo}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `url=${data.url}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `state=${data.estado}\n`);
+          NODE
+
+      - name: Abrir alerta única de actualización
+        if: steps.check.outputs.available == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PERIOD: ${{ steps.check.outputs.period }}
+          SOURCE_URL: ${{ steps.check.outputs.url }}
+        run: |
+          TITLE="[Estados] SHF ${PERIOD} disponible para actualizar vivienda"
+          EXISTING="$(gh issue list --state open --search "${TITLE} in:title" --json number,title --jq ".[] | select(.title == \"$TITLE\") | .number" 2>/dev/null | head -n1 || true)"
+          if [ -n "$EXISTING" ]; then
+            echo "La alerta ya existe: #$EXISTING"
+            exit 0
+          fi
+          cat > /tmp/body.md <<EOF
+          La página oficial de Sociedad Hipotecaria Federal ya muestra una publicación posterior al corte de vivienda vigente en MiLana.
+
+          - **Nuevo periodo detectado:** ${PERIOD}
+          - **Página oficial:** ${SOURCE_URL}
+          - **Archivo vigente en MiLana:** \`src/data/viviendaEstados.json\` (2026-T2)
+          - **Acción:** localizar boletín, anexo y datos abiertos oficiales; validar fila nacional y las 32 entidades; actualizar mediante PR.
+          - **Regla:** esta alerta **no cambia, no publica y no infiere cifras automáticamente**.
+
+          Antes del merge, comprobar por separado apreciación, promedio, P25, mediana y P75, y conservar las advertencias sobre operaciones hipotecarias, renta, oferta total y valuación individual.
+          EOF
+          gh issue create --title "$TITLE" --body-file /tmp/body.md

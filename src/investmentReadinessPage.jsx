@@ -54,7 +54,7 @@ export default function InvestmentReadinessPage() {
           <div className="investment-factors">{mapa.factores.map((factor) => <article key={factor.id}><div><span>{factor.titulo}</span><EstadoFactor estado={factor.estado} /></div><p>{factor.detalle}</p></article>)}</div>
           <div className="investment-summary"><div><span>Disponible mensual capturado</span><strong>{dinero(radiografia.flujo.disponible)}</strong><p>No es “dinero para invertir”; es el saldo matemático de los rubros capturados.</p></div><div><span>Referencia educativa de respaldo</span><strong>{dinero(radiografia.emergencia.referenciaTresMeses)}</strong><p>Tres meses de gastos esenciales. No es un requisito universal ni una instrucción.</p></div></div>
         </div>
-      </section></div></section>
+      </div></section>
 
       <section className="investment-questions"><div className="shell"><div className="investment-section-head"><div><p className="eyebrow">Antes de un producto</p><h2>Cinco preguntas que ningún botón de “invertir” debería esconder.</h2></div><p>CONDUSEF recomienda definir meta y horizonte, comparar instrumentos, considerar riesgo y comisiones y no comprometer recursos necesarios para gastos básicos. MiLana convierte esos principios en preguntas visibles.</p></div><ol>{mapa.preguntasAntesDeProducto.map((pregunta, index) => <li key={pregunta}><span>{String(index + 1).padStart(2,'0')}</span><p>{pregunta}</p></li>)}</ol><aside className="investment-source"><span>Fuente educativa</span><div><strong>CONDUSEF — “Piérdele el miedo a invertir” y materiales de Educación Financiera</strong><p>Meta, presupuesto, horizonte, riesgo, comparación y comisiones como conceptos previos a una inversión.</p></div></aside></div></section>
 

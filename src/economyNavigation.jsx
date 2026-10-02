@@ -29,7 +29,8 @@ function sincronizarEconomia() {
   filas.slice(0, destinos.length).forEach((fila, i) => fila.setAttribute('href', destinos[i]));
 
   const nota = document.querySelector('.ml-editorial-note');
-  if (nota) nota.textContent = 'Radar activo con fecha, fuente y contexto visibles. Las señales económicas se conectan con herramientas de MiLana y no se presentan como recomendaciones financieras personalizadas.';
+  const textoNota = 'Radar activo con fecha, fuente y contexto visibles. Las señales económicas se conectan con herramientas de MiLana y no se presentan como recomendaciones financieras personalizadas.';
+  if (nota && nota.textContent !== textoNota) nota.textContent = textoNota;
 }
 
 export default function EconomyNavigation() {

@@ -44,6 +44,14 @@ function actualizarFotoCalculadora() {
   img.dataset.heroPexels = config.pexelsId;
 }
 
+function asegurarEtiquetasCalculadoras() {
+  document.querySelectorAll('.calculator-card a[href^="/calculadoras/"]').forEach((enlace) => {
+    if (enlace.hasAttribute('aria-label')) return;
+    const nombre = enlace.closest('.calculator-card')?.querySelector('h3')?.textContent?.trim();
+    if (nombre) enlace.setAttribute('aria-label', `Calcular ${nombre}`);
+  });
+}
+
 function asegurarCorreo() {
   const bloque = document.querySelector('.site-footer .footer-inner > div');
   if (!bloque || bloque.querySelector('[data-milana-contacto]')) return;
@@ -110,6 +118,7 @@ export default function SiteEnhancements() {
     const aplicar = () => {
       actualizarHero();
       actualizarFotoCalculadora();
+      asegurarEtiquetasCalculadoras();
       asegurarCorreo();
       prepararMovimiento().forEach((node) => revealObserver?.observe(node));
     };

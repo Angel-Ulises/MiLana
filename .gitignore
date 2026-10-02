@@ -12,3 +12,6 @@ design-spec/preview-local.html
 # necesita son las variantes de public/images/gen/.
 assets-master/*.jpg
 assets-master/originales-verticales/
+
+# Proyección compacta generada para el bundle del navegador.
+src/data/stateOccupations.browser.js

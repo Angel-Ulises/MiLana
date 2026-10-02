@@ -25,7 +25,9 @@ function normalizarHref(href) {
 function existeRuta(pathname) {
   if (pathname === '/') return existsSync(join(DIST, 'index.html'));
   const rel = pathname.replace(/^\/+|\/+$/g, '');
-  return existsSync(join(DIST, rel)) || existsSync(join(DIST, rel, 'index.html'));
+  const directo = join(DIST, rel);
+  if (existsSync(directo) && statSync(directo).isFile()) return true;
+  return existsSync(join(directo, 'index.html'));
 }
 
 const htmls = recorrer(DIST, '.html');

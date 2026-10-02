@@ -57,6 +57,9 @@ for (const archivo of htmls(DIST)) {
     continue;
   }
 
+  // Variantes internas servidas solo por rewrite para ?embed=1. No son rutas canónicas.
+  if (ruta.startsWith('/_embed/')) continue;
+
   if (redirects.has(ruta)) {
     legacyRedirects += 1;
     continue;
@@ -78,7 +81,7 @@ for (const archivo of htmls(DIST)) {
   if (descriptions.length !== 1 || !descriptions[0]) errores.push(`${rel}: debe tener exactamente 1 meta description no vacía`);
   if (canonical.length !== 1 || !canonical[0]) errores.push(`${rel}: debe tener exactamente 1 canonical`);
   if (ogTitles.length !== 1 || !ogTitles[0]) errores.push(`${rel}: debe tener exactamente 1 og:title no vacío`);
-  if (ogDescriptions.length !== 1 || !ogDescriptions[0]) errores.push(`${rel}: debe tener exactamente 1 og:description no vacío`);
+  if (ogDescriptions.length !== 1 || !ogDescriptions[0]) errores.push(`${rel}: debe tener exactamente 1 og:description no vacía`);
   if (ogUrls.length !== 1 || !ogUrls[0]) errores.push(`${rel}: debe tener exactamente 1 og:url no vacío`);
   if (twitterCards.length !== 1 || !twitterCards[0]) errores.push(`${rel}: debe tener exactamente 1 twitter:card no vacío`);
   if (!jsonLd.length) errores.push(`${rel}: falta JSON-LD`);

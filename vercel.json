@@ -38,6 +38,15 @@
       ]
     },
     {
+      "source": "/_embed/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
@@ -49,6 +58,19 @@
           "value": "strict-origin-when-cross-origin"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/calculadoras/:slug",
+      "has": [
+        {
+          "type": "query",
+          "key": "embed",
+          "value": "1"
+        }
+      ],
+      "destination": "/_embed/calculadoras/:slug"
     }
   ]
 }

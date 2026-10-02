@@ -57,8 +57,8 @@ for (const archivo of htmls(DIST)) {
     continue;
   }
 
-  // Variantes internas servidas solo por rewrite para ?embed=1. No son rutas canónicas.
-  if (ruta.startsWith('/_embed/')) continue;
+  // URLs físicas de widget: reutilizan la calculadora, son noindex y no son rutas canónicas.
+  if (ruta.startsWith('/widgets/calculadoras/')) continue;
 
   if (redirects.has(ruta)) {
     legacyRedirects += 1;

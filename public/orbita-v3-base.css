@@ -10,6 +10,8 @@ html.ml-orbita-enabled[data-orbita-section="aprende"]{--orb-accent:#FF8A65;--orb
 html.ml-orbita-easy{--orb-fs:20px}
 html.ml-orbita-enabled body{font-family:var(--orb-font);font-size:var(--orb-fs)}
 html.ml-orbita-enabled #root :is(p,li,label,input,select,textarea,button),html.ml-orbita-enabled body>main :is(p,li,label,input,select,textarea,button){font-size:max(var(--orb-fs),1em)}
+html.ml-orbita-easy #root .calculator-main label{font-size:var(--orb-fs)!important}
+html.ml-orbita-enabled #calculadoras{scroll-margin-top:66px}
 html.ml-orbita-enabled body>#root .site-header{display:none}
 html.ml-orbita-enabled body[data-orbita-static-top="true"]>header.top{display:none}
 html.ml-orbita-enabled .ml-editorial-method{color:#63707B}

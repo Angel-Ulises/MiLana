@@ -17,13 +17,17 @@ test('assets de Vercel quedan immutable por un año',()=>{
   const rule=vercel.headers.find(x=>x.source==='/assets/(.*)');
   assert.deepEqual(rule?.headers,[{key:'Cache-Control',value:'public, max-age=31536000, immutable'}]);
 });
-test('embed=1 usa variante limpia por rewrite y no carga Órbita',()=>{
-  const rule=vercel.rewrites?.find(x=>x.source==='/calculadoras/:slug');
-  assert.equal(rule?.destination,'/_embed/calculadoras/:slug');
-  assert.deepEqual(rule?.has,[{type:'query',key:'embed',value:'1'}]);
-  assert.match(inject,/writeEmbedVariant\(route, html\)/);
-  assert.match(inject,/if\(isCalculator\(route\)\)\{ await writeEmbedVariant\(route, html\); embeds\+\+; \}/);
-  assert.match(seo,/ruta\.startsWith\('\/_embed\/'\)/);
+test('embed usa URL física y ?embed=1 conserva protección antes de habilitar Órbita',()=>{
+  assert.equal(vercel.rewrites, undefined);
+  const rule=vercel.headers.find(x=>x.source==='/widgets/calculadoras/(.*)');
+  assert.deepEqual(rule?.headers,[{key:'X-Robots-Tag',value:'noindex, nofollow'}]);
+  assert.match(inject,/writeWidgetVariant\(route, html\)/);
+  assert.match(inject,/widgets', 'calculadoras', slug/);
+  assert.match(inject,/q\.get\('embed'\)===\'1\'/);
+  assert.match(inject,/ml-orbita-embed/);
+  assert.match(js,/legacyEmbed/);
+  assert.match(js,/node\.remove\(\)/);
+  assert.match(seo,/ruta\.startsWith\('\/widgets\/calculadoras\/'\)/);
 });
 test('Órbita no oscurece el body heredado y conserva tokens aprobados',()=>{
   for(const token of ['#060A13','#0E1524','#162036','#F4F7FC','#B7C3D6','#2D6CAA','#9B8CFF','#2EC4B6','#5DD39E','#F4B942','#FF8A65']) assert.match(css,new RegExp(token,'i'));
@@ -52,9 +56,13 @@ test('búsqueda oculta resultados, muestra vacío y Enter abre el primero',()=>{
   assert.match(inject,/careerData\.paginas/);
   assert.match(inject,/stateData\.estados/);
   assert.match(inject,/financeData\.paginas/);
+  assert.match(inject,/professionData\.profesiones/);
+  assert.match(inject,/`\/carreras\/profesion\/\$\{x\.slug\}`/);
 });
-test('Calculadoras apunta a ancla existente y el verificador no acepta directorios vacíos',()=>{
+test('Calculadoras apunta a ancla real y el verificador exige que exista su id',()=>{
   assert.match(inject,/\['calculadoras', '\/#calculadoras', 'Calculadoras'\]/);
+  assert.match(links,/contieneId\(destino, target\.fragment\)/);
+  assert.match(links,/ancla sin id/);
   assert.match(links,/statSync\(directo\)\.isFile\(\)/);
   assert.doesNotMatch(inject,/\['calculadoras', '\/calculadoras', 'Calculadoras'\]/);
 });
@@ -63,6 +71,13 @@ test('Modo fácil afecta contenido y sincroniza aria-pressed desde estado inicia
   assert.match(css,/#root :is\(p,li,label,input,select,textarea,button\)/);
   assert.match(js,/setEasy\(root\.classList\.contains\('ml-orbita-easy'\), false\)/);
   assert.match(js,/button\.setAttribute\('aria-pressed', String\(on\)\)/);
+  assert.match(css,/html\.ml-orbita-easy #root \.calculator-main label\{font-size:var\(--orb-fs\)!important\}/);
+});
+test('ancla #calculadoras se asienta después de load con offset del shell',()=>{
+  assert.match(css,/html\.ml-orbita-enabled #calculadoras\{scroll-margin-top:66px\}/);
+  assert.match(js,/addEventListener\('load', settleHashAnchor/);
+  assert.match(js,/location\.hash !== '#calculadoras'/);
+  assert.match(js,/target\.scrollIntoView\(\{ block: 'start', behavior: 'instant' \}\)/);
 });
 test('targets desktop y logo son de al menos 48px',()=>{
   assert.match(css,/\.ml-orbita-logo\{min-height:48px/);
@@ -79,7 +94,8 @@ test('acento de sección es visible en el marco',()=>{
 test('build aplica Órbita antes de normalizar y verificar',()=>{
   const b=pkg.scripts.build;
   assert.ok(b.indexOf('aplicar-orbita-base.mjs')>b.indexOf('inyectar-analytics-estaticos.mjs'));
-  assert.ok(b.indexOf('aplicar-orbita-base.mjs')<b.indexOf('verificar-enlaces-internos.mjs'));
+  assert.ok(b.indexOf('aplicar-orbita-base.mjs')<b.indexOf('verificar-orbita-generada.mjs'));
+  assert.ok(b.indexOf('verificar-orbita-generada.mjs')<b.indexOf('verificar-enlaces-internos.mjs'));
 });
 test('etapa 1 no reutiliza productShell',()=>{
   assert.doesNotMatch(css,/product-shell/i);

@@ -22,10 +22,11 @@ const nav = [
   ['aprende', '/aprende', 'Aprende'],
 ];
 
-const [careerData, stateData, financeData] = await Promise.all([
+const [careerData, stateData, financeData, professionData] = await Promise.all([
   readFile(new URL('../src/data/carreras.json', import.meta.url), 'utf8').then(JSON.parse),
   readFile(new URL('../src/data/estados.json', import.meta.url), 'utf8').then(JSON.parse),
   readFile(new URL('../src/data/finanzas.json', import.meta.url), 'utf8').then(JSON.parse),
+  readFile(new URL('../src/data/profesiones.json', import.meta.url), 'utf8').then(JSON.parse),
 ]);
 const cleanTitle = (title='') => title.replace(/\s*\|\s*MiLana.*$/i, '').trim();
 const searchItems = [
@@ -43,6 +44,7 @@ const searchItems = [
   ...careerData.paginas.filter(x=>x.slug).map(x=>[`carrera-${x.slug}`, `/carreras/${x.slug}`, cleanTitle(x.titulo)]),
   ['carreras-comparar','/carreras/comparar','Comparar carreras'],
   ['carreras-ocupaciones','/carreras/ocupaciones','Carrera y ocupación'],
+  ...professionData.profesiones.map(x=>[`profesion-${x.slug}`, `/carreras/profesion/${x.slug}`, x.nombre]),
   ...stateData.estados.map(x=>[`estado-${x.slug}`, `/estados/${x.slug}`, `Estado: ${x.estado}`]),
   ['estados-comparar','/estados/comparar','Comparar estados'],
   ...financeData.paginas.filter(x=>x.slug).map(x=>[`finanzas-${x.slug}`, `/finanzas/${x.slug}`, cleanTitle(x.titulo)]),
@@ -54,8 +56,9 @@ const searchItems = [
 ];
 const iconSearch = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>';
 const iconMenu = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>';
-const boot = `<script data-orbita-boot>(function(){var p=location.pathname.replace(/\\\/$/,'')||'/';var r=document.documentElement;r.classList.add('ml-orbita-enabled');var s=p.indexOf('/calculadoras')===0?'calculadoras':p.indexOf('/carreras')===0?'carreras':p.indexOf('/estados')===0?'estados':p.indexOf('/finanzas')===0?'finanzas':p.indexOf('/economia')===0?'economia':p.indexOf('/aprende')===0?'aprende':'inicio';r.dataset.orbitaSection=s;try{if(localStorage.getItem('ml-orbita-easy')==='1')r.classList.add('ml-orbita-easy')}catch(e){}})();</script>`;
-const head = `${boot}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/orbita-v3-base.css">`;
+const boot = `<script data-orbita-boot>(function(){var q=new URLSearchParams(location.search);var r=document.documentElement;if(q.get('embed')==='1'){r.classList.add('ml-orbita-embed');return}var p=location.pathname.replace(/\\\/$/,'')||'/';r.classList.add('ml-orbita-enabled');var s=p.indexOf('/calculadoras')===0?'calculadoras':p.indexOf('/carreras')===0?'carreras':p.indexOf('/estados')===0?'estados':p.indexOf('/finanzas')===0?'finanzas':p.indexOf('/economia')===0?'economia':p.indexOf('/aprende')===0?'aprende':'inicio';r.dataset.orbitaSection=s;try{if(localStorage.getItem('ml-orbita-easy')==='1')r.classList.add('ml-orbita-easy')}catch(e){}})();</script>`;
+const embedGuard = `<style data-orbita-embed-guard>html.ml-orbita-embed .ml-orbita-shell,html.ml-orbita-embed .ml-orbita-drawer,html.ml-orbita-embed .ml-orbita-search,html.ml-orbita-embed .ml-orbita-skip-link{display:none!important}</style>`;
+const head = `${boot}${embedGuard}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/orbita-v3-base.css">`;
 const headerNav = nav.map(([key, href, label]) => `<a data-orbita-nav="${key}" href="${href}">${label}</a>`).join('');
 const drawerNav = `<a href="/finanzas/mi-situacion">Mi situación</a>${nav.map(([key, href, label]) => `<a data-orbita-nav="${key}" href="${href}">${label === 'Finanzas' ? 'Finanzas personales' : label}</a>`).join('')}<button class="ml-orbita-mobile-easy" type="button" data-orbita-easy aria-pressed="false">Modo fácil</button>`;
 const results = searchItems.map(([,href,label])=>`<a data-orbita-search-item href="${href}">${label}</a>`).join('');
@@ -78,19 +81,27 @@ function routeFor(path) {
   return '/'+rel.replace(/\/index\.html$/,'').replace(/\.html$/,'');
 }
 function isCalculator(route) { return /^\/calculadoras\/[^/]+$/.test(route); }
-async function writeEmbedVariant(route, html) {
-  const dest=join(DIST.pathname, '_embed', route.replace(/^\//,''), 'index.html');
+function noIndexWidget(html) {
+  const robots = '<meta name="robots" content="noindex, nofollow" />';
+  if (/<meta\b[^>]*\bname=["\']robots["\'][^>]*>/i.test(html)) {
+    return html.replace(/<meta\b[^>]*\bname=["\']robots["\'][^>]*>/i, robots);
+  }
+  return html.replace('</head>', `    ${robots}\n  </head>`);
+}
+async function writeWidgetVariant(route, html) {
+  const slug=route.split('/').filter(Boolean).at(-1);
+  const dest=join(DIST.pathname, 'widgets', 'calculadoras', slug, 'index.html');
   await mkdir(dirname(dest), { recursive:true });
-  await writeFile(dest, html);
+  await writeFile(dest, noIndexWidget(html));
 }
 
-let changed=0, skipped=0, embeds=0;
+let changed=0, skipped=0, widgets=0;
 const originals = await files(DIST);
 for(const path of originals){
   const route=routeFor(path);
   if(SKIP_ROUTES.has(route)||route.startsWith('/widgets/')){skipped++;continue}
   let html=await readFile(path,'utf8');
-  if(isCalculator(route)){ await writeEmbedVariant(route, html); embeds++; }
+  if(isCalculator(route)){ await writeWidgetVariant(route, html); widgets++; }
   if(html.includes('data-orbita-shell')) continue;
   if(!html.includes('</head>')||!/<body(?:\s|>)/i.test(html)) throw new Error(`HTML sin estructura esperada: ${route}`);
   const hasRoot = html.includes('id="root"');
@@ -102,4 +113,4 @@ for(const path of originals){
   await writeFile(path,html);
   changed++;
 }
-console.log(`Órbita v3 base: ${changed} HTML con marco; ${skipped} excluidos; ${embeds} variantes embed limpias.`);
+console.log(`Órbita v3 base: ${changed} HTML con marco; ${skipped} excluidos; ${widgets} URLs físicas de widget limpias.`);

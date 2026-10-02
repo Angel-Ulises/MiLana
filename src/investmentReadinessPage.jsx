@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { crearMapaPreparacionInversion, crearPlanDecisionInversion, crearRadiografiaFinanciera } from './lib/advisorCore.js';
+import { crearContextoDeuda } from './lib/debtDecisionContext.js';
 
 const dinero = (n) => new Intl.NumberFormat('es-MX', { style:'currency', currency:'MXN', maximumFractionDigits:0 }).format(Number(n) || 0);
 
@@ -16,6 +17,10 @@ function Campo({ label, value, onChange, help }) {
   return <label className="investment-field"><span>{label}</span><div><b>$</b><input inputMode="decimal" type="number" min="0" step="100" value={value} onChange={(e) => onChange(e.target.value)} placeholder="0" /></div>{help && <small>{help}</small>}</label>;
 }
 
+function CampoDato({ label, value, onChange, help, prefix, suffix, step = '1' }) {
+  return <label className="investment-field-data"><span>{label}</span><div>{prefix && <b>{prefix}</b>}<input inputMode="decimal" type="number" min="0" step={step} value={value} onChange={(e) => onChange(e.target.value)} placeholder="0" />{suffix && <em>{suffix}</em>}</div>{help && <small>{help}</small>}</label>;
+}
+
 function EstadoFactor({ estado }) {
   const copy = estado === 'observado' ? 'Dato observado' : estado === 'revisar' ? 'Revisar' : 'Falta dato';
   return <span className={`investment-factor-state ${estado}`}>{copy}</span>;
@@ -29,11 +34,14 @@ function Escenario({ escenario }) {
 }
 
 export default function InvestmentReadinessPage() {
-  const [form, setForm] = useState({ ingresoNeto:'', gastosEsenciales:'', gastosVariables:'', pagosDeuda:'', fondoActual:'', objetivo:'inversion', metaObjetivo:'', ahorroMetaActual:'', horizonteMeses:'' });
+  const [form, setForm] = useState({ ingresoNeto:'', gastosEsenciales:'', gastosVariables:'', pagosDeuda:'', fondoActual:'', objetivo:'inversion', metaObjetivo:'', ahorroMetaActual:'', horizonteMeses:'', saldoDeuda:'', catDeuda:'', tasaDeuda:'', mesesDeuda:'' });
   const set = (key) => (value) => setForm((actual) => ({ ...actual, [key]: value }));
   const radiografia = useMemo(() => crearRadiografiaFinanciera(form), [form]);
   const mapa = useMemo(() => crearMapaPreparacionInversion(radiografia), [radiografia]);
   const plan = useMemo(() => crearPlanDecisionInversion(radiografia), [radiografia]);
+  const deudaContexto = useMemo(() => crearContextoDeuda({ pagoMensual: form.pagosDeuda, saldo: form.saldoDeuda, catAnualPct: form.catDeuda, tasaAnualPct: form.tasaDeuda, mesesRestantes: form.mesesDeuda }), [form.pagosDeuda, form.saldoDeuda, form.catDeuda, form.tasaDeuda, form.mesesDeuda]);
+  const faltantesPlan = useMemo(() => plan.faltantes.filter((item) => item.id !== 'deuda-costo' || !deudaContexto.completo), [plan.faltantes, deudaContexto.completo]);
+  const tienePagoDeuda = Number(form.pagosDeuda) > 0;
   const tituloEstado = {
     'faltan-datos': 'Todavía faltan datos antes de comparar productos.',
     'ordenar-base': 'Primero hay factores básicos que conviene entender mejor.',
@@ -53,6 +61,7 @@ export default function InvestmentReadinessPage() {
           <Campo label="Gastos esenciales" value={form.gastosEsenciales} onChange={set('gastosEsenciales')} help="Vivienda, comida, transporte, servicios, salud y otros básicos." />
           <Campo label="Gastos variables" value={form.gastosVariables} onChange={set('gastosVariables')} help="Compras, ocio y otros gastos que cambian mes con mes." />
           <Campo label="Pagos mensuales de deuda" value={form.pagosDeuda} onChange={set('pagosDeuda')} help="Captura 0 si confirmas que hoy no tienes pagos mensuales de deuda." />
+          {tienePagoDeuda && <><div className="investment-form-divider"><span>Detalle opcional de deuda</span></div><div className="investment-debt-fields"><CampoDato label="Saldo actual" value={form.saldoDeuda} onChange={set('saldoDeuda')} prefix="$" step="100" help="Saldo que hoy reporta tu crédito." /><CampoDato label="Meses restantes" value={form.mesesDeuda} onChange={set('mesesDeuda')} suffix="meses" help="Plazo aproximado que todavía falta." /><CampoDato label="CAT anual" value={form.catDeuda} onChange={set('catDeuda')} suffix="%" step="0.1" help="Si tu estado de cuenta lo muestra. No se usa como rendimiento." /><CampoDato label="Tasa anual" value={form.tasaDeuda} onChange={set('tasaDeuda')} suffix="%" step="0.1" help="Opcional si conoces la tasa; se mantiene separada del CAT." /></div></>}
           <Campo label="Fondo de emergencia disponible" value={form.fondoActual} onChange={set('fondoActual')} help="Dinero líquido que realmente podrías usar ante un imprevisto." />
           <div className="investment-form-divider"><span>Meta y tiempo</span></div>
           <Campo label="Monto de tu meta" value={form.metaObjetivo} onChange={set('metaObjetivo')} help="Una cifra de referencia; no tiene que ser el monto que invertirías." />
@@ -65,8 +74,10 @@ export default function InvestmentReadinessPage() {
           <div className="investment-factors">{mapa.factores.map((factor) => <article key={factor.id}><div><span>{factor.titulo}</span><EstadoFactor estado={factor.estado} /></div><p>{factor.detalle}</p></article>)}</div>
           <div className="investment-summary"><div><span>Disponible mensual capturado</span><strong>{dinero(radiografia.flujo.disponible)}</strong><p>No es “dinero para invertir”; es el saldo matemático de los rubros capturados.</p></div><div><span>Referencia educativa de respaldo</span><strong>{dinero(radiografia.emergencia.referenciaTresMeses)}</strong><p>Tres meses de gastos esenciales. No es un requisito universal ni una instrucción.</p></div></div>
 
+          {tienePagoDeuda && <section className="investment-debt-context" aria-label="Contexto matemático de deuda"><div className="investment-debt-head"><div><p className="eyebrow">Deuda · detalle opcional</p><h3>Separa saldo, costo y pagos restantes.</h3></div><span className={deudaContexto.completo ? 'complete' : ''}>{deudaContexto.completo ? 'Contexto capturado' : 'Faltan datos'}</span></div><div className="investment-debt-grid"><article><span>Saldo declarado</span><strong>{deudaContexto.capturado.saldo ? dinero(deudaContexto.saldo) : '—'}</strong></article><article><span>Pagos restantes declarados</span><strong>{deudaContexto.pagosRestantesDeclarados === null ? '—' : dinero(deudaContexto.pagosRestantesDeclarados)}</strong></article><article><span>CAT declarado</span><strong>{deudaContexto.capturado.catAnualPct ? `${deudaContexto.catAnualPct.toFixed(1)}%` : '—'}</strong></article><article><span>Tasa anual declarada</span><strong>{deudaContexto.capturado.tasaAnualPct ? `${deudaContexto.tasaAnualPct.toFixed(1)}%` : '—'}</strong></article></div>{deudaContexto.diferenciaPagosSaldo !== null && <div className="investment-debt-difference"><span>Diferencia aritmética: pagos declarados menos saldo</span><strong>{dinero(deudaContexto.diferenciaPagosSaldo)}</strong></div>}{deudaContexto.faltantes.length > 0 && <p className="investment-debt-missing">Para completar el contexto todavía falta: {deudaContexto.faltantes.join(', ')}.</p>}<p className="investment-debt-note">{deudaContexto.nota}</p></section>}
+
           <section className="investment-decision" aria-label="Plan de decisión"><div className="investment-decision-head"><div><p className="eyebrow">Plan de decisión</p><h2>Haz visible qué cambia antes de mirar instrumentos.</h2></div><span>{plan.horizonte.etiqueta}</span></div><p className="investment-horizon-copy">{plan.horizonte.lectura}</p>
-            {plan.faltantes.length > 0 && <div className="investment-missing"><strong>Información que todavía falta</strong><div>{plan.faltantes.map((item) => <article key={item.id}><span>{item.titulo}</span><p>{item.detalle}</p></article>)}</div></div>}
+            {faltantesPlan.length > 0 && <div className="investment-missing"><strong>Información que todavía falta</strong><div>{faltantesPlan.map((item) => <article key={item.id}><span>{item.titulo}</span><p>{item.detalle}</p></article>)}</div></div>}
             {plan.escenarios.length > 0 ? <div><div className="investment-scenario-title"><strong>Escenarios aritméticos</strong><span>Sin rendimiento, sin pronóstico de mercado</span></div><div className="investment-scenarios">{plan.escenarios.map((escenario) => <Escenario key={escenario.id} escenario={escenario} />)}</div><p className="investment-scenario-note">{plan.nota}</p></div> : <div className="investment-empty-scenarios"><strong>Los escenarios aparecen cuando completas monto de meta, ahorro actual y horizonte.</strong><p>No necesitas inventar datos para obtener una respuesta. Si no conoces algo, MiLana lo deja como faltante.</p></div>}
           </section>
         </div>

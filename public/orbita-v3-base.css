@@ -12,6 +12,8 @@ html.ml-orbita-enabled body{font-family:var(--orb-font);font-size:var(--orb-fs)}
 html.ml-orbita-enabled #root :is(p,li,label,input,select,textarea,button),html.ml-orbita-enabled body>main :is(p,li,label,input,select,textarea,button){font-size:max(var(--orb-fs),1em)}
 html.ml-orbita-enabled body>#root .site-header{display:none}
 html.ml-orbita-enabled body[data-orbita-static-top="true"]>header.top{display:none}
+html.ml-orbita-enabled .ml-editorial-method{color:#63707B}
+html.ml-orbita-enabled .ml-editorial-note,html.ml-orbita-enabled p[data-milana-share-note="true"]{color:#5E6B78!important}
 .ml-orbita-shell,.ml-orbita-shell *{box-sizing:border-box}.ml-orbita-shell{position:sticky;top:0;z-index:1000;height:66px;background:color-mix(in srgb,var(--orb-bg) 80%,transparent);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid var(--orb-line);color:var(--orb-text);font:500 var(--orb-fs)/1.55 var(--orb-font);transition:border-color .2s,box-shadow .2s}
 .ml-orbita-shell::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,transparent 4%,var(--orb-accent) 50%,transparent 96%);opacity:.95;pointer-events:none}.ml-orbita-shell.is-scrolled{box-shadow:0 10px 30px rgba(0,0,0,.34)}
 .ml-orbita-skip-link{position:fixed;top:-100px;left:12px;z-index:1200;background:#fff;color:#000;padding:10px 14px;border-radius:10px;text-decoration:none}.ml-orbita-skip-link:focus{top:12px}

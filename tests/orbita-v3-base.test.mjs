@@ -30,6 +30,12 @@ test('Órbita no oscurece el body heredado y conserva tokens aprobados',()=>{
   assert.doesNotMatch(css,/html\.ml-orbita-enabled body\{[^}]*background(?:-color)?:var\(--orb-bg\)/);
   assert.match(css,/font-size:var\(--orb-fs\)/);
 });
+
+test('los textos secundarios auditados conservan contraste AA sobre marfil',()=>{
+  assert.match(css,/\.ml-editorial-method\{color:#63707B\}/);
+  assert.match(css,/\.ml-editorial-note,html\.ml-orbita-enabled p\[data-milana-share-note="true"\]\{color:#5E6B78!important\}/);
+});
+
 test('las 12 páginas estáticas ocultan header.top al recibir el marco',()=>{
   const block=inject.match(/const STATIC_TOP_ROUTES = new Set\(\[([\s\S]*?)\]\);/)?.[1]||'';
   const routes=[...block.matchAll(/'([^']+)'/g)].map(m=>m[1]);

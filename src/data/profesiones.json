@@ -13,7 +13,7 @@
       "hombres": 63.0,
       "mujeres": 37.0,
       "area": "Económico Administrativas",
-      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
     },
     {
       "slug": "medicina",
@@ -37,7 +37,7 @@
       "mujeres": 60.4,
       "area": "Artes",
       "cuentaPropia": 17.6,
-      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Artes.html"
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Artes.html"
     },
     {
       "slug": "ciencias-computacion",
@@ -48,7 +48,7 @@
       "hombres": 72.2,
       "mujeres": 27.8,
       "area": "Ingenierías y tecnologías",
-      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Ingenierias.html"
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Ingenierias.html"
     },
     {
       "slug": "derecho",
@@ -59,7 +59,7 @@
       "hombres": 56.8,
       "mujeres": 43.2,
       "area": "Ciencias Sociales",
-      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Sociales.html"
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Sociales.html"
     },
     {
       "slug": "contabilidad",
@@ -70,7 +70,7 @@
       "hombres": 47.9,
       "mujeres": 52.1,
       "area": "Económico Administrativas",
-      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
     },
     {
       "slug": "administracion",
@@ -81,7 +81,7 @@
       "hombres": 48.1,
       "mujeres": 51.9,
       "area": "Económico Administrativas",
-      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
     },
     {
       "slug": "psicologia",
@@ -126,7 +126,7 @@
       "hombres": 90.1,
       "mujeres": 9.9,
       "area": "Ingenierías",
-      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Ingenierias.html"
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Ingenierias.html"
     },
     {
       "slug": "mercadotecnia",
@@ -137,7 +137,7 @@
       "hombres": 44.4,
       "mujeres": 55.6,
       "area": "Económico Administrativas",
-      "fuenteUrl": "https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
+      "fuenteUrl": "https://observatoriolaboral.gob.mx/static/estudios-publicaciones/Administrativo.html"
     }
   ]
 }

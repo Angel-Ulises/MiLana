@@ -27,6 +27,7 @@ const rutas = [
   '/finanzas/inversion',
   '/finanzas/inversion/comparar',
   '/finanzas/inversion/cetes',
+  '/finanzas/inversion/fondos',
   ...rutasEconomia,
   '/aprende',
   '/aprende/finiquito-vs-liquidacion',

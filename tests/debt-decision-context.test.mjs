@@ -41,7 +41,7 @@ test('la capa de deuda no compara CAT contra rendimientos ni ordena pagar o inve
 test('la UI muestra deuda solo como contexto y carga sus estilos', () => {
   assert.match(pagina, /Detalle opcional de deuda/i);
   assert.match(pagina, /Diferencia aritmética: pagos declarados menos saldo/i);
-  assert.match(pagina, /no equivale necesariamente a intereses/i);
+  assert.match(pagina, /deudaContexto\.nota/);
   assert.doesNotMatch(pagina, /te conviene|paga primero|debes invertir/i);
   assert.match(main, /investment-debt-context\.css/);
 });

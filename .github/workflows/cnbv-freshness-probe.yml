@@ -1,0 +1,24 @@
+name: Probe CNBV fondos — frescura segura
+
+on:
+  push:
+    branches:
+      - chatgpt/cnbv-freshness-probe-20261001
+    paths:
+      - '.github/workflows/cnbv-freshness-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar página segura del Portafolio
+        run: |
+          set -euo pipefail
+          URL='https://portafolioinfo.cnbv.gob.mx/Paginas/Reporte.aspx?s=52&t=2&st=0&ti=0&sti=0&n=0&tp=0'
+          curl -fsSL --retry 3 --retry-delay 3 --connect-timeout 15 --max-time 60 "$URL" -o /tmp/cnbv.html
+          echo "bytes=$(wc -c < /tmp/cnbv.html)"
+          grep -Eoi '.{0,80}(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)[[:space:]]+2026.{0,80}' /tmp/cnbv.html | head -30 || true
+          grep -Eoi '.{0,80}(actualizad[oa]|periodo|corte).{0,120}' /tmp/cnbv.html | head -50 || true

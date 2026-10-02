@@ -21,7 +21,7 @@ function Header() {
     <header className="site-header">
       <div className="shell header-inner">
         <a className="brand" href="/" aria-label="MiLana, inicio"><span className="brand-mark" aria-hidden="true">M</span><span className="brand-name">MiLana</span></a>
-        <nav className="desktop-nav" aria-label="Principal"><a href="/carreras">Carreras</a><a href="/finanzas">Finanzas</a><a href="/#calculadoras">Calculadoras</a><a href="/aprende/">Aprende</a></nav>
+        <nav className="desktop-nav" aria-label="Principal"><a href="/carreras">Carreras</a><a href="/finanzas">Finanzas</a><a href="/#calculadoras">Calculadoras</a><a href="/aprende">Aprende</a></nav>
         <a className="header-cta" href="/calculadoras/bruto-a-neto">Calcular sueldo</a>
       </div>
     </header>

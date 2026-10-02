@@ -53,7 +53,7 @@ jobs:
           1. confirmar manualmente el corte más reciente en la fuente oficial;
           2. si no cambió, actualizar únicamente `checkedAt` tras verificarlo;
           3. si cambió, validar el nuevo R1 antes de sustituir datos;
-          4. nunca usar `--insecure`, `curl -k` ni desactivar TLS en un flujo productivo.
+          4. nunca desactivar la validación TLS en un flujo productivo.
 
           Este workflow no descarga XLSM, no modifica contenido y no publica cifras.
           EOF

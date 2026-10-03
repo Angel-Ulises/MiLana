@@ -1,0 +1,14 @@
+/* Glosario contextual Órbita V4. Sin modales ni elementos flotantes. */
+.orb-glossary{width:min(1120px,calc(100% - 36px));margin:24px auto;padding:16px 18px;border:1px solid #DFE5EC;border-radius:18px;background:#FFF;color:#15181E}
+.orb-glossary-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px}
+.orb-glossary-head>span{color:var(--orb-section);font:800 11px/1.2 var(--orb-mono);letter-spacing:.08em;text-transform:uppercase}
+.orb-glossary-head>strong{color:#53616D;font:650 max(12px,calc(var(--orb-fs) * .74))/1.35 var(--orb-font);text-align:right}
+.orb-glossary-list{display:flex;flex-wrap:wrap;gap:8px}
+.orb-glossary-item{max-width:100%;border:1px solid #D9E2EA;border-radius:14px;background:#F9FBFD;overflow:hidden}
+.orb-glossary-item summary{min-height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;cursor:pointer;list-style:none;color:#263744;font:750 max(13px,calc(var(--orb-fs) * .78))/1.2 var(--orb-font)}
+.orb-glossary-item summary::-webkit-details-marker{display:none}
+.orb-glossary-item summary strong{color:var(--orb-section);font-weight:850}
+.orb-glossary-item summary span{color:#5D6B77;font-size:.9em}
+.orb-glossary-item[open]{flex-basis:min(100%,620px);background:#FFF}
+.orb-glossary-item p{margin:0!important;padding:0 12px 12px;color:#4F5F6C!important;font-size:max(13px,calc(var(--orb-fs) * .82))!important;line-height:1.55!important}
+@media(max-width:620px){.orb-glossary{width:calc(100% - 28px);margin-block:18px;padding:14px}.orb-glossary-head{align-items:flex-start;flex-direction:column}.orb-glossary-head>strong{text-align:left}.orb-glossary-list{display:grid;grid-template-columns:1fr 1fr}.orb-glossary-item[open]{grid-column:1/-1}.orb-glossary-item summary{justify-content:space-between}}

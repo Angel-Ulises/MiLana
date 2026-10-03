@@ -1,0 +1,140 @@
+/* MiLana V4 · capa híbrida GBM + Órbita. Solo presentación; no toca cálculos ni AdSense. */
+@property --orb-chart-fill{syntax:'<percentage>';inherits:false;initial-value:0%}
+
+html.ml-orbita-enabled{
+  --orb-bg:#F5F7FA;
+  --orb-s1:#FFFFFF;
+  --orb-s2:#F7F9FC;
+  --orb-line:#DFE5EC;
+  --orb-text:#15181E;
+  --orb-muted:#53616D;
+  --orb-brand:#2D6CAA;
+  --orb-section:#2D6CAA;
+  color:#15181E;
+  background:#F5F7FA;
+}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"]{--orb-section:#2D6CAA}
+html.ml-orbita-enabled[data-orbita-section="finanzas"]{--orb-section:#247A59}
+html.ml-orbita-enabled[data-orbita-section="carreras"]{--orb-section:#6654C7}
+html.ml-orbita-enabled[data-orbita-section="estados"]{--orb-section:#16766C}
+html.ml-orbita-enabled[data-orbita-section="economia"]{--orb-section:#9A6819}
+html.ml-orbita-enabled[data-orbita-section="aprende"]{--orb-section:#B95032}
+html.ml-orbita-enabled body{background:#F5F7FA;color:#15181E}
+html.ml-orbita-enabled :is(p,li,small,figcaption){color:#53616D}
+html.ml-orbita-enabled .eyebrow{color:var(--orb-section)!important}
+html.ml-orbita-enabled :is(main,article,section) a:not(.btn):not(.ml-btn):not(.orb-result-share):not(.orb-result-next){color:var(--orb-section)}
+
+/* Header claro y sobrio. */
+.ml-orbita-shell{background:rgba(255,255,255,.96)!important;color:#15181E!important;border-bottom:1px solid #E2E7ED!important;box-shadow:none!important;backdrop-filter:blur(14px) saturate(1.1)!important}
+.ml-orbita-shell::after{display:none!important}
+.ml-orbita-shell.is-scrolled{box-shadow:0 10px 32px rgba(15,23,42,.07)!important}
+.ml-orbita-logo{color:#15181E!important}
+.ml-orbita-logo-m{background:#2D6CAA!important;border-radius:13px!important;box-shadow:none!important}
+.ml-orbita-nav a{color:#4B5966!important;border-radius:999px!important}
+.ml-orbita-nav a:hover,.ml-orbita-nav a:focus-visible,.ml-orbita-nav a[aria-current="page"]{background:#EEF3F8!important;color:#15181E!important}
+.ml-orbita-icon-btn,.ml-orbita-menu-btn{background:#FFF!important;color:#15181E!important;border-color:#DFE5EC!important;border-radius:999px!important;box-shadow:none!important}
+.ml-orbita-icon-btn[aria-pressed="true"]{background:#EAF2FB!important;color:#245C93!important;border-color:#BFD3E7!important}
+.ml-orbita-situation{background:#171B22!important;color:#FFF!important;border:0!important;border-radius:999px!important;box-shadow:none!important}
+.ml-orbita-situation::after{content:'→';margin-left:8px}
+.ml-orbita-drawer{background:#FFF!important;color:#15181E!important;border-color:#E2E7ED!important;box-shadow:0 24px 55px rgba(15,23,42,.10)!important}
+.ml-orbita-drawer a{color:#1D2731!important;border-color:#E7EBF0!important}
+.ml-orbita-mobile-easy{background:#F7F9FC!important;color:#15181E!important;border-color:#DFE5EC!important}
+.ml-orbita-search{background:#FFF!important;color:#15181E!important;border:1px solid #DFE5EC!important;box-shadow:0 28px 80px rgba(15,23,42,.20)!important}
+.ml-orbita-search::backdrop{background:rgba(19,27,36,.32)!important;backdrop-filter:blur(3px)!important}
+.ml-orbita-search-close,.ml-orbita-search input{background:#F8FAFC!important;color:#15181E!important;border-color:#DDE4EB!important}
+.ml-orbita-search-list a{color:#202B35!important;border-color:#E1E7ED!important;background:#FFF!important}
+.ml-orbita-search-list a:hover,.ml-orbita-search-list a:focus-visible{background:#F2F6FA!important;border-color:#9BBAD8!important}
+
+/* Calculadoras: paso activo cerca, tipografía compatible con Letra grande. */
+html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-main{width:min(100% - 32px,900px)!important;padding-top:clamp(24px,4vw,48px)!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) [data-orbita-question]{scroll-margin-top:82px}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) [data-orbita-question] label:not(.calc-check){font-size:clamp(calc(var(--orb-fs) * 1.15),3vw,30px)!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) [data-orbita-question] :is(input:not([type="checkbox"]),select,textarea){font-size:var(--orb-fs)!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) [data-orbita-question] p{font-size:var(--orb-fs)!important;color:#53616D!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) [data-orbita-question] .calc-check,
+html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) [data-orbita-question].calc-check{font-size:var(--orb-fs)!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) :is(.calc-intro,[data-orbita-intro]){font-size:var(--orb-fs)!important;color:#53616D!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-intro][hidden]{display:none!important}
+.ml-calc-assistant{margin-bottom:18px!important;padding-bottom:18px!important}
+.ml-calc-assistant-head>div{display:grid;gap:4px}
+.ml-calc-assistant-kicker{font-size:max(12px,calc(var(--orb-fs) * .70))!important;color:#315E88!important}
+.ml-calc-assistant-count{font-size:max(12px,calc(var(--orb-fs) * .72))!important;color:#53616D!important}
+.ml-calc-assistant-copy{font-size:max(14px,calc(var(--orb-fs) * .84))!important;color:#53616D!important}
+.ml-calc-assistant-track{height:5px!important;background:#E5EBF1!important}
+.ml-calc-assistant-progress{background:#2D6CAA!important}
+.ml-calc-flow-actions{margin:16px 0 6px!important;gap:10px!important}
+.ml-calc-flow-actions button{min-height:50px!important;border-radius:999px!important;font-size:var(--orb-fs)!important;padding-inline:20px!important}
+.ml-calc-flow-next{background:#2D6CAA!important;color:#FFF!important;box-shadow:none!important}
+.ml-calc-flow-next::after{content:'›';font-size:1.2em;margin-left:6px}
+.ml-calc-flow-back{background:#FFF!important;color:#344454!important;border:1px solid #D7E0E8!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main .ml-btn[data-orbita-primary-action="true"]{border-radius:999px!important;background:#2D6CAA!important;color:#FFF!important;font-size:var(--orb-fs)!important;box-shadow:none!important}
+.ml-calc-examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ml-calc-example{min-height:42px!important;margin:0!important;border-radius:999px!important;background:#FFF!important;border:1px solid #CBD9E6!important;color:#245C93!important;font-size:max(13px,calc(var(--orb-fs) * .78))!important}
+.ml-calc-example:hover,.ml-calc-example:focus-visible{background:#EDF4FB!important;border-color:#91B2D2!important}
+
+/* Dona de progreso interactiva. */
+.orb-donut{--orb-chart-fill:0%;position:relative;flex:0 0 auto;width:58px;height:58px;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;background:conic-gradient(#2D6CAA var(--orb-chart-fill),#E6EDF4 0)!important;transition:--orb-chart-fill .65s cubic-bezier(.2,.75,.2,1);box-shadow:0 8px 20px rgba(45,108,170,.13)}
+.orb-donut::before{content:'';position:absolute;inset:6px;border-radius:50%;background:#FFF}
+.orb-donut span{position:relative;z-index:1;color:#244C73;font:800 max(11px,calc(var(--orb-fs) * .68))/1 var(--orb-mono)}
+
+/* Glosario inline: sin popup. */
+.orb-term-help{margin:8px 0 0;padding:0;border:0;background:transparent;color:#445462;font-size:max(13px,calc(var(--orb-fs) * .78))}
+.orb-term-help summary{display:inline-flex;align-items:center;min-height:34px;padding:0 11px;border:1px solid #D3DEE8;border-radius:999px;background:#FFF;color:#2D6CAA;font-weight:750;cursor:pointer;list-style:none}
+.orb-term-help summary::-webkit-details-marker{display:none}
+.orb-term-help p{margin:8px 0 0!important;padding:10px 12px;border-left:3px solid #8EB5DA;background:#F5F9FD;border-radius:0 10px 10px 0;color:#455766!important;font-size:var(--orb-fs)!important}
+
+/* Resultado financiero estilo app. */
+html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .ml-result{background:#FFF!important;border:1px solid #DCE5ED!important;border-radius:24px!important;box-shadow:0 18px 46px rgba(31,48,66,.08)!important}
+.orb-result-head{display:grid;gap:6px;padding:0 0 20px;margin-bottom:12px;border-bottom:1px solid #E1E8EF}
+.orb-result-head>span{color:#53616D;font-size:max(14px,calc(var(--orb-fs) * .86));font-weight:700}
+.orb-result-head>strong{color:#15181E;font-family:var(--orb-font);font-size:clamp(36px,7vw,58px);font-weight:800;letter-spacing:-.055em;line-height:1}
+.orb-money-cents{font-size:.46em;letter-spacing:-.02em;vertical-align:baseline;opacity:.68}
+.orb-result-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid #E3E9EF}
+.orb-result-tools :is(button,a){min-height:48px;display:flex;align-items:center;justify-content:center;border-radius:999px;text-decoration:none;font:750 max(14px,calc(var(--orb-fs) * .84))/1.2 var(--orb-font);text-align:center;cursor:pointer}
+.orb-result-edit{border:1px solid #CBD6E0;background:#FFF;color:#344454}
+.orb-result-share{border:1px solid #BFD2E4;background:#EFF6FC;color:#245C93!important}
+.orb-result-next{grid-column:1/-1;justify-content:space-between!important;padding:14px 18px;border:0;background:#171B22;color:#FFF!important;border-radius:18px!important}
+.orb-result-next span{font-weight:650;color:#C9D0D7}
+.orb-result-next strong{color:#FFF}
+
+/* Fotos: contenido y fotografía siempre separados. */
+html.ml-orbita-enabled :is(.calculator-hero-copy,.hero-copy){position:static!important;z-index:auto!important}
+html.ml-orbita-enabled :is(.calculator-hero-media,.hero-media-wrap,.career-hero-media,.profession-hero-media,.finance-page-photo){position:relative!important;isolation:isolate}
+html.ml-orbita-enabled .hero-note{display:none!important}
+html.ml-orbita-enabled .calculator-hero :is(.calculator-hero-copy,.calculator-hero-media){grid-area:auto!important}
+
+/* Estados: botón principal sí; acción secundaria permanece legible. */
+html.ml-orbita-enabled[data-orbita-section="estados"] .state-selector button{min-height:52px!important;height:auto!important;border-radius:999px!important;background:#FFF!important;color:#263744!important;border:1px solid #C8D7D4!important;box-shadow:none!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] .state-selector :is(button[type="submit"],.ml-btn,.primary,.state-selector-primary){background:#2D6CAA!important;color:#FFF!important;border-color:#2D6CAA!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-selector select,.sc-selectors select){font-size:var(--orb-fs)!important;color:#263744!important}
+
+/* Colores de sección y contraste AA en texto sobre blanco. */
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.eyebrow,a:not(.ml-orbita-logo):not(.ml-orbita-situation)){color:#16766C}
+html.ml-orbita-enabled[data-orbita-section="economia"] :is(.eyebrow,a:not(.ml-orbita-logo):not(.ml-orbita-situation)){color:#9A6819}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.eyebrow,a:not(.ml-orbita-logo):not(.ml-orbita-situation)){color:#6654C7}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.eyebrow,a:not(.ml-orbita-logo):not(.ml-orbita-situation)){color:#247A59}
+html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.eyebrow,a:not(.ml-orbita-logo):not(.ml-orbita-situation)){color:#B95032}
+html.ml-orbita-enabled[data-orbita-section="estados"] [style*="#6a7a87" i],
+html.ml-orbita-enabled[data-orbita-section="economia"] [style*="#6a7a87" i],
+html.ml-orbita-enabled[data-orbita-section="carreras"] [style*="#6a7a87" i]{color:#53616D!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(p,li,small,.state-copy,.state-description,.state-meta),
+html.ml-orbita-enabled[data-orbita-section="economia"] :is(.economy-card p,.economy-card small,.economy-meta,.economy-source p),
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-route p,.career-question-grid p,.profession-summary p,.cc-card p){color:#53616D!important}
+
+/* Letra grande: evita tamaños rígidos en secciones internas. */
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-state-tool select,.cc-selectors select){font-size:var(--orb-fs)!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-field input,.advisor-field input,.advisor-field select,.instrument-selector select){font-size:var(--orb-fs)!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .article :is(p,li){font-size:var(--orb-fs)!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .grid .card :is(p,a){font-size:var(--orb-fs)!important}
+
+@media(max-width:760px){
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-main{width:min(100% - 28px,900px)!important;padding-top:20px!important}
+  .ml-calc-assistant{margin-bottom:14px!important;padding-bottom:14px!important}
+  .ml-calc-assistant-copy{margin-top:8px!important}
+  .orb-donut{width:52px;height:52px}
+  .orb-result-tools{grid-template-columns:1fr}
+  .orb-result-next{grid-column:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .orb-donut,.ml-calc-assistant-progress{transition:none!important}
+}

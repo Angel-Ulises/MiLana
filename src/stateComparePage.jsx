@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import estadosData from './data/estados.json';
 import laboralData from './data/mercadoLaboralEstados.json';
 import viviendaData from './data/viviendaEstados.json';
+import AdReserve from './AdReserve.jsx';
 
 const dinero = (n) => new Intl.NumberFormat('es-MX', { style:'currency', currency:'MXN', maximumFractionDigits:0 }).format(Number(n)||0);
 const numero = (n) => new Intl.NumberFormat('es-MX').format(Number(n)||0);
@@ -17,7 +18,7 @@ function Header(){
 }
 
 function Footer(){
-  return <footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Fuentes: Observatorio Laboral/STPS, ENOE/INEGI y Sociedad Hipotecaria Federal. Cortes 2026-T2.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer>;
+  return <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Fuentes: Observatorio Laboral/STPS, ENOE/INEGI y Sociedad Hipotecaria Federal. Cortes 2026-T2.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>;
 }
 
 function Metric({ label, a, b, formatter = (v) => v, note }){

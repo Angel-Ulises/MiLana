@@ -1,4 +1,5 @@
 import { CETES_REFERENCE } from './data/cetes-reference.js';
+import AdReserve from './AdReserve.jsx';
 
 export function esRutaCetesReferencia() {
   if (typeof window === 'undefined') return false;
@@ -29,6 +30,6 @@ export default function CetesReferencePage() {
 
       <section className="cetes-reference-boundary"><div className="shell"><div><p className="eyebrow">Límite</p><h2>Datos concretos, decisión todavía separada.</h2><p>MiLana no usa este snapshot para recomendar plazo, monto o instrumento. La ejecución, custodia, impuestos y condiciones finales pertenecen al canal financiero que la persona decida utilizar.</p></div><div><a href="/finanzas/inversion/comparar">Comparar familias <span>→</span></a><a href="/finanzas/inversion">Volver al mapa previo <span>→</span></a></div></div></section>
     </main>
-    <footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Contenido educativo. No constituye asesoría de inversión ni recomendación de compra, venta o mantenimiento.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer>
+    <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Contenido educativo. No constituye asesoría de inversión ni recomendación de compra, venta o mantenimiento.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>
   </div>;
 }

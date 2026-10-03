@@ -8,6 +8,8 @@ import articulos from "./data/articulos.json";
 import contenidoCalc from "./data/contenido-calculadoras.json";
 import catalogoSituaciones from "./data/situaciones.json";
 import catalogoFotos from "./data/fotos.json";
+import AdReserve from './AdReserve.jsx';
+import { HomeRoutes, SituationCard } from './homeRoutes.jsx';
 
 // ═══════════════════════════════════════════════════════════════
 // DATOS OFICIALES 2026 — SAT / CONASAMI / INEGI
@@ -1624,18 +1626,19 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
           <section className="hero">
             <div className="shell hero-grid">
               <div className="hero-copy">
-                <p className="eyebrow">Dinero claro, decisiones propias</p>
-                <h1>Entiende lo que tienes. Decide lo que sigue.</h1>
-                <p className="hero-lede">MiLana reúne calculadoras, explicaciones y datos oficiales para ayudarte a pasar de la duda a una decisión concreta, sin lenguaje de banco y sin promesas fáciles.</p>
-                <div className="hero-actions">
+                <p className="eyebrow orb-home-kicker">Gratis · sin registro · datos 2026</p>
+                <h1>Entiende tu <span className="orb-home-accent">lana</span> en un minuto</h1>
+                <p className="hero-lede">Elige lo que estás viviendo y te decimos qué hacer, paso a paso.</p>
+                <div className="hero-actions" hidden>
                   <a className="btn btn-primary" href="/#situaciones">Explorar mi situación</a>
                   <a className="btn btn-secondary" href="/#calculadoras">Ver calculadoras</a>
                 </div>
-                <div className="hero-proof" aria-label="Señales de confianza">
+                <div className="hero-proof" aria-label="Señales de confianza" hidden>
                   <span>Datos 2026</span>
                   <span>Fuentes oficiales</span>
                   <span>Sin registro</span>
                 </div>
+                <HomeRoutes />
               </div>
 
               <div className="hero-media-wrap">
@@ -1643,8 +1646,9 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                 <div className="hero-orbit hero-orbit-two" aria-hidden="true"></div>
                 <figure className="hero-media">
                   <Foto name="inicio" sizes="(max-width: 1023px) 102vw, (max-width: 1279px) 88vw, (max-width: 1599px) 83vw, 1230px" eager />
+                  <figcaption className="orb-home-photo-caption">Calculadoras y guías con fuentes oficiales.</figcaption>
                 </figure>
-                <aside className="hero-note" aria-label="Qué ofrece MiLana">
+                <aside className="hero-note" aria-label="Qué ofrece MiLana" hidden>
                   <span className="hero-note-kicker">Primero entiende</span>
                   <strong>Luego compara escenarios.</strong>
                   <span className="hero-note-copy">Y decide con números que sí puedes explicar.</span>
@@ -1652,6 +1656,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
               </div>
             </div>
           </section>
+          <SituationCard />
 
           <section id="situaciones" className="section situations">
             <div className="shell">
@@ -1736,6 +1741,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             </div>
           </section>
 
+          <AdReserve size="970x90" />
           <section id="aprende" className="section learn-section">
             <div className="shell learn-grid">
               <div className="learn-copy">
@@ -1776,7 +1782,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         </main>
       )}
 
-      <footer className="site-footer">
+      <><AdReserve size="970x90" /><footer className="site-footer">
         <div className="shell footer-inner">
           <div>
             <span className="brand-name">MiLana</span>
@@ -1787,7 +1793,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
           </div>
           <p>MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{textDecoration:'underline'}}>Privacidad</a></p>
         </div>
-      </footer>
+      </footer></>
     </>
   );
 }

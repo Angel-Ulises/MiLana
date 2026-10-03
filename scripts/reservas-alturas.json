@@ -1,0 +1,242 @@
+{
+  "/aprende": {
+    "m": 587,
+    "d": 266
+  },
+  "/aprende/aguinaldo-bruto-neto": {
+    "m": 587,
+    "d": 266
+  },
+  "/aprende/finiquito-vs-liquidacion": {
+    "m": 587,
+    "d": 266
+  },
+  "/aprende/leer-recibo-nomina": {
+    "m": 587,
+    "d": 266
+  },
+  "/aprende/pension-imss-ley-97": {
+    "m": 587,
+    "d": 266
+  },
+  "/aprende/resico-ingresos-cobrados": {
+    "m": 587,
+    "d": 266
+  },
+  "/aprende/vacaciones-prima-vacacional": {
+    "m": 587,
+    "d": 266
+  },
+  "/carreras": {
+    "m": 411,
+    "d": 241
+  },
+  "/carreras/comparar": {
+    "m": 476,
+    "d": 278
+  },
+  "/carreras/mejor-pagadas": {
+    "m": 670,
+    "d": 392
+  },
+  "/carreras/ocupaciones": {
+    "m": 411,
+    "d": 241
+  },
+  "/carreras/peor-pagadas": {
+    "m": 670,
+    "d": 392
+  },
+  "/economia": {
+    "m": 480,
+    "d": 304
+  },
+  "/economia/consumo-privado-agosto-2026": {
+    "m": 480,
+    "d": 304
+  },
+  "/economia/inflacion-primera-quincena-septiembre-2026": {
+    "m": 584,
+    "d": 369
+  },
+  "/estados": {
+    "m": 951,
+    "d": 733
+  },
+  "/estados/aguascalientes": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/baja-california": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/baja-california-sur": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/campeche": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/chiapas": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/chihuahua": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/ciudad-de-mexico": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/coahuila": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/colima": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/comparar": {
+    "m": 951,
+    "d": 733
+  },
+  "/estados/durango": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/estado-de-mexico": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/guanajuato": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/guerrero": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/hidalgo": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/jalisco": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/michoacan": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/morelos": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/nayarit": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/nuevo-leon": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/oaxaca": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/puebla": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/queretaro": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/quintana-roo": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/san-luis-potosi": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/sinaloa": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/sonora": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/tabasco": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/tamaulipas": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/tlaxcala": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/veracruz": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/yucatan": {
+    "m": 461,
+    "d": 311
+  },
+  "/estados/zacatecas": {
+    "m": 461,
+    "d": 311
+  },
+  "/finanzas": {
+    "m": 700,
+    "d": 451
+  },
+  "/finanzas/ahorro": {
+    "m": 700,
+    "d": 451
+  },
+  "/finanzas/deuda-y-credito": {
+    "m": 700,
+    "d": 451
+  },
+  "/finanzas/fondo-emergencia": {
+    "m": 700,
+    "d": 451
+  },
+  "/finanzas/inversion": {
+    "m": 700,
+    "d": 451
+  },
+  "/finanzas/inversion/cetes": {
+    "m": 700,
+    "d": 451
+  },
+  "/finanzas/inversion/comparar": {
+    "m": 700,
+    "d": 451
+  },
+  "/finanzas/inversion/fondos": {
+    "m": 700,
+    "d": 451
+  },
+  "/finanzas/mi-situacion": {
+    "m": 700,
+    "d": 451
+  },
+  "/finanzas/presupuesto": {
+    "m": 700,
+    "d": 451
+  },
+  "/finanzas/vivienda": {
+    "m": 700,
+    "d": 451
+  }
+}

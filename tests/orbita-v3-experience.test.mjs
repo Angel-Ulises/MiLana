@@ -1,0 +1,55 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+
+const base = readFileSync('public/orbita-v3-base.js', 'utf8');
+const js = readFileSync('public/orbita-v3-experience.js', 'utf8');
+const css = readFileSync('public/orbita-v3-experience.css', 'utf8');
+
+test('portada V4 carga después del guard de embed y nunca en Pensión', () => {
+  const guard = base.indexOf('if (legacyEmbed)');
+  const earlyReturn = base.indexOf('return;', guard);
+  assert.ok(base.indexOf('/orbita-v3-experience.css') > earlyReturn);
+  assert.ok(base.indexOf('/orbita-v3-experience.js') > earlyReturn);
+  assert.match(base, /if \(protectedPension\) return/);
+});
+
+test('portada usa el copy aprobado y las seis situaciones', () => {
+  for (const text of [
+    'Entiende tu ', 'lana', ' en un minuto',
+    '¿Qué estás viviendo?',
+    'Me despidieron', 'Renuncié', 'Voy a cobrar aguinaldo',
+    'Quiero ahorrar', 'Estoy eligiendo carrera', 'Pienso mudarme de estado',
+    'Busca una calculadora'
+  ]) assert.match(js, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+});
+
+test('portada mantiene foto separada del texto y elimina overlay', () => {
+  assert.match(js, /hero\.querySelector\('\.hero-note'\)\?\.setAttribute\('hidden'/);
+  assert.match(css, /\.hero-note[^\n]*display:none!important/);
+  assert.match(css, /\.hero-grid\{[\s\S]*grid-template-columns:minmax\(0,1\.08fr\) minmax\(340px,.72fr\)!important/);
+  assert.match(css, /\.hero-media-wrap\{display:none!important\}/);
+});
+
+test('Mi situación es una tarjeta oscura con siguiente paso', () => {
+  assert.match(js, /Mi situación · paso 1 de 4/);
+  assert.match(js, /Siguiente:/);
+  assert.match(css, /\.orb-situation-card\{[\s\S]*background:#162536/);
+});
+
+test('estética híbrida es clara, redondeada y usa azul MiLana como acción', () => {
+  assert.match(css, /background:#F5F7FA!important/);
+  assert.match(css, /\.orb-home-route\{[\s\S]*background:#FFF/);
+  assert.match(css, /border-radius:16px/);
+  assert.match(css, /color:#2D6CAA/);
+});
+
+test('no se incorporan marcas, imágenes ni copy de GBM', () => {
+  assert.doesNotMatch(js, /GBM|gbm\.com|Pioneros|asesoría financiera/i);
+  assert.doesNotMatch(css, /GBM|gbm\.com/i);
+});
+
+test('la portada no introduce carruseles ni controles flotantes', () => {
+  assert.doesNotMatch(js, /carousel|swiper|slick/i);
+  assert.doesNotMatch(css, /position\s*:\s*fixed/i);
+});

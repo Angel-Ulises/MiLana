@@ -14,6 +14,7 @@
     const styles = [
       ['orbitaInternalStyle', '/orbita-v3-internal.css'],
       ['orbitaHybridStyle', '/orbita-v3-hybrid.css'],
+      ['orbitaExperienceStyle', '/orbita-v3-experience.css'],
     ];
     for (const [key, href] of styles) {
       if (document.querySelector(`link[data-${key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}]`)) continue;
@@ -23,11 +24,16 @@
       link.dataset[key] = 'true';
       document.head.appendChild(link);
     }
-    if (!document.querySelector('script[data-orbita-internal-runtime]')) {
+    const scripts = [
+      ['orbitaInternalRuntime', '/orbita-v3-internal.js'],
+      ['orbitaExperienceRuntime', '/orbita-v3-experience.js'],
+    ];
+    for (const [key, src] of scripts) {
+      if (document.querySelector(`script[data-${key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}]`)) continue;
       const script = document.createElement('script');
-      script.src = '/orbita-v3-internal.js';
+      script.src = src;
       script.defer = true;
-      script.dataset.orbitaInternalRuntime = 'true';
+      script.dataset[key] = 'true';
       document.body.appendChild(script);
     }
   };

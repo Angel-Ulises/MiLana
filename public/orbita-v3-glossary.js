@@ -66,6 +66,13 @@
     }
 
     const h1 = main.querySelector('h1');
+    // Si el h1 vive dentro de un hero (p. ej. con el selector de estado), la tira va después del hero:
+    // insertarla dentro empujaría los controles del primer viewport.
+    const hero = h1?.closest('main > section');
+    if (hero && hero.parentElement === main && hero !== main.lastElementChild) {
+      hero.insertAdjacentElement('afterend', strip);
+      return true;
+    }
     const intro = h1?.nextElementSibling?.matches?.('p') ? h1.nextElementSibling : null;
     if (intro) intro.insertAdjacentElement('afterend', strip);
     else if (h1) h1.insertAdjacentElement('afterend', strip);
@@ -76,7 +83,8 @@
   const run = () => {
     if (document.querySelector('[data-orbita-glossary]')) return;
     const main = document.querySelector('main');
-    if (!main) return;
+    // El HTML prerenderizado lo reemplaza React: insertar ahí solo mueve el layout y se pierde.
+    if (!main || main.hasAttribute('data-static-seo')) return;
     const text = ` ${main.textContent.toUpperCase()} `;
     const detected = Object.keys(TERMS).filter((term) => new RegExp(`(^|[^A-ZÁÉÍÓÚÑ])${term}([^A-ZÁÉÍÓÚÑ]|$)`).test(text));
     if (!detected.length) {
@@ -90,5 +98,16 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once: true });
   else run();
   [80, 240, 650].forEach((delay) => setTimeout(run, delay));
+  const rootNode = document.getElementById('root');
+  if (rootNode) {
+    let queued = false;
+    const watcher = new MutationObserver(() => {
+      if (document.querySelector('[data-orbita-glossary]')) { watcher.disconnect(); return; }
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; run(); });
+    });
+    watcher.observe(rootNode, { childList: true, subtree: true });
+  }
   addEventListener('popstate', () => setTimeout(run, 0));
 })();

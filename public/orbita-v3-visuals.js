@@ -31,6 +31,11 @@
   };
 
   const insertVisual = (visual) => {
+    const reserve = main.querySelector('[data-orbita-visual-reserve]');
+    if (reserve) {
+      reserve.replaceWith(visual);
+      return;
+    }
     const hero = main.querySelector(':scope > .career-hero,:scope > .profession-hero,:scope > .state-hero,:scope > .state-detail-hero,:scope > .finance-page-hero,:scope > .advisor-hero,:scope > .investment-hero,:scope > .economy-hero,:scope > .hubhead');
     if (hero) {
       hero.insertAdjacentElement('afterend', visual);
@@ -98,7 +103,7 @@
       seen.add(href);
       links.push({ href, label });
     });
-    if (links.length < 8) return null;
+    if (links.length < 2) return null;
     const visual = card('Estados', 'México en mosaico', 'Explora las entidades disponibles. El mosaico es navegación visual: no colorea estados como mejores o peores.');
     const grid = document.createElement('div');
     grid.className = 'orb-state-mosaic';
@@ -126,21 +131,24 @@
     tabs.className = 'orb-projection-tabs';
     const chart = document.createElement('div');
     chart.className = 'orb-projection-chart';
-    const line = document.createElement('div');
-    line.className = 'orb-projection-line';
-    chart.appendChild(line);
+    const stages = [['01', 'Hoy'], ['02', 'Aporta'], ['03', 'Revisa'], ['04', 'Meta']];
+    for (const [number, label] of stages) {
+      const stage = document.createElement('div');
+      stage.className = 'orb-projection-stage';
+      stage.innerHTML = `<span>${number}</span><strong>${label}</strong>`;
+      chart.appendChild(stage);
+    }
     const note = document.createElement('p');
     note.className = 'orb-projection-note';
     note.textContent = 'Visual conceptual, sin eje monetario: no representa un rendimiento ni una promesa de crecimiento.';
 
     const scenarios = [
-      { label: 'Ahorro', href: '/finanzas/ahorro', angle: '-7deg', text: 'Ahorro: define meta, ahorro actual y aportación mensual; la calculadora estima el tiempo sin asumir rendimiento.' },
-      { label: 'CETES', href: '/finanzas/inversion/cetes', angle: '-4deg', text: 'CETES: revisa la tasa y el plazo vigentes en la herramienta; esta línea no sustituye ese dato.' },
-      { label: 'Casa', href: '/finanzas/vivienda', angle: '-2deg', text: 'Casa: ordena presupuesto, fondo, deuda y después compara el financiamiento.' }
+      { label: 'Ahorro', href: '/finanzas/ahorro', text: 'Ahorro: define meta, ahorro actual y aportación mensual; la calculadora estima el tiempo sin asumir rendimiento.' },
+      { label: 'CETES', href: '/finanzas/inversion/cetes', text: 'CETES: revisa la tasa y el plazo vigentes en la herramienta; este camino visual no sustituye ese dato.' },
+      { label: 'Casa', href: '/finanzas/vivienda', text: 'Casa: ordena presupuesto, fondo, deuda y después compara el financiamiento.' }
     ];
     const set = (scenario, button) => {
       tabs.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
-      line.style.setProperty('--orb-line-angle', scenario.angle);
       visual._readout.innerHTML = `${scenario.text} <a href="${scenario.href}">Abrir →</a>`;
     };
     scenarios.forEach((scenario, index) => {
@@ -180,47 +188,24 @@
   const economyVisual = () => {
     const values = collectPercentages();
     if (values.length < 2) return null;
-    const visual = card('Economía', 'Línea de porcentajes visibles', 'La gráfica solo reutiliza porcentajes presentes en esta página. Toca un punto para ver su valor y contexto inmediato.');
-    const min = Math.min(...values.map((item) => item.value));
-    const max = Math.max(...values.map((item) => item.value));
-    const span = Math.max(max - min, 1);
-    const width = 640;
-    const height = 220;
-    const pad = 28;
-    const points = values.map((item, index) => {
-      const x = pad + (index * (width - pad * 2)) / Math.max(values.length - 1, 1);
-      const y = height - pad - ((item.value - min) / span) * (height - pad * 2);
-      return { ...item, x, y };
-    });
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('class', 'orb-economy-line');
-    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-    svg.setAttribute('role', 'img');
-    svg.setAttribute('aria-label', 'Línea de porcentajes visibles en la página');
-    const area = document.createElementNS(svg.namespaceURI, 'path');
-    const line = document.createElementNS(svg.namespaceURI, 'polyline');
-    const pointText = points.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
-    area.setAttribute('d', `M ${points[0].x} ${height - pad} L ${pointText.replace(/,/g, ' ')} L ${points.at(-1).x} ${height - pad} Z`);
-    area.setAttribute('class', 'orb-economy-area');
-    line.setAttribute('points', pointText);
-    line.setAttribute('class', 'orb-economy-polyline');
-    svg.append(area, line);
-    points.forEach((point) => {
-      const circle = document.createElementNS(svg.namespaceURI, 'circle');
-      circle.setAttribute('cx', point.x);
-      circle.setAttribute('cy', point.y);
-      circle.setAttribute('r', '7');
-      circle.setAttribute('class', 'orb-economy-point');
-      circle.setAttribute('tabindex', '0');
-      circle.setAttribute('role', 'button');
-      circle.setAttribute('aria-label', `${point.label}: ${point.value}%`);
-      const show = () => { visual._readout.textContent = `${point.label}: ${point.value}%`; };
-      circle.addEventListener('click', show);
-      circle.addEventListener('focus', show);
-      svg.appendChild(circle);
-    });
-    visual._readout.textContent = `${min}% – ${max}%`;
-    visual.appendChild(svg);
+    const visual = card('Economía', 'Porcentajes visibles, separados', 'La gráfica solo reutiliza porcentajes presentes en esta página. Cada barra es un dato independiente: no representa una tendencia temporal.');
+    const maxAbs = Math.max(...values.map((item) => Math.abs(item.value)), 1);
+    const wrap = document.createElement('div');
+    wrap.className = 'orb-economy-bars';
+    for (const item of values) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'orb-economy-bar';
+      const width = 18 + (Math.abs(item.value) / maxAbs) * 82;
+      button.innerHTML = `<span class="orb-economy-bar-label">${item.label}</span><span class="orb-economy-bar-track"><span class="orb-economy-bar-fill" style="--orb-economy-width:${width.toFixed(1)}%"></span></span><span class="orb-economy-bar-value">${item.value}%</span>`;
+      const show = () => { visual._readout.textContent = `${item.label}: ${item.value}%`; };
+      button.addEventListener('click', show);
+      button.addEventListener('focus', show);
+      wrap.appendChild(button);
+    }
+    // La antigua orb-economy-polyline se retiró: porcentajes sin relación ya no se conectan.
+    visual._readout.textContent = `${values.length} porcentajes visibles`;
+    visual.appendChild(wrap);
     return visual;
   };
 
@@ -245,13 +230,9 @@
     return visual;
   };
 
-  const builders = {
-    carreras: careersVisual,
-    estados: stateVisual,
-    finanzas: financeVisual,
-    economia: economyVisual,
-    aprende: learnVisual,
-  };
+  const builders = { carreras: careersVisual, estados: stateVisual, finanzas: financeVisual, economia: economyVisual, aprende: learnVisual };
   const visual = builders[section]?.();
+  const reserve = main.querySelector('[data-orbita-visual-reserve]');
   if (visual) insertVisual(visual);
+  else reserve?.remove();
 })();

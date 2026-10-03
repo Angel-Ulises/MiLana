@@ -15,6 +15,7 @@
       ['orbitaInternalStyle', '/orbita-v3-internal.css'],
       ['orbitaHybridStyle', '/orbita-v3-hybrid.css'],
       ['orbitaExperienceStyle', '/orbita-v3-experience.css'],
+      ['orbitaGlossaryStyle', '/orbita-v3-glossary.css'],
       ['orbitaVisualsStyle', '/orbita-v3-visuals.css'],
     ];
     for (const [key, href] of styles) {
@@ -27,6 +28,7 @@
     }
     const scripts = [
       ['orbitaInternalRuntime', '/orbita-v3-internal.js'],
+      ['orbitaGlossaryRuntime', '/orbita-v3-glossary.js'],
       ['orbitaExperienceRuntime', '/orbita-v3-experience.js'],
       ['orbitaVisualsRuntime', '/orbita-v3-visuals.js'],
     ];

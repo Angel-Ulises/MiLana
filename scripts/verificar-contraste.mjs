@@ -51,6 +51,8 @@ function auditInPage() {
     const bg = parse(ps.backgroundColor);
     return ps.backgroundImage !== 'none' || (bg && bg.a > 0);
   });
+  // Capas sólidas bajo el texto; si hay degradado, imagen o un pseudo-elemento decorativo, el fondo se
+  // mide después por muestreo de píxeles de una captura con el texto oculto (ver sampleInPage).
   const backdrop = (el, stack) => {
     const start = stack.findIndex((node) => node === el || el.contains(node));
     if (start < 0) return null; // tapado por otro elemento
@@ -58,15 +60,7 @@ function auditInPage() {
     let source = null;
     for (const node of stack.slice(start)) {
       const cs = getComputedStyle(node);
-      if (decorativePseudo(node)) return null;
-      if (cs.backgroundImage !== 'none') {
-        if (!/(linear|radial|conic)-gradient\(/.test(cs.backgroundImage)) return null;
-        const colors = [...cs.backgroundImage.matchAll(/rgba?\([^)]+\)|#[0-9a-f]{3,8}\b/gi)].map((m) => m[0]);
-        const probe = document.createElement('i');
-        const parsed = colors.map((c) => { probe.style.color = c; document.body.append(probe); const v = parse(getComputedStyle(probe).color); probe.remove(); return v; }).filter(Boolean);
-        if (!parsed.length) return null;
-        return { gradient: parsed, layers };
-      }
+      if (decorativePseudo(node) || cs.backgroundImage !== 'none') return { sample: true, source: node };
       const bg = parse(cs.backgroundColor);
       if (bg && bg.a > 0) { layers.push(bg); source = node; if (bg.a === 1) break; }
     }
@@ -75,6 +69,8 @@ function auditInPage() {
   const flatten = (layers) => layers.reduceRight((acc, layer) => over(layer, acc), { r: 255, g: 255, b: 255, a: 1 });
 
   const out = [];
+  const pending = [];
+  const id = (e) => e.tagName.toLowerCase() + (e.className && typeof e.className === 'string' ? '.' + e.className.trim().split(/\s+/).slice(0, 3).join('.') : '');
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   const seen = new Set();
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {
@@ -104,7 +100,7 @@ function auditInPage() {
     if (!fg) continue;
     const point = [rect.left + rect.width / 2, rect.top + rect.height / 2];
     const back = backdrop(el, document.elementsFromPoint(point[0], point[1]));
-    if (!back) continue; // imagen de fondo: no se puede evaluar
+    if (!back) continue;
     if (el.closest(':disabled,[aria-disabled="true"]')) continue;
     const size = parseFloat(cs.fontSize);
     const weight = parseInt(cs.fontWeight, 10) || 400;
@@ -112,17 +108,70 @@ function auditInPage() {
     const need = large ? 3 : 4.5;
     let opacity = 1;
     for (let p = el; p; p = p.parentElement) opacity *= parseFloat(getComputedStyle(p).opacity);
-    const backs = back.gradient ? back.gradient.map((g) => flatten([g, ...back.layers])) : [flatten(back.layers)];
-    const worst = Math.min(...backs.map((bg) => {
-      const solid = over({ ...fg, a: fg.a * opacity }, bg);
-      return ratio(solid, bg);
-    }));
+    if (back.sample) {
+      el.setAttribute('data-cs', String(pending.length));
+      el.setAttribute('data-cs-ni', String([...el.childNodes].indexOf(node)));
+      pending.push({ ni: [...el.childNodes].indexOf(node), text: text.slice(0, 50), x: rect.left + scrollX, y: rect.top + scrollY, w: rect.width, h: rect.height, fg: { ...fg, a: fg.a * opacity }, need, el: id(el), parent: el.parentElement ? id(el.parentElement) : '', src: back.source ? id(back.source) : '', color: cs.color });
+      continue;
+    }
+    const bg = flatten(back.layers);
+    const worst = ratio(over({ ...fg, a: fg.a * opacity }, bg), bg);
     if (worst < need) {
-      const id = (e) => e.tagName.toLowerCase() + (e.className && typeof e.className === 'string' ? '.' + e.className.trim().split(/\s+/).slice(0, 3).join('.') : '');
-      out.push({ text: text.slice(0, 50), ratio: Math.round(worst * 100) / 100, need, el: id(el), parent: el.parentElement ? id(el.parentElement) : '', src: back.source ? id(back.source) : '', color: cs.color, bg: backs.map((b) => `rgb(${[b.r, b.g, b.b].map(Math.round)})`).join('|') });
+      out.push({ text: text.slice(0, 50), ratio: Math.round(worst * 100) / 100, need, el: id(el), parent: el.parentElement ? id(el.parentElement) : '', src: back.source ? id(back.source) : '', color: cs.color, bg: `rgb(${[bg.r, bg.g, bg.b].map(Math.round)})` });
     }
   }
-  return out;
+  return { out, pending };
+}
+
+// Vuelve a ubicar cada texto pendiente (con el viewport normal) por su marca data-cs.
+function locateInPage(count) {
+  const found = {};
+  for (let k = 0; k < count; k++) {
+    const el = document.querySelector(`[data-cs="${k}"]`);
+    if (!el) continue;
+    const node = el.childNodes[Number(el.dataset.csNi)];
+    if (!node) continue;
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    const r = range.getBoundingClientRect();
+    found[k] = { x: r.left + scrollX, y: r.top + scrollY, w: r.width, h: r.height };
+  }
+  return found;
+}
+
+// Muestrea la captura (texto oculto) bajo cada texto pendiente y mide el peor contraste.
+async function sampleInPage(dataUrl, pending) {
+  const image = new Image();
+  image.src = dataUrl;
+  await image.decode();
+  const canvas = document.createElement('canvas');
+  canvas.width = image.width;
+  canvas.height = image.height;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(image, 0, 0);
+  const lum = (r, g, b) => { const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+  const fails = [];
+  for (const item of pending) {
+    if (item.y + item.h > canvas.height || item.x + item.w > canvas.width + 1) continue; // fuera de la captura (página > 16384px)
+    const cols = 10;
+    const rows = 3;
+    let worst = Infinity;
+    let worstBg = '';
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        const px = Math.min(canvas.width - 1, Math.max(0, Math.round(item.x + (item.w * (i + 0.5)) / cols)));
+        const py = Math.min(canvas.height - 1, Math.max(0, Math.round(item.y + (item.h * (j + 0.5)) / rows)));
+        const [r, g, b] = ctx.getImageData(px, py, 1, 1).data;
+        const mix = (t, base) => t * item.fg.a + base * (1 - item.fg.a);
+        const L1 = lum(mix(item.fg.r, r), mix(item.fg.g, g), mix(item.fg.b, b));
+        const L2 = lum(r, g, b);
+        const c = (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05);
+        if (c < worst) { worst = c; worstBg = `rgb(${r},${g},${b})`; }
+      }
+    }
+    if (worst < item.need) fails.push({ text: item.text, ratio: Math.round(worst * 100) / 100, need: item.need, el: item.el, parent: item.parent, src: item.src, color: item.color, bg: worstBg + ' (muestreo)' });
+  }
+  return fails;
 }
 
 // ── Servidor estático de dist/ (cleanUrls) ───────────────────────────────────
@@ -170,31 +219,75 @@ const send = (method, params = {}, sessionId) => new Promise((ok, fail) => {
 const sleep = (ms) => new Promise((ok) => setTimeout(ok, ms));
 
 async function audit(sessionId, route, width) {
-  await send('Emulation.setDeviceMetricsOverride', { width, height: 900, deviceScaleFactor: 1, mobile: width < 500 }, sessionId);
+  const VIEW_H = 900;
+  const evaluar = async (expression, extra = {}) => {
+    const { result, exceptionDetails } = await send('Runtime.evaluate', { expression, returnByValue: true, ...extra }, sessionId);
+    if (exceptionDetails) throw new Error(`${route}@${width}: ${exceptionDetails.text} ${exceptionDetails.exception?.description || ''}`);
+    return result.value;
+  };
+  await send('Page.bringToFront', {}, sessionId);
+  await send('Emulation.setScrollbarsHidden', { hidden: true }, sessionId);
+  await send('Emulation.setDeviceMetricsOverride', { width, height: VIEW_H, deviceScaleFactor: 1, mobile: false }, sessionId);
   await send('Page.navigate', { url: base + route }, sessionId);
   // Espera a que React monte (main sin data-static-seo) y a que Órbita termine de insertar sus bloques.
   for (let i = 0; i < 60; i++) {
     await sleep(100);
-    const { result } = await send('Runtime.evaluate', { expression: `document.readyState === 'complete' && !!document.querySelector('main') && !document.querySelector('main[data-static-seo]')`, returnByValue: true }, sessionId);
-    if (result.value) break;
+    if (await evaluar(`document.readyState === 'complete' && !!document.querySelector('main') && !document.querySelector('main[data-static-seo]')`)) break;
   }
   await sleep(900);
-  // Fuerza a render todo lo diferido por scroll/IntersectionObserver.
-  await send('Runtime.evaluate', { expression: `document.documentElement.classList.add('ml-premium-motion-ready'); document.querySelectorAll('.ml-premium-reveal,[data-reveal]').forEach((n) => n.classList.add('ml-premium-in')); window.scrollTo(0, document.body.scrollHeight); window.scrollTo(0, 0);` }, sessionId);
-  await send('Runtime.evaluate', { expression: `(() => { const s = document.createElement('style'); s.textContent = '*,*::before,*::after{animation:none!important;transition:none!important}'; document.head.append(s); })()` }, sessionId);
-  const { result: heightResult } = await send('Runtime.evaluate', { expression: 'document.documentElement.scrollHeight', returnByValue: true }, sessionId);
-  await send('Emulation.setDeviceMetricsOverride', { width, height: Math.min(Math.max(heightResult.value, 900), 16000), deviceScaleFactor: 1, mobile: width < 500 }, sessionId);
+  // Sin animaciones, con todo lo diferido visible y recorriendo la página para que monte lo perezoso.
+  await evaluar(`(() => { const s = document.createElement('style'); s.textContent = '*,*::before,*::after{animation:none!important;transition:none!important;content-visibility:visible!important}'; document.head.append(s); document.documentElement.classList.add('ml-premium-motion-ready'); document.querySelectorAll('.ml-premium-reveal,[data-reveal]').forEach((n) => n.classList.add('ml-premium-in')); })()`);
+  const alturaInicial = await evaluar('document.documentElement.scrollHeight');
+  for (let y = 0; y < Math.min(alturaInicial, 20000); y += 600) { await evaluar(`window.scrollTo({ top: ${y}, behavior: 'instant' })`); await sleep(40); }
+  await evaluar("window.scrollTo({ top: 0, behavior: 'instant' })");
   await sleep(300);
-  const { result, exceptionDetails } = await send('Runtime.evaluate', { expression: `(${auditInPage.toString()})()`, returnByValue: true }, sessionId);
-  if (exceptionDetails) throw new Error(`${route}@${width}: ${exceptionDetails.text} ${exceptionDetails.exception?.description || ''}`);
-  return result.value;
+  // Medición con el viewport tan alto como la página (así todo es "visible" para elementsFromPoint).
+  const alto = Math.min(Math.max(await evaluar('document.documentElement.scrollHeight'), VIEW_H), 16384);
+  await send('Emulation.setDeviceMetricsOverride', { width, height: alto, deviceScaleFactor: 1, mobile: false }, sessionId);
+  await sleep(300);
+  const { out, pending } = await evaluar(`(${auditInPage.toString()})()`);
+  await send('Emulation.setDeviceMetricsOverride', { width, height: VIEW_H, deviceScaleFactor: 1, mobile: false }, sessionId);
+  await sleep(300);
+  if (!pending.length) return out;
+  const ubicaciones = await evaluar(`(${locateInPage.toString()})(${pending.length})`);
+  pending.forEach((item, k) => { if (ubicaciones[k]) Object.assign(item, ubicaciones[k]); else item.perdido = true; });
+  // Capturas con el texto oculto, ventana por ventana (como un usuario que hace scroll), para leer el fondo real
+  // (degradados, imágenes, pseudo-elementos) y muestrear píxeles bajo cada texto.
+  await evaluar(`(() => { const s = document.createElement('style'); s.id = '__contraste-oculta'; s.textContent = '*,*::before,*::after{color:transparent!important;-webkit-text-fill-color:transparent!important;text-shadow:none!important;caret-color:transparent!important}'; document.head.append(s); })()`);
+  const pageH = await evaluar('document.documentElement.scrollHeight');
+  const HEADER = 110;
+  const STEP = VIEW_H - HEADER - 100;
+  const fails = [];
+  const done = new Set();
+  for (let y0 = 0; y0 < pageH; y0 += STEP) {
+    const ventana = [];
+    pending.forEach((item, index) => {
+      if (done.has(index) || item.perdido) return;
+      const top = item.y - y0;
+      if (top >= (y0 === 0 ? 0 : HEADER) && top + item.h <= VIEW_H) { ventana.push({ ...item, x: item.x, y: top }); done.add(index); }
+    });
+    if (!ventana.length) continue;
+    await evaluar(`window.scrollTo({ top: ${y0}, behavior: 'instant' })`);
+    await sleep(250);
+    const real = await evaluar('window.scrollY');
+    const shot = await send('Page.captureScreenshot', { format: 'png' }, sessionId);
+    const ajustados = ventana.map((item) => ({ ...item, y: item.y + y0 - real }));
+    const sampled = await send('Runtime.evaluate', { expression: `(${sampleInPage.toString()})(${JSON.stringify('data:image/png;base64,' + shot.data)}, ${JSON.stringify(ajustados)})`, awaitPromise: true, returnByValue: true }, sessionId);
+    if (sampled.exceptionDetails) throw new Error(`${route}@${width}: muestreo ${sampled.exceptionDetails.text} ${sampled.exceptionDetails.exception?.description || ''}`);
+    fails.push(...sampled.result.value);
+  }
+  await evaluar(`document.getElementById('__contraste-oculta')?.remove()`);
+  return [...out, ...fails];
 }
 
 const jobs = routes.flatMap((route) => VIEWPORTS.map((width) => ({ route, width })));
 const failures = [];
 async function worker() {
-  const { targetId } = await send('Target.createTarget', { url: 'about:blank' });
+  const { targetId } = await send('Target.createTarget', { url: 'about:blank', newWindow: true });
   const { sessionId } = await send('Target.attachToTarget', { targetId, flatten: true });
+  // Sin fuentes remotas: el layout no cambia entre la medición y la captura y no depende de la red.
+  await send('Network.enable', {}, sessionId);
+  await send('Network.setBlockedURLs', { urls: ['*fonts.googleapis.com*', '*fonts.gstatic.com*'] }, sessionId);
   for (let job = jobs.shift(); job; job = jobs.shift()) {
     try {
       const found = await audit(sessionId, job.route, job.width);

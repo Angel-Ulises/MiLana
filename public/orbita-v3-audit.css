@@ -144,3 +144,7 @@ html.ml-orbita-enabled .investment-factor-state.faltan-datos{color:#4A5865!impor
 html.ml-orbita-enabled[data-orbita-section] .instrument-compare-heads article:nth-child(2) :is(p,span){opacity:1!important;color:#3F4D5A!important}
 html.ml-orbita-enabled .instrument-source-panel p,html.ml-orbita-enabled .career-occupation-page .shell>p{color:#4A5865!important}
 html.ml-orbita-enabled .career-compare-page article>span,html.ml-orbita-enabled .career-state-row.header span{color:#53616D!important}
+/* Tarjeta del asesor en Inicio (degradado sobre sección oscura) y etiqueta bajo la foto de descubrimiento. */
+html.ml-orbita-enabled .ml-advisor-strip p{color:rgba(235,243,249,.7)!important}
+html.ml-orbita-enabled .ml-advisor-strip a,html.ml-orbita-enabled .ml-advisor-strip a span{color:#FFF!important}
+html.ml-orbita-enabled .ml-discovery-photo span{color:#4A5865!important}

@@ -7,6 +7,25 @@
     root.classList.remove('ml-orbita-enabled');
     return;
   }
+
+  const ensureInternalLayer = () => {
+    if (!document.querySelector('link[data-orbita-internal-style]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/orbita-v3-internal.css';
+      link.dataset.orbitaInternalStyle = 'true';
+      document.head.appendChild(link);
+    }
+    if (!document.querySelector('script[data-orbita-internal-runtime]')) {
+      const script = document.createElement('script');
+      script.src = '/orbita-v3-internal.js';
+      script.defer = true;
+      script.dataset.orbitaInternalRuntime = 'true';
+      document.body.appendChild(script);
+    }
+  };
+  ensureInternalLayer();
+
   const shell = document.querySelector('.ml-orbita-shell');
   const drawer = document.querySelector('.ml-orbita-drawer');
   const menu = document.querySelector('.ml-orbita-menu-btn');
@@ -30,7 +49,10 @@
     root.classList.toggle('ml-orbita-easy', on);
     easyButtons.forEach((button) => {
       button.setAttribute('aria-pressed', String(on));
-      button.title = on ? 'Modo fácil activado' : 'Modo fácil desactivado';
+      button.title = on ? 'Letra grande activada' : 'Letra grande desactivada';
+      const label = button.querySelector('span');
+      if (label) label.textContent = 'Letra grande';
+      else if (button.classList.contains('ml-orbita-mobile-easy')) button.textContent = 'Letra grande';
     });
     if (persist) try { localStorage.setItem('ml-orbita-easy', on ? '1' : '0'); } catch {}
   };
@@ -64,7 +86,6 @@
     event.preventDefault();
     first.click();
   });
-
 
   let anchorObserver;
   const settleHashAnchor = () => {

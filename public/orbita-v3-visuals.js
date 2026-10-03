@@ -4,10 +4,28 @@
   if (root.classList.contains('ml-orbita-embed') || new URLSearchParams(location.search).get('embed') === '1') return;
   if (/^\/calculadoras\/pension-imss\/?$/.test(location.pathname)) return;
 
-  const section = root.dataset.orbitaSection || '';
-  const main = document.querySelector('main');
-  if (!main || !['carreras', 'estados', 'finanzas', 'economia', 'aprende'].includes(section)) return;
-  if (main.querySelector('[data-orbita-section-visual]')) return;
+  const supportedSections = new Set(['carreras', 'estados', 'finanzas', 'economia', 'aprende']);
+  const sectionForPath = () => {
+    const path = location.pathname;
+    if (path.startsWith('/carreras')) return 'carreras';
+    if (path.startsWith('/estados')) return 'estados';
+    if (path.startsWith('/finanzas')) return 'finanzas';
+    if (path.startsWith('/economia')) return 'economia';
+    if (path.startsWith('/aprende')) return 'aprende';
+    return '';
+  };
+  let section = '';
+  let main = null;
+  let observedRoot = null;
+  let observer = null;
+  let queued = false;
+  let savingsMain = null;
+
+  const syncContext = () => {
+    section = root.dataset.orbitaSection || sectionForPath();
+    main = document.querySelector('main');
+    return Boolean(main && supportedSections.has(section));
+  };
 
   const money = (value) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(value);
   const clean = (text) => String(text || '').replace(/\s+/g, ' ').trim();
@@ -310,15 +328,53 @@
   };
 
   const scheduleSavingsChart = () => requestAnimationFrame(() => requestAnimationFrame(renderSavingsResultChart));
-  if ((location.pathname.replace(/\/$/, '') || '/') === '/finanzas/ahorro') {
+  const bindSavingsChart = () => {
+    if ((location.pathname.replace(/\/$/, '') || '/') !== '/finanzas/ahorro') {
+      savingsMain = null;
+      return;
+    }
+    if (main === savingsMain) return;
+    savingsMain = main;
     main.addEventListener('input', scheduleSavingsChart);
     main.addEventListener('change', scheduleSavingsChart);
     scheduleSavingsChart();
-  }
+  };
 
   const builders = { carreras: careersVisual, estados: stateVisual, finanzas: financeVisual, economia: economyVisual, aprende: learnVisual };
-  const visual = builders[section]?.();
-  const reserve = main.querySelector('[data-orbita-visual-reserve]');
-  if (visual) insertVisual(visual);
-  else reserve?.remove();
+
+  const enhanceVisuals = () => {
+    if (!syncContext()) return;
+    bindSavingsChart();
+    if (main.querySelector('[data-orbita-section-visual]')) return;
+    const visual = builders[section]?.();
+    const reserve = main.querySelector('[data-orbita-visual-reserve]');
+    if (visual) insertVisual(visual);
+    else reserve?.remove();
+  };
+
+  function queueEnhance() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      if (main && !main.isConnected) main = null;
+      observeRoot();
+      enhanceVisuals();
+    });
+  }
+
+  function observeRoot() {
+    const target = document.getElementById('root');
+    if (!target) return;
+    if (!observer) observer = new MutationObserver(queueEnhance);
+    if (observedRoot !== target) {
+      observer.disconnect();
+      observedRoot = target;
+    }
+    observer.observe(observedRoot, { childList: true, subtree: true });
+  }
+
+  observeRoot();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', queueEnhance, { once: true });
+  else queueEnhance();
 })();

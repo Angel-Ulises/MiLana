@@ -62,6 +62,16 @@ test('gráficas respetan reducción de movimiento y no usan controles flotantes'
   assert.doesNotMatch(js, /carousel|swiper|slick/i);
 });
 
+
+test('la capa visual sigue el #root vivo tras el reemplazo de React', () => {
+  assert.match(js, /document\.getElementById\('root'\)/);
+  assert.match(js, /new MutationObserver\(queueEnhance\)/);
+  assert.match(js, /observer\.observe\(observedRoot, \{ childList: true, subtree: true \}\)/);
+  assert.match(js, /if \(main && !main\.isConnected\) main = null/);
+  assert.match(js, /main === savingsMain/);
+  assert.match(js, /main\.addEventListener\('input', scheduleSavingsChart\)/);
+});
+
 test('la capa visual no contiene funciones de cálculo de MiLana', () => {
   assert.doesNotMatch(js, /calcISR|calcularFiniquito|calcularLiquidacion|calcularBrutoNeto|ISR_MENSUAL_2026|RESICO_TASAS/);
 });

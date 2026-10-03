@@ -68,8 +68,16 @@
     return overlap / words.length >= .72;
   };
 
+  const liveObserverTarget = () => document.getElementById('root');
+
   const observeCalculator = () => {
-    if (!observer || !observerTarget) return;
+    if (!observer) return;
+    const target = liveObserverTarget();
+    if (!target) return;
+    if (observerTarget !== target) {
+      observer.disconnect();
+      observerTarget = target;
+    }
     observer.observe(observerTarget, { childList: true, subtree: true });
   };
 
@@ -515,8 +523,6 @@
   };
 
   const resetCalculatorState = () => {
-    observer?.disconnect();
-    observerTarget = null;
     assistant?.remove();
     actions?.remove();
     currentMain = null;
@@ -551,8 +557,7 @@
       currentMain = main;
       currentRoot = candidate;
       formHost = currentRoot.matches('form') ? currentRoot : currentRoot.querySelector('form') || currentRoot;
-      observerTarget = main;
-      observer = new MutationObserver(queueEnhance);
+      if (!observer) observer = new MutationObserver(queueEnhance);
       questions = buildQuestions(currentRoot);
       questionTotal = questions.length;
       if (!questions.length) {
@@ -598,6 +603,9 @@
     queued = true;
     requestAnimationFrame(() => {
       queued = false;
+      const disconnected = Boolean(currentMain || currentRoot) && (!currentMain?.isConnected || !currentRoot?.isConnected);
+      if (disconnected) resetCalculatorState();
+      observeCalculator();
       enhanceCalculator();
     });
   }

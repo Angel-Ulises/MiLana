@@ -26,11 +26,14 @@ test('Pensión queda fuera de la capa interna completa', () => {
   assert.match(js, /PENSION_PATH/);
 });
 
-test('el observador de calculadoras no vigila body y se pausa al mutar', () => {
+test('el observador de calculadoras sigue #root y se pausa al mutar', () => {
+  assert.match(js, /const liveObserverTarget = \(\) => document\.getElementById\('root'\)/);
   assert.match(js, /observer\.observe\(observerTarget, \{ childList: true, subtree: true \}\)/);
   assert.match(js, /withObserverPaused/);
   assert.match(js, /observer\.disconnect\(\)/);
+  assert.doesNotMatch(js, /observerTarget = main/);
   assert.doesNotMatch(js, /observer\.observe\(document\.body/);
+  assert.match(js, /!currentMain\?\.isConnected \|\| !currentRoot\?\.isConnected/);
   assert.match(js, /setText\(count, `Pregunta/);
 });
 

@@ -84,16 +84,8 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] .orb-visual-reserve{min-h
 .orb-savings-result-bar{display:grid;align-content:end;gap:6px;min-height:64px;height:var(--orb-savings-height,25%);padding:10px;border-radius:14px 14px 8px 8px;background:linear-gradient(180deg,#CFE9DD,#247A59);color:#FFF}
 .orb-savings-result-bar span{font:750 11px/1.2 var(--orb-font);color:#FFF!important}.orb-savings-result-bar strong{font:800 12px/1.2 var(--orb-mono);color:#FFF!important}
 
-/* Calculadoras móviles: primer campo más cerca del primer pantallazo. */
+/* Reservas visuales y gráficas responsivas. La geometría crítica de calculadoras vive en prepaint. */
 @media(max-width:760px){
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero{padding-block:10px!important}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-inner{gap:10px!important}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-copy .calculator-hero-lede{margin:5px 0 0!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-copy .calculator-hero-proof{display:none!important}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-media{max-height:150px!important}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-media{display:none!important}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-main{padding-top:6px!important}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .ml-calc-assistant{margin-bottom:8px!important;padding-bottom:10px!important}
   .orb-runtime-reserve{width:calc(100% - 28px);margin-block:18px}
   .orb-glossary-reserve{min-height:220px}.orb-visual-reserve{min-height:420px}
   html.ml-orbita-enabled[data-orbita-section="carreras"] .orb-visual-reserve{min-height:420px}
@@ -103,18 +95,4 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] .orb-visual-reserve{min-h
   html.ml-orbita-enabled[data-orbita-section="aprende"] .orb-visual-reserve{min-height:430px}
   .orb-projection-chart{grid-template-columns:1fr 1fr!important;height:auto!important}.orb-projection-stage{min-height:82px!important}
   .orb-economy-bar{grid-template-columns:1fr;gap:5px}.orb-economy-bar-value{justify-self:end;margin-top:-20px}
-}
-
-/* Reservas de anuncios: solo tamaño/layout; no crea, mueve ni inicializa AdSense. */
-.orb-ad-reserve,[data-orbita-ad-reserve]{display:block;max-width:100%;margin-inline:auto;overflow:hidden;contain:layout paint style;background:transparent}
-.orb-ad-leaderboard{width:min(970px,100%);min-height:90px}
-.orb-ad-rectangle{width:min(336px,100%);min-height:280px}
-.orb-ad-rail{width:min(300px,100%);min-height:600px}
-.orb-ad-mobile-banner{display:none;width:min(320px,100%);min-height:50px}
-.orb-ad-reserve-group{width:min(980px,calc(100% - 32px));margin:28px auto;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start}
-@media(max-width:767px){
-  .orb-ad-leaderboard{width:min(320px,100%);min-height:100px}
-  .orb-ad-reserve-group{grid-template-columns:1fr;width:calc(100% - 28px)}
-  .orb-ad-rail{display:none}
-  .orb-ad-mobile-banner{display:block;min-height:50px}
 }

@@ -24,7 +24,8 @@ test('Pensión permanece fuera de las capas V4', () => {
   assert.match(base, /protectedPension/);
   assert.match(base, /if \(protectedPension\) return/);
   assert.match(internal, /PENSION_PATH/);
-  assert.match(audit, /:not\(\[data-orbita-protected="pension"\]\)/);
+  assert.match(inject, /route === PROTECTED_PENSION \? '' : '[^']*orbita-v3-prepaint\.css[^']*'\+internalHead/);
+  assert.match(inject, /const PROTECTED_PENSION = '\/calculadoras\/pension-imss'/);
 });
 
 test('capa de auditoría carga al final de los estilos V4', () => {

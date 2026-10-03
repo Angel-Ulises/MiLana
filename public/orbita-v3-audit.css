@@ -1,0 +1,82 @@
+/* PR #87 · correcciones de auditoría visual y reservas de layout. Solo presentación. */
+html.ml-orbita-enabled,html.ml-orbita-enabled body{max-width:100%;overflow-x:clip}
+
+/* Inicio: la foto vuelve al flujo; nunca hereda el absolute del Hero V2. */
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media-wrap{position:relative!important;inset:auto!important;min-width:0!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media{position:relative!important;inset:auto!important;min-width:0!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media::before,
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media::after{display:none!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media picture{position:relative!important;inset:auto!important;height:auto!important;min-width:0!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media img{position:relative!important;inset:auto!important;height:auto!important;max-width:100%!important;transform:none!important;filter:none!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .orb-home-search{color:#53616D!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .orb-home-search svg{stroke:#53616D!important}
+
+/* Contraste: el color global de párrafo no invade superficies oscuras. */
+html.ml-orbita-enabled :is(.ml-money-head,.finance-advisor-preview,.footer-inner,.economy-related) :is(p,li,small,figcaption){color:#DCE6EF!important}
+html.ml-orbita-enabled .ml-money-head .eyebrow{color:#C7E0F7!important}
+html.ml-orbita-enabled .ml-money-card h3{color:#F4F7FC!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] .finance-next-box>span{color:#245C93!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .career-question-grid span{color:#4D6478!important}
+html.ml-orbita-enabled .footer-inner a{color:#F4F7FC!important}
+
+/* Economía: hero claro y lectura con contraste alto. */
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero{background:linear-gradient(145deg,#FFFDF8 0%,#FFF5DC 100%)!important;color:#15181E!important;border-bottom:1px solid #E8DDBF!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero :is(h1,h2,strong){color:#2B2418!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero :is(p,li,span:not(.eyebrow)){color:#53616D!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero .eyebrow{color:#7A5011!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero-panel{background:#FFF!important;border-color:#E6D5A9!important;backdrop-filter:none!important;color:#2B2418!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero-panel :is(span,b,p,li){color:#4F4634!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] :is(.economy-guide,.economy-reading,.economy-how-read,.economy-how) :is(p,li,span){color:#4B5966!important}
+
+/* Estados: el breadcrumb no queda pegado al eyebrow. */
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero) nav+ .eyebrow,
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero) nav~.eyebrow{margin-top:18px!important}
+
+/* Reservas para contenido insertado por JS: reducen CLS antes de reemplazarse. */
+.orb-runtime-reserve{width:min(1120px,calc(100% - 36px));margin:24px auto;border-radius:18px;background:transparent;contain:layout style paint;pointer-events:none}
+.orb-glossary-reserve{min-height:92px}
+.orb-visual-reserve{min-height:286px}
+html.ml-orbita-enabled[data-orbita-section="estados"] .orb-visual-reserve{min-height:318px}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .orb-visual-reserve{min-height:190px}
+html.ml-orbita-enabled[data-orbita-section="economia"] .orb-visual-reserve{min-height:300px}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] .orb-visual-reserve{min-height:292px}
+
+/* Finanzas: visual conceptual con degradado suave, no una recta que parezca rendimiento. */
+.orb-projection-chart{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));align-items:end;gap:10px;padding:18px!important;background:linear-gradient(180deg,#FBFDFC,#F1F7F4)!important}
+.orb-projection-chart::before,.orb-projection-line{display:none!important}
+.orb-projection-stage{min-height:72px;display:grid;align-content:end;gap:6px;padding:12px;border-radius:14px;background:linear-gradient(180deg,#F5FBF8 0%,color-mix(in srgb,var(--orb-section) 16%,#FFF) 100%);border:1px solid color-mix(in srgb,var(--orb-section) 22%,#DDE6E1);color:#334D43}
+.orb-projection-stage:nth-child(2){min-height:94px}.orb-projection-stage:nth-child(3){min-height:116px}.orb-projection-stage:nth-child(4){min-height:138px}
+.orb-projection-stage span{font:800 11px/1 var(--orb-mono);color:#53616D}.orb-projection-stage strong{font:750 13px/1.25 var(--orb-font);color:#263D34}
+
+/* Economía: porcentajes independientes en barras, con degradado; no línea temporal falsa. */
+.orb-economy-bars{display:grid;gap:10px;padding:18px;border:1px solid #E6E1D8;border-radius:18px;background:linear-gradient(180deg,#FFFCF5,#FFF8E8)}
+.orb-economy-bar{display:grid;grid-template-columns:minmax(110px,1fr) minmax(150px,3fr) auto;align-items:center;gap:10px;border:0;background:transparent;padding:3px 0;text-align:left;cursor:pointer}
+.orb-economy-bar-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#4C4335;font:700 12px/1.25 var(--orb-font)}
+.orb-economy-bar-track{height:14px;border-radius:999px;background:#F0E7D4;overflow:hidden}
+.orb-economy-bar-fill{display:block;height:100%;width:var(--orb-economy-width,20%);border-radius:999px;background:linear-gradient(90deg,#F2D18A,#9A6819)}
+.orb-economy-bar-value{color:#5B4521;font:800 12px/1 var(--orb-mono);white-space:nowrap}
+
+/* Calculadoras móviles: primer campo más cerca del primer pantallazo. */
+@media(max-width:760px){
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero{padding-block:18px!important}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-inner{gap:16px!important}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-media{max-height:190px!important}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-media :is(picture,img){height:190px!important;max-height:190px!important;object-fit:cover!important}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-main{padding-top:12px!important}
+  .orb-runtime-reserve{width:calc(100% - 28px);margin-block:18px}
+  .orb-glossary-reserve{min-height:128px}.orb-visual-reserve{min-height:260px}
+  .orb-projection-chart{grid-template-columns:1fr 1fr!important;height:auto!important}.orb-projection-stage{min-height:82px!important}
+  .orb-economy-bar{grid-template-columns:1fr;gap:5px}.orb-economy-bar-value{justify-self:end;margin-top:-20px}
+}
+
+/* Reservas de anuncios: solo tamaño/layout; no crea, mueve ni inicializa AdSense. */
+.ad-slot,[data-ad-slot],ins.adsbygoogle{display:block;max-width:100%;margin-inline:auto;overflow:hidden;contain:layout paint style}
+.ad-slot--leaderboard,[data-ad-size="970x90"]{width:min(970px,100%);min-height:90px}
+.ad-slot--rectangle,[data-ad-size="336x280"]{width:min(336px,100%);min-height:280px}
+.ad-slot--rail,[data-ad-size="300x600"]{width:min(300px,100%);min-height:600px}
+.ad-slot--mobile-banner,[data-ad-size="320x50"]{width:min(320px,100%);min-height:50px}
+@media(max-width:767px){
+  .ad-slot--leaderboard,[data-ad-size="970x90"]{width:min(320px,100%);min-height:100px}
+  .ad-slot--rail,[data-ad-size="300x600"]{display:none}
+  .ad-slot--mobile-banner,[data-ad-size="320x50"]{display:block;min-height:50px}
+}

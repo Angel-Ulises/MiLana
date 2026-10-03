@@ -148,3 +148,5 @@ html.ml-orbita-enabled .career-compare-page article>span,html.ml-orbita-enabled 
 html.ml-orbita-enabled .ml-advisor-strip p{color:rgba(235,243,249,.7)!important}
 html.ml-orbita-enabled .ml-advisor-strip a,html.ml-orbita-enabled .ml-advisor-strip a span{color:#FFF!important}
 html.ml-orbita-enabled .ml-discovery-photo span{color:#4A5865!important}
+/* Enlaces dentro de párrafos: subrayados para no depender solo del color (axe link-in-text-block). */
+html.ml-orbita-enabled :is(main,article,section) :is(p,li) a:not(.btn):not(.ml-btn):not(.orb-result-share):not(.orb-result-next){text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}

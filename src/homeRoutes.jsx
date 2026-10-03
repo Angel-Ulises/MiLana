@@ -22,7 +22,11 @@ const RUTAS = [
 ];
 
 function rutaGuardada() {
-  try { return JSON.parse(localStorage.getItem('ml-orbita-route') || 'null'); }
+  try {
+    const guardada = JSON.parse(localStorage.getItem('ml-orbita-route') || 'null');
+    // Solo rutas internas guardadas por este mismo componente.
+    return guardada && typeof guardada.label === 'string' && /^\/(?!\/)/.test(String(guardada.href)) ? guardada : null;
+  }
   catch { return null; }
 }
 

@@ -39,7 +39,7 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-proof{display:none!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media{display:none!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] body:has(.calculator-hero) .calc-intro{display:none!important}
-  html.ml-orbita-enabled[data-orbita-section="calculatoras"] .calculator-main{padding-top:6px!important}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main{padding-top:6px!important}
   /* Reserva exactamente el bloque Paso a paso hasta que el internal.js lo inserta. */
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main::before{content:'';display:block;height:131px;min-height:131px}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main:has(> .ml-calc-assistant)::before{display:none;height:0;min-height:0}

@@ -28,7 +28,11 @@
   ];
 
   const readRoute = () => {
-    try { return JSON.parse(localStorage.getItem('ml-orbita-route') || 'null'); }
+    try {
+      const saved = JSON.parse(localStorage.getItem('ml-orbita-route') || 'null');
+      // Solo rutas internas guardadas por este mismo script.
+      return saved && typeof saved.label === 'string' && /^\/(?!\/)/.test(String(saved.href)) ? saved : null;
+    }
     catch { return null; }
   };
 
@@ -78,9 +82,12 @@
     card.setAttribute('aria-label', 'Mi situación');
 
     const copy = document.createElement('div');
-    copy.innerHTML = route
-      ? `<span>Mi situación · paso 1 de 4</span><strong>${route.label}</strong><p>Tu ruta queda guardada en este dispositivo para que puedas retomarla.</p>`
-      : '<span>Mi situación · paso 1 de 4</span><strong>Empieza por lo que estás viviendo</strong><p>Elige una ruta y MiLana te lleva a la herramienta correcta sin hacerte adivinar qué buscar.</p>';
+    const addLine = (tag, text) => { const node = document.createElement(tag); node.textContent = text; copy.appendChild(node); };
+    addLine('span', 'Mi situación · paso 1 de 4');
+    addLine('strong', route ? String(route.label) : 'Empieza por lo que estás viviendo');
+    addLine('p', route
+      ? 'Tu ruta queda guardada en este dispositivo para que puedas retomarla.'
+      : 'Elige una ruta y MiLana te lleva a la herramienta correcta sin hacerte adivinar qué buscar.');
 
     const action = document.createElement('a');
     action.href = route?.href || '#orb-home-routes';

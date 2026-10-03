@@ -1782,7 +1782,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         </main>
       )}
 
-      <><AdReserve size="970x90" /><footer className="site-footer">
+      <>{activa !== 'pension' && <AdReserve size="970x90" />}<footer className="site-footer">
         <div className="shell footer-inner">
           <div>
             <span className="brand-name">MiLana</span>

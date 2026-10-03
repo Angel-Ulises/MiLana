@@ -38,19 +38,41 @@
     return section;
   };
 
+  const placeStrip = (main, strip) => {
+    if ((location.pathname.replace(/\/$/, '') || '/') === '/') {
+      const routes = main.querySelector('.orb-home-route-grid');
+      if (!routes) return false;
+      strip.classList.add('orb-glossary-home');
+      routes.insertAdjacentElement('afterend', strip);
+      return true;
+    }
+
+    const reserve = main.querySelector('[data-orbita-glossary-reserve]');
+    if (reserve) {
+      reserve.replaceWith(strip);
+      return true;
+    }
+
+    const h1 = main.querySelector('h1');
+    const intro = h1?.nextElementSibling?.matches?.('p') ? h1.nextElementSibling : null;
+    if (intro) intro.insertAdjacentElement('afterend', strip);
+    else if (h1) h1.insertAdjacentElement('afterend', strip);
+    else main.prepend(strip);
+    return true;
+  };
+
   const run = () => {
     if (document.querySelector('[data-orbita-glossary]')) return;
     const main = document.querySelector('main');
     if (!main) return;
     const text = ` ${main.textContent.toUpperCase()} `;
     const detected = Object.keys(TERMS).filter((term) => new RegExp(`(^|[^A-ZÁÉÍÓÚÑ])${term}([^A-ZÁÉÍÓÚÑ]|$)`).test(text));
-    if (!detected.length) return;
+    if (!detected.length) {
+      main.querySelector('[data-orbita-glossary-reserve]')?.remove();
+      return;
+    }
     const strip = makeStrip(detected.slice(0, 5));
-    const h1 = main.querySelector('h1');
-    const intro = h1?.nextElementSibling?.matches?.('p') ? h1.nextElementSibling : null;
-    if (intro) intro.insertAdjacentElement('afterend', strip);
-    else if (h1) h1.insertAdjacentElement('afterend', strip);
-    else main.prepend(strip);
+    placeStrip(main, strip);
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once: true });

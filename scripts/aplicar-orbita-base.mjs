@@ -63,7 +63,7 @@ const iconSearch = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" 
 const iconMenu = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>';
 const boot = `<script data-orbita-boot>(function(){var q=new URLSearchParams(location.search);var r=document.documentElement;if(q.get('embed')==='1'){r.classList.add('ml-orbita-embed');return}var p=location.pathname.replace(/\\\/$/,'')||'/';r.classList.add('ml-orbita-enabled');var s=p.indexOf('/calculadoras')===0?'calculadoras':p.indexOf('/carreras')===0?'carreras':p.indexOf('/estados')===0?'estados':p.indexOf('/finanzas')===0?'finanzas':p.indexOf('/economia')===0?'economia':p.indexOf('/aprende')===0?'aprende':'inicio';r.dataset.orbitaSection=s;try{if(localStorage.getItem('ml-orbita-easy')==='1')r.classList.add('ml-orbita-easy')}catch(e){}})();</script>`;
 const embedGuard = `<style data-orbita-embed-guard>html.ml-orbita-embed .ml-orbita-shell,html.ml-orbita-embed .ml-orbita-drawer,html.ml-orbita-embed .ml-orbita-search,html.ml-orbita-embed .ml-orbita-skip-link,html.ml-orbita-embed [data-orbita-static-reserve],html.ml-orbita-embed [data-orbita-ad-reserve]{display:none!important}</style>`;
-const baseHead = `${boot}${embedGuard}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/orbita-v3-base.css">`;
+const baseHead = `${boot}${embedGuard}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=optional" rel="stylesheet"><link rel="stylesheet" href="/orbita-v3-base.css">`;
 const internalHead = '<link rel="stylesheet" href="/orbita-v3-runtime.css" data-orbita-runtime-bundle><script src="/orbita-v3-internal.js" defer data-orbita-internal-runtime></script><script src="/orbita-v3-experience.js" defer data-orbita-experience-runtime></script><script src="/orbita-v3-glossary.js" defer data-orbita-glossary-runtime></script><script src="/orbita-v3-visuals.js" defer data-orbita-visuals-runtime></script>';
 const headForRoute = (route) => `${baseHead}${route === PROTECTED_PENSION ? '' : '<link rel="stylesheet" href="/orbita-v3-prepaint.css" data-orbita-prepaint>'+internalHead}<script src="/orbita-v3-base.js" defer data-orbita-runtime></script>`;
 const headerNav = nav.map(([key, href, label]) => `<a data-orbita-nav="${key}" href="${href}">${label}</a>`).join('');
@@ -165,8 +165,8 @@ for(const path of originals){
   const frame = shell.replace('__CONTENT_ID__', contentId);
   const staticAttr = STATIC_TOP_ROUTES.has(route) ? ' data-orbita-static-top="true"' : '';
   // Preload estático solo en Inicio, para que lo vea el preload scanner.
-  // Justo después de <meta charset>; en móvil (≤620px) la foto del hero está oculta, así que no se precarga.
-  if(route==='/') html=html.replace(/(<meta\s+charset=[^>]*>)/i,'$1<link rel="preload" as="image" href="/images/gen/inicio-1440.webp" fetchpriority="high" media="(min-width: 621px)">');
+  // Justo después de <meta name="viewport"> (antes el viewport por defecto de 980px hacía coincidir la media query); en móvil (≤620px) la foto del hero está oculta, así que no se precarga.
+  if(route==='/') html=html.replace(/(<meta\s+name=["']viewport["'][^>]*>)/i,'$1<link rel="preload" as="image" href="/images/gen/inicio-1440.webp" fetchpriority="high" media="(min-width: 621px)">');
   html=html.replace('</head>',`${headForRoute(route)}</head>`).replace(/<body([^>]*)>/i,`<body$1${staticAttr}>${frame}`);
   await writeFile(path,html);
   changed++;

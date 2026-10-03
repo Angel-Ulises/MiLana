@@ -9,11 +9,13 @@
   }
 
   const protectedPension = /^\/calculadoras\/pension-imss\/?$/.test(location.pathname);
+  const bundledRuntime = Boolean(document.querySelector('[data-orbita-runtime-bundle]'));
   const visualSections = new Set(['carreras', 'estados', 'finanzas', 'economia', 'aprende']);
   const glossaryPattern = /(^|[^A-ZÁÉÍÓÚÑ])(ISR|UMA|CETES|CAT|RESICO|PTU|SBC|IMSS|LFT)([^A-ZÁÉÍÓÚÑ]|$)/i;
 
   const reserveRuntimeSurfaces = () => {
     if (protectedPension) return;
+    if (bundledRuntime) return;
     const section = root.dataset.orbitaSection || '';
     if (!visualSections.has(section)) return;
     const main = document.querySelector('main');
@@ -48,6 +50,7 @@
 
   const ensureInternalLayer = () => {
     if (protectedPension) return;
+    if (bundledRuntime) return;
     const styles = [
       ['orbitaInternalStyle', '/orbita-v3-internal.css'],
       ['orbitaHybridStyle', '/orbita-v3-hybrid.css'],

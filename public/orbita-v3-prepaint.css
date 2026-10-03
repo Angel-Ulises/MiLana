@@ -60,5 +60,5 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.
 /* Inicio: el LCP es el H1; Chrome no lo cuenta hasta que termina la animación de opacidad. */
 html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy>*{animation:none!important}
 
-/* Inicio en móvil: el panel crema del hero se extiende 14px más allá del texto (mismo ancho de contenido, sin saltos). */
-@media(max-width:620px){html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{padding-inline:14px;margin-inline:-14px}}
+/* Inicio en móvil: el panel crema del hero se extiende 14px más allá del texto (sin saltos). Doble clase: experience.css fija padding:0!important. */
+@media(max-width:620px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{width:calc(100% + 28px)!important;padding-inline:14px!important;margin-inline:-14px!important}}

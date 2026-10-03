@@ -24,7 +24,46 @@ function dumpDom(url) {
     child.on('close', (code) => { clearTimeout(timer); code === 0 ? resolve(stdout) : reject(new Error(`Chromium ${code}: ${stderr}`)); });
   });
 }
+function aguinaldoFixture() {
+  const field = (id, label, type) => `<label for="${id}">${label}</label><input id="${id}" type="${type}" step="any" aria-invalid="true">`;
+  return `<!doctype html><html class="ml-orbita-enabled"><body>
+    <main class="calculator-main"><form>
+      <p class="calc-intro">Intro suficientemente larga para aguinaldo dentro de una prueba de navegador.</p>
+      ${field('salario', 'Salario mensual fijo (MXN)', 'number')}
+      ${field('dias', 'Días de aguinaldo que te corresponden', 'number')}
+      ${field('ingreso', 'Fecha de ingreso', 'date')}
+      ${field('salida', 'Último día trabajado en 2026', 'date')}
+      <p role="alert"></p><button class="ml-btn" type="submit">Calcular aguinaldo</button>
+    </form></main>
+    <script>history.replaceState(null,'','/calculadoras/aguinaldo');</script>
+    <script src="/orbita-v3-internal.js"></script>
+    <script>
+      addEventListener('load', () => setTimeout(() => {
+        const form = document.querySelector('form');
+        document.getElementById('dias').value = '15';
+        document.getElementById('ingreso').value = '2026-01-01';
+        document.getElementById('salida').value = '2026-12-31';
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          form.querySelector('[role="alert"]').textContent = 'Captura un importe positivo con un máximo de dos decimales.';
+        });
+        // Se salta al último paso para comprobar que la validación regresa a la Pregunta 1.
+        document.querySelector('[data-orbita-calc-next]').click();
+        document.querySelector('[data-orbita-calc-next]').click();
+        document.querySelector('[data-orbita-calc-next]').click();
+        form.querySelector('button[type="submit"]').click();
+        setTimeout(() => {
+          document.body.dataset.count = document.querySelector('[data-orbita-calc-count]')?.textContent || '';
+          document.body.dataset.targetHidden = document.getElementById('salario').getAttribute('aria-hidden') || '';
+          document.body.dataset.targetNativeHidden = String(document.getElementById('salario').hidden);
+        }, 120);
+      }, 80));
+    </script>
+  </body></html>`;
+}
+
 function fixtureHtml(kind) {
+  if (kind === 'aguinaldo') return aguinaldoFixture();
   const isISR = kind === 'isr';
   const form = isISR ? `
     <form><p>Intro suficientemente larga para la calculadora de ISR en una prueba de navegador.</p>
@@ -96,4 +135,10 @@ test('navegador: finiquito prioriza vacaciones anuales sobre vacaciones pendient
   const html = await runCase(t, 'finiquito');
   if (!html) return;
   assert.match(html, /data-count="Pregunta 2 de 2"/);
+});
+
+test('navegador: aguinaldo sin salario vuelve a la Pregunta 1', async (t) => {
+  const html = await runCase(t, 'aguinaldo');
+  if (!html) return;
+  assert.match(html, /data-count="Pregunta 1 de 4"/);
 });

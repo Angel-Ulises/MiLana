@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
-import { spawn, spawnSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import { createServer } from 'vite';
+import { renderDom } from './helpers/chrome-dom.mjs';
 
 const candidates = [
   process.env.MILANA_CHROME,
@@ -11,19 +12,8 @@ const candidates = [
 ].filter(Boolean);
 const chrome = candidates.find((path) => existsSync(path));
 const fixtureDir = 'public/__orbita-race';
-const fixturePath = `${fixtureDir}/index.html`;
 
-function dumpDom(url) {
-  return new Promise((resolve, reject) => {
-    const child = spawn(chrome, ['--headless=new','--no-sandbox','--disable-gpu','--virtual-time-budget=2600','--dump-dom',url], { env: process.env });
-    let stdout=''; let stderr='';
-    const timer=setTimeout(() => { child.kill('SIGKILL'); reject(new Error(`Chromium timeout: ${stderr}`)); }, 15000);
-    child.stdout.on('data', (chunk) => { stdout += chunk; });
-    child.stderr.on('data', (chunk) => { stderr += chunk; });
-    child.on('error', reject);
-    child.on('close', (code) => { clearTimeout(timer); code === 0 ? resolve(stdout) : reject(new Error(`Chromium ${code}: ${stderr}`)); });
-  });
-}
+const dumpDom = (url) => renderDom(chrome, url, { waitMs: 2000, until: "document.body.dataset.raceVisible === 'true' || document.body.dataset.visualConnected === 'true' && (location.pathname !== '/finanzas/ahorro' || document.body.dataset.savingsChart === 'true')" });
 
 function calculatorForm(kind) {
   const labels = {
@@ -104,7 +94,7 @@ function visualFixture(mode) {
 
 async function browserReady(t) {
   if (!chrome) { t.skip('Chrome/Chromium no instalado en el runner'); return false; }
-  const probe = spawnSync(chrome, ['--headless=new','--no-sandbox','--disable-gpu','--dump-dom','about:blank'], { encoding:'utf8', timeout:8000, env:process.env });
+  const probe = spawnSync(chrome, ['--headless=new','--no-sandbox','--disable-gpu','--timeout=2500','--dump-dom','about:blank'], { encoding:'utf8', timeout:8000, env:process.env });
   if (probe.status !== 0) { t.skip('Chrome/Chromium no puede iniciar en este runner'); return false; }
   return true;
 }
@@ -113,6 +103,7 @@ async function withServer(t, fixtures, fn) {
   if (!await browserReady(t)) return;
   mkdirSync(fixtureDir, { recursive:true });
   for (const [name, html] of Object.entries(fixtures)) writeFileSync(`${fixtureDir}/${name}.html`, html);
+  // El fixture debe existir antes de createServer: Vite 5.4 no sirve como público lo escrito después.
   const server = await createServer({ root:process.cwd(), server:{host:'127.0.0.1',port:0}, logLevel:'silent' });
   await server.listen();
   try { return await fn(server.httpServer.address().port); }

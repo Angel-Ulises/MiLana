@@ -9,6 +9,43 @@
   }
 
   const protectedPension = /^\/calculadoras\/pension-imss\/?$/.test(location.pathname);
+  const visualSections = new Set(['carreras', 'estados', 'finanzas', 'economia', 'aprende']);
+  const glossaryPattern = /(^|[^A-ZÁÉÍÓÚÑ])(ISR|UMA|CETES|CAT|RESICO|PTU|SBC|IMSS|LFT)([^A-ZÁÉÍÓÚÑ]|$)/i;
+
+  const reserveRuntimeSurfaces = () => {
+    if (protectedPension) return;
+    const section = root.dataset.orbitaSection || '';
+    if (!visualSections.has(section)) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    const hero = main.querySelector(':scope > .career-hero,:scope > .profession-hero,:scope > .state-hero,:scope > .state-detail-hero,:scope > .finance-page-hero,:scope > .advisor-hero,:scope > .investment-hero,:scope > .economy-hero,:scope > .hubhead');
+    const h1 = main.querySelector('h1');
+    const intro = h1?.nextElementSibling?.matches?.('p') ? h1.nextElementSibling : null;
+
+    if (!main.querySelector('[data-orbita-visual-reserve]')) {
+      const visualReserve = document.createElement('div');
+      visualReserve.className = 'orb-runtime-reserve orb-visual-reserve';
+      visualReserve.dataset.orbitaVisualReserve = 'true';
+      visualReserve.setAttribute('aria-hidden', 'true');
+      if (hero) hero.insertAdjacentElement('afterend', visualReserve);
+      else if (intro) intro.insertAdjacentElement('afterend', visualReserve);
+      else if (h1) h1.insertAdjacentElement('afterend', visualReserve);
+      else main.prepend(visualReserve);
+    }
+
+    const needsGlossary = glossaryPattern.test(main.textContent || '');
+    if (needsGlossary && !main.querySelector('[data-orbita-glossary-reserve]')) {
+      const glossaryReserve = document.createElement('div');
+      glossaryReserve.className = 'orb-runtime-reserve orb-glossary-reserve';
+      glossaryReserve.dataset.orbitaGlossaryReserve = 'true';
+      glossaryReserve.setAttribute('aria-hidden', 'true');
+      if (intro) intro.insertAdjacentElement('afterend', glossaryReserve);
+      else if (h1) h1.insertAdjacentElement('afterend', glossaryReserve);
+      else main.prepend(glossaryReserve);
+    }
+  };
+
   const ensureInternalLayer = () => {
     if (protectedPension) return;
     const styles = [
@@ -17,6 +54,7 @@
       ['orbitaExperienceStyle', '/orbita-v3-experience.css'],
       ['orbitaGlossaryStyle', '/orbita-v3-glossary.css'],
       ['orbitaVisualsStyle', '/orbita-v3-visuals.css'],
+      ['orbitaAuditStyle', '/orbita-v3-audit.css'],
     ];
     for (const [key, href] of styles) {
       if (document.querySelector(`link[data-${key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}]`)) continue;
@@ -28,8 +66,8 @@
     }
     const scripts = [
       ['orbitaInternalRuntime', '/orbita-v3-internal.js'],
-      ['orbitaGlossaryRuntime', '/orbita-v3-glossary.js'],
       ['orbitaExperienceRuntime', '/orbita-v3-experience.js'],
+      ['orbitaGlossaryRuntime', '/orbita-v3-glossary.js'],
       ['orbitaVisualsRuntime', '/orbita-v3-visuals.js'],
     ];
     for (const [key, src] of scripts) {
@@ -41,6 +79,7 @@
       document.body.appendChild(script);
     }
   };
+  reserveRuntimeSurfaces();
   ensureInternalLayer();
 
   const shell = document.querySelector('.ml-orbita-shell');

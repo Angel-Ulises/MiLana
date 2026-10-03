@@ -29,7 +29,20 @@ function pexelsUrl(id, width) {
   return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
 }
 
+// La foto de Pexels reemplaza a la local: pedirla antes del evento load solo retrasa la carga.
+let cargaCompleta = document.readyState === 'complete';
+let fotoDiferida = false;
+function despuesDeLaCarga(callback) {
+  const idle = () => (window.requestIdleCallback ? window.requestIdleCallback(callback, { timeout: 3000 }) : setTimeout(callback, 300));
+  if (cargaCompleta) { idle(); return; }
+  window.addEventListener('load', () => { cargaCompleta = true; idle(); }, { once: true });
+}
+
 function actualizarFotoCalculadora() {
+  if (!cargaCompleta) {
+    if (!fotoDiferida) { fotoDiferida = true; despuesDeLaCarga(() => { fotoDiferida = false; actualizarFotoCalculadora(); }); }
+    return;
+  }
   const slug = window.location.pathname.split('/').filter(Boolean).at(-1);
   const config = CALCULATOR_PHOTO_OVERRIDES[slug];
   if (!config) return;

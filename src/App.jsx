@@ -1624,9 +1624,9 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
           <section className="hero">
             <div className="shell hero-grid">
               <div className="hero-copy">
-                <p className="eyebrow">Dinero claro, decisiones propias</p>
-                <h1>Entiende lo que tienes. Decide lo que sigue.</h1>
-                <p className="hero-lede">MiLana reúne calculadoras, explicaciones y datos oficiales para ayudarte a pasar de la duda a una decisión concreta, sin lenguaje de banco y sin promesas fáciles.</p>
+                <p className="eyebrow">Gratis · sin registro · datos 2026</p>
+                <h1>Entiende tu <span className="orb-home-accent">lana</span> en un minuto</h1>
+                <p className="hero-lede">Elige lo que estás viviendo y te decimos qué hacer, paso a paso.</p>
                 <div className="hero-actions">
                   <a className="btn btn-primary" href="/#situaciones">Explorar mi situación</a>
                   <a className="btn btn-secondary" href="/#calculadoras">Ver calculadoras</a>

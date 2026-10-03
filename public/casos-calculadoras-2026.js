@@ -8,6 +8,13 @@
   let cache = null;
   let cargando = null;
 
+  // Ejemplos y JSON se piden con el navegador ocioso, después del evento load.
+  const cuandoOcioso = () => new Promise((resolve) => {
+    const listo = () => (window.requestIdleCallback ? window.requestIdleCallback(() => resolve(), { timeout: 3000 }) : setTimeout(resolve, 300));
+    if (document.readyState === 'complete') listo();
+    else window.addEventListener('load', listo, { once: true });
+  });
+
   const cargar = () => {
     if (cache) return Promise.resolve(cache);
     if (!cargando) {
@@ -70,9 +77,11 @@
     if (existente?.dataset.caseSlug === slug) return;
     existente?.remove();
 
+    await cuandoOcioso();
     const data = await cargar();
     const caso = data?.[slug];
     if (!caso || location.pathname.match(/^\/calculadoras\/([^/]+)\/?$/)?.[1] !== slug) return;
+    if (main.querySelector('.ml-case')?.dataset.caseSlug === slug || !form.isConnected) return;
 
     estilo();
     const wrap = document.createElement('div');

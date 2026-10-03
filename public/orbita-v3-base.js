@@ -8,12 +8,19 @@
     return;
   }
 
+  const protectedPension = /^\/calculadoras\/pension-imss\/?$/.test(location.pathname);
   const ensureInternalLayer = () => {
-    if (!document.querySelector('link[data-orbita-internal-style]')) {
+    if (protectedPension) return;
+    const styles = [
+      ['orbitaInternalStyle', '/orbita-v3-internal.css'],
+      ['orbitaHybridStyle', '/orbita-v3-hybrid.css'],
+    ];
+    for (const [key, href] of styles) {
+      if (document.querySelector(`link[data-${key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}]`)) continue;
       const link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = '/orbita-v3-internal.css';
-      link.dataset.orbitaInternalStyle = 'true';
+      link.href = href;
+      link.dataset[key] = 'true';
       document.head.appendChild(link);
     }
     if (!document.querySelector('script[data-orbita-internal-runtime]')) {

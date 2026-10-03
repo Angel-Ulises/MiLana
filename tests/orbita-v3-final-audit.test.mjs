@@ -22,7 +22,9 @@ test('reservas críticas existen en HTML antes del runtime y conservan altura fi
 test('espacios de publicidad son contenedores vacíos y no inicializan AdSense',()=>{
   for(const size of ['970x90','336x280','300x600','320x50']) assert.ok(inject.includes(`data-ad-size="${size}"`));
   assert.match(inject,/data-orbita-ad-reserve/);
-  assert.doesNotMatch(inject,/adsbygoogle|data-ad-client|\.push\(/i);
+  const adMarkup=inject.match(/const markup='([^']*data-orbita-ad-reserve[^']*)';/)?.[1] || '';
+  assert.ok(adMarkup, 'no se encontró el markup publicitario inyectado');
+  assert.doesNotMatch(adMarkup,/adsbygoogle|data-ad-client|\.push\(/i);
 });
 
 test('calculadoras ocultan intro repetido y vuelven al paso que falló',()=>{

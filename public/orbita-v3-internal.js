@@ -557,7 +557,6 @@
       currentMain = main;
       currentRoot = candidate;
       formHost = currentRoot.matches('form') ? currentRoot : currentRoot.querySelector('form') || currentRoot;
-      if (!observer) observer = new MutationObserver(queueEnhance);
       questions = buildQuestions(currentRoot);
       questionTotal = questions.length;
       if (!questions.length) {
@@ -618,6 +617,8 @@
 
   addEventListener('popstate', routeChanged);
   addEventListener('hashchange', routeChanged);
+  observer = new MutationObserver(queueEnhance);
+  observeCalculator();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', queueEnhance, { once: true });
   else queueEnhance();
 })();

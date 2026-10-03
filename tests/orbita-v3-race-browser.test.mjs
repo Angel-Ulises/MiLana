@@ -15,7 +15,7 @@ const fixturePath = `${fixtureDir}/index.html`;
 
 function dumpDom(url) {
   return new Promise((resolve, reject) => {
-    const child = spawn(chrome, ['--headless=new','--no-sandbox','--disable-gpu','--virtual-time-budget=1800','--dump-dom',url], { env: process.env });
+    const child = spawn(chrome, ['--headless=new','--no-sandbox','--disable-gpu','--virtual-time-budget=2600','--dump-dom',url], { env: process.env });
     let stdout=''; let stderr='';
     const timer=setTimeout(() => { child.kill('SIGKILL'); reject(new Error(`Chromium timeout: ${stderr}`)); }, 15000);
     child.stdout.on('data', (chunk) => { stdout += chunk; });
@@ -44,16 +44,26 @@ function calculatorFixture(kind) {
   const live = JSON.stringify(calculatorForm(kind));
   return `<!doctype html><html class="ml-orbita-enabled" data-orbita-section="calculadoras"><head>
     <script defer src="/orbita-v3-internal.js"></script>
-  </head><body><div id="root">${calculatorForm(kind)}</div>
+  </head><body><div id="root"><main data-static-seo="true"><h1>Calculadora prerenderizada</h1><p>Contenido SEO inicial sustituido por React.</p></main></div>
     <script>
       history.replaceState(null,'','/calculadoras/${kind}');
-      setTimeout(() => { document.getElementById('root').innerHTML = ${live}; }, 35);
-      setTimeout(() => {
+      setTimeout(() => { document.getElementById('root').innerHTML = ${live}; }, 300);
+      const capture = () => {
         const count = document.querySelector('[data-orbita-calc-count]');
         const visible = !!count && count.isConnected && !count.hidden && getComputedStyle(count).display !== 'none' && getComputedStyle(count).visibility !== 'hidden';
-        document.body.dataset.raceCount = count?.textContent || '';
-        document.body.dataset.raceVisible = String(visible);
-      }, 260);
+        if (!visible || !count.textContent) return false;
+        document.body.dataset.raceCount = count.textContent;
+        document.body.dataset.raceVisible = 'true';
+        return true;
+      };
+      const probe = new MutationObserver(() => { if (capture()) probe.disconnect(); });
+      probe.observe(document.getElementById('root'), { childList:true, subtree:true });
+      let attempts = 0;
+      const poll = () => {
+        if (capture() || ++attempts >= 30) return;
+        setTimeout(poll, 50);
+      };
+      setTimeout(poll, 320);
     </script>
   </body></html>`;
 }
@@ -78,13 +88,17 @@ function visualFixture(mode) {
     history.replaceState(null,'','${config.path}');
     setTimeout(() => { document.getElementById('root').innerHTML = ${live}; }, 35);
     setTimeout(() => { ${after} }, 120);
-    setTimeout(() => {
+    const capture = () => {
       const visual=document.querySelector('[data-orbita-section-visual]');
       const chart=document.querySelector('[data-orbita-savings-result-chart]');
       document.body.dataset.visualConnected=String(!!visual && visual.isConnected);
       document.body.dataset.visualSection=visual?.getAttribute('data-orbita-section-visual') || '';
       document.body.dataset.savingsChart=String(!!chart && chart.isConnected);
-    }, 300);
+      return !!visual && (location.pathname !== '/finanzas/ahorro' || !!chart);
+    };
+    const probe = new MutationObserver(() => { if (capture()) probe.disconnect(); });
+    probe.observe(document.getElementById('root'), { childList:true, subtree:true });
+    setTimeout(capture, 300);
   </script></body></html>`;
 }
 
@@ -95,9 +109,10 @@ async function browserReady(t) {
   return true;
 }
 
-async function withServer(t, fn) {
+async function withServer(t, fixtures, fn) {
   if (!await browserReady(t)) return;
   mkdirSync(fixtureDir, { recursive:true });
+  for (const [name, html] of Object.entries(fixtures)) writeFileSync(`${fixtureDir}/${name}.html`, html);
   const server = await createServer({ root:process.cwd(), server:{host:'127.0.0.1',port:0}, logLevel:'silent' });
   await server.listen();
   try { return await fn(server.httpServer.address().port); }
@@ -105,11 +120,12 @@ async function withServer(t, fn) {
 }
 
 test('navegador: las cuatro calculadoras conservan el asistente 10 de 10 tras reemplazar #root', async (t) => {
-  await withServer(t, async (port) => {
-    for (const kind of ['finiquito','isr','aguinaldo','bruto-a-neto']) {
+  const kinds = ['finiquito','isr','aguinaldo','bruto-a-neto'];
+  const fixtures = Object.fromEntries(kinds.map((kind) => [`calc-${kind}`, calculatorFixture(kind)]));
+  await withServer(t, fixtures, async (port) => {
+    for (const kind of kinds) {
       for (let i=0; i<10; i++) {
-        writeFileSync(fixturePath, calculatorFixture(kind));
-        const html=await dumpDom(`http://127.0.0.1:${port}/__orbita-race/index.html?run=${kind}-${i}`);
+        const html=await dumpDom(`http://127.0.0.1:${port}/__orbita-race/calc-${kind}.html?run=${i}`);
         assert.match(html, /data-race-visible="true"/, `${kind} carga ${i+1}: contador no visible`);
         assert.match(html, /data-race-count="Pregunta 1 de 2"/, `${kind} carga ${i+1}: asistente ausente`);
       }
@@ -118,10 +134,10 @@ test('navegador: las cuatro calculadoras conservan el asistente 10 de 10 tras re
 });
 
 test('navegador: Estados y Economía reinsertan su visual en el main vivo', async (t) => {
-  await withServer(t, async (port) => {
+  const fixtures = { estados: visualFixture('estados'), economia: visualFixture('economia') };
+  await withServer(t, fixtures, async (port) => {
     for (const mode of ['estados','economia']) {
-      writeFileSync(fixturePath, visualFixture(mode));
-      const html=await dumpDom(`http://127.0.0.1:${port}/__orbita-race/index.html?mode=${mode}`);
+      const html=await dumpDom(`http://127.0.0.1:${port}/__orbita-race/${mode}.html`);
       assert.match(html, /data-visual-connected="true"/);
       assert.match(html, new RegExp(`data-visual-section="${mode}"`));
     }
@@ -129,9 +145,8 @@ test('navegador: Estados y Economía reinsertan su visual en el main vivo', asyn
 });
 
 test('navegador: ahorro vuelve a enlazar input/change al main vivo y dibuja la proyección real', async (t) => {
-  await withServer(t, async (port) => {
-    writeFileSync(fixturePath, visualFixture('ahorro'));
-    const html=await dumpDom(`http://127.0.0.1:${port}/__orbita-race/index.html?mode=ahorro`);
+  await withServer(t, { ahorro: visualFixture('ahorro') }, async (port) => {
+    const html=await dumpDom(`http://127.0.0.1:${port}/__orbita-race/ahorro.html`);
     assert.match(html, /data-visual-connected="true"/);
     assert.match(html, /data-savings-chart="true"/);
   });

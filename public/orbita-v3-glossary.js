@@ -40,11 +40,23 @@
 
   const placeStrip = (main, strip) => {
     if ((location.pathname.replace(/\/$/, '') || '/') === '/') {
+      const search = main.querySelector('.orb-home-search');
       const routes = main.querySelector('.orb-home-route-grid');
-      if (!routes) return false;
+      const anchor = search || routes;
+      if (!anchor) return false;
       strip.classList.add('orb-glossary-home');
-      routes.insertAdjacentElement('afterend', strip);
+      anchor.insertAdjacentElement('afterend', strip);
       return true;
+    }
+
+    if (root.dataset.orbitaSection === 'calculadoras') {
+      const calculator = main.querySelector('.calculator-main') || main;
+      const form = calculator.querySelector('form');
+      if (form) {
+        strip.classList.add('orb-glossary-after-calculator');
+        form.insertAdjacentElement('afterend', strip);
+        return true;
+      }
     }
 
     const reserve = main.querySelector('[data-orbita-glossary-reserve]');

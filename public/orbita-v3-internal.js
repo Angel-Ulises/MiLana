@@ -422,36 +422,36 @@
   );
 
   const questionIndexForError = () => {
+    const errorText = normalizeCopy(currentRoot?.querySelector('.calc-error')?.textContent);
+    if (errorText) {
+      const prefix = errorText.split(' captura ')[0].split(' revisa ')[0].split(' selecciona ')[0].trim();
+      const tokens = prefix.split(' ').filter((word) => word.length > 3);
+      let best = { index: -1, score: 0 };
+      questions.forEach((question, index) => {
+        const label = questionLabelText(question);
+        const score = tokens.length ? tokens.filter((word) => label.includes(word)).length / tokens.length : 0;
+        if (score > best.score) best = { index, score };
+      });
+      if (best.score >= .5) return best.index;
+
+      if (errorText.includes('salario minimo')) {
+        const index = questions.findIndex((question) => questionLabelText(question).includes('salario minimo'));
+        if (index >= 0) return index;
+      }
+      if (errorText.includes('vacaciones') && errorText.includes('anuales')) {
+        const index = questions.findIndex((question) => {
+          const label = questionLabelText(question);
+          return label.includes('vacaciones') && label.includes('anuales');
+        });
+        if (index >= 0) return index;
+      }
+    }
+
     const invalidIndex = questions.findIndex(({ control }) => {
-      try { return control.matches(':invalid') || control.getAttribute('aria-invalid') === 'true'; }
+      try { return control.matches(':invalid'); }
       catch { return false; }
     });
-    if (invalidIndex >= 0) return invalidIndex;
-
-    const errorText = normalizeCopy(currentRoot?.querySelector('.calc-error')?.textContent);
-    if (!errorText) return -1;
-    const prefix = errorText.split(' captura ')[0].split(' revisa ')[0].split(' selecciona ')[0].trim();
-    const tokens = prefix.split(' ').filter((word) => word.length > 3);
-    let best = { index: -1, score: 0 };
-    questions.forEach((question, index) => {
-      const label = questionLabelText(question);
-      const score = tokens.length ? tokens.filter((word) => label.includes(word)).length / tokens.length : 0;
-      if (score > best.score) best = { index, score };
-    });
-    if (best.score >= .5) return best.index;
-
-    if (errorText.includes('salario minimo')) {
-      const index = questions.findIndex((question) => questionLabelText(question).includes('salario minimo'));
-      if (index >= 0) return index;
-    }
-    if (errorText.includes('vacaciones') && errorText.includes('anuales')) {
-      const index = questions.findIndex((question) => {
-        const label = questionLabelText(question);
-        return label.includes('vacaciones') && label.includes('anuales');
-      });
-      if (index >= 0) return index;
-    }
-    return -1;
+    return invalidIndex;
   };
 
   const recoverValidationStep = () => {

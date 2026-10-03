@@ -81,6 +81,8 @@ test('un error de validación en un paso previo reactiva ese paso y le da foco',
   assert.match(js, /step = index;\n\s*renderStep\(\{ focus: true \}\)/);
   assert.match(js, /errorText\.includes\('salario minimo'\)/);
   assert.match(js, /errorText\.includes\('vacaciones'\) && errorText\.includes\('anuales'\)/);
+  assert.ok(js.indexOf('const errorText =') < js.indexOf("control.matches(':invalid')"));
+  assert.doesNotMatch(js, /getAttribute\('aria-invalid'\)/);
 });
 
 test('intro repetido se oculta y el hero móvil deja la pregunta más arriba', () => {

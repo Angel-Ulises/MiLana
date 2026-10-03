@@ -2,6 +2,8 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, sep } from 'node:path';
 
 const DIST = new URL('../dist/', import.meta.url);
+const PUBLIC = new URL('../public/', import.meta.url);
+const RUNTIME_CSS_FILES = ['orbita-v3-internal.css','orbita-v3-hybrid.css','orbita-v3-experience.css','orbita-v3-glossary.css','orbita-v3-visuals.css','orbita-v3-audit.css'];
 const SKIP_ROUTES = new Set(['/404', '/widgets']);
 const PROTECTED_PENSION = '/calculadoras/pension-imss';
 const VISUAL_SECTIONS = new Set(['carreras', 'estados', 'finanzas', 'economia', 'aprende']);
@@ -62,12 +64,12 @@ const iconMenu = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4
 const boot = `<script data-orbita-boot>(function(){var q=new URLSearchParams(location.search);var r=document.documentElement;if(q.get('embed')==='1'){r.classList.add('ml-orbita-embed');return}var p=location.pathname.replace(/\\\/$/,'')||'/';r.classList.add('ml-orbita-enabled');var s=p.indexOf('/calculadoras')===0?'calculadoras':p.indexOf('/carreras')===0?'carreras':p.indexOf('/estados')===0?'estados':p.indexOf('/finanzas')===0?'finanzas':p.indexOf('/economia')===0?'economia':p.indexOf('/aprende')===0?'aprende':'inicio';r.dataset.orbitaSection=s;try{if(localStorage.getItem('ml-orbita-easy')==='1')r.classList.add('ml-orbita-easy')}catch(e){}})();</script>`;
 const embedGuard = `<style data-orbita-embed-guard>html.ml-orbita-embed .ml-orbita-shell,html.ml-orbita-embed .ml-orbita-drawer,html.ml-orbita-embed .ml-orbita-search,html.ml-orbita-embed .ml-orbita-skip-link,html.ml-orbita-embed [data-orbita-static-reserve],html.ml-orbita-embed [data-orbita-ad-reserve]{display:none!important}</style>`;
 const baseHead = `${boot}${embedGuard}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/orbita-v3-base.css">`;
-const headForRoute = (route) => `${baseHead}${route === PROTECTED_PENSION ? '' : '<link rel="stylesheet" href="/orbita-v3-prepaint.css" data-orbita-prepaint>'}`;
+const internalHead = '<link rel="stylesheet" href="/orbita-v3-runtime.css" data-orbita-runtime-bundle><script src="/orbita-v3-internal.js" defer data-orbita-internal-runtime></script><script src="/orbita-v3-experience.js" defer data-orbita-experience-runtime></script><script src="/orbita-v3-glossary.js" defer data-orbita-glossary-runtime></script><script src="/orbita-v3-visuals.js" defer data-orbita-visuals-runtime></script>';
+const headForRoute = (route) => `${baseHead}${route === PROTECTED_PENSION ? '' : '<link rel="stylesheet" href="/orbita-v3-prepaint.css" data-orbita-prepaint>'+internalHead}<script src="/orbita-v3-base.js" defer data-orbita-runtime></script>`;
 const headerNav = nav.map(([key, href, label]) => `<a data-orbita-nav="${key}" href="${href}">${label}</a>`).join('');
 const drawerNav = `<a href="/finanzas/mi-situacion">Mi situación</a>${nav.map(([key, href, label]) => `<a data-orbita-nav="${key}" href="${href}">${label === 'Finanzas' ? 'Finanzas personales' : label}</a>`).join('')}<button class="ml-orbita-mobile-easy" type="button" data-orbita-easy aria-pressed="false">Letra grande</button>`;
 const results = searchItems.map(([,href,label])=>`<a data-orbita-search-item href="${href}">${label}</a>`).join('');
 const shell = `<a class="ml-orbita-skip-link" href="#__CONTENT_ID__">Saltar al contenido</a><header class="ml-orbita-shell" data-orbita-shell><div class="ml-orbita-top"><a class="ml-orbita-logo" href="/" aria-label="MiLana, inicio"><span class="ml-orbita-logo-m" aria-hidden="true">M</span><span>MiLana</span></a><nav class="ml-orbita-nav" aria-label="Secciones">${headerNav}</nav><div class="ml-orbita-actions"><button class="ml-orbita-icon-btn" type="button" data-orbita-easy aria-pressed="false" title="Letra grande desactivada">Aa<span>Letra grande</span></button><button class="ml-orbita-icon-btn" type="button" data-orbita-search-open aria-label="Buscar">${iconSearch}</button><a class="ml-orbita-situation" href="/finanzas/mi-situacion">Mi situación</a><button class="ml-orbita-menu-btn" type="button" aria-label="Menú" aria-expanded="false" aria-controls="ml-orbita-drawer">${iconMenu}</button></div></div></header><nav class="ml-orbita-drawer" id="ml-orbita-drawer" aria-label="Menú" aria-hidden="true">${drawerNav}</nav><dialog class="ml-orbita-search" aria-labelledby="ml-orbita-search-title"><div class="ml-orbita-search-inner"><div class="ml-orbita-search-head"><h2 id="ml-orbita-search-title">Buscar en MiLana</h2><button class="ml-orbita-search-close" type="button" data-orbita-search-close aria-label="Cerrar">×</button></div><input type="search" autocomplete="off" placeholder="¿Qué quieres encontrar?" aria-label="Buscar herramientas o secciones"><div class="ml-orbita-search-list">${results}</div><p class="ml-orbita-search-empty" data-orbita-search-empty hidden>Sin resultados</p></div></dialog>`;
-const runtime = '<script src="/orbita-v3-base.js" defer data-orbita-runtime></script>';
 
 const sectionForRoute = (route) => {
   if (route.startsWith('/carreras')) return 'carreras';
@@ -111,9 +113,20 @@ function injectStaticReserves(html,route){
   const visual='<div class="orb-runtime-reserve orb-visual-reserve" data-orbita-static-reserve data-orbita-visual-reserve aria-hidden="true"></div>';
   return insertAfterHero(html,section,`${glossary}${visual}`);
 }
-function injectAdReserves(html,route){
+function insertAfterReactRoot(html,markup){
+  const rootAt=html.indexOf('id="root"');
+  if(rootAt<0) return null;
+  const mainClose=html.indexOf('</main>',rootAt);
+  if(mainClose<0) return null;
+  const rootClose=html.indexOf('</div>',mainClose);
+  if(rootClose<0) return null;
+  const at=rootClose+6;
+  return html.slice(0,at)+markup+html.slice(at);
+}
+function injectAdReserves(html,route,hasRoot){
   if(route===PROTECTED_PENSION) return html;
   const markup='<aside class="orb-ad-reserve orb-ad-leaderboard" data-orbita-ad-reserve data-ad-size="970x90" aria-hidden="true"></aside><div class="orb-ad-reserve-group" data-orbita-ad-reserve aria-hidden="true"><aside class="orb-ad-reserve orb-ad-rectangle" data-orbita-ad-reserve data-ad-size="336x280"></aside><aside class="orb-ad-reserve orb-ad-rail" data-orbita-ad-reserve data-ad-size="300x600"></aside></div><aside class="orb-ad-reserve orb-ad-mobile-banner" data-orbita-ad-reserve data-ad-size="320x50" aria-hidden="true"></aside>';
+  if(hasRoot){const outside=insertAfterReactRoot(html,markup);if(outside) return outside;}
   if(/<\/main>/i.test(html)) return html.replace(/<\/main>/i,`${markup}</main>`);
   return html.replace('</body>',`${markup}</body>`);
 }
@@ -133,6 +146,8 @@ function routeFor(path) {
   if(rel==='404.html') return '/404';
   return '/'+rel.replace(/\/index\.html$/,'').replace(/\.html$/,'');
 }
+const runtimeCss=(await Promise.all(RUNTIME_CSS_FILES.map((name)=>readFile(new URL(name,PUBLIC),'utf8')))).join('\n\n');
+await writeFile(new URL('orbita-v3-runtime.css',DIST),runtimeCss);
 let changed=0, skipped=0;
 const originals = await files(DIST);
 for(const path of originals){
@@ -144,11 +159,11 @@ for(const path of originals){
   const hasRoot = html.includes('id="root"');
   const contentId = hasRoot ? 'root' : 'ml-main';
   if(!hasRoot && /<main(?:\s|>)/i.test(html) && !html.includes('id="ml-main"')) html=html.replace(/<main(\s|>)/i, '<main id="ml-main"$1');
-  html=injectStaticReserves(html,route);
-  html=injectAdReserves(html,route);
+  if(!hasRoot) html=injectStaticReserves(html,route);
+  html=injectAdReserves(html,route,hasRoot);
   const frame = shell.replace('__CONTENT_ID__', contentId);
   const staticAttr = STATIC_TOP_ROUTES.has(route) ? ' data-orbita-static-top="true"' : '';
-  html=html.replace('</head>',`${headForRoute(route)}</head>`).replace(/<body([^>]*)>/i,`<body$1${staticAttr}>${frame}`).replace('</body>',`${runtime}</body>`);
+  html=html.replace('</head>',`${headForRoute(route)}</head>`).replace(/<body([^>]*)>/i,`<body$1${staticAttr}>${frame}`);
   await writeFile(path,html);
   changed++;
 }

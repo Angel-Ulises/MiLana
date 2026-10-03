@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import vm from 'node:vm';
 import { readFileSync } from 'node:fs';
 
 const base = readFileSync('public/orbita-v3-base.js', 'utf8');
@@ -31,6 +32,21 @@ test('el observador de calculadoras no vigila body y se pausa al mutar', () => {
   assert.match(js, /setText\(count, `Pregunta/);
 });
 
+test('select hijo directo del form nunca convierte el form en pregunta', () => {
+  const helpers = js.match(/const questionControlCount =[\s\S]*?const isQuestionHostSafe =[\s\S]*?\n  \);/)?.[0];
+  assert.ok(helpers, 'no se encontró el guard de host de pregunta');
+  const context = { safe: null };
+  vm.runInNewContext(`const QUESTION_SELECTOR='select'; let formHost=null; ${helpers}; safe=isQuestionHostSafe;`, context);
+  const root = { tagName: 'DIV' };
+  const directSelect = { tagName: 'SELECT' };
+  const form = { tagName: 'FORM', querySelectorAll: () => [directSelect] };
+  directSelect.parentElement = form;
+  assert.equal(context.safe(form, root), false);
+  assert.match(js, /return \[label, control\]\.filter\(Boolean\)/);
+  assert.match(js, /host\.tagName !== 'FORM'/);
+  assert.match(js, /questionControlCount\(host\) <= 1/);
+});
+
 test('Siguiente vive dentro del formulario, Enter avanza y la pregunta hace scroll', () => {
   assert.match(js, /formHost\.appendChild\(nav\)/);
   assert.match(js, /moveActionsAfterActiveQuestion/);
@@ -39,11 +55,22 @@ test('Siguiente vive dentro del formulario, Enter avanza y la pregunta hace scro
   assert.match(js, /HEADER_OFFSET = 82/);
 });
 
-test('el resultado se puede corregir y conserva acciones de ruta', () => {
+test('contador fija el total inicial y el resultado oculta preguntas y navegación', () => {
+  assert.match(js, /let questionTotal = 0/);
+  assert.match(js, /questionTotal = questions\.length/);
+  assert.match(js, /const total = Math\.max\(questionTotal, 1\)/);
+  assert.match(js, /const active = !showingResult && index === step/);
+  assert.match(js, /back\.hidden = step === 0 \|\| showingResult/);
+  assert.match(js, /actions\.hidden = showingResult/);
+});
+
+test('el resultado se puede corregir y conserva acciones de ruta sin duplicar WhatsApp', () => {
   assert.match(js, /Editar respuestas/);
   assert.match(js, /editing = true/);
   assert.match(js, /result\.hidden = editing/);
   assert.match(js, /Compartir por WhatsApp/);
+  assert.match(js, /hasNativeWhatsAppShare/);
+  assert.match(js, /if \(!hasNativeWhatsAppShare\(result\)\)/);
   assert.match(js, /Siguiente paso de tu ruta/);
 });
 

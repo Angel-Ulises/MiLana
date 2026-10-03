@@ -245,10 +245,10 @@ export function calcularBrutoNeto2026({
   if (netoDespuesISRIMSS < 0) throw new Error('Las bases capturadas producen deducciones superiores al bruto. Revisa los datos.');
 
   return {
-    bruto,
-    gravable,
     ...isr,
     ...imss,
+    bruto,
+    gravable,
     netoDespuesISRIMSS,
     otrasDeduccionesIncluidas: false,
   };

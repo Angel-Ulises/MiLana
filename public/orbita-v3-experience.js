@@ -96,6 +96,8 @@
     if (!hero || !copy || hero.dataset.orbitaHybridReady === '1') return;
 
     hero.dataset.orbitaHybridReady = '1';
+    // React ya renderiza el hero V4 (src/homeRoutes.jsx): no reescribir texto ni insertar nodos.
+    if (copy.querySelector('.orb-home-routes') && copy.querySelector('.orb-home-accent')) return;
     const eyebrow = copy.querySelector('.eyebrow');
     if (eyebrow) {
       eyebrow.classList.add('orb-home-kicker');

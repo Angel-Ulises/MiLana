@@ -50,7 +50,7 @@ html.ml-orbita-enabled[data-orbita-section="economia"] :is(.economy-guide,.econo
 
 /* Estados: el breadcrumb no queda pegado al eyebrow. */
 html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero) nav+ .eyebrow,
-html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero) na~~.eyebrow{margin-top:18px!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero) nav~.eyebrow{margin-top:18px!important}
 
 /* Reservas de respaldo para contenido insertado por JS. Las reservas críticas también se pintan desde base/prepaint. */
 .orb-runtime-reserve{width:min(1120px,calc(100% - 36px));margin:24px auto;border-radius:18px;background:transparent;contain:layout style paint;pointer-events:none}

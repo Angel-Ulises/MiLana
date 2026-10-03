@@ -15,3 +15,11 @@ test('la auditoría cubre el sitemap completo a 390 y 1280 y exige 4.5:1 (3:1 en
   assert.match(script, /const need = large \? 3 : 4\.5/);
   assert.match(script, /process\.exit\(1\)/);
 });
+
+test('el build verifica que los visuales ocupen >= 90% de su reserva a 390 y 1280', () => {
+  const reservas = readFileSync('scripts/verificar-reservas.mjs', 'utf8');
+  assert.match(pkg.scripts.build, /verificar-reservas\.mjs/);
+  assert.match(reservas, /const VIEWPORTS = \[390, 1280\]/);
+  assert.match(reservas, /const MIN_RATIO = 0\.9/);
+  assert.doesNotMatch(readFileSync('public/orbita-v3-prepaint.css', 'utf8'), /orb-visual-reservee/);
+});

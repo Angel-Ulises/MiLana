@@ -34,7 +34,7 @@
       if (document.querySelector(`script[data-${key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}]`)) continue;
       const script = document.createElement('script');
       script.src = src;
-      script.defer = true;
+      script.async = false;
       script.dataset[key] = 'true';
       document.body.appendChild(script);
     }

@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 
 const base=readFileSync('public/orbita-v3-base.js','utf8');
 const audit=readFileSync('public/orbita-v3-audit.css','utf8');
+const prepaint=readFileSync('public/orbita-v3-prepaint.css','utf8');
 const glossary=readFileSync('public/orbita-v3-glossary.js','utf8');
 const visuals=readFileSync('public/orbita-v3-visuals.js','utf8');
 
@@ -54,16 +55,18 @@ test('Economía adopta hero claro y Estados separa breadcrumb de eyebrow',()=>{
   assert.match(audit,/data-orbita-section="estados"[\s\S]*nav~\.eyebrow\{margin-top:18px!important\}/);
 });
 
-test('calculadoras móviles compactan hero sin tocar Pensión',()=>{
-  assert.match(audit,/data-orbita-section="calculadoras"\]:not\(\[data-orbita-protected="pension"\]\) \.calculator-hero-media\{max-height:150px!important\}/);
-  assert.match(audit,/\.calculator-main\{padding-top:6px!important\}/);
+test('calculadoras móviles compactan hero desde prepaint y reservan el asistente',()=>{
+  assert.match(prepaint,/data-orbita-section="calculadoras"[^\n]*\.calculator-purpose\{[^}]*-webkit-line-clamp:1/);
+  assert.match(prepaint,/body:has\(\.calculator-hero\) \.calc-intro\{display:none!important\}/);
+  assert.match(prepaint,/\.calculator-hero-media\{display:none!important\}/);
+  assert.match(prepaint,/\.calculator-main\{padding-top:6px!important\}/);
+  assert.match(prepaint,/\.calculator-main::before\{[^}]*height:131px/);
 });
 
-test('se definen contenedores publicitarios vacíos sin inicializar AdSense',()=>{
-  for(const token of ['.orb-ad-leaderboard','.orb-ad-rectangle','.orb-ad-rail','.orb-ad-mobile-banner']) assert.ok(audit.includes(token));
-  assert.match(audit,/\.orb-ad-leaderboard\{width:min\(970px,100%\);min-height:90px\}/);
-  assert.match(audit,/\.orb-ad-rectangle\{width:min\(336px,100%\);min-height:280px\}/);
-  assert.match(audit,/\.orb-ad-rail\{width:min\(300px,100%\);min-height:600px\}/);
-  assert.match(audit,/\.orb-ad-mobile-banner\{display:none;width:min\(320px,100%\);min-height:50px\}/);
-  assert.doesNotMatch(audit,/push\(|adsbygoogle\s*=|data-ad-client/);
+test('prepaint muestra una sola reserva publicitaria etiquetada sin inicializar AdSense',()=>{
+  assert.match(prepaint,/\.orb-ad-leaderboard\{[^}]*height:90px;min-height:90px;display:grid/);
+  assert.match(prepaint,/Publicidad · 970×90/);
+  assert.match(prepaint,/\.orb-ad-reserve-group,\.orb-ad-rectangle,\.orb-ad-rail,\.orb-ad-mobile-banner\{display:none!important\}/);
+  assert.match(prepaint,/Publicidad · 320×50/);
+  assert.doesNotMatch(prepaint,/push\(|adsbygoogle\s*=|data-ad-client/);
 });

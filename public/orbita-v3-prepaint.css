@@ -28,6 +28,8 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.
 .orb-ad-reserve,[data-orbita-ad-reserve]{max-width:100%;margin:24px auto;overflow:hidden;contain:layout paint style;border:1px dashed #B9C6D2;border-radius:14px;background:repeating-linear-gradient(135deg,#F5F8FA 0,#F5F8FA 10px,#EEF3F6 10px,#EEF3F6 20px);color:#667684}
 .orb-ad-leaderboard{width:min(970px,calc(100% - 32px));height:90px;min-height:90px;display:grid;place-items:center}
 .orb-ad-leaderboard::before{content:'Publicidad · 970×90';font:700 11px/1.2 var(--orb-font,system-ui);letter-spacing:.04em}
+.orb-ad-compact{width:min(320px,calc(100% - 28px));height:50px;min-height:50px}
+.orb-ad-compact::before{content:'Publicidad · 320×50'}
 .orb-ad-reserve-group,.orb-ad-rectangle,.orb-ad-rail,.orb-ad-mobile-banner{display:none!important}
 
 @media(max-width:760px){

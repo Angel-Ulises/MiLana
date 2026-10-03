@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
-import { spawn, spawnSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import { createServer } from 'vite';
+import { renderDom } from './helpers/chrome-dom.mjs';
 
 const candidates = [
   process.env.MILANA_CHROME,
@@ -13,17 +14,7 @@ const chrome = candidates.find((path) => existsSync(path));
 const fixtureDir = 'public/__orbita-validation';
 const fixturePath = `${fixtureDir}/index.html`;
 
-function dumpDom(url) {
-  return new Promise((resolve, reject) => {
-    const child = spawn(chrome, ['--headless=new','--no-sandbox','--disable-gpu','--virtual-time-budget=1800','--dump-dom',url], { env: process.env });
-    let stdout=''; let stderr='';
-    const timer=setTimeout(() => { child.kill('SIGKILL'); reject(new Error(`Chromium timeout: ${stderr}`)); }, 15000);
-    child.stdout.on('data', (chunk) => { stdout += chunk; });
-    child.stderr.on('data', (chunk) => { stderr += chunk; });
-    child.on('error', reject);
-    child.on('close', (code) => { clearTimeout(timer); code === 0 ? resolve(stdout) : reject(new Error(`Chromium ${code}: ${stderr}`)); });
-  });
-}
+const dumpDom = (url) => renderDom(chrome, url, { waitMs: 3000, until: "document.body.dataset.targetHidden !== undefined" });
 function aguinaldoFixture() {
   const field = (id, label, type) => `<label for="${id}">${label}</label><input id="${id}" type="${type}" step="any" aria-invalid="true">`;
   return `<!doctype html><html class="ml-orbita-enabled"><body>
@@ -56,7 +47,7 @@ function aguinaldoFixture() {
           document.body.dataset.count = document.querySelector('[data-orbita-calc-count]')?.textContent || '';
           document.body.dataset.targetHidden = document.getElementById('salario').getAttribute('aria-hidden') || '';
           document.body.dataset.targetNativeHidden = String(document.getElementById('salario').hidden);
-        }, 120);
+        }, 250);
       }, 80));
     </script>
   </body></html>`;
@@ -99,7 +90,7 @@ function fixtureHtml(kind) {
           document.body.dataset.targetHidden = target.getAttribute('aria-hidden') || '';
           document.body.dataset.targetNativeHidden = String(target.hidden);
           document.body.dataset.count = document.querySelector('[data-orbita-calc-count]')?.textContent || '';
-        }, 120);
+        }, 250);
       }, 80));
     </script>
   </body></html>`;

@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import datos from './data/carreras.json';
 import profesiones from './data/profesiones.json';
 import ocupacionesEstados from './data/stateOccupations.json';
+import AdReserve from './AdReserve.jsx';
 
 const PEXELS = {
   hub: '6147267',
@@ -51,7 +52,7 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="site-footer">
+    <><AdReserve size="970x90" /><footer className="site-footer">
       <div className="shell footer-inner">
         <div>
           <span className="brand-name">MiLana</span>
@@ -61,7 +62,7 @@ function Footer() {
         </div>
         <p>MiLana © 2026 · Hecho en México</p>
       </div>
-    </footer>
+    </footer></>
   );
 }
 

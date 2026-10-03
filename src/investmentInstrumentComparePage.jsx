@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { investmentInstrumentClasses, INSTRUMENT_SOURCE_CHECKED_AT } from './data/investment-instrument-classes.js';
 import { compararInstrumentosEducativos } from './lib/investmentInstrumentCompare.js';
+import AdReserve from './AdReserve.jsx';
 
 export function esRutaCompararInstrumentos() {
   if (typeof window === 'undefined') return false;
@@ -36,6 +37,6 @@ export default function InvestmentInstrumentComparePage() {
 
       <section className="instrument-compare-boundary"><div className="shell"><div><p className="eyebrow">Límite de esta herramienta</p><h2>Una categoría no determina qué le conviene a una persona.</h2><p>Para pasar de educación a una decisión real todavía importan objetivo, horizonte, necesidad de liquidez, capacidad financiera, tolerancia a pérdidas, impuestos, costos, documentación y condiciones del producto concreto.</p></div><div><a href="/finanzas/inversion/cetes">Ver snapshot oficial de CETES <span>→</span></a><a href="/finanzas/inversion/fondos">Ver muestra regulatoria de fondos CNBV <span>→</span></a><a href="/finanzas/inversion">Volver al mapa previo <span>→</span></a><a href="/finanzas/mi-situacion">Revisar mi situación <span>→</span></a></div></div></section>
     </main>
-    <footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Contenido educativo. No constituye asesoría de inversión ni recomendación de compra, venta o mantenimiento de instrumentos.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer>
+    <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Contenido educativo. No constituye asesoría de inversión ni recomendación de compra, venta o mantenimiento de instrumentos.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>
   </div>;
 }

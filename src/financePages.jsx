@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import datos from './data/finanzas.json';
+import AdReserve from './AdReserve.jsx';
 
 const FOTO_ID = '6963848';
 const foto = (width = 1400) => `https://images.pexels.com/photos/${FOTO_ID}/pexels-photo-${FOTO_ID}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
@@ -22,7 +23,7 @@ function Header() {
 }
 
 function Footer() {
-  return <footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>{datos.nota}</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer>;
+  return <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>{datos.nota}</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>;
 }
 
 function Fuente({ tipo }) {

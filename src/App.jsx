@@ -8,6 +8,7 @@ import articulos from "./data/articulos.json";
 import contenidoCalc from "./data/contenido-calculadoras.json";
 import catalogoSituaciones from "./data/situaciones.json";
 import catalogoFotos from "./data/fotos.json";
+import AdReserve from './AdReserve.jsx';
 
 // ═══════════════════════════════════════════════════════════════
 // DATOS OFICIALES 2026 — SAT / CONASAMI / INEGI
@@ -1736,6 +1737,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             </div>
           </section>
 
+          <AdReserve size="970x90" />
           <section id="aprende" className="section learn-section">
             <div className="shell learn-grid">
               <div className="learn-copy">
@@ -1776,7 +1778,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
         </main>
       )}
 
-      <footer className="site-footer">
+      <><AdReserve size="970x90" /><footer className="site-footer">
         <div className="shell footer-inner">
           <div>
             <span className="brand-name">MiLana</span>
@@ -1787,7 +1789,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
           </div>
           <p>MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{textDecoration:'underline'}}>Privacidad</a></p>
         </div>
-      </footer>
+      </footer></>
     </>
   );
 }

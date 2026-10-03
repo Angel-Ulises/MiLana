@@ -160,7 +160,8 @@ for(const path of originals){
   const contentId = hasRoot ? 'root' : 'ml-main';
   if(!hasRoot && /<main(?:\s|>)/i.test(html) && !html.includes('id="ml-main"')) html=html.replace(/<main(\s|>)/i, '<main id="ml-main"$1');
   if(!hasRoot) html=injectStaticReserves(html,route);
-  html=injectAdReserves(html,route,hasRoot);
+  // En páginas React el espacio lo renderiza <AdReserve/> antes del footer; aquí solo las estáticas.
+  if(!hasRoot) html=injectAdReserves(html,route,hasRoot);
   const frame = shell.replace('__CONTENT_ID__', contentId);
   const staticAttr = STATIC_TOP_ROUTES.has(route) ? ' data-orbita-static-top="true"' : '';
   html=html.replace('</head>',`${headForRoute(route)}</head>`).replace(/<body([^>]*)>/i,`<body$1${staticAttr}>${frame}`);

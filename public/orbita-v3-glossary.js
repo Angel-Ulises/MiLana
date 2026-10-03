@@ -105,7 +105,8 @@
       if (document.querySelector('[data-orbita-glossary]')) { watcher.disconnect(); return; }
       if (queued) return;
       queued = true;
-      requestAnimationFrame(() => { queued = false; run(); });
+      // Microtarea: corre antes del siguiente pintado, así la tira entra junto con el render de React sin mover el layout.
+      queueMicrotask(() => { queued = false; run(); });
     });
     watcher.observe(rootNode, { childList: true, subtree: true });
   }

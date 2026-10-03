@@ -87,9 +87,10 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] .orb-visual-reserve{min-h
 @media(max-width:760px){
   html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero{padding-block:10px!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-inner{gap:10px!important}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-copy :is(.calculator-hero-lede,.calculator-hero-proof){margin-block:6px!important}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-copy .calculator-hero-lede{margin:5px 0 0!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-copy .calculator-hero-proof{display:none!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-media{max-height:150px!important}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-media :is(picture,img){height:150px!important;max-height:150px!important;object-fit:cover!important}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-hero-media{display:none!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .calculator-main{padding-top:6px!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"]:not([data-orbita-protected="pension"]) .ml-calc-assistant{margin-bottom:8px!important;padding-bottom:10px!important}
   .orb-runtime-reserve{width:calc(100% - 28px);margin-block:18px}

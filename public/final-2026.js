@@ -6,8 +6,12 @@
 function calculatorShare(){
  if(!location.pathname.startsWith('/calculadoras/'))return;
  const host=document.querySelector('.calculator-hero-copy');
- if(!host||host.querySelector('[data-milana-share]'))return;
+ if(!host)return;
+ const existing=document.querySelector('[data-milana-share-tools]');
+ if(existing){placeCalculatorShare(existing,host);return;}
  const original='Compartir enlace de esta calculadora';
+ const wrap=document.createElement('div');
+ wrap.dataset.milanaShareTools='true';
  const button=document.createElement('button');
  button.type='button';
  button.className='btn btn-secondary';
@@ -78,8 +82,21 @@ function calculatorShare(){
    feedback('Enlace listo para copiar'); track('manual_copy');
   }finally{button.disabled=false;}
  });
- host.appendChild(button);
- host.appendChild(note);
+ wrap.append(button,note);
+ placeCalculatorShare(wrap,host);
+}
+
+function placeCalculatorShare(wrap,host){
+ const mobile=matchMedia('(max-width: 760px)').matches;
+ if(!mobile){
+  wrap.hidden=false;
+  if(wrap.parentElement!==host)host.appendChild(wrap);
+  return;
+ }
+ const result=document.querySelector('.calculator-main .ml-result:not([hidden])');
+ if(!result){wrap.hidden=true;return;}
+ wrap.hidden=false;
+ if(wrap.previousElementSibling!==result)result.insertAdjacentElement('afterend',wrap);
 }
 
 function run(){calculatorShare()}
@@ -89,6 +106,7 @@ function schedule(){
  queued=true;
  requestAnimationFrame(()=>{queued=false;run()});
 }
+matchMedia('(max-width: 760px)').addEventListener?.('change',schedule);
 if(document.readyState==='loading'){
  document.addEventListener('DOMContentLoaded',()=>{
   run();

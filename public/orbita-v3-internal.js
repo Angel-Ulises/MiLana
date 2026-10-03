@@ -422,18 +422,8 @@
   );
 
   const questionIndexForError = () => {
-    const errorText = normalizeCopy(currentRoot?.querySelector('.calc-error')?.textContent);
+    const errorText = normalizeCopy(currentRoot?.querySelector('.calc-error,[role="alert"]')?.textContent);
     if (errorText) {
-      const prefix = errorText.split(' captura ')[0].split(' revisa ')[0].split(' selecciona ')[0].trim();
-      const tokens = prefix.split(' ').filter((word) => word.length > 3);
-      let best = { index: -1, score: 0 };
-      questions.forEach((question, index) => {
-        const label = questionLabelText(question);
-        const score = tokens.length ? tokens.filter((word) => label.includes(word)).length / tokens.length : 0;
-        if (score > best.score) best = { index, score };
-      });
-      if (best.score >= .5) return best.index;
-
       if (errorText.includes('salario minimo')) {
         const index = questions.findIndex((question) => questionLabelText(question).includes('salario minimo'));
         if (index >= 0) return index;
@@ -445,6 +435,21 @@
         });
         if (index >= 0) return index;
       }
+
+      const prefix = errorText.split(' captura ')[0].split(' revisa ')[0].split(' selecciona ')[0].trim();
+      const tokens = prefix.split(' ').filter((word) => word.length > 3);
+      let best = { index: -1, matches: 0, exact: 0 };
+      questions.forEach((question, index) => {
+        const label = questionLabelText(question);
+        const matches = tokens.filter((word) => label.includes(word)).length;
+        if (tokens.length && matches === tokens.length) {
+          best = { index, matches, exact: tokens.length + 1 };
+          return;
+        }
+        const exact = prefix && label.includes(prefix) ? matches + 1 : matches;
+        if (exact > best.exact || (exact === best.exact && matches > best.matches)) best = { index, matches, exact };
+      });
+      if (best.index >= 0 && best.matches >= Math.max(1, Math.ceil(tokens.length * .5))) return best.index;
     }
 
     const invalidIndex = questions.findIndex(({ control }) => {
@@ -584,7 +589,7 @@
       dedupeCases();
       ensureResultTools();
     });
-    if (!currentRoot.querySelector('.ml-result') && currentRoot.querySelector('.calc-error')?.textContent.trim() && recoverValidationStep()) return;
+    if (!currentRoot.querySelector('.ml-result') && currentRoot.querySelector('.calc-error,[role="alert"]')?.textContent.trim() && recoverValidationStep()) return;
     renderStep();
   };
 

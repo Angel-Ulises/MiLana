@@ -1,0 +1,168 @@
+/* Órbita v3 · etapa 2: superficies internas. Sin overlays sobre fotografía. */
+html.ml-orbita-enabled[data-orbita-section="calculadoras"]{--orb-calc:#4A8AD0;--orb-calc-soft:#EAF3FC;--orb-calc-line:#C9DDF2}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero{background:linear-gradient(180deg,#FBF8F2 0%,#F7F5F0 100%);border-bottom:1px solid #E7E1D8}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-inner{max-width:1180px;margin-inline:auto;gap:clamp(30px,5vw,74px)}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-copy{align-self:center}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero h1{letter-spacing:-.035em;max-width:13ch}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media{border-radius:clamp(20px,2.5vw,34px);overflow:hidden;box-shadow:0 22px 70px rgba(19,38,59,.12);isolation:isolate}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media picture,
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media img{display:block;width:100%;height:100%}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main{width:min(100% - 32px,900px)!important;max-width:900px!important;padding-top:clamp(40px,6vw,76px)!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main>form,
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main>div:first-child{position:relative;margin:0;padding:0;background:transparent!important;border:0!important;box-shadow:none!important}
+.ml-calc-assistant{margin:0 0 24px;padding:0 0 22px;border-bottom:1px solid #DDE6EE}
+.ml-calc-assistant-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:11px}
+.ml-calc-assistant-kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#456B91}
+.ml-calc-assistant-count{font:700 12px/1.3 var(--orb-mono);color:#637586}
+.ml-calc-assistant-track{height:6px;border-radius:99px;background:#DFE9F2;overflow:hidden}
+.ml-calc-assistant-progress{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#2D6CAA,#7FB1E5);transition:width .28s ease}
+.ml-calc-assistant-copy{margin:12px 0 0;color:#667784;font-size:14px;line-height:1.55}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question]{animation:orbQuestionIn .26s ease both}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question][hidden]{display:none!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question] label:not(.calc-check){display:block!important;margin:0 0 12px!important;color:#13263B!important;font-size:clamp(22px,3vw,30px)!important;font-weight:750!important;line-height:1.17!important;letter-spacing:-.02em}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question] input:not([type="checkbox"]),
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question] select{min-height:58px!important;padding:14px 16px!important;border:1px solid #BFCFDD!important;border-radius:16px!important;background:#FFF!important;color:#13263B!important;font-size:18px!important;box-shadow:0 8px 24px rgba(19,38,59,.045)!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question] input:not([type="checkbox"]):focus,
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question] select:focus{border-color:#2D6CAA!important;box-shadow:0 0 0 4px rgba(45,108,170,.13)!important;outline:0!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question] p{max-width:64ch;margin:10px 0 0!important;color:#637586!important;font-size:15px!important;line-height:1.58!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question].calc-check,
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question] .calc-check{min-height:58px;padding:15px 16px;border:1px solid #CAD8E4;border-radius:16px;background:#FFF;color:#233D57;font-size:17px!important;line-height:1.45}
+.ml-calc-example{display:inline-flex;align-items:center;min-height:44px;margin-top:12px;padding:0 14px;border:1px solid #C5D7E8;border-radius:999px;background:#F2F7FB;color:#245C93;font:750 14px/1 var(--orb-font);cursor:pointer}
+.ml-calc-example:hover,.ml-calc-example:focus-visible{background:#E4F0FB;border-color:#8EB5DA}
+.ml-calc-flow-actions{display:flex;align-items:center;gap:10px;margin:22px 0 4px}
+.ml-calc-flow-actions button{min-height:50px;padding:0 18px;border-radius:14px;font:750 15px/1 var(--orb-font);cursor:pointer}
+.ml-calc-flow-back{border:1px solid #C9D8E5;background:#FFF;color:#31506D}
+.ml-calc-flow-next{margin-left:auto;border:0;background:#2D6CAA;color:#FFF;box-shadow:0 10px 24px rgba(45,108,170,.22)}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main .ml-btn[data-orbita-primary-action="true"]{min-height:54px!important;margin-top:22px!important;border-radius:15px!important;background:#2D6CAA!important;box-shadow:0 12px 28px rgba(45,108,170,.24)!important;font-size:17px!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result{position:relative;margin-top:26px!important;padding:clamp(22px,4vw,34px)!important;border:1px solid #C9DDF2!important;border-radius:24px!important;background:linear-gradient(145deg,#F8FBFE,#ECF5FD)!important;box-shadow:0 20px 55px rgba(34,84,130,.09)!important;scroll-margin-top:90px}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result::before{content:"Resultado";display:block;margin-bottom:14px;color:#315E88;font:800 11px/1 var(--orb-mono);letter-spacing:.1em;text-transform:uppercase}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result>div:not(.ml-details){border-color:#D2E2F0!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result [data-orbita-primary-result="true"]{padding:16px 0!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result [data-orbita-primary-result="true"] span:first-child{font-size:14px!important;font-weight:750!important;color:#315E88!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result [data-orbita-primary-result="true"] span:last-child{font-family:Newsreader,Georgia,serif!important;font-size:clamp(30px,5vw,48px)!important;line-height:1!important;letter-spacing:-.035em!important;color:#173C61!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result button{min-height:48px!important;border-radius:14px!important;font-size:15px!important}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-trust{margin-top:54px;padding-top:28px;border-top:1px solid #DDE6EE}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calc-intro,
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main>div:first-child>p:first-child{max-width:68ch;margin:0 0 26px!important;color:#5E6B78!important;font-size:17px!important;line-height:1.7!important}
+@keyframes orbQuestionIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media{border-radius:18px;box-shadow:0 14px 42px rgba(19,38,59,.10)}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main{width:min(100% - 28px,900px)!important;padding-top:38px!important}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question] label:not(.calc-check){font-size:23px!important}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question] input:not([type="checkbox"]),html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question] select{font-size:17px!important}
+  .ml-calc-flow-actions{position:static}
+}
+@media(prefers-reduced-motion:reduce){
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] [data-orbita-question]{animation:none}
+  .ml-calc-assistant-progress{transition:none}
+}
+
+/* Parte 2 · Finanzas: verde, lectura de flujo y fuentes visibles. */
+html.ml-orbita-enabled[data-orbita-section="finanzas"]{--orb-section:#2F9E72;--orb-section-soft:#EAF7F1;--orb-section-ink:#174C39}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-page-hero,.advisor-hero,.investment-hero,.instrument-compare-hero,.cetes-reference-hero){background:linear-gradient(145deg,#F8FBF9 0%,#EDF7F2 100%)!important;color:#13263B!important;border-bottom:1px solid #DCE9E2}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-page-hero,.advisor-hero,.investment-hero,.instrument-compare-hero,.cetes-reference-hero) :is(h1,h2,strong){color:#173D31!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-page-hero,.advisor-hero,.investment-hero,.instrument-compare-hero,.cetes-reference-hero) :is(p,nav,nav a){color:#586D65!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-page-photo,.ml-discovery-photo){box-shadow:0 20px 56px rgba(27,75,58,.10)!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] .finance-page-photo{border-radius:26px!important;overflow:hidden}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-route-list>a,.finance-housing-steps>a,.finance-next-box,.advisor-path-list>a,.investment-next a){border-radius:16px!important;border-color:#D7E5DD!important;background:#FFF!important;box-shadow:none!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-route-list>a,.finance-housing-steps>a,.advisor-path-list>a,.investment-next a):hover{border-color:#84BCA6!important;transform:translateY(-2px)}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-form-card,.advisor-form,.investment-form){position:static!important;border:0!important;border-top:3px solid #62B18E!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:24px 0!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-field input,.advisor-field input,.advisor-field select,.investment-field>div,.instrument-selector select){min-height:54px;border-radius:14px!important;border-color:#C9DAD1!important;background:#FFF!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-results,.advisor-output,.investment-output){padding-left:clamp(0px,2vw,24px)}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-source,.investment-source,.instrument-source-panel){border-color:#CFE2D8!important;background:#F2F8F5!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-result-card,.advisor-scenario-grid article,.investment-factors article,.investment-scenario,.cetes-reference-grid article){border-color:#D6E5DD!important;box-shadow:none!important}
+/* Regla Angel: convertir dos overlays heredados en composición editorial separada. */
+html.ml-orbita-enabled .ml-discovery-photo{display:grid!important;width:min(100%,520px)!important;aspect-ratio:auto!important;overflow:visible!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+html.ml-orbita-enabled .ml-discovery-photo::after{display:none!important}
+html.ml-orbita-enabled .ml-discovery-photo img{position:static!important;width:100%!important;aspect-ratio:4/3;border-radius:24px!important;object-fit:cover!important;box-shadow:0 20px 56px rgba(19,38,59,.10)}
+html.ml-orbita-enabled .ml-discovery-photo span{position:static!important;justify-self:start;margin-top:12px;padding:0!important;border:0!important;background:transparent!important;backdrop-filter:none!important;color:#607180!important;font-size:12px!important}
+html.ml-orbita-enabled .ml-editorial-feature{display:grid!important;min-height:0!important;overflow:visible!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+html.ml-orbita-enabled .ml-editorial-feature::after{display:none!important}
+html.ml-orbita-enabled .ml-editorial-feature>img{position:static!important;width:100%!important;height:auto!important;aspect-ratio:16/10;border-radius:26px!important;object-fit:cover!important;box-shadow:0 22px 60px rgba(19,38,59,.11)}
+html.ml-orbita-enabled .ml-editorial-overlay{position:static!important;padding:24px 2px 0!important;color:#13263B!important}
+html.ml-orbita-enabled .ml-editorial-overlay .eyebrow{color:#8B5A22!important}
+html.ml-orbita-enabled .ml-editorial-overlay h2{color:#13263B!important;font-size:clamp(34px,4vw,54px)!important}
+html.ml-orbita-enabled .ml-editorial-overlay p:last-child{color:#61707D!important;font-size:15px!important}
+
+/* Parte 2 · Carreras: violeta, datos primero y comparación legible. */
+html.ml-orbita-enabled[data-orbita-section="carreras"]{--orb-section:#7766DB;--orb-section-soft:#F0EEFF;--orb-section-ink:#3C327D}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-hero,.profession-hero,.cc-hero){background:linear-gradient(145deg,#FBF8F2 0%,#F3F0FF 100%)!important;color:#13263B!important;border-bottom:1px solid #E3DFF1}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-hero-media,.profession-hero-media){border-radius:26px!important;box-shadow:0 20px 60px rgba(63,52,126,.12)!important;overflow:hidden}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-hero-media,.profession-hero-media)::after{display:none!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-hero-media,.profession-hero-media) img{transform:none!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-route,.career-question-grid a,.profession-related-grid>a,.cc-card,.career-state-focus){border-color:#DED9F2!important;box-shadow:none!important;background:#FFF!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-route,.career-question-grid a,.profession-related-grid>a):hover{border-color:#A99FE5!important;box-shadow:0 12px 30px rgba(80,66,150,.08)!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-data-section,.career-snapshot,.profession-summary,.profession-context,.cc-tool){background:#FCFBFF!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-rank-number,.profession-source>span,.career-source>span,.cc-label){color:#5949BA!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-state-tool select,.cc-selectors select){min-height:54px!important;border:1px solid #CFC8EA!important;border-radius:14px!important;background:#FFF!important;color:#2A2850!important;font-size:17px!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .cc-selectors{gap:14px!important;padding:20px 0 28px!important;border-bottom:1px solid #E1DDF1}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .cc-card{border-radius:22px!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .cc-primary strong{font-size:clamp(34px,5vw,52px)!important;color:#44389A!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .profession-metric:first-child strong{color:#44389A!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .career-callout{background:#F0EEFF!important;color:#312A68!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .career-money-bridge{background:#251F4D!important}
+@media(max-width:760px){
+  html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.finance-results,.advisor-output,.investment-output){padding-left:0}
+  html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-hero-media,.profession-hero-media){border-radius:18px!important}
+  html.ml-orbita-enabled[data-orbita-section="carreras"] .cc-selectors{grid-template-columns:1fr!important}
+}
+
+/* Parte 3 · Estados: turquesa, contexto comparativo sin ranking. */
+html.ml-orbita-enabled[data-orbita-section="estados"]{--orb-section:#2AA89A;--orb-section-soft:#E9F8F6;--orb-section-ink:#185B55}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero){background:linear-gradient(145deg,#FBF8F2 0%,#EEF9F7 100%)!important;border-bottom:1px solid #D9EAE7}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero) :is(h1,h2,strong){color:#174D49!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-proof span,.state-source>span,.state-occupations-source>span,.state-housing-source>span){border-color:#BFE0DB!important;background:#E9F8F5!important;color:#1D746B!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] .state-selector{max-width:760px;padding:0 0 22px;border:0;border-bottom:2px solid #B8DDD7;border-radius:0;background:transparent;box-shadow:none}
+html.ml-orbita-enabled[data-orbita-section="estados"] .state-selector select{min-height:54px!important;border:1px solid #C5DDD9!important;border-radius:14px!important;background:#FFF!important;font-size:17px!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] .state-selector button{min-height:54px!important;height:auto!important;border-radius:14px!important;background:#237E75!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-grid>a,.state-action-grid>a,.state-near-grid>a,.state-metric-grid article,.sc-summary,.sc-rules>div){border-color:#D7E8E5!important;box-shadow:none!important;background:#FFF!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-grid>a,.state-action-grid>a,.state-near-grid>a):hover{border-color:#82C9C0!important;box-shadow:0 12px 30px rgba(29,116,107,.07)!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-grid strong,.state-metric-grid strong,.state-near-grid strong,.sc-summary div strong,.sc-metric-value strong){color:#1A625B!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-directory,.state-metrics,.sc-tool){background:#FCFEFD!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] .sc-selectors{padding:0 0 28px;border-bottom:1px solid #D7E8E5}
+html.ml-orbita-enabled[data-orbita-section="estados"] .sc-selectors select{min-height:54px!important;border-color:#BDD9D5!important;background:#FFF!important;font-size:17px!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] .sc-differences{border-radius:22px!important;background:#123F3B!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] .sc-next a{border-color:#CBE3DF!important;background:#EEF8F6!important;color:#174D49!important;box-shadow:none!important}
+/* Parte 3 · Economía: ámbar, lectura editorial sin cubrir fotografía. */
+html.ml-orbita-enabled[data-orbita-section="economia"]{--orb-section:#E5A72B;--orb-section-soft:#FFF7E5;--orb-section-ink:#6E4A0B}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero{background:linear-gradient(145deg,#171F2A 0%,#2B2519 100%)!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero .eyebrow,
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero-panel>span,
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero-panel b{color:#F4C864!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero-panel{border-color:rgba(244,200,100,.22)!important;background:rgba(255,248,229,.055)!important;backdrop-filter:none!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-filters button{min-height:44px;padding-inline:15px;border-color:#E6D8B8!important;background:#FFF!important;color:#645432!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-filters button.is-active{border-color:#D6A23C!important;background:#FFF5DD!important;color:#795313!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-card{border-color:#E6E0D5!important;border-radius:20px!important;box-shadow:none!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-card.featured{border-radius:24px!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-card figure{position:relative;background:#EEE9DF!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-card figure::after{display:none!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-card figure img{transform:none!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-card:hover{border-color:#DAB969!important;box-shadow:0 14px 34px rgba(102,76,25,.08)!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-meta span{color:#9A6819!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-article-hero{background:linear-gradient(145deg,#FBF8F2,#FFF8E9)!important;border-bottom-color:#E9DEC7!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-article-hero figure{border-radius:26px!important;box-shadow:0 20px 60px rgba(95,72,25,.10)!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-source{border-color:#E7D9BA!important;background:#FFF9EA!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-related{background:#211D16!important}
+/* Parte 3 · Aprende: coral editorial, lectura larga y CTAs integrados. */
+html.ml-orbita-enabled[data-orbita-section="aprende"]{--orb-section:#E97856;--orb-section-soft:#FFF0EA;--orb-section-ink:#7A3D2A}
+html.ml-orbita-enabled[data-orbita-section="aprende"] body{background:#FFFEFC!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] main.wrap{width:min(calc(100% - 36px),1120px)!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .hub{padding-top:54px!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .hubhead{max-width:860px!important;padding-bottom:28px;border-bottom:2px solid #F0D7CE}
+html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.hubhead,.article) .eyebrow{color:#B55335!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .hubhead h1{max-width:780px;font-size:clamp(46px,7vw,76px)!important;line-height:.98!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .grid{gap:0!important;border-top:1px solid #E9DED9}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .grid .card{min-height:0!important;padding:24px 18px!important;border:0!important;border-bottom:1px solid #E9DED9!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .grid .card:hover{transform:none!important;background:#FFF8F4!important;box-shadow:none!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .grid .card h2{margin:12px 0 8px!important;font-family:Newsreader,Georgia,serif!important;font-size:26px!important;line-height:1.08!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .grid .tag{color:#B55335!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .grid .more{color:#9B482F!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .article{max-width:780px!important;padding-top:54px!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .article h1{font-size:clamp(44px,6.5vw,68px)!important;line-height:1!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .article h2{margin-top:46px!important;font-size:32px!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .article :is(p,li){font-size:17px!important;line-height:1.78!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .callout{border:0!important;border-left:4px solid #E97856!important;border-radius:0 16px 16px 0!important;background:#FFF3EE!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .cta{border-radius:18px!important;background:#36231D!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .cta a{min-height:48px;align-items:center;border-radius:12px!important;color:#6C3525!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .sources{border-top-color:#E8D8D1!important}
+@media(max-width:680px){html.ml-orbita-enabled[data-orbita-section="aprende"] .grid{grid-template-columns:1fr!important}html.ml-orbita-enabled[data-orbita-section="aprende"] .article :is(p,li){font-size:17px!important}}

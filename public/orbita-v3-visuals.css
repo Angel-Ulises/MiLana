@@ -1,0 +1,14 @@
+/* Gráficas Órbita V4: capa visual, sin datos inventados ni lógica de cálculo. */
+.orb-bar-row{width:100%;padding:4px 0;border:0;background:transparent;text-align:left;cursor:pointer;font:inherit}
+.orb-bar-row:focus-visible{outline:3px solid color-mix(in srgb,var(--orb-section) 35%,transparent);outline-offset:4px;border-radius:10px}
+.orb-state-tile{border:1px solid #D8E6E3}
+.orb-chart-readout a{color:var(--orb-section)!important;font-weight:800;text-decoration:none}
+.orb-chart-readout a:hover,.orb-chart-readout a:focus-visible{text-decoration:underline}
+.orb-economy-line{display:block;width:100%;height:auto;max-height:250px;border:1px solid #E6E1D8;border-radius:18px;background:linear-gradient(180deg,#FFFCF5,#FFF8E8);overflow:visible}
+.orb-economy-area{fill:rgba(154,104,25,.10)}
+.orb-economy-polyline{fill:none;stroke:#9A6819;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1200;stroke-dashoffset:1200;animation:orbLineDraw 1s ease forwards}
+.orb-economy-point{fill:#FFF;stroke:#9A6819;stroke-width:4;cursor:pointer;transition:r .16s ease,fill .16s ease}
+.orb-economy-point:hover,.orb-economy-point:focus{r:9;fill:#FFF1CB;outline:none}
+@keyframes orbLineDraw{to{stroke-dashoffset:0}}
+@media(max-width:620px){.orb-economy-line{min-height:190px}.orb-state-tile{min-height:52px}.orb-projection-chart{height:160px}}
+@media(prefers-reduced-motion:reduce){.orb-economy-polyline{animation:none;stroke-dasharray:none;stroke-dashoffset:0}.orb-economy-point{transition:none}}

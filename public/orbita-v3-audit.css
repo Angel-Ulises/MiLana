@@ -1,0 +1,152 @@
+/* PR #87 · correcciones de auditoría visual y reservas de layout. Solo presentación. */
+html.ml-orbita-enabled,html.ml-orbita-enabled body{max-width:100%;overflow-x:clip}
+
+/* Inicio: la foto vuelve al flujo; nunca hereda el absolute del Hero V2. */
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media-wrap{position:relative!important;inset:auto!important;min-width:0!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media{position:relative!important;inset:auto!important;min-width:0!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media::before,
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media::after{display:none!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media picture{position:relative!important;inset:auto!important;height:auto!important;min-width:0!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media img{position:relative!important;inset:auto!important;height:auto!important;max-width:100%!important;transform:none!important;filter:none!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{width:100%!important;min-width:0!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .orb-home-search{color:#4E5C69!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .orb-home-search svg{stroke:#4E5C69!important}
+
+/* Contraste: el color global de párrafo no invade superficies oscuras. */
+html.ml-orbita-enabled :is(.ml-money-head,.footer-inner,.economy-related) :is(p,li,small,figcaption),
+html.ml-orbita-enabled .finance-advisor-preview :is(p,li,small,figcaption):not(aside *){color:#DCE6EF!important}
+html.ml-orbita-enabled :is(.ml-money-card,.trust-points,.career-money-bridge-inner) :is(p,li,small,figcaption){color:#E2EBF3!important}
+html.ml-orbita-enabled :is(.ml-money-card,.trust-points,.career-money-bridge-inner) :is(h2,h3,strong){color:#FFF!important}
+html.ml-orbita-enabled .ml-money-head .eyebrow,
+html.ml-orbita-enabled .trust-band .eyebrow,
+html.ml-orbita-enabled .career-money-bridge-inner .eyebrow{color:#C7E0F7!important}
+html.ml-orbita-enabled .ml-money-card h3{color:#F4F7FC!important}
+html.ml-orbita-enabled .career-money-bridge-inner a{color:#FFF!important;text-decoration-color:#BFD7EB!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] .finance-next-box>span{color:#245C93!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .career-question-grid span{color:#4D6478!important}
+html.ml-orbita-enabled .footer-inner a{color:#F4F7FC!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] .footer-inner :is(p,li,small,figcaption){color:#DCE6EF!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] .footer-inner a{color:#F4F7FC!important}
+
+/* Tarjetas oscuras de fichas estatales. */
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-occupations-guardrails,.state-meaning-grid,.state-checks) :is(p,li,small,dt,dd,span){color:#E1EAF1!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-occupations-guardrails,.state-meaning-grid,.state-checks) :is(h2,h3,strong){color:#FFF!important}
+
+/* Secundarios sobre superficies claras: AA o mejor. */
+html.ml-orbita-enabled .feature-card .card-tag{color:#455A6D!important}
+html.ml-orbita-enabled .article-row>span,
+html.ml-orbita-enabled .article-row span{color:#53616D!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] .state-compare-entry>span{color:#53616D!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-detail,.state-page,.state-detail-page) dt{color:#53616D!important}
+
+/* Economía: hero claro y lectura con contraste alto. */
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero{background:linear-gradient(145deg,#FFFDF8 0%,#FFF5DC 100%)!important;color:#15181E!important;border-bottom:1px solid #E8DDBF!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero :is(h1,h2,strong){color:#2B2418!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero :is(p,li,span:not(.eyebrow)){color:#53616D!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero .eyebrow{color:#7A5011!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero-panel{background:#FFF!important;border-color:#E6D5A9!important;backdrop-filter:none!important;color:#2B2418!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] .economy-hero-panel :is(span,b,p,li){color:#4F4634!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] :is(.economy-guide,.economy-reading,.economy-how-read,.economy-how) :is(p,li,span){color:#4B5966!important}
+
+/* Estados: el breadcrumb no queda pegado al eyebrow. */
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero) nav+ .eyebrow,
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero) nav~.eyebrow{margin-top:18px!important}
+
+/* Reservas de respaldo para contenido insertado por JS. Las reservas críticas también se pintan desde base/prepaint. */
+.orb-runtime-reserve{width:min(1120px,calc(100% - 36px));margin:24px auto;border-radius:18px;background:transparent;contain:layout style paint;pointer-events:none}
+.orb-glossary-reserve{min-height:180px}
+.orb-visual-reserve{min-height:360px}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .orb-visual-reserve{min-height:395px}
+html.ml-orbita-enabled[data-orbita-section="estados"] .orb-visual-reserve{min-height:520px}
+html.ml-orbita-enabled[data-orbita-section="aprende"] .orb-visual-reserve{min-height:300px}
+html.ml-orbita-enabled[data-orbita-section="economia"] .orb-visual-reserve{min-height:380px}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] .orb-visual-reserve{min-height:430px}
+
+/* Finanzas: visual conceptual con degradado suave, no una recta que parezca rendimiento. */
+.orb-projection-chart{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));align-items:end;gap:10px;padding:18px!important;background:linear-gradient(180deg,#FBFDFC,#F1F7F4)!important}
+.orb-projection-chart::before,.orb-projection-line{display:none!important}
+.orb-projection-stage{min-height:72px;display:grid;align-content:end;gap:6px;padding:12px;border-radius:14px;background:linear-gradient(180deg,#F5FBF8 0%,color-mix(in srgb,var(--orb-section) 16%,#FFF) 100%);border:1px solid color-mix(in srgb,var(--orb-section) 22%,#DDE6E1);color:#334D43}
+.orb-projection-stage:nth-child(2){min-height:94px}.orb-projection-stage:nth-child(3){min-height:116px}.orb-projection-stage:nth-child(4){min-height:138px}
+.orb-projection-stage span{font:800 11px/1 var(--orb-mono);color:#53616D}.orb-projection-stage strong{font:750 13px/1.25 var(--orb-font);color:#263D34}
+
+/* Economía: porcentajes independientes en barras, con degradado; no línea temporal falsa. */
+.orb-economy-bars{display:grid;gap:10px;padding:18px;border:1px solid #E6E1D8;border-radius:18px;background:linear-gradient(180deg,#FFFCF5,#FFF8E8)}
+.orb-economy-bar{display:grid;grid-template-columns:minmax(110px,1fr) minmax(150px,3fr) auto;align-items:center;gap:10px;border:0;background:transparent;padding:3px 0;text-align:left;cursor:pointer}
+.orb-economy-bar-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#4C4335;font:700 12px/1.25 var(--orb-font)}
+.orb-economy-bar-track{height:14px;border-radius:999px;background:#F0E7D4;overflow:hidden}
+.orb-economy-bar-fill{display:block;height:100%;width:var(--orb-economy-width,20%);border-radius:999px;background:linear-gradient(90deg,#F2D18A,#9A6819)}
+.orb-economy-bar-value{color:#5B4521;font:800 12px/1 var(--orb-mono);white-space:nowrap}
+
+/* Proyección basada solo en el resultado real de /finanzas/ahorro. */
+.orb-savings-result-chart{margin-top:18px;padding:16px;border:1px solid #DDE7E1;border-radius:18px;background:linear-gradient(180deg,#FBFEFC,#F0F8F4)}
+.orb-savings-result-chart>p{margin:0 0 14px!important;color:#455B50!important;font-size:13px!important}
+.orb-savings-result-bars{height:190px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:end;gap:10px}
+.orb-savings-result-bar{display:grid;align-content:end;gap:6px;min-height:64px;height:var(--orb-savings-height,25%);padding:10px;border-radius:14px 14px 8px 8px;background:linear-gradient(180deg,#CFE9DD,#247A59);color:#FFF}
+.orb-savings-result-bar span{font:750 11px/1.2 var(--orb-font);color:#FFF!important}.orb-savings-result-bar strong{font:800 12px/1.2 var(--orb-mono);color:#FFF!important}
+
+/* Reservas visuales y gráficas responsivas. La geometría crítica de calculadoras vive en prepaint. */
+@media(max-width:760px){
+  .orb-runtime-reserve{width:calc(100% - 28px);margin-block:18px}
+  .orb-glossary-reserve{min-height:220px}.orb-visual-reserve{min-height:420px}
+  html.ml-orbita-enabled[data-orbita-section="carreras"] .orb-visual-reserve{min-height:420px}
+  html.ml-orbita-enabled[data-orbita-section="estados"] .orb-visual-reserve{min-height:930px}
+  html.ml-orbita-enabled[data-orbita-section="finanzas"] .orb-visual-reserve{min-height:670px}
+  html.ml-orbita-enabled[data-orbita-section="economia"] .orb-visual-reserve{min-height:540px}
+  html.ml-orbita-enabled[data-orbita-section="aprende"] .orb-visual-reserve{min-height:430px}
+  .orb-projection-chart{grid-template-columns:1fr 1fr!important;height:auto!important}.orb-projection-stage{min-height:82px!important}
+  .orb-economy-bar{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"label value" "track track";gap:5px 10px}.orb-economy-bar-label{grid-area:label}.orb-economy-bar-track{grid-area:track}.orb-economy-bar-value{grid-area:value;justify-self:end}
+}
+
+/* Contraste (revisión v10): las reglas genéricas de texto no revisan el fondo real. Aquí cada superficie
+   fija su propio texto; scripts/verificar-contraste.mjs recorre todo el sitemap y falla ante casos nuevos. */
+/* Texto tenue sobre superficies claras: migas, etiquetas, unidades y notas. */
+html.ml-orbita-enabled #root :is(main,section) nav,html.ml-orbita-enabled #root :is(main,section) nav span{opacity:1!important}
+html.ml-orbita-enabled #root :is(main,section) nav span{color:#48566A!important}
+html.ml-orbita-enabled #root :is(main,section) nav a:not(.btn){color:#2F4558!important}
+html.ml-orbita-enabled :is(.profession-metric,.finance-result-card,.finance-field,.advisor-field,.investment-field,.cc-card,.sc-tool,.advisor-result,.co-card,.career-route,.career-state-occupations,.economy-big-number,.economy-card,.sc-metric-value,.instrument-selector,.investment-form-divider,.investment-field,.cetes-reference-grid,.investment-factor-state) :is(span,dt,b,small,p,label>span):where(:not(.positive):not(.negative):not(.btn)){color:#53616D!important}
+html.ml-orbita-enabled .economy-related-head a{color:#F2D18A!important}
+/* Superficies oscuras: texto claro. */
+html.ml-orbita-enabled[data-orbita-section] :is(.sc-differences,.co-explain,.co-metric,.instrument-compare-heads article:not(:nth-child(2)),.cnbv-funds-boundary,.investment-security,.advisor-path>div:not(.advisor-path-list),.cc-next,.finance-checklist,.state-housing-primary,.state-housing-grid-hub article:first-child,.cc-primary,.cnbv-funds-hero,.site-footer,[style*="ml-navy"]) :is(p,li,small,figcaption,dt,dd,span:not(a span)){color:rgba(255,255,255,.9)!important}
+html.ml-orbita-enabled[data-orbita-section] :is(.sc-differences,.co-explain,.co-metric,.instrument-compare-heads article:not(:nth-child(2)),.cnbv-funds-boundary,.investment-security,.advisor-path>div:not(.advisor-path-list),.cc-next,.finance-checklist,[style*="ml-navy"]) .eyebrow{color:#CFE6FF!important}
+html.ml-orbita-enabled[data-orbita-section] :is(.sc-differences,.co-explain,.co-metric,.instrument-compare-heads article:not(:nth-child(2)),.investment-security,.advisor-path>div:not(.advisor-path-list),.finance-checklist,[style*="ml-navy"]) a:not(.btn):not(.ml-btn),
+html.ml-orbita-enabled[data-orbita-section] :is(.sc-differences,.co-explain,.co-metric,.instrument-compare-heads article:not(:nth-child(2)),.investment-security,.advisor-path>div:not(.advisor-path-list),.finance-checklist,[style*="ml-navy"]) a:not(.btn):not(.ml-btn) :is(span,b,strong){color:#CFE6FF!important}
+html.ml-orbita-enabled[data-orbita-section] .cc-primary strong{color:#D9D2FF!important}
+/* Enlaces-botón sobre secciones oscuras: cada uno con el color de su propio fondo. */
+html.ml-orbita-enabled[data-orbita-section] .cc-next a,html.ml-orbita-enabled[data-orbita-section] .cc-next a *{color:#FFF!important}
+html.ml-orbita-enabled[data-orbita-section] .cc-next a:last-child,html.ml-orbita-enabled[data-orbita-section] .cc-next a:last-child *{color:#173C61!important}
+html.ml-orbita-enabled[data-orbita-section] .cnbv-funds-boundary a,html.ml-orbita-enabled[data-orbita-section] .cnbv-funds-boundary a *{color:#13263B!important}
+html.ml-orbita-enabled[data-orbita-section] .instrument-compare-boundary a,html.ml-orbita-enabled[data-orbita-section] .instrument-compare-boundary a *{color:#FFF!important}
+html.ml-orbita-enabled[data-orbita-section] .instrument-compare-boundary a+a,html.ml-orbita-enabled[data-orbita-section] .instrument-compare-boundary a+a *{color:#173A5A!important}
+/* Tarjetas claras dentro de secciones oscuras. */
+html.ml-orbita-enabled[data-orbita-section] :is(.advisor-path-list>a,.investment-next a) :is(strong,h3){color:#13263B!important}
+html.ml-orbita-enabled[data-orbita-section] :is(.advisor-path-list>a,.investment-next a) p{color:#4E5C69!important}
+html.ml-orbita-enabled[data-orbita-section] :is(.advisor-path-list>a,.investment-next a)>span,html.ml-orbita-enabled[data-orbita-section] :is(.advisor-path-list>a,.investment-next a) b{color:#245C93!important}
+html.ml-orbita-enabled[data-orbita-section] .co-next-links a,html.ml-orbita-enabled[data-orbita-section] .co-next-links a *{color:#173C61!important}
+html.ml-orbita-enabled[data-orbita-section] .co-next-links a:last-child,html.ml-orbita-enabled[data-orbita-section] .co-next-links a:last-child *{color:#FFF!important}
+html.ml-orbita-enabled a.btn.btn-primary{color:#FFF!important}
+/* Superficies claras con texto blanco heredado de la hoja original. */
+html.ml-orbita-enabled[data-orbita-section="inicio"] .calculator-card :is(h2,h3){color:#13263B!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .calculator-card :is(p,.text-link){color:#4E5C69!important}
+html.ml-orbita-enabled .state-entry-band h2{color:#13263B!important}
+html.ml-orbita-enabled .state-entry-band p{color:#4E5C69!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] .finance-next-box :is(h2,h3,strong){color:#13263B!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] .finance-next-box p{color:#4E5C69!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .profession-context :is(h2,h3,strong){color:#13263B!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .profession-context :is(p,span,small,li){color:#4E5C69!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .career-state-focus :is(strong,h2,h3){color:#13263B!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] .career-state-focus :is(span,p,small){color:#4E5C69!important}
+html.ml-orbita-enabled .investment-proof span{color:#2A4A66!important}
+html.ml-orbita-enabled .economy-step>span{color:#7A5212!important}
+html.ml-orbita-enabled .orb-projection-stage span{color:#245C93!important}
+html.ml-orbita-enabled[data-orbita-section] :is(.cnbv-funds-hero,.site-footer) :is(nav span,nav a,.brand-name,span){color:rgba(255,255,255,.9)!important}
+html.ml-orbita-enabled #root .cnbv-funds-hero :is(.eyebrow,p,span,nav a,nav span){color:#FFF!important}
+html.ml-orbita-enabled .investment-factor-state.faltan-datos{color:#4A5865!important}
+html.ml-orbita-enabled[data-orbita-section] .instrument-compare-heads article:nth-child(2) :is(p,span){opacity:1!important;color:#3F4D5A!important}
+html.ml-orbita-enabled .instrument-source-panel p,html.ml-orbita-enabled .career-occupation-page .shell>p{color:#4A5865!important}
+html.ml-orbita-enabled .career-compare-page article>span,html.ml-orbita-enabled .career-state-row.header span{color:#53616D!important}
+/* Tarjeta del asesor en Inicio (degradado sobre sección oscura) y etiqueta bajo la foto de descubrimiento. */
+html.ml-orbita-enabled .ml-advisor-strip p{color:rgba(235,243,249,.7)!important}
+html.ml-orbita-enabled .ml-advisor-strip a,html.ml-orbita-enabled .ml-advisor-strip a span{color:#FFF!important}
+html.ml-orbita-enabled .ml-discovery-photo span{color:#4A5865!important}
+/* Enlaces dentro de párrafos: subrayados para no depender solo del color (axe link-in-text-block). */
+html.ml-orbita-enabled :is(main,article,section) :is(p,li) a:not(.btn):not(.ml-btn):not(.orb-result-share):not(.orb-result-next){text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}

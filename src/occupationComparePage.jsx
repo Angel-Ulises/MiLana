@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import carreras from './data/profesiones.json';
 import ocupaciones from './data/ocupaciones.json';
+import AdReserve from './AdReserve.jsx';
 
 const dinero = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(Number(n) || 0);
 const numero = (n) => new Intl.NumberFormat('es-MX').format(Number(n) || 0);
@@ -15,7 +16,7 @@ function Header() {
 }
 
 function Footer() {
-  return <footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Carrera y ocupación son estadísticas distintas; MiLana no las convierte en una sola cifra.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer>;
+  return <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Carrera y ocupación son estadísticas distintas; MiLana no las convierte en una sola cifra.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>;
 }
 
 function TarjetaCarrera({ carrera }) {

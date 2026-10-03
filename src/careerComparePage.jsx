@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import datos from './data/profesiones.json';
+import AdReserve from './AdReserve.jsx';
 
 const dinero = (n) => new Intl.NumberFormat('es-MX', { style:'currency', currency:'MXN', maximumFractionDigits:0 }).format(Number(n)||0);
 const numero = (n) => new Intl.NumberFormat('es-MX').format(Number(n)||0);
@@ -10,7 +11,7 @@ export function esRutaCompararCarreras() {
 }
 
 function Header(){return <header className="site-header"><div className="shell header-inner"><a className="brand" href="/" aria-label="MiLana, inicio"><span className="brand-mark" aria-hidden="true">M</span><span className="brand-name">MiLana</span></a><nav className="desktop-nav" aria-label="Principal"><a href="/carreras">Carreras</a><a href="/finanzas">Finanzas</a><a href="/economia">Economía</a></nav><a className="header-cta" href="/finanzas/mi-situacion">Mi situación</a></div></header>}
-function Footer(){return <footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>{datos.nota}</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer>}
+function Footer(){return <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>{datos.nota}</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>}
 
 function Card({ p, label }){
   return <article className="cc-card"><span className="cc-label">{label}</span><p className="cc-area">{p.area}</p><h2>{p.nombre}</h2><div className="cc-primary"><span>Ingreso promedio mensual</span><strong>{dinero(p.ingreso)}</strong></div><dl><div><dt>Profesionistas ocupados</dt><dd>{numero(p.ocupados)}</dd></div><div><dt>Hombres</dt><dd>{p.hombres}%</dd></div><div><dt>Mujeres</dt><dd>{p.mujeres}%</dd></div></dl><a href={`/carreras/profesion/${p.slug}`}>Abrir perfil completo →</a></article>

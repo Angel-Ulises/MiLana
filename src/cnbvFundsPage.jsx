@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CNBV_FUND_SAMPLE } from './data/cnbv-fund-sample.js';
+import AdReserve from './AdReserve.jsx';
 
 export function esRutaFondosCNBV() {
   if (typeof window === 'undefined') return false;
@@ -37,6 +38,6 @@ export default function CnbvFundsPage() {
 
       <section className="cnbv-funds-boundary"><div className="shell"><div><p className="eyebrow">Límite</p><h2>Que un fondo aparezca en este reporte no significa que sea adecuado ni que esté disponible en cualquier plataforma.</h2><p>MiLana no ordena estos registros por tamaño, rendimiento o conveniencia. Para una decisión real todavía debe revisarse la serie concreta, documentación contractual, perfilamiento y condiciones del intermediario.</p></div><div><a href="/finanzas/inversion/comparar">Comparar familias <span>→</span></a><a href="/finanzas/inversion/cetes">Ver referencias CETES <span>→</span></a><a href="/finanzas/inversion">Volver al mapa previo <span>→</span></a></div></div></section>
     </main>
-    <footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Contenido educativo. No constituye asesoría de inversión ni recomendación de compra, venta o mantenimiento de instrumentos.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer>
+    <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Contenido educativo. No constituye asesoría de inversión ni recomendación de compra, venta o mantenimiento de instrumentos.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>
   </div>;
 }

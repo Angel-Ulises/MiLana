@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { crearRadiografiaFinanciera, crearEscenariosIngreso, crearRutaAsesor } from './lib/advisorCore.js';
 import AdvisorProfessionContext from './advisorProfessionContext.jsx';
+import AdReserve from './AdReserve.jsx';
 
 const dinero = (n) => new Intl.NumberFormat('es-MX', {
   style: 'currency', currency: 'MXN', maximumFractionDigits: 0,
@@ -71,6 +72,6 @@ export default function AdvisorPage() {
       </div>
     </section></main>
 
-    <footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Estimaciones informativas. No sustituyen asesoría financiera personalizada ni condiciones contractuales de una institución.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer>
+    <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Estimaciones informativas. No sustituyen asesoría financiera personalizada ni condiciones contractuales de una institución.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>
   </div>;
 }

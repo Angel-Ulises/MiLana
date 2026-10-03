@@ -80,28 +80,12 @@ function routeFor(path) {
   if(rel==='404.html') return '/404';
   return '/'+rel.replace(/\/index\.html$/,'').replace(/\.html$/,'');
 }
-function isCalculator(route) { return /^\/calculadoras\/[^/]+$/.test(route); }
-function noIndexWidget(html) {
-  const robots = '<meta name="robots" content="noindex, nofollow" />';
-  if (/<meta\b[^>]*\bname=["\']robots["\'][^>]*>/i.test(html)) {
-    return html.replace(/<meta\b[^>]*\bname=["\']robots["\'][^>]*>/i, robots);
-  }
-  return html.replace('</head>', `    ${robots}\n  </head>`);
-}
-async function writeWidgetVariant(route, html) {
-  const slug=route.split('/').filter(Boolean).at(-1);
-  const dest=join(DIST.pathname, 'widgets', 'calculadoras', slug, 'index.html');
-  await mkdir(dirname(dest), { recursive:true });
-  await writeFile(dest, noIndexWidget(html));
-}
-
-let changed=0, skipped=0, widgets=0;
+let changed=0, skipped=0;
 const originals = await files(DIST);
 for(const path of originals){
   const route=routeFor(path);
   if(SKIP_ROUTES.has(route)||route.startsWith('/widgets/')){skipped++;continue}
   let html=await readFile(path,'utf8');
-  if(isCalculator(route)){ await writeWidgetVariant(route, html); widgets++; }
   if(html.includes('data-orbita-shell')) continue;
   if(!html.includes('</head>')||!/<body(?:\s|>)/i.test(html)) throw new Error(`HTML sin estructura esperada: ${route}`);
   const hasRoot = html.includes('id="root"');
@@ -113,4 +97,4 @@ for(const path of originals){
   await writeFile(path,html);
   changed++;
 }
-console.log(`Órbita v3 base: ${changed} HTML con marco; ${skipped} excluidos; ${widgets} URLs físicas de widget limpias.`);
+console.log(`Órbita v3 base: ${changed} HTML con marco; ${skipped} excluidos; embeds por ?embed=1.`);

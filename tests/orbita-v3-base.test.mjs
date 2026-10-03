@@ -17,17 +17,15 @@ test('assets de Vercel quedan immutable por un año',()=>{
   const rule=vercel.headers.find(x=>x.source==='/assets/(.*)');
   assert.deepEqual(rule?.headers,[{key:'Cache-Control',value:'public, max-age=31536000, immutable'}]);
 });
-test('embed usa URL física y ?embed=1 conserva protección antes de habilitar Órbita',()=>{
+test('embed se sirve por ?embed=1 y no publica rutas físicas rotas',()=>{
   assert.equal(vercel.rewrites, undefined);
-  const rule=vercel.headers.find(x=>x.source==='/widgets/calculadoras/(.*)');
-  assert.deepEqual(rule?.headers,[{key:'X-Robots-Tag',value:'noindex, nofollow'}]);
-  assert.match(inject,/writeWidgetVariant\(route, html\)/);
-  assert.match(inject,/widgets', 'calculadoras', slug/);
+  assert.equal(vercel.headers.some(x=>x.source==='/widgets/calculadoras/(.*)'), false);
+  assert.doesNotMatch(inject,/writeWidgetVariant\(/);
+  assert.doesNotMatch(inject,/widgets', 'calculadoras', slug/);
   assert.match(inject,/q\.get\('embed'\)===\'1\'/);
   assert.match(inject,/ml-orbita-embed/);
   assert.match(js,/legacyEmbed/);
   assert.match(js,/node\.remove\(\)/);
-  assert.match(seo,/ruta\.startsWith\('\/widgets\/calculadoras\/'\)/);
 });
 test('Órbita no oscurece el body heredado y conserva tokens aprobados',()=>{
   for(const token of ['#060A13','#0E1524','#162036','#F4F7FC','#B7C3D6','#2D6CAA','#9B8CFF','#2EC4B6','#5DD39E','#F4B942','#FF8A65']) assert.match(css,new RegExp(token,'i'));

@@ -7,6 +7,7 @@
 
   const PENSION_PATH = /^\/calculadoras\/pension-imss\/?$/;
   const HEADER_OFFSET = 82;
+  const QUESTION_SELECTOR = 'input:not([type="hidden"]):not([type="submit"]):not([type="button"]), select, textarea';
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const sectionForPath = () => {
@@ -31,6 +32,7 @@
   let currentRoot = null;
   let formHost = null;
   let questions = [];
+  let questionTotal = 0;
   let step = 0;
   let assistant = null;
   let actions = null;
@@ -71,25 +73,39 @@
     return [...root.querySelectorAll('label')].find((label) => label.htmlFor === control.id) || control.closest('label') || null;
   };
 
+  const questionControlCount = (host) => host?.querySelectorAll?.(QUESTION_SELECTOR)?.length || 0;
+  const isQuestionHostSafe = (host, root) => Boolean(
+    host &&
+    host !== root &&
+    host !== formHost &&
+    host.tagName !== 'FORM' &&
+    questionControlCount(host) <= 1
+  );
+
+  const questionNodes = (root, control) => {
+    const label = labelFor(root, control);
+    const host = control.parentElement;
+    if (control.type === 'checkbox' || control.type === 'radio') {
+      const labeledHost = control.closest('label');
+      if (isQuestionHostSafe(labeledHost, root)) return [labeledHost];
+      if (isQuestionHostSafe(host, root)) return [host];
+      return [label, control].filter(Boolean);
+    }
+    if (isQuestionHostSafe(host, root)) {
+      if (label && host.contains(label)) return [host];
+      if (control.tagName !== 'SELECT' && control.tagName !== 'TEXTAREA') return [host];
+    }
+    return [label, control].filter(Boolean);
+  };
+
   const buildQuestions = (root) => {
     const seen = new Set();
     const list = [];
-    const controls = [...root.querySelectorAll('input:not([type="hidden"]):not([type="submit"]):not([type="button"]), select, textarea')]
+    const controls = [...root.querySelectorAll(QUESTION_SELECTOR)]
       .filter((control) => !isInsideResult(control) && !control.closest('[data-orbita-ignore-question]'));
 
     for (const control of controls) {
-      let nodes = [];
-      if (control.type === 'checkbox' || control.type === 'radio') {
-        const host = control.closest('label') || control.parentElement;
-        if (host) nodes = [host];
-      } else if (control.tagName === 'SELECT') {
-        const label = labelFor(root, control);
-        const host = control.parentElement;
-        nodes = host && label && host.contains(label) ? [host] : [label, control].filter(Boolean);
-      } else {
-        const host = control.parentElement;
-        if (host) nodes = [host];
-      }
+      const nodes = questionNodes(root, control);
       const key = nodes[0];
       if (!key || seen.has(key)) continue;
       seen.add(key);
@@ -130,12 +146,12 @@
   };
 
   const addExamples = (list) => {
-    for (const { control, nodes } of list) {
+    for (const question of list) {
+      const { control, nodes } = question;
       if (control.type !== 'number' || control.dataset.orbitaExampleReady === '1') continue;
       const values = exampleValues(control, nodes);
       if (!values.length) continue;
-      const host = nodes[0];
-      if (!(host instanceof HTMLElement) || host.tagName === 'LABEL') continue;
+      const host = nodes.find((node) => node instanceof HTMLElement && node.tagName !== 'LABEL' && node !== control);
 
       const wrap = document.createElement('div');
       wrap.className = 'ml-calc-examples';
@@ -153,7 +169,9 @@
         });
         wrap.appendChild(button);
       }
-      host.appendChild(wrap);
+      if (host instanceof HTMLElement) host.appendChild(wrap);
+      else control.insertAdjacentElement('afterend', wrap);
+      if (!nodes.includes(wrap)) nodes.push(wrap);
       control.dataset.orbitaExampleReady = '1';
     }
   };
@@ -244,6 +262,9 @@
     return 'Te toca aproximadamente';
   };
 
+  const hasNativeWhatsAppShare = (result) => [...result.querySelectorAll('a,button')]
+    .some((node) => /Compartir\s+por\s+WhatsApp/i.test(node.textContent || ''));
+
   const ensureResultTools = () => {
     if (!currentRoot || PENSION_PATH.test(location.pathname)) return;
     const marked = markPrimaryResult(currentRoot);
@@ -281,21 +302,25 @@
         step = 0;
         renderStep({ focus: true });
       });
+      tools.appendChild(edit);
 
-      const share = document.createElement('a');
-      share.className = 'orb-result-share';
-      share.target = '_blank';
-      share.rel = 'noopener noreferrer';
-      share.textContent = 'Compartir por WhatsApp';
-      const shareText = `Mi resultado en MiLana: ${rawAmount || 'revisa el cálculo'} — ${location.href}`;
-      share.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+      if (!hasNativeWhatsAppShare(result)) {
+        const share = document.createElement('a');
+        share.className = 'orb-result-share';
+        share.target = '_blank';
+        share.rel = 'noopener noreferrer';
+        share.textContent = 'Compartir por WhatsApp';
+        const shareText = `Mi resultado en MiLana: ${rawAmount || 'revisa el cálculo'} — ${location.href}`;
+        share.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+        tools.appendChild(share);
+      }
 
       const [href, label] = routeNext();
       const next = document.createElement('a');
       next.className = 'orb-result-next';
       next.href = href;
       next.innerHTML = `<span>Siguiente paso de tu ruta</span><strong>${label} →</strong>`;
-      tools.append(edit, share, next);
+      tools.appendChild(next);
       result.appendChild(tools);
     } else {
       const share = tools.querySelector('.orb-result-share');
@@ -320,8 +345,11 @@
     step = Math.max(0, Math.min(step, questions.length - 1));
 
     withObserverPaused(() => {
+      const result = currentRoot.querySelector('.ml-result');
+      const showingResult = Boolean(result) && !editing;
+
       questions.forEach((question, index) => {
-        const active = index === step;
+        const active = !showingResult && index === step;
         question.nodes.forEach((node) => {
           if (node.hidden === active) node.hidden = !active;
           const hidden = String(!active);
@@ -330,39 +358,41 @@
       });
 
       if (intro) {
-        const showIntro = step === 0;
+        const showIntro = !showingResult && step === 0;
         if (intro.hidden === showIntro) intro.hidden = !showIntro;
         intro.dataset.orbitaIntro = 'true';
       }
 
+      const total = Math.max(questionTotal, 1);
       const count = assistant.querySelector('[data-orbita-calc-count]');
       const progress = assistant.querySelector('[data-orbita-calc-progress]');
       const donut = assistant.querySelector('[data-orbita-donut]');
-      const percent = ((step + 1) / questions.length) * 100;
-      setText(count, `Pregunta ${step + 1} de ${questions.length}`);
+      const percent = Math.min(100, ((step + 1) / total) * 100);
+      setText(count, `Pregunta ${step + 1} de ${total}`);
       if (progress && progress.style.width !== `${percent}%`) progress.style.width = `${percent}%`;
       if (donut) {
         donut.style.setProperty('--orb-chart-fill', `${percent}%`);
-        setText(donut.querySelector('span'), `${step + 1}/${questions.length}`);
-        donut.setAttribute('aria-label', `Progreso: pregunta ${step + 1} de ${questions.length}`);
+        setText(donut.querySelector('span'), `${step + 1}/${total}`);
+        donut.setAttribute('aria-label', `Progreso: pregunta ${step + 1} de ${total}`);
       }
 
       const back = actions.querySelector('[data-orbita-calc-back]');
       const next = actions.querySelector('[data-orbita-calc-next]');
-      if (back) back.hidden = step === 0;
-      if (next) next.hidden = step === questions.length - 1;
-      if (primaryAction) primaryAction.hidden = step !== questions.length - 1;
+      if (back) back.hidden = step === 0 || showingResult;
+      if (next) next.hidden = step === questions.length - 1 || showingResult;
+      if (primaryAction) primaryAction.hidden = showingResult || step !== questions.length - 1;
 
-      const result = currentRoot.querySelector('.ml-result');
       if (result) result.hidden = editing;
-      actions.hidden = Boolean(result) && !editing;
+      actions.hidden = showingResult;
       if (!actions.hidden) moveActionsAfterActiveQuestion();
 
       dedupeCases();
       ensureResultTools();
     });
 
-    if (focus) requestAnimationFrame(() => scrollQuestionIntoView(questions[step]));
+    if (focus && !currentRoot.querySelector('.ml-result:not([hidden])')) {
+      requestAnimationFrame(() => scrollQuestionIntoView(questions[step]));
+    }
   };
 
   const buildAssistant = (main) => {
@@ -407,6 +437,7 @@
     currentRoot = null;
     formHost = null;
     questions = [];
+    questionTotal = 0;
     step = 0;
     assistant = null;
     actions = null;
@@ -436,6 +467,7 @@
       observerTarget = main;
       observer = new MutationObserver(queueEnhance);
       questions = buildQuestions(currentRoot);
+      questionTotal = questions.length;
       if (!questions.length) {
         observeCalculator();
         return;
@@ -453,7 +485,8 @@
       observeCalculator();
     } else {
       withObserverPaused(() => {
-        questions = buildQuestions(currentRoot);
+        const refreshed = buildQuestions(currentRoot);
+        if (refreshed.length) questions = refreshed;
         addExamples(questions);
         addTermHelp(questions);
       });

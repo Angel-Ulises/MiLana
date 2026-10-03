@@ -8,6 +8,7 @@ const css = readFileSync('public/orbita-v3-internal.css', 'utf8');
 const hybrid = readFileSync('public/orbita-v3-hybrid.css', 'utf8');
 const js = readFileSync('public/orbita-v3-internal.js', 'utf8');
 const audit = readFileSync('public/orbita-v3-audit.css', 'utf8');
+const prepaint = readFileSync('public/orbita-v3-prepaint.css', 'utf8');
 
 test('la capa interna se carga solo después de descartar embed', () => {
   const embedGuard = base.indexOf('if (legacyEmbed)');
@@ -89,8 +90,10 @@ test('intro repetido se oculta y el hero móvil deja la pregunta más arriba', (
   assert.match(js, /introDuplicatesHero/);
   assert.match(js, /introRepeatsHero = introDuplicatesHero\(intro\)/);
   assert.match(js, /if \(introRepeatsHero && intro\) intro\.hidden = true/);
-  assert.match(audit, /\.calculator-hero-media\{max-height:150px!important\}/);
-  assert.match(audit, /\.calculator-main\{padding-top:6px!important\}/);
+  assert.match(prepaint, /\.calculator-hero-media\{display:none!important\}/);
+  assert.match(prepaint, /\.calculator-purpose\{[^}]*-webkit-line-clamp:1/);
+  assert.match(prepaint, /body:has\(\.calculator-hero\) \.calc-intro\{display:none!important\}/);
+  assert.match(prepaint, /\.calculator-main::before\{[^}]*height:131px/);
 });
 
 test('casos duplicados se eliminan por data-case-slug y no separan el flujo', () => {

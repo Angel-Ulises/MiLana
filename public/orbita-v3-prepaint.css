@@ -56,3 +56,6 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.
   .orb-ad-leaderboard{width:min(320px,calc(100% - 28px));height:50px;min-height:50px;margin-block:18px}
   .orb-ad-leaderboard::before{content:'Publicidad · 320×50'}
 }
+
+/* Inicio: el LCP es el H1; Chrome no lo cuenta hasta que termina la animación de opacidad. */
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy>*{animation:none!important}

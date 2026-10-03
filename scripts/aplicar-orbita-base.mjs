@@ -164,8 +164,9 @@ for(const path of originals){
   if(!hasRoot) html=injectAdReserves(html,route,hasRoot);
   const frame = shell.replace('__CONTENT_ID__', contentId);
   const staticAttr = STATIC_TOP_ROUTES.has(route) ? ' data-orbita-static-top="true"' : '';
-  // Preload estático solo en Inicio, al principio del <head> para que lo vea el preload scanner.
-  if(route==='/') html=html.replace(/<head([^>]*)>/i,'<head$1><link rel="preload" as="image" href="/images/gen/inicio-1440.webp" fetchpriority="high">');
+  // Preload estático solo en Inicio, para que lo vea el preload scanner.
+  // Justo después de <meta charset>; en móvil (≤620px) la foto del hero está oculta, así que no se precarga.
+  if(route==='/') html=html.replace(/(<meta\s+charset=[^>]*>)/i,'$1<link rel="preload" as="image" href="/images/gen/inicio-1440.webp" fetchpriority="high" media="(min-width: 621px)">');
   html=html.replace('</head>',`${headForRoute(route)}</head>`).replace(/<body([^>]*)>/i,`<body$1${staticAttr}>${frame}`);
   await writeFile(path,html);
   changed++;

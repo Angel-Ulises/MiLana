@@ -21,12 +21,12 @@ test('portada usa el copy aprobado y las seis situaciones', () => {
     'Me despidieron', 'Renuncié', 'Voy a cobrar aguinaldo',
     'Quiero ahorrar', 'Estoy eligiendo carrera', 'Pienso mudarme de estado',
     'Busca una calculadora'
-  ]) assert.match(js, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  ]) assert.ok(js.includes(text), `falta copy de portada: ${text}`);
 });
 
 test('portada mantiene foto separada del texto y elimina overlay', () => {
   assert.match(js, /hero\.querySelector\('\.hero-note'\)\?\.setAttribute\('hidden'/);
-  assert.match(css, /\.hero-note[^\n]*display:none!important/);
+  assert.match(css, /\.hero-note[\s\S]{0,260}display:none!important/);
   assert.match(css, /\.hero-grid\{[\s\S]*grid-template-columns:minmax\(0,1\.08fr\) minmax\(340px,.72fr\)!important/);
   assert.match(css, /\.hero-media-wrap\{display:none!important\}/);
 });

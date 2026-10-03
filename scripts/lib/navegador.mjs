@@ -60,8 +60,11 @@ export async function abrirChrome(chrome) {
     socket.send(JSON.stringify({ id, method, params, sessionId }));
   });
   async function nuevaPestana() {
-    const { targetId } = await send('Target.createTarget', { url: 'about:blank' });
+    const { targetId } = await send('Target.createTarget', { url: 'about:blank', newWindow: true });
     const { sessionId } = await send('Target.attachToTarget', { targetId, flatten: true });
+    // Sin fuentes ni fotos externas: las medidas no dependen de la red del runner.
+    await send('Network.enable', {}, sessionId);
+    await send('Network.setBlockedURLs', { urls: ['*fonts.googleapis.com*', '*fonts.gstatic.com*', '*images.pexels.com*'] }, sessionId);
     return {
       send: (method, params) => send(method, params, sessionId),
       async evaluar(expression) {

@@ -13,9 +13,9 @@ test('reservas críticas existen en HTML antes del runtime y conservan altura fi
   assert.match(inject,/orbita-v3-prepaint\.css/);
   assert.match(inject,/data-orbita-static-reserve data-orbita-glossary-reserve/);
   assert.match(inject,/data-orbita-static-reserve data-orbita-visual-reserve/);
-  assert.match(prepaint,/data-orbita-section="estados"[^\n]*min-height:330px/);
-  assert.match(prepaint,/data-orbita-section="finanzas"[^\n]*min-height:670px/);
-  assert.match(prepaint,/data-orbita-section="economia"[^\n]*min-height:455px/);
+  assert.match(prepaint,/data-orbita-section="estados"[^\n]*min-height:var\(--orb-reserve-m,330px\)/);
+  assert.match(prepaint,/data-orbita-section="finanzas"[^\n]*min-height:var\(--orb-reserve-m,670px\)/);
+  assert.match(prepaint,/data-orbita-section="economia"[^\n]*min-height:var\(--orb-reserve-m,455px\)/);
   assert.match(prepaint,/\.orb-glossary-reserve,\.orb-glossary\{min-height:220px\}/);
 });
 

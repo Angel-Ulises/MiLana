@@ -17,12 +17,12 @@ html.ml-orbita-enabled .finance-advisor-preview aside.investment-entry p{color:#
 .orb-glossary-reserve,
 .orb-glossary{min-height:180px}
 .orb-visual-reserve,
-.orb-section-visual{min-height:360px}
-html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.orb-visual-reserve,.orb-section-visual){min-height:225px}
-html.ml-orbita-enabled[data-orbita-section="estados"] :is(.orb-visual-reserve,.orb-section-visual){min-height:295px}
-html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.orb-visual-reserve,.orb-section-visual){min-height:250px}
-html.ml-orbita-enabled[data-orbita-section="economia"] :is(.orb-visual-reserve,.orb-section-visual){min-height:290px}
-html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.orb-section-visual){min-height:430px}
+.orb-section-visual{min-height:var(--orb-reserve-d,360px)}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,225px)}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,295px)}
+html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,250px)}
+html.ml-orbita-enabled[data-orbita-section="economia"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,290px)}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,430px)}
 
 /* Publicidad reservada: una sola zona visible, sin tocar ni inicializar AdSense. */
 .orb-ad-reserve,[data-orbita-ad-reserve]{max-width:100%;margin:24px auto;overflow:hidden;contain:layout paint style;border:1px dashed #B9C6D2;border-radius:14px;background:repeating-linear-gradient(135deg,#F5F8FA 0,#F5F8FA 10px,#EEF3F6 10px,#EEF3F6 20px);color:#667684}
@@ -45,12 +45,12 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main:has(> .ml-calc-assistant)::before{display:none;height:0;min-height:0}
   .orb-runtime-reserve{width:calc(100% - 28px);margin-block:18px}
   .orb-glossary-reserve,.orb-glossary{min-height:220px}
-  .orb-visual-reserve,.orb-section-visual{min-height:420px}
-  html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.orb-visual-reserve,.orb-section-visual){min-height:390px}
-  html.ml-orbita-enabled[data-orbita-section="estados"] :is(.orb-visual-reserve,.orb-section-visual){min-height:330px}
-  html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.orb-section-visual){min-height:670px}
-  html.ml-orbita-enabled[data-orbita-section="economia"] :is(.orb-visual-reserve,.orb-section-visual){min-height:455px}
-  html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.orb-visual-reserve,.orb-section-visual){min-height:430px}
+  .orb-visual-reserve,.orb-section-visual{min-height:var(--orb-reserve-m,420px)}
+  html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,390px)}
+  html.ml-orbita-enabled[data-orbita-section="estados"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,330px)}
+  html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,670px)}
+  html.ml-orbita-enabled[data-orbita-section="economia"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,455px)}
+  html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,430px)}
 }
 @media(max-width:767px){
   .orb-ad-leaderboard{width:min(320px,calc(100% - 28px));height:50px;min-height:50px;margin-block:18px}
@@ -59,3 +59,6 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.
 
 /* Inicio: el LCP es el H1; Chrome no lo cuenta hasta que termina la animación de opacidad. */
 html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy>*{animation:none!important}
+
+/* Inicio en móvil: el panel crema del hero se extiende 14px más allá del texto (mismo ancho de contenido, sin saltos). */
+@media(max-width:620px){html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{padding-inline:14px;margin-inline:-14px}}

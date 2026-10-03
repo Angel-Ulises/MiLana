@@ -4,6 +4,7 @@ import { dirname, join, relative, sep } from 'node:path';
 const DIST = new URL('../dist/', import.meta.url);
 const PUBLIC = new URL('../public/', import.meta.url);
 const RUNTIME_CSS_FILES = ['orbita-v3-internal.css','orbita-v3-hybrid.css','orbita-v3-experience.css','orbita-v3-glossary.css','orbita-v3-visuals.css','orbita-v3-audit.css'];
+const RESERVAS = JSON.parse(await readFile(new URL('./reservas-alturas.json', import.meta.url), 'utf8').catch(() => '{}'));
 const SKIP_ROUTES = new Set(['/404', '/widgets']);
 const PROTECTED_PENSION = '/calculadoras/pension-imss';
 const VISUAL_SECTIONS = new Set(['carreras', 'estados', 'finanzas', 'economia', 'aprende']);
@@ -159,6 +160,9 @@ for(const path of originals){
   const hasRoot = html.includes('id="root"');
   const contentId = hasRoot ? 'root' : 'ml-main';
   if(!hasRoot && /<main(?:\s|>)/i.test(html) && !html.includes('id="ml-main"')) html=html.replace(/<main(\s|>)/i, '<main id="ml-main"$1');
+  // Altura de reserva del visual de sección por ruta (scripts/reservas-alturas.json); prepaint.css la usa como min-height.
+  const reserva=RESERVAS[route];
+  if(reserva) html=html.replace(/<html\b([^>]*)>/i,(tag,attrs)=>/\sstyle=/.test(attrs)?tag:`<html${attrs} style="${reserva.m?`--orb-reserve-m:${reserva.m}px;`:''}${reserva.d?`--orb-reserve-d:${reserva.d}px`:''}">`);
   if(!hasRoot) html=injectStaticReserves(html,route);
   // En páginas React el espacio lo renderiza <AdReserve/> antes del footer; aquí solo las estáticas.
   if(!hasRoot) html=injectAdReserves(html,route,hasRoot);

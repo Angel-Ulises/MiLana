@@ -147,6 +147,8 @@
       if (href.includes('/comparar')) return;
       add(slugOf(href));
     });
+    // Comparar estados enlaza solo a dos entidades: el mosaico muestra las 32 para navegar.
+    if (/^\/estados\/comparar\/?$/.test(location.pathname)) Object.keys(STATES).forEach(add);
     if (entries.length < 2) return null;
     const detail = Boolean(currentSlug && STATES[currentSlug]);
     const visual = card('Estados', detail ? 'Tu estado y comparables' : 'México en mosaico', detail

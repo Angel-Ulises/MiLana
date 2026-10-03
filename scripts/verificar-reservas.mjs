@@ -1,12 +1,21 @@
-// Verifica en dist/ que las reservas de altura de los visuales de sección (prepaint.css) no dejen huecos:
-// la altura natural del visual renderizado debe ser >= 90% de la reserva, a 390 y 1280 px.
-//   node scripts/verificar-reservas.mjs [--verbose] [ruta ...]
+// Verifica en dist/ las reservas de altura de los visuales de sección, definidas por ruta en
+// scripts/reservas-alturas.json (aplicar-orbita-base las escribe como --orb-reserve-m/-d en <html>):
+//   - la reserva no puede ser menor que el visual renderizado (empujaría el contenido: CLS), y
+//   - el visual debe ocupar >= 90% de la reserva (sin huecos en blanco), a 390 y 1280 px.
+//   node scripts/verificar-reservas.mjs [--verbose] [--update] [ruta ...]
+//   --update recalcula scripts/reservas-alturas.json (reserva = altura natural + 4%) tras cambiar un visual.
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { abrirChrome, cargarPagina, encontrarChrome, rutasDelSitemap, servirDist, sleep } from './lib/navegador.mjs';
 
 const VIEWPORTS = [390, 1280];
 const CONCURRENCY = 4;
 const MIN_RATIO = 0.9;
 const verbose = process.argv.includes('--verbose');
+const update = process.argv.includes('--update');
+const JSON_PATH = new URL('./reservas-alturas.json', import.meta.url);
+const table = existsSync(JSON_PATH) ? JSON.parse(readFileSync(JSON_PATH, 'utf8')) : {};
+const MARGEN = 1.04;
+const TOLERANCIA = 1.03; // el visual puede superar a la reserva hasta 3% (fuentes distintas entre equipos)
 const onlyRoutes = process.argv.slice(2).filter((arg) => arg.startsWith('/'));
 
 const chrome = encontrarChrome();
@@ -44,15 +53,30 @@ try { await Promise.all(Array.from({ length: CONCURRENCY }, worker)); }
 finally { await navegador.cerrar(); servidor.close(); }
 
 const fallos = [];
+const nuevaTabla = {};
 for (const r of resultados.sort((a, b) => a.route.localeCompare(b.route) || a.width - b.width)) {
   if (r.error) { fallos.push(`${r.route} @${r.width}: ${r.error}`); continue; }
   if (!r.medida) { if (verbose) console.log(`${r.route} @${r.width} sin visual`); continue; }
   const { reserved, natural } = r.medida;
-  const ok = natural >= reserved * MIN_RATIO;
-  if (verbose) console.log(`${ok ? 'ok ' : 'HUECO'} ${r.route} @${r.width} visual ${natural}px / reserva ${reserved}px`);
-  if (!ok) fallos.push(`${r.route} @${r.width}: visual ${natural}px < ${Math.round(MIN_RATIO * 100)}% de la reserva ${reserved}px`);
+  const key = r.width <= 760 ? 'm' : 'd';
+  (nuevaTabla[r.route] ??= {})[key] = Math.ceil(natural * MARGEN);
+  if (update) continue;
+  const esperado = table[r.route]?.[key];
+  const tag = `${r.route} @${r.width}`;
+  if (esperado === undefined) { fallos.push(`${tag}: sin reserva en reservas-alturas.json (visual ${natural}px); ejecuta verificar-reservas --update`); continue; }
+  const corta = natural > reserved * TOLERANCIA;
+  const hueco = natural < reserved * 0.9;
+  if (verbose) console.log(`${corta ? 'CORTA' : hueco ? 'HUECO' : 'ok   '} ${tag} visual ${natural}px / reserva ${reserved}px`);
+  if (corta) fallos.push(`${tag}: reserva ${reserved}px menor que el visual (${natural}px): empuja el contenido`);
+  if (hueco) fallos.push(`${tag}: visual ${natural}px < 90% de la reserva ${reserved}px: hueco en blanco`);
+}
+if (update) {
+  const ordenada = Object.fromEntries(Object.entries(nuevaTabla).sort(([a], [b]) => a.localeCompare(b)));
+  writeFileSync(JSON_PATH, JSON.stringify(ordenada, null, 2) + '\n');
+  console.log(`reservas: ${Object.keys(ordenada).length} rutas escritas en scripts/reservas-alturas.json`);
+  process.exit(0);
 }
 const conVisual = resultados.filter((r) => r.medida).length;
-console.log(`reservas: ${total} páginas/anchos, ${conVisual} con visual, ${fallos.length} huecos.`);
+console.log(`reservas: ${total} páginas/anchos, ${conVisual} con visual, ${fallos.length} problemas.`);
 if (!conVisual) { console.error('reservas: ningún visual encontrado (¿cambió el selector .orb-section-visual?).'); process.exit(1); }
 if (fallos.length) { for (const f of fallos) console.error(`  ${f}`); process.exit(1); }

@@ -394,12 +394,12 @@
       }
 
       const total = Math.max(questionTotal, 1);
-      const count = assistant.querySelector('[data-orbita-calc-count]');
+      const count = assistant.querySelector([data-orbita-calc-count]);
       const progress = assistant.querySelector('[data-orbita-calc-progress]');
-      const donut = assistant.querySelector('[data-orbita-donut]');
+      const donut = assistant.querySelector([data-orbita-donut]);
       const percent = Math.min(100, ((step + 1) / total) * 100);
       setText(count, `Pregunta ${step + 1} de ${total}`);
-      if (progress && progress.style.width !== `${percent}%`) progress.style.width = `${percent}%`;
+      if (progress && progress.style.width !== `${percent}%`) progress.style.width = `${percent}%`);
       if (donut) {
         donut.style.setProperty('--orb-chart-fill', `${percent}%`);
         setText(donut.querySelector('span'), `${step + 1}/${total}`);
@@ -464,7 +464,16 @@
       try { return control.matches(':invalid'); }
       catch { return false; }
     });
-    return invalidIndex;
+    if (invalidIndex >= 0) return invalidIndex;
+
+    return questions.findIndex(({ control }) => {
+      if (!(control instanceof HTMLInputElement) || !['number', 'date'].includes(control.type)) return false;
+      const value = control.value.trim();
+      if (!value) return true;
+      if (control.type === 'number') return !Number.isFinite(control.valueAsNumber);
+      if (control.type === 'date') return Number.isNaN(Date.parse(value));
+      return false;
+    });
   };
 
   const recoverValidationStep = () => {

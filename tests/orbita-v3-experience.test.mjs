@@ -64,3 +64,12 @@ test('portada reserva la geometría final y se realza con el #root vivo, no con 
   assert.match(js, /rootObserver\.observe\(observedRoot, \{ childList: true, subtree: true \}\)/);
   assert.doesNotMatch(js, /\[80, 220, 600\]\.forEach/);
 });
+
+
+test('Nuevo León evita el swap tardío de Newsreader solo en el título de estado detalle', () => {
+  const prepaint = readFileSync('public/orbita-v3-prepaint.css', 'utf8');
+  assert.match(prepaint, /font-family:"Newsreader State Optional"/);
+  assert.match(prepaint, /font-display:optional/);
+  assert.match(prepaint, /cY9AfjOCX1hbuyalUrK4397yjA\.woff2/);
+  assert.match(prepaint, /data-orbita-section="estados"\] \.state-detail-hero h1\{font-family:"Newsreader State Optional",Georgia/);
+});

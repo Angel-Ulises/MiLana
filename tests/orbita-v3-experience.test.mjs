@@ -53,3 +53,14 @@ test('la portada no introduce carruseles ni controles flotantes', () => {
   assert.doesNotMatch(js, /carousel|swiper|slick/i);
   assert.doesNotMatch(css, /position\s*:\s*fixed/i);
 });
+
+
+test('portada reserva la geometría final y se realza con el #root vivo, no con reintentos tardíos', () => {
+  const prepaint = readFileSync('public/orbita-v3-prepaint.css', 'utf8');
+  assert.match(prepaint, /data-orbita-section="inicio"\] \.hero\{min-height:1104px!important\}/);
+  assert.match(prepaint, /max-width:620px\)\{html\.ml-orbita-enabled\[data-orbita-section="inicio"\] \.hero\{min-height:1172px!important\}/);
+  assert.match(js, /document\.getElementById\('root'\)/);
+  assert.match(js, /new MutationObserver\(queueRun\)/);
+  assert.match(js, /rootObserver\.observe\(observedRoot, \{ childList: true, subtree: true \}\)/);
+  assert.doesNotMatch(js, /\[80, 220, 600\]\.forEach/);
+});

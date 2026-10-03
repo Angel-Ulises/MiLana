@@ -1,6 +1,10 @@
 /* Órbita V4 · geometría crítica antes del runtime. Solo layout; no datos ni AdSense. */
 html.ml-orbita-enabled,html.ml-orbita-enabled body{max-width:100%;overflow-x:clip}
 html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{width:100%!important;min-width:0!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero{min-height:1104px!important}
+@media(min-width:901px) and (max-width:1279px){html.ml-orbita-enabled[data-orbita-section="inicio"] .hero{min-height:calc(55.5vw + 381px)!important}}
+@media(max-width:900px){html.ml-orbita-enabled[data-orbita-section="inicio"] .hero{min-height:1280px!important}}
+@media(max-width:620px){html.ml-orbita-enabled[data-orbita-section="inicio"] .hero{min-height:1172px!important}}
 /* El header React legacy no debe ocupar ni un frame antes de que llegue la capa V4. */
 html.ml-orbita-enabled .site-header{display:none!important}
 html.ml-orbita-enabled[data-orbita-section="inicio"] :is(.hero-actions,.hero-proof,.hero-note,.hero-orbit){display:none!important}
@@ -39,10 +43,10 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.
   .orb-glossary-reserve,.orb-glossary{min-height:220px}
   .orb-visual-reserve,.orb-section-visual{min-height:420px}
   html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.orb-visual-reserve,.orb-section-visual){min-height:420px}
-  html.ml-orbita-enabled[data-orbita-section="estados"] :is(.orb-visual-reserve,.orb-section-visual){min-height:930px}
+  html.ml-orbita-enabled[data-orbita-section="estados"] :is(.orb-visual-reservee,.orb-section-visual){min-height:930px}
   html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.orb-section-visual){min-height:670px}
   html.ml-orbita-enabled[data-orbita-section="economia"] :is(.orb-visual-reserve,.orb-section-visual){min-height:540px}
-  html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.orb-visual-reserve,.orb-section-visual){min-height:430px}
+  html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.orb-visual-reservee,.orb-section-visual){min-height:430px}
 }
 @media(max-width:767px){
   .orb-ad-leaderboard{width:min(320px,calc(100% - 28px));height:50px;min-height:50px;margin-block:18px}

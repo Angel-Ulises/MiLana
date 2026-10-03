@@ -134,8 +134,31 @@
     enhanceHome();
   };
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once: true });
-  else run();
-  [80, 220, 600].forEach((delay) => setTimeout(run, delay));
-  addEventListener('popstate', run);
+  let rootObserver = null;
+  let observedRoot = null;
+  let queued = false;
+  const queueRun = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      observeRoot();
+      run();
+    });
+  };
+  function observeRoot() {
+    const target = document.getElementById('root');
+    if (!target) return;
+    if (!rootObserver) rootObserver = new MutationObserver(queueRun);
+    if (observedRoot !== target) {
+      rootObserver.disconnect();
+      observedRoot = target;
+    }
+    rootObserver.observe(observedRoot, { childList: true, subtree: true });
+  }
+
+  observeRoot();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', queueRun, { once: true });
+  else queueRun();
+  addEventListener('popstate', queueRun);
 })();

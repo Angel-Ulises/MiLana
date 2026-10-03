@@ -34,7 +34,9 @@ test('calculadoras ocultan intro repetido y vuelven al paso que falló',()=>{
   assert.match(internal,/addEventListener\('invalid',[\s\S]*step = index/);
   assert.match(internal,/errorText\.includes\('salario minimo'\)/);
   assert.match(internal,/errorText\.includes\('vacaciones'\) && errorText\.includes\('anuales'\)/);
-  assert.match(audit,/\.calculator-hero-media\{max-height:150px!important\}/);
+  assert.match(prepaint,/\.calculator-hero-media\{display:none!important\}/);
+  assert.match(prepaint,/\.calculator-purpose\{[^}]*-webkit-line-clamp:1/);
+  assert.match(prepaint,/\.calculator-main::before\{[^}]*height:131px/);
 });
 
 test('Palabras claras queda después de búsqueda en Inicio y después del formulario en calculadoras',()=>{

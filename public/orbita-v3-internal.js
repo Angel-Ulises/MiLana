@@ -38,6 +38,7 @@
   let actions = null;
   let primaryAction = null;
   let intro = null;
+  let introRepeatsHero = false;
   let editing = false;
   let observer = null;
   let observerTarget = null;
@@ -45,6 +46,26 @@
 
   const setText = (node, value) => {
     if (node && node.textContent !== value) node.textContent = value;
+  };
+
+  const normalizeCopy = (value) => String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase('es-MX')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+
+  const introDuplicatesHero = (node) => {
+    if (!(node instanceof HTMLElement)) return false;
+    const introText = normalizeCopy(node.textContent);
+    const heroText = normalizeCopy(document.querySelector('.calculator-hero-copy')?.textContent);
+    if (introText.length < 55 || heroText.length < 55) return false;
+    if (heroText.includes(introText) || introText.includes(heroText)) return true;
+    const words = introText.split(' ').filter((word) => word.length > 3).slice(0, 14);
+    if (words.length < 6) return false;
+    const heroWords = new Set(heroText.split(' '));
+    const overlap = words.filter((word) => heroWords.has(word)).length;
+    return overlap / words.length >= .72;
   };
 
   const observeCalculator = () => {
@@ -358,9 +379,10 @@
       });
 
       if (intro) {
-        const showIntro = !showingResult && step === 0;
+        const showIntro = !showingResult && step === 0 && !introRepeatsHero;
         if (intro.hidden === showIntro) intro.hidden = !showIntro;
         intro.dataset.orbitaIntro = 'true';
+        intro.dataset.orbitaDuplicateIntro = String(introRepeatsHero);
       }
 
       const total = Math.max(questionTotal, 1);
@@ -395,6 +417,53 @@
     }
   };
 
+  const questionLabelText = (question) => normalizeCopy(
+    labelFor(currentRoot, question.control)?.textContent || question.nodes.map((node) => node.textContent || '').join(' ')
+  );
+
+  const questionIndexForError = () => {
+    const invalidIndex = questions.findIndex(({ control }) => {
+      try { return control.matches(':invalid') || control.getAttribute('aria-invalid') === 'true'; }
+      catch { return false; }
+    });
+    if (invalidIndex >= 0) return invalidIndex;
+
+    const errorText = normalizeCopy(currentRoot?.querySelector('.calc-error')?.textContent);
+    if (!errorText) return -1;
+    const prefix = errorText.split(' captura ')[0].split(' revisa ')[0].split(' selecciona ')[0].trim();
+    const tokens = prefix.split(' ').filter((word) => word.length > 3);
+    let best = { index: -1, score: 0 };
+    questions.forEach((question, index) => {
+      const label = questionLabelText(question);
+      const score = tokens.length ? tokens.filter((word) => label.includes(word)).length / tokens.length : 0;
+      if (score > best.score) best = { index, score };
+    });
+    if (best.score >= .5) return best.index;
+
+    if (errorText.includes('salario minimo')) {
+      const index = questions.findIndex((question) => questionLabelText(question).includes('salario minimo'));
+      if (index >= 0) return index;
+    }
+    if (errorText.includes('vacaciones') && errorText.includes('anuales')) {
+      const index = questions.findIndex((question) => {
+        const label = questionLabelText(question);
+        return label.includes('vacaciones') && label.includes('anuales');
+      });
+      if (index >= 0) return index;
+    }
+    return -1;
+  };
+
+  const recoverValidationStep = () => {
+    if (!currentRoot || currentRoot.querySelector('.ml-result')) return false;
+    const index = questionIndexForError();
+    if (index < 0) return false;
+    editing = true;
+    step = index;
+    renderStep({ focus: true });
+    return true;
+  };
+
   const buildAssistant = (main) => {
     const head = document.createElement('section');
     head.className = 'ml-calc-assistant';
@@ -426,6 +495,18 @@
       step += 1;
       renderStep({ focus: true });
     });
+    formHost.addEventListener('invalid', (event) => {
+      const index = questions.findIndex((question) => question.control === event.target);
+      if (index < 0) return;
+      event.preventDefault();
+      editing = true;
+      step = index;
+      renderStep({ focus: true });
+    }, true);
+    formHost.addEventListener('submit', () => {
+      setTimeout(recoverValidationStep, 0);
+      setTimeout(recoverValidationStep, 40);
+    }, true);
   };
 
   const resetCalculatorState = () => {
@@ -443,6 +524,7 @@
     actions = null;
     primaryAction = null;
     intro = null;
+    introRepeatsHero = false;
     editing = false;
   };
 
@@ -473,13 +555,19 @@
         return;
       }
       intro = currentRoot.querySelector('.calc-intro') || currentRoot.querySelector(':scope > p:first-child');
+      introRepeatsHero = introDuplicatesHero(intro);
+      if (introRepeatsHero && intro) intro.hidden = true;
       addExamples(questions);
       addTermHelp(questions);
       primaryAction = [...formHost.querySelectorAll('.ml-btn, button[type="submit"]')]
         .find((button) => !button.closest('.ml-result') && !button.closest('.ml-case')) || null;
       if (primaryAction) {
         primaryAction.dataset.orbitaPrimaryAction = 'true';
-        primaryAction.addEventListener('click', () => { editing = false; }, { capture: true });
+        primaryAction.addEventListener('click', () => {
+          editing = false;
+          setTimeout(recoverValidationStep, 0);
+          setTimeout(recoverValidationStep, 40);
+        }, { capture: true });
       }
       buildAssistant(main);
       observeCalculator();
@@ -496,6 +584,7 @@
       dedupeCases();
       ensureResultTools();
     });
+    if (!currentRoot.querySelector('.ml-result') && currentRoot.querySelector('.calc-error')?.textContent.trim() && recoverValidationStep()) return;
     renderStep();
   };
 

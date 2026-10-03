@@ -164,21 +164,53 @@
     return visual;
   };
 
+  const economySource = (text) => {
+    if (/banxico|banco de m[eé]xico/i.test(text)) return 'Banxico';
+    if (/inegi|inpc/i.test(text)) return 'INEGI';
+    return clean(text).slice(0, 40) || 'Fuente visible';
+  };
+
+  const economyLabel = ({ title, dataLabel, source }) => {
+    const text = `${title} ${dataLabel}`;
+    if (source === 'Banxico' && /tasa objetivo|tasa de inter[eé]s/i.test(text)) return 'Tasa objetivo Banxico';
+    if (source === 'INEGI' && /inflaci[oó]n|inpc/i.test(text)) return 'Inflación anual INEGI';
+    if (source === 'INEGI' && /consumo/i.test(text)) return 'Consumo privado INEGI';
+    return clean(`${dataLabel || title} · ${source}`).slice(0, 58);
+  };
+
   const collectPercentages = () => {
     const values = [];
     const seen = new Set();
-    const nodes = main.querySelectorAll('p,li,td,strong,.economy-card,.economy-meta');
+    const cards = [...main.querySelectorAll('.economy-card')];
+    for (const node of cards) {
+      const strong = node.querySelector('.economy-card-bottom strong');
+      const match = clean(strong?.textContent).match(/^(-?\d{1,3}(?:\.\d{1,2})?)\s*%$/);
+      if (!match) continue;
+      const value = Number(match[1]);
+      if (!Number.isFinite(value)) continue;
+      const title = clean(node.querySelector('h2,h3')?.textContent);
+      const dataLabel = clean(node.querySelector('.economy-card-bottom span')?.textContent);
+      const source = economySource(node.textContent);
+      const key = `${value}|${source}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      values.push({ label: economyLabel({ title, dataLabel, source }), value, source });
+    }
+    if (values.length) return values.slice(0, 8);
+
+    const nodes = main.querySelectorAll('.economy-big-number,.economy-step,.economy-meta');
     for (const node of nodes) {
       const text = clean(node.textContent);
       const matches = [...text.matchAll(/(-?\d{1,3}(?:\.\d{1,2})?)\s*%/g)];
       for (const match of matches) {
         const value = Number(match[1]);
         if (!Number.isFinite(value)) continue;
-        const label = clean(text.slice(0, match.index)).slice(-40).replace(/[—–:·-]+$/g, '').trim() || 'Dato';
-        const key = `${label}|${value}`;
+        const title = clean(node.closest('article,section')?.querySelector('h1,h2,h3')?.textContent);
+        const source = economySource(`${title} ${text}`);
+        const key = `${value}|${source}`;
         if (seen.has(key)) continue;
         seen.add(key);
-        values.push({ label, value });
+        values.push({ label: economyLabel({ title, dataLabel: '', source }), value, source });
         if (values.length >= 8) return values;
       }
     }
@@ -203,7 +235,6 @@
       button.addEventListener('focus', show);
       wrap.appendChild(button);
     }
-    // La antigua orb-economy-polyline se retiró: porcentajes sin relación ya no se conectan.
     visual._readout.textContent = `${values.length} porcentajes visibles`;
     visual.appendChild(wrap);
     return visual;
@@ -229,6 +260,61 @@
     visual.appendChild(path);
     return visual;
   };
+
+  const fieldValue = (labelText) => {
+    const field = [...main.querySelectorAll('.finance-field')].find((node) => clean(node.querySelector(':scope > span')?.textContent).toLocaleLowerCase('es-MX') === labelText.toLocaleLowerCase('es-MX'));
+    const value = Number(field?.querySelector('input')?.value);
+    return Number.isFinite(value) ? Math.max(0, value) : 0;
+  };
+
+  const savingsMonths = () => {
+    const card = [...main.querySelectorAll('.finance-result-card')].find((node) => /Tiempo estimado/i.test(node.querySelector(':scope > span')?.textContent || ''));
+    const match = clean(card?.querySelector('strong')?.textContent).match(/^(\d+)\s+meses?$/i);
+    return match ? Number(match[1]) : null;
+  };
+
+  const renderSavingsResultChart = () => {
+    if ((location.pathname.replace(/\/$/, '') || '/') !== '/finanzas/ahorro') return;
+    const host = main.querySelector('.finance-results');
+    if (!host) return;
+    const meta = fieldValue('Meta total');
+    const actual = fieldValue('Ahorro actual');
+    const aportacion = fieldValue('Aportación mensual');
+    const meses = savingsMonths();
+    let visual = host.querySelector('[data-orbita-savings-result-chart]');
+    if (!(meta > 0) || !(aportacion > 0) || !Number.isFinite(meses)) {
+      visual?.remove();
+      return;
+    }
+    if (!visual) {
+      visual = document.createElement('section');
+      visual.className = 'orb-savings-result-chart';
+      visual.dataset.orbitaSavingsResultChart = 'true';
+      visual.innerHTML = '<p><strong>Tu proyección capturada.</strong> Usa exactamente tu meta, ahorro actual, aportación mensual y el tiempo calculado arriba; no agrega intereses ni rendimientos.</p><div class="orb-savings-result-bars"></div>';
+      const next = host.querySelector('.finance-next-box');
+      if (next) next.insertAdjacentElement('beforebegin', visual);
+      else host.appendChild(visual);
+    }
+    const bars = visual.querySelector('.orb-savings-result-bars');
+    bars.textContent = '';
+    const checkpoints = [...new Set([0, Math.ceil(meses / 3), Math.ceil((meses * 2) / 3), meses])];
+    checkpoints.forEach((month, index) => {
+      const value = Math.min(meta, actual + (aportacion * month));
+      const ratio = meta > 0 ? Math.min(1, value / meta) : 0;
+      const item = document.createElement('div');
+      item.className = 'orb-savings-result-bar';
+      item.style.setProperty('--orb-savings-height', `${Math.max(18, 18 + ratio * 82)}%`);
+      item.innerHTML = `<span>${index === 0 ? 'Hoy' : month === meses ? `Mes ${meses}` : `Mes ${month}`}</span><strong>${money(value)}</strong>`;
+      bars.appendChild(item);
+    });
+  };
+
+  const scheduleSavingsChart = () => requestAnimationFrame(() => requestAnimationFrame(renderSavingsResultChart));
+  if ((location.pathname.replace(/\/$/, '') || '/') === '/finanzas/ahorro') {
+    main.addEventListener('input', scheduleSavingsChart);
+    main.addEventListener('change', scheduleSavingsChart);
+    scheduleSavingsChart();
+  }
 
   const builders = { carreras: careersVisual, estados: stateVisual, finanzas: financeVisual, economia: economyVisual, aprende: learnVisual };
   const visual = builders[section]?.();

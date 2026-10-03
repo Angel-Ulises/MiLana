@@ -54,12 +54,18 @@
       reserve.replaceWith(visual);
       return;
     }
-    const hero = main.querySelector(':scope > .career-hero,:scope > .profession-hero,:scope > .state-hero,:scope > .state-detail-hero,:scope > .finance-page-hero,:scope > .advisor-hero,:scope > .investment-hero,:scope > .economy-hero,:scope > .hubhead');
+    const hero = main.querySelector(':scope > .career-hero,:scope > .profession-hero,:scope > .state-hero,:scope > .state-detail-hero,:scope > .finance-page-hero,:scope > .advisor-hero,:scope > .investment-hero,:scope > .economy-hero,:scope > .hubhead,:scope > .cnbv-funds-hero,:scope > .cetes-reference-hero,:scope > .instrument-compare-hero');
     if (hero) {
       hero.insertAdjacentElement('afterend', visual);
       return;
     }
     const h1 = main.querySelector('h1');
+    // Hero desconocido: va después de la sección de primer nivel que contiene el h1, nunca dentro de ella.
+    const heroSection = h1?.closest('main > section');
+    if (heroSection && heroSection.parentElement === main) {
+      heroSection.insertAdjacentElement('afterend', visual);
+      return;
+    }
     const intro = h1?.nextElementSibling?.matches?.('p') ? h1.nextElementSibling : null;
     if (intro) intro.insertAdjacentElement('afterend', visual);
     else if (h1) h1.insertAdjacentElement('afterend', visual);
@@ -110,35 +116,63 @@
     return visual;
   };
 
+  // Nombre y código fijos por entidad (slug de /estados/<slug>); evita derivar iniciales de texto de tarjetas.
+  const STATES = {
+    'aguascalientes': ['AGS', 'Aguascalientes'], 'baja-california': ['BC', 'Baja California'],
+    'baja-california-sur': ['BCS', 'Baja California Sur'], 'campeche': ['CAMP', 'Campeche'],
+    'chiapas': ['CHIS', 'Chiapas'], 'chihuahua': ['CHIH', 'Chihuahua'], 'coahuila': ['COAH', 'Coahuila'],
+    'colima': ['COL', 'Colima'], 'ciudad-de-mexico': ['CDMX', 'Ciudad de México'], 'durango': ['DGO', 'Durango'],
+    'estado-de-mexico': ['MEX', 'Estado de México'], 'guanajuato': ['GTO', 'Guanajuato'], 'guerrero': ['GRO', 'Guerrero'],
+    'hidalgo': ['HGO', 'Hidalgo'], 'jalisco': ['JAL', 'Jalisco'], 'michoacan': ['MICH', 'Michoacán'],
+    'morelos': ['MOR', 'Morelos'], 'nayarit': ['NAY', 'Nayarit'], 'nuevo-leon': ['NL', 'Nuevo León'],
+    'oaxaca': ['OAX', 'Oaxaca'], 'puebla': ['PUE', 'Puebla'], 'queretaro': ['QRO', 'Querétaro'],
+    'quintana-roo': ['QROO', 'Quintana Roo'], 'san-luis-potosi': ['SLP', 'San Luis Potosí'], 'sinaloa': ['SIN', 'Sinaloa'],
+    'sonora': ['SON', 'Sonora'], 'tabasco': ['TAB', 'Tabasco'], 'tamaulipas': ['TAMS', 'Tamaulipas'],
+    'tlaxcala': ['TLAX', 'Tlaxcala'], 'veracruz': ['VER', 'Veracruz'], 'yucatan': ['YUC', 'Yucatán'], 'zacatecas': ['ZAC', 'Zacatecas']
+  };
+
   const stateVisual = () => {
-    const links = [];
+    const slugOf = (href) => (href.match(/^\/estados\/([^/?#]+)\/?$/) || [])[1];
+    const currentSlug = slugOf(location.pathname);
+    const entries = [];
     const seen = new Set();
+    const add = (slug) => {
+      if (!slug || !STATES[slug] || seen.has(slug)) return;
+      seen.add(slug);
+      entries.push({ slug, href: `/estados/${slug}`, code: STATES[slug][0], label: STATES[slug][1] });
+    };
+    if (currentSlug) add(currentSlug);
     main.querySelectorAll('a[href^="/estados/"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
-      if (!/^\/estados\/[^/?#]+\/?$/.test(href) || href.includes('/comparar')) return;
-      const label = clean(a.textContent).replace(/^Estado:\s*/i, '').split(' — ')[0].trim();
-      if (!label || seen.has(href)) return;
-      seen.add(href);
-      links.push({ href, label });
+      if (href.includes('/comparar')) return;
+      add(slugOf(href));
     });
-    if (links.length < 2) return null;
-    const visual = card('Estados', 'México en mosaico', 'Explora las entidades disponibles. El mosaico es navegación visual: no colorea estados como mejores o peores.');
+    if (entries.length < 2) return null;
+    const detail = Boolean(currentSlug && STATES[currentSlug]);
+    const visual = card('Estados', detail ? 'Tu estado y comparables' : 'México en mosaico', detail
+      ? 'Tu entidad aparece resaltada junto con las que esta ficha enlaza. El mosaico es navegación visual: no colorea estados como mejores o peores.'
+      : 'Explora las entidades disponibles. El mosaico es navegación visual: no colorea estados como mejores o peores.');
     const grid = document.createElement('div');
     grid.className = 'orb-state-mosaic';
-    links.slice(0, 32).forEach(({ href, label }) => {
+    const select = (button, entry) => {
+      grid.querySelectorAll('.is-active').forEach((n) => n.classList.remove('is-active'));
+      button.classList.add('is-active');
+      visual._readout.innerHTML = entry.slug === currentSlug
+        ? `<span>${entry.label}</span> · estás aquí`
+        : `<span>${entry.label}</span> · <a href="${entry.href}">Abrir estado →</a>`;
+    };
+    entries.slice(0, 32).forEach((entry) => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'orb-state-tile';
-      button.setAttribute('aria-label', `Ver ${label}`);
-      button.textContent = label.split(/\s+/).map((part) => part[0]).join('').slice(0, 3).toUpperCase();
-      button.addEventListener('click', () => {
-        grid.querySelectorAll('.is-active').forEach((n) => n.classList.remove('is-active'));
-        button.classList.add('is-active');
-        visual._readout.innerHTML = `<span>${label}</span> · <a href="${href}">Abrir estado →</a>`;
-      });
+      button.dataset.stateCode = entry.code;
+      button.setAttribute('aria-label', `Ver ${entry.label}`);
+      button.textContent = entry.code;
+      button.addEventListener('click', () => select(button, entry));
       grid.appendChild(button);
+      if (entry.slug === currentSlug) { button.classList.add('is-active'); button.setAttribute('aria-current', 'true'); }
     });
-    visual._readout.textContent = `${Math.min(links.length, 32)} entidades disponibles`;
+    visual._readout.textContent = detail ? `${entries[0].label} y ${entries.length - 1} más` : `${Math.min(entries.length, 32)} entidades disponibles`;
     visual.appendChild(grid);
     return visual;
   };

@@ -229,6 +229,7 @@ function cuerpoEstatico(s) {
   const ruta = s.ruta
     .map((r) => `<li><strong>${e(r.paso)}</strong> — ${e(r.detalle)}</li>`)
     .join("\n        ");
+  const anclasGrupos = s.grupos ? s.grupos.map((g) => `<span id="${e(g.ancla)}" aria-hidden="true"></span>`).join('\n      ') : '';
   const ids = s.grupos ? s.grupos.flatMap((g) => g.ids) : s.herramientas;
   const herramientas = ids
     .map((id) => `<li><a href="/calculadoras/${SLUG_POR_ID[id]}">${e(TITULO_CORTO[id] || id)}</a></li>`)
@@ -259,6 +260,7 @@ function cuerpoEstatico(s) {
         ${ruta}
       </ol>
 
+      ${anclasGrupos}
       <h2>Herramientas para esta situación</h2>
       <ul>
         ${herramientas}

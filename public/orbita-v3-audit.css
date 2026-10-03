@@ -13,7 +13,8 @@ html.ml-orbita-enabled[data-orbita-section="inicio"] .orb-home-search{color:#4E5
 html.ml-orbita-enabled[data-orbita-section="inicio"] .orb-home-search svg{stroke:#4E5C69!important}
 
 /* Contraste: el color global de párrafo no invade superficies oscuras. */
-html.ml-orbita-enabled :is(.ml-money-head,.finance-advisor-preview,.footer-inner,.economy-related) :is(p,li,small,figcaption){color:#DCE6EF!important}
+html.ml-orbita-enabled :is(.ml-money-head,.footer-inner,.economy-related) :is(p,li,small,figcaption),
+html.ml-orbita-enabled .finance-advisor-preview :is(p,li,small,figcaption):not(aside *){color:#DCE6EF!important}
 html.ml-orbita-enabled :is(.ml-money-card,.trust-points,.career-money-bridge-inner) :is(p,li,small,figcaption){color:#E2EBF3!important}
 html.ml-orbita-enabled :is(.ml-money-card,.trust-points,.career-money-bridge-inner) :is(h2,h3,strong){color:#FFF!important}
 html.ml-orbita-enabled .ml-money-head .eyebrow,
@@ -49,7 +50,7 @@ html.ml-orbita-enabled[data-orbita-section="economia"] :is(.economy-guide,.econo
 
 /* Estados: el breadcrumb no queda pegado al eyebrow. */
 html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero) nav+ .eyebrow,
-html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero) nav~.eyebrow{margin-top:18px!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.state-hero,.state-detail-hero,.sc-hero) na~~.eyebrow{margin-top:18px!important}
 
 /* Reservas de respaldo para contenido insertado por JS. Las reservas críticas también se pintan desde base/prepaint. */
 .orb-runtime-reserve{width:min(1120px,calc(100% - 36px));margin:24px auto;border-radius:18px;background:transparent;contain:layout style paint;pointer-events:none}

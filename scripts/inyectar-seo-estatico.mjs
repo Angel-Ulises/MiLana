@@ -85,16 +85,16 @@ function cuerpoInicio() {
       <main data-static-seo="inicio">
         <h1>Calculadoras de sueldo, prestaciones e impuestos para México</h1>
         <p>MiLana reúne herramientas gratuitas para estimar y entender sueldo, ISR, aguinaldo, finiquito, liquidación, vacaciones, PTU, RESICO, Infonavit y pensión IMSS con alcance y fuentes visibles.</p>
-        <h2>Calculadoras</h2>
-        <ul>${calculadoras}</ul>
-        <h2>Explora MiLana por decisión</h2>
+        <section id="calculadoras"><h2>Calculadoras</h2>
+        <ul>${calculadoras}</ul></section>
+        <section id="situaciones"><h2>Explora MiLana por decisión</h2>
         <ul>
           <li><a href="/carreras">Carreras, empleos y salarios</a></li>
           <li><a href="/estados">Trabajo, salarios y vivienda por estado</a></li>
           <li><a href="/finanzas">Finanzas personales y herramientas de decisión</a></li>
           <li><a href="/economia">Radar económico y contexto para tu dinero</a></li>
-        </ul>
-        <h2>Aprende antes de decidir</h2>
+        </ul></section>
+        <section id="aprende"><h2>Aprende antes de decidir</h2>
         <ul>
           <li><a href="/aprende/finiquito-vs-liquidacion">Finiquito vs. liquidación</a></li>
           <li><a href="/aprende/leer-recibo-nomina">Cómo leer tu recibo de nómina</a></li>
@@ -102,8 +102,8 @@ function cuerpoInicio() {
           <li><a href="/aprende/vacaciones-prima-vacacional">Vacaciones y prima vacacional</a></li>
           <li><a href="/aprende/resico-ingresos-cobrados">RESICO e ingresos cobrados</a></li>
           <li><a href="/aprende/pension-imss-ley-97">Pensión IMSS Ley 97</a></li>
-        </ul>
-        <p><a href="/widgets">Calculadoras gratuitas para insertar en otros sitios</a>.</p>
+        </ul></section>
+        <section id="fuentes"><p><a href="/widgets">Calculadoras gratuitas para insertar en otros sitios</a>.</p></section>
       </main>
     </div>`;
 }

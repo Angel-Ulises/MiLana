@@ -1,10 +1,11 @@
 (() => {
   'use strict';
   const params = new URLSearchParams(location.search);
-  if (params.get('embed') !== '1') return;
-  const match = location.pathname.match(/^\/calculadoras\/([^/]+)\/?$/);
-  if (!match) return;
-  const slug = match[1];
+  const widgetMatch = location.pathname.match(/^\/widgets\/calculadoras\/([^/]+)\/?$/);
+  const calculatorMatch = location.pathname.match(/^\/calculadoras\/([^/]+)\/?$/);
+  if (!widgetMatch && !(calculatorMatch && params.get('embed') === '1')) return;
+  const slug = (widgetMatch || calculatorMatch)[1];
+  const fullPath = `/calculadoras/${slug}`;
 
   document.documentElement.classList.add('milana-embed');
   const style = document.createElement('style');
@@ -25,7 +26,7 @@
     if (!main || !form || main.querySelector('.ml-embed-brand')) return;
     const bar = document.createElement('div');
     bar.className = 'ml-embed-brand';
-    bar.innerHTML = `<span><strong>MiLana</strong> · calculadora gratuita</span><a href="${location.origin}${location.pathname}" target="_blank" rel="noopener noreferrer">Abrir completa ↗</a>`;
+    bar.innerHTML = `<span><strong>MiLana</strong> · calculadora gratuita</span><a href="${location.origin}${fullPath}" target="_blank" rel="noopener noreferrer">Abrir completa ↗</a>`;
     main.insertBefore(bar, form);
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'widget_view', { calculator_id: slug, page_path: location.pathname });

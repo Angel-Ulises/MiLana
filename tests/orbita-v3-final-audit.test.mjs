@@ -35,7 +35,7 @@ test('calculadoras ocultan intro repetido y vuelven al paso que falló',()=>{
   assert.match(internal,/errorText\.includes\('salario minimo'\)/);
   assert.match(internal,/errorText\.includes\('vacaciones'\) && errorText\.includes\('anuales'\)/);
   assert.match(prepaint,/\.calculator-hero-media\{display:none!important\}/);
-  assert.match(prepaint,/\.calculator-purpose\{[^}]*-webkit-line-clamp:1/);
+  assert.match(prepaint,/\.calculator-purpose\{[^}]*-webkit-line-clamp:2/);
   assert.match(prepaint,/\.calculator-main::before\{[^}]*height:131px/);
 });
 

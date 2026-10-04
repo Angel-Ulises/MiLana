@@ -35,7 +35,7 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.
 @media(max-width:760px){
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero{padding-block:10px!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-inner{gap:10px!important}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-purpose{margin:5px 0 0!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-purpose{margin:5px 0 0!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-proof{display:none!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media{display:none!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] body:has(.calculator-hero) .calc-intro{display:none!important}
@@ -62,3 +62,12 @@ html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy>*{animation:none
 
 /* Inicio en móvil: el panel crema del hero se extiende 14px más allá del texto (sin saltos). Doble clase: experience.css fija padding:0!important. */
 @media(max-width:620px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{width:calc(100% + 28px)!important;padding-inline:14px!important;margin-inline:-14px!important}}
+
+/* Contenido siempre visible: las animaciones de entrada dejaban bloques en blanco al hacer scroll rápido. */
+html.ml-orbita-enabled :is(.ml-premium-reveal,.career-reveal,.route-reveal){opacity:1!important;transform:none!important;transition:none!important}
+
+/* Espacios de anuncio invisibles hasta que AdSense los llene: conservan su alto, sin caja ni etiqueta. */
+html.ml-orbita-enabled :is(.orb-ad-reserve,[data-orbita-ad-reserve]){border:0!important;background:transparent!important;color:transparent!important;margin-block:0!important}
+html.ml-orbita-enabled .orb-ad-leaderboard::before{content:none!important}
+/* Inicio en tablet: sin hueco de 56px sobre el panel crema y con margen interior para el texto. */
+@media(min-width:621px) and (max-width:900px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid{padding-top:0!important}html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{padding:24px 22px!important;border-radius:22px}}

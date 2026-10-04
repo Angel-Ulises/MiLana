@@ -336,6 +336,8 @@
   };
 
   const learnVisual = () => {
+    // En una guía individual el lector ya eligió tema: el mapa de 4 pasos empujaba el título ~520 px hacia abajo en móvil.
+    if (/^\/aprende\/[^/]+/.test(location.pathname)) return null;
     const visual = card('Aprende', 'Un camino corto para decidir mejor', 'Las guías están pensadas para convertir una palabra difícil en una decisión que puedas explicar.');
     const path = document.createElement('div');
     path.className = 'orb-learn-path';

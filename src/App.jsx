@@ -472,7 +472,7 @@ function CalcBrutoNeto() {
     <label className="calc-check"><input type="checkbox" checked={confirmado} onChange={e => editar(setConfirmado)(e.target.checked)} /> Confirmo que es un mes completo ordinario con un solo empleador.</label>
     <p className="calc-help">En ISSSTE se consideran las cuotas obligatorias del trabajador: RCV 6.125%, salud 3.375%, invalidez y vida 0.625% y servicios sociales 0.5%. No se incluyen Ahorro Solidario, FOVISSSTE, préstamos, sindicato u otros descuentos personales.</p>
     <p id={errorId} role="alert" className="calc-error">{error}</p>
-    <Btn>Calcular neto después de ISR y seguridad social</Btn>
+    <Btn>Calcular mi sueldo neto</Btn>
     <div aria-live="polite" aria-atomic="true">
       {resultado && <ResultBox>
         <ResultLine label="Percepciones brutas" value={fmt(resultado.bruto)} />

@@ -2,7 +2,8 @@ import datos from './data/profesiones.json';
 import AdReserve from './AdReserve.jsx';
 
 const FOTO_ID = '3184465';
-const foto = (width = 1400) => `https://images.pexels.com/photos/${FOTO_ID}/pexels-photo-${FOTO_ID}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
+// Recorte 16:9 anclado abajo: la foto original corta la cabeza (solo se veía la barbilla); así queda el apretón de manos.
+const foto = (width = 1400) => `https://images.pexels.com/photos/${FOTO_ID}/pexels-photo-${FOTO_ID}.jpeg?auto=compress&cs=tinysrgb&w=${width}&h=${Math.round(width * 0.5625)}&fit=crop&crop=bottom`;
 const dinero = (valor) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(valor);
 const numero = (valor) => new Intl.NumberFormat('es-MX').format(valor);
 

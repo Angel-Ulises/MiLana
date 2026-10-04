@@ -10,8 +10,10 @@ const PEXELS = {
   estados: '3184291',
 };
 
+// 3184465 (apretón de manos) trae la cabeza cortada en el original: se recorta 16:9 anclado abajo.
+const RECORTE_ABAJO = new Set(['3184465']);
 const pexels = (id, width = 1400) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
+  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}${RECORTE_ABAJO.has(id) ? `&h=${Math.round(width * 0.5625)}&fit=crop&crop=bottom` : ''}`;
 
 const dinero = (valor) => new Intl.NumberFormat('es-MX', {
   style: 'currency', currency: 'MXN', maximumFractionDigits: 0,

@@ -82,8 +82,9 @@
       if (!match) continue;
       const value = Number(match[1].replace(/,/g, ''));
       if (!Number.isFinite(value) || value <= 0) continue;
-      let label = clean(text.slice(0, match.index)).replace(/[—–:·-]+$/g, '').trim();
-      if (!label) label = clean(node.querySelector('strong,h2,h3,td')?.textContent) || 'Dato visible';
+      // El título de la fila (h3/h2) es la etiqueta; el texto previo a la cifra mezcla número, nombre y conteos sin espacios.
+      let label = clean(node.querySelector('h2,h3,h4')?.textContent) || clean(text.slice(0, match.index)).replace(/[—–:·-]+$/g, '').trim();
+      if (!label) label = clean(node.querySelector('strong,td')?.textContent) || 'Dato visible';
       label = label.slice(0, 58);
       const key = `${label}|${value}`;
       if (seen.has(key)) continue;
@@ -241,7 +242,22 @@
     if (source === 'Banxico' && /tasa objetivo|tasa de inter[eé]s/i.test(text)) return 'Tasa objetivo Banxico';
     if (source === 'INEGI' && /inflaci[oó]n|inpc/i.test(text)) return 'Inflación anual INEGI';
     if (source === 'INEGI' && /consumo/i.test(text)) return 'Consumo privado INEGI';
-    return clean(`${dataLabel || title} · ${source}`).slice(0, 58);
+    return cutWords(`${dataLabel || title} · ${source}`, 58);
+  };
+
+  // Recorta en el último espacio para no partir palabras ("falt…").
+  const cutWords = (text, max) => {
+    const value = clean(text);
+    if (value.length <= max) return value;
+    return `${value.slice(0, max).replace(/\s+\S*$/, '')}…`;
+  };
+
+  // Etiqueta de un porcentaje dentro de un párrafo: las palabras que lo describen, no el título de la sección.
+  const phraseAround = (text, match) => {
+    const before = text.slice(0, match.index).split(/[.:;,\n]\s*/).pop().trim().split(/\s+/).slice(-8).join(' ');
+    const after = text.slice(match.index + match[0].length).split(/[.,;\n]/)[0].trim().split(/\s+/).slice(0, 5).join(' ');
+    const phrase = before.length >= 12 ? before : after;
+    return phrase ? cutWords(phrase.charAt(0).toUpperCase() + phrase.slice(1), 58) : '';
   };
 
   const collectPercentages = () => {
@@ -266,17 +282,18 @@
 
     const nodes = main.querySelectorAll('.economy-big-number,.economy-step,.economy-meta');
     for (const node of nodes) {
-      const text = clean(node.textContent);
+      // innerText separa los bloques con saltos de línea; textContent pegaba "oficialINEGI".
+      const text = String(node.innerText || node.textContent || '').replace(/[ \t]+/g, ' ');
       const matches = [...text.matchAll(/(-?\d{1,3}(?:\.\d{1,2})?)\s*%/g)];
       for (const match of matches) {
         const value = Number(match[1]);
         if (!Number.isFinite(value)) continue;
         const title = clean(node.closest('article,section')?.querySelector('h1,h2,h3')?.textContent);
         const source = economySource(`${title} ${text}`);
-        const key = `${value}|${source}`;
+        const key = String(value);
         if (seen.has(key)) continue;
         seen.add(key);
-        values.push({ label: economyLabel({ title, dataLabel: '', source }), value, source });
+        values.push({ label: phraseAround(text, match) || economyLabel({ title, dataLabel: '', source }), value, source });
         if (values.length >= 8) return values;
       }
     }

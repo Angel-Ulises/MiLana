@@ -67,5 +67,7 @@ html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy>*{animation:none
 html.ml-orbita-enabled :is(.ml-premium-reveal,.career-reveal,.route-reveal){opacity:1!important;transform:none!important;transition:none!important}
 
 /* Espacios de anuncio invisibles hasta que AdSense los llene: conservan su alto, sin caja ni etiqueta. */
-html.ml-orbita-enabled :is(.orb-ad-reserve,[data-orbita-ad-reserve]){border:0!important;background:transparent!important;color:transparent!important}
+html.ml-orbita-enabled :is(.orb-ad-reserve,[data-orbita-ad-reserve]){border:0!important;background:transparent!important;color:transparent!important;margin-block:0!important}
 html.ml-orbita-enabled .orb-ad-leaderboard::before{content:none!important}
+/* Inicio en tablet: sin hueco de 56px sobre el panel crema y con margen interior para el texto. */
+@media(min-width:621px) and (max-width:900px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid{padding-top:0!important}html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{padding:24px 22px!important;border-radius:22px}}

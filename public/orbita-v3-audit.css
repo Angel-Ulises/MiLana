@@ -158,3 +158,24 @@ html.ml-orbita-enabled[data-orbita-section="inicio"] .article-row{padding:20px 1
 /* Preguntas de Carreras: títulos alineados arriba en todas las tarjetas. */
 html.ml-orbita-enabled .career-question-grid a{align-content:start!important}
 html.ml-orbita-enabled .career-question-grid :is(strong,b){align-self:start!important}
+
+/* Barras de carreras: el relleno es un span; sin display:block su ancho era 0 y la barra salía vacía. */
+.orb-bar-fill{display:block}
+/* Etiquetas de barras: hasta dos líneas completas en vez de cortarse con "…". */
+.orb-bar-label,.orb-economy-bar-label{white-space:normal!important;text-overflow:clip!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere}
+@media(max-width:620px){
+  .orb-bar-row{grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"label value" "track track";gap:6px 10px!important}
+  .orb-bar-label{grid-area:label}.orb-bar-track{grid-area:track}.orb-bar-value{grid-area:value;margin-top:0!important;align-self:start}
+}
+/* Pie de página en tablet: el "© 2026" quedaba en una columna de 83px, una palabra por línea. */
+@media(max-width:1023px){
+  html.ml-orbita-enabled .footer-inner{flex-wrap:wrap!important;row-gap:18px!important}
+  html.ml-orbita-enabled .footer-inner>p{order:9;flex:1 0 100%!important;margin-top:0!important}
+}
+/* Tabla por estado en móvil: tres columnas que caben en 390px, sin desplazamiento lateral. */
+@media(max-width:640px){
+  .career-state-table{overflow-x:visible!important}
+  .career-state-row{min-width:0!important;grid-template-columns:minmax(0,1fr) 96px 78px!important;gap:8px!important;padding:12px!important;font-size:12px!important}
+  .career-state-row>:not(:first-child){text-align:right}
+  .career-state-row.header{font-size:9.5px!important;letter-spacing:.02em!important}
+}

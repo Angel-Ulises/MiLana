@@ -1,3 +1,4 @@
+import Detalle from './Detalle.jsx';
 import { useMemo, useState } from 'react';
 import datos from './data/economia.json';
 import AdReserve from './AdReserve.jsx';
@@ -37,7 +38,7 @@ function Footer() {
 function Fuente({ articulo }) {
   const fuente = datos.fuentes.find((f) => f.id === articulo.fuenteId);
   if (!fuente) return null;
-  return <aside className="economy-source"><span>Fuente oficial</span><div><strong>{fuente.nombre}</strong><p>Publicado o actualizado: {articulo.fuenteFecha}. MiLana conserva la URL oficial en su registro editorial y muestra aquí el alcance sin convertir la nota en asesoría personalizada.</p></div></aside>;
+  return <Detalle className="orb-more-source" titulo="Fuente oficial" resumen={`${fuente.nombre} · ${articulo.fuenteFecha}`} cta="Ver fuente"><aside className="economy-source"><span>Fuente oficial</span><div><strong>{fuente.nombre}</strong><p>Publicado o actualizado: {articulo.fuenteFecha}. MiLana conserva la URL oficial en su registro editorial y muestra aquí el alcance sin convertir la nota en asesoría personalizada.</p></div></aside></Detalle>;
 }
 
 function ArticleCard({ articulo, featured = false }) {
@@ -92,8 +93,8 @@ function Hub() {
 
         <section className="economy-sources-section">
           <div className="shell economy-sources-grid">
-            <div><p className="eyebrow">Fuentes vigiladas</p><h2>El sistema ya sabe qué revisar y cuándo.</h2><p>La primera versión prioriza datos públicos de INEGI y Banco de México. El siguiente paso de automatización será actualizar este registro cuando cambie una publicación, no llenar la portada de titulares irrelevantes.</p></div>
-            <div className="economy-source-list">{datos.fuentes.map((f) => <article key={f.id}><span>{f.cadencia}</span><h3>{f.nombre}</h3><p>Próxima revisión prevista: {f.proximaRevision}</p></article>)}</div>
+            <div><p className="eyebrow">Fuentes que revisamos</p><h2>Cuándo se actualiza cada dato.</h2><p>Usamos datos públicos de INEGI y Banco de México. Actualizamos el Radar cuando sale una publicación nueva, no para llenar la portada de titulares.</p></div>
+            <Detalle className="orb-more-calendar" titulo="Calendario de próximas publicaciones" resumen={datos.fuentes.map((f) => f.nombre.split(' — ')[0]).filter((v, i, arr) => arr.indexOf(v) === i).join(' · ')} cta="Ver fechas"><div className="economy-source-list">{datos.fuentes.map((f) => <article key={f.id}><span>{f.cadencia}</span><h3>{f.nombre}</h3><p>Próxima revisión prevista: {f.proximaRevision}</p></article>)}</div></Detalle>
           </div>
         </section>
       </main>

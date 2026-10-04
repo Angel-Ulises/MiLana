@@ -29,8 +29,24 @@ function Footer() {
 
 function Selector({ value = '' }) {
   const [seleccion, setSeleccion] = useState(value);
-  const ir = () => { if (seleccion) window.location.href = `/estados/${seleccion}`; };
-  return <div className="state-selector"><label><span>Elige tu estado</span><select value={seleccion} onChange={(e) => setSeleccion(e.target.value)}><option value="">Selecciona una entidad</option>{datos.estados.map((e) => <option key={e.slug} value={e.slug}>{e.estado}</option>)}</select></label><button type="button" onClick={ir} disabled={!seleccion}>Ver panorama <span>→</span></button></div>;
+  // value = estado de la página actual. Antes el botón siempre navegaba a /estados/<selección>; en una ficha la
+  // selección inicial ES la página actual, así que "Ver panorama" recargaba la misma URL y no pasaba nada.
+  const mismaFicha = Boolean(value) && seleccion === value;
+  const destino = datos.estados.find((e) => e.slug === seleccion);
+  const ir = () => {
+    if (!seleccion) return;
+    if (mismaFicha) {
+      const panorama = document.getElementById('panorama-estado');
+      if (!panorama) return;
+      const reducir = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      panorama.scrollIntoView({ behavior: reducir ? 'auto' : 'smooth', block: 'start' });
+      panorama.focus({ preventScroll: true });
+      return;
+    }
+    window.location.href = `/estados/${seleccion}`;
+  };
+  const etiqueta = mismaFicha ? 'Ver panorama' : (value && destino ? `Ir a ${destino.estado}` : 'Ver panorama');
+  return <div className="state-selector"><label><span>{value ? 'Cambiar de estado' : 'Elige tu estado'}</span><select value={seleccion} onChange={(e) => setSeleccion(e.target.value)}><option value="">Selecciona una entidad</option>{datos.estados.map((e) => <option key={e.slug} value={e.slug}>{e.estado}</option>)}</select></label><button type="button" onClick={ir} disabled={!seleccion} data-state-action={mismaFicha ? 'panorama' : 'ir'}>{etiqueta} <span aria-hidden="true">{mismaFicha ? '↓' : '→'}</span></button></div>;
 }
 
 function Hub() {
@@ -56,7 +72,7 @@ function Detail({ estado }) {
 
   return <div className="state-pages"><Header /><main><section className="state-detail-hero"><div className="shell"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/estados">Estados</a><span>/</span><span>{estado.estado}</span></nav><p className="eyebrow">{estado.estado} · {datos.actualizado}</p><h1>Trabajo, salarios y decisiones de dinero en {estado.estado}.</h1><p>MiLana combina dos lecturas oficiales del mismo trimestre: panorama profesional de OLA/STPS y mercado laboral general de ENOE/INEGI. Se muestran juntas, pero nunca como si fueran la misma población.</p><Selector value={estado.slug} /></div></section>
 
-  <section className="state-metrics"><div className="shell"><div className="state-metric-grid"><article><span>Ingreso profesional promedio</span><strong>{dinero(estado.ingreso)}</strong><p>{diferencia >= 0 ? '+' : ''}{diferenciaPct.toFixed(1)}% frente al promedio profesional nacional de {dinero(datos.promedioNacional)}.</p></article><article><span>Profesionistas ocupados</span><strong>{numero(estado.ocupados)}</strong><p>Personas ocupadas con formación profesional en el corte OLA.</p></article><article><span>Posición por ingreso promedio</span><strong>{rankIngreso}<small> de 32</small></strong><p>Orden descriptivo entre entidades con el mismo corte.</p></article><article><span>Posición por profesionistas ocupados</span><strong>{rankOcupados}<small> de 32</small></strong><p>Describe tamaño de la población profesional, no vacantes abiertas.</p></article></div><aside className="state-source"><span>Fuente profesional</span><div><strong>{datos.fuente.nombre}</strong><p>{datos.fuente.periodo}. {datos.nota}</p></div></aside></div></section>
+  <section className="state-metrics" id="panorama-estado" tabIndex={-1} aria-label={`Panorama de ${estado.estado}`}><div className="shell"><div className="state-metric-grid"><article><span>Ingreso profesional promedio</span><strong>{dinero(estado.ingreso)}</strong><p>{diferencia >= 0 ? '+' : ''}{diferenciaPct.toFixed(1)}% frente al promedio profesional nacional de {dinero(datos.promedioNacional)}.</p></article><article><span>Profesionistas ocupados</span><strong>{numero(estado.ocupados)}</strong><p>Personas ocupadas con formación profesional en el corte OLA.</p></article><article><span>Posición por ingreso promedio</span><strong>{rankIngreso}<small> de 32</small></strong><p>Orden descriptivo entre entidades con el mismo corte.</p></article><article><span>Posición por profesionistas ocupados</span><strong>{rankOcupados}<small> de 32</small></strong><p>Describe tamaño de la población profesional, no vacantes abiertas.</p></article></div><aside className="state-source"><span>Fuente profesional</span><div><strong>{datos.fuente.nombre}</strong><p>{datos.fuente.periodo}. {datos.nota}</p></div></aside></div></section>
 
   {mercado && <section className="state-labor"><div className="shell"><div className="state-labor-head"><div><p className="eyebrow">Mercado laboral · ENOE {laboral.actualizado}</p><h2>¿Cómo está el trabajo en {estado.estado}?</h2></div><p>Estas tasas describen al mercado laboral general del estado, no solo a profesionistas. La comparación usa el mismo trimestre para México y las 32 entidades.</p></div><div className="state-labor-grid"><LaborMetric label="Participación económica" value={`${mercado.participacion.toFixed(1)}%`} note={pp(mercado.participacion, mx.participacion)} /><LaborMetric label="Desocupación" value={`${mercado.desocupacion.toFixed(1)}%`} note={pp(mercado.desocupacion, mx.desocupacion)} /><LaborMetric label="Informalidad laboral" value={`${mercado.informalidad.toFixed(1)}%`} note={pp(mercado.informalidad, mx.informalidad)} /><LaborMetric label="Subocupación" value={`${mercado.subocupacion.toFixed(1)}%`} note={pp(mercado.subocupacion, mx.subocupacion)} /><LaborMetric label="Trabajo asalariado" value={`${mercado.trabajoAsalariado.toFixed(1)}%`} note={pp(mercado.trabajoAsalariado, mx.trabajoAsalariado)} /><LaborMetric label="Condiciones críticas" value={`${mercado.condicionesCriticas.toFixed(1)}%`} note={pp(mercado.condicionesCriticas, mx.condicionesCriticas)} /></div><div className="state-labor-pop"><div><span>Población ocupada</span><strong>{numero(mercado.ocupados)}</strong></div><div><span>Población desocupada</span><strong>{numero(mercado.desocupados)}</strong></div><div><span>Ocupación en sector informal</span><strong>{mercado.sectorInformal.toFixed(1)}%</strong></div></div><aside className="state-source state-source-labor"><span>Fuente laboral</span><div><strong>{laboral.fuente}</strong><p>Publicado el {fechaLarga(laboral.publicado)}. Próxima publicación trimestral programada: {fechaLarga(actualizacion.proximaPublicacion)}. {laboral.nota}</p></div></aside></div></section>}
 

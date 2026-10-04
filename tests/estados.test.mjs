@@ -74,3 +74,12 @@ test('cada estado recibe HTML estático, canonical, mercado laboral y sitemap', 
   assert.match(sitemap, /\/estados/);
   assert.match(sitemap, /estados\.map\(e => `\/estados\/\$\{e\.slug\}`\)/);
 });
+
+test('en una ficha, "Ver panorama" baja al panorama del mismo estado en vez de recargar la misma URL', () => {
+  // Regresión: el selector arrancaba con el estado de la página y el botón navegaba a /estados/<mismo>, sin efecto.
+  assert.match(pagina, /const mismaFicha = Boolean\(value\) && seleccion === value;/);
+  assert.match(pagina, /getElementById\('panorama-estado'\)/);
+  assert.match(pagina, /id="panorama-estado" tabIndex=\{-1\}/);
+  assert.match(pagina, /window\.location\.href = `\/estados\/\$\{seleccion\}`;/);
+  assert.match(pagina, /Ir a \$\{destino\.estado\}/);
+});

@@ -58,6 +58,8 @@ import './cetes-reference.css'
 import './cnbv-funds.css'
 import './economy-pages.css'
 import './route-motion.css'
+import './publicSectorScope.js'
+import './publicSectorScope.css'
 
 const profesion = esRutaProfesion()
 const ocupaciones = esRutaOcupaciones()

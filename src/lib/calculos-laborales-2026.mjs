@@ -1,6 +1,15 @@
 import { calcularISR } from './calculos-revisados.mjs';
 
 export const UMA_DIARIA_2026 = 117.31;
+export const UMA_MENSUAL_2026 = 3566.22;
+export const ISSSTE_CUOTAS_TRABAJADOR_2026 = Object.freeze({
+  retiroCesantiaVejez: 0.06125,
+  saludActivo: 0.0275,
+  saludPensionados: 0.00625,
+  invalidezVida: 0.00625,
+  serviciosSociales: 0.005,
+  total: 0.10625,
+});
 export const SALARIOS_MINIMOS_2026 = Object.freeze({
   general: 315.04,
   frontera: 440.87,
@@ -224,11 +233,36 @@ export function calcularCuotaObreraIMSS2026({ sbcDiario, diasCotizados, soloMini
   return { diasCotizados: dias, sbcCapturado: sbc, sbcAplicado, topeSbc, cuotaObrera: fija + excedenteTresUma };
 }
 
+export function calcularCuotaTrabajadorISSSTE2026({ sueldoBasicoMensual }) {
+  const sueldo = numero(sueldoBasicoMensual, 'Sueldo Básico mensual ISSSTE', { min: 0.01, max: 100_000_000, decimales: 2 });
+  const topeSueldoBasico = 10 * UMA_MENSUAL_2026;
+  const sueldoBasicoAplicado = Math.min(sueldo, topeSueldoBasico);
+  const retiroCesantiaVejez = sueldoBasicoAplicado * ISSSTE_CUOTAS_TRABAJADOR_2026.retiroCesantiaVejez;
+  const saludActivo = sueldoBasicoAplicado * ISSSTE_CUOTAS_TRABAJADOR_2026.saludActivo;
+  const saludPensionados = sueldoBasicoAplicado * ISSSTE_CUOTAS_TRABAJADOR_2026.saludPensionados;
+  const invalidezVida = sueldoBasicoAplicado * ISSSTE_CUOTAS_TRABAJADOR_2026.invalidezVida;
+  const serviciosSociales = sueldoBasicoAplicado * ISSSTE_CUOTAS_TRABAJADOR_2026.serviciosSociales;
+  const cuotaISSSTE = retiroCesantiaVejez + saludActivo + saludPensionados + invalidezVida + serviciosSociales;
+  return {
+    sueldoBasicoCapturado: sueldo,
+    sueldoBasicoAplicado,
+    topeSueldoBasico,
+    retiroCesantiaVejez,
+    saludActivo,
+    saludPensionados,
+    invalidezVida,
+    serviciosSociales,
+    cuotaISSSTE,
+  };
+}
+
 export function calcularBrutoNeto2026({
   brutoMensual,
   ingresoGravableISR,
   sbcDiario,
   diasCotizados,
+  sueldoBasicoISSSTE,
+  seguridadSocial = 'imss',
   soloMinimo,
   periodo = '2026-09',
   empleadorUnico = true,
@@ -238,18 +272,26 @@ export function calcularBrutoNeto2026({
   if (gravable > bruto) throw new Error('El ingreso gravable para ISR no puede superar las percepciones brutas capturadas en este modo.');
   if (typeof soloMinimo !== 'boolean') throw new Error('Indica si percibiste únicamente el salario mínimo general de tu zona.');
   if (empleadorUnico !== true) throw new Error('Este modo cubre un mes completo ordinario con un solo empleador.');
+  if (!['imss', 'issste'].includes(seguridadSocial)) throw new Error('Selecciona si cotizas al IMSS o al ISSSTE.');
 
   const isr = calcularISR({ ingreso: gravable, soloMinimo, periodo, empleadorUnico: true });
-  const imss = calcularCuotaObreraIMSS2026({ sbcDiario, diasCotizados, soloMinimo });
-  const netoDespuesISRIMSS = bruto - isr.retenido - imss.cuotaObrera;
-  if (netoDespuesISRIMSS < 0) throw new Error('Las bases capturadas producen deducciones superiores al bruto. Revisa los datos.');
+  const seguridad = seguridadSocial === 'issste'
+    ? calcularCuotaTrabajadorISSSTE2026({ sueldoBasicoMensual: sueldoBasicoISSSTE })
+    : calcularCuotaObreraIMSS2026({ sbcDiario, diasCotizados, soloMinimo });
+  const cuotaSeguridadSocial = seguridadSocial === 'issste' ? seguridad.cuotaISSSTE : seguridad.cuotaObrera;
+  const netoDespuesISRSeguridadSocial = bruto - isr.retenido - cuotaSeguridadSocial;
+  if (netoDespuesISRSeguridadSocial < 0) throw new Error('Las bases capturadas producen deducciones superiores al bruto. Revisa los datos.');
 
   return {
     ...isr,
-    ...imss,
+    ...seguridad,
     bruto,
     gravable,
-    netoDespuesISRIMSS,
+    seguridadSocial,
+    cuotaSeguridadSocial,
+    netoDespuesISRSeguridadSocial,
+    // Compatibilidad con consumidores anteriores del modo IMSS.
+    netoDespuesISRIMSS: seguridadSocial === 'imss' ? netoDespuesISRSeguridadSocial : null,
     otrasDeduccionesIncluidas: false,
   };
 }

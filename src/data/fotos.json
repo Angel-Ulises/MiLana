@@ -3,14 +3,14 @@
   "fotos": {
     "inicio":      { "focal": "68% 46%", "focalTablet": "66% 46%", "focalMovil": "62% 46%" },
     "finiquito":   { "focal": "65% 48%", "movil": "finiquito-movil" },
-    "liquidacion": { "focal": "68% 45%", "movil": "liquidacion-movil" },
-    "aguinaldo":   { "focal": "65% 52%" },
+    "liquidacion": { "focal": "68% 45%", "focalMovil": "50% 22%", "movil": "liquidacion-movil" },
+    "aguinaldo":   { "focal": "65% 52%", "focalMovil": "50% 34%" },
     "isr":         { "focal": "66% 48%" },
-    "resico":      { "focal": "68% 44%" },
+    "resico":      { "focal": "68% 44%", "focalMovil": "50% 31%" },
     "ptu":         { "focal": "67% 48%" },
     "bruto-neto":  { "focal": "64% 52%", "movil": "bruto-neto-movil" },
     "vacaciones":  { "focal": "68% 52%", "movil": "vacaciones-movil" },
     "infonavit":   { "focal": "68% 46%" },
-    "pension":     { "focal": "66% 46%" }
+    "pension":     { "focal": "66% 46%", "focalMovil": "58% 38%" }
   }
 }

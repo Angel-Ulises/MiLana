@@ -180,3 +180,42 @@ html.ml-orbita-enabled .career-question-grid :is(strong,b){align-self:start!impo
   .career-state-row>:not(:first-child){text-align:right}
   .career-state-row.header{font-size:9.5px!important;letter-spacing:.02em!important}
 }
+
+/* Auditoría móvil 4-oct: el encuadre puede cambiar por fotografía; protege rostros en franjas 16:9. */
+html.ml-orbita-enabled .calculator-hero-media img{object-position:var(--ml-photo-focal,50% 50%)!important}
+/* Tarjetas: altura por contenido, respiración mínima y palabras largas sin desbordarse. */
+html.ml-orbita-enabled :is(.calculator-card,.situation-card,.career-question-grid a,.career-route,.state-action-grid>a,.state-near-grid>a,.finance-route-list>a,.economy-card-copy,.cc-card,.co-card){min-height:0!important;overflow-wrap:anywhere}
+html.ml-orbita-enabled :is(.calculator-card,.situation-card,.career-question-grid a,.career-route,.state-action-grid>a,.state-near-grid>a,.finance-route-list>a,.cc-card,.co-card) :is(h2,h3,p,strong){max-width:100%;overflow-wrap:anywhere}
+@media(max-width:760px){
+  html.ml-orbita-enabled .calculator-hero-media img{object-position:var(--ml-photo-focal-mobile,var(--ml-photo-focal,50% 50%))!important}
+  html.ml-orbita-enabled :is(.calculator-card,.situation-card,.career-question-grid a,.career-route,.state-action-grid>a,.state-near-grid>a,.finance-route-list>a,.economy-card-copy,.cc-card,.co-card){padding-left:max(18px,5vw)!important;padding-right:max(18px,5vw)!important}
+  html.ml-orbita-enabled :is(.calculator-card,.situation-card,.career-question-grid a,.career-route,.state-action-grid>a,.state-near-grid>a,.finance-route-list>a,.cc-card,.co-card) :is(h2,h3){line-height:1.12!important;text-wrap:balance}
+}
+/* Las fotos de calculadora sí forman parte del encabezado móvil. Prepaint las ocultaba para ahorrar altura,
+   pero eso anulaba los recortes verticales por fotografía y dejaba el encabezado sin contexto visual. */
+@media(max-width:760px){
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media{
+    display:block!important;
+    position:relative!important;
+    width:100vw!important;
+    height:220px!important;
+    min-height:220px!important;
+    margin:16px 0 0 calc(50% - 50vw)!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+  }
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media picture,
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media img{
+    width:100%!important;height:100%!important;display:block!important;
+  }
+}
+/* El prepaint reserva 131 px para el asistente de formularios. Calculadoras cuyo núcleo no es un FORM
+   (RESICO, PTU, Vacaciones, Infonavit y Pensión) nunca montan ese asistente: la reserva era un hueco real. */
+@media(max-width:760px){
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main:not(:has(> form))::before{
+    display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;
+  }
+}
+/* Contraste estable en heroes de Carreras: la columna de lectura tiene fondo opaco propio,
+   así el H1 nunca depende del degradado/fotografía de la columna vecina. */
+html.ml-orbita-enabled[data-orbita-section="carreras"] .career-hero-copy{background:#FBF8F2!important}

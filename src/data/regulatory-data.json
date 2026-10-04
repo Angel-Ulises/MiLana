@@ -308,6 +308,18 @@
           "document": "LISR; revisión fiscal separada",
           "reference": "Art. 93 XIV; no certifica el bruto",
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+        },
+        {
+          "institution": "Cámara de Diputados",
+          "document": "LFTSE",
+          "reference": "Art. 42 Bis: al menos 40 días de salario",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFTSE.pdf"
+        },
+        {
+          "institution": "SEP",
+          "document": "Manual de Normas para la Administración de Recursos Humanos en la SEP 2025",
+          "reference": "Reglas de aguinaldo y conceptos computables de SEP federal",
+          "url": "https://normatecainterna.sep.gob.mx/work/models/normateca/Resource/323/7/images/MANUAL_NORMAS_ADMINISTRACION_RH_SEP_2025.pdf"
         }
       ],
       "legalBasis": [
@@ -316,30 +328,42 @@
           "name": "LFT",
           "reference": "Art. 87",
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
+        },
+        {
+          "type": "law",
+          "name": "LFTSE",
+          "reference": "Art. 42 Bis",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFTSE.pdf"
         }
       ],
-      "verifiedAt": "2026-09-14",
+      "verifiedAt": "2026-10-04",
       "verifiedThrough": [],
-      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
-      "verificationScope": "Aguinaldo bruto 2026 con salario mensual fijo, días de prestación capturados y servicio continuo hasta el cierre del año.",
+      "notas": "Alcance LFT conservado; se añadió LFTSE/SEP federal el 2026-10-04. El modo SEP Educación Media Superior aplica la tabla 11.4.3.8 del Manual SEP 2025 según tiempo de servicio.",
+      "verificationScope": "Aguinaldo bruto 2026: LFT con días capturados; LFTSE federal con mínimo de 40 días; SEP federal Básica/apoyo con 40 días y base computable; SEP Educación Media Superior con 40 días para 6 meses o más, 20 días para más de 3 y menos de 6 meses, y proporcional sobre 40 días hasta 3 meses.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
           "status": "superseded",
           "notice": "Antecedente sustituido por revisión 14/09/2026; no es evidencia vigente.",
           "notes": "La exención de 30 UMAs SÍ corresponde al Art. 93 LISR, pero es la fracción XIII, no la XIV como se había anotado antes en este archivo (corregido aquí). El código (30 × UMA_DIARIA) coincide exactamente con el monto confirmado de forma independiente ($3,519.30). Nota para el futuro: el Art. 93 también pone un tope combinado de 7 UMAs anuales para la suma de aguinaldo + PTU + prima vacacional exentos — el código no modela ese tope combinado, pero es un caso límite (solo importa si las tres prestaciones exentas suman más de 7 UMAs al año), se deja para una revisión posterior. ACTUALIZACIÓN 2026-09-06 (auditoría transversal Claude+ChatGPT): se retiró el cálculo de \"ISR estimado/neto\" de la interfaz (el Art. 174 del Reglamento LISR exige un procedimiento que relaciona esta prestación con el salario ordinario mensual, no una tarifa aislada) y se corrigió un bug donde la fecha de ingreso se comparaba contra el fin del año de ingreso en vez del año de referencia (2026), lo cual daba resultados incorrectos para cualquier empleado contratado en años anteriores. ACTUALIZACION 2026-09-07 (auditoria transversal T-04/T-14, Claude+ChatGPT): se corrigio un caso donde un valor de 0 escrito explicitamente en dias de aguinaldo se perdia y se sustituia por el default de 15; ahora un 0 explicito se respeta y solo el campo vacio usa el default."
+        },
+        {
+          "recordedAt": "2026-10-04",
+          "status": "current",
+          "notice": "Se añadió separación explícita entre LFT y servicio público federal.",
+          "notes": "LFTSE establece al menos 40 días. La interfaz exige régimen; SEP Educación Media Superior aplica la fórmula del Manual SEP 2025: 40 días con 6 meses o más, 20 días con más de 3 y menos de 6 meses, y proporcional sobre 40 días hasta 3 meses."
         }
       ],
-      "reviewReason": "Aguinaldo bruto 2026 con salario mensual fijo, días de prestación capturados y servicio continuo hasta el cierre del año.",
-      "calculationReviewedAt": "2026-09-14",
+      "reviewReason": "Aguinaldo bruto 2026: LFT con días capturados; LFTSE federal con mínimo de 40 días; SEP federal Básica/apoyo con 40 días y base computable; SEP Educación Media Superior con la tabla de antigüedad anual del Manual SEP 2025.",
+      "calculationReviewedAt": "2026-10-04",
       "referenceCases": [
         "Salario $18,000, ingreso 01/07/2026: 184 días y $4,536.99 brutos."
       ],
       "publicLabel": "Cálculo comprobado",
       "calculationEnabled": true,
-      "sourceCheckedAt": "2026-09-14",
+      "sourceCheckedAt": "2026-10-04",
       "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa.",
-      "calculationCheckedAt": "2026-09-14"
+      "calculationCheckedAt": "2026-10-04"
     },
     "isr": {
       "name": "ISR Mensual",
@@ -519,6 +543,18 @@
           "document": "Anexo 8 RMF 2026 y subsidio para el empleo",
           "reference": "Tarifa mensual y reglas febrero–diciembre",
           "url": "https://sidof.segob.gob.mx/notas/docFuente/5777219"
+        },
+        {
+          "institution": "Cámara de Diputados",
+          "document": "Ley del ISSSTE",
+          "reference": "Art. 17: Sueldo Básico como base de cuotas; Manual SEP 2025 operacionaliza el límite de 10 UMA",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISSSTE.pdf"
+        },
+        {
+          "institution": "SEP",
+          "document": "Manual de Normas para la Administración de Recursos Humanos en la SEP 2025",
+          "reference": "10.19.2, 10.20.3 y 10.20.7: cuotas 6.125% + 0.625% + 0.5% + 3.375% y tope de 10 UMA",
+          "url": "https://normatecainterna.sep.gob.mx/work/models/normateca/Resource/323/7/images/MANUAL_NORMAS_ADMINISTRACION_RH_SEP_2025.pdf"
         }
       ],
       "legalBasis": [
@@ -527,29 +563,42 @@
           "name": "LSS",
           "reference": "Arts. 25, 27–29, 36, 106–107, 147 y 168",
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf"
+        },
+        {
+          "type": "law",
+          "name": "LISSSTE",
+          "reference": "Régimen de cuotas y Sueldo Básico de cotización",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISSSTE.pdf"
         }
       ],
-      "verifiedAt": "2026-09-14",
+      "verifiedAt": "2026-10-04",
       "verifiedThrough": [],
-      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
-      "verificationScope": "Estima neto después de ISR e IMSS para un mes completo ordinario de febrero a diciembre de 2026, separando bruto, base gravable ISR y SBC diario.",
+      "notas": "Alcance IMSS conservado y régimen ISSSTE federal añadido y comprobado el 2026-10-04; Ahorro Solidario, FOVISSSTE y deducciones personales quedan fuera.",
+      "verificationScope": "Estima neto después de ISR y seguridad social para un mes completo ordinario de febrero a diciembre de 2026: IMSS separando bruto, base ISR y SBC; o ISSSTE federal separando bruto, base ISR y Sueldo Básico con cuotas obligatorias y tope de 10 UMA.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
           "status": "superseded",
           "notice": "Antecedente sustituido por revisión 14/09/2026; no es evidencia vigente.",
           "notes": "CONFIRMADO (fix aplicado y desplegado en producción — commit 00bd2d428f, deploy dpl_4qJQQ8Doeyt7mLXDbbXbBQWESczv, READY): el 2.5% fijo que usaba el código era una aproximación, no la cuota real. La cuota obrera real 2026 es 2.625% (Enfermedad y Maternidad dinero 0.25% + especie 0.625% sobre excedente de 3 UMA + Invalidez y Vida 0.625% + Cesantía/Vejez 1.125%), y se calcula sobre el Salario Base de Cotización (SBC, que incluye un factor de integración de antigüedad ~1.05-1.06), no directamente sobre el salario bruto mensual como hace el código hoy. El error resultante es pequeño para salarios bajos (~5% de diferencia en la tasa) pero crece para quien gana por encima de 3 UMA. ACTUALIZACIÓN 2026-09-06 (auditoría transversal, hallazgo T-08): 2.625% plano también era incorrecto — la estructura real es 2.375% fijo (suma de las cuatro ramas) más 0.40% adicional solo sobre el excedente de SBC por encima de 3 UMA mensuales (rama Cesantía y Vejez). Corregido en el código (aproximando SBC con el salario bruto, como ya se explicaba). También se corrigió el ingreso por hora, que dividía entre 160 en vez de 173.33 horas al mes."
+        },
+        {
+          "recordedAt": "2026-10-04",
+          "status": "current",
+          "notice": "Alcance ampliado sin alterar el modo IMSS verificado.",
+          "notes": "Se añadió selección IMSS/ISSSTE. El modo ISSSTE usa las cuatro cuotas obligatorias publicadas por SEP (RCV 6.125%, invalidez y vida 0.625%, servicios sociales y culturales 0.5%, salud 3.375%) sobre Sueldo Básico topado a 10 UMA. Se excluyen Ahorro Solidario y deducciones personales."
         }
       ],
-      "reviewReason": "Estima neto después de ISR e IMSS para un mes completo ordinario de febrero a diciembre de 2026, separando bruto, base gravable ISR y SBC diario.",
-      "calculationReviewedAt": "2026-09-14",
+      "reviewReason": "Estima neto después de ISR y seguridad social para un mes completo ordinario de febrero a diciembre de 2026: IMSS separando bruto, base ISR y SBC; o ISSSTE federal separando bruto, base ISR y Sueldo Básico con cuotas obligatorias y tope de 10 UMA.",
+      "calculationReviewedAt": "2026-10-04",
       "referenceCases": [
-        "Bruto/gravable $30,000, SBC $1,000 y 30 días: ISR $4,519.65, IMSS $790.27, neto después de ambos $24,690.08.",
-        "Salario mínimo declarado: cuota obrera IMSS e ISR retenido iguales a cero en el alcance indicado."
+        "IMSS: bruto/gravable $30,000, SBC $1,000 y 30 días conserva el caso de referencia verificado.",
+        "ISSSTE: Sueldo Básico $30,000 produce $3,187.50 de cuotas obligatorias (10.625%).",
+        "ISSSTE: Sueldo Básico $50,000 se limita a 10 UMA mensuales ($35,662.20) antes de aplicar las cuotas."
       ],
       "publicLabel": "Cálculo comprobado",
       "calculationEnabled": true,
-      "sourceCheckedAt": "2026-09-14",
+      "sourceCheckedAt": "2026-10-04",
       "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa."
     },
     "vacaciones": {
@@ -563,6 +612,18 @@
           "document": "LFT",
           "reference": "Arts. 76 y 80",
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
+        },
+        {
+          "institution": "Cámara de Diputados",
+          "document": "LFTSE",
+          "reference": "Arts. 30 y 40: periodos de vacaciones y prima",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFTSE.pdf"
+        },
+        {
+          "institution": "SEP",
+          "document": "Manual de Normas para la Administración de Recursos Humanos en la SEP 2025",
+          "reference": "Prima vacacional: Básica/apoyo 50% sobre 20 días; Media Superior 60% sobre salario convencional de 40 días",
+          "url": "https://normatecainterna.sep.gob.mx/work/models/normateca/Resource/323/7/images/MANUAL_NORMAS_ADMINISTRACION_RH_SEP_2025.pdf"
         }
       ],
       "legalBasis": [
@@ -571,28 +632,43 @@
           "name": "LFT",
           "reference": "Arts. 76 y 80",
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
+        },
+        {
+          "type": "law",
+          "name": "LFTSE",
+          "reference": "Arts. 30 y 40",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFTSE.pdf"
         }
       ],
-      "verifiedAt": "2026-09-14",
+      "verifiedAt": "2026-10-04",
       "verifiedThrough": [],
-      "notas": "Alcance publicado y casos de referencia comprobados el 2026-09-14.",
-      "verificationScope": "Días mínimos de vacaciones por antigüedad y prima mínima de 25%; si se captura salario, valora el periodo y la prima.",
+      "notas": "Tabla LFT conservada. Se añadieron referencias SEP federal de prima vacacional y se separó la base de Educación Básica/apoyo de Educación Media Superior.",
+      "verificationScope": "LFT: días mínimos por antigüedad y prima mínima de 25%. LFTSE federal: dos periodos de 10 días laborables y prima de 30% para personal con más de 6 meses consecutivos. SEP federal Básica/apoyo: 20 días y prima de 50%. SEP Media Superior: prima de 60% sobre salario convencional correspondiente a 40 días como base; casos parciales se remiten a la regla proporcional del periodo.",
       "reviewHistory": [
         {
           "recordedAt": "2026-09-06",
           "status": "superseded",
           "notice": "Antecedente sustituido por revisión 14/09/2026; no es evidencia vigente.",
           "notes": "La tabla completa (12,14,16,18,20 para años 1-5; +2 días cada 5 años después) coincide exactamente con la fuente consultada. Sin cambios necesarios. ACTUALIZACIÓN 2026-09-06 (hallazgo T-11): la tabla del código solo llega hasta el año 35 (32 días) y de ahí en adelante se congelaba en 32 días, sin límite en la ley real (Art. 76 sigue sumando 2 días cada 5 años indefinidamente). Se agregó una fórmula que continúa el patrón más allá del año 35. También se renombraron las etiquetas de resultado para no sugerir que es un pago adicional al salario ordinario, sino el valor del periodo vacacional más la prima."
+        },
+        {
+          "recordedAt": "2026-10-04",
+          "status": "current",
+          "notice": "Alcance ampliado a reglas SEP federal verificadas.",
+          "notes": "Se evitó trasladar la tabla LFT a SEP. Básica/apoyo usa la referencia de 20 días y 50%; Educación Media Superior usa 60% sobre salario convencional de 40 días. Otros regímenes públicos quedan bloqueados."
         }
       ],
-      "reviewReason": "Días mínimos de vacaciones por antigüedad y prima mínima de 25%; si se captura salario, valora el periodo y la prima.",
-      "calculationReviewedAt": "2026-09-14",
+      "reviewReason": "LFT, LFTSE federal y reglas SEP federal separadas para no trasladar automáticamente la tabla privada a servidores públicos.",
+      "calculationReviewedAt": "2026-10-04",
       "referenceCases": [
-        "Año 1: 12 días; año 6: 22 días; año 36 continúa el incremento legal."
+        "LFT: año 1 = 12 días; año 6 = 22 días; después continúa el incremento legal.",
+        "LFTSE federal: 20 días laborables al año en dos periodos y prima de 30% sobre el sueldo de esos periodos.",
+        "SEP federal Básica/apoyo: prima de 50% del Sueldo Base correspondiente a 20 días laborables.",
+        "SEP federal Educación Media Superior: prima de 60% del salario convencional correspondiente a 40 días al año; el dato de 40 días es base salarial de la prima."
       ],
       "publicLabel": "Cálculo comprobado",
       "calculationEnabled": true,
-      "sourceCheckedAt": "2026-09-14",
+      "sourceCheckedAt": "2026-10-04",
       "nextReview": "Antes de cambiar de ejercicio, ampliar el alcance o aplicar una modificación normativa."
     },
     "infonavit": {

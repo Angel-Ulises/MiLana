@@ -43,7 +43,7 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] .orb-section-visual{min-h
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-purpose{margin:5px 0 0!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
   html.ml-orbita-enabled.orb-purpose-ready[data-orbita-section="calculadoras"] .calculator-purpose{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-proof{display:none!important}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media{display:none!important}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media{display:block!important;position:relative!important;width:100vw!important;height:220px!important;min-height:220px!important;margin:16px 0 0 calc(50% - 50vw)!important;border-radius:0!important;box-shadow:none!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] body:has(.calculator-hero) .calc-intro{display:none!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main{padding-top:6px!important}
   /* Reserva exactamente el bloque Paso a paso hasta que el internal.js lo inserta. */

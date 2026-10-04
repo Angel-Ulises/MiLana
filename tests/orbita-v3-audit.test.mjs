@@ -55,12 +55,12 @@ test('Economía adopta hero claro y Estados separa breadcrumb de eyebrow',()=>{
   assert.match(audit,/data-orbita-section="estados"[\s\S]*nav~\.eyebrow\{margin-top:18px!important\}/);
 });
 
-test('calculadoras móviles compactan hero sin cortar el propósito y reservan el asistente',()=>{
+test('calculadoras móviles reservan la foto sin cortar el propósito y reservan el asistente',()=>{
   assert.match(prepaint,/data-orbita-section="calculadoras"[^\n]*\.calculator-purpose\{[^}]*overflow:visible!important/);
   assert.match(prepaint,/\.calculator-purpose\{[^}]*-webkit-line-clamp:2/);
   assert.match(prepaint,/\.orb-purpose-ready[^\n]*\.calculator-purpose\{[^}]*-webkit-line-clamp:unset!important/);
   assert.match(prepaint,/body:has\(\.calculator-hero\) \.calc-intro\{display:none!important\}/);
-  assert.match(prepaint,/\.calculator-hero-media\{display:none!important\}/);
+  assert.match(prepaint,/\.calculator-hero-media\{display:block!important[^}]*height:220px!important/);
   assert.match(prepaint,/\.calculator-main\{padding-top:6px!important\}/);
   assert.match(prepaint,/\.calculator-main::before\{[^}]*height:131px/);
 });

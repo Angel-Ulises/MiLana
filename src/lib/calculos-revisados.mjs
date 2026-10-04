@@ -50,3 +50,35 @@ export function calcularAguinaldo({salario,dias='15',ingreso='',anioCompleto=fal
   if (!Number.isFinite(bruto)) throw new Error('Revisa los importes capturados.');
   return {salarioDiario:sm/30,diasPrestacion:da,diasPeriodo,bruto};
 }
+
+// Manual de Normas para la Administración de Recursos Humanos en la SEP 2025, 11.4.3.8.
+// Educación Media Superior: 6 meses o más = 40 días; más de 3 y menos de 6 = 20 días;
+// hasta 3 meses = 40/365 por cada día laborado. Este modo supone servicio continuo hasta 31/12/2026.
+export function calcularAguinaldoSEPEMS2026({salarioConvencional,ingreso='',anioCompleto=false}) {
+  const sm=money(salarioConvencional);
+  const end=Date.UTC(2026,11,31),start=Date.UTC(2026,0,1);
+  if (!ingreso && !anioCompleto) throw new Error('Captura tu fecha de ingreso o confirma el año completo.');
+  const rawEntry=ingreso?fechaCivil(ingreso):start;
+  if (rawEntry>end) throw new Error('La fecha de ingreso debe ser anterior al 1 de enero de 2027.');
+  const entry=Math.max(rawEntry,start);
+  const diasPeriodo=Math.floor((end-entry)/86400000)+1;
+  const seisMeses=Date.UTC(2026,6,1);
+  const tresMeses=Date.UTC(2026,9,1);
+  const salarioDiario=sm/30;
+  let diasPrestacion,bruto,reglaSEP;
+  if (entry<=seisMeses) {
+    diasPrestacion=40;
+    bruto=salarioDiario*40;
+    reglaSEP='6 meses o más: 40 días de salario';
+  } else if (entry<tresMeses) {
+    diasPrestacion=20;
+    bruto=salarioDiario*20;
+    reglaSEP='Más de 3 y menos de 6 meses: 20 días de salario';
+  } else {
+    diasPrestacion=40;
+    bruto=salarioDiario*40*diasPeriodo/365;
+    reglaSEP='Hasta 3 meses: parte proporcional sobre base de 40 días';
+  }
+  if (!Number.isFinite(bruto)) throw new Error('Revisa los importes capturados.');
+  return {salarioDiario,diasPrestacion,diasPeriodo,bruto,reglaSEP};
+}

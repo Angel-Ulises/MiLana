@@ -626,7 +626,13 @@
     } else {
       withObserverPaused(() => {
         const refreshed = buildQuestions(currentRoot);
-        if (refreshed.length) questions = refreshed;
+        if (refreshed.length) {
+          questions = refreshed;
+          // React puede añadir o retirar preguntas según una respuesta (p. ej. régimen LFT/SEP).
+          // Mantén el contador y el paso sincronizados mientras el formulario siga en edición.
+          if (!currentRoot.querySelector('.ml-result')) questionTotal = questions.length;
+          step = Math.min(step, Math.max(questions.length - 1, 0));
+        }
         addExamples(questions);
         addTermHelp(questions);
       });

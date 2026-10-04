@@ -11,10 +11,22 @@
       "Causa: renuncia voluntaria"
     ],
     "resultados": [
-      { "etiqueta": "Aguinaldo proporcional", "valor": 6731.506849315068 },
-      { "etiqueta": "Vacaciones proporcionales", "valor": 7180.27397260274 },
-      { "etiqueta": "Prima vacacional", "valor": 1795.068493150685 },
-      { "etiqueta": "Total bruto estimado", "valor": 15706.849315068494 }
+      {
+        "etiqueta": "Aguinaldo proporcional",
+        "valor": 6731.506849315068
+      },
+      {
+        "etiqueta": "Vacaciones proporcionales",
+        "valor": 7180.27397260274
+      },
+      {
+        "etiqueta": "Prima vacacional",
+        "valor": 1795.068493150685
+      },
+      {
+        "etiqueta": "Total bruto estimado",
+        "valor": 15706.849315068494
+      }
     ],
     "nota": "Este ejemplo no incluye ISR, bonos, comisiones, prestaciones superiores a ley ni otros conceptos que puedan existir en un caso real.",
     "verificacion": {
@@ -36,20 +48,28 @@
     }
   },
   "aguinaldo": {
-    "titulo": "Ejemplo: $18,000 mensuales y año completo",
-    "resumen": "Con un salario mensual fijo de $18,000, 15 días de aguinaldo y servicio durante todo 2026, el salario diario usado por el ejemplo es de $600.",
+    "titulo": "Ejemplo LFT: $18,000 y año completo",
+    "resumen": "Ejemplo para una relación sujeta a LFT: salario mensual fijo de $18,000, 15 días de aguinaldo y servicio durante todo 2026; el salario diario usado es de $600.",
     "entradas": [
       "Salario mensual: $18,000",
       "Prestación: 15 días de aguinaldo",
       "Periodo: año completo 2026"
     ],
     "resultados": [
-      { "etiqueta": "Aguinaldo bruto estimado", "valor": 9000 }
+      {
+        "etiqueta": "Aguinaldo bruto estimado",
+        "valor": 9000
+      }
     ],
-    "nota": "Es un monto bruto. Esta calculadora no descuenta ISR del aguinaldo ni modela prestaciones superiores a las capturadas.",
+    "nota": "Es un ejemplo LFT y un monto bruto. Si seleccionaste LFTSE o SEP, usa el resultado del formulario superior: esos regímenes aplican días o bases diferentes. No incluye ISR del aguinaldo.",
     "verificacion": {
       "tipo": "aguinaldo",
-      "argumentos": { "salario": "18000", "dias": "15", "ingreso": "", "anioCompleto": true },
+      "argumentos": {
+        "salario": "18000",
+        "dias": "15",
+        "ingreso": "",
+        "anioCompleto": true
+      },
       "campo": "bruto",
       "esperado": 9000
     }
@@ -63,13 +83,24 @@
       "Un solo empleador"
     ],
     "resultados": [
-      { "etiqueta": "ISR retenido estimado", "valor": 2383.65236 },
-      { "etiqueta": "Ingreso después de ISR", "valor": 17616.34764 }
+      {
+        "etiqueta": "ISR retenido estimado",
+        "valor": 2383.65236
+      },
+      {
+        "etiqueta": "Ingreso después de ISR",
+        "valor": 17616.34764
+      }
     ],
     "nota": "No representa un recibo de nómina completo: IMSS, otras deducciones, percepciones exentas y situaciones fiscales distintas se revisan por separado.",
     "verificacion": {
       "tipo": "isr",
-      "argumentos": { "ingreso": "20000", "soloMinimo": false, "periodo": "2026-09", "empleadorUnico": true },
+      "argumentos": {
+        "ingreso": "20000",
+        "soloMinimo": false,
+        "periodo": "2026-09",
+        "empleadorUnico": true
+      },
       "campo": "retenido",
       "esperado": 2383.65236
     }
@@ -84,9 +115,18 @@
       "Días cotizados: 30"
     ],
     "resultados": [
-      { "etiqueta": "ISR estimado", "valor": 2383.65236 },
-      { "etiqueta": "Cuota obrera IMSS estimada", "valor": 512.771175 },
-      { "etiqueta": "Neto después de ISR e IMSS", "valor": 17103.576465 }
+      {
+        "etiqueta": "ISR estimado",
+        "valor": 2383.65236
+      },
+      {
+        "etiqueta": "Cuota obrera IMSS estimada",
+        "valor": 512.771175
+      },
+      {
+        "etiqueta": "Neto después de ISR e IMSS",
+        "valor": 17103.576465
+      }
     ],
     "nota": "Un recibo real puede tener otras deducciones y bases diferentes. El ejemplo muestra por qué bruto, gravable para ISR y SBC no deben confundirse.",
     "verificacion": {

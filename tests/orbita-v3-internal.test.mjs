@@ -63,6 +63,8 @@ test('Siguiente vive dentro del formulario, Enter avanza y la pregunta hace scro
 test('contador fija el total inicial y el resultado oculta preguntas y navegación', () => {
   assert.match(js, /let questionTotal = 0/);
   assert.match(js, /questionTotal = questions\.length/);
+  assert.match(js, /if \(!currentRoot\.querySelector\('\.ml-result'\)\) questionTotal = questions\.length/);
+  assert.match(js, /step = Math\.min\(step, Math\.max\(questions\.length - 1, 0\)\)/);
   assert.match(js, /const total = Math\.max\(questionTotal, 1\)/);
   assert.match(js, /const active = !showingResult && index === step/);
   assert.match(js, /back\.hidden = step === 0 \|\| showingResult/);
@@ -89,11 +91,11 @@ test('un error de validación en un paso previo reactiva ese paso y le da foco',
   assert.doesNotMatch(js, /getAttribute\('aria-invalid'\)/);
 });
 
-test('intro repetido se oculta y el hero móvil deja la pregunta más arriba', () => {
+test('intro repetido se oculta y el hero móvil conserva la foto sin salto', () => {
   assert.match(js, /introDuplicatesHero/);
   assert.match(js, /introRepeatsHero = introDuplicatesHero\(intro\)/);
   assert.match(js, /if \(introRepeatsHero && intro\) intro\.hidden = true/);
-  assert.match(prepaint, /\.calculator-hero-media\{display:none!important\}/);
+  assert.match(prepaint, /\.calculator-hero-media\{display:block!important[^}]*height:220px!important/);
   assert.match(prepaint, /\.calculator-purpose\{[^}]*-webkit-line-clamp:2/);
   assert.match(prepaint, /\.orb-purpose-ready[^\n]*\.calculator-purpose\{[^}]*-webkit-line-clamp:unset!important/);
   assert.match(prepaint, /body:has\(\.calculator-hero\) \.calc-intro\{display:none!important\}/);

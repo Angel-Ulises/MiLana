@@ -3,7 +3,7 @@
 //   - la reserva no puede ser menor que el visual renderizado (empujaría el contenido: CLS), y
 //   - el visual debe ocupar >= 90% de la reserva (sin huecos en blanco), a 390 y 1280 px.
 //   node scripts/verificar-reservas.mjs [--verbose] [--update] [ruta ...]
-//   --update recalcula scripts/reservas-alturas.json (reserva = altura natural + 4%) tras cambiar un visual.
+//   --update recalcula scripts/reservas-alturas.json (reserva = altura natural + 6%) tras cambiar un visual.
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { abrirChrome, cargarPagina, encontrarChrome, rutasDelSitemap, servirDist, sleep } from './lib/navegador.mjs';
 
@@ -14,7 +14,9 @@ const verbose = process.argv.includes('--verbose');
 const update = process.argv.includes('--update');
 const JSON_PATH = new URL('./reservas-alturas.json', import.meta.url);
 const table = existsSync(JSON_PATH) ? JSON.parse(readFileSync(JSON_PATH, 'utf8')) : {};
-const MARGEN = 1.04;
+// 6% de holgura: la copia del visual puede ganar una línea con otra fuente de sistema (p. ej. DejaVu en CI, +26 px
+// a 390). Con 6% la reserva cubre ese caso sin acercarse al 90% mínimo (sin huecos) en ningún entorno.
+const MARGEN = 1.06;
 const TOLERANCIA = 1.03; // el visual puede superar a la reserva hasta 3% (fuentes distintas entre equipos)
 const onlyRoutes = process.argv.slice(2).filter((arg) => arg.startsWith('/'));
 

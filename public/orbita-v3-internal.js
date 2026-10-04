@@ -7,6 +7,18 @@
 
   const PENSION_PATH = /^\/calculadoras\/pension-imss\/?$/;
   const HEADER_OFFSET = 82;
+  const PURPOSE_MEDIA = matchMedia('(max-width: 760px)');
+  const COMPACT_PURPOSES = {
+    finiquito: 'Estima tu finiquito bruto 2026 y separa los conceptos que ya generaste al terminar la relación laboral.',
+    liquidacion: 'Estima un escenario de liquidación 2026 y separa prestaciones e indemnizaciones según el supuesto declarado.',
+    aguinaldo: 'Proyecta tu aguinaldo bruto 2026 según salario, periodo trabajado y días de prestación.',
+    vacaciones: 'Estima tus días de vacaciones y prima vacacional según antigüedad y los datos que captures.',
+    isr: 'Estima la retención mensual de ISR 2026 sobre el ingreso gravable que declares.',
+    resico: 'Estima el ISR mensual de RESICO con ingresos efectivamente cobrados, dentro del alcance indicado.',
+    ptu: 'Estima una participación individual de PTU con utilidad repartible, días trabajados y salario capturados.',
+    'bruto-a-neto': 'Estima tu sueldo neto separando sueldo bruto, base de ISR y SBC para IMSS.',
+    infonavit: 'Simula la evolución de un crédito Infonavit con saldo, pago, tasa y los datos que captures.'
+  };
   const QUESTION_SELECTOR = 'input:not([type="hidden"]):not([type="submit"]):not([type="button"]), select, textarea';
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -54,6 +66,24 @@
     .toLocaleLowerCase('es-MX')
     .replace(/[^a-z0-9]+/g, ' ')
     .trim();
+
+  const syncCalculatorPurpose = () => {
+    const purpose = document.querySelector('.calculator-purpose');
+    if (!(purpose instanceof HTMLElement)) {
+      html.classList.remove('orb-purpose-ready');
+      return;
+    }
+    if (!purpose.dataset.orbitaFullPurpose) purpose.dataset.orbitaFullPurpose = purpose.textContent.trim();
+    const slug = location.pathname.match(/^\/calculadoras\/([^/]+)\/?$/)?.[1] || '';
+    const compact = COMPACT_PURPOSES[slug];
+    if (PURPOSE_MEDIA.matches && compact) {
+      setText(purpose, compact);
+      html.classList.add('orb-purpose-ready');
+    } else {
+      setText(purpose, purpose.dataset.orbitaFullPurpose);
+      html.classList.remove('orb-purpose-ready');
+    }
+  };
 
   const introDuplicatesHero = (node) => {
     if (!(node instanceof HTMLElement)) return false;
@@ -555,9 +585,11 @@
     if (html.dataset.orbitaSection !== 'calculadoras' || !html.classList.contains('ml-orbita-enabled')) return;
     if (PENSION_PATH.test(location.pathname)) {
       resetCalculatorState();
+      html.classList.remove('orb-purpose-ready');
       return;
     }
 
+    syncCalculatorPurpose();
     const main = document.querySelector('.calculator-main');
     if (!main) return;
     const candidate = main.querySelector(':scope > form, :scope > div:first-child');
@@ -628,6 +660,7 @@
 
   addEventListener('popstate', routeChanged);
   addEventListener('hashchange', routeChanged);
+  PURPOSE_MEDIA.addEventListener?.('change', queueEnhance);
   observer = new MutationObserver(queueEnhance);
   observeCalculator();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', queueEnhance, { once: true });

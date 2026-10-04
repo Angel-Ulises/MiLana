@@ -8,7 +8,7 @@ const RESERVAS = JSON.parse(await readFile(new URL('./reservas-alturas.json', im
 const SKIP_ROUTES = new Set(['/404', '/widgets']);
 const PROTECTED_PENSION = '/calculadoras/pension-imss';
 const VISUAL_SECTIONS = new Set(['carreras', 'estados', 'finanzas', 'economia', 'aprende']);
-const GLOSSARY_PATTERN = /(^|[^A-ZÁÉÍÓÚÑ])(ISR|UMA|CETES|CAT|RESICO|PTU|SBC|IMSS|LFT)([^A-ZÁÉÍÓÚÑ]|$)/i;
+const GLOSSARY_TERMS = ['ISR','UMA','CETES','CAT','RESICO','PTU','SBC','IMSS','LFT'];
 const STATIC_TOP_ROUTES = new Set([
   '/aprende',
   '/aprende/aguinaldo-bruto-neto',
@@ -112,29 +112,14 @@ function injectStaticReserves(html,route){
   if(route===PROTECTED_PENSION) return html;
   const section=sectionForRoute(route);
   if(!VISUAL_SECTIONS.has(section)) return html;
-  const needsGlossary=GLOSSARY_PATTERN.test(visibleText(html));
-  const glossary=needsGlossary?'<div class="orb-runtime-reserve orb-glossary-reserve" data-orbita-static-reserve data-orbita-glossary-reserve aria-hidden="true"></div>':'';
+  const text=visibleText(html).toUpperCase();
+  const detectedTerms=GLOSSARY_TERMS.filter((term)=>new RegExp(`(^|[^A-ZÁÉÍÓÚÑ])${term}([^A-ZÁÉÍÓÚÑ]|$)`).test(text)).slice(0,5);
+  const mobileRows=Math.max(1,Math.ceil(detectedTerms.length/2));
+  const glossaryM=detectedTerms.length ? 128 + Math.max(0,mobileRows-1)*50 : 0;
+  const glossary=detectedTerms.length?`<div class="orb-runtime-reserve orb-glossary-reserve" style="--orb-glossary-reserve-d:104px;--orb-glossary-reserve-m:${glossaryM}px" data-orbita-static-reserve data-orbita-glossary-reserve aria-hidden="true"></div>`:'';
   const visual='<div class="orb-runtime-reserve orb-visual-reserve" data-orbita-static-reserve data-orbita-visual-reserve aria-hidden="true"></div>';
   return insertAfterHero(html,section,`${glossary}${visual}`);
 }
-function insertAfterReactRoot(html,markup){
-  const rootAt=html.indexOf('id="root"');
-  if(rootAt<0) return null;
-  const mainClose=html.indexOf('</main>',rootAt);
-  if(mainClose<0) return null;
-  const rootClose=html.indexOf('</div>',mainClose);
-  if(rootClose<0) return null;
-  const at=rootClose+6;
-  return html.slice(0,at)+markup+html.slice(at);
-}
-function injectAdReserves(html,route,hasRoot){
-  if(route===PROTECTED_PENSION) return html;
-  const markup='<aside class="orb-ad-reserve orb-ad-leaderboard" data-orbita-ad-reserve data-ad-size="970x90" aria-hidden="true"></aside><div class="orb-ad-reserve-group" data-orbita-ad-reserve aria-hidden="true"><aside class="orb-ad-reserve orb-ad-rectangle" data-orbita-ad-reserve data-ad-size="336x280"></aside><aside class="orb-ad-reserve orb-ad-rail" data-orbita-ad-reserve data-ad-size="300x600"></aside></div><aside class="orb-ad-reserve orb-ad-mobile-banner" data-orbita-ad-reserve data-ad-size="320x50" aria-hidden="true"></aside>';
-  if(hasRoot){const outside=insertAfterReactRoot(html,markup);if(outside) return outside;}
-  if(/<\/main>/i.test(html)) return html.replace(/<\/main>/i,`${markup}</main>`);
-  return html.replace('</body>',`${markup}</body>`);
-}
-
 async function files(dir) {
   const out=[];
   for (const entry of await readdir(dir,{withFileTypes:true})) {
@@ -167,8 +152,7 @@ for(const path of originals){
   const reserva=RESERVAS[route];
   if(reserva) html=html.replace(/<html\b([^>]*)>/i,(tag,attrs)=>/\sstyle=/.test(attrs)?tag:`<html${attrs} style="${reserva.m?`--orb-reserve-m:${reserva.m}px;`:''}${reserva.d?`--orb-reserve-d:${reserva.d}px`:''}">`);
   if(!hasRoot) html=injectStaticReserves(html,route);
-  // En páginas React el espacio lo renderiza <AdReserve/> antes del footer; aquí solo las estáticas.
-  if(!hasRoot) html=injectAdReserves(html,route,hasRoot);
+  // No se inyectan reservas publicitarias vacías; AdSense real se gestiona fuera de esta capa.
   const frame = shell.replace('__CONTENT_ID__', contentId);
   const staticAttr = STATIC_TOP_ROUTES.has(route) ? ' data-orbita-static-top="true"' : '';
   // Preload estático solo en Inicio, para que lo vea el preload scanner.

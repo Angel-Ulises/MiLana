@@ -1,4 +1,5 @@
 import Detalle from './Detalle.jsx';
+import RecordarEstado from './stateRememberControl.jsx';
 import { useMemo, useState } from 'react';
 import datos from './data/estados.json';
 import laboral from './data/mercadoLaboralEstados.json';
@@ -47,7 +48,7 @@ function Selector({ value = '' }) {
     window.location.href = `/estados/${seleccion}`;
   };
   const etiqueta = mismaFicha ? 'Ver panorama' : (value && destino ? `Ir a ${destino.estado}` : 'Ver panorama');
-  return <div className="state-selector"><label><span>{value ? 'Cambiar de estado' : 'Elige tu estado'}</span><select value={seleccion} onChange={(e) => setSeleccion(e.target.value)}><option value="">Selecciona una entidad</option>{datos.estados.map((e) => <option key={e.slug} value={e.slug}>{e.estado}</option>)}</select></label><button type="button" onClick={ir} disabled={!seleccion} data-state-action={mismaFicha ? 'panorama' : 'ir'}>{etiqueta} <span aria-hidden="true">{mismaFicha ? '↓' : '→'}</span></button></div>;
+  return <div className="state-selector"><label><span>{value ? 'Cambiar de estado' : 'Elige tu estado'}</span><select value={seleccion} onChange={(e) => setSeleccion(e.target.value)}><option value="">Selecciona una entidad</option>{datos.estados.map((e) => <option key={e.slug} value={e.slug}>{e.estado}</option>)}</select></label><button type="button" onClick={ir} disabled={!seleccion} data-state-action={mismaFicha ? 'panorama' : 'ir'}>{etiqueta} <span aria-hidden="true">{mismaFicha ? '↓' : '→'}</span></button><RecordarEstado slug={seleccion} /></div>;
 }
 
 function Hub() {

@@ -70,3 +70,10 @@ test('prepaint muestra una sola reserva publicitaria etiquetada sin inicializar 
   assert.match(prepaint,/Publicidad · 320×50/);
   assert.doesNotMatch(prepaint,/push\(|adsbygoogle\s*=|data-ad-client/);
 });
+
+test('espacios de anuncio invisibles y contenido sin animación de entrada que lo oculte', () => {
+  const prepaint = readFileSync('public/orbita-v3-prepaint.css', 'utf8');
+  assert.match(prepaint, /\.orb-ad-leaderboard::before\{content:none!important\}/);
+  assert.match(prepaint, /:is\(\.orb-ad-reserve,\[data-orbita-ad-reserve\]\)\{border:0!important;background:transparent!important/);
+  assert.match(prepaint, /:is\(\.ml-premium-reveal,\.career-reveal,\.route-reveal\)\{opacity:1!important/);
+});

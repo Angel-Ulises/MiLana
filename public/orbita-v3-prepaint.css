@@ -62,3 +62,10 @@ html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy>*{animation:none
 
 /* Inicio en móvil: el panel crema del hero se extiende 14px más allá del texto (sin saltos). Doble clase: experience.css fija padding:0!important. */
 @media(max-width:620px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{width:calc(100% + 28px)!important;padding-inline:14px!important;margin-inline:-14px!important}}
+
+/* Contenido siempre visible: las animaciones de entrada dejaban bloques en blanco al hacer scroll rápido. */
+html.ml-orbita-enabled :is(.ml-premium-reveal,.career-reveal,.route-reveal){opacity:1!important;transform:none!important;transition:none!important}
+
+/* Espacios de anuncio invisibles hasta que AdSense los llene: conservan su alto, sin caja ni etiqueta. */
+html.ml-orbita-enabled :is(.orb-ad-reserve,[data-orbita-ad-reserve]){border:0!important;background:transparent!important;color:transparent!important}
+html.ml-orbita-enabled .orb-ad-leaderboard::before{content:none!important}

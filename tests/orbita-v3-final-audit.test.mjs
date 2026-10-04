@@ -8,6 +8,7 @@ const audit=readFileSync('public/orbita-v3-audit.css','utf8');
 const internal=readFileSync('public/orbita-v3-internal.js','utf8');
 const glossary=readFileSync('public/orbita-v3-glossary.js','utf8');
 const visuals=readFileSync('public/orbita-v3-visuals.js','utf8');
+const reserveVerifier=readFileSync('scripts/verificar-reservas.mjs','utf8');
 
 test('reservas críticas existen en HTML antes del runtime y conservan altura final',()=>{
   assert.match(inject,/orbita-v3-prepaint\.css/);
@@ -17,9 +18,11 @@ test('reservas críticas existen en HTML antes del runtime y conservan altura fi
   assert.match(prepaint,/data-orbita-section="finanzas"[^\n]*min-height:var\(--orb-reserve-m,670px\)/);
   assert.match(prepaint,/data-orbita-section="economia"[^\n]*min-height:var\(--orb-reserve-m,455px\)/);
   assert.match(prepaint,/\.orb-glossary-reserve\{min-height:var\(--orb-glossary-reserve-m,178px\)!important\}/);
-  assert.match(prepaint,/\.orb-visual-reserve,\.orb-section-visual\{min-height:var\(--orb-reserve-m,420px\)!important\}/);
-  assert.match(prepaint,/data-orbita-section="estados"[^\n]*min-height:var\(--orb-reserve-m,330px\)!important/);
-  assert.match(prepaint,/data-orbita-section="finanzas"[^\n]*min-height:var\(--orb-reserve-m,670px\)!important/);
+  assert.match(prepaint,/\.orb-visual-reserve\{min-height:var\(--orb-reserve-m,420px\)!important\}/);
+  assert.match(prepaint,/data-orbita-section="estados"[^\n]*\.orb-visual-reserve\{min-height:var\(--orb-reserve-m,330px\)!important/);
+  assert.match(prepaint,/data-orbita-section="finanzas"[^\n]*\.orb-visual-reserve\{min-height:var\(--orb-reserve-m,670px\)!important/);
+  assert.doesNotMatch(prepaint,/\.orb-section-visual\{[^}]*!important/);
+  assert.match(reserveVerifier,/visual\.style\.minHeight = '0px'/);
   assert.doesNotMatch(prepaint,/\.orb-glossary-reserve,\.orb-glossary\{min-height/);
 });
 

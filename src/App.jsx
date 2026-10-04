@@ -1,4 +1,4 @@
-import { calcularISR, calcularAguinaldo, ISR_MENSUAL_2026 } from "./lib/calculos-revisados.mjs";
+import { calcularISR, calcularAguinaldo, calcularAguinaldoSEPEMS2026, ISR_MENSUAL_2026 } from "./lib/calculos-revisados.mjs";
 import { calcularFiniquito2026, calcularLiquidacion2026, calcularBrutoNeto2026 } from "./lib/calculos-laborales-2026.mjs";
 import { useEffect, useState, useId } from "react";
 import "./design-home.css";
@@ -110,6 +110,7 @@ function fmtPct(n) { return n.toFixed(2) + '%'; }
 // ═══════════════════════════════════════════════════════════════
 
 function CalcFiniquito() {
+  const [regimen, setRegimen] = useState('lft');
   const [salario, setSalario] = useState('');
   const [ingreso, setIngreso] = useState('');
   const [salida, setSalida] = useState('');
@@ -127,6 +128,7 @@ function CalcFiniquito() {
   const calcular = e => {
     e.preventDefault(); setResultado(null);
     try {
+      if (regimen !== 'lft') throw new Error(regimen === 'lftse' ? 'Esta fórmula de finiquito usa la LFT y no debe aplicarse automáticamente a una plaza federal/SEP sujeta a la LFTSE. La baja depende de tu nombramiento y de las reglas de la dependencia.' : 'El servicio público estatal, municipal o con régimen especial puede tener reglas propias. MiLana detuvo la fórmula LFT para evitar una cifra incorrecta.');
       setResultado(calcularFiniquito2026({
         salarioMensual: salario, fechaIngreso: ingreso, fechaSalida: salida,
         diasTrabajadosNoPagados: diasPendientes, vacacionesPendientes: vacPendientes,
@@ -136,7 +138,13 @@ function CalcFiniquito() {
     } catch (err) { setError(err.message); }
   };
   return <form onSubmit={calcular} noValidate>
-    <p className="calc-intro">Estima el finiquito bruto de una terminación ocurrida en 2026 con salario mensual fijo. Separa salario pendiente, aguinaldo, vacaciones, prima vacacional y, cuando procede, prima de antigüedad.</p>
+    <p className="calc-intro">Estima el finiquito bruto de una terminación ocurrida en 2026. Primero identifica tu régimen: la fórmula numérica aplica a relaciones regidas por la LFT y se bloquea en plazas públicas que requieren reglas distintas.</p>
+    <label style={styles.fieldLabel} htmlFor="fin-regimen">Régimen laboral</label>
+    <select id="fin-regimen" value={regimen} onChange={e => editar(setRegimen)(e.target.value)} style={styles.select}>
+      <option value="lft">Ley Federal del Trabajo (empresa privada o puesto sujeto a LFT)</option>
+      <option value="lftse">Servicio público federal / SEP federal (LFTSE)</option>
+      <option value="otro-publico">Servicio público estatal, municipal u otro régimen</option>
+    </select>
     <div style={styles.grid2}>
       <Field label="Salario mensual fijo (MXN)" value={salario} onChange={editar(setSalario)} type="number" placeholder="Ej: 18000" error={error} errorId={errorId} />
       <Field label="Días trabajados aún no pagados" value={diasPendientes} onChange={editar(setDiasPendientes)} type="number" placeholder="0" error={error} errorId={errorId} />
@@ -176,6 +184,7 @@ function CalcFiniquito() {
 }
 
 function CalcLiquidacion() {
+  const [regimen, setRegimen] = useState('lft');
   const [salario, setSalario] = useState('');
   const [ingreso, setIngreso] = useState('');
   const [salida, setSalida] = useState('');
@@ -194,6 +203,7 @@ function CalcLiquidacion() {
   const calcular = e => {
     e.preventDefault(); setResultado(null);
     try {
+      if (regimen !== 'lft') throw new Error(regimen === 'lftse' ? 'La indemnización de 3 meses y el escenario de 20 días de esta calculadora son un modelo LFT. No los aplicamos a una plaza federal/SEP sujeta a LFTSE porque la terminación depende del nombramiento y del régimen burocrático.' : 'No aplicamos automáticamente la fórmula LFT a un puesto público estatal, municipal o especial. Revisa el estatuto local o las condiciones del nombramiento.');
       setResultado(calcularLiquidacion2026({
         salarioMensual: salario, fechaIngreso: ingreso, fechaSalida: salida,
         diasTrabajadosNoPagados: diasPendientes, vacacionesPendientes: vacPendientes,
@@ -204,7 +214,13 @@ function CalcLiquidacion() {
     } catch (err) { setError(err.message); }
   };
   return <form onSubmit={calcular} noValidate>
-    <p className="calc-intro">Estima un escenario de indemnización por despido injustificado para una relación por tiempo indeterminado, además de las prestaciones devengadas. Los 20 días por año se muestran solo si tú activas ese supuesto.</p>
+    <p className="calc-intro">Estima un escenario de indemnización por despido injustificado bajo la LFT. Si trabajas en gobierno o SEP, selecciona tu régimen: MiLana no traslada esta indemnización privada a una plaza pública sin fundamento.</p>
+    <label style={styles.fieldLabel} htmlFor="liq-regimen">Régimen laboral</label>
+    <select id="liq-regimen" value={regimen} onChange={e => editar(setRegimen)(e.target.value)} style={styles.select}>
+      <option value="lft">Ley Federal del Trabajo (empresa privada o puesto sujeto a LFT)</option>
+      <option value="lftse">Servicio público federal / SEP federal (LFTSE)</option>
+      <option value="otro-publico">Servicio público estatal, municipal u otro régimen</option>
+    </select>
     <div style={styles.grid2}>
       <Field label="Salario mensual fijo (MXN)" value={salario} onChange={editar(setSalario)} type="number" placeholder="Ej: 18000" error={error} errorId={errorId} />
       <Field label="Días trabajados aún no pagados" value={diasPendientes} onChange={editar(setDiasPendientes)} type="number" placeholder="0" error={error} errorId={errorId} />
@@ -246,6 +262,7 @@ function CalculoRevisado({ tipo }) {
   const isISR = tipo === 'isr';
   const [importe, setImporte] = useState('');
   const [dias, setDias] = useState('15');
+  const [regimenAguinaldo, setRegimenAguinaldo] = useState('lft');
   const [fecha, setFecha] = useState('');
   const [minimo, setMinimo] = useState('');
   const [periodo, setPeriodo] = useState('2026-09');
@@ -258,15 +275,29 @@ function CalculoRevisado({ tipo }) {
     e.preventDefault(); setResultado(null);
     try {
       if (isISR && !confirmado) throw new Error('Confirma que es un mes completo ordinario con un solo empleador.');
+      if (!isISR && regimenAguinaldo === 'otro-publico') throw new Error('Este régimen público puede tener días, base y conceptos computables propios. No se aplicará automáticamente la fórmula LFT.');
+      if (!isISR && regimenAguinaldo === 'lftse' && Number(dias) < 40) throw new Error('En el servicio público federal sujeto a LFTSE el aguinaldo es de al menos 40 días.');
       const r = isISR
         ? calcularISR({ ingreso: importe, soloMinimo: minimo === '' ? undefined : minimo === 'si', periodo })
-        : calcularAguinaldo({ salario: importe, dias, ingreso: fecha, anioCompleto: confirmado });
+        : regimenAguinaldo === 'sep-ems'
+          ? calcularAguinaldoSEPEMS2026({ salarioConvencional: importe, ingreso: fecha, anioCompleto: confirmado })
+          : calcularAguinaldo({ salario: importe, dias: regimenAguinaldo === 'sep-basica' ? '40' : dias, ingreso: fecha, anioCompleto: confirmado });
       setResultado(r); setError('');
     } catch (err) { setError(err.message); }
   };
   return <form onSubmit={calcular} noValidate>
-    <p>{isISR ? 'Estimación de ISR para un mes completo ordinario de febrero a diciembre de 2026, con un solo empleador.' : 'Aguinaldo bruto proyectado al cierre de 2026. Supone salario mensual fijo y servicio continuo hasta el 31 de diciembre.'}</p>
-    <Field label={isISR ? 'Ingreso mensual gravable para ISR (MXN)' : 'Salario mensual fijo (MXN)'} type="number" value={importe} onChange={editar(setImporte)} help={isISR ? 'Captura la parte gravada de tus percepciones; puede ser distinta de tu sueldo bruto.' : 'No incluye incidencias ni cambios de salario.'} error={error} errorId={errorId} />
+    <p>{isISR ? 'Estimación de ISR para un mes completo ordinario de febrero a diciembre de 2026, con un solo empleador.' : 'Aguinaldo bruto proyectado al cierre de 2026. Primero identifica tu régimen: en servicio público federal y SEP la base puede ser distinta del sueldo bruto ordinario.'}</p>
+    {!isISR && <>
+      <label style={styles.fieldLabel} htmlFor="agu-regimen">Régimen / tipo de plaza</label>
+      <select id="agu-regimen" value={regimenAguinaldo} onChange={e => { const v=e.target.value; editar(setRegimenAguinaldo)(v); if (['lftse','sep-basica','sep-ems'].includes(v)) setDias('40'); else if (v === 'lft') setDias('15'); }} style={styles.select}>
+        <option value="lft">Ley Federal del Trabajo</option>
+        <option value="lftse">Servicio público federal sujeto a LFTSE</option>
+        <option value="sep-basica">SEP federal — Educación Básica / apoyo</option>
+        <option value="sep-ems">SEP federal — Educación Media Superior</option>
+        <option value="otro-publico">Otro servicio público / régimen especial</option>
+      </select>
+    </>}
+    <Field label={isISR ? 'Ingreso mensual gravable para ISR (MXN)' : regimenAguinaldo === 'sep-ems' ? 'Salario convencional mensual computable (MXN)' : ['lftse','sep-basica'].includes(regimenAguinaldo) ? 'Sueldo base / conceptos mensuales computables (MXN)' : 'Salario mensual fijo (MXN)'} type="number" value={importe} onChange={editar(setImporte)} help={isISR ? 'Captura la parte gravada de tus percepciones; puede ser distinta de tu sueldo bruto.' : regimenAguinaldo === 'sep-basica' ? 'SEP puede integrar conceptos específicos además del sueldo base; captura la suma mensual computable de tu nómina.' : 'No incluye incidencias ni cambios de salario.'} error={error} errorId={errorId} />
     {isISR ? <>
       <label htmlFor="isr-periodo">Mes completo de 2026</label>
       <select id="isr-periodo" value={periodo} onChange={e=>editar(setPeriodo)(e.target.value)} style={{display:'block',width:'100%',minHeight:48,padding:12,margin:'8px 0 16px',border:'1px solid #64748b',borderRadius:8,fontSize:16}} aria-describedby={error ? errorId : undefined}>
@@ -280,7 +311,7 @@ function CalculoRevisado({ tipo }) {
       <p id="isr-minimo-ayuda">Se refiere al mínimo general aplicable al lugar donde trabajas.</p>
       <label><input type="checkbox" checked={confirmado} onChange={e=>editar(setConfirmado)(e.target.checked)} aria-describedby={error ? errorId : undefined} /> Confirmo que es un mes completo ordinario con un solo empleador.</label>
     </> : <>
-      <Field label="Días de prestación (al menos 15)" type="number" value={dias} onChange={editar(setDias)} help="Se permiten prestaciones superiores, por ejemplo 15.5 días. El valor inicial es 15." error={error} errorId={errorId} />
+      {['lft','lftse'].includes(regimenAguinaldo) ? <Field label={regimenAguinaldo === 'lft' ? "Días de prestación (al menos 15)" : "Días de prestación (mínimo federal 40)"} type="number" value={dias} onChange={editar(setDias)} help={regimenAguinaldo === 'lft' ? "Se permiten prestaciones superiores, por ejemplo 15.5 días. El valor inicial es 15." : "La LFTSE establece al menos 40 días; una condición específica puede mejorar la prestación."} error={error} errorId={errorId} /> : <p className="calc-help">{regimenAguinaldo === 'sep-ems' ? 'SEP Media Superior: MiLana aplica automáticamente la regla del Manual 2025: 40 días con 6 meses o más; 20 días con más de 3 y menos de 6 meses; hasta 3 meses, proporcional sobre 40 días.' : 'SEP Educación Básica / apoyo: el Manual 2025 fija 40 días y una base integrada por los conceptos que correspondan a tu plaza.'}</p>}
       <Field label="Fecha de ingreso" type="date" value={fecha} onChange={editar(setFecha)} help="Se supone que continúas hasta el 31 de diciembre de 2026. Para una salida anterior, consulta Finiquito." error={error} errorId={errorId} />
       {!fecha && <label><input type="checkbox" checked={confirmado} onChange={e=>editar(setConfirmado)(e.target.checked)} aria-describedby={error ? errorId : undefined} /> Confirmo que trabajé todo el año 2026.</label>}
       <p>El periodo incluye el día de ingreso y el 31 de diciembre. <a href="/calculadoras/finiquito">Consultar Finiquito</a></p>
@@ -297,10 +328,11 @@ function CalculoRevisado({ tipo }) {
       <Note>No incluye IMSS ni otros descuentos. No es una declaración anual.</Note>
     </> : <>
       <ResultLine label="Salario diario" value={fmt(resultado.salarioDiario)} />
-      <ResultLine label="Días de prestación" value={resultado.diasPrestacion} />
+      <ResultLine label={regimenAguinaldo === 'sep-ems' ? "Días base aplicados" : "Días de prestación"} value={resultado.diasPrestacion} />
       <ResultLine label="Días del periodo incluido en 2026" value={resultado.diasPeriodo} />
+      {resultado.reglaSEP && <ResultLine label="Regla SEP aplicada" value={resultado.reglaSEP} />}
       <ResultLine label="Aguinaldo bruto proyectado" value={fmt(resultado.bruto)} bold />
-      <Note>La retención de ISR no está incluida. La revisión del bruto no certifica la exención fiscal.</Note>
+      <Note>{regimenAguinaldo === 'sep-basica' ? 'SEP federal: el Manual de RH 2025 usa 40 días y define los conceptos que integran la base. Verifica que el importe capturado coincida con tu tipo de plaza.' : regimenAguinaldo === 'sep-ems' ? 'SEP Media Superior: la regla se aplica al salario convencional computable capturado y supone que continúas en servicio hasta el 31 de diciembre de 2026.' : 'La retención de ISR no está incluida. La revisión del bruto no certifica la exención fiscal.'}</Note>
     </>}</ResultBox>}
     </div>
   </form>;
@@ -366,7 +398,7 @@ function CalcPTU() {
   return (
     <div>
       <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula el monto total que una empresa debe repartir por Participación de los Trabajadores en las Utilidades (PTU): el 10% de sus utilidades anuales, conforme a los artículos 117 al 131 de la Ley Federal del Trabajo.
+        Calcula el monto total que una empresa sujeta a la LFT debe repartir por Participación de los Trabajadores en las Utilidades (PTU): el 10% de sus utilidades anuales. No es una prestación automática del servicio público federal sujeto a la LFTSE.
       </p>
       <div style={styles.grid2}>
         <Field label="Renta gravable para PTU de la empresa ($)" value={utilidadesEmpresa} onChange={setUtilidadesEmpresa} type="number" placeholder="Ej: 5000000" />
@@ -385,8 +417,10 @@ function CalcPTU() {
 function CalcBrutoNeto() {
   const [bruto, setBruto] = useState('');
   const [gravable, setGravable] = useState('');
+  const [seguridadSocial, setSeguridadSocial] = useState('imss');
   const [sbc, setSbc] = useState('');
   const [dias, setDias] = useState('30');
+  const [sueldoBasicoISSSTE, setSueldoBasicoISSSTE] = useState('');
   const [minimo, setMinimo] = useState('');
   const [periodo, setPeriodo] = useState('2026-09');
   const [confirmado, setConfirmado] = useState(false);
@@ -399,20 +433,33 @@ function CalcBrutoNeto() {
     try {
       if (!confirmado) throw new Error('Confirma que es un mes completo ordinario con un solo empleador.');
       setResultado(calcularBrutoNeto2026({
-        brutoMensual: bruto, ingresoGravableISR: gravable, sbcDiario: sbc,
-        diasCotizados: dias, soloMinimo: minimo === '' ? undefined : minimo === 'si',
-        periodo, empleadorUnico: true,
+        brutoMensual: bruto,
+        ingresoGravableISR: gravable,
+        seguridadSocial,
+        sbcDiario: seguridadSocial === 'imss' ? sbc : undefined,
+        diasCotizados: seguridadSocial === 'imss' ? dias : undefined,
+        sueldoBasicoISSSTE: seguridadSocial === 'issste' ? sueldoBasicoISSSTE : undefined,
+        soloMinimo: minimo === '' ? undefined : minimo === 'si',
+        periodo,
+        empleadorUnico: true,
       }));
       setError('');
     } catch (err) { setError(err.message); }
   };
   return <form onSubmit={calcular} noValidate>
-    <p className="calc-intro">Estima cuánto queda después de ISR e IMSS separando las tres bases que una nómina no debe confundir: percepciones brutas, ingreso gravable para ISR y SBC diario reportado al IMSS.</p>
+    <p className="calc-intro">Estima cuánto queda después de ISR y seguridad social sin mezclar regímenes. Si cotizas al IMSS usa tu SBC; si eres trabajador federal —por ejemplo, una plaza SEP federal— y cotizas al ISSSTE usa el Sueldo Básico reportado en nómina.</p>
+    <label style={styles.fieldLabel} htmlFor="bn-seguridad">Institución de seguridad social</label>
+    <select id="bn-seguridad" value={seguridadSocial} onChange={e => editar(setSeguridadSocial)(e.target.value)} style={styles.select}>
+      <option value="imss">IMSS — empresa privada o puesto afiliado al IMSS</option>
+      <option value="issste">ISSSTE — dependencia federal / SEP federal</option>
+    </select>
     <div style={styles.grid2}>
-      <Field label="Percepciones brutas del mes (MXN)" value={bruto} onChange={editar(setBruto)} type="number" placeholder="Ej: 30000" help="Antes de ISR, IMSS y otras deducciones." error={error} errorId={errorId} />
+      <Field label="Percepciones brutas del mes (MXN)" value={bruto} onChange={editar(setBruto)} type="number" placeholder="Ej: 30000" help="Antes de ISR, seguridad social y otras deducciones." error={error} errorId={errorId} />
       <Field label="Ingreso gravable del mes para ISR (MXN)" value={gravable} onChange={editar(setGravable)} type="number" placeholder="Ej: 30000" help="Puede ser menor que el bruto si existen percepciones exentas." error={error} errorId={errorId} />
-      <Field label="Salario Base de Cotización diario (SBC)" value={sbc} onChange={editar(setSbc)} type="number" placeholder="Ej: 1000" help="Tómalo de tu alta, modificación salarial o información de nómina/IMSS; no se deduce del bruto." error={error} errorId={errorId} />
-      <Field label="Días cotizados en el mes" value={dias} onChange={editar(setDias)} type="number" placeholder="30" error={error} errorId={errorId} />
+      {seguridadSocial === 'imss' ? <>
+        <Field label="Salario Base de Cotización diario (SBC)" value={sbc} onChange={editar(setSbc)} type="number" placeholder="Ej: 1000" help="Tómalo de tu alta, modificación salarial o información de nómina/IMSS; no se deduce del bruto." error={error} errorId={errorId} />
+        <Field label="Días cotizados en el mes" value={dias} onChange={editar(setDias)} type="number" placeholder="30" error={error} errorId={errorId} />
+      </> : <Field label="Sueldo Básico mensual reportado al ISSSTE (MXN)" value={sueldoBasicoISSSTE} onChange={editar(setSueldoBasicoISSSTE)} type="number" placeholder="Ej: 25000" help="No captures aquí toda tu percepción bruta: usa el Sueldo Básico de cotización de tu recibo. MiLana aplica el tope de 10 UMA mensuales." error={error} errorId={errorId} />}
     </div>
     <label style={styles.fieldLabel} htmlFor="bn-periodo">Mes completo de 2026</label>
     <select id="bn-periodo" value={periodo} onChange={e => editar(setPeriodo)(e.target.value)} style={styles.select}>
@@ -423,83 +470,125 @@ function CalcBrutoNeto() {
       <option value="">Selecciona una respuesta</option><option value="si">Sí</option><option value="no">No</option>
     </select>
     <label className="calc-check"><input type="checkbox" checked={confirmado} onChange={e => editar(setConfirmado)(e.target.checked)} /> Confirmo que es un mes completo ordinario con un solo empleador.</label>
-    <p className="calc-help">Enero queda fuera porque el subsidio para el empleo usa una transición distinta antes de la UMA 2026.</p>
+    <p className="calc-help">En ISSSTE se consideran las cuotas obligatorias del trabajador: RCV 6.125%, salud 3.375%, invalidez y vida 0.625% y servicios sociales 0.5%. No se incluyen Ahorro Solidario, FOVISSSTE, préstamos, sindicato u otros descuentos personales.</p>
     <p id={errorId} role="alert" className="calc-error">{error}</p>
-    <Btn>Calcular neto después de ISR e IMSS</Btn>
+    <Btn>Calcular neto después de ISR y seguridad social</Btn>
     <div aria-live="polite" aria-atomic="true">
       {resultado && <ResultBox>
         <ResultLine label="Percepciones brutas" value={fmt(resultado.bruto)} />
         <ResultLine label="ISR mensual estimado" value={'− ' + fmt(resultado.retenido)} color="#A94442" />
-        <ResultLine label="Cuota obrera IMSS" value={'− ' + fmt(resultado.cuotaObrera)} color="#A94442" />
+        {resultado.seguridadSocial === 'issste'
+          ? <ResultLine label="Cuotas obligatorias ISSSTE" value={'− ' + fmt(resultado.cuotaISSSTE)} color="#A94442" />
+          : <ResultLine label="Cuota obrera IMSS" value={'− ' + fmt(resultado.cuotaObrera)} color="#A94442" />}
         <Divider />
-        <ResultLine label="Neto después de ISR e IMSS" value={fmt(resultado.netoDespuesISRIMSS)} bold color="#28735A" />
-        {!resultado.soloMinimo && <ResultLine label="SBC diario aplicado" value={fmt(resultado.sbcAplicado)} />}
-        <ResultLine label="Días cotizados" value={resultado.diasCotizados} />
-        <Note>No incluye Infonavit, Fonacot, préstamos, pensión alimenticia, caja de ahorro ni otras deducciones de tu recibo. El SBC se limita a 25 UMA para este cálculo.</Note>
+        <ResultLine label={`Neto después de ISR e ${resultado.seguridadSocial === 'issste' ? 'ISSSTE' : 'IMSS'}`} value={fmt(resultado.netoDespuesISRSeguridadSocial)} bold color="#28735A" />
+        {resultado.seguridadSocial === 'issste' ? <>
+          <ResultLine label="Sueldo Básico ISSSTE aplicado" value={fmt(resultado.sueldoBasicoAplicado)} />
+          <ResultLine label="RCV (6.125%)" value={fmt(resultado.retiroCesantiaVejez)} />
+          <ResultLine label="Salud (3.375%)" value={fmt(resultado.saludActivo + resultado.saludPensionados)} />
+        </> : <>
+          {!resultado.soloMinimo && <ResultLine label="SBC diario aplicado" value={fmt(resultado.sbcAplicado)} />}
+          <ResultLine label="Días cotizados" value={resultado.diasCotizados} />
+        </>}
+        <Note>{resultado.seguridadSocial === 'issste' ? 'Estimación para régimen ISSSTE federal. Un puesto estatal, municipal, universitario o con instituto propio puede usar reglas distintas.' : 'No incluye Infonavit, Fonacot, préstamos, pensión alimenticia, caja de ahorro ni otras deducciones de tu recibo. El SBC se limita a 25 UMA.'}</Note>
       </ResultBox>}
     </div>
   </form>;
 }
 
 function CalcVacaciones() {
+  const [regimen, setRegimen] = useState('lft');
   const [aniosTrabajados, setAniosTrabajados] = useState('');
   const [salarioMensual, setSalarioMensual] = useState('');
   const [result, setResult] = useState(null);
+  const [error, setError] = useState('');
 
+  const editar = setter => valor => { setter(valor); setResult(null); setError(''); };
   const calcular = () => {
-    const anios = parseInt(aniosTrabajados) || 0;
-    const sm = parseFloat(salarioMensual) || 0;
-    if (anios <= 0) return;
+    try {
+      const anios = parseInt(aniosTrabajados, 10) || 0;
+      const sm = parseFloat(salarioMensual) || 0;
+      if (anios <= 0) throw new Error('Captura al menos un año cumplido para este estimador anual.');
+      if (regimen === 'otro-publico') throw new Error('El servicio público estatal, municipal, universitario o con instituto propio puede tener vacaciones y prima distintas. MiLana no aplicará la tabla LFT por defecto.');
 
-    const sd = sm / 30;
-    const dias = getVacDias(anios);
-    const pagoVac = sd * dias;
-    const primaVac = pagoVac * 0.25;
-
-    // Tabla completa
-    const tabla = [];
-    for (let i = 1; i <= Math.max(anios + 5, 10); i++) {
-      tabla.push({ anio: i, dias: getVacDias(i) });
-    }
-
-    setResult({ anios, dias, sd, pagoVac, primaVac, total: pagoVac + primaVac, tabla });
+      const sd = sm > 0 ? sm / 30 : 0;
+      let dias;
+      let tasaPrima;
+      let baseLabel;
+      let tabla = [];
+      if (regimen === 'lftse') {
+        dias = 20;
+        tasaPrima = 0.30;
+        baseLabel = 'Servicio público federal sujeto a LFTSE: dos periodos anuales de 10 días laborables y prima adicional de 30% sobre el sueldo correspondiente a esos periodos, para personal con más de 6 meses consecutivos de servicio.';
+      } else if (regimen === 'sep-basica') {
+        dias = 20;
+        tasaPrima = 0.50;
+        baseLabel = 'SEP federal — Educación Básica / apoyo: 20 días laborables en dos periodos; prima equivalente al 50% del sueldo base correspondiente a esos 20 días.';
+      } else if (regimen === 'sep-ems') {
+        dias = 40;
+        tasaPrima = 0.60;
+        baseLabel = 'SEP federal — Educación Media Superior: prima equivalente al 60% del salario convencional correspondiente a 40 días al año, pagada en tres periodos.';
+      } else {
+        dias = getVacDias(anios);
+        tasaPrima = 0.25;
+        baseLabel = 'Ley Federal del Trabajo: tabla de Vacaciones Dignas y prima mínima de 25%.';
+        for (let i = 1; i <= Math.max(anios + 5, 10); i++) tabla.push({ anio: i, dias: getVacDias(i) });
+      }
+      const pagoVac = sd * dias;
+      const primaVac = pagoVac * tasaPrima;
+      setResult({ anios, dias, sd, pagoVac, primaVac, total: pagoVac + primaVac, tabla, tasaPrima, regimen, baseLabel });
+      setError('');
+    } catch (err) { setResult(null); setError(err.message); }
   };
 
   return (
     <div>
       <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Consulta cuántos días de vacaciones te corresponden de acuerdo con tu antigüedad en la empresa, conforme a la reforma de Vacaciones Dignas de 2023 (Art. 76 LFT).
+        Elige primero tu régimen. La tabla de Vacaciones Dignas es LFT; el servicio público federal sujeto a LFTSE y las plazas SEP federales tienen reglas propias y no deben usar automáticamente 12 días + 25%.
       </p>
+      <label style={styles.fieldLabel} htmlFor="vac-regimen">Régimen / tipo de plaza</label>
+      <select id="vac-regimen" value={regimen} onChange={e => editar(setRegimen)(e.target.value)} style={styles.select}>
+        <option value="lft">Ley Federal del Trabajo</option>
+        <option value="lftse">Servicio público federal sujeto a LFTSE</option>
+        <option value="sep-basica">SEP federal — Educación Básica / apoyo</option>
+        <option value="sep-ems">SEP federal — Educación Media Superior</option>
+        <option value="otro-publico">Otro servicio público / régimen especial</option>
+      </select>
       <div style={styles.grid2}>
-        <Field label="Años trabajados en la empresa" value={aniosTrabajados} onChange={setAniosTrabajados} type="number" placeholder="Ej: 3" />
-        <Field label="Salario mensual (opcional, para calcular prima)" value={salarioMensual} onChange={setSalarioMensual} type="number" placeholder="Ej: 20000" />
+        <Field label="Años completos de servicio" value={aniosTrabajados} onChange={editar(setAniosTrabajados)} type="number" placeholder="Ej: 3" />
+        <Field label={regimen === 'sep-ems' ? 'Salario convencional mensual (opcional)' : ['sep-basica','lftse'].includes(regimen) ? 'Sueldo base mensual computable (opcional)' : 'Salario mensual (opcional, para calcular prima)'} value={salarioMensual} onChange={editar(setSalarioMensual)} type="number" placeholder="Ej: 20000" />
       </div>
+      <p className="calc-help">Este modo muestra el derecho anual completo. Para antigüedad menor a un año o incidencias dentro de un periodo público/SEP, revisa la regla proporcional específica de tu nómina.</p>
+      <p role="alert" className="calc-error">{error}</p>
       <Btn onClick={calcular}>Consultar</Btn>
       {result && (
         <ResultBox>
-          <ResultLine label={`Con ${result.anios} año(s) de antigüedad`} value={`${result.dias} días de vacaciones`} bold color="#28735A" />
+          <ResultLine label={result.regimen === 'lft' ? `Con ${result.anios} año(s) de antigüedad` : result.regimen === 'sep-ems' ? 'Base salarial anual para la prima' : 'Vacaciones anuales de referencia'} value={result.regimen === 'sep-ems' ? `${result.dias} días de salario` : `${result.dias} días`} bold color="#28735A" />
           {result.sd > 0 && (
             <>
               <Divider />
-              <ResultLine label="Valor salarial del periodo vacacional" value={fmt(result.pagoVac)} />
-              <ResultLine label="Prima vacacional (25%)" value={fmt(result.primaVac)} />
-              <ResultLine label="Valor del periodo + prima" value={fmt(result.total)} bold color="#28735A" />
+              <ResultLine label="Valor salarial de los días de referencia" value={fmt(result.pagoVac)} />
+              <ResultLine label={`Prima vacacional (${Math.round(result.tasaPrima * 100)}%)`} value={fmt(result.primaVac)} />
+              <ResultLine label="Valor de referencia + prima" value={fmt(result.total)} bold color="#28735A" />
             </>
           )}
-          <Divider />
-          <div style={{marginBottom:8,fontWeight:600,color:'#5E6B78',fontSize:13}}>Tabla de vacaciones LFT 2026</div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(100px,1fr))',gap:4}}>
-            {result.tabla.map(t => (
-              <div key={t.anio} style={{
-                padding:'6px 8px',fontSize:12,borderRadius:6,
-                background: t.anio === result.anios ? '#28735A' : '#f1f5f9',
-                color: t.anio === result.anios ? 'white' : '#475569',
-                textAlign:'center'
-              }}>
-                Año {t.anio}: <strong>{t.dias}d</strong>
-              </div>
-            ))}
-          </div>
+          <Note>{result.baseLabel}</Note>
+          {result.regimen === 'lft' && <>
+            <Divider />
+            <div style={{marginBottom:8,fontWeight:600,color:'#5E6B78',fontSize:13}}>Tabla de vacaciones LFT 2026</div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(100px,1fr))',gap:4}}>
+              {result.tabla.map(t => (
+                <div key={t.anio} style={{
+                  padding:'6px 8px',fontSize:12,borderRadius:6,
+                  background: t.anio === result.anios ? '#28735A' : '#f1f5f9',
+                  color: t.anio === result.anios ? 'white' : '#475569',
+                  textAlign:'center'
+                }}>
+                  Año {t.anio}: <strong>{t.dias}d</strong>
+                </div>
+              ))}
+            </div>
+          </>}
         </ResultBox>
       )}
     </div>
@@ -677,7 +766,7 @@ function CalcPension() {
   return (
     <div>
       <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Revisa si cumples los requisitos generales de edad y semanas cotizadas para pensionarte bajo el esquema de Ley 97 (AFORE). En 2026 se requiere un mínimo de 875 semanas cotizadas.
+        Revisa si cumples los requisitos generales de edad y semanas cotizadas para pensionarte bajo el esquema IMSS Ley 97 (AFORE). No aplica a una pensión ISSSTE ni a un instituto estatal. En 2026 se requiere un mínimo de 875 semanas cotizadas.
       </p>
       <div style={styles.grid2}>
         <Field label="Tu edad actual" value={edad} onChange={setEdad} type="number" placeholder="Ej: 35" />
@@ -970,7 +1059,7 @@ const ANCHOS_MOVIL_IMAGEN = [480, 768, 1024, 1440];
 // donde esta el sujeto cambia en cada imagen.
 const FOTOS = catalogoFotos.fotos;
 
-function Foto({ name, alt = '', sizes, className, eager = false, focal, movil }) {
+function Foto({ name, alt = '', sizes, className, eager = false, focal, focalMovil, movil }) {
   const srcset = (base, anchos, ext) =>
     anchos.map(w => `/images/gen/${base}-${w}.${ext} ${w}w`).join(', ');
   // El src es solo el respaldo para navegadores que ignoran srcset: no
@@ -1004,7 +1093,7 @@ function Foto({ name, alt = '', sizes, className, eager = false, focal, movil })
         aria-hidden={alt ? undefined : 'true'}
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
-        style={focal ? { objectPosition: focal } : undefined}
+        style={focal || focalMovil ? { objectPosition: focal || '50% 50%', '--ml-photo-focal': focal || '50% 50%', '--ml-photo-focal-mobile': focalMovil || focal || '50% 50%' } : undefined}
       />
     </picture>
   );
@@ -1456,7 +1545,7 @@ const CALC_META = {
   finiquito:  { tag: 'Trabajo',      largo: 'Estima lo que corresponde al cerrar una relación laboral y revisa qué integra el cálculo.' },
   isr:        { tag: 'Impuestos',    largo: 'Calcula la retención estimada y entiende de dónde sale.' },
   aguinaldo:  { tag: 'Prestaciones', largo: 'Revisa tu monto proporcional o anual con datos claros.' },
-  'bruto-neto':{ tag: 'Sueldo',      largo: 'Estima lo que queda después de ISR e IMSS usando bases separadas de nómina.' },
+  'bruto-neto':{ tag: 'Sueldo',      largo: 'Estima lo que queda después de ISR y seguridad social, separando IMSS e ISSSTE.' },
   resico:     { tag: 'Impuestos',    largo: 'Estima el ISR del régimen simplificado con fundamento visible.' },
   liquidacion:{ tag: 'Trabajo',      largo: 'Calcula los conceptos de un despido injustificado y qué los integra.' },
   ptu:        { tag: 'Prestaciones', largo: 'Revisa el 10% de utilidades que corresponde repartir.' },
@@ -1601,6 +1690,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                     name={calc.id}
                     sizes="(max-width: 1023px) 100vw, min(48vw, 760px)"
                     focal={FOTOS[calc.id].focal}
+                    focalMovil={FOTOS[calc.id].focalMovil}
                     movil={FOTOS[calc.id].movil}
                     eager
                   />

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {calcularISR,calcularAguinaldo} from '../src/lib/calculos-revisados.mjs';
+import {calcularISR,calcularAguinaldo,calcularAguinaldoSEPEMS2026} from '../src/lib/calculos-revisados.mjs';
 const peso=n=>n.toFixed(2);
 test('ISR: referencias independientes de tarifa y borde del subsidio',()=>{
   for(const [ingreso,esperado] of [['25000','3451.65'],['11000','302.17'],['11492.66','355.77'],['11492.67','891.42']])
@@ -25,4 +25,14 @@ test('Aguinaldo: año completo y fechas civiles inclusivas',()=>{
 test('Aguinaldo rechaza negativos, fechas inexistentes/futuras y periodo sin confirmar',()=>{
   for(const input of [{ingreso:'2027-01-01'},{ingreso:'2026-02-30'},{dias:'0'},{dias:'-15'},{salario:'-10'},{ingreso:'',anioCompleto:false}])
     assert.throws(()=>calcularAguinaldo({salario:'18000',ingreso:'2026-01-01',...input}));
+});
+
+test('Aguinaldo SEP EMS 2026 aplica 40, 20 o proporcional según antigüedad en el año',()=>{
+  assert.equal(peso(calcularAguinaldoSEPEMS2026({salarioConvencional:'18000',ingreso:'2026-07-01'}).bruto),'24000.00');
+  assert.equal(calcularAguinaldoSEPEMS2026({salarioConvencional:'18000',ingreso:'2026-07-01'}).reglaSEP,'6 meses o más: 40 días de salario');
+  assert.equal(peso(calcularAguinaldoSEPEMS2026({salarioConvencional:'18000',ingreso:'2026-08-15'}).bruto),'12000.00');
+  const corto=calcularAguinaldoSEPEMS2026({salarioConvencional:'18000',ingreso:'2026-10-15'});
+  assert.equal(corto.diasPeriodo,78);
+  assert.equal(peso(corto.bruto),'5128.77');
+  assert.match(corto.reglaSEP,/Hasta 3 meses/);
 });

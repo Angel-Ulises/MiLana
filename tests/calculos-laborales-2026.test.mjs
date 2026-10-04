@@ -5,6 +5,7 @@ import {
   calcularLiquidacion2026,
   calcularBrutoNeto2026,
   calcularCuotaObreraIMSS2026,
+  calcularCuotaTrabajadorISSSTE2026,
 } from '../src/lib/calculos-laborales-2026.mjs';
 
 const cerca = (actual, esperado, tolerancia = 0.01) => {
@@ -111,4 +112,33 @@ test('bruto a neto: exige declaración explícita de salario mínimo', () => {
     brutoMensual: '20000', ingresoGravableISR: '20000', sbcDiario: '700', diasCotizados: '30',
     periodo: '2026-09', empleadorUnico: true,
   }), /Indica si percibiste/);
+});
+
+
+test('ISSSTE: SEP federal aplica las cinco cuotas obligatorias del trabajador (10.625%)', () => {
+  const r = calcularCuotaTrabajadorISSSTE2026({ sueldoBasicoMensual: '30000' });
+  cerca(r.retiroCesantiaVejez, 1837.50);
+  cerca(r.saludActivo, 825.00);
+  cerca(r.saludPensionados, 187.50);
+  cerca(r.invalidezVida, 187.50);
+  cerca(r.serviciosSociales, 150.00);
+  cerca(r.cuotaISSSTE, 3187.50);
+});
+
+test('ISSSTE: limita el Sueldo Básico a 10 UMA mensuales', () => {
+  const r = calcularCuotaTrabajadorISSSTE2026({ sueldoBasicoMensual: '50000' });
+  cerca(r.sueldoBasicoAplicado, 35662.20);
+  cerca(r.cuotaISSSTE, 3789.10875, 0.001);
+});
+
+test('bruto a neto: modo ISSSTE no descuenta IMSS y usa Sueldo Básico separado', () => {
+  const r = calcularBrutoNeto2026({
+    brutoMensual: '30000', ingresoGravableISR: '30000', sueldoBasicoISSSTE: '25000',
+    seguridadSocial: 'issste', soloMinimo: false, periodo: '2026-09', empleadorUnico: true,
+  });
+  assert.equal(r.seguridadSocial, 'issste');
+  assert.equal('cuotaObrera' in r, false);
+  cerca(r.cuotaISSSTE, 2656.25);
+  cerca(r.netoDespuesISRSeguridadSocial, 22824.10);
+  assert.equal(r.netoDespuesISRIMSS, null);
 });

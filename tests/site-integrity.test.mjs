@@ -89,19 +89,19 @@ test('el movimiento premium es progresivo y respeta reducir movimiento', () => {
   assert.ok(staticCss.includes('prefers-reduced-motion:reduce'));
 });
 
-test('los heroes de calculadora no lavan la acción principal', () => {
+test('los heroes de calculadora conservan el recorte móvil local y no lo sustituyen tras cargar', () => {
   const mejoras = read('src/siteEnhancements.jsx');
-  const overrides = read('src/site-overrides.css');
-  const fuentes = read('assets-master/FUENTES.json');
-  assert.ok(mejoras.includes("pexelsId: '10376251'"));
-  assert.ok(mejoras.includes('actualizarFotoCalculadora'));
-  assert.ok(overrides.includes('rgb(251 248 242 / 0) 16%'));
-  assert.ok(overrides.includes('rgb(251 248 242 / 0) 18%'));
-  assert.ok(overrides.includes('.calculator-hero-media::after'));
-  assert.ok(overrides.includes('background: none !important'));
-  assert.ok(fuentes.includes('10376251'));
-  const catalogo = JSON.parse(fuentes);
-  assert.equal(catalogo.fotos.find((foto) => foto.id === 'finiquito')?.pexels, 10376251);
+  const app = read('src/App.jsx');
+  const fotos = JSON.parse(read('src/data/fotos.json'));
+  const auditCss = read('public/orbita-v3-audit.css');
+  const fuentes = JSON.parse(read('assets-master/FUENTES.json'));
+  assert.ok(!mejoras.includes('actualizarFotoCalculadora'));
+  assert.ok(!mejoras.includes('CALCULATOR_PHOTO_OVERRIDES'));
+  assert.equal(fotos.fotos.finiquito?.movil, 'finiquito-movil');
+  assert.equal(fotos.fotos.liquidacion?.focalMovil, '50% 22%');
+  assert.ok(app.includes("'--ml-photo-focal-mobile'"));
+  assert.ok(auditCss.includes('--ml-photo-focal-mobile'));
+  assert.equal(fuentes.fotos.find((foto) => foto.id === 'finiquito')?.pexels, 10376251);
 });
 
 test('el build genera sitemap final sin lastmod artificial', () => {
@@ -177,4 +177,32 @@ test('no quedan mensajes públicos de canal o importes pendientes', () => {
     assert.ok(!text.includes('Canal público pendiente'));
     assert.ok(!text.includes('Importes en revisión'));
   }
+});
+
+
+test('las calculadoras separan LFT, IMSS e ISSSTE antes de aplicar fórmulas de régimen privado', () => {
+  const app = read('src/App.jsx');
+  const calculos = read('src/lib/calculos-laborales-2026.mjs');
+  for (const id of ['fin-regimen', 'liq-regimen', 'agu-regimen', 'bn-seguridad', 'vac-regimen']) {
+    assert.ok(app.includes(id), `falta selector ${id}`);
+  }
+  assert.ok(app.includes('FOVISSSTE'));
+  assert.ok(app.includes('No aplica a una pensión ISSSTE'));
+  assert.ok(calculos.includes("seguridadSocial = 'imss'"));
+  assert.ok(calculos.includes('calcularCuotaTrabajadorISSSTE2026'));
+  assert.ok(app.includes('calcularAguinaldoSEPEMS2026'));
+  assert.ok(app.includes('Servicio público federal sujeto a LFTSE'));
+});
+
+
+test('el editorial no contradice los nuevos alcances público/privado', () => {
+  const contenido = JSON.parse(read('src/data/contenido-calculadoras.json'));
+  const casos = JSON.parse(read('public/casos-calculadoras.json'));
+  assert.match(contenido.aguinaldo.fundamento, /LFTSE/);
+  assert.match(contenido.aguinaldo.metodologia, /Educación Media Superior/);
+  assert.match(contenido.vacaciones.metodologia, /prima de 30%/);
+  assert.match(contenido.vacaciones.metodologia, /prima de 60%/);
+  assert.match(contenido.ptu.proposito, /únicamente el monto total/);
+  assert.doesNotMatch(contenido.ptu.proposito, /participación individual/i);
+  assert.match(casos.aguinaldo.titulo, /Ejemplo LFT/);
 });

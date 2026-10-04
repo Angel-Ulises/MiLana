@@ -31,14 +31,14 @@ test('Órbita ya no inyecta contenedores publicitarios vacíos',()=>{
   assert.doesNotMatch(inject,/const markup='[^']*data-orbita-ad-reserve/);
 });
 
-test('calculadoras ocultan intro repetido y vuelven al paso que falló',()=>{
+test('calculadoras conservan la foto, ocultan intro repetido y vuelven al paso que falló',()=>{
   assert.match(internal,/introDuplicatesHero/);
   assert.match(internal,/introRepeatsHero = introDuplicatesHero\(intro\)/);
   assert.match(internal,/recoverValidationStep/);
   assert.match(internal,/addEventListener\('invalid',[\s\S]*step = index/);
   assert.match(internal,/errorText\.includes\('salario minimo'\)/);
   assert.match(internal,/errorText\.includes\('vacaciones'\) && errorText\.includes\('anuales'\)/);
-  assert.match(prepaint,/\.calculator-hero-media\{display:none!important\}/);
+  assert.match(prepaint,/\.calculator-hero-media\{display:block!important[^}]*height:220px!important/);
   assert.match(prepaint,/\.calculator-purpose\{[^}]*-webkit-line-clamp:2/);
   assert.match(prepaint,/\.orb-purpose-ready[^\n]*\.calculator-purpose\{[^}]*-webkit-line-clamp:unset!important/);
   assert.match(prepaint,/\.calculator-main::before\{[^}]*height:131px/);

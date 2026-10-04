@@ -1,0 +1,36 @@
+/* Alcance laboral/seguridad social y correcciones móviles — 4 oct 2026. */
+[data-public-scope-blocked="true"]>:not(.ml-public-sector-scope):not(.ml-public-scope-warning){display:none!important}
+html.ml-public-scope-blocked-route[data-orbita-section="calculadoras"] .calculator-main>.ml-calc-assistant,
+html.ml-public-scope-blocked-route[data-orbita-section="calculadoras"] .ml-calc-flow-actions{display:none!important}
+.ml-public-sector-scope{margin:0 0 22px;padding:18px;border:1px solid #D7E2EB;border-radius:18px;background:#F7FAFC}
+.ml-public-sector-scope label,.ml-public-vacation-tool label{display:block;margin-bottom:8px;color:#263746;font-weight:750;line-height:1.4}
+.ml-public-sector-scope select,.ml-public-vacation-tool input{width:100%;min-height:50px;padding:11px 12px;border:1px solid #AEBCC8;border-radius:12px;background:#FFF;color:#13263B;font:inherit}
+.ml-public-sector-scope .calc-help{margin:9px 0 0;color:#667784;font-size:13px;line-height:1.55}
+.ml-public-scope-warning{margin:18px 0 8px;padding:20px;border:1px solid #E3D6BD;border-radius:18px;background:#FFF8EA;color:#4F4332}
+.ml-public-scope-warning>strong{display:block;color:#3F3323;font-size:17px;line-height:1.35}
+.ml-public-scope-warning>p{margin:9px 0 0;color:#665946;font-size:14px;line-height:1.6}
+.ml-public-vacation-tool{margin-top:16px;padding-top:16px;border-top:1px solid #E3D6BD}
+.ml-public-vacation-tool button{min-height:48px;margin-top:10px;padding:0 18px;border:0;border-radius:999px;background:#2D6CAA;color:#FFF;font-weight:750;cursor:pointer}
+.ml-public-vacation-tool [aria-live]{margin-top:14px;color:#4F4332;line-height:1.55}
+
+@media(max-width:760px){
+  /* La reserva de 131px era visible como hueco en Finiquito/Liquidación/Bruto→Neto. */
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main::before{height:92px!important;min-height:92px!important}
+  html.ml-orbita-enabled.orb-calc-assistant-ready[data-orbita-section="calculadoras"] .calculator-main::before,
+  html.ml-public-scope-blocked-route[data-orbita-section="calculadoras"] .calculator-main::before,
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main:has(>.ml-calc-assistant)::before{display:none!important;height:0!important;min-height:0!important}
+
+  /* Pexels 3184465 contiene rostros altos; centra el recorte en ellos, no en las manos. */
+  html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.career-hero-media,.profession-hero-media) img[src*="3184465"]{object-position:50% 30%!important;transform:none!important}
+
+  /* Familias densas: más aire, piso de lectura y una columna cuando 3 celdas ya no caben. */
+  html.ml-orbita-enabled[data-orbita-section="carreras"] .career-state-row{grid-template-columns:minmax(0,1fr)!important;gap:5px!important;padding:18px!important;font-size:13px!important}
+  html.ml-orbita-enabled[data-orbita-section="carreras"] .career-state-row.header{display:none!important}
+  html.ml-orbita-enabled[data-orbita-section="carreras"] .career-state-row strong{text-align:left!important;justify-self:start!important}
+  html.ml-orbita-enabled :is(.profession-related-grid>a,.finance-route-list>a,.finance-housing-steps>a,.state-grid>a,.state-action-grid>a,.state-near-grid>a,.advisor-scenario-grid article,.investment-factors article,.investment-scenario,.investment-debt-grid article){padding:20px!important;min-height:0!important}
+  html.ml-orbita-enabled :is(.profession-related-grid p,.finance-route-list p,.finance-housing-steps p,.finance-result-card p,.state-grid p,.state-metric-grid p,.state-action-grid p,.state-near-grid p,.advisor-scenario-grid p,.investment-factors p,.investment-scenario p,.investment-debt-note,.investment-debt-missing){font-size:13px!important;line-height:1.55!important}
+  html.ml-orbita-enabled :is(.saved-state-context-grid,.investment-debt-grid){grid-template-columns:1fr!important}
+  html.ml-orbita-enabled .saved-state-context-grid>div{padding:16px!important}
+  .ml-public-sector-scope,.ml-public-scope-warning{padding:18px;margin-bottom:18px}
+  .ml-public-scope-warning>strong{font-size:16px}
+}

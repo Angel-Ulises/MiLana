@@ -3,7 +3,7 @@ import { dirname, join, relative, sep } from 'node:path';
 
 const DIST = new URL('../dist/', import.meta.url);
 const PUBLIC = new URL('../public/', import.meta.url);
-const RUNTIME_CSS_FILES = ['orbita-v3-internal.css','orbita-v3-hybrid.css','orbita-v3-experience.css','orbita-v3-glossary.css','orbita-v3-visuals.css','orbita-v3-audit.css'];
+const RUNTIME_CSS_FILES = ['orbita-v3-internal.css','orbita-v3-hybrid.css','orbita-v3-experience.css','orbita-v3-glossary.css','orbita-v3-visuals.css','orbita-v3-audit.css','orbita-v3-detalle.css','orbita-v3-movil.css'];
 const RESERVAS = JSON.parse(await readFile(new URL('./reservas-alturas.json', import.meta.url), 'utf8').catch(() => '{}'));
 const SKIP_ROUTES = new Set(['/404', '/widgets']);
 const PROTECTED_PENSION = '/calculadoras/pension-imss';
@@ -118,6 +118,11 @@ function injectStaticReserves(html,route){
   const glossaryM=detectedTerms.length ? 128 + Math.max(0,mobileRows-1)*50 : 0;
   const glossary=detectedTerms.length?`<div class="orb-runtime-reserve orb-glossary-reserve" style="--orb-glossary-reserve-d:104px;--orb-glossary-reserve-m:${glossaryM}px" data-orbita-static-reserve data-orbita-glossary-reserve aria-hidden="true"></div>`:'';
   const visual='<div class="orb-runtime-reserve orb-visual-reserve" data-orbita-static-reserve data-orbita-visual-reserve aria-hidden="true"></div>';
+  // Guías de Aprende: sin visual de sección y el glosario después del artículo, para que el título sea lo primero.
+  if(section==='aprende' && /^\/aprende\/[^/]+/.test(route)){
+    const end=html.indexOf('</article>');
+    return end>=0 ? html.slice(0,end+10)+glossary+html.slice(end+10) : html;
+  }
   return insertAfterHero(html,section,`${glossary}${visual}`);
 }
 async function files(dir) {

@@ -1,63 +1,31 @@
-import { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { useState } from 'react';
 import datos from './data/estados.json';
 import { borrarEstadoGuardado, guardarEstado, leerEstadoGuardado } from './lib/statePreference.js';
 
-export default function StateRememberControl() {
-  const [target, setTarget] = useState(null);
-  const [seleccion, setSeleccion] = useState('');
+// Botón "Recordar <estado> en este dispositivo". Se dibuja dentro del selector de estado (statePages.jsx), en el
+// mismo render que la ficha. Antes se montaba en un árbol React aparte que buscaba `.state-selector` con reintentos
+// y lo insertaba por portal ~100-300 ms después: empujaba el contenido de abajo ~97 px (CLS intermitente en móvil).
+export default function RecordarEstado({ slug = '' }) {
   const [guardado, setGuardado] = useState(() => leerEstadoGuardado());
-
-  useEffect(() => {
-    const path = window.location.pathname.replace(/\/$/, '') || '/';
-    if (!path.startsWith('/estados')) return undefined;
-    const slugRuta = path.split('/').filter(Boolean)[1] || '';
-    let intentos = 0;
-    let select = null;
-    let cambio = null;
-    let timer = null;
-
-    const buscar = () => {
-      const nodo = document.querySelector('.state-selector');
-      select = nodo?.querySelector('select') || null;
-      if (nodo && select) {
-        setTarget(nodo);
-        setSeleccion(slugRuta || select.value || '');
-        cambio = () => setSeleccion(select?.value || '');
-        select.addEventListener('change', cambio);
-      } else if (++intentos < 30) {
-        timer = window.setTimeout(buscar, 100);
-      }
-    };
-
-    buscar();
-    return () => {
-      if (timer) window.clearTimeout(timer);
-      if (select && cambio) select.removeEventListener('change', cambio);
-    };
-  }, []);
-
-  if (!target || !seleccion) return null;
-  const info = datos.estados.find((e) => e.slug === seleccion);
+  const info = slug ? datos.estados.find((e) => e.slug === slug) : null;
   if (!info) return null;
-  const activo = guardado === seleccion;
+  const activo = guardado === slug;
 
   const alternar = () => {
     if (activo) {
       borrarEstadoGuardado();
       setGuardado('');
-    } else if (guardarEstado(seleccion)) {
-      setGuardado(seleccion);
+    } else if (guardarEstado(slug)) {
+      setGuardado(slug);
     }
   };
 
-  return createPortal(
+  return (
     <div className="state-remember-control">
       <button type="button" onClick={alternar} aria-pressed={activo}>
         {activo ? `${info.estado} está guardado en este dispositivo` : `Recordar ${info.estado} en este dispositivo`}
       </button>
       <small>No usa geolocalización ni envía tu elección a MiLana.</small>
-    </div>,
-    target,
+    </div>
   );
 }

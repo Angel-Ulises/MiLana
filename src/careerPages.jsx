@@ -1,3 +1,4 @@
+import Detalle from './Detalle.jsx';
 import { useMemo, useState } from 'react';
 import datos from './data/carreras.json';
 import profesiones from './data/profesiones.json';
@@ -10,8 +11,10 @@ const PEXELS = {
   estados: '3184291',
 };
 
+// 3184465 (apretón de manos) trae la cabeza cortada en el original: se recorta 16:9 anclado abajo.
+const RECORTE_ABAJO = new Set(['3184465']);
 const pexels = (id, width = 1400) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
+  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}${RECORTE_ABAJO.has(id) ? `&h=${Math.round(width * 0.5625)}&fit=crop&crop=bottom` : ''}`;
 
 const dinero = (valor) => new Intl.NumberFormat('es-MX', {
   style: 'currency', currency: 'MXN', maximumFractionDigits: 0,
@@ -211,9 +214,13 @@ function Hub() {
               <p>Cada perfil usa el mismo corte 2026 y separa ingreso promedio, población ocupada y contexto. No convierte el promedio en sueldo inicial.</p>
             </div>
             <div className="career-profession-grid">
-              {perfiles.map((p) => <a key={p.slug} href={`/carreras/profesion/${p.slug}`}><span>{p.area}</span><h3>{p.nombre}</h3><strong>{dinero(p.ingreso)}/mes</strong><p>{numero(p.ocupados)} profesionistas ocupados</p><b>Ver perfil →</b></a>)}
+              {perfiles.slice(0, 4).map((p) => <a key={p.slug} href={`/carreras/profesion/${p.slug}`}><span>{p.area}</span><h3>{p.nombre}</h3><strong>{dinero(p.ingreso)}/mes</strong><p>{numero(p.ocupados)} profesionistas ocupados</p><b>Ver perfil →</b></a>)}
             </div>
-            <div className="career-profession-more">{profesiones.profesiones.slice(8).map((p) => <a key={p.slug} href={`/carreras/profesion/${p.slug}`}>{p.nombre}<span>→</span></a>)}</div>
+            {/* Resto de perfiles y profesiones: mismo contenido y enlaces, plegado para que la sección se lea de un vistazo. */}
+            <Detalle className="orb-more-professions" titulo={`Ver más profesiones (${perfiles.length - 4 + profesiones.profesiones.slice(8).length})`} resumen={perfiles.slice(4).map((p) => p.nombre).join(' · ')} cta="Ver todas">
+              <div className="career-profession-grid">{perfiles.slice(4).map((p) => <a key={p.slug} href={`/carreras/profesion/${p.slug}`}><span>{p.area}</span><h3>{p.nombre}</h3><strong>{dinero(p.ingreso)}/mes</strong><p>{numero(p.ocupados)} profesionistas ocupados</p><b>Ver perfil →</b></a>)}</div>
+              <div className="career-profession-more">{profesiones.profesiones.slice(8).map((p) => <a key={p.slug} href={`/carreras/profesion/${p.slug}`}>{p.nombre}<span>→</span></a>)}</div>
+            </Detalle>
           </div>
         </section>
 

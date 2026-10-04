@@ -12,7 +12,6 @@ import CareerComparePage, { esRutaCompararCarreras } from './careerComparePage.j
 import StateComparePage, { esRutaCompararEstados } from './stateComparePage.jsx'
 import StatePages, { esRutaEstado } from './statePages.jsx'
 import StateEntry from './stateEntry.jsx'
-import StateRememberControl from './stateRememberControl.jsx'
 import StateHousing from './stateHousing.jsx'
 import StateOccupations from './stateOccupations.jsx'
 import StateCompareEntry from './stateCompareEntry.jsx'
@@ -151,7 +150,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       )}
       <OccupationEntry />
       <StateEntry />
-      <StateRememberControl />
       <StateHousing />
       <StateOccupations />
       <StateCompareEntry />

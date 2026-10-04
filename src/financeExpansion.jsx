@@ -170,7 +170,8 @@ function PreguntaCard({ item, abierta, onToggle }) {
 }
 
 function FinanceContent() {
-  const [abierta, setAbierta] = useState('mejor-pagadas');
+  // Todas cerradas al inicio: se lee la lista de preguntas de un vistazo y se abre la que interesa.
+  const [abierta, setAbierta] = useState('');
   const preguntas = useMemo(() => PREGUNTAS, []);
 
   return (
@@ -200,9 +201,9 @@ function FinanceContent() {
           <div className="ml-money-head">
             <div>
               <p className="eyebrow">Tu vida financiera, conectada</p>
-              <h2>MiLana crece de calculadora a mapa de decisiones.</h2>
+              <h2>Tu dinero, conectado por temas.</h2>
             </div>
-            <p>Cada tema debe llevar a una herramienta, una comparación o una siguiente pregunta útil. Ya no son tarjetas de destino: son rutas reales.</p>
+            <p>Cada tema te lleva a una herramienta, una comparación o la siguiente pregunta útil.</p>
           </div>
           <div className="ml-money-grid">
             {AREAS.map((area) => (
@@ -232,7 +233,7 @@ function FinanceContent() {
             <div className="ml-editorial-overlay">
               <p className="eyebrow">Radar económico</p>
               <h2>Lo que pasa afuera, explicado por lo que cambia para ti.</h2>
-              <p>Esta será la capa de actualidad: evento → contexto → impacto personal → herramienta. No reemplaza la sección Aprende.</p>
+              <p>Qué pasó, por qué te importa y qué herramienta te sirve para decidir.</p>
             </div>
           </article>
           <div className="ml-editorial-list">
@@ -248,7 +249,7 @@ function FinanceContent() {
                 <b>Explorar →</b>
               </a>
             ))}
-            <p className="ml-editorial-note">Las noticias se incorporarán después con fecha, fuente, vigencia y contexto visibles. MiLana no presentará titulares automáticos como recomendación financiera.</p>
+            <p className="ml-editorial-note">Radar activo con fecha, fuente y contexto visibles. Las señales económicas se conectan con herramientas de MiLana y no se presentan como recomendaciones financieras personalizadas.</p>
           </div>
         </div>
       </section>

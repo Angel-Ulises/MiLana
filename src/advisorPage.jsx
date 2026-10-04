@@ -39,7 +39,7 @@ export default function AdvisorPage() {
 
   return <div className="advisor-page">
     <Header />
-    <section className="advisor-hero"><div className="shell"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/finanzas">Finanzas</a><span>/</span><span>Mi situación</span></nav><p className="eyebrow">Asesor MiLana · versión 1</p><h1>Cuéntame tus números. MiLana conecta lo que significan.</h1><p>No es un chat que adivina. Esta primera versión usa reglas visibles para ordenar flujo mensual, deuda, respaldo y una meta. Los cálculos ocurren en tu navegador y no eligen inversiones por ti.</p><div className="advisor-proof"><span>Sin cuenta</span><span>Sin guardar contraseñas</span><span>Sin seleccionar productos</span></div></div></section>
+    <section className="advisor-hero"><div className="shell"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/finanzas">Finanzas</a><span>/</span><span>Mi situación</span></nav><p className="eyebrow">Mi situación · MiLana</p><h1>Cuéntame tus números. MiLana conecta lo que significan.</h1><p>No es un chat que adivina. MiLana usa reglas visibles para ordenar flujo mensual, deuda, respaldo y una meta. Los cálculos ocurren en tu navegador y no eligen inversiones por ti.</p><div className="advisor-proof"><span>Sin cuenta</span><span>Sin guardar contraseñas</span><span>Sin seleccionar productos</span></div></div></section>
 
     <main className="advisor-main">
       <div className="shell"><AdvisorProfessionContext /></div>
@@ -68,7 +68,7 @@ export default function AdvisorPage() {
 
         <section className="advisor-scenarios"><div className="advisor-scenarios-head"><p className="eyebrow">Escenarios</p><h2>¿Qué cambia si tu ingreso neto sube?</h2><p>Solo mueve matemáticamente tu ingreso neto. No recalcula ISR, IMSS ni supone que realmente recibirás un aumento.</p></div><div className="advisor-scenario-grid">{escenarios.map((escenario) => <article key={escenario.incrementoPct}><span>+{escenario.incrementoPct}% ingreso</span><strong>{dinero(escenario.disponibleEscenario)}</strong><p>Disponible mensual con los mismos gastos capturados.</p></article>)}</div></section>
 
-        <aside className="advisor-investment-gate"><span>{ruta.inversion.estado === 'contexto-educativo-disponible' ? 'Inversión: contexto disponible' : 'Inversión: todavía solo educación'}</span><p>{ruta.inversion.motivo}</p><strong>MiLana v1 no recomienda ni ejecuta productos de inversión.</strong></aside>
+        <aside className="advisor-investment-gate"><span>{ruta.inversion.estado === 'contexto-educativo-disponible' ? 'Inversión: contexto disponible' : 'Inversión: todavía solo educación'}</span><p>{ruta.inversion.motivo}</p><strong>MiLana no recomienda ni ejecuta productos de inversión.</strong></aside>
       </div>
     </section></main>
 

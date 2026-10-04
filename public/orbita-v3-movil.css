@@ -1,0 +1,43 @@
+/* Órbita V3 · ajustes visuales móvil (oct 2026). Solo espaciado, tipografía y encuadre de fotos.
+   No toca fórmulas, fuentes, estados de confianza, Pensión ni AdSense. Se carga al final del bundle runtime. */
+
+/* 1) Fotos: encuadre para que no se corten cabezas. */
+/* Persona con calculadora (retrato vertical): con 50% 50% en tarjetas 3:2 solo se veía de la nariz para abajo. */
+html.ml-orbita-enabled img[src*="pexels-photo-6963848"]{object-position:50% 14%!important}
+/* Estudiantes en el pasto: mantener caras dentro del recorte en cajas más altas. */
+html.ml-orbita-enabled img[src*="pexels-photo-6147267"]{object-position:50% 40%!important}
+
+@media (max-width:620px){
+  /* 2) Hueco blanco bajo el header: el contenido arrancaba 43-73 px debajo de la barra. Objetivo ≈20 px. */
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .hero{padding-top:6px!important;min-height:1124px!important}
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid{padding-top:14px!important}
+  html.ml-orbita-enabled .calculator-hero-copy{padding-top:12px!important}
+  html.ml-orbita-enabled :is(.finance-page-hero-grid,.profession-hero-grid,.economy-article-hero-grid){padding-top:20px!important}
+  html.ml-orbita-enabled :is(.advisor-hero,.state-hero,.state-detail-hero,.career-hero-copy,.economy-hero,.cetes-reference-hero,.investment-hero,.cnbv-funds-hero,.instrument-compare-hero){padding-top:20px!important}
+  html.ml-orbita-enabled main.wrap.hub{padding-top:20px!important}
+  html.ml-orbita-enabled main.wrap.hub > .hubhead > .eyebrow:first-child,
+  html.ml-orbita-enabled main.wrap > article.article > .eyebrow:first-child{margin-top:0!important}
+  html.ml-orbita-enabled main.wrap > article.article{padding-top:20px!important}
+
+  /* 3) Cuadros de texto apretados. */
+  /* Ruta (breadcrumb) pegada al kicker en Mi situación. */
+  html.ml-orbita-enabled .advisor-hero nav[aria-label="Ruta"]{margin-bottom:12px!important}
+  /* Título de 2 líneas con interlineado de párrafo (1.6) en profesión: parecía texto suelto. */
+  html.ml-orbita-enabled .profession-related-head h2{line-height:1.12!important}
+  /* Botón "Recordar <estado> en este dispositivo": cabe en una línea en 390 y si no, envuelve con aire. */
+  html.ml-orbita-enabled .state-remember-control button{width:100%!important;font-size:15px!important;line-height:1.25!important;padding-inline:14px!important;min-height:48px}
+  /* Selects largos de las calculadoras (p. ej. régimen laboral): menos letra para que se lea más del texto. */
+  html.ml-orbita-enabled .ml-panel select{font-size:15px!important;text-overflow:ellipsis}
+
+  /* 4) Densidad: fichas de las 32 entidades más compactas (antes 250 px cada una, ~8,000 px de scroll). */
+  html.ml-orbita-enabled .state-grid{gap:10px!important}
+  html.ml-orbita-enabled .state-grid > a{padding:16px 18px!important}
+  html.ml-orbita-enabled .state-grid > a > strong{font-size:27px!important;margin:6px 0 4px!important}
+  html.ml-orbita-enabled .state-grid > a > p{font-size:15px!important;line-height:1.45!important}
+  html.ml-orbita-enabled .state-grid > a > b{margin-top:8px!important}
+}
+
+@media (max-width:620px){
+  /* Botón principal de calcular: si llega a envolver, que sea un rectángulo redondeado con interlineado corto, no un óvalo de 82 px. */
+  html.ml-orbita-enabled button.ml-btn{line-height:1.25!important;text-wrap:balance}
+}

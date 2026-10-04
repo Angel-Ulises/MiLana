@@ -3,40 +3,16 @@
     "m": 587,
     "d": 266
   },
-  "/aprende/aguinaldo-bruto-neto": {
-    "m": 587,
-    "d": 266
-  },
-  "/aprende/finiquito-vs-liquidacion": {
-    "m": 587,
-    "d": 266
-  },
-  "/aprende/leer-recibo-nomina": {
-    "m": 587,
-    "d": 266
-  },
-  "/aprende/pension-imss-ley-97": {
-    "m": 587,
-    "d": 266
-  },
-  "/aprende/resico-ingresos-cobrados": {
-    "m": 587,
-    "d": 266
-  },
-  "/aprende/vacaciones-prima-vacacional": {
-    "m": 587,
-    "d": 266
-  },
   "/carreras": {
-    "m": 411,
+    "m": 395,
     "d": 241
   },
   "/carreras/comparar": {
-    "m": 476,
+    "m": 452,
     "d": 278
   },
   "/carreras/mejor-pagadas": {
-    "m": 670,
+    "m": 643,
     "d": 420
   },
   "/carreras/ocupaciones": {
@@ -52,11 +28,11 @@
     "d": 304
   },
   "/economia/consumo-privado-agosto-2026": {
-    "m": 480,
+    "m": 430,
     "d": 304
   },
   "/economia/inflacion-primera-quincena-septiembre-2026": {
-    "m": 527,
+    "m": 481,
     "d": 335
   },
   "/estados": {

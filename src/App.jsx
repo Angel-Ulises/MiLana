@@ -1,3 +1,4 @@
+import Detalle, { primeraOracion } from './Detalle.jsx';
 import { calcularISR, calcularAguinaldo, calcularAguinaldoSEPEMS2026, ISR_MENSUAL_2026 } from "./lib/calculos-revisados.mjs";
 import { calcularFiniquito2026, calcularLiquidacion2026, calcularBrutoNeto2026 } from "./lib/calculos-laborales-2026.mjs";
 import { useEffect, useState, useId } from "react";
@@ -472,7 +473,7 @@ function CalcBrutoNeto() {
     <label className="calc-check"><input type="checkbox" checked={confirmado} onChange={e => editar(setConfirmado)(e.target.checked)} /> Confirmo que es un mes completo ordinario con un solo empleador.</label>
     <p className="calc-help">En ISSSTE se consideran las cuotas obligatorias del trabajador: RCV 6.125%, salud 3.375%, invalidez y vida 0.625% y servicios sociales 0.5%. No se incluyen Ahorro Solidario, FOVISSSTE, préstamos, sindicato u otros descuentos personales.</p>
     <p id={errorId} role="alert" className="calc-error">{error}</p>
-    <Btn>Calcular neto después de ISR y seguridad social</Btn>
+    <Btn>Calcular mi sueldo neto</Btn>
     <div aria-live="polite" aria-atomic="true">
       {resultado && <ResultBox>
         <ResultLine label="Percepciones brutas" value={fmt(resultado.bruto)} />
@@ -1211,10 +1212,11 @@ function ContenidoCalculadora({ id, ir }) {
   };
   return (
     <div style={{ marginTop: 30, paddingTop: 24, borderTop: '1px solid var(--ml-border, #edf0f4)' }}>
+      {/* Divulgación progresiva: título + primera oración visibles; el texto completo sigue en el DOM. */}
       {ORDEN_SECCIONES.filter(k => data[k]).map(k => (
-        <Seccion key={k} titulo={TITULOS_SECCION[k]}>
-          <p style={parrafo}>{data[k]}</p>
-        </Seccion>
+        <Detalle key={k} className="orb-more-plain orb-calc-more" nivel="h2" titulo={TITULOS_SECCION[k]} resumen={primeraOracion(data[k])}>
+          <p style={{ ...parrafo, fontSize: 15, lineHeight: 1.7 }}>{data[k]}</p>
+        </Detalle>
       ))}
 
       {Array.isArray(data.faq) && data.faq.length > 0 && (
@@ -1748,26 +1750,23 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
           </section>
           <SituationCard />
 
-          <section id="situaciones" className="section situations">
+          {/* La lista "¿Qué estás viviendo?" del hero ya cubre las situaciones: aquí solo queda un acceso plegado
+              a las rutas por tema (mismo contenido y enlaces, sin repetir otra sección completa). */}
+          <section id="situaciones" className="section situations orb-situations-compact" aria-label="Rutas por tema">
             <div className="shell">
-              <div className="section-head split-head">
-                <div>
-                  <p className="eyebrow">Empieza por lo que estás viviendo</p>
-                  <h2>No necesitas saber qué calculadora buscar.</h2>
+              <Detalle titulo="Más rutas guiadas por tema" resumen="Sueldo, prestaciones o fin de una relación laboral: herramientas y explicaciones para ese momento." cta="Ver rutas">
+                <div className="situation-grid">
+                  {SITUACIONES.map((s, i) => (
+                    <a key={s.titulo} className="situation-card" href={`/situaciones/${s.slug}`}
+                       onClick={(e) => { e.preventDefault(); irASituacion(s.slug); }}>
+                      <span className="situation-icon">{String(i + 1).padStart(2, '0')}</span>
+                      <h3>{s.titulo}</h3>
+                      <p>{s.desc}</p>
+                      <span className="text-link">Ver ruta <span>→</span></span>
+                    </a>
+                  ))}
                 </div>
-                <p>Elige una situación y MiLana te lleva a las herramientas y explicaciones que tienen sentido para ese momento.</p>
-              </div>
-              <div className="situation-grid">
-                {SITUACIONES.map((s, i) => (
-                  <a key={s.titulo} className="situation-card" href={`/situaciones/${s.slug}`}
-                     onClick={(e) => { e.preventDefault(); irASituacion(s.slug); }}>
-                    <span className="situation-icon">{String(i + 1).padStart(2, '0')}</span>
-                    <h3>{s.titulo}</h3>
-                    <p>{s.desc}</p>
-                    <span className="text-link">Ver ruta <span>→</span></span>
-                  </a>
-                ))}
-              </div>
+              </Detalle>
             </div>
           </section>
 

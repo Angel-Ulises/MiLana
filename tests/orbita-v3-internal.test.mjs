@@ -94,7 +94,7 @@ test('intro repetido se oculta y el hero móvil deja la pregunta más arriba', (
   assert.match(js, /introRepeatsHero = introDuplicatesHero\(intro\)/);
   assert.match(js, /if \(introRepeatsHero && intro\) intro\.hidden = true/);
   assert.match(prepaint, /\.calculator-hero-media\{display:none!important\}/);
-  assert.match(prepaint, /\.calculator-purpose\{[^}]*-webkit-line-clamp:1/);
+  assert.match(prepaint, /\.calculator-purpose\{[^}]*-webkit-line-clamp:2/);
   assert.match(prepaint, /body:has\(\.calculator-hero\) \.calc-intro\{display:none!important\}/);
   assert.match(prepaint, /\.calculator-main::before\{[^}]*height:131px/);
 });

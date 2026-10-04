@@ -56,7 +56,7 @@ test('Economía adopta hero claro y Estados separa breadcrumb de eyebrow',()=>{
 });
 
 test('calculadoras móviles compactan hero desde prepaint y reservan el asistente',()=>{
-  assert.match(prepaint,/data-orbita-section="calculadoras"[^\n]*\.calculator-purpose\{[^}]*-webkit-line-clamp:1/);
+  assert.match(prepaint,/data-orbita-section="calculadoras"[^\n]*\.calculator-purpose\{[^}]*-webkit-line-clamp:2/);
   assert.match(prepaint,/body:has\(\.calculator-hero\) \.calc-intro\{display:none!important\}/);
   assert.match(prepaint,/\.calculator-hero-media\{display:none!important\}/);
   assert.match(prepaint,/\.calculator-main\{padding-top:6px!important\}/);

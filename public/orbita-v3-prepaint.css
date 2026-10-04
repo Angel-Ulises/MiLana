@@ -14,14 +14,16 @@ html.ml-orbita-enabled[data-orbita-section="inicio"] :is(.hero-actions,.hero-pro
 html.ml-orbita-enabled .finance-advisor-preview aside.investment-entry p{color:#4E5C69!important}
 
 .orb-runtime-reserve{width:min(1120px,calc(100% - 36px));margin:24px auto;border-radius:18px;background:transparent;contain:layout style paint;pointer-events:none}
-.orb-glossary-reserve{min-height:var(--orb-glossary-reserve-d,104px)}
+/* Estas alturas son la geometría crítica medida por ruta. El runtime se carga después y todavía
+   contiene fallbacks históricos; !important impide que esos fallbacks vuelvan a inflar el hueco. */
+.orb-glossary-reserve{min-height:var(--orb-glossary-reserve-d,104px)!important}
 .orb-visual-reserve,
-.orb-section-visual{min-height:var(--orb-reserve-d,360px)}
-html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,225px)}
-html.ml-orbita-enabled[data-orbita-section="estados"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,295px)}
-html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,250px)}
-html.ml-orbita-enabled[data-orbita-section="economia"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,290px)}
-html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,430px)}
+.orb-section-visual{min-height:var(--orb-reserve-d,360px)!important}
+html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,225px)!important}
+html.ml-orbita-enabled[data-orbita-section="estados"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,295px)!important}
+html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,250px)!important}
+html.ml-orbita-enabled[data-orbita-section="economia"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,290px)!important}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-d,430px)!important}
 
 /* Las reservas publicitarias antiguas eran contenedores vacíos: no cargaban AdSense y dejaban huecos.
    Se colapsan; el script real de AdSense de index.html permanece intacto. */
@@ -41,13 +43,13 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main::before{content:'';display:block;height:131px;min-height:131px}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main:has(> .ml-calc-assistant)::before{display:none;height:0;min-height:0}
   .orb-runtime-reserve{width:calc(100% - 28px);margin-block:18px}
-  .orb-glossary-reserve{min-height:var(--orb-glossary-reserve-m,178px)}
-  .orb-visual-reserve,.orb-section-visual{min-height:var(--orb-reserve-m,420px)}
-  html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,390px)}
-  html.ml-orbita-enabled[data-orbita-section="estados"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,330px)}
-  html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,670px)}
-  html.ml-orbita-enabled[data-orbita-section="economia"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,455px)}
-  html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,430px)}
+  .orb-glossary-reserve{min-height:var(--orb-glossary-reserve-m,178px)!important}
+  .orb-visual-reserve,.orb-section-visual{min-height:var(--orb-reserve-m,420px)!important}
+  html.ml-orbita-enabled[data-orbita-section="carreras"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,390px)!important}
+  html.ml-orbita-enabled[data-orbita-section="estados"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,330px)!important}
+  html.ml-orbita-enabled[data-orbita-section="finanzas"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,670px)!important}
+  html.ml-orbita-enabled[data-orbita-section="economia"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,455px)!important}
+  html.ml-orbita-enabled[data-orbita-section="aprende"] :is(.orb-visual-reserve,.orb-section-visual){min-height:var(--orb-reserve-m,430px)!important}
 }
 
 /* Inicio: el LCP es el H1; Chrome no lo cuenta hasta que termina la animación de opacidad. */

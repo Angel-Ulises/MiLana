@@ -16,15 +16,13 @@ test('reservas críticas existen en HTML antes del runtime y conservan altura fi
   assert.match(prepaint,/data-orbita-section="estados"[^\n]*min-height:var\(--orb-reserve-m,330px\)/);
   assert.match(prepaint,/data-orbita-section="finanzas"[^\n]*min-height:var\(--orb-reserve-m,670px\)/);
   assert.match(prepaint,/data-orbita-section="economia"[^\n]*min-height:var\(--orb-reserve-m,455px\)/);
-  assert.match(prepaint,/\.orb-glossary-reserve,\.orb-glossary\{min-height:220px\}/);
+  assert.match(prepaint,/\.orb-glossary-reserve\{min-height:var\(--orb-glossary-reserve-m,178px\)\}/);
+  assert.doesNotMatch(prepaint,/\.orb-glossary-reserve,\.orb-glossary\{min-height/);
 });
 
-test('espacios de publicidad son contenedores vacíos y no inicializan AdSense',()=>{
-  for(const size of ['970x90','336x280','300x600','320x50']) assert.ok(inject.includes(`data-ad-size="${size}"`));
-  assert.match(inject,/data-orbita-ad-reserve/);
-  const adMarkup=inject.match(/const markup='([^']*data-orbita-ad-reserve[^']*)';/)?.[1] || '';
-  assert.ok(adMarkup, 'no se encontró el markup publicitario inyectado');
-  assert.doesNotMatch(adMarkup,/adsbygoogle|data-ad-client|\.push\(/i);
+test('Órbita ya no inyecta contenedores publicitarios vacíos',()=>{
+  assert.doesNotMatch(inject,/data-ad-size=|orb-ad-leaderboard|orb-ad-rectangle|orb-ad-rail|orb-ad-mobile-banner/);
+  assert.doesNotMatch(inject,/const markup='[^']*data-orbita-ad-reserve/);
 });
 
 test('calculadoras ocultan intro repetido y vuelven al paso que falló',()=>{
@@ -36,6 +34,7 @@ test('calculadoras ocultan intro repetido y vuelven al paso que falló',()=>{
   assert.match(internal,/errorText\.includes\('vacaciones'\) && errorText\.includes\('anuales'\)/);
   assert.match(prepaint,/\.calculator-hero-media\{display:none!important\}/);
   assert.match(prepaint,/\.calculator-purpose\{[^}]*-webkit-line-clamp:2/);
+  assert.match(prepaint,/\.orb-purpose-ready[^\n]*\.calculator-purpose\{[^}]*-webkit-line-clamp:unset!important/);
   assert.match(prepaint,/\.calculator-main::before\{[^}]*height:131px/);
 });
 

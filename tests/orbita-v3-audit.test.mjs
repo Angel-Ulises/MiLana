@@ -55,25 +55,24 @@ test('Economía adopta hero claro y Estados separa breadcrumb de eyebrow',()=>{
   assert.match(audit,/data-orbita-section="estados"[\s\S]*nav~\.eyebrow\{margin-top:18px!important\}/);
 });
 
-test('calculadoras móviles compactan hero desde prepaint y reservan el asistente',()=>{
-  assert.match(prepaint,/data-orbita-section="calculadoras"[^\n]*\.calculator-purpose\{[^}]*-webkit-line-clamp:2/);
+test('calculadoras móviles compactan hero sin cortar el propósito y reservan el asistente',()=>{
+  assert.match(prepaint,/data-orbita-section="calculadoras"[^\n]*\.calculator-purpose\{[^}]*overflow:visible!important/);
+  assert.match(prepaint,/\.calculator-purpose\{[^}]*-webkit-line-clamp:2/);
+  assert.match(prepaint,/\.orb-purpose-ready[^\n]*\.calculator-purpose\{[^}]*-webkit-line-clamp:unset!important/);
   assert.match(prepaint,/body:has\(\.calculator-hero\) \.calc-intro\{display:none!important\}/);
   assert.match(prepaint,/\.calculator-hero-media\{display:none!important\}/);
   assert.match(prepaint,/\.calculator-main\{padding-top:6px!important\}/);
   assert.match(prepaint,/\.calculator-main::before\{[^}]*height:131px/);
 });
 
-test('prepaint muestra una sola reserva publicitaria etiquetada sin inicializar AdSense',()=>{
-  assert.match(prepaint,/\.orb-ad-leaderboard\{[^}]*height:90px;min-height:90px;display:grid/);
-  assert.match(prepaint,/Publicidad · 970×90/);
+test('prepaint colapsa reservas publicitarias vacías sin tocar el cargador real de AdSense',()=>{
+  assert.match(prepaint,/\.orb-ad-reserve,\[data-orbita-ad-reserve\]\{display:none!important/);
   assert.match(prepaint,/\.orb-ad-reserve-group,\.orb-ad-rectangle,\.orb-ad-rail,\.orb-ad-mobile-banner\{display:none!important\}/);
-  assert.match(prepaint,/Publicidad · 320×50/);
+  assert.doesNotMatch(prepaint,/Publicidad · 970×90|Publicidad · 320×50/);
   assert.doesNotMatch(prepaint,/push\(|adsbygoogle\s*=|data-ad-client/);
 });
 
-test('espacios de anuncio invisibles y contenido sin animación de entrada que lo oculte', () => {
+test('contenido queda visible y sin animación de entrada que lo oculte', () => {
   const prepaint = readFileSync('public/orbita-v3-prepaint.css', 'utf8');
-  assert.match(prepaint, /\.orb-ad-leaderboard::before\{content:none!important\}/);
-  assert.match(prepaint, /:is\(\.orb-ad-reserve,\[data-orbita-ad-reserve\]\)\{border:0!important;background:transparent!important/);
   assert.match(prepaint, /:is\(\.ml-premium-reveal,\.career-reveal,\.route-reveal\)\{opacity:1!important/);
 });

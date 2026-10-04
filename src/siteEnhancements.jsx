@@ -39,6 +39,8 @@ function despuesDeLaCarga(callback) {
 }
 
 function actualizarFotoCalculadora() {
+  // En móvil conserva el <picture> vertical preparado por foto; sustituirlo por la toma horizontal recorta rostros.
+  if (window.matchMedia?.('(max-width: 640px)').matches) return;
   if (!cargaCompleta) {
     if (!fotoDiferida) { fotoDiferida = true; despuesDeLaCarga(() => { fotoDiferida = false; actualizarFotoCalculadora(); }); }
     return;

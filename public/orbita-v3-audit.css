@@ -163,9 +163,10 @@ html.ml-orbita-enabled .career-question-grid :is(strong,b){align-self:start!impo
 .orb-bar-fill{display:block}
 /* Etiquetas de barras: hasta dos líneas completas en vez de cortarse con "…". */
 .orb-bar-label,.orb-economy-bar-label{white-space:normal!important;text-overflow:clip!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere}
-@media(max-width:620px){
+@media(max-width:900px){
   .orb-bar-row{grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"label value" "track track";gap:6px 10px!important}
   .orb-bar-label{grid-area:label}.orb-bar-track{grid-area:track}.orb-bar-value{grid-area:value;margin-top:0!important;align-self:start}
+  .orb-economy-bar{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"label value" "track track";gap:5px 10px}.orb-economy-bar-label{grid-area:label}.orb-economy-bar-track{grid-area:track}.orb-economy-bar-value{grid-area:value;justify-self:end}
 }
 /* Pie de página en tablet: el "© 2026" quedaba en una columna de 83px, una palabra por línea. */
 @media(max-width:1023px){

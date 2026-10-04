@@ -85,7 +85,7 @@
       // El título de la fila (h3/h2) es la etiqueta; el texto previo a la cifra mezcla número, nombre y conteos sin espacios.
       let label = clean(node.querySelector('h2,h3,h4')?.textContent) || clean(text.slice(0, match.index)).replace(/[—–:·-]+$/g, '').trim();
       if (!label) label = clean(node.querySelector('strong,td')?.textContent) || 'Dato visible';
-      label = label.slice(0, 58);
+      if (label.length > 80) label = `${label.slice(0, 80).replace(/\s+\S*$/, '')}…`;
       const key = `${label}|${value}`;
       if (seen.has(key)) continue;
       seen.add(key);

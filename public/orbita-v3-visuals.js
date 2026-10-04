@@ -434,7 +434,10 @@
   function queueEnhance() {
     if (queued) return;
     queued = true;
-    requestAnimationFrame(() => {
+    // Microtarea (no rAF): el visual entra en el mismo turno en que React reemplaza #root, antes de cualquier
+    // pintado. Con rAF podía pintarse un frame sin visual (el glosario ya entraba por microtarea) y luego todo
+    // lo de abajo saltaba ~300 px (CLS intermitente en producción).
+    queueMicrotask(() => {
       queued = false;
       if (main && !main.isConnected) main = null;
       observeRoot();

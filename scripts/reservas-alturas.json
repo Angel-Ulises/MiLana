@@ -1,218 +1,218 @@
 {
   "/aprende": {
-    "m": 587,
-    "d": 266
+    "m": 567,
+    "d": 306
   },
   "/carreras": {
-    "m": 395,
-    "d": 241
+    "m": 414,
+    "d": 314
   },
   "/carreras/comparar": {
-    "m": 452,
-    "d": 278
+    "m": 491,
+    "d": 369
   },
   "/carreras/mejor-pagadas": {
-    "m": 643,
-    "d": 420
+    "m": 721,
+    "d": 537
   },
   "/carreras/ocupaciones": {
-    "m": 411,
-    "d": 241
+    "m": 414,
+    "d": 314
   },
   "/carreras/peor-pagadas": {
-    "m": 670,
-    "d": 452
+    "m": 721,
+    "d": 537
   },
   "/economia": {
-    "m": 480,
-    "d": 304
+    "m": 537,
+    "d": 392
   },
   "/economia/consumo-privado-agosto-2026": {
-    "m": 430,
-    "d": 304
+    "m": 468,
+    "d": 343
   },
   "/economia/inflacion-primera-quincena-septiembre-2026": {
-    "m": 481,
-    "d": 335
+    "m": 537,
+    "d": 392
   },
   "/estados": {
-    "m": 951,
-    "d": 733
+    "m": 995,
+    "d": 781
   },
   "/estados/aguascalientes": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/baja-california": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/baja-california-sur": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/campeche": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/chiapas": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/chihuahua": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/ciudad-de-mexico": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/coahuila": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/colima": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/comparar": {
-    "m": 951,
-    "d": 733
+    "m": 995,
+    "d": 781
   },
   "/estados/durango": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/estado-de-mexico": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/guanajuato": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/guerrero": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/hidalgo": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/jalisco": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/michoacan": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/morelos": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/nayarit": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/nuevo-leon": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/oaxaca": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/puebla": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/queretaro": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/quintana-roo": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/san-luis-potosi": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/sinaloa": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/sonora": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/tabasco": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/tamaulipas": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/tlaxcala": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/veracruz": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/yucatan": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/estados/zacatecas": {
-    "m": 461,
-    "d": 311
+    "m": 468,
+    "d": 351
   },
   "/finanzas": {
-    "m": 700,
-    "d": 451
+    "m": 686,
+    "d": 493
   },
   "/finanzas/ahorro": {
-    "m": 700,
-    "d": 451
+    "m": 686,
+    "d": 493
   },
   "/finanzas/deuda-y-credito": {
-    "m": 700,
-    "d": 451
+    "m": 686,
+    "d": 493
   },
   "/finanzas/fondo-emergencia": {
-    "m": 700,
-    "d": 451
+    "m": 686,
+    "d": 493
   },
   "/finanzas/inversion": {
-    "m": 700,
-    "d": 451
+    "m": 686,
+    "d": 493
   },
   "/finanzas/inversion/cetes": {
-    "m": 700,
-    "d": 451
+    "m": 686,
+    "d": 493
   },
   "/finanzas/inversion/comparar": {
-    "m": 700,
-    "d": 451
+    "m": 686,
+    "d": 493
   },
   "/finanzas/inversion/fondos": {
-    "m": 700,
-    "d": 451
+    "m": 686,
+    "d": 493
   },
   "/finanzas/mi-situacion": {
-    "m": 700,
-    "d": 451
+    "m": 686,
+    "d": 493
   },
   "/finanzas/presupuesto": {
-    "m": 700,
-    "d": 451
+    "m": 686,
+    "d": 493
   },
   "/finanzas/vivienda": {
-    "m": 700,
-    "d": 451
+    "m": 686,
+    "d": 493
   }
 }

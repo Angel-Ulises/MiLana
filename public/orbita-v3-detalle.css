@@ -77,3 +77,9 @@ html.ml-orbita-enabled .section.situations.orb-situations-compact{padding:12px 0
   .ml-details-chevron,.ml-details>summary,.orb-glossary-item>summary,.orb-term-help>summary{transition:none!important}
   .ml-details[open]>:not(summary),.orb-glossary-item[open]>:not(summary),.orb-term-help[open]>:not(summary){animation:none!important}
 }
+
+/* 6) Visuales de sección con altura determinista (las reservas anti-CLS no dependen de la fuente instalada).
+   'Plus Jakarta Sans' no se descarga: cada equipo usa su system-ui y los títulos/etiquetas cambiaban de 1 a 2
+   líneas (p. ej. Linux/DejaVu en CI: +39 px). Se reserva siempre el máximo de líneas que ya permitía el clamp. */
+html.ml-orbita-enabled .orb-section-visual-head h2{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;min-height:2.16em}
+html.ml-orbita-enabled :is(.orb-bar-label,.orb-economy-bar-label){min-height:2.5em}

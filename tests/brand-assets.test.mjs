@@ -35,3 +35,8 @@ test('generated shell uses the same lockup with a 48px accessible link target', 
   assert.match(read('public/orbita-v3-base.css'), /\.ml-orbita-logo\{min-height:48px/);
   assert.match(read('public/orbita-v3-base.css'), /\.ml-orbita-brand-image\{display:block;width:144px;height:27px;flex:none;object-fit:contain/);
 });
+
+test('compact brand leaves room for all three 48px mobile controls at 320px', () => {
+  assert.match(read('public/orbita-v3-base.css'), /@media\(max-width:359px\)\{\.ml-orbita-brand-image\{width:112px;height:21px/);
+  assert.ok(112 + 10 + 3 * 48 + 2 * 8 <= 320 - 32);
+});

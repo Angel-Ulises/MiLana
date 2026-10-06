@@ -43,6 +43,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Instalar dependencias
+        run: npm install --ignore-scripts --no-audit --no-fund
+
       - name: Pruebas unitarias
         run: npm test
 

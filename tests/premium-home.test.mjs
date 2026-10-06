@@ -40,3 +40,8 @@ test('review keeps PR94 hero reservations and a contained mobile photograph',()=
  assert.match(prepaint,/min-height:1104px!important/);
  assert.match(prepaint,/min-height:1280px!important/);
 });
+test('filled shortcut labels survive the global important navigation color',()=>{
+ const css=read('public/premium-home.css');
+ assert.match(css,/#root nav\.ml-home-shortcuts > a:first-child,/);
+ assert.match(css,/#root \.finance-page-hero nav\.ml-hub-shortcuts > a:first-child \{\s*color:#FFF!important/);
+});

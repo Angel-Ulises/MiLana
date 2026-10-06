@@ -86,3 +86,11 @@ html.ml-orbita-enabled[data-orbita-section="inicio"] .calculator-card {
 .economy-hero .ml-hub-shortcuts a {color:#17324D}
 .ml-hub-shortcuts a:focus-visible {outline:3px solid #2D6CAA;outline-offset:4px}
 #rutas-financieras,#radar,#fuentes-radar {scroll-margin-top:84px}
+
+/* Preview QA: the global nav-link rule uses #root and !important. Match its
+   scope only for these two filled actions so their white labels remain legible. */
+html.ml-orbita-enabled #root nav.ml-home-shortcuts > a:first-child,
+html.ml-orbita-enabled #root nav.ml-home-shortcuts > a:first-child span,
+html.ml-orbita-enabled #root .finance-page-hero nav.ml-hub-shortcuts > a:first-child {
+  color:#FFF!important;
+}

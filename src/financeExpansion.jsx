@@ -122,7 +122,7 @@ const EDITORIAL = [
 ];
 
 function asegurarDestino() {
-  const home = document.querySelector('main .situations');
+  const home = document.querySelector('main .calculators');
   if (!home) return null;
   let target = document.getElementById('ml-finance-expansion-root');
   if (!target) {

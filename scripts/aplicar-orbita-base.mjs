@@ -3,7 +3,7 @@ import { dirname, join, relative, sep } from 'node:path';
 
 const DIST = new URL('../dist/', import.meta.url);
 const PUBLIC = new URL('../public/', import.meta.url);
-const RUNTIME_CSS_FILES = ['orbita-v3-internal.css','orbita-v3-hybrid.css','orbita-v3-experience.css','orbita-v3-glossary.css','orbita-v3-visuals.css','orbita-v3-audit.css','orbita-v3-detalle.css','orbita-v3-movil.css'];
+const RUNTIME_CSS_FILES = ['orbita-v3-internal.css','orbita-v3-hybrid.css','orbita-v3-experience.css','orbita-v3-glossary.css','orbita-v3-visuals.css','orbita-v3-audit.css','orbita-v3-detalle.css','orbita-v3-movil.css','premium-home.css'];
 const RESERVAS = JSON.parse(await readFile(new URL('./reservas-alturas.json', import.meta.url), 'utf8').catch(() => '{}'));
 const SKIP_ROUTES = new Set(['/404', '/widgets']);
 const PROTECTED_PENSION = '/calculadoras/pension-imss';

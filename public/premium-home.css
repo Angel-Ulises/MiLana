@@ -1,0 +1,88 @@
+/* Temporary review layer: home and hub navigation only; no calculation/data edits.
+   Existing !important declarations require matching priority here. After visual approval,
+   consolidate into the owning stylesheets instead of retaining another override layer.
+   PR94/prepaint reservations stay intact until delayed-font/image CLS tests pass. */
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero {
+  padding:0!important;
+  background:#FBF8F2!important;
+  border-bottom:1px solid #D9E1E8!important;
+}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid {
+  padding:44px 0 36px!important;
+  gap:48px!important;
+  grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr)!important;
+}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy h1 {
+  max-width:17ch!important;
+  font-family:"Newsreader",Georgia,serif!important;
+  font-size:clamp(44px,4.8vw,64px)!important;
+  font-weight:500!important;
+  line-height:1.04!important;
+  letter-spacing:-.035em!important;
+  color:#13263B!important;
+}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-lede {
+  max-width:52ch!important;
+  font-family:"Inter",sans-serif!important;
+  font-size:17px!important;
+  margin:18px 0!important;
+}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media-wrap {padding-top:18px!important}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media :is(picture,img) {
+  aspect-ratio:4/3.6!important;
+  border-radius:8px!important;
+  box-shadow:none!important;
+}
+.ml-home-shortcuts {display:flex;flex-wrap:wrap;gap:12px 24px;margin:0 0 26px;font:600 14px/1.4 "Inter",sans-serif}
+.ml-home-shortcuts a {display:inline-flex;align-items:center;gap:14px;min-height:44px;color:#245C93;border-bottom:1px solid #A9BFD1}
+.ml-home-shortcuts a:first-child {background:#17324D;color:#FFF;padding:10px 16px;border:0;border-radius:6px}
+.ml-home-shortcuts a:focus-visible {outline:3px solid #2D6CAA;outline-offset:4px}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .orb-home-route {
+  border-radius:8px!important;box-shadow:none!important;
+}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .orb-situation-card {
+  margin:24px auto 12px;padding:20px 24px;min-height:0;border-radius:8px;box-shadow:none;
+}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .orb-situation-card>div>strong {
+  font-family:"Newsreader",Georgia,serif;font-size:28px;font-weight:500;line-height:1.15;
+}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .calculators {
+  padding-top:36px!important;padding-bottom:48px!important;
+}
+html.ml-orbita-enabled[data-orbita-section="inicio"] .calculator-card {
+  border-radius:8px!important;box-shadow:none!important;
+}
+@media(min-width:901px) {
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media-wrap {align-self:center!important}
+}
+@media(max-width:900px) {
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid {grid-template-columns:1fr!important;gap:24px!important}
+  /* Keep the original photograph at every width. A bounded, contained image
+     avoids cropping the face/documents while leaving tools ahead in DOM order. */
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media-wrap {display:block!important;padding-top:0!important}
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-media :is(picture,img) {
+    height:clamp(180px,48vw,280px)!important;
+    aspect-ratio:auto!important;
+    object-fit:contain!important;
+    background:#F5F7FA;
+  }
+}
+@media(max-width:640px) {
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid {padding:24px 0!important}
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy h1 {font-size:clamp(38px,10vw,48px)!important;max-width:17ch!important}
+  .ml-home-shortcuts {gap:8px 16px;margin-bottom:24px}
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .orb-situation-card {width:calc(100% - 32px);padding:18px;gap:14px}
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .orb-situation-card>div>strong {font-size:25px}
+}
+@media(prefers-reduced-motion:reduce) {
+  .ml-home-shortcuts a {transition:none!important}
+}
+
+/* Hubs retain their own visual identity: personal-finance actions and editorial
+   navigation differ; no generic restyle is applied to calculators or articles. */
+.ml-hub-shortcuts {display:flex;flex-wrap:wrap;gap:10px 22px;margin:20px 0;font:600 14px/1.4 "Inter",sans-serif}
+.ml-hub-shortcuts a {display:inline-flex;align-items:center;min-height:44px;padding:8px 0;color:#245C93;border-bottom:1px solid #A9BFD1}
+.finance-page-hero .ml-hub-shortcuts a:first-child {background:#245942;color:white;border:0;border-radius:6px;padding:10px 16px}
+.economy-hero .ml-hub-shortcuts a {color:#17324D}
+.ml-hub-shortcuts a:focus-visible {outline:3px solid #2D6CAA;outline-offset:4px}
+#rutas-financieras,#radar,#fuentes-radar {scroll-margin-top:84px}

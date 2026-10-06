@@ -31,8 +31,6 @@ concurrency:
 jobs:
   detectar:
     runs-on: ubuntu-latest
-    env:
-      XDG_CACHE_HOME: ${{ runner.temp }}/milana-cache
     permissions:
       contents: read
       issues: write
@@ -46,7 +44,12 @@ jobs:
           node-version: '20'
 
       - name: Preparar caché de fuentes
-        run: mkdir -p "$XDG_CACHE_HOME/fontconfig"
+        run: |
+          cache_home="$RUNNER_TEMP/milana-cache"
+          mkdir -p "$cache_home/fontconfig"
+          test -w "$cache_home/fontconfig"
+          echo "XDG_CACHE_HOME=$cache_home" >> "$GITHUB_ENV"
+          echo "Fontconfig cache: $cache_home/fontconfig (writable)"
 
       - name: Instalar dependencias
         run: npm install --ignore-scripts --no-audit --no-fund

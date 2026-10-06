@@ -11,8 +11,9 @@ test('las pruebas no arrancan archivos de navegador en paralelo', () => {
 test('CI y Radar preparan caché de fuentes propia del runner', () => {
   for (const name of ['ci.yml', 'radar-collector.yml']) {
     const workflow = readFileSync(new URL(`../.github/workflows/${name}`, import.meta.url), 'utf8');
-    assert.match(workflow, /XDG_CACHE_HOME: \$\{\{ runner\.temp \}\}\/milana-cache/);
-    assert.match(workflow, /run: mkdir -p "\$XDG_CACHE_HOME\/fontconfig"/);
+    assert.match(workflow, /cache_home="\$RUNNER_TEMP\/milana-cache"/);
+    assert.match(workflow, /test -w "\$cache_home\/fontconfig"/);
+    assert.match(workflow, /echo "XDG_CACHE_HOME=\$cache_home" >> "\$GITHUB_ENV"/);
     assert.ok(workflow.indexOf('Preparar caché de fuentes') < workflow.indexOf('Instalar dependencias'));
   }
 });

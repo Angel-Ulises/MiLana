@@ -29,7 +29,6 @@ html.ml-orbita-enabled :is(main,article,section) a:not(.btn):not(.ml-btn):not(.o
 .ml-orbita-shell::after{display:none!important}
 .ml-orbita-shell.is-scrolled{box-shadow:0 10px 32px rgba(15,23,42,.07)!important}
 .ml-orbita-logo{color:#15181E!important}
-.ml-orbita-logo-m{background:#2D6CAA!important;border-radius:13px!important;box-shadow:none!important}
 .ml-orbita-nav a{color:#4B5966!important;border-radius:999px!important}
 .ml-orbita-nav a:hover,.ml-orbita-nav a:focus-visible,.ml-orbita-nav a[aria-current="page"]{background:#EEF3F8!important;color:#15181E!important}
 .ml-orbita-icon-btn,.ml-orbita-menu-btn{background:#FFF!important;color:#15181E!important;border-color:#DFE5EC!important;border-radius:999px!important;box-shadow:none!important}

@@ -11,7 +11,7 @@ export function esRutaInversionEducativa() {
 }
 
 function Header() {
-  return <header className="site-header"><div className="shell header-inner"><a className="brand" href="/" aria-label="MiLana, inicio"><span className="brand-mark" aria-hidden="true">M</span><span className="brand-name">MiLana</span></a><nav className="desktop-nav" aria-label="Principal"><a href="/finanzas">Finanzas</a><a href="/estados">Estados</a><a href="/carreras">Carreras</a><a href="/economia">Economía</a></nav><a className="header-cta" href="/finanzas/mi-situacion">Mi situación</a></div></header>;
+  return <header className="site-header"><div className="shell header-inner"><a className="brand" href="/" aria-label="MiLana, inicio"><img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" /></a><nav className="desktop-nav" aria-label="Principal"><a href="/finanzas">Finanzas</a><a href="/estados">Estados</a><a href="/carreras">Carreras</a><a href="/economia">Economía</a></nav><a className="header-cta" href="/finanzas/mi-situacion">Mi situación</a></div></header>;
 }
 
 function Campo({ label, value, onChange, help }) {

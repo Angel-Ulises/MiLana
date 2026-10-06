@@ -79,7 +79,7 @@ test('ancla #calculadoras se asienta después de load con offset del shell',()=>
 });
 test('targets desktop y logo son de al menos 48px',()=>{
   assert.match(css,/\.ml-orbita-logo\{min-height:48px/);
-  assert.match(css,/\.ml-orbita-logo-m\{width:48px;height:48px/);
+  assert.match(css,/\.ml-orbita-brand-image\{display:block;width:144px;height:27px/);
   assert.match(css,/\.ml-orbita-nav a\{min-height:48px/);
   assert.match(css,/@media\(min-width:1100px\)/);
 });

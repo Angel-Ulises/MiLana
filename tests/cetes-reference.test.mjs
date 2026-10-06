@@ -12,16 +12,19 @@ const sitemap = readFileSync('scripts/generar-sitemap-final.mjs','utf8');
 const workflow = readFileSync('.github/workflows/cetes-reference-watch.yml','utf8');
 
 test('snapshot CETES conserva fecha, fuente y cinco plazos oficiales verificados', () => {
-  assert.equal(CETES_REFERENCE.sourceDate, '2026-09-28');
+  assert.equal(CETES_REFERENCE.sourceDate, '2026-10-06');
+  assert.equal(CETES_REFERENCE.checkedAt, '2026-10-06');
   assert.equal(CETES_REFERENCE.products.length, 5);
   assert.deepEqual(CETES_REFERENCE.products.map((p) => [p.days, p.indicativePrice, p.grossAnnualRatePct]), [
-    [28, 9.95, 6.15],
-    [91, 9.83, 6.59],
-    [182, 9.67, 6.91],
-    [364, 9.31, 7.24],
+    [28, 9.95, 6.01],
+    [91, 9.83, 6.73],
+    [182, 9.65, 7.01],
+    [364, 9.32, 7.44],
     [728, 8.68, 8.01],
   ]);
-  assert.match(CETES_REFERENCE.sourceUrl, /^https:\/\/www\.cetesdirecto\.com\//);
+  assert.equal(CETES_REFERENCE.sourceUrl, 'https://www.cetesdirecto.com/tablas/valores_gubernamentales/cetes.html');
+  assert.equal(CETES_REFERENCE.nominalValueMx, 10);
+  assert.deepEqual(CETES_REFERENCE.products.map((p) => p.displayTerm), ['1 mes', '3 meses', '6 meses', '1 año', '2 años']);
   assert.match(CETES_REFERENCE.scope, /no son una cotización|No son una cotización/i);
 });
 

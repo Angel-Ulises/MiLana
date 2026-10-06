@@ -39,7 +39,7 @@ try {
     const result=await tab.evaluar(`(() => {
       const shifts=window.__homeLayoutShifts||[];
       let max=0,sum=0,start=0,last=0;
-      for(const s of shifts){if(s.time-last>1000 || s.time-start>5000){sum=0;start=s.time}sum+=s.value;max=Math.max(max,sum);last=s.time}
+      for(const s of shifts){if(sum===0 || s.time-last>1000 || s.time-start>5000){sum=0;start=s.time}sum+=s.value;max=Math.max(max,sum);last=s.time}
       return {cls:max,shifts,fontsStatus:document.fonts.status,newsreaderLoaded:Array.from(document.fonts).some(f=>f.family.replaceAll('"','')==='Newsreader'&&f.status==='loaded'),photoLoaded:!!document.querySelector('.hero-media img')?.naturalWidth,overflow:document.documentElement.scrollWidth>innerWidth,titleFont:getComputedStyle(document.querySelector('h1')).fontFamily};
     })()`);
     const row={width,latency,ready,...result};results.push(row);

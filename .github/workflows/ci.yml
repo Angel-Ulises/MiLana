@@ -30,5 +30,16 @@ jobs:
       - name: Build completo
         run: npm run build
 
+      - name: CLS portada con fuentes reales y red demorada
+        run: node --experimental-websocket scripts/verificar-home-cls.mjs
+
+      - name: Guardar mediciones CLS
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-cls
+          path: qa-results/home-cls.json
+          if-no-files-found: ignore
+
       - name: Diff limpio
         run: git diff --check

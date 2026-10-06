@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
+import { browserReady } from './helpers/chrome-probe.mjs';
 import { createServer } from 'vite';
 import { renderDom } from './helpers/chrome-dom.mjs';
 
@@ -92,15 +92,8 @@ function visualFixture(mode) {
   </script></body></html>`;
 }
 
-async function browserReady(t) {
-  if (!chrome) { t.skip('Chrome/Chromium no instalado en el runner'); return false; }
-  const probe = spawnSync(chrome, ['--headless=new','--no-sandbox','--disable-gpu','--timeout=2500','--dump-dom','about:blank'], { encoding:'utf8', timeout:8000, env:process.env });
-  if (probe.status !== 0) { t.skip('Chrome/Chromium no puede iniciar en este runner'); return false; }
-  return true;
-}
-
 async function withServer(t, fixtures, fn) {
-  if (!await browserReady(t)) return;
+  if (!browserReady(t, chrome)) return;
   mkdirSync(fixtureDir, { recursive:true });
   for (const [name, html] of Object.entries(fixtures)) writeFileSync(`${fixtureDir}/${name}.html`, html);
   // El fixture debe existir antes de createServer: Vite 5.4 no sirve como público lo escrito después.

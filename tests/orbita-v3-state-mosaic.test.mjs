@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
+import { browserReady } from './helpers/chrome-probe.mjs';
 import vm from 'node:vm';
 import { createServer } from 'vite';
 import { renderDom } from './helpers/chrome-dom.mjs';
@@ -45,7 +45,7 @@ const hub = page('/estados', `<main><section class="state-hero"><h1>Estados</h1>
 const detail = page('/estados/nuevo-leon', `<main><section class="state-detail-hero"><h1>Nuevo León</h1></section>${cards([['coahuila','Coahuila'],['tamaulipas','Tamaulipas'],['san-luis-potosi','San Luis Potosí'],['zacatecas','Zacatecas']])}</main>`);
 
 test('navegador: el mosaico muestra códigos únicos y, en una ficha, resalta el estado propio', async (t) => {
-  if (!chrome || spawnSync(chrome, ['--headless=new', '--no-sandbox', '--disable-gpu', '--dump-dom', 'about:blank'], { timeout: 8000 }).status !== 0) return t.skip('Chrome/Chromium no disponible');
+  if (!browserReady(t, chrome)) return;
   mkdirSync(fixtureDir, { recursive: true });
   writeFileSync(`${fixtureDir}/hub.html`, hub);
   writeFileSync(`${fixtureDir}/detail.html`, detail);

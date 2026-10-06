@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
+import { browserReady } from './helpers/chrome-probe.mjs';
 import { createServer } from 'vite';
 import { renderDom } from './helpers/chrome-dom.mjs';
 
@@ -97,9 +97,7 @@ function fixtureHtml(kind) {
 }
 
 async function runCase(t, kind) {
-  if (!chrome) return t.skip('Chrome/Chromium no instalado en el runner');
-  const probe = spawnSync(chrome, ['--headless=new','--no-sandbox','--disable-gpu','--dump-dom','about:blank'], { encoding:'utf8', timeout:8000, env:process.env });
-  if (probe.status !== 0) return t.skip('Chrome/Chromium no puede iniciar en este runner');
+  if (!browserReady(t, chrome)) return;
   mkdirSync(fixtureDir, { recursive:true });
   writeFileSync(fixturePath, fixtureHtml(kind));
   const server = await createServer({ root:process.cwd(), server:{host:'127.0.0.1',port:0}, logLevel:'silent' });

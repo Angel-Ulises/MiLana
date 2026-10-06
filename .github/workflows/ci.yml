@@ -27,6 +27,24 @@ jobs:
       - name: Instalar dependencias
         run: npm install --ignore-scripts --no-audit --no-fund
 
+      - name: Diagnosticar Chrome del runner
+        run: |
+          for chrome in /usr/bin/chromium /usr/bin/chromium-browser /usr/bin/google-chrome /usr/bin/google-chrome-stable; do
+            if [ ! -e "$chrome" ]; then continue; fi
+            echo "::group::Chrome $chrome"
+            ls -l "$chrome"
+            "$chrome" --version || true
+            profile="$(mktemp -d)"
+            if timeout 15s "$chrome" --headless=new --no-sandbox --disable-gpu --remote-debugging-port=0 --user-data-dir="$profile" --dump-dom about:blank > "$profile/stdout.log" 2> "$profile/stderr.log"; then
+              echo "Chrome smoke test: success"
+            else
+              echo "Chrome smoke test exit: $?"
+            fi
+            cat "$profile/stdout.log" "$profile/stderr.log"
+            rm -rf "$profile"
+            echo "::endgroup::"
+          done
+
       - name: Build completo
         run: npm run build
 

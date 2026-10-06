@@ -22,3 +22,12 @@
 @media(max-width:900px){.profession-hero-grid,.profession-context-grid,.profession-money-inner{grid-template-columns:1fr}.profession-hero-grid{min-height:auto;padding:58px 0 0;gap:38px}.profession-hero-media{max-width:none;aspect-ratio:16/9;border-radius:26px 26px 0 0}.profession-metrics{grid-template-columns:1fr 1fr}.profession-metric:last-child{grid-column:1/-1}.profession-actions{flex-direction:row;min-width:0}.profession-related-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.profession-page .shell{width:min(100% - 28px,1180px)}.profession-hero-grid{padding-top:42px}.profession-hero-copy h1{font-size:39px}.profession-hero-media{aspect-ratio:4/3}.profession-summary{padding:48px 0 58px}.profession-metrics{grid-template-columns:1fr}.profession-metric:last-child{grid-column:auto}.profession-context,.profession-money{padding:64px 0}.profession-source{grid-template-columns:1fr}.profession-money-inner{gap:24px}.profession-actions{flex-direction:column}.profession-related{padding:64px 0 78px}.profession-related-head{align-items:start;flex-direction:column}.profession-related-grid{grid-template-columns:1fr}.profession-related-grid>a{min-height:auto}.profession-context-grid{gap:34px}}
 @media(prefers-reduced-motion:reduce){.profession-hero-media{animation:none}.profession-related-grid>a{transition:none}}
+
+/* Profession-specific, licensed context. Unknown subjects stay typographic
+   rather than reusing a handshake that does not explain the occupation. */
+.profession-photo-context{min-width:0}
+.profession-photo-context .profession-hero-media{aspect-ratio:3/2;max-height:none}
+.profession-photo-credit{margin:10px 0 0;color:#5E6B78;font-size:12px;line-height:1.4}
+.profession-photo-credit a{text-decoration:underline;text-underline-offset:3px}
+.profession-hero--text .profession-hero-grid{grid-template-columns:1fr;min-height:0;padding-block:42px;gap:0}
+.profession-hero--text .profession-hero-copy{max-width:920px}

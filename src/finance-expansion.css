@@ -760,3 +760,8 @@
     transform: none !important;
   }
 }
+
+/* The home entry explains the next step instead of repeating the career hub photograph. */
+.ml-discovery-journey{margin:28px 0 0;padding-left:24px;color:#2D6CAA}
+.ml-discovery-journey li{padding:12px 0;border-bottom:1px solid #D9E1E8}
+.ml-discovery-journey a{display:flex;justify-content:space-between;gap:16px;min-height:32px;align-items:center;font-size:14px;font-weight:600}

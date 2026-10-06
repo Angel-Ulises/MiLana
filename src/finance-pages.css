@@ -10,3 +10,10 @@
 @media(max-width:900px){.finance-page-hero-grid,.finance-hub-grid,.finance-tool-layout,.finance-advisor-preview-inner{grid-template-columns:1fr}.finance-page-hero-grid{min-height:auto;padding:58px 0 0;gap:38px}.finance-page-photo{max-width:none;aspect-ratio:16/9;border-radius:26px 26px 0 0}.finance-hub-copy,.finance-form-card{position:static}.finance-advisor-preview-inner{align-items:start}.finance-tool-layout{gap:28px}.finance-form-card{max-width:none}}
 @media(max-width:640px){.finance-pages .shell{width:min(100% - 28px,1180px)}.finance-page-hero-grid{padding-top:42px}.finance-page-hero-copy h1{font-size:39px}.finance-page-photo{aspect-ratio:4/3}.finance-hub,.finance-tool-section,.finance-housing{padding:62px 0 78px}.finance-route-list>a{grid-template-columns:38px 1fr 20px;padding:19px;min-height:104px}.finance-results-grid{grid-template-columns:1fr}.finance-result-card{min-height:auto}.finance-advisor-preview{padding:64px 0}.finance-source{grid-template-columns:1fr}.finance-housing-steps>a{grid-template-columns:40px 1fr 18px;padding:18px}.finance-housing-steps p{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.finance-page-photo{animation:none}.finance-route-list>a{transition:none}}
+
+/* Tools start with their question and inputs, rather than repeating the hub's
+   generic stock photograph on every route. The hub keeps its original image. */
+.finance-page-hero--compact .finance-page-hero-grid{grid-template-columns:1fr;min-height:0;padding-block:36px;gap:0}
+.finance-page-hero--compact .finance-page-hero-copy{max-width:900px}
+.finance-page-hero--compact .finance-page-hero-copy h1{font-size:clamp(36px,4.4vw,58px);max-width:24ch}
+.finance-page-hero--compact .finance-page-lede{max-width:76ch}

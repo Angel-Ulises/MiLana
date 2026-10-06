@@ -41,10 +41,13 @@ function Fuente({ articulo }) {
   return <Detalle className="orb-more-source" titulo="Fuente oficial" resumen={`${fuente.nombre} · ${articulo.fuenteFecha}`} cta="Ver fuente"><aside className="economy-source"><span>Fuente oficial</span><div><strong>{fuente.nombre}</strong><p>Publicado o actualizado: {articulo.fuenteFecha}. MiLana conserva la URL oficial en su registro editorial y muestra aquí el alcance sin convertir la nota en asesoría personalizada.</p></div></aside></Detalle>;
 }
 
+const NOTAS_TIPOGRAFICAS = new Set(['inflacion-primera-quincena-septiembre-2026', 'consumo-privado-agosto-2026']);
+
 function ArticleCard({ articulo, featured = false }) {
+  const conFoto = !NOTAS_TIPOGRAFICAS.has(articulo.slug);
   return (
-    <a className={`economy-card${featured ? ' featured' : ''}`} href={`/economia/${articulo.slug}`}>
-      <figure><img src={foto(articulo.fotoId, featured ? 1400 : 900)} alt={articulo.fotoAlt} loading={featured ? 'eager' : 'lazy'} /></figure>
+    <a className={`economy-card${featured ? ' featured' : ''}${conFoto ? '' : ' economy-card--text'}`} href={`/economia/${articulo.slug}`}>
+      {conFoto && <figure><img src={foto(articulo.fotoId, featured ? 1400 : 900)} alt={articulo.fotoAlt} loading={featured ? 'eager' : 'lazy'} /></figure>}
       <div className="economy-card-copy">
         <div className="economy-meta"><span>{articulo.categoria}</span><time dateTime={articulo.fecha}>{fechaLarga(articulo.fecha)}</time></div>
         <h2>{articulo.titulo}</h2>
@@ -73,6 +76,7 @@ function Hub() {
               <p className="eyebrow">Radar económico · México</p>
               <h1>Economía para entender qué cambia en tu dinero.</h1>
               <p>Inflación, tasas, empleo, consumo y regiones, explicados con una regla simple: primero el dato oficial, después el contexto y al final una herramienta útil.</p>
+              <nav className="ml-hub-shortcuts" aria-label="Explorar el Radar"><a href="#radar">Ver señales del Radar ↓</a><a href="#fuentes-radar">Consultar fuentes y fechas ↓</a></nav>
               <div className="economy-proof"><span>Fuentes oficiales</span><span>Fecha visible</span><span>Sin recomendaciones automáticas</span></div>
             </div>
             <div className="economy-hero-panel">
@@ -82,7 +86,7 @@ function Hub() {
           </div>
         </section>
 
-        <section className="economy-radar">
+        <section className="economy-radar" id="radar">
           <div className="shell">
             <div className="economy-section-head"><div><p className="eyebrow">Actualidad con contexto</p><h2>Señales que vale la pena entender.</h2></div><p>El Radar no publica por volumen. Una señal entra cuando puede explicarse con una fuente identificable y conectarse con una decisión financiera o laboral concreta.</p></div>
             <div className="economy-filters" aria-label="Filtrar por categoría">{categorias.map((c) => <button key={c} type="button" className={categoria === c ? 'is-active' : ''} onClick={() => setCategoria(c)}>{c}</button>)}</div>
@@ -91,7 +95,7 @@ function Hub() {
           </div>
         </section>
 
-        <section className="economy-sources-section">
+        <section className="economy-sources-section" id="fuentes-radar">
           <div className="shell economy-sources-grid">
             <div><p className="eyebrow">Fuentes que revisamos</p><h2>Cuándo se actualiza cada dato.</h2><p>Usamos datos públicos de INEGI y Banco de México. Actualizamos el Radar cuando sale una publicación nueva, no para llenar la portada de titulares.</p></div>
             <Detalle className="orb-more-calendar" titulo="Calendario de próximas publicaciones" resumen={datos.fuentes.map((f) => f.nombre.split(' — ')[0]).filter((v, i, arr) => arr.indexOf(v) === i).join(' · ')} cta="Ver fechas"><div className="economy-source-list">{datos.fuentes.map((f) => <article key={f.id}><span>{f.cadencia}</span><h3>{f.nombre}</h3><p>Próxima revisión prevista: {f.proximaRevision}</p></article>)}</div></Detalle>
@@ -104,12 +108,13 @@ function Hub() {
 }
 
 function Article({ articulo }) {
+  const conFoto = !NOTAS_TIPOGRAFICAS.has(articulo.slug);
   const relacionados = datos.articulos.filter((a) => a.slug !== articulo.slug).slice(0, 3);
   return (
     <div className="economy-page economy-article-page">
       <Header />
       <main>
-        <section className="economy-article-hero">
+        <section className={`economy-article-hero${conFoto ? '' : ' economy-article-hero--text'}`}>
           <div className="shell economy-article-hero-grid">
             <div className="economy-article-copy">
               <nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/economia">Economía</a></nav>
@@ -118,7 +123,7 @@ function Article({ articulo }) {
               <p>{articulo.descripcion}</p>
               <div className="economy-big-number"><strong>{articulo.datoPrincipal}</strong><span>{articulo.datoEtiqueta}</span></div>
             </div>
-            <figure><img src={foto(articulo.fotoId)} srcSet={`${foto(articulo.fotoId, 720)} 720w, ${foto(articulo.fotoId, 1400)} 1400w`} sizes="(max-width: 900px) 100vw, 45vw" alt={articulo.fotoAlt} loading="eager" /></figure>
+            {conFoto && <figure><img src={foto(articulo.fotoId)} srcSet={`${foto(articulo.fotoId, 720)} 720w, ${foto(articulo.fotoId, 1400)} 1400w`} sizes="(max-width: 900px) 100vw, 45vw" alt={articulo.fotoAlt} loading="eager" /></figure>}
           </div>
         </section>
 

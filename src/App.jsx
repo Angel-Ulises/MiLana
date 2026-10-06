@@ -1730,6 +1730,10 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                   <span>Fuentes oficiales</span>
                   <span>Sin registro</span>
                 </div>
+                <nav className="ml-home-shortcuts" aria-label="Accesos principales">
+                  <a href="#calculadoras">Usar una calculadora <span aria-hidden="true">→</span></a>
+                  <a href="/economia">Leer el Radar económico <span aria-hidden="true">→</span></a>
+                </nav>
                 <HomeRoutes />
               </div>
 

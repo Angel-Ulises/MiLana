@@ -38,8 +38,7 @@ function Header() {
     <header className="site-header">
       <div className="shell header-inner">
         <a className="brand" href="/" aria-label="MiLana, inicio">
-          <span className="brand-mark" aria-hidden="true">M</span>
-          <span className="brand-name">MiLana</span>
+          <img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" />
         </a>
         <nav className="desktop-nav" aria-label="Principal">
           <a href="/carreras">Carreras</a>

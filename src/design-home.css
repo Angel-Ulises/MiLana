@@ -69,6 +69,7 @@ button, input, textarea, select { font: inherit; }
   background: var(--ml-navy); color: #fff;
   font-weight: 700; font-size: 16px; line-height: 1;
 }
+.brand-logo { display: block; width: 144px; height: 27px; flex: none; object-fit: contain; }
 .brand-name { color: var(--ml-ink); font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
 .desktop-nav { display: flex; align-items: center; gap: 28px; }
 .desktop-nav a { color: var(--ml-muted); font-size: 14px; font-weight: 600; }

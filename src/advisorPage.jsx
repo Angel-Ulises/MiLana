@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { crearRadiografiaFinanciera, crearEscenariosIngreso, crearRutaAsesor } from './lib/advisorCore.js';
 import AdvisorProfessionContext from './advisorProfessionContext.jsx';
 import AdReserve from './AdReserve.jsx';
+import { estadoReferenciaFondo } from './lib/financeResultStates.js';
 
 const dinero = (n) => new Intl.NumberFormat('es-MX', {
   style: 'currency', currency: 'MXN', maximumFractionDigits: 0,
@@ -35,7 +36,7 @@ export default function AdvisorPage() {
   const ruta = useMemo(() => crearRutaAsesor(radiografia), [radiografia]);
   const escenarios = useMemo(() => crearEscenariosIngreso(radiografia), [radiografia]);
   const tieneDatos = radiografia.banderas.tieneIngreso || radiografia.flujo.gastoTotal > 0 || radiografia.emergencia.fondoActual > 0;
-  const mesesFondo = radiografia.emergencia.mesesATresConDisponible;
+  const referenciaFondo = estadoReferenciaFondo(radiografia);
 
   return <div className="advisor-page">
     <Header />
@@ -60,7 +61,7 @@ export default function AdvisorPage() {
         <div className="advisor-results">
           <Resultado label="Disponible al mes" value={dinero(radiografia.flujo.disponible)} tone={radiografia.flujo.disponible < 0 ? 'warning' : 'positive'} note={radiografia.banderas.tieneIngreso ? `${radiografia.flujo.disponiblePct.toFixed(1)}% del ingreso después de los rubros capturados.` : 'Falta ingreso para calcular una proporción.'} />
           <Resultado label="Pagos de deuda" value={radiografia.banderas.tieneIngreso ? `${radiografia.deuda.proporcionIngresoPct.toFixed(1)}%` : '—'} note="Proporción descriptiva; no es un límite de crédito." />
-          <Resultado label="Referencia de 3 meses" value={dinero(radiografia.emergencia.referenciaTresMeses)} note={mesesFondo === null ? 'Captura flujo positivo para estimar tiempo.' : mesesFondo === 0 ? 'El fondo capturado ya alcanza esta referencia educativa.' : `Con todo el disponible actual: ${mesesFondo} meses. Es un escenario, no una instrucción.`} />
+          <Resultado label="Referencia de 3 meses" value={referenciaFondo.mostrarReferencia ? dinero(radiografia.emergencia.referenciaTresMeses) : '—'} note={referenciaFondo.nota} />
           <Resultado label="Faltante de tu meta" value={dinero(radiografia.meta.faltante)} note={radiografia.meta.aporteMensualNecesarioSinRendimiento === null ? 'Añade un horizonte para calcular una aportación.' : `${dinero(radiografia.meta.aporteMensualNecesarioSinRendimiento)} al mes durante ${radiografia.meta.horizonteMeses} meses, sin rendimiento.`} />
         </div>
 

@@ -8,3 +8,11 @@
 @media(max-width:900px){.economy-hero-grid,.economy-section-head,.economy-sources-grid,.economy-article-hero-grid{grid-template-columns:1fr}.economy-card.featured{grid-template-columns:1fr;min-height:0}.economy-card.featured figure{min-height:340px}.economy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.economy-article-hero-grid{min-height:auto;padding:56px 0 0}.economy-article-hero figure{max-height:none;aspect-ratio:16/9;border-radius:28px 28px 0 0}.economy-step{grid-template-columns:64px 1fr}.economy-related-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.economy-page .shell{width:min(100% - 28px,1180px)}.economy-hero{padding:58px 0}.economy-hero h1,.economy-article-copy h1{font-size:40px}.economy-grid{grid-template-columns:1fr}.economy-card.featured figure,.economy-grid .economy-card figure{min-height:0;height:240px}.economy-card.featured .economy-card-copy{padding:24px}.economy-card-bottom{grid-template-columns:1fr}.economy-article-hero figure{aspect-ratio:4/3}.economy-steps-section{padding:58px 0}.economy-step{grid-template-columns:1fr;gap:8px;padding:34px 0}.economy-step>span{font-size:24px}.economy-related-grid{grid-template-columns:1fr}.economy-related-head{align-items:flex-start;flex-direction:column}.economy-source{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.economy-card,.economy-card figure img,.economy-filters button,.economy-related-grid>a{transition:none!important;transform:none!important}}
+
+/* Two INEGI data stories use their existing figure, date and source as the
+   visual hierarchy instead of duplicating the personal-finance stock photo. */
+.economy-card--text.featured{grid-template-columns:1fr;min-height:0}
+.economy-card--text .economy-card-copy{border-top:3px solid #9A6819}
+.economy-article-hero--text .economy-article-hero-grid{grid-template-columns:1fr;min-height:0;padding-block:42px;gap:0}
+.economy-article-hero--text .economy-article-copy{max-width:940px}
+.economy-article-hero--text .economy-article-copy h1{max-width:24ch}

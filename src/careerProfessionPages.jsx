@@ -1,9 +1,8 @@
 import datos from './data/profesiones.json';
 import AdReserve from './AdReserve.jsx';
+import fotosProfesiones from './data/fotos-profesiones.json';
 
-const FOTO_ID = '3184465';
-// Recorte 16:9 anclado abajo: la foto original corta la cabeza (solo se veía la barbilla); así queda el apretón de manos.
-const foto = (width = 1400) => `https://images.pexels.com/photos/${FOTO_ID}/pexels-photo-${FOTO_ID}.jpeg?auto=compress&cs=tinysrgb&w=${width}&h=${Math.round(width * 0.5625)}&fit=crop&crop=bottom`;
+const foto = (id, width = 1400) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
 const dinero = (valor) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(valor);
 const numero = (valor) => new Intl.NumberFormat('es-MX').format(valor);
 
@@ -45,6 +44,7 @@ export default function CareerProfessionPages() {
   if (!p) return <><Header /><main className="profession-not-found"><h1>Profesión no encontrada</h1><a href="/carreras">Volver a carreras</a></main><Footer /></>;
 
   const diferencia = p.ingreso - datos.promedioNacional;
+  const fotoElegida = fotosProfesiones.selected[p.slug];
   const diferenciaPct = (diferencia / datos.promedioNacional) * 100;
   const relacionadas = datos.profesiones
     .filter((x) => x.slug !== p.slug)
@@ -55,7 +55,7 @@ export default function CareerProfessionPages() {
     <div className="profession-page">
       <Header />
       <main>
-        <section className="profession-hero">
+        <section className={`profession-hero${fotoElegida ? '' : ' profession-hero--text'}`}>
           <div className="shell profession-hero-grid">
             <div className="profession-hero-copy">
               <nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/carreras">Carreras</a><span>/</span><span>{p.nombre}</span></nav>
@@ -64,7 +64,7 @@ export default function CareerProfessionPages() {
               <p className="profession-lede">El Observatorio Laboral reporta un ingreso mensual promedio de <strong>{dinero(p.ingreso)}</strong> para profesionistas ocupados en {p.nombre}. Úsalo como referencia de grupo, no como sueldo inicial ni como oferta de trabajo.</p>
               <div className="profession-proof"><span>ENOE 2026-T2</span><span>STPS</span><span>INEGI</span></div>
             </div>
-            <figure className="profession-hero-media"><img src={foto(1400)} srcSet={`${foto(720)} 720w, ${foto(1400)} 1400w`} sizes="(max-width: 900px) 100vw, 46vw" alt="Profesionales revisando información de trabajo y salarios" loading="eager" /></figure>
+            {fotoElegida && <div className="profession-photo-context"><figure className="profession-hero-media"><img src={foto(fotoElegida.id, 1400)} srcSet={`${foto(fotoElegida.id, 480)} 480w, ${foto(fotoElegida.id, 720)} 720w, ${foto(fotoElegida.id, 1400)} 1400w`} sizes="(max-width: 900px) 100vw, 46vw" alt={fotoElegida.alt} style={{objectPosition:fotoElegida.focal}} loading="eager" /></figure><p className="profession-photo-credit">Foto de contexto · <a href={fotoElegida.pageUrl} target="_blank" rel="noopener noreferrer">{fotoElegida.author} / Pexels</a></p></div>}
           </div>
         </section>
 

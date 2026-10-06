@@ -1,0 +1,56 @@
+{
+  "checkedAt": "2026-10-06",
+  "licenseUrl": "https://www.pexels.com/license/",
+  "useNote": "Fotografías de contexto; no representan participantes del estudio ni acreditan ubicación o nacionalidad.",
+  "selected": {
+    "medicina": {
+      "id": "5327584",
+      "pageUrl": "https://www.pexels.com/photo/photo-of-doctor-checking-on-her-patient-5327584/",
+      "author": "Thirdman",
+      "alt": "Profesional con bata blanca usando un estetoscopio durante una consulta.",
+      "focal": "65% 42%"
+    },
+    "ciencias-computacion": {
+      "id": "36706460",
+      "pageUrl": "https://www.pexels.com/photo/developer-working-on-code-in-a-modern-office-36706460/",
+      "author": "Zayed Hossain",
+      "alt": "Persona trabajando frente a dos monitores, con código visible en una de las pantallas.",
+      "focal": "53% 55%"
+    },
+    "contabilidad": {
+      "id": "8296970",
+      "pageUrl": "https://www.pexels.com/photo/a-person-examining-documents-8296970/",
+      "author": "Mikhail Nilov",
+      "alt": "Vista desde arriba de una persona revisando documentos con bolígrafo y calculadora.",
+      "focal": "50% 45%"
+    },
+    "psicologia": {
+      "id": "7176027",
+      "pageUrl": "https://www.pexels.com/photo/crop-psychologist-consulting-patient-in-office-7176027/",
+      "author": "SHVETS production",
+      "alt": "Persona sentada con una carpeta y un bolígrafo, conversando con otra persona fuera de foco.",
+      "focal": "46% 40%"
+    },
+    "arquitectura": {
+      "id": "11269741",
+      "pageUrl": "https://www.pexels.com/photo/an-architect-working-on-a-blueprint-11269741/",
+      "author": "Pilan Filmes",
+      "alt": "Manos usando una regla sobre un plano arquitectónico, con una calculadora en primer plano.",
+      "focal": "58% 44%"
+    },
+    "enfermeria": {
+      "id": "6129678",
+      "pageUrl": "https://www.pexels.com/photo/a-nurse-checking-a-woman-s-blood-pressure-6129678/",
+      "author": "RDNE Stock project",
+      "alt": "Profesional con uniforme azul midiendo la presión arterial a una persona sentada en una camilla.",
+      "focal": "52% 39%"
+    },
+    "ingenieria-civil": {
+      "id": "8961008",
+      "pageUrl": "https://www.pexels.com/photo/an-engineer-using-a-digital-tablet-8961008/",
+      "author": "Mikael Blomkvist",
+      "alt": "Persona con casco blanco y chaleco de seguridad consultando una tableta junto a una estructura.",
+      "focal": "60% 40%"
+    }
+  }
+}

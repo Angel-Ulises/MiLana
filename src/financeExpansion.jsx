@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const PEXELS = {
-  carreras: '6147267',
   economia: '13196409',
 };
 
@@ -183,10 +182,11 @@ function FinanceContent() {
             <h2>Empieza con una duda. MiLana conecta lo que sigue.</h2>
             <p className="ml-discovery-lede">Carreras, empleo y salarios se vuelven una puerta de entrada a decisiones de dinero reales: cuánto te queda, cuánto puedes ahorrar y qué puedes pagar.</p>
             <a className="ml-discovery-entry" href="/carreras">Explorar carreras, empleos y salarios <span>→</span></a>
-            <div className="ml-discovery-photo">
-              <img src={foto(PEXELS.carreras, 1200)} srcSet={`${foto(PEXELS.carreras, 640)} 640w, ${foto(PEXELS.carreras, 1200)} 1200w`} sizes="(max-width: 760px) 92vw, 440px" alt="Estudiantes universitarios trabajando juntos con una laptop" loading="lazy" />
-              <span>Trabajo · Carreras · Salarios</span>
-            </div>
+            <ol className="ml-discovery-journey" aria-label="De tu carrera a tus decisiones de dinero">
+              <li><a href="/carreras">Explora una carrera <span aria-hidden="true">→</span></a></li>
+              <li><a href="/calculadoras/bruto-a-neto">Convierte el sueldo a ingreso neto <span aria-hidden="true">→</span></a></li>
+              <li><a href="/finanzas/presupuesto">Ordena tu presupuesto <span aria-hidden="true">→</span></a></li>
+            </ol>
           </div>
           <div className="mlq-list">
             {preguntas.map((item) => (

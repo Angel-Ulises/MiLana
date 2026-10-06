@@ -41,10 +41,13 @@ function Fuente({ articulo }) {
   return <Detalle className="orb-more-source" titulo="Fuente oficial" resumen={`${fuente.nombre} · ${articulo.fuenteFecha}`} cta="Ver fuente"><aside className="economy-source"><span>Fuente oficial</span><div><strong>{fuente.nombre}</strong><p>Publicado o actualizado: {articulo.fuenteFecha}. MiLana conserva la URL oficial en su registro editorial y muestra aquí el alcance sin convertir la nota en asesoría personalizada.</p></div></aside></Detalle>;
 }
 
+const NOTAS_TIPOGRAFICAS = new Set(['inflacion-primera-quincena-septiembre-2026', 'consumo-privado-agosto-2026']);
+
 function ArticleCard({ articulo, featured = false }) {
+  const conFoto = !NOTAS_TIPOGRAFICAS.has(articulo.slug);
   return (
-    <a className={`economy-card${featured ? ' featured' : ''}`} href={`/economia/${articulo.slug}`}>
-      <figure><img src={foto(articulo.fotoId, featured ? 1400 : 900)} alt={articulo.fotoAlt} loading={featured ? 'eager' : 'lazy'} /></figure>
+    <a className={`economy-card${featured ? ' featured' : ''}${conFoto ? '' : ' economy-card--text'}`} href={`/economia/${articulo.slug}`}>
+      {conFoto && <figure><img src={foto(articulo.fotoId, featured ? 1400 : 900)} alt={articulo.fotoAlt} loading={featured ? 'eager' : 'lazy'} /></figure>}
       <div className="economy-card-copy">
         <div className="economy-meta"><span>{articulo.categoria}</span><time dateTime={articulo.fecha}>{fechaLarga(articulo.fecha)}</time></div>
         <h2>{articulo.titulo}</h2>
@@ -105,12 +108,13 @@ function Hub() {
 }
 
 function Article({ articulo }) {
+  const conFoto = !NOTAS_TIPOGRAFICAS.has(articulo.slug);
   const relacionados = datos.articulos.filter((a) => a.slug !== articulo.slug).slice(0, 3);
   return (
     <div className="economy-page economy-article-page">
       <Header />
       <main>
-        <section className="economy-article-hero">
+        <section className={`economy-article-hero${conFoto ? '' : ' economy-article-hero--text'}`}>
           <div className="shell economy-article-hero-grid">
             <div className="economy-article-copy">
               <nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/economia">Economía</a></nav>
@@ -119,7 +123,7 @@ function Article({ articulo }) {
               <p>{articulo.descripcion}</p>
               <div className="economy-big-number"><strong>{articulo.datoPrincipal}</strong><span>{articulo.datoEtiqueta}</span></div>
             </div>
-            <figure><img src={foto(articulo.fotoId)} srcSet={`${foto(articulo.fotoId, 720)} 720w, ${foto(articulo.fotoId, 1400)} 1400w`} sizes="(max-width: 900px) 100vw, 45vw" alt={articulo.fotoAlt} loading="eager" /></figure>
+            {conFoto && <figure><img src={foto(articulo.fotoId)} srcSet={`${foto(articulo.fotoId, 720)} 720w, ${foto(articulo.fotoId, 1400)} 1400w`} sizes="(max-width: 900px) 100vw, 45vw" alt={articulo.fotoAlt} loading="eager" /></figure>}
           </div>
         </section>
 

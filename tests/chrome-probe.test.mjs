@@ -11,15 +11,15 @@ test('las sondas Chrome usan perfiles únicos y los limpian', () => {
     profiles.push(profile);
     return { status: 0 };
   };
-  browserReady({}, '/chrome', { run, ci: true });
-  browserReady({}, '/chrome', { run, ci: true });
+  browserReady({}, '/chrome', { run, ci: false });
+  browserReady({}, '/chrome', { run, ci: false });
   assert.notEqual(profiles[0], profiles[1]);
   for (const profile of profiles) assert.equal(existsSync(profile), false);
 });
 
-test('CI falla con stderr si Chrome no arranca, sin omitir pruebas', () => {
-  assert.throws(() => browserReady({ skip: () => assert.fail('no debe omitir') }, '/chrome', {
-    ci: true, run: () => ({ status: 1, stderr: 'launcher failure' }),
-  }), /launcher failure/);
+test('CI exige Chrome y ejecuta el test real sin sonda redundante ni skips', () => {
+  assert.equal(browserReady({ skip: () => assert.fail('no debe omitir') }, '/chrome', {
+    ci: true, run: () => assert.fail('el test real debe probar CDP'),
+  }), true);
   assert.throws(() => browserReady({}, undefined, { ci: true }), /no instalado/);
 });

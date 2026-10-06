@@ -10,6 +10,10 @@ export function browserReady(t, chrome, { run = spawnSync, ci = process.env.CI =
     return false;
   };
   if (!chrome) return unavailable('Chrome/Chromium no instalado en el runner');
+  // CI ejecuta siempre la prueba real por CDP: no lanzar otra instancia sólo
+  // para comprobar --dump-dom, cuya salida puede bloquearse al cerrar Chrome.
+  // Si el navegador falla, renderDom rechaza la prueba con su stderr.
+  if (ci) return true;
   const profile = mkdtempSync(join(tmpdir(), 'milana-probe-'));
   try {
     const result = run(chrome, ['--headless=new', '--no-sandbox', '--disable-gpu', `--user-data-dir=${profile}`, '--dump-dom', 'about:blank'], {

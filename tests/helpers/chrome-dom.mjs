@@ -8,7 +8,8 @@ import { navigateAndWait } from './chrome-page.mjs';
 // --virtual-time-budget), espera hasta `waitMs` (o hasta que `until` sea verdadero) y devuelve el DOM serializado.
 export async function renderDom(chrome, url, { waitMs = 1500, until = null, timeoutMs = 20000 } = {}) {
   const profile = mkdtempSync(join(tmpdir(), 'milana-chrome-'));
-  const child = spawn(chrome, ['--headless=new', '--no-sandbox', '--disable-gpu', '--remote-debugging-port=0', `--user-data-dir=${profile}`, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] });
+  const ownGroup = process.platform === 'linux';
+  const child = spawn(chrome, ['--headless=new', '--no-sandbox', '--disable-gpu', '--remote-debugging-port=0', `--user-data-dir=${profile}`, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'], detached: ownGroup });
   const exited = new Promise((resolve) => child.once('close', resolve));
   let socket;
   let timer;
@@ -59,7 +60,10 @@ export async function renderDom(chrome, url, { waitMs = 1500, until = null, time
   finally {
     clearTimeout(timer);
     try { socket?.close(); } catch {}
-    child.kill('SIGKILL');
+    try {
+      if (ownGroup && child.pid) process.kill(-child.pid, 'SIGKILL');
+      else child.kill('SIGKILL');
+    } catch (error) { if (error.code !== 'ESRCH') throw error; }
     await exited;
     try { rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }); } catch {}
   }

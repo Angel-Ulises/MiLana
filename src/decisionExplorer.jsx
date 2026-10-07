@@ -21,8 +21,8 @@ export default function DecisionExplorer({ initialTopic = '' }) {
         <div className="ml-decision-head">
           <div>
             <p className="ml-decision-kicker">Explora tu siguiente decisión</p>
-            <h2 id={`${id}-titulo`}>Tu pregunta cambia el camino.</h2>
-            <p className="ml-decision-lede">Dos elecciones bastan para encontrar herramientas de MiLana relacionadas con lo que quieres resolver. Sin registro, IA de pago ni datos personales.</p>
+            <h2 id={`${id}-titulo`}>Tu pregunta, tu siguiente paso.</h2>
+            <p className="ml-decision-lede">Selecciona un tema y lo que quieres resolver. MiLana conecta la herramienta correcta con las siguientes preguntas.</p>
           </div>
           <span className="ml-decision-label">Guía interactiva · México</span>
         </div>
@@ -66,29 +66,21 @@ export default function DecisionExplorer({ initialTopic = '' }) {
             ) : <p className="ml-decision-hint">Selecciona una de las situaciones del paso 1. Las preguntas aparecerán aquí.</p>}
           </div>
 
-          <div className="ml-decision-result" aria-live="polite" aria-atomic="true">
-            {decision ? (
-              <>
-                <div className="ml-decision-result-title"><span>Tu ruta para explorar</span><button type="button" onClick={() => { setTemaId(''); setOpcionId(''); }}>Empezar de nuevo</button></div>
-                <p className="ml-decision-explain">{decision.opcion.explicacion}</p>
-                <a className="ml-decision-primary" href={decision.opcion.principal.href}>
-                  <span><small>Empieza aquí</small><strong>{decision.opcion.principal.titulo}</strong><em>{decision.opcion.principal.detalle}</em></span>
-                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
-                </a>
-                <div className="ml-decision-related">
-                  <span>Después podrías explorar</span>
-                  {decision.opcion.relacionadas.map((r) => <a href={r.href} key={r.href}>{r.titulo} <span aria-hidden="true">↗</span></a>)}
-                </div>
-              </>
-            ) : (
-              <div className="ml-decision-empty" aria-hidden="true">
-                <span>Tu siguiente paso</span>
-                <strong>{tema ? 'Elige una pregunta para descubrir tu ruta.' : 'Una mejor pregunta lleva a una mejor herramienta.'}</strong>
-                <p>Conectamos información, comparadores y calculadoras que ya existen en MiLana.</p>
+          {decision && (
+            <div className="ml-decision-result" aria-live="polite" aria-atomic="true">
+              <div className="ml-decision-result-title"><span>Tu ruta para explorar</span><button type="button" onClick={() => { setTemaId(''); setOpcionId(''); }}>Empezar de nuevo</button></div>
+              <p className="ml-decision-explain">{decision.opcion.explicacion}</p>
+              <a className="ml-decision-primary" href={decision.opcion.principal.href}>
+                <span><small>Empieza aquí</small><strong>{decision.opcion.principal.titulo}</strong><em>{decision.opcion.principal.detalle}</em></span>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+              </a>
+              <div className="ml-decision-related">
+                <span>Después podrías explorar</span>
+                {decision.opcion.relacionadas.map((r) => <a href={r.href} key={r.href}>{r.titulo} <span aria-hidden="true">↗</span></a>)}
               </div>
-            )}
-            <p className="ml-decision-disclaimer">Recorrido educativo basado en reglas fijas. No evalúa tu perfil ni sustituye asesoría profesional. Revisa fechas, fuentes y supuestos de cada herramienta.</p>
-          </div>
+              <p className="ml-decision-disclaimer">Recorrido educativo basado en reglas fijas. Revisa fechas, fuentes y supuestos de cada herramienta. No sustituye asesoría profesional.</p>
+            </div>
+          )}
         </div>
       </div>
     </section>

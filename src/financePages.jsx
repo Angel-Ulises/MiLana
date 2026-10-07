@@ -35,8 +35,8 @@ function Fuente({ tipo }) {
   return <aside className="finance-source"><span>Fuente</span><div><strong>{f.nombre}</strong><p>{f.fecha}</p></div></aside>;
 }
 
-function Hero({ eyebrow, title, lede, photo = true }) {
-  return <section className="finance-page-hero"><div className="shell finance-page-hero-grid"><div className="finance-page-hero-copy"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/finanzas">Finanzas</a></nav><p className="eyebrow">{eyebrow}</p><h1>{title}</h1><p className="finance-page-lede">{lede}</p><div className="finance-page-proof"><span>Sin registro</span><span>Todo en tu navegador</span><span>Supuestos visibles</span></div></div>{photo && <figure className="finance-page-photo"><img src={foto(1400)} srcSet={`${foto(720)} 720w, ${foto(1400)} 1400w`} sizes="(max-width: 900px) 100vw, 46vw" alt="Persona organizando un presupuesto con laptop y calculadora" loading="eager" /></figure>}</div></section>;
+function Hero({ eyebrow, title, lede, photo = true, compact = false }) {
+  return <section className="finance-page-hero"><div className="shell finance-page-hero-grid"><div className="finance-page-hero-copy"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/finanzas">Finanzas</a></nav><p className="eyebrow">{eyebrow}</p><h1>{title}</h1><p className="finance-page-lede">{lede}</p><div className="finance-page-proof"><span>Sin registro</span><span>Todo en tu navegador</span><span>Supuestos visibles</span></div>{compact && <a className="ecosystem-hero-link" href="#explorar">Explorar mis opciones <span aria-hidden="true">↓</span></a>}</div>{photo && <figure className="finance-page-photo"><img src={foto(1400)} srcSet={`${foto(720)} 720w, ${foto(1400)} 1400w`} sizes="(max-width: 900px) 100vw, 46vw" alt="Persona organizando un presupuesto con laptop y calculadora" loading="eager" /></figure>}</div></section>;
 }
 
 function Campo({ label, value, onChange, help, placeholder = '0' }) {
@@ -49,14 +49,33 @@ function Resultado({ label, value, note, tone = '' }) {
 
 function Hub() {
   const rutas = [
-    ['01','Presupuesto','¿Cuánto entra, cuánto sale y cuánto queda?','/finanzas/presupuesto'],
-    ['02','Fondo de emergencia','Convierte tus gastos esenciales en una meta de 3 a 6 meses.','/finanzas/fondo-emergencia'],
-    ['03','Deuda y crédito','Mide cuánto de tu ingreso ya está comprometido y qué comparar.','/finanzas/deuda-y-credito'],
-    ['04','Ahorro','Pon fecha aproximada a una meta sin inventar rendimientos.','/finanzas/ahorro'],
-    ['05','Vivienda','Ordena ingreso, ahorro y deuda antes de rentar o comprar.','/finanzas/vivienda'],
-    ['06','Retiro','Revisa requisitos y continúa hacia Pensión IMSS.','/calculadoras/pension-imss'],
+    ['Presupuesto', '¿Cuánto entra y sale?', '/finanzas/presupuesto'],
+    ['Fondo de emergencia', 'Tres a seis meses de gastos esenciales', '/finanzas/fondo-emergencia'],
+    ['Deuda y crédito', 'Mensualidades y capacidad de pago', '/finanzas/deuda-y-credito'],
+    ['Ahorro', 'Metas y escenarios comparables', '/finanzas/ahorro'],
+    ['Vivienda', 'Rentar, comprar y planear', '/finanzas/vivienda'],
+    ['Retiro', 'Requisitos y Pensión IMSS', '/calculadoras/pension-imss'],
   ];
-  return <><Hero eyebrow="Finanzas personales · México" title="Tu dinero no vive en temas separados." lede="Sueldo, gastos, deuda, ahorro y vivienda se afectan entre sí. MiLana los conecta para que puedas entender qué cambia antes de tomar una decisión." /><main><DecisionExplorer initialTopic="dinero" /><section className="finance-hub"><div className="shell finance-hub-grid"><div className="finance-hub-copy"><p className="eyebrow">Empieza por tu situación</p><h2>Primero entiende el flujo. Después decide.</h2><p>No necesitas saber de finanzas para empezar. Elige la pregunta que tengas hoy y MiLana te lleva a una herramienta o a la siguiente decisión útil.</p></div><div className="finance-route-list">{rutas.map(([n,t,d,h]) => <a href={h} key={n}><span>{n}</span><div><h3>{t}</h3><p>{d}</p></div><b>↗</b></a>)}</div></div></section><section className="finance-advisor-preview"><div className="shell finance-advisor-preview-inner"><div><p className="eyebrow">Tu situación completa</p><h2>“Gano X, gasto Y y quiero lograr Z.”</h2><p>Estas herramientas crean las piezas que después permitirán a MiLana conectar contexto personal, escenarios y calculadoras sin convertir una sola cifra en una recomendación automática.</p></div><a href="/finanzas/presupuesto">Empezar con mi presupuesto <span>→</span></a></div></section></main></>;
+  return <div className="finance-hub-page">
+    <Hero compact eyebrow="Finanzas personales · México" title="Tu dinero no vive en temas separados." lede="Sueldo, gastos, deuda, ahorro y vivienda se afectan entre sí. MiLana los conecta para que puedas entender qué cambia antes de tomar una decisión." />
+    <main>
+      <section className="finance-hub ecosystem-hub" id="explorar" aria-label="Explora herramientas conectadas">
+        <div className="shell">
+          <DecisionExplorer initialTopic="dinero" />
+          <nav className="ecosystem-shortcuts" aria-label="Todas las herramientas de finanzas">
+            <span className="ecosystem-shortcuts-label">Herramientas disponibles</span>
+            <div className="ecosystem-shortcuts-grid">
+              {rutas.map(([titulo, descripcion, href]) => <a key={href} href={href} title={descripcion}>{titulo}<span aria-hidden="true">↗</span></a>)}
+            </div>
+          </nav>
+          <a className="ecosystem-advisor-link" href="/finanzas/mi-situacion">
+            <span><strong>¿Todo está conectado en tu caso?</strong><small>Revisa presupuesto, respaldo, deuda y metas en Mi situación.</small></span>
+            <b aria-hidden="true">→</b>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>;
 }
 
 function Presupuesto() {

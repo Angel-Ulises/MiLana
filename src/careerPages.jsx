@@ -42,8 +42,8 @@ function Header() {
           <img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" />
         </a>
         <nav className="desktop-nav" aria-label="Principal">
-          <a href="/carreras">Carreras</a>
           <a href="/finanzas">Finanzas</a>
+          <a href="/carreras">Carreras</a>
           <a href="/#calculadoras">Calculadoras</a>
           <a href="/aprende">Aprende</a>
         </nav>

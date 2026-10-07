@@ -29,6 +29,7 @@ import EconomyPages, { esRutaEconomia } from './economyPages.jsx'
 import EconomyNavigation from './economyNavigation.jsx'
 import CareerMotion from './careerMotion.jsx'
 import RouteMotion from './routeMotion.jsx'
+import JourneyCompanion from './journeyCompanion.jsx'
 import './site-overrides.css'
 import './motion-viz.css'
 import './results-only-viz.css'
@@ -58,6 +59,7 @@ import './cnbv-funds.css'
 import './economy-pages.css'
 import './route-motion.css'
 import './ecosystem-compact.css'
+import './connected-journeys.css'
 
 const profesion = esRutaProfesion()
 const ocupaciones = esRutaOcupaciones()
@@ -159,6 +161,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <InvestmentEntry />
       <InvestmentCompareEntry />
       <EconomyNavigation />
+      <JourneyCompanion />
     </>
   </React.StrictMode>,
 )

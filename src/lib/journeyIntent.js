@@ -13,6 +13,8 @@ export function resolverRutaAcompanamiento(temaId, opcionId, destino) {
   if (!actual) return null;
   const siguiente = rutas.find((r) => r.href !== actual.href) || null;
   return {
+    temaId,
+    opcionId,
     tema: tema.titulo,
     pregunta: opcion.titulo,
     actual: actual.titulo,

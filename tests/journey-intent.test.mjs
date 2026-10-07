@@ -54,5 +54,7 @@ test('interfaz compartida no utiliza LLM ni modifica fórmulas o campos financie
   assert.match(css,/focus-visible/);
   assert.match(home,/href="\/finanzas">Finanzas/);
   assert.match(home,/href="\/carreras">Carreras/);
+  const legacyNav=readFileSync('src/financeExpansion.jsx','utf8');
+  assert.match(legacyNav,/nav\.querySelector\('a\[href="\/finanzas"\]'\) && nav\.querySelector\('a\[href="\/carreras"\]'\)/);
   assert.doesNotMatch(ui+comp,/fetch\(|XMLHttpRequest|formData|FormData\(/);
 });

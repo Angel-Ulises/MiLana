@@ -4,6 +4,7 @@ import datos from './data/carreras.json';
 import profesiones from './data/profesiones.json';
 import ocupacionesEstados from './data/stateOccupations.json';
 import AdReserve from './AdReserve.jsx';
+import DecisionExplorer from './decisionExplorer.jsx';
 
 const PEXELS = {
   hub: '6147267',
@@ -162,6 +163,7 @@ function Hub() {
     <>
       <Hero eyebrow="Carreras · Trabajo · Dinero" title="Elegir carrera también es una decisión financiera." lede="Compara ingresos, tamaño del mercado laboral y diferencias regionales con datos públicos. Después convierte esas cifras en ingreso neto, ahorro y decisiones de vida." image={PEXELS.hub} imageAlt="Estudiantes universitarios colaborando frente a una laptop" />
       <main>
+        <DecisionExplorer initialTopic="carrera" />
         <section className="career-hub-section">
           <div className="shell career-hub-grid">
             <div className="career-hub-intro">

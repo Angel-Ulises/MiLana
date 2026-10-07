@@ -1647,12 +1647,12 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             <img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" />
           </a>
           <nav className="desktop-nav" aria-label="Principal">
-            <a href="/#situaciones">Tu situación</a>
+            <a href="/finanzas">Finanzas</a>
+            <a href="/carreras">Carreras</a>
             <a href="/#calculadoras">Calculadoras</a>
             <a href="/#aprende">Aprende</a>
-            <a href="/#fuentes">Fuentes</a>
           </nav>
-          <a className="header-cta" href="/#situaciones">Empezar</a>
+          <a className="header-cta" href="/finanzas/mi-situacion">Mi situación</a>
         </div>
       </header>
 

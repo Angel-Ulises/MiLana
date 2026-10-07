@@ -42,7 +42,8 @@
 .ml-decision-empty{min-height:96px;display:flex;flex-direction:column;justify-content:center;gap:7px}
 .ml-decision-empty strong{max-width:850px;font-family:Newsreader,Georgia,serif;font-weight:600;font-size:clamp(23px,2.8vw,32px)}
 .ml-decision-empty p{margin:0;color:#d4e0ea;font-size:13px;line-height:1.5}
-.ml-decision-disclaimer{margin:20px 0 0;color:#cfdeea;font-size:12px;line-height:1.65}
+/* Los estilos editoriales globales fuerzan un gris oscuro en <p>; este texto vive sobre azul marino. */
+.ml-decision .ml-decision-result p.ml-decision-disclaimer{margin:20px 0 0;color:#cfdeea !important;font-size:12px;line-height:1.65}
 .ml-decision button:focus-visible,.ml-decision a:focus-visible{outline:3px solid #8ac3f6;outline-offset:3px}
 @media (hover:hover) and (pointer:fine){.ml-decision-choice:hover,.ml-decision-need:hover{border-color:#5485b4;box-shadow:0 5px 20px rgba(19,38,59,.08)}.ml-decision-primary:hover{background:#e8f3fc}.ml-decision-related a:hover{background:rgba(255,255,255,.1)}}
 @media(max-width:780px){.ml-decision-head{display:block}.ml-decision-label{display:inline-block;margin-top:18px}.ml-decision-flow{grid-template-columns:1fr}.ml-decision-result{grid-column:auto}.ml-decision-stage,.ml-decision-result{border-radius:18px}}

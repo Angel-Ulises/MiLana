@@ -211,13 +211,10 @@ function Hub() {
               <div className="career-profession-grid">{perfiles.slice(2).map((p) => <a key={p.slug} href={`/carreras/profesion/${p.slug}`}><span>{p.area}</span><h3>{p.nombre}</h3><strong>{dinero(p.ingreso)}/mes</strong><p>{numero(p.ocupados)} profesionistas ocupados</p><b>Ver perfil →</b></a>)}</div>
               <div className="career-profession-more">{profesiones.profesiones.slice(8).map((p) => <a key={p.slug} href={`/carreras/profesion/${p.slug}`}>{p.nombre}<span>→</span></a>)}</div>
             </Detalle>
-          </div>
-        </section>
-
-        <section className="career-money-bridge">
-          <div className="shell career-money-bridge-inner">
-            <div><p className="eyebrow">Del dato a tu bolsillo</p><h2>Un salario promedio se vuelve útil cuando lo aterrizas.</h2><p>Prueba cualquier cifra en la calculadora Bruto → Neto para estimar ISR e IMSS y entender cuánto podría llegar realmente a tu cuenta.</p></div>
-            <a href="/calculadoras/bruto-a-neto">Calcular ingreso neto <span>→</span></a>
+            <aside className="career-money-inline">
+              <div><strong>Del salario promedio a tu bolsillo</strong><p>Estima ISR e IMSS con Bruto → Neto y conecta ese ingreso con tu presupuesto personal.</p></div>
+              <a href="/calculadoras/bruto-a-neto">Calcular ingreso neto <span aria-hidden="true">→</span></a>
+            </aside>
           </div>
         </section>
       </main>

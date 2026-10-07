@@ -173,7 +173,7 @@ function Hub() {
               </div>
             </nav>
             <details className="ecosystem-more-questions">
-              <summary>Explorar las 9 preguntas frecuentes sobre carreras <span aria-hidden="true">+</span></summary>
+              <summary><span><small>Preguntas que abren otras preguntas</small><strong>Explora como buscarías en Google. · 9 preguntas</strong></span><span aria-hidden="true">+</span></summary>
               <nav aria-label="Más preguntas sobre carreras" className="ecosystem-more-links">
                 {preguntas.map(([tipo, pregunta, href]) => <a href={href} key={pregunta}><span>{tipo}</span><strong>{pregunta}</strong></a>)}
               </nav>

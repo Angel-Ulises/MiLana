@@ -1,0 +1,54 @@
+/* La experiencia de decisiones es una sola superficie, no tres bloques verticales. */
+.ecosystem-hub .ml-decision-connected .ml-decision-flow{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-areas:"topics topics" "needs answer";
+  align-items:stretch;
+  gap:12px;
+}
+.ecosystem-hub .ml-decision-connected .ml-decision-stage-topics{grid-area:topics;padding:14px 17px}
+.ecosystem-hub .ml-decision-connected .ml-decision-stage-secondary{grid-area:needs}
+.ecosystem-hub .ml-decision-connected .ml-decision-answer{grid-area:answer;min-width:0}
+.ecosystem-hub .ml-decision-connected .ml-decision-topics{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ecosystem-hub .ml-decision-connected .ml-decision-choice{min-height:68px}
+.ecosystem-hub .ml-decision-connected .ml-decision-answer .ml-decision-result{grid-column:auto;margin:0;height:100%;padding:17px;border-radius:17px}
+.ecosystem-hub .ml-decision-connected .ml-decision-result-title{margin-bottom:8px}
+.ecosystem-hub .ml-decision-connected .ml-decision-answer .ml-decision-explain{margin:0 0 9px;font-size:12px}
+.ecosystem-hub .ml-decision-connected .ml-decision-answer .ml-decision-primary{padding:11px 13px}
+.ecosystem-hub .ml-decision-connected .ml-decision-answer .ml-decision-primary strong{font-size:22px}
+.ecosystem-hub .ml-decision-connected .ml-decision-answer .ml-decision-primary em{font-size:11px}
+.ecosystem-hub .ml-decision-connected .ml-decision-related{margin-top:10px}
+.ecosystem-hub .ml-decision-connected .ml-decision-related a{font-size:11px}
+.ecosystem-hub .ml-decision-connected .ml-decision-answer-placeholder{
+  height:100%;min-height:175px;display:flex;flex-direction:column;justify-content:center;
+  border:1px dashed #bfcedc;border-radius:17px;background:linear-gradient(130deg,#fff,#eff5fa);
+  padding:20px 24px;color:#13263b;
+}
+.ml-decision-answer-placeholder>span{font-size:10px;font-weight:800;color:#285f93;text-transform:uppercase;letter-spacing:.08em}
+.ml-decision-answer-placeholder strong{font-family:Newsreader,Georgia,serif;font-size:clamp(23px,2.4vw,30px);font-weight:600;letter-spacing:-.025em;margin:9px 0}
+.ml-decision-answer-placeholder p{color:#475e70;font-size:13px;line-height:1.55;margin:0}
+.ml-journey-mount:empty{display:none}
+.ml-journey{border-bottom:1px solid #d5e2ed;background:#f1f7fc;color:#18344d}
+.ml-journey-inner{width:min(1180px,calc(100% - 40px));margin:0 auto;padding:9px 0;display:flex;justify-content:space-between;align-items:center;gap:13px}
+.ml-journey-context{min-width:0;display:flex;align-items:baseline;flex-wrap:wrap;gap:6px;font-size:12px;line-height:1.45}
+.ml-journey-overline{font-weight:800;text-transform:uppercase;font-size:10px;letter-spacing:.08em;color:#315e82;margin-right:6px}
+.ml-journey-context strong{font-weight:750;color:#13263b}
+.ml-journey-separator{color:#7490a6}
+.ml-journey-actions{flex:none;display:flex;align-items:center;gap:12px}
+.ml-journey-actions a{color:#225c8e;font-weight:750;font-size:12px;line-height:1.35;text-decoration:underline;text-underline-offset:3px}
+.ml-journey-back{font-weight:550!important}
+.ml-journey-actions button{border:1px solid #becddb;color:#24445f;background:transparent;border-radius:50%;width:27px;height:27px;font-size:20px;line-height:1;cursor:pointer}
+.ml-journey a:focus-visible,.ml-journey button:focus-visible,.ml-decision-connected button:focus-visible{outline:3px solid #2d6caa;outline-offset:3px}
+@media(max-width:760px){
+ .ecosystem-hub .ml-decision-connected .ml-decision-flow{grid-template-columns:minmax(0,1fr);grid-template-areas:"topics" "needs" "answer"}
+ .ecosystem-hub .ml-decision-connected .ml-decision-topics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ecosystem-hub .ml-decision-connected .ml-decision-answer:not(:has(.ml-decision-result)){display:none}
+ .ml-journey-inner{width:calc(100% - 28px);align-items:flex-start;flex-direction:column;gap:5px;padding:9px 0}
+ .ml-journey-actions{width:100%;justify-content:flex-start;gap:15px}
+ .ml-journey-actions button{margin-left:auto}
+ .ml-journey-context{font-size:11px}
+ .ml-journey-actions a{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ml-decision-connected *, .ml-journey *{scroll-behavior:auto;transition:none!important}
+}

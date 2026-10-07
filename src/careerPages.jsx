@@ -95,6 +95,7 @@ function Hero({ eyebrow, title, lede, image = PEXELS.salarios, imageAlt, compact
           <div className="career-hero-proof">
             <span>ENOE 2026-T2</span><span>STPS</span><span>INEGI</span>
           </div>
+          {compact && <a className="ecosystem-hero-link" href="#explorar">Explorar carreras <span aria-hidden="true">↓</span></a>}
         </div>
         <figure className="career-hero-media">
           <img src={pexels(image)} srcSet={`${pexels(image, 720)} 720w, ${pexels(image, 1400)} 1400w`} sizes="(max-width: 900px) 100vw, 48vw" alt={imageAlt} loading="eager" />

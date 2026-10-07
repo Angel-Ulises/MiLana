@@ -108,3 +108,8 @@
 .ecosystem-hero-link:hover{border-color:#2d6caa;background:#edf6ff}
 .ecosystem-hero-link:focus-visible,.career-money-inline a:focus-visible{outline:3px solid #5d9ed0;outline-offset:3px}
 @media(max-width:760px){.career-money-inline{align-items:flex-start;flex-direction:column;gap:12px;padding:16px}.career-money-inline a{align-self:flex-start}}
+
+/* Los enlaces editoriales globales fuerzan un morado y los <small> un gris oscuro.
+   Estas dos superficies tienen fondo azul marino: mantener AA en móvil y escritorio. */
+.career-profession-directory .career-money-inline a{color:#fff !important}
+.finance-hub-page .ecosystem-advisor-link small{color:#dce9f5 !important}

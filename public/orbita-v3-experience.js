@@ -22,9 +22,9 @@
     { label: 'Me despidieron', href: '/calculadoras/liquidacion', icon: 'exit', tone: 'blue' },
     { label: 'Renuncié', href: '/calculadoras/finiquito', icon: 'work', tone: 'blue' },
     { label: 'Voy a cobrar aguinaldo', href: '/calculadoras/aguinaldo', icon: 'gift', tone: 'coral' },
-    { label: 'Quiero ahorrar', href: '/finanzas', icon: 'wallet', tone: 'green' },
+    { label: 'Quiero ahorrar', href: '/finanzas/ahorro', icon: 'wallet', tone: 'green' },
     { label: 'Estoy eligiendo carrera', href: '/carreras', icon: 'cap', tone: 'violet' },
-    { label: 'Pienso mudarme de estado', href: '/estados', icon: 'map', tone: 'teal' }
+    { label: 'Pienso mudarme de estado', href: '/estados/comparar', icon: 'map', tone: 'teal' }
   ];
 
   const readRoute = () => {

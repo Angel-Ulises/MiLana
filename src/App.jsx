@@ -1584,6 +1584,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
     if (typeof window !== 'undefined') {
       const destino = id ? rutaDe(id) : '/';
       if (window.location.pathname !== destino) window.history.pushState({ id }, '', destino);
+      window.dispatchEvent(new Event('milana:route-change'));
       window.scrollTo({ top: 0 });
       const meta = RUTAS.find(p => p.id === id);
       document.title = meta ? meta.titulo : 'MiLana — Calculadoras Financieras México 2026';
@@ -1601,6 +1602,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
     if (typeof window !== 'undefined') {
       const destino = s ? `/situaciones/${s.slug}` : '/';
       if (window.location.pathname !== destino) window.history.pushState({ slug }, '', destino);
+      window.dispatchEvent(new Event('milana:route-change'));
       window.scrollTo({ top: 0 });
       document.title = s ? s.titulo : 'MiLana — Calculadoras Financieras México 2026';
     }

@@ -81,9 +81,9 @@ function Fuente() {
   );
 }
 
-function Hero({ eyebrow, title, lede, image = PEXELS.salarios, imageAlt }) {
+function Hero({ eyebrow, title, lede, image = PEXELS.salarios, imageAlt, compact = false }) {
   return (
-    <section className="career-hero">
+    <section className={`career-hero${compact ? " career-hero-compact" : ""}`}>
       <div className="shell career-hero-grid">
         <div className="career-hero-copy">
           <nav className="career-breadcrumb" aria-label="Ruta de navegación">
@@ -141,11 +141,11 @@ function NextRoutes({ current }) {
 }
 
 function Hub() {
-  const routes = [
-    { n: '01', titulo: '¿Qué carreras pagan mejor?', texto: 'Compara ingreso mensual promedio y número de profesionistas ocupados.', href: '/carreras/mejor-pagadas' },
-    { n: '02', titulo: '¿Cuáles tienen más profesionistas ocupados?', texto: 'Una señal de tamaño del mercado laboral, sin confundirla con vacantes disponibles.', href: '/carreras/mas-demandadas' },
-    { n: '03', titulo: '¿Dónde ganan más los profesionistas?', texto: 'Compara los 32 estados y aterriza la conversación a tu ubicación.', href: '/carreras/por-estado' },
-    { n: '04', titulo: '¿Qué carreras reportan menor ingreso?', texto: 'Mira el otro extremo de la distribución y qué contexto falta antes de elegir.', href: '/carreras/peor-pagadas' },
+  const rutas = [
+    { titulo: 'Carreras mejor pagadas', href: '/carreras/mejor-pagadas' },
+    { titulo: 'Profesionistas ocupados', href: '/carreras/mas-demandadas' },
+    { titulo: 'Salarios por estado', href: '/carreras/por-estado' },
+    { titulo: 'Carreras de menor ingreso', href: '/carreras/peor-pagadas' },
   ];
   const perfiles = profesiones.profesiones.slice(0, 8);
   const preguntas = [
@@ -161,35 +161,23 @@ function Hub() {
   ];
   return (
     <>
-      <Hero eyebrow="Carreras · Trabajo · Dinero" title="Elegir carrera también es una decisión financiera." lede="Compara ingresos, tamaño del mercado laboral y diferencias regionales con datos públicos. Después convierte esas cifras en ingreso neto, ahorro y decisiones de vida." image={PEXELS.hub} imageAlt="Estudiantes universitarios colaborando frente a una laptop" />
+      <Hero compact eyebrow="Carreras · Trabajo · Dinero" title="Elegir carrera también es una decisión financiera." lede="Compara ingresos, tamaño del mercado laboral y diferencias regionales con datos públicos. Después convierte esas cifras en ingreso neto, ahorro y decisiones de vida." image={PEXELS.hub} imageAlt="Estudiantes universitarios colaborando frente a una laptop" />
       <main>
-        <DecisionExplorer initialTopic="carrera" />
-        <section className="career-hub-section">
-          <div className="shell career-hub-grid">
-            <div className="career-hub-intro">
-              <p className="eyebrow">No empieces por un ranking</p>
-              <h2>Empieza por la pregunta que realmente quieres resolver.</h2>
-              <p>Un sueldo promedio por sí solo no te dice cuánto ganarás, si habrá vacantes o si disfrutarás el trabajo. MiLana separa esas preguntas para que puedas compararlas sin mezclar métricas.</p>
-            </div>
-            <div className="career-route-list">
-              {routes.map((r) => (
-                <a className="career-route" href={r.href} key={r.n}>
-                  <span>{r.n}</span><div><h3>{r.titulo}</h3><p>{r.texto}</p></div><b>↗</b>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="career-question-section" aria-labelledby="career-question-title">
+        <section className="career-hub-section ecosystem-hub" id="explorar" aria-label="Explorador de carreras y empleos">
           <div className="shell">
-            <div className="career-question-head">
-              <div><p className="eyebrow">Preguntas que abren otras preguntas</p><h2 id="career-question-title">Explora como buscarías en Google.</h2></div>
-              <p>No necesitas conocer la estructura de MiLana. Elige una duda concreta y salta a la siguiente comparación sin perder el contexto.</p>
-            </div>
-            <div className="career-question-grid">
-              {preguntas.map(([tipo, pregunta, href]) => <a href={href} key={pregunta}><span>{tipo}</span><strong>{pregunta}</strong><b>→</b></a>)}
-            </div>
+            <DecisionExplorer initialTopic="carrera" />
+            <nav className="ecosystem-shortcuts" aria-label="Datos y rankings de carreras">
+              <span className="ecosystem-shortcuts-label">Consultar datos de carreras</span>
+              <div className="ecosystem-shortcuts-grid">
+                {rutas.map((r) => <a href={r.href} key={r.href}>{r.titulo}<span aria-hidden="true">↗</span></a>)}
+              </div>
+            </nav>
+            <details className="ecosystem-more-questions">
+              <summary>Explorar las 9 preguntas frecuentes sobre carreras <span aria-hidden="true">+</span></summary>
+              <nav aria-label="Más preguntas sobre carreras" className="ecosystem-more-links">
+                {preguntas.map(([tipo, pregunta, href]) => <a href={href} key={pregunta}><span>{tipo}</span><strong>{pregunta}</strong></a>)}
+              </nav>
+            </details>
           </div>
         </section>
 

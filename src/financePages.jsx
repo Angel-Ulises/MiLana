@@ -35,8 +35,8 @@ function Fuente({ tipo }) {
   return <aside className="finance-source"><span>Fuente</span><div><strong>{f.nombre}</strong><p>{f.fecha}</p></div></aside>;
 }
 
-function Hero({ eyebrow, title, lede, photo = true }) {
-  return <section className="finance-page-hero"><div className="shell finance-page-hero-grid"><div className="finance-page-hero-copy"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/finanzas">Finanzas</a></nav><p className="eyebrow">{eyebrow}</p><h1>{title}</h1><p className="finance-page-lede">{lede}</p><div className="finance-page-proof"><span>Sin registro</span><span>Todo en tu navegador</span><span>Supuestos visibles</span></div></div>{photo && <figure className="finance-page-photo"><img src={foto(1400)} srcSet={`${foto(720)} 720w, ${foto(1400)} 1400w`} sizes="(max-width: 900px) 100vw, 46vw" alt="Persona organizando un presupuesto con laptop y calculadora" loading="eager" /></figure>}</div></section>;
+function Hero({ eyebrow, title, lede, photo = true, compact = false }) {
+  return <section className="finance-page-hero"><div className="shell finance-page-hero-grid"><div className="finance-page-hero-copy"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/finanzas">Finanzas</a></nav><p className="eyebrow">{eyebrow}</p><h1>{title}</h1><p className="finance-page-lede">{lede}</p><div className="finance-page-proof"><span>Sin registro</span><span>Todo en tu navegador</span><span>Supuestos visibles</span></div>{compact && <a className="ecosystem-hero-link" href="#explorar">Explorar mis opciones <span aria-hidden="true">↓</span></a>}</div>{photo && <figure className="finance-page-photo"><img src={foto(1400)} srcSet={`${foto(720)} 720w, ${foto(1400)} 1400w`} sizes="(max-width: 900px) 100vw, 46vw" alt="Persona organizando un presupuesto con laptop y calculadora" loading="eager" /></figure>}</div></section>;
 }
 
 function Campo({ label, value, onChange, help, placeholder = '0' }) {
@@ -57,7 +57,7 @@ function Hub() {
     ['Retiro', 'Requisitos y Pensión IMSS', '/calculadoras/pension-imss'],
   ];
   return <div className="finance-hub-page">
-    <Hero eyebrow="Finanzas personales · México" title="Tu dinero no vive en temas separados." lede="Sueldo, gastos, deuda, ahorro y vivienda se afectan entre sí. MiLana los conecta para que puedas entender qué cambia antes de tomar una decisión." />
+    <Hero compact eyebrow="Finanzas personales · México" title="Tu dinero no vive en temas separados." lede="Sueldo, gastos, deuda, ahorro y vivienda se afectan entre sí. MiLana los conecta para que puedas entender qué cambia antes de tomar una decisión." />
     <main>
       <section className="finance-hub ecosystem-hub" id="explorar" aria-label="Explora herramientas conectadas">
         <div className="shell">

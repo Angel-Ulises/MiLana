@@ -136,6 +136,8 @@ function asegurarDestino() {
 function asegurarNavegacion() {
   const nav = document.querySelector('.desktop-nav');
   if (!nav || nav.querySelector('[data-ml-finance-nav]')) return;
+  // El header React ya incluye ambas áreas: no duplicarlas con el puente legacy.
+  if (nav.querySelector('a[href="/finanzas"]') && nav.querySelector('a[href="/carreras"]')) return;
   const carreras = document.createElement('a');
   carreras.href = '/carreras';
   carreras.textContent = 'Carreras';

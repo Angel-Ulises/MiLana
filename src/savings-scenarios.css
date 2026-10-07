@@ -1,0 +1,32 @@
+/* Comparaciones de ahorro – usa el sistema cromático vigente. */
+.ml-scenarios{margin-top:28px;border:1px solid #cedce6;border-radius:22px;background:#f8fafc;padding:clamp(18px,2.3vw,25px);color:#13263b}
+.ml-scenarios-eyebrow{color:#245c93;font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.ml-scenarios-heading h3{font-family:Newsreader,Georgia,serif;font-weight:600;letter-spacing:-.03em;font-size:clamp(24px,2.7vw,30px);line-height:1.15;margin:8px 0 10px}
+.ml-scenarios .ml-scenarios-heading p{font-size:13px;line-height:1.6;color:#405568;margin:0 0 18px}
+.ml-scenarios-empty{background:white;border:1px dashed #a9c2d6;border-radius:13px;padding:16px;line-height:1.6;color:#384e60;font-size:13px}
+.ml-scenarios-control{border:1px solid #d7e2eb;background:white;border-radius:15px;padding:15px}
+.ml-scenarios-control-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ml-scenarios-control-head label{font-weight:750;font-size:13px;color:#13263b}
+.ml-scenarios-control-head strong{font-weight:800;font-size:13px;color:#245c93}
+.ml-scenarios-control input[type=range]{display:block;width:100%;margin:16px 0 4px;accent-color:#2d6caa;cursor:pointer;min-height:24px}
+.ml-scenarios-boundaries{display:flex;justify-content:space-between;color:#536575;font-size:11px}
+.ml-scenarios-legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin:19px 0 16px;font-size:12px;line-height:1.4;color:#233a4e}
+.ml-scenarios-legend>span{display:flex;align-items:center;gap:8px;font-weight:700}
+.ml-scenarios-dot{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}
+.ml-scenarios-dot.base{background:#2d6caa}.ml-scenarios-dot.alternative{background:#24745e}
+.ml-scenarios-chart{display:grid;gap:18px}
+.ml-scenarios-chart-row{min-width:0}
+.ml-scenarios-chart-title{display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:space-between;align-items:baseline;margin-bottom:6px;color:#2a4155}
+.ml-scenarios-chart-title b{font-size:12px}
+.ml-scenarios-chart-title span{font-variant-numeric:tabular-nums;font-size:12px}
+.ml-scenarios-bar{display:flex;flex-direction:column;justify-content:center;gap:5px;height:29px;min-width:0}
+.ml-scenarios-bar>span{display:block;height:11px;border-radius:0 99px 99px 0;transition:width .22s ease}
+.ml-scenarios-bar .base{background:#2d6caa}.ml-scenarios-bar .alternative{background:#24745e}
+.ml-scenarios-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:19px}
+.ml-scenarios-summary>div{background:white;border:1px solid #dce5ed;border-radius:12px;padding:13px;min-width:0}
+.ml-scenarios-summary span{display:block;font-size:11px;line-height:1.35;color:#40596c;margin-bottom:7px}
+.ml-scenarios-summary strong{display:block;color:#13263b;font-weight:800;font-size:clamp(14px,1.3vw,18px);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.ml-scenarios .ml-scenarios-warning{color:#40596c !important;font-size:12px;line-height:1.55;margin:17px 0 0}
+.ml-scenarios input:focus-visible{outline:3px solid #2d6caa;outline-offset:3px}
+@media(max-width:640px){.ml-scenarios-summary{grid-template-columns:1fr 1fr}.ml-scenarios-summary>div:first-child{grid-column:1/-1}.ml-scenarios-legend{flex-direction:column}.ml-scenarios-chart-title{display:block}.ml-scenarios-chart-title span{display:block;margin-top:3px}}
+@media(prefers-reduced-motion:reduce){.ml-scenarios-bar>span{transition:none}}

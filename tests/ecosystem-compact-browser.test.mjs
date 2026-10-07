@@ -20,7 +20,7 @@ test('navegador: Finanzas y Carreras integran el explorador sin navegación repe
       });
       assert.match(html, /id="explorar"/, ruta);
       assert.match(html, /class="ecosystem-shortcuts"/, ruta);
-      assert.match(html, /class="ml-decision-needs"/, ruta);
+      assert.match(html, /class="ml-decision-options ml-decision-needs"/, ruta);
       assert.doesNotMatch(html, /class="ml-decision-result"/, ruta);
       assert.match(html, /href="#explorar"/, ruta);
       if (ruta === '/finanzas') {

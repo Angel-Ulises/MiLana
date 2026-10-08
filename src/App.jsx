@@ -11,6 +11,7 @@ import catalogoSituaciones from "./data/situaciones.json";
 import catalogoFotos from "./data/fotos.json";
 import AdReserve from './AdReserve.jsx';
 import { HomeRoutes, SituationCard } from './homeRoutes.jsx';
+import NetIncomeTransferActions from './netIncomeTransferActions.jsx';
 import { CalculatorResultContext, ResultNextSteps } from './calculatorResultJourney.jsx';
 import './calculator-result-journey.css';
 
@@ -494,6 +495,7 @@ function CalcBrutoNeto() {
           <ResultLine label="Días cotizados" value={resultado.diasCotizados} />
         </>}
         <Note>{resultado.seguridadSocial === 'issste' ? 'Estimación para régimen ISSSTE federal. Un puesto estatal, municipal, universitario o con instituto propio puede usar reglas distintas.' : 'No incluye Infonavit, Fonacot, préstamos, pensión alimenticia, caja de ahorro ni otras deducciones de tu recibo. El SBC se limita a 25 UMA.'}</Note>
+        <NetIncomeTransferActions neto={resultado.netoDespuesISRSeguridadSocial} />
       </ResultBox>}
     </div>
   </form>;

@@ -64,6 +64,7 @@ import './home-flow.css'
 import './home-expansion-compact.css'
 import './net-income-handoff.css'
 import './finance-continuations.css'
+import './finance-tool-first.css'
 
 const profesion = esRutaProfesion()
 const ocupaciones = esRutaOcupaciones()

@@ -2,6 +2,7 @@ import Detalle from './Detalle.jsx';
 import { useMemo, useState } from 'react';
 import datos from './data/economia.json';
 import AdReserve from './AdReserve.jsx';
+import SiteHeader from './siteHeader.jsx';
 
 const foto = (id, width = 1400) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
 const fechaLarga = (fecha) => new Intl.DateTimeFormat('es-MX', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${fecha}T12:00:00Z`));
@@ -18,17 +19,7 @@ function slugActual() {
 }
 
 function Header() {
-  return (
-    <header className="site-header">
-      <div className="shell header-inner">
-        <a className="brand" href="/" aria-label="MiLana, inicio"><img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" /></a>
-        <nav className="desktop-nav" aria-label="Principal">
-          <a href="/finanzas">Finanzas</a><a href="/economia">Economía</a><a href="/carreras">Carreras</a><a href="/#calculadoras">Calculadoras</a><a href="/aprende">Aprende</a>
-        </nav>
-        <a className="header-cta" href="/finanzas/presupuesto">Ordenar mi dinero</a>
-      </div>
-    </header>
-  );
+  return <SiteHeader ctaHref="/finanzas/presupuesto" ctaLabel="Ordenar mi dinero" />;
 }
 
 function Footer() {
@@ -73,6 +64,7 @@ function Hub() {
               <p className="eyebrow">Radar económico · México</p>
               <h1>Economía para entender qué cambia en tu dinero.</h1>
               <p>Inflación, tasas, empleo, consumo y regiones, explicados con una regla simple: primero el dato oficial, después el contexto y al final una herramienta útil.</p>
+              <a className="economy-jump" href="#senales">Ver las señales y sus cifras ↓</a>
               <div className="economy-proof"><span>Fuentes oficiales</span><span>Fecha visible</span><span>Sin recomendaciones automáticas</span></div>
             </div>
             <div className="economy-hero-panel">
@@ -82,10 +74,10 @@ function Hub() {
           </div>
         </section>
 
-        <section className="economy-radar">
+        <section className="economy-radar" id="senales">
           <div className="shell">
             <div className="economy-section-head"><div><p className="eyebrow">Actualidad con contexto</p><h2>Señales que vale la pena entender.</h2></div><p>El Radar no publica por volumen. Una señal entra cuando puede explicarse con una fuente identificable y conectarse con una decisión financiera o laboral concreta.</p></div>
-            <div className="economy-filters" aria-label="Filtrar por categoría">{categorias.map((c) => <button key={c} type="button" className={categoria === c ? 'is-active' : ''} onClick={() => setCategoria(c)}>{c}</button>)}</div>
+            <div className="economy-filters" aria-label="Filtrar por categoría">{categorias.map((c) => <button key={c} type="button" className={categoria === c ? 'is-active' : ''} onClick={() => setCategoria(c)} aria-pressed={categoria === c}>{c}</button>)}</div>
             {principal && <ArticleCard articulo={principal} featured />}
             {resto.length > 0 && <div className="economy-grid">{resto.map((a) => <ArticleCard key={a.slug} articulo={a} />)}</div>}
           </div>
@@ -117,6 +109,11 @@ function Article({ articulo }) {
               <h1>{articulo.titulo}</h1>
               <p>{articulo.descripcion}</p>
               <div className="economy-big-number"><strong>{articulo.datoPrincipal}</strong><span>{articulo.datoEtiqueta}</span></div>
+              <nav className="economy-quick-actions" aria-label="Explorar herramientas para esta señal">
+                <span>Para entenderlo con tus datos</span>
+                <div><a href={articulo.herramienta.href}>{articulo.herramienta.texto} →</a><a href={articulo.herramientaSecundaria.href}>{articulo.herramientaSecundaria.texto} →</a></div>
+                <small>El dato publicado y una estimación personal no son equivalentes.</small>
+              </nav>
             </div>
             <figure><img src={foto(articulo.fotoId)} srcSet={`${foto(articulo.fotoId, 720)} 720w, ${foto(articulo.fotoId, 1400)} 1400w`} sizes="(max-width: 900px) 100vw, 45vw" alt={articulo.fotoAlt} loading="eager" /></figure>
           </div>

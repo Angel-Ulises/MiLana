@@ -1,0 +1,31 @@
+/* Portada: explicación breve disponible bajo demanda, no otra sección narrativa alta. */
+html.ml-orbita-enabled[data-orbita-section="inicio"] .path-section{
+  padding-block:18px!important;
+}
+.ml-how-it-works{
+  border-top:1px solid #d8e2eb;
+  border-bottom:1px solid #d8e2eb;
+  color:#13263b;
+}
+.ml-how-it-works>summary{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  cursor:pointer;list-style:none;min-height:62px;padding:12px 4px;
+}
+.ml-how-it-works>summary::-webkit-details-marker{display:none}
+.ml-how-it-works>summary>span{display:flex;align-items:baseline;flex-wrap:wrap;gap:7px 16px}
+.ml-how-it-works>summary strong{color:#17344d;font-size:14px;font-weight:800}
+.ml-how-it-works>summary small{font-size:12px;font-weight:600;color:#455d70}
+.ml-how-it-works>summary b{color:#2d6caa;font-size:24px;line-height:1;transition:transform .15s ease}
+.ml-how-it-works[open]>summary b{transform:rotate(45deg)}
+.ml-how-it-works>summary:focus-visible{outline:3px solid #2d6caa;outline-offset:3px;border-radius:6px}
+.ml-how-it-works-body{padding:12px 4px 22px}
+.ml-how-it-works-body .path-title{font-family:Newsreader,Georgia,serif;font-size:clamp(25px,3vw,36px);line-height:1.15;max-width:740px;letter-spacing:-.03em;margin:0}
+.ml-how-it-works .path-grid{margin-top:20px}
+.ml-how-it-works .path-step{min-height:110px}
+.ml-how-it-works .path-step.ml-premium-reveal{opacity:1!important;transform:none!important;transition:none!important}
+@media(max-width:640px){
+  .ml-how-it-works>summary>span{display:flex;flex-direction:column;gap:4px}
+  .ml-how-it-works>summary{min-height:64px}
+  .ml-how-it-works .path-step{min-height:0}
+}
+@media(prefers-reduced-motion:reduce){.ml-how-it-works>summary b{transition:none}}

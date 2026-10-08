@@ -1,35 +1,47 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import SiteEnhancements from './siteEnhancements.jsx'
-import MotionDataViz from './motionDataViz.jsx'
-import FinanceExpansion from './financeExpansion.jsx'
-import CareerPages, { esRutaCarreras } from './careerPages.jsx'
-import CareerProfessionPages, { esRutaProfesion } from './careerProfessionPages.jsx'
-import OccupationComparePage, { esRutaOcupaciones } from './occupationComparePage.jsx'
-import OccupationEntry from './occupationEntry.jsx'
-import CareerComparePage, { esRutaCompararCarreras } from './careerComparePage.jsx'
-import StateComparePage, { esRutaCompararEstados } from './stateComparePage.jsx'
-import StatePages, { esRutaEstado } from './statePages.jsx'
-import StateEntry from './stateEntry.jsx'
-import StateHousing from './stateHousing.jsx'
-import StateOccupations from './stateOccupations.jsx'
-import StateCompareEntry from './stateCompareEntry.jsx'
-import SavedStateContext from './savedStateContext.jsx'
-import FinancePages, { esRutaFinanzas } from './financePages.jsx'
-import AdvisorPage, { esRutaAsesor } from './advisorPage.jsx'
-import AdvisorEntry from './advisorEntry.jsx'
-import InvestmentReadinessPage, { esRutaInversionEducativa } from './investmentReadinessPage.jsx'
-import InvestmentInstrumentComparePage, { esRutaCompararInstrumentos } from './investmentInstrumentComparePage.jsx'
-import CetesReferencePage, { esRutaCetesReferencia } from './cetesReferencePage.jsx'
-import CnbvFundsPage, { esRutaFondosCNBV } from './cnbvFundsPage.jsx'
-import InvestmentEntry from './investmentEntry.jsx'
-import InvestmentCompareEntry from './investmentCompareEntry.jsx'
-import EconomyPages, { esRutaEconomia } from './economyPages.jsx'
-import EconomyNavigation from './economyNavigation.jsx'
-import CareerMotion from './careerMotion.jsx'
-import RouteMotion from './routeMotion.jsx'
-import JourneyCompanion from './journeyCompanion.jsx'
+import {
+  esRutaCarreras, esRutaProfesion, esRutaOcupaciones, esRutaCompararCarreras,
+  esRutaCompararEstados, esRutaEstado, esRutaFondosCNBV, esRutaCetesReferencia,
+  esRutaCompararInstrumentos, esRutaInversionEducativa, esRutaAsesor,
+  esRutaFinanzas, esRutaEconomia, rutaConExtras,
+} from './lib/routeMatcher.js'
+
+// Cada página carga únicamente la sección que el visitante pidió.
+// La detección de rutas permanece síncrona para conservar todas las prioridades.
+const App = React.lazy(() => import('./App.jsx'))
+const SiteEnhancements = React.lazy(() => import('./siteEnhancements.jsx'))
+const MotionDataViz = React.lazy(() => import('./motionDataViz.jsx'))
+const FinanceExpansion = React.lazy(() => import('./financeExpansion.jsx'))
+const CareerPages = React.lazy(() => import('./careerPages.jsx'))
+const CareerProfessionPages = React.lazy(() => import('./careerProfessionPages.jsx'))
+const OccupationComparePage = React.lazy(() => import('./occupationComparePage.jsx'))
+const OccupationEntry = React.lazy(() => import('./occupationEntry.jsx'))
+const CareerComparePage = React.lazy(() => import('./careerComparePage.jsx'))
+const StateComparePage = React.lazy(() => import('./stateComparePage.jsx'))
+const StatePages = React.lazy(() => import('./statePages.jsx'))
+const StateEntry = React.lazy(() => import('./stateEntry.jsx'))
+const StateHousing = React.lazy(() => import('./stateHousing.jsx'))
+const StateOccupations = React.lazy(() => import('./stateOccupations.jsx'))
+const StateCompareEntry = React.lazy(() => import('./stateCompareEntry.jsx'))
+const SavedStateContext = React.lazy(() => import('./savedStateContext.jsx'))
+const FinancePages = React.lazy(() => import('./financePages.jsx'))
+const AdvisorPage = React.lazy(() => import('./advisorPage.jsx'))
+const AdvisorEntry = React.lazy(() => import('./advisorEntry.jsx'))
+const InvestmentReadinessPage = React.lazy(() => import('./investmentReadinessPage.jsx'))
+const InvestmentInstrumentComparePage = React.lazy(() => import('./investmentInstrumentComparePage.jsx'))
+const CetesReferencePage = React.lazy(() => import('./cetesReferencePage.jsx'))
+const CnbvFundsPage = React.lazy(() => import('./cnbvFundsPage.jsx'))
+const InvestmentEntry = React.lazy(() => import('./investmentEntry.jsx'))
+const InvestmentCompareEntry = React.lazy(() => import('./investmentCompareEntry.jsx'))
+const EconomyPages = React.lazy(() => import('./economyPages.jsx'))
+const EconomyNavigation = React.lazy(() => import('./economyNavigation.jsx'))
+const CareerMotion = React.lazy(() => import('./careerMotion.jsx'))
+const RouteMotion = React.lazy(() => import('./routeMotion.jsx'))
+const JourneyCompanion = React.lazy(() => import('./journeyCompanion.jsx'))
+// Estilos base compartidos: no diferirlos junto al módulo de calculadoras.
+import './design-home.css'
+import './route-loading.css'
 import './site-overrides.css'
 import './motion-viz.css'
 import './results-only-viz.css'
@@ -83,94 +95,109 @@ const inversion = esRutaInversionEducativa()
 const asesor = esRutaAsesor()
 const finanzas = esRutaFinanzas()
 const economia = esRutaEconomia()
+const extras = rutaConExtras()
+
+// Se reserva el espacio del contenido principal mientras llega su módulo.
+// Los complementos cargan de forma independiente para no bloquear la página.
+function PrimaryRoute() {
+  return profesion ? (
+    <>
+      <CareerProfessionPages />
+      <RouteMotion />
+    </>
+  ) : ocupaciones ? (
+    <>
+      <OccupationComparePage />
+      <RouteMotion />
+    </>
+  ) : compararCarreras ? (
+    <>
+      <CareerComparePage />
+      <RouteMotion />
+    </>
+  ) : compararEstados ? (
+    <>
+      <StateComparePage />
+      <RouteMotion />
+    </>
+  ) : estados ? (
+    <>
+      <StatePages />
+      <RouteMotion />
+    </>
+  ) : carrera ? (
+    <>
+      <CareerPages />
+      <CareerMotion />
+    </>
+  ) : fondosCNBV ? (
+    <>
+      <CnbvFundsPage />
+      <RouteMotion />
+    </>
+  ) : cetesReferencia ? (
+    <>
+      <CetesReferencePage />
+      <RouteMotion />
+    </>
+  ) : compararInstrumentos ? (
+    <>
+      <InvestmentInstrumentComparePage />
+      <RouteMotion />
+    </>
+  ) : inversion ? (
+    <>
+      <InvestmentReadinessPage />
+      <RouteMotion />
+    </>
+  ) : asesor ? (
+    <>
+      <AdvisorPage />
+      <RouteMotion />
+    </>
+  ) : finanzas ? (
+    <>
+      <FinancePages />
+      <RouteMotion />
+    </>
+  ) : economia ? (
+    <>
+      <EconomyPages />
+      <RouteMotion />
+    </>
+  ) : (
+    <>
+      <App />
+      <SiteEnhancements />
+      <MotionDataViz />
+      <FinanceExpansion />
+    </>
+  )
+}
+
+function RouteExtras() {
+  return <>
+    {extras.occupationEntry && <OccupationEntry />}
+    {extras.stateEntry && <StateEntry />}
+    {extras.stateHousing && <StateHousing />}
+    {extras.stateOccupations && <StateOccupations />}
+    {extras.stateCompareEntry && <StateCompareEntry />}
+    {extras.savedStateContext && <SavedStateContext />}
+    {extras.advisorEntry && <AdvisorEntry />}
+    {extras.investmentEntry && <InvestmentEntry />}
+    {extras.investmentCompareEntry && <InvestmentCompareEntry />}
+    {extras.economyNavigation && <EconomyNavigation />}
+    <JourneyCompanion />
+  </>
+}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <>
-      {profesion ? (
-        <>
-          <CareerProfessionPages />
-          <RouteMotion />
-        </>
-      ) : ocupaciones ? (
-        <>
-          <OccupationComparePage />
-          <RouteMotion />
-        </>
-      ) : compararCarreras ? (
-        <>
-          <CareerComparePage />
-          <RouteMotion />
-        </>
-      ) : compararEstados ? (
-        <>
-          <StateComparePage />
-          <RouteMotion />
-        </>
-      ) : estados ? (
-        <>
-          <StatePages />
-          <RouteMotion />
-        </>
-      ) : carrera ? (
-        <>
-          <CareerPages />
-          <CareerMotion />
-        </>
-      ) : fondosCNBV ? (
-        <>
-          <CnbvFundsPage />
-          <RouteMotion />
-        </>
-      ) : cetesReferencia ? (
-        <>
-          <CetesReferencePage />
-          <RouteMotion />
-        </>
-      ) : compararInstrumentos ? (
-        <>
-          <InvestmentInstrumentComparePage />
-          <RouteMotion />
-        </>
-      ) : inversion ? (
-        <>
-          <InvestmentReadinessPage />
-          <RouteMotion />
-        </>
-      ) : asesor ? (
-        <>
-          <AdvisorPage />
-          <RouteMotion />
-        </>
-      ) : finanzas ? (
-        <>
-          <FinancePages />
-          <RouteMotion />
-        </>
-      ) : economia ? (
-        <>
-          <EconomyPages />
-          <RouteMotion />
-        </>
-      ) : (
-        <>
-          <App />
-          <SiteEnhancements />
-          <MotionDataViz />
-          <FinanceExpansion />
-        </>
-      )}
-      <OccupationEntry />
-      <StateEntry />
-      <StateHousing />
-      <StateOccupations />
-      <StateCompareEntry />
-      <SavedStateContext />
-      <AdvisorEntry />
-      <InvestmentEntry />
-      <InvestmentCompareEntry />
-      <EconomyNavigation />
-      <JourneyCompanion />
-    </>
+    <React.Suspense fallback={<main className="ml-route-loading" role="status" aria-label="Cargando sección"><span>Cargando contenido…</span></main>}>
+      <PrimaryRoute />
+    </React.Suspense>
+    <React.Suspense fallback={null}>
+      <RouteExtras />
+    </React.Suspense>
   </React.StrictMode>,
 )

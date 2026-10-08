@@ -1,0 +1,25 @@
+/* Pantalla de transición breve mientras se descarga la sección solicitada. */
+.ml-route-loading{
+  min-height:clamp(260px,55vh,540px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:48px 24px;
+  color:#35516c;
+  background:linear-gradient(165deg,#fbf8f2,#f3f8fc);
+  font-family:Inter,system-ui,sans-serif;
+}
+.ml-route-loading span{
+  display:block;
+  max-width:20rem;
+  padding:12px 20px;
+  border:1px solid #dbe6ef;
+  border-radius:999px;
+  background:#fff;
+  font-size:13px;
+  font-weight:650;
+  text-align:center;
+}
+@media(max-width:640px){
+  .ml-route-loading{min-height:320px;padding:30px 16px}
+}

@@ -31,10 +31,13 @@ test('portada mantiene foto separada del texto y elimina overlay', () => {
   assert.match(css, /\.hero-media-wrap\{display:none!important\}/);
 });
 
-test('Mi situación es una tarjeta oscura con siguiente paso', () => {
-  assert.match(js, /Mi situación · paso 1 de 4/);
-  assert.match(js, /Siguiente:/);
-  assert.match(css, /\.orb-situation-card\{[\s\S]*background:#162536/);
+test('el seguimiento solo se muestra con una ruta guardada y sin pasos ficticios', () => {
+  assert.match(js, /if \(!route\) return null/);
+  assert.match(js, /Continúa donde te quedaste/);
+  assert.match(js, /Retomar herramienta/);
+  assert.match(js, /Descartar/);
+  assert.doesNotMatch(js, /paso 1 de 4/);
+  assert.match(css, /\.orb-situation-card\{[\s\S]*background:#EEF5FA/);
 });
 
 test('estética híbrida es clara, redondeada y usa azul MiLana como acción', () => {

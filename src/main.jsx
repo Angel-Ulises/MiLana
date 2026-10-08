@@ -63,6 +63,7 @@ import './connected-journeys.css'
 import './home-flow.css'
 import './home-expansion-compact.css'
 import './net-income-handoff.css'
+import './finance-continuations.css'
 
 const profesion = esRutaProfesion()
 const ocupaciones = esRutaOcupaciones()

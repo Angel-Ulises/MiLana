@@ -18,7 +18,7 @@ export function esRutaAsesor() {
 }
 
 function Header() {
-  return <header className="site-header"><div className="shell header-inner"><a className="brand" href="/" aria-label="MiLana, inicio"><img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" /></a><nav className="desktop-nav" aria-label="Principal"><a href="/finanzas">Finanzas</a><a href="/carreras">Carreras</a><a href="/#calculadoras">Calculadoras</a><a href="/economia">Economía</a></nav><a className="header-cta" href="/finanzas/presupuesto">Presupuesto</a></div></header>;
+  return <header className="site-header"><div className="shell header-inner"><a className="brand" href="/" aria-label="MiLana, inicio"><img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" /></a><nav className="desktop-nav" aria-label="Principal"><a href="/finanzas">Finanzas</a><a href="/carreras">Carreras</a><a href="/#calculadoras">Calculadoras</a><a href="/aprende">Aprende</a></nav><a className="header-cta" href="/finanzas/presupuesto">Presupuesto</a></div></header>;
 }
 
 function Campo({ label, value, onChange, help }) {
@@ -67,12 +67,12 @@ export default function AdvisorPage() {
 
   return <div className="advisor-page">
     <Header />
-    <section className="advisor-hero"><div className="shell"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/finanzas">Finanzas</a><span>/</span><span>Mi situación</span></nav><p className="eyebrow">Mi situación · MiLana</p><h1>Cuéntame tus números. MiLana conecta lo que significan.</h1><p>No es un chat que adivina. MiLana usa reglas visibles para ordenar flujo mensual, deuda, respaldo y una meta. Los cálculos ocurren en tu navegador y no eligen inversiones por ti.</p><div className="advisor-proof"><span>Sin cuenta</span><span>Sin guardar contraseñas</span><span>Sin seleccionar productos</span></div></div></section>
+    <section className="advisor-hero"><div className="shell"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/finanzas">Finanzas</a><span>/</span><span>Mi situación</span></nav><p className="eyebrow">Mi situación · MiLana</p><h1>Cuéntame tus números. MiLana conecta lo que significan.</h1><p>No es un chat que adivina. MiLana usa reglas visibles para ordenar flujo mensual, deuda, respaldo y una meta. Los cálculos ocurren en tu navegador y no eligen inversiones por ti.</p><div className="advisor-proof"><span>Sin cuenta</span><span>Sin guardar contraseñas</span><span>Sin seleccionar productos</span></div><a className="finance-start-link advisor-start-link" href="#mi-situacion-datos">Empezar mi análisis <span aria-hidden="true">↓</span></a></div></section>
 
     <main className="advisor-main">
       <div className="shell"><AdvisorProfessionContext /></div>
       <section className="shell advisor-layout">
-      <form className="advisor-form" onSubmit={(e) => e.preventDefault()}>
+      <form className="advisor-form" id="mi-situacion-datos" onSubmit={(e) => e.preventDefault()}>
         <div className="advisor-form-head"><p className="eyebrow">Tu fotografía mensual</p><h2>Empieza con lo que ya sabes.</h2><p>Puedes dejar campos vacíos. MiLana solo calcula con lo que captures.</p></div>
         {contextoImportado && <FinanceContextNotice contexto={contextoImportado} onClear={quitarContexto} />}
         {ingresoImportado && <IncomeTransferNotice onClear={() => { setForm(actual => ({ ...actual, ingresoNeto: '' })); setIngresoImportado(false); }} />}

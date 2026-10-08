@@ -1,0 +1,66 @@
+/* Inicio: conservar todas las rutas sin apilar secciones de tamaño editorial. */
+#ml-finance-expansion-root .ml-discovery-section{
+  padding:clamp(34px,4.5vw,60px) 0;
+}
+#ml-finance-expansion-root .ml-discovery-shell{gap:clamp(20px,4vw,48px)}
+#ml-finance-expansion-root .ml-discovery-copy h2{font-size:clamp(32px,3.3vw,46px)}
+#ml-finance-expansion-root .ml-discovery-photo{width:min(100%,390px);margin-top:23px}
+#ml-finance-expansion-root .mlq-list{gap:9px}
+#ml-finance-expansion-root .mlq-question{min-height:72px;padding:15px 17px;gap:11px}
+#ml-finance-expansion-root .mlq-question-title{font-size:clamp(19px,1.8vw,23px)}
+#ml-finance-expansion-root .mlq-answer{margin-left:17px;margin-right:17px}
+#ml-finance-expansion-root .ml-money-map{padding:clamp(38px,5vw,66px) 0}
+#ml-finance-expansion-root .ml-money-head{gap:24px;margin-bottom:23px}
+#ml-finance-expansion-root .ml-money-head h2{font-size:clamp(33px,4vw,49px)}
+#ml-finance-expansion-root .ml-money-card{min-height:160px;padding:17px 18px}
+#ml-finance-expansion-root .ml-money-card h3{font-size:23px;margin:22px 0 7px}
+#ml-finance-expansion-root .ml-money-card p{font-size:12px;line-height:1.45}
+#ml-finance-expansion-root .ml-advisor-strip{margin-top:13px;padding:22px 25px;border-radius:20px}
+#ml-finance-expansion-root .ml-advisor-strip h3{font-size:clamp(25px,2.8vw,34px)}
+#ml-finance-expansion-root .ml-editorial-section{padding:clamp(38px,5vw,66px) 0}
+#ml-finance-expansion-root .ml-editorial-feature{min-height:360px}
+#ml-finance-expansion-root .ml-editorial-overlay h2{font-size:clamp(28px,3.6vw,42px)}
+#ml-finance-expansion-root .ml-more-questions{border:1px solid #d7e3ee;border-radius:14px;background:#fff}
+#ml-finance-expansion-root .ml-more-questions summary{
+  min-height:51px;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;list-style:none;padding:11px 16px;cursor:pointer;
+  font-size:13px;font-weight:800;color:#245c93;
+}
+#ml-finance-expansion-root .ml-more-questions summary::-webkit-details-marker{display:none}
+#ml-finance-expansion-root .ml-more-questions summary span{font-size:21px;line-height:1;color:#245c93}
+#ml-finance-expansion-root .ml-more-questions[open] summary span{transform:rotate(45deg)}
+#ml-finance-expansion-root .ml-more-questions-list{display:grid;gap:9px;padding:0 10px 10px}
+#ml-finance-expansion-root .ml-more-questions summary:focus-visible{outline:3px solid #2d6caa;outline-offset:3px}
+@media(max-width:900px){
+  #ml-finance-expansion-root .ml-discovery-copy{position:static}
+}
+@media(max-width:640px){
+  #ml-finance-expansion-root .ml-discovery-section,
+  #ml-finance-expansion-root .ml-money-map,
+  #ml-finance-expansion-root .ml-editorial-section{padding:32px 0}
+  /* La fotografía de estudiantes ya aparece en Carreras; no duplicarla en Inicio móvil. */
+  #ml-finance-expansion-root .ml-discovery-photo{display:none}
+  #ml-finance-expansion-root .ml-discovery-copy h2{font-size:32px;line-height:1.07}
+  #ml-finance-expansion-root .mlq-question{min-height:64px;padding:12px 14px;gap:8px}
+  #ml-finance-expansion-root .mlq-question-title{font-size:20px}
+  #ml-finance-expansion-root .ml-money-head{gap:13px;margin-bottom:16px}
+  #ml-finance-expansion-root .ml-money-head h2{font-size:34px}
+  #ml-finance-expansion-root .ml-money-grid{gap:0}
+  #ml-finance-expansion-root .ml-money-card{
+    display:grid;grid-template-columns:27px minmax(0,1fr);
+    grid-template-rows:auto auto;gap:4px 10px;min-height:0;
+    padding:14px 26px 14px 4px;border:0;border-bottom:1px solid rgba(255,255,255,.16);
+    border-radius:0;background:transparent;backdrop-filter:none;
+  }
+  #ml-finance-expansion-root .ml-money-card>span{grid-column:1;grid-row:1 / 3;font-size:14px}
+  #ml-finance-expansion-root .ml-money-card h3{grid-column:2;grid-row:1;margin:0;max-width:none;font-size:19px;line-height:1.15}
+  #ml-finance-expansion-root .ml-money-card p{grid-column:2;grid-row:2;margin:0;max-width:none;font-size:11.5px;line-height:1.45}
+  #ml-finance-expansion-root .ml-money-card b{right:4px;top:13px}
+  #ml-finance-expansion-root .ml-advisor-strip{padding:20px;margin-top:18px;border-radius:18px;gap:15px}
+  #ml-finance-expansion-root .ml-advisor-strip h3{font-size:27px}
+  #ml-finance-expansion-root .ml-editorial-feature{min-height:370px}
+  #ml-finance-expansion-root .ml-editorial-overlay h2{font-size:34px}
+}
+@media(prefers-reduced-motion:reduce){
+  #ml-finance-expansion-root .ml-more-questions summary span{transition:none}
+}

@@ -1773,22 +1773,29 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
 
           <section className="section path-section">
             <div className="shell">
-              <p className="eyebrow">La ruta MiLana</p>
-              <h2 className="path-title">De “no entiendo” a “sé por qué elegir esto”.</h2>
-              <div className="path-grid">
-                <div className="path-step">
-                  <span className="path-number">1</span>
-                  <div><h3>Entender</h3><p>Traducimos conceptos y reglas a lenguaje normal.</p></div>
+              <details className="ml-how-it-works">
+                <summary>
+                  <span><strong>¿Cómo funciona MiLana?</strong><small>Entender · Comparar · Decidir</small></span>
+                  <b aria-hidden="true">+</b>
+                </summary>
+                <div className="ml-how-it-works-body">
+                  <h2 className="path-title">De “no entiendo” a “sé por qué elegir esto”.</h2>
+                  <div className="path-grid">
+                    <div className="path-step">
+                      <span className="path-number">1</span>
+                      <div><h3>Entender</h3><p>Traducimos conceptos y reglas a lenguaje normal.</p></div>
+                    </div>
+                    <div className="path-step">
+                      <span className="path-number">2</span>
+                      <div><h3>Comparar</h3><p>Prueba números y escenarios sin perder el contexto.</p></div>
+                    </div>
+                    <div className="path-step">
+                      <span className="path-number">3</span>
+                      <div><h3>Decidir</h3><p>Qué cambia, qué revisar y qué conviene preguntar antes de actuar.</p></div>
+                    </div>
+                  </div>
                 </div>
-                <div className="path-step">
-                  <span className="path-number">2</span>
-                  <div><h3>Comparar</h3><p>Prueba números y escenarios sin perder el contexto.</p></div>
-                </div>
-                <div className="path-step">
-                  <span className="path-number">3</span>
-                  <div><h3>Decidir</h3><p>Qué cambia, qué revisar y qué conviene preguntar antes de actuar.</p></div>
-                </div>
-              </div>
+              </details>
             </div>
           </section>
 

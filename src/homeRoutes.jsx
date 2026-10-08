@@ -21,19 +21,29 @@ const RUTAS = [
   { label: 'Pienso mudarme de estado', href: '/estados/comparar', icon: 'map', tone: 'teal' }
 ];
 
+const DURACION_RUTA = 14 * 24 * 60 * 60 * 1000;
+
 function rutaGuardada() {
   try {
-    const guardada = JSON.parse(localStorage.getItem('ml-orbita-route') || 'null');
-    // Solo rutas internas guardadas por este mismo componente.
-    return guardada && typeof guardada.label === 'string' && /^\/(?!\/)/.test(String(guardada.href)) ? guardada : null;
-  }
-  catch { return null; }
+    const dato = JSON.parse(localStorage.getItem('ml-orbita-route') || 'null');
+    // Nunca confiar en destinos introducidos manualmente ni mostrar rutas indefinidas.
+    const ruta = RUTAS.find((item) => item.href === dato?.href && item.label === dato?.label);
+    const tiempo = Number(dato?.updatedAt);
+    if (!ruta || !Number.isFinite(tiempo) || tiempo > Date.now() || Date.now() - tiempo > DURACION_RUTA) return null;
+    return ruta;
+  } catch { return null; }
 }
 
 function recordarRuta(ruta) {
   try {
-    localStorage.setItem('ml-orbita-route', JSON.stringify({ label: ruta.label, href: ruta.href, step: 1, updatedAt: Date.now() }));
-  } catch { /* sin almacenamiento */ }
+    localStorage.setItem('ml-orbita-route', JSON.stringify({
+      label: ruta.label, href: ruta.href, updatedAt: Date.now(),
+    }));
+  } catch { /* Navegación disponible aunque se bloquee almacenamiento. */ }
+}
+
+function descartarRuta() {
+  try { localStorage.removeItem('ml-orbita-route'); } catch { /* sin almacenamiento */ }
 }
 
 export function HomeRoutes() {
@@ -59,26 +69,19 @@ export function HomeRoutes() {
 }
 
 export function SituationCard() {
-  const [ruta] = useState(rutaGuardada);
+  const [ruta, setRuta] = useState(rutaGuardada);
+  // La portada ya pregunta qué necesita el visitante: no repetirla cuando no hay ruta.
+  if (!ruta) return null;
   return (
-    <section className="orb-situation-card" data-orbita-situation-card="true" aria-label="Mi situación">
+    <aside className="orb-situation-card" data-orbita-situation-card="true" aria-label="Retomar tu última consulta">
       <div>
-        <span>Mi situación · paso 1 de 4</span>
-        {ruta ? (
-          <>
-            <strong>{ruta.label}</strong>
-            <p>Tu ruta queda guardada en este dispositivo para que puedas retomarla.</p>
-          </>
-        ) : (
-          <>
-            <strong>Empieza por lo que estás viviendo</strong>
-            <p>Elige una ruta y MiLana te lleva a la herramienta correcta sin hacerte adivinar qué buscar.</p>
-          </>
-        )}
+        <span>Continúa donde te quedaste</span>
+        <strong>{ruta.label}</strong>
       </div>
-      <a href={ruta?.href || '#orb-home-routes'}>
-        <span>Siguiente:</span> {ruta ? 'continuar mi ruta' : 'elegir mi situación'} <b>→</b>
-      </a>
-    </section>
+      <div className="orb-situation-actions">
+        <a href={ruta.href}>Retomar herramienta <b aria-hidden="true">→</b></a>
+        <button type="button" onClick={() => { descartarRuta(); setRuta(null); }}>Descartar</button>
+      </div>
+    </aside>
   );
 }

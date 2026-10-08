@@ -191,9 +191,17 @@ function FinanceContent() {
             </div>
           </div>
           <div className="mlq-list">
-            {preguntas.map((item) => (
+            {preguntas.slice(0, 3).map((item) => (
               <PreguntaCard key={item.id} item={item} abierta={abierta === item.id} onToggle={() => setAbierta(abierta === item.id ? null : item.id)} />
             ))}
+            <details className="ml-more-questions">
+              <summary>Ver otras 3 preguntas <span aria-hidden="true">+</span></summary>
+              <div className="ml-more-questions-list">
+                {preguntas.slice(3).map((item) => (
+                  <PreguntaCard key={item.id} item={item} abierta={abierta === item.id} onToggle={() => setAbierta(abierta === item.id ? null : item.id)} />
+                ))}
+              </div>
+            </details>
           </div>
         </div>
       </section>

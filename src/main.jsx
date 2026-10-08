@@ -60,6 +60,8 @@ import './economy-pages.css'
 import './route-motion.css'
 import './ecosystem-compact.css'
 import './connected-journeys.css'
+import './home-flow.css'
+import './home-expansion-compact.css'
 
 const profesion = esRutaProfesion()
 const ocupaciones = esRutaOcupaciones()

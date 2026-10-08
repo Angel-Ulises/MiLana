@@ -30,15 +30,15 @@
   const readRoute = () => {
     try {
       const saved = JSON.parse(localStorage.getItem('ml-orbita-route') || 'null');
-      // Solo rutas internas guardadas por este mismo script.
-      return saved && typeof saved.label === 'string' && /^\/(?!\/)/.test(String(saved.href)) ? saved : null;
-    }
-    catch { return null; }
+      const route = options.find((item) => item.href === saved?.href && item.label === saved?.label);
+      const age = Date.now() - Number(saved?.updatedAt);
+      return route && Number.isFinite(age) && age >= 0 && age <= 14 * 24 * 60 * 60 * 1000 ? route : null;
+    } catch { return null; }
   };
 
   const rememberRoute = (option) => {
     try {
-      localStorage.setItem('ml-orbita-route', JSON.stringify({ label: option.label, href: option.href, step: 1, updatedAt: Date.now() }));
+      localStorage.setItem('ml-orbita-route', JSON.stringify({ label: option.label, href: option.href, updatedAt: Date.now() }));
     } catch {}
   };
 
@@ -76,23 +76,31 @@
 
   const makeSituationCard = () => {
     const route = readRoute();
-    const card = document.createElement('section');
+    if (!route) return null;
+    const card = document.createElement('aside');
     card.className = 'orb-situation-card';
     card.dataset.orbitaSituationCard = 'true';
-    card.setAttribute('aria-label', 'Mi situación');
-
+    card.setAttribute('aria-label', 'Retomar tu última consulta');
     const copy = document.createElement('div');
-    const addLine = (tag, text) => { const node = document.createElement(tag); node.textContent = text; copy.appendChild(node); };
-    addLine('span', 'Mi situación · paso 1 de 4');
-    addLine('strong', route ? String(route.label) : 'Empieza por lo que estás viviendo');
-    addLine('p', route
-      ? 'Tu ruta queda guardada en este dispositivo para que puedas retomarla.'
-      : 'Elige una ruta y MiLana te lleva a la herramienta correcta sin hacerte adivinar qué buscar.');
-
-    const action = document.createElement('a');
-    action.href = route?.href || '#orb-home-routes';
-    action.innerHTML = route ? '<span>Siguiente:</span> continuar mi ruta <b>→</b>' : '<span>Siguiente:</span> elegir mi situación <b>→</b>';
-    card.append(copy, action);
+    const label = document.createElement('span');
+    label.textContent = 'Continúa donde te quedaste';
+    const title = document.createElement('strong');
+    title.textContent = route.label;
+    copy.append(label, title);
+    const actions = document.createElement('div');
+    actions.className = 'orb-situation-actions';
+    const link = document.createElement('a');
+    link.href = route.href;
+    link.innerHTML = 'Retomar herramienta <b aria-hidden="true">→</b>';
+    const clear = document.createElement('button');
+    clear.type = 'button';
+    clear.textContent = 'Descartar';
+    clear.addEventListener('click', () => {
+      try { localStorage.removeItem('ml-orbita-route'); } catch {}
+      card.remove();
+    });
+    actions.append(link, clear);
+    card.append(copy, actions);
     return card;
   };
 
@@ -136,7 +144,10 @@
       media.appendChild(caption);
     }
 
-    if (!document.querySelector('[data-orbita-situation-card]')) hero.insertAdjacentElement('afterend', makeSituationCard());
+    if (!document.querySelector('[data-orbita-situation-card]')) {
+      const saved = makeSituationCard();
+      if (saved) hero.insertAdjacentElement('afterend', saved);
+    }
   };
 
   const run = () => {

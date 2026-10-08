@@ -17,7 +17,10 @@ export function ResultNextSteps() {
         <span>Ya tienes una estimación</span>
         <h3>¿Qué hago con este resultado?</h3>
       </div>
-      <a className="ml-result-interpret" href="#ml-calc-interpretation">
+      <a className="ml-result-interpret" href="#ml-calc-interpretation" onClick={() => {
+        const interpretacion = document.getElementById('ml-calc-interpretation');
+        if (interpretacion) interpretacion.open = true;
+      }}>
         Entender qué significa y qué no incluye <span aria-hidden="true">↓</span>
       </a>
       {proximos.length > 0 && (

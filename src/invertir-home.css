@@ -81,3 +81,8 @@
 @media(max-width:780px){.ml-inv-explainer,.ml-inv-sim-grid{grid-template-columns:1fr}.ml-inv-lesson,.ml-inv-paths{padding-block:30px}.ml-inv-hero h1{font-size:45px}.ml-inv-paths-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.ml-inv-hero{padding:25px 0 24px}.ml-inv-breadcrumb{margin-bottom:13px}.ml-inv-hero h1{font-size:39px}.ml-inv-hero-actions{gap:7px;margin-top:16px}.ml-inv-hero-actions a{width:100%;justify-content:space-between;min-height:46px}.ml-inv-level{margin-top:17px}.ml-inv-level>div{display:grid;grid-template-columns:1fr 1fr}.ml-inv-level button{font-size:12px}.ml-inv-level button:last-child{grid-column:1/-1}.ml-inv-explainer{padding:17px;gap:8px}.ml-inv-explainer h3{font-size:30px}.ml-inv-instruments{gap:6px}.ml-inv-instruments button{font-size:12px;min-height:44px}.ml-inv-assumption-grid{grid-template-columns:1fr}.ml-inv-paths-grid{grid-template-columns:1fr}.ml-inv-outcome,.ml-inv-form{padding:17px}}
 @media(prefers-reduced-motion:reduce){.ml-invertir *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Contraste AA frente a estilos globales: textos claros sobre superficies azul marino. */
+html.ml-orbita-enabled #root .ml-invertir .ml-inv-hero-actions a:first-child,html.ml-orbita-enabled #root .ml-invertir .ml-inv-hero-actions a:first-child:visited{color:#fff!important}
+.ml-invertir .ml-inv-boundary p{color:#dfebf3!important}
+.ml-invertir .ml-inv-boundary .ml-inv-more p{color:#e2f1fa!important}

@@ -6,6 +6,7 @@ import datos from './data/estados.json';
 import laboral from './data/mercadoLaboralEstados.json';
 import actualizacion from './data/actualizacionEstados.json';
 import AdReserve from './AdReserve.jsx';
+import { enlaceComparacion } from './lib/compareFromProfile.js';
 
 const dinero = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(Number(n) || 0);
 const numero = (n) => new Intl.NumberFormat('es-MX').format(Number(n) || 0);
@@ -73,7 +74,7 @@ function Detail({ estado }) {
   const mercado = laboral.estados.find((e) => e.slug === estado.slug);
   const mx = laboral.nacional;
 
-  return <div className="state-pages"><Header /><main><section className="state-detail-hero"><div className="shell"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/estados">Estados</a><span>/</span><span>{estado.estado}</span></nav><p className="eyebrow">{estado.estado} · {datos.actualizado}</p><h1>Trabajo, salarios y decisiones de dinero en {estado.estado}.</h1><p>MiLana combina dos lecturas oficiales del mismo trimestre: panorama profesional de OLA/STPS y mercado laboral general de ENOE/INEGI. Se muestran juntas, pero nunca como si fueran la misma población.</p><Selector value={estado.slug} /></div></section>
+  return <div className="state-pages"><Header /><main><section className="state-detail-hero"><div className="shell"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/estados">Estados</a><span>/</span><span>{estado.estado}</span></nav><p className="eyebrow">{estado.estado} · {datos.actualizado}</p><h1>Trabajo, salarios y decisiones de dinero en {estado.estado}.</h1><p>MiLana combina dos lecturas oficiales del mismo trimestre: panorama profesional de OLA/STPS y mercado laboral general de ENOE/INEGI. Se muestran juntas, pero nunca como si fueran la misma población.</p><Selector value={estado.slug} /><a className="ml-compare-context-link" href={enlaceComparacion('estado', estado.slug, datos.estados)}>Comparar {estado.estado} con otro estado <span aria-hidden="true">→</span></a></div></section>
 
   <section className="state-metrics" id="panorama-estado" tabIndex={-1} aria-label={`Panorama de ${estado.estado}`}><div className="shell"><div className="state-metric-grid"><article><span>Ingreso profesional promedio</span><strong>{dinero(estado.ingreso)}</strong><p>{diferencia >= 0 ? '+' : ''}{diferenciaPct.toFixed(1)}% frente al promedio profesional nacional de {dinero(datos.promedioNacional)}.</p></article><article><span>Profesionistas ocupados</span><strong>{numero(estado.ocupados)}</strong><p>Personas ocupadas con formación profesional en el corte OLA.</p></article><article><span>Posición por ingreso promedio</span><strong>{rankIngreso}<small> de 32</small></strong><p>Orden descriptivo entre entidades con el mismo corte.</p></article><article><span>Posición por profesionistas ocupados</span><strong>{rankOcupados}<small> de 32</small></strong><p>Describe tamaño de la población profesional, no vacantes abiertas.</p></article></div><Detalle className="orb-more-source" titulo="Fuente profesional" resumen={datos.fuente.nombre} cta="Ver fuente"><aside className="state-source"><span>Fuente profesional</span><div><strong>{datos.fuente.nombre}</strong><p>{datos.fuente.periodo}. {datos.nota}</p></div></aside></Detalle></div></section>
 

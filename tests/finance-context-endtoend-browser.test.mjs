@@ -12,7 +12,7 @@ const cases=[
   {origen:'/finanzas/presupuesto',destino:'/finanzas/fondo-emergencia',valores:{gastosEsenciales:'8100'},expected:['8100','','']},
   {origen:'/finanzas/presupuesto',destino:'/finanzas/deuda-y-credito',valores:{ingresoNeto:'28000',pagosDeuda:'2400'},expected:['28000','2400']},
   {origen:'/finanzas/mi-situacion',destino:'/finanzas/ahorro',valores:{metaObjetivo:'55000',ahorroMetaActual:'12000'},expected:['55000','12000','']},
-  {origen:'/finanzas/presupuesto',destino:'/finanzas/mi-situacion',valores:{ingresoNeto:'21000',gastosEsenciales:'7000',gastosVariables:'1500',pagosDeuda:'0'},expected:['21000','7000','1500','0','','','','','']},
+  {origen:'/finanzas/presupuesto',destino:'/finanzas/mi-situacion',valores:{ingresoNeto:'21000',gastosEsenciales:'7000',gastosVariables:'1500',pagosDeuda:'0'},expected:['21000','7000','1500','0','','','','']},
 ];
 
 for(const item of cases) test(`Chrome: ${item.origen} → ${item.destino} sin URL ni campos inventados`,async t=>{

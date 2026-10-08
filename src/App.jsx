@@ -1223,17 +1223,17 @@ function ContenidoCalculadora({ id, ir }) {
       ))}
 
       {Array.isArray(data.faq) && data.faq.length > 0 && (
-        <Seccion titulo="Preguntas frecuentes">
+        <Detalle className="orb-more-plain orb-calc-faq" nivel="h2" titulo="Preguntas frecuentes" resumen={`${data.faq.length} respuestas sobre casos y límites de esta herramienta`} cta="Ver preguntas">
           <div>
             {data.faq.map((f, i) => (
               <Pregunta key={i} pregunta={f.pregunta} respuesta={f.respuesta} />
             ))}
           </div>
-        </Seccion>
+        </Detalle>
       )}
 
       {Array.isArray(data.siguientes) && data.siguientes.length > 0 && (
-        <Seccion titulo="Qué revisar después">
+        <Detalle className="orb-more-plain orb-calc-related" nivel="h2" titulo="Qué revisar después" resumen="Otras rutas relacionadas para profundizar en tu consulta" cta="Ver rutas">
           <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 8 }}>
             {data.siguientes.map((s, i) => (
               <li key={i}>
@@ -1255,7 +1255,7 @@ function ContenidoCalculadora({ id, ir }) {
               </li>
             ))}
           </ul>
-        </Seccion>
+        </Detalle>
       )}
 
       <p style={{

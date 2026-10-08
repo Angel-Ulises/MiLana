@@ -21,7 +21,9 @@ test('Chrome Android: las cinco áreas montan su módulo dinámico y retiran la 
           title,
           loading: Boolean(document.querySelector('.ml-route-loading')),
           horizontalOverflow: document.documentElement.scrollWidth > innerWidth + 2,
-          width: innerWidth
+          width: innerWidth,
+          measuredAtMs: Math.round(performance.now()),
+          fcpMs: Math.round(performance.getEntriesByType('paint').find(e => e.name === 'first-contentful-paint')?.startTime || 0)
         }));
       })()`;
       const html = await renderDom(chrome, origin + path, {
@@ -37,6 +39,7 @@ test('Chrome Android: las cinco áreas montan su módulo dinámico y retiran la 
       assert.equal(result.loading, false, path + ': pantalla de carga persistente');
       assert.equal(result.horizontalOverflow, false, path + ': overflow horizontal en Android');
       assert.equal(result.width, 390);
+      t.diagnostic(`${path}: Chrome Android emulado 390px, contenido visible al medir ${result.measuredAtMs}ms, FCP ${result.fcpMs || 'no disponible'}ms`);
     }
   } finally { await server.close(); }
 });

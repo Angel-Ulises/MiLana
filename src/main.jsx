@@ -62,6 +62,7 @@ import './ecosystem-compact.css'
 import './connected-journeys.css'
 import './home-flow.css'
 import './home-expansion-compact.css'
+import './net-income-handoff.css'
 
 const profesion = esRutaProfesion()
 const ocupaciones = esRutaOcupaciones()

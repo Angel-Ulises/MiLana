@@ -45,7 +45,7 @@ for(const width of [320,360,390,620]) test(`Chrome: home móvil ${width}px cabe 
         allVisible:primary.length,
         moreCount:hiddenLinks.length,
         initiallyClosed:!extra.open,
-        extraHidden:getComputedStyle(extra.querySelector('.orb-home-extra-grid')).display==='none',
+        initiallyCollapsed:extra.getAttribute('open')===null,
         overflow:document.documentElement.scrollWidth > innerWidth+2
       };
       extra.querySelector('summary').click();
@@ -65,7 +65,7 @@ for(const width of [320,360,390,620]) test(`Chrome: home móvil ${width}px cabe 
     assert.equal(metrics.allVisible,3);
     assert.equal(metrics.moreCount,3);
     assert.equal(metrics.initiallyClosed,true);
-    assert.equal(metrics.extraHidden,true);
+    assert.equal(metrics.initiallyCollapsed,true);
     assert.equal(metrics.expands,true);
     assert.equal(metrics.overflow,false,'Hay desbordamiento horizontal');
     assert.equal(metrics.reserve,870,'Reserva inicial distinta del diseño');

@@ -1,0 +1,16 @@
+/* Solo aparece dentro de un resultado válido. Las fórmulas y campos siguen intactos. */
+.ml-result-journey{margin-top:16px;padding:16px 0 0;border-top:1px solid #bfd3e3;color:#13263b}
+.ml-result-journey-heading span{color:#275b83;font-size:11px;font-weight:800;letter-spacing:.065em;text-transform:uppercase}
+.ml-result-journey-heading h3{margin:5px 0 13px;color:#13263b;font-family:Newsreader,Georgia,serif;font-size:clamp(23px,2.7vw,29px);font-weight:600;line-height:1.14}
+.ml-result-interpret{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 14px;border:1px solid #9fc3de;border-radius:12px;background:#fff;color:#1e5684!important;font-weight:800;font-size:13px;line-height:1.4;text-decoration:none}
+.ml-result-interpret>span{flex:none;font-size:19px;color:#235c8b}
+.ml-result-next-links{display:grid;gap:0;margin-top:14px}
+.ml-result-next-links>span{margin-bottom:4px;font-size:11px;font-weight:800;color:#455d70;text-transform:uppercase;letter-spacing:.04em}
+.ml-result-next-links a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px;border-bottom:1px solid #d3e1eb;color:#235d8d!important;text-decoration:none;font-size:12px;line-height:1.45;font-weight:700}
+.ml-result-next-links a span{flex:none;color:#245c93}
+.ml-result-journey p{color:#465a6c!important;font-size:12px;line-height:1.55;margin:12px 0 0}
+.ml-result-journey a:focus-visible{outline:3px solid #245c93;outline-offset:3px}
+.ml-result-interpret:hover,.ml-result-next-links a:hover{background:#edf6fd}
+#ml-calc-interpretation{scroll-margin-top:28px}
+@media(max-width:500px){.ml-result-journey{padding-top:14px}.ml-result-interpret{padding:12px;font-size:12px}.ml-result-next-links a{font-size:12px}}
+@media(prefers-reduced-motion:reduce){#ml-calc-interpretation{scroll-behavior:auto}}

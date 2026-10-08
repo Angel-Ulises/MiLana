@@ -68,7 +68,7 @@ test('navegador: Inicio muestra tres preguntas y las demás quedan desplegables'
     assert.match(html, /<details class="ml-how-it-works"/);
     assert.doesNotMatch(html, /<details class="ml-more-questions" open/);
     assert.doesNotMatch(html, /<details class="ml-how-it-works" open/);
-    assert.equal((html.match(/class="mlq-card"/g) || []).length,6);
+    assert.equal((html.match(/class="mlq-card(?:\\s[^"]*)?"/g) || []).length,6);
     assert.doesNotMatch(html,/data-orbita-situation-card="true"/);
   } finally {await server.close();}
 });

@@ -39,6 +39,8 @@ const EconomyNavigation = React.lazy(() => import('./economyNavigation.jsx'))
 const CareerMotion = React.lazy(() => import('./careerMotion.jsx'))
 const RouteMotion = React.lazy(() => import('./routeMotion.jsx'))
 const JourneyCompanion = React.lazy(() => import('./journeyCompanion.jsx'))
+// Estilos base compartidos: no diferirlos junto al módulo de calculadoras.
+import './design-home.css'
 import './route-loading.css'
 import './site-overrides.css'
 import './motion-viz.css'

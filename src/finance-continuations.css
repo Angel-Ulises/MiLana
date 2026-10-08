@@ -1,0 +1,26 @@
+/* Continuidad contextual entre finanzas: sin formularios nuevos ni panel flotante. */
+.ml-finance-continuations{margin-top:13px;padding-top:13px;border-top:1px solid #d6e4ec;min-width:0}
+.ml-finance-continuations-kicker{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#2b608c;margin-bottom:10px}
+.ml-finance-continuations-actions{display:flex;flex-wrap:wrap;gap:8px}
+.ml-finance-continuations-actions button{min-height:42px;display:inline-flex;align-items:center;justify-content:space-between;gap:13px;padding:10px 12px;border-radius:11px;border:1px solid #a8c9df;background:#eef7fc;color:#1b557f;font:750 12px/1.35 Inter,Arial,sans-serif;cursor:pointer;text-align:left}
+.ml-finance-continuations-actions button>span{color:#226b9f;font-size:16px;flex:none}
+.ml-finance-continuations>small{display:block;margin-top:10px;font-size:11px;line-height:1.55;color:#4b6275}
+.ml-finance-continuations>p[role=alert]{font-size:12px;color:#982e2b!important;margin-top:10px}
+.ml-finance-context-notice{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding:14px;margin:12px 0 18px;border:1px solid #b4d1e4;border-radius:13px;background:#eff8fc;color:#142d44}
+.ml-finance-context-notice>div{min-width:0}
+.ml-finance-context-notice span{font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#285f8b}
+.ml-finance-context-notice strong{display:block;margin:5px 0;font-size:13px;line-height:1.35;color:#142d44}
+.ml-finance-context-notice p{color:#455d71!important;font-size:12px;line-height:1.55;margin:0}
+.ml-finance-context-notice button{flex:none;background:white;border:1px solid #92bad2;border-radius:999px;color:#205880;cursor:pointer;font-size:12px;font-weight:750;padding:8px 10px}
+.ml-finance-continuations-actions button:hover{background:#deeff9}
+.ml-finance-continuations button:focus-visible,.ml-finance-context-notice button:focus-visible{outline:3px solid #2d6caa;outline-offset:3px}
+@media(max-width:560px){.ml-finance-continuations-actions{display:grid;grid-template-columns:1fr}.ml-finance-continuations-actions button{width:100%}.ml-finance-context-notice{flex-direction:column}.ml-finance-context-notice button{align-self:flex-start}}
+@media(prefers-reduced-motion:reduce){.ml-finance-continuations-actions button{transition:none}}
+
+/* Presupuesto coloca acciones dentro de una superficie azul oscura. */
+.finance-next-box .ml-finance-continuations{border-top-color:#51697c}
+.finance-next-box .ml-finance-continuations-kicker{color:#b9dcfa}
+.finance-next-box .ml-finance-continuations>small{color:#d9e6f1}
+.finance-next-box .ml-finance-continuations>p[role=alert]{color:#ffd3c9!important}
+.finance-next-box .ml-finance-continuations-actions button{background:#f3f9fd;color:#20577d;border-color:#b7d0e1}
+.finance-next-box .ml-finance-continuations-actions button>span{color:#20577d}

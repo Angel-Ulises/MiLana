@@ -63,6 +63,7 @@ test('Los CTAs de Aprende son visibles en móvil y respetan movimiento reducido'
   const s = read('public/static-2026.css');
   assert.match(s, /\.guide-direct a/);
   assert.match(s, /\.card-content:focus-visible/);
+  assert.match(s, /\.learn-start a:first-child:visited\{[^}]*color:#fff!important/);
   assert.match(s, /max-width:580px/);
   assert.match(s, /prefers-reduced-motion:reduce/);
 });

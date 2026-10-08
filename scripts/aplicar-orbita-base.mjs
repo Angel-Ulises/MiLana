@@ -1,5 +1,6 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, sep } from 'node:path';
+import { NAVEGACION_MILANA } from '../src/lib/siteNavigation.js';
 
 const DIST = new URL('../dist/', import.meta.url);
 const PUBLIC = new URL('../public/', import.meta.url);
@@ -19,14 +20,7 @@ const STATIC_TOP_ROUTES = new Set([
   '/aprende/vacaciones-prima-vacacional',
   '/sobre', '/contacto', '/metodo', '/privacidad', '/financiamiento',
 ]);
-const nav = [
-  ['calculadoras', '/#calculadoras', 'Calculadoras'],
-  ['carreras', '/carreras', 'Carreras'],
-  ['estados', '/estados', 'Estados'],
-  ['finanzas', '/finanzas', 'Finanzas'],
-  ['economia', '/economia', 'Economía'],
-  ['aprende', '/aprende', 'Aprende'],
-];
+const nav = NAVEGACION_MILANA;
 
 const [careerData, stateData, financeData, professionData] = await Promise.all([
   readFile(new URL('../src/data/carreras.json', import.meta.url), 'utf8').then(JSON.parse),

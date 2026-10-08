@@ -1,0 +1,58 @@
+/* Carrera, ocupación y profesión: tarea primero en móvil, sin mezclar poblaciones. */
+.ml-profession-data-link,.ml-occupation-context-link{
+  display:inline-flex;align-items:center;justify-content:space-between;gap:12px;
+  max-width:100%;margin:12px 10px 0 0;padding:10px 13px;border:1px solid #a9c9de;
+  border-radius:999px;background:#fff;color:#225b85!important;text-decoration:none;
+  font:800 12px/1.4 Inter,Arial,sans-serif;
+}
+.ml-profession-data-link span,.ml-occupation-context-link span{font-size:17px;line-height:1;color:#245c93;flex:none}
+.ml-profession-data-link:focus-visible,.ml-occupation-context-link:focus-visible,
+.co-hero .ml-mobile-data-jump:focus-visible{outline:3px solid #2d6caa;outline-offset:3px}
+#datos-profesion,#comparar-trabajos{scroll-margin-top:20px}
+.co-origin{margin:0 0 14px;padding:10px 12px;border-left:3px solid #2d6caa;background:#f1f7fb;
+ color:#435b70;font-size:12px;line-height:1.55}
+@media(max-width:900px){
+ .co-hero{padding:26px 0 23px}
+ .co-hero nav{margin-bottom:12px}
+ .co-hero h1{font-size:clamp(32px,5.3vw,46px);line-height:1.06;margin:10px 0 12px}
+ .co-hero>div>p:not(.eyebrow){font-size:14px;line-height:1.54}
+ .co-tool{padding:22px 0 63px}
+ .co-picker{gap:15px;margin-bottom:19px}
+ .co-picker h2{font-size:clamp(27px,3.8vw,36px);line-height:1.08}
+ .co-card{box-shadow:none}
+ .profession-hero-grid{min-height:0;grid-template-columns:minmax(0,1fr);padding:27px 0 23px;gap:0}
+ .profession-hero-copy nav{margin-bottom:12px}
+ .profession-hero-copy h1{font-size:clamp(33px,5.3vw,47px);line-height:1.06;margin:10px 0 12px}
+ .profession-lede{font-size:14px;line-height:1.56}
+ .profession-proof{margin-top:13px}
+ .profession-proof span:not(:first-child){display:none}
+ .profession-hero-media{display:none!important}
+ .profession-summary{padding:20px 0 51px}
+ .profession-metric{min-height:0;padding:20px;box-shadow:none}
+ .profession-metric>span{margin-bottom:12px}
+ .profession-metric p{margin-top:10px;font-size:12px}
+ .profession-context,.profession-money,.profession-related{padding:48px 0}
+}
+@media(max-width:640px){
+ .co-hero{padding:19px 0 18px}
+ .co-hero h1{font-size:clamp(30px,8vw,38px)}
+ .co-tool{padding:17px 0 52px}
+ .co-picker h2{font-size:29px}
+ .co-picker select{min-height:48px}
+ .co-card{padding:17px}
+ .co-mini-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .co-mini-grid>div{padding:11px}
+ .co-card h2{font-size:27px;margin-bottom:16px}
+ .co-metric{padding:16px}
+ .co-metric strong{font-size:32px}
+ .co-card-note{min-height:0;margin:15px 0}
+ .profession-hero-grid{padding:19px 0 16px}
+ .profession-hero-copy h1{font-size:clamp(30px,8.2vw,38px)}
+ .profession-summary{padding:15px 0 42px}
+ .profession-metrics{grid-template-columns:1fr;gap:8px}
+ .profession-metric{padding:16px;border-radius:16px}
+ .profession-metric strong{font-size:clamp(29px,8.3vw,38px)}
+ .profession-context,.profession-money,.profession-related{padding:40px 0}
+ .ml-profession-data-link,.ml-occupation-context-link{padding:9px 12px;margin:9px 8px 0 0;font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.ml-profession-data-link,.ml-occupation-context-link{transition:none}}

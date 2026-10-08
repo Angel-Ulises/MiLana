@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import estados from './data/estados.json';
+import { enlaceComparacion } from './lib/compareFromProfile.js';
 
 export default function StateCompareEntry(){
   const [target,setTarget]=useState(null);
@@ -20,5 +22,7 @@ export default function StateCompareEntry(){
     return ()=>{ if(timer) window.clearTimeout(timer); };
   },[]);
 
-  return target ? createPortal(<a className="state-compare-entry" href="/estados/comparar"><span>Comparador estatal</span><strong>Comparar dos estados con las mismas fuentes</strong><b>→</b></a>,target) : null;
+  const slug=window.location.pathname.split('/').filter(Boolean)[1] || '';
+  const href=enlaceComparacion('estado', slug, estados.estados);
+  return target ? createPortal(<a className="state-compare-entry" href={href}><span>Comparador estatal</span><strong>Comparar dos estados con las mismas fuentes</strong><b>→</b></a>,target) : null;
 }

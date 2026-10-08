@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { consumirIngresoTemporal } from './lib/netIncomeHandoff.js';
 import IncomeTransferNotice from './incomeTransferNotice.jsx';
+import { consumirContextoFinanciero, quitarValoresImportados } from './lib/financeContextHandoff.js';
+import FinanceContinueActions, { FinanceContextNotice } from './financeContinuations.jsx';
 import { crearRadiografiaFinanciera, crearEscenariosIngreso, crearRutaAsesor } from './lib/advisorCore.js';
 import AdvisorProfessionContext from './advisorProfessionContext.jsx';
 import AdReserve from './AdReserve.jsx';
@@ -34,6 +36,21 @@ function Resultado({ label, value, note, tone = '' }) {
 export default function AdvisorPage() {
   const [form, setForm] = useState({ ingresoNeto:'', gastosEsenciales:'', gastosVariables:'', pagosDeuda:'', fondoActual:'', objetivo:'', metaObjetivo:'', ahorroMetaActual:'', horizonteMeses:'' });
   const [ingresoImportado, setIngresoImportado] = useState(false);
+  const [contextoImportado, setContextoImportado] = useState(null);
+  useEffect(() => {
+    const ctx = consumirContextoFinanciero('/finanzas/mi-situacion');
+    if (!ctx) return;
+    setForm(actual => {
+      const salida={...actual};
+      for (const [campo, cantidad] of Object.entries(ctx.valores)) if (salida[campo]==='') salida[campo]=cantidad;
+      return salida;
+    });
+    setContextoImportado(ctx);
+  }, []);
+  const quitarContexto = () => {
+    setForm(actual => quitarValoresImportados(actual, contextoImportado?.valores));
+    setContextoImportado(null);
+  };
   useEffect(() => {
     const dato = consumirIngresoTemporal('/finanzas/mi-situacion');
     if (!dato) return;
@@ -56,6 +73,7 @@ export default function AdvisorPage() {
       <section className="shell advisor-layout">
       <form className="advisor-form" onSubmit={(e) => e.preventDefault()}>
         <div className="advisor-form-head"><p className="eyebrow">Tu fotografía mensual</p><h2>Empieza con lo que ya sabes.</h2><p>Puedes dejar campos vacíos. MiLana solo calcula con lo que captures.</p></div>
+        {contextoImportado && <FinanceContextNotice contexto={contextoImportado} onClear={quitarContexto} />}
         {ingresoImportado && <IncomeTransferNotice onClear={() => { setForm(actual => ({ ...actual, ingresoNeto: '' })); setIngresoImportado(false); }} />}
         <Campo label="Ingreso neto mensual" value={form.ingresoNeto} onChange={set('ingresoNeto')} help="Lo que realmente llega a tu cuenta." />
         <Campo label="Gastos esenciales" value={form.gastosEsenciales} onChange={set('gastosEsenciales')} help="Vivienda, comida, transporte, servicios, salud y otros básicos." />
@@ -79,6 +97,7 @@ export default function AdvisorPage() {
 
         <section className="advisor-scenarios"><div className="advisor-scenarios-head"><p className="eyebrow">Escenarios</p><h2>¿Qué cambia si tu ingreso neto sube?</h2><p>Solo mueve matemáticamente tu ingreso neto. No recalcula ISR, IMSS ni supone que realmente recibirás un aumento.</p></div><div className="advisor-scenario-grid">{escenarios.map((escenario) => <article key={escenario.incrementoPct}><span>+{escenario.incrementoPct}% ingreso</span><strong>{dinero(escenario.disponibleEscenario)}</strong><p>Disponible mensual con los mismos gastos capturados.</p></article>)}</div></section>
 
+        <FinanceContinueActions origen="/finanzas/mi-situacion" valores={form} destinos={["/finanzas/presupuesto","/finanzas/fondo-emergencia","/finanzas/deuda-y-credito","/finanzas/ahorro"]} />
         <aside className="advisor-investment-gate"><span>{ruta.inversion.estado === 'contexto-educativo-disponible' ? 'Inversión: contexto disponible' : 'Inversión: todavía solo educación'}</span><p>{ruta.inversion.motivo}</p><strong>MiLana no recomienda ni ejecuta productos de inversión.</strong></aside>
       </div>
     </section></main>

@@ -48,7 +48,9 @@ test('no mezcla vivienda SHF con ingreso OLA para fingir asequibilidad', () => {
 });
 
 test('comparador es descubrible, estático y usa una sola URL canónica', () => {
-  assert.match(entrada, /href="\/estados\/comparar"/);
+  // El acceso puede llevar el slug público actual, pero conserva el destino canónico.
+  assert.match(entrada, /href=\{href\}/);
+  assert.match(entrada, /enlaceComparacion\('estado', slug, estados\.estados\)/);
   assert.match(generador, /https:\/\/www\.milanaaqui\.mx\/estados\/comparar/);
   assert.match(generador, /rel="canonical"/);
   assert.match(generador, /BreadcrumbList/);

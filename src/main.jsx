@@ -66,6 +66,7 @@ import './net-income-handoff.css'
 import './finance-continuations.css'
 import './finance-tool-first.css'
 import './career-state-tool-first.css'
+import './compare-profile-context.css'
 
 const profesion = esRutaProfesion()
 const ocupaciones = esRutaOcupaciones()

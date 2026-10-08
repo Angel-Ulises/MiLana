@@ -1,4 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { consumirIngresoTemporal } from './lib/netIncomeHandoff.js';
+import IncomeTransferNotice from './incomeTransferNotice.jsx';
 import { crearRadiografiaFinanciera, crearEscenariosIngreso, crearRutaAsesor } from './lib/advisorCore.js';
 import AdvisorProfessionContext from './advisorProfessionContext.jsx';
 import AdReserve from './AdReserve.jsx';
@@ -31,6 +33,13 @@ function Resultado({ label, value, note, tone = '' }) {
 
 export default function AdvisorPage() {
   const [form, setForm] = useState({ ingresoNeto:'', gastosEsenciales:'', gastosVariables:'', pagosDeuda:'', fondoActual:'', objetivo:'', metaObjetivo:'', ahorroMetaActual:'', horizonteMeses:'' });
+  const [ingresoImportado, setIngresoImportado] = useState(false);
+  useEffect(() => {
+    const dato = consumirIngresoTemporal('/finanzas/mi-situacion');
+    if (!dato) return;
+    setForm(actual => ({ ...actual, ingresoNeto: actual.ingresoNeto === '' ? dato.importe : actual.ingresoNeto }));
+    setIngresoImportado(true);
+  }, []);
   const set = (key) => (value) => setForm((actual) => ({ ...actual, [key]: value }));
   const radiografia = useMemo(() => crearRadiografiaFinanciera(form), [form]);
   const ruta = useMemo(() => crearRutaAsesor(radiografia), [radiografia]);
@@ -47,6 +56,7 @@ export default function AdvisorPage() {
       <section className="shell advisor-layout">
       <form className="advisor-form" onSubmit={(e) => e.preventDefault()}>
         <div className="advisor-form-head"><p className="eyebrow">Tu fotografía mensual</p><h2>Empieza con lo que ya sabes.</h2><p>Puedes dejar campos vacíos. MiLana solo calcula con lo que captures.</p></div>
+        {ingresoImportado && <IncomeTransferNotice onClear={() => { setForm(actual => ({ ...actual, ingresoNeto: '' })); setIngresoImportado(false); }} />}
         <Campo label="Ingreso neto mensual" value={form.ingresoNeto} onChange={set('ingresoNeto')} help="Lo que realmente llega a tu cuenta." />
         <Campo label="Gastos esenciales" value={form.gastosEsenciales} onChange={set('gastosEsenciales')} help="Vivienda, comida, transporte, servicios, salud y otros básicos." />
         <Campo label="Gastos variables" value={form.gastosVariables} onChange={set('gastosVariables')} help="Compras, salidas, ocio y otros gastos que cambian." />

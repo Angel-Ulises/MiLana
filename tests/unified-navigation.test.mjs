@@ -5,11 +5,11 @@ import { NAVEGACION_MILANA, seccionNavegacion } from '../src/lib/siteNavigation.
 
 const pages=['src/App.jsx','src/financePages.jsx','src/advisorPage.jsx','src/careerPages.jsx','src/statePages.jsx','src/stateComparePage.jsx','src/careerComparePage.jsx'];
 
-test('Órbita y React comparten las mismas seis secciones en idéntico orden',()=>{
+test('Órbita y React comparten las mismas siete secciones en idéntico orden',()=>{
   const expected=[
     ['calculadoras','/#calculadoras','Calculadoras'],['carreras','/carreras','Carreras'],
     ['estados','/estados','Estados'],['finanzas','/finanzas','Finanzas'],
-    ['economia','/economia','Economía'],['aprende','/aprende','Aprende']
+    ['invertir','/invertir','Invertir'],['economia','/economia','Economía'],['aprende','/aprende','Aprende']
   ];
   assert.deepEqual(NAVEGACION_MILANA,expected);
   const generator=readFileSync('scripts/aplicar-orbita-base.mjs','utf8');
@@ -41,7 +41,7 @@ test('sección actual se selecciona por prefijo completo, sin interferir con rut
     ['/calculadoras/isr','calculadoras'],['/calculadoras/bruto-a-neto','calculadoras'],
     ['/carreras','carreras'],['/carreras/comparar','carreras'],
     ['/estados/nuevo-leon','estados'],['/estados/comparar','estados'],
-    ['/finanzas/presupuesto','finanzas'],['/economia','economia'],
+    ['/finanzas/presupuesto','finanzas'],['/finanzas/inversion','invertir'],['/invertir','invertir'],['/economia','economia'],
     ['/aprende/finiquito-vs-liquidacion','aprende'],['/','null'],['/finanzasx','null']
   ]) assert.equal(seccionNavegacion(url),expected==='null'?null:expected,url);
 });

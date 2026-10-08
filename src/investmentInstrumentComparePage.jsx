@@ -2,6 +2,9 @@ import { useMemo, useState } from 'react';
 import { investmentInstrumentClasses, INSTRUMENT_SOURCE_CHECKED_AT } from './data/investment-instrument-classes.js';
 import { compararInstrumentosEducativos } from './lib/investmentInstrumentCompare.js';
 import AdReserve from './AdReserve.jsx';
+import SiteHeader from './siteHeader.jsx';
+import { primeraOracion } from './Detalle.jsx';
+import { leerNivelLectura, guardarNivelLectura } from './lib/readingDepth.js';
 
 export function esRutaCompararInstrumentos() {
   if (typeof window === 'undefined') return false;
@@ -9,7 +12,7 @@ export function esRutaCompararInstrumentos() {
 }
 
 function Header() {
-  return <header className="site-header"><div className="shell header-inner"><a className="brand" href="/" aria-label="MiLana, inicio"><img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" /></a><nav className="desktop-nav" aria-label="Principal"><a href="/finanzas">Finanzas</a><a href="/estados">Estados</a><a href="/carreras">Carreras</a><a href="/economia">Economía</a></nav><a className="header-cta" href="/finanzas/mi-situacion">Mi situación</a></div></header>;
+  return <SiteHeader ctaHref="/invertir" ctaLabel="Entender inversiones" />;
 }
 
 function Selector({ label, value, onChange, exclude }) {
@@ -19,6 +22,8 @@ function Selector({ label, value, onChange, exclude }) {
 export default function InvestmentInstrumentComparePage() {
   const [a, setA] = useState('cetes');
   const [b, setB] = useState('fondos-inversion');
+  const [profundizar, setProfundizar] = useState(() => leerNivelLectura() === 'experto');
+  const cambiarProfundidad = (valor) => { setProfundizar(valor); guardarNivelLectura(valor ? 'experto' : 'inicio'); };
   const comparacion = useMemo(() => compararInstrumentosEducativos([a, b]), [a, b]);
   const [izquierda, derecha] = comparacion.instrumentos;
 
@@ -27,9 +32,10 @@ export default function InvestmentInstrumentComparePage() {
     <main>
       <section className="instrument-compare-hero"><div className="shell"><nav aria-label="Ruta"><a href="/">Inicio</a><span>/</span><a href="/finanzas">Finanzas</a><span>/</span><a href="/finanzas/inversion">Inversión</a><span>/</span><span>Comparar</span></nav><p className="eyebrow">Comparación educativa · México</p><h1>Compara estructuras, no promesas.</h1><p>Elige dos familias para ver qué cambia en plazo, liquidez, variación, diversificación, costos e intermediación. MiLana no usa una tasa del día, no asigna un score y no declara un ganador.</p><div className="instrument-compare-proof"><span>Sin ranking</span><span>Sin rendimiento prometido</span><span>Fuentes oficiales</span><span>Sin operación</span></div></div></section>
 
-      <section className="instrument-compare-tool"><div className="shell"><div className="instrument-compare-controls"><Selector label="Instrumento A" value={a} onChange={setA} exclude={b} /><Selector label="Instrumento B" value={b} onChange={setB} exclude={a} /></div>
+      <section className="instrument-compare-tool"><div className="shell"><p className="instrument-compare-back"><a href="/invertir#entender">¿Primera vez? Entiende cada instrumento primero →</a></p><div className="instrument-compare-controls"><Selector label="Instrumento A" value={a} onChange={setA} exclude={b} /><Selector label="Instrumento B" value={b} onChange={setB} exclude={a} /></div>
         <div className="instrument-compare-heads"><article><span>{izquierda.familia}</span><h2>{izquierda.nombre}</h2><p>{izquierda.resumen}</p></article><article><span>{derecha.familia}</span><h2>{derecha.nombre}</h2><p>{derecha.resumen}</p></article></div>
-        <div className="instrument-compare-table">{comparacion.dimensiones.map((dimension) => <section key={dimension.id}><h3>{dimension.etiqueta}</h3><div>{dimension.valores.map((valor) => <article key={valor.instrumentoId}><p>{valor.texto}</p></article>)}</div></section>)}</div>
+        <div className="instrument-depth" role="group" aria-label="Profundidad de la comparación"><span>¿Cuánto detalle quieres?</span><button type="button" aria-pressed={!profundizar} onClick={() => cambiarProfundidad(false)}>Lo esencial</button><button type="button" aria-pressed={profundizar} onClick={() => cambiarProfundidad(true)}>Profundizar</button></div>
+        <div className="instrument-compare-table">{comparacion.dimensiones.filter((d) => profundizar || ['estructura','liquidez','variacion','costos','custodia'].includes(d.id)).map((dimension) => <section key={dimension.id}><h3>{dimension.etiqueta}</h3><div>{dimension.valores.map((valor) => <article key={valor.instrumentoId}><strong className="instrument-side-label">{valor.instrumentoId === izquierda.id ? izquierda.nombre : derecha.nombre}</strong><p>{profundizar ? valor.texto : primeraOracion(valor.texto, 125)}</p>{!profundizar && primeraOracion(valor.texto, 125) !== valor.texto && <details className="instrument-more"><summary>Explicar más</summary><p>{valor.texto}</p></details>}</article>)}</div></section>)}</div>
         <p className="instrument-compare-note">{comparacion.nota}</p>
       </div></section>
 

@@ -6,9 +6,9 @@ import { browserReady } from './helpers/chrome-probe.mjs';
 import { renderDom } from './helpers/chrome-dom.mjs';
 
 const chrome = [process.env.MILANA_CHROME, '/usr/bin/google-chrome', '/usr/bin/chromium'].filter(Boolean).find(existsSync);
-const routes = ['/','/carreras','/estados/nuevo-leon','/finanzas','/economia'];
+const routes = ['/','/carreras','/estados/nuevo-leon','/finanzas','/economia','/invertir'];
 
-test('Chrome Android: las cinco áreas montan su módulo dinámico y retiran la pantalla de carga', async t => {
+test('Chrome Android: las seis áreas montan su módulo dinámico y retiran la pantalla de carga', async t => {
   if (!browserReady(t, chrome)) return;
   const server = await createServer({ server:{ host:'127.0.0.1', port:0 }, logLevel:'silent' });
   await server.listen();

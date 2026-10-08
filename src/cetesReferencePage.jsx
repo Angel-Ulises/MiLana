@@ -1,5 +1,6 @@
 import { CETES_REFERENCE } from './data/cetes-reference.js';
 import AdReserve from './AdReserve.jsx';
+import SiteHeader from './siteHeader.jsx';
 
 export function esRutaCetesReferencia() {
   if (typeof window === 'undefined') return false;
@@ -11,7 +12,7 @@ const porcentaje = (n) => `${Number(n).toFixed(2)}%`;
 const precio = (n) => new Intl.NumberFormat('es-MX', { style:'currency', currency:'MXN', minimumFractionDigits:2, maximumFractionDigits:2 }).format(n);
 
 function Header() {
-  return <header className="site-header"><div className="shell header-inner"><a className="brand" href="/" aria-label="MiLana, inicio"><img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" /></a><nav className="desktop-nav" aria-label="Principal"><a href="/finanzas">Finanzas</a><a href="/estados">Estados</a><a href="/carreras">Carreras</a><a href="/economia">Economía</a></nav><a className="header-cta" href="/finanzas/mi-situacion">Mi situación</a></div></header>;
+  return <SiteHeader ctaHref="/invertir" ctaLabel="Entender inversiones" />;
 }
 
 export default function CetesReferencePage() {

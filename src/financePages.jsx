@@ -60,6 +60,7 @@ function Hub() {
     ['Ahorro', 'Metas y escenarios comparables', '/finanzas/ahorro'],
     ['Vivienda', 'Rentar, comprar y planear', '/finanzas/vivienda'],
     ['Retiro', 'Requisitos y Pensión IMSS', '/calculadoras/pension-imss'],
+    ['Invertir', 'Aprende, simula y compara sin arriesgar dinero', '/invertir'],
   ];
   return <div className="finance-hub-page">
     <Hero compact eyebrow="Finanzas personales · México" title="Tu dinero no vive en temas separados." lede="Sueldo, gastos, deuda, ahorro y vivienda se afectan entre sí. MiLana los conecta para que puedas entender qué cambia antes de tomar una decisión." />

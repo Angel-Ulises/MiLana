@@ -19,7 +19,7 @@
 .hub .hubhead{margin-bottom:20px}
 .learn-start{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
 .learn-start a,.guide-direct a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 14px;border:1px solid #cbdce9;border-radius:12px;color:#245c93;background:#f2f7fb;font-weight:750;font-size:13px;text-decoration:none}
-.learn-start a:first-child{background:#173c61;border-color:#173c61;color:#fff}
+.learn-start a:first-child,.learn-start a:first-child:visited{background:#173c61;border-color:#173c61;color:#fff!important}
 .learn-start a:focus-visible,.card-content:focus-visible,.card-tool:focus-visible,.guide-direct a:focus-visible{outline:3px solid #2d6caa;outline-offset:3px}
 .hub .card{min-width:0;min-height:0;padding:0;overflow:hidden}
 .card-content{display:flex;flex-direction:column;flex:1;padding:20px;color:inherit;min-width:0}

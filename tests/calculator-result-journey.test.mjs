@@ -50,5 +50,5 @@ test('preguntas, fundamentación y enlaces editoriales permanecen íntegros, aho
   assert.match(seccion, /data\.faq\.map\(/);
   assert.match(seccion, /data\.siguientes\.map\(/);
   assert.match(seccion, /ORDEN_SECCIONES\.filter/);
-  assert.match(seccion, /Fundamento y fuentes|fundamento/);
+  assert.match(app, /fundamento: 'Fundamento y fuentes'/);
 });

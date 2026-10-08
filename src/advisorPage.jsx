@@ -48,7 +48,8 @@ export default function AdvisorPage() {
     setContextoImportado(ctx);
   }, []);
   const quitarContexto = () => {
-    setForm(actual => quitarValoresImportados(actual, contextoImportado?.valores));
+    const valoresRecibidos = contextoImportado?.valores;
+    setForm(actual => quitarValoresImportados(actual, valoresRecibidos));
     setContextoImportado(null);
   };
   useEffect(() => {

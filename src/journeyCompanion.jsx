@@ -8,12 +8,25 @@ export default function JourneyCompanion() {
   const [host, setHost] = useState(null);
   const [ruta, setRuta] = useState(null);
   useEffect(() => {
-    const header = document.querySelector('.site-header');
-    if (!header) return undefined;
-    const el = document.createElement('div');
-    el.className = 'ml-journey-mount';
-    header.insertAdjacentElement('afterend', el);
-    setHost(el);
+    let el = null;
+    let observer = null;
+    // El encabezado llega desde un módulo React diferido. Esperarlo sin bloquear
+    // el render principal y desconectar el observador al montar.
+    const montar = () => {
+      if (el) return true;
+      const header = document.querySelector('.site-header');
+      if (!header) return false;
+      el = document.createElement('div');
+      el.className = 'ml-journey-mount';
+      header.insertAdjacentElement('afterend', el);
+      observer?.disconnect();
+      setHost(el);
+      return true;
+    };
+    if (!montar()) {
+      observer = new MutationObserver(montar);
+      observer.observe(document.getElementById('root') || document.body, { childList: true, subtree: true });
+    }
     const actualizar = () => setRuta(leerRutaAcompanamiento(window.location.pathname));
     actualizar();
     window.addEventListener('popstate', actualizar);
@@ -21,7 +34,8 @@ export default function JourneyCompanion() {
     return () => {
       window.removeEventListener('popstate', actualizar);
       window.removeEventListener('milana:route-change', actualizar);
-      el.remove();
+      observer?.disconnect();
+      el?.remove();
     };
   }, []);
 

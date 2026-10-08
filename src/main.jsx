@@ -101,78 +101,52 @@ const extras = rutaConExtras()
 // Los complementos cargan de forma independiente para no bloquear la página.
 function PrimaryRoute() {
   return profesion ? (
-    <>
-      <CareerProfessionPages />
-      <RouteMotion />
-    </>
+    <CareerProfessionPages />
   ) : ocupaciones ? (
-    <>
-      <OccupationComparePage />
-      <RouteMotion />
-    </>
+    <OccupationComparePage />
   ) : compararCarreras ? (
-    <>
-      <CareerComparePage />
-      <RouteMotion />
-    </>
+    <CareerComparePage />
   ) : compararEstados ? (
-    <>
-      <StateComparePage />
-      <RouteMotion />
-    </>
+    <StateComparePage />
   ) : estados ? (
-    <>
-      <StatePages />
-      <RouteMotion />
-    </>
+    <StatePages />
   ) : carrera ? (
-    <>
-      <CareerPages />
-      <CareerMotion />
-    </>
+    <CareerPages />
   ) : fondosCNBV ? (
-    <>
-      <CnbvFundsPage />
-      <RouteMotion />
-    </>
+    <CnbvFundsPage />
   ) : cetesReferencia ? (
-    <>
-      <CetesReferencePage />
-      <RouteMotion />
-    </>
+    <CetesReferencePage />
   ) : compararInstrumentos ? (
-    <>
-      <InvestmentInstrumentComparePage />
-      <RouteMotion />
-    </>
+    <InvestmentInstrumentComparePage />
   ) : inversion ? (
-    <>
-      <InvestmentReadinessPage />
-      <RouteMotion />
-    </>
+    <InvestmentReadinessPage />
   ) : asesor ? (
-    <>
-      <AdvisorPage />
-      <RouteMotion />
-    </>
+    <AdvisorPage />
   ) : finanzas ? (
-    <>
-      <FinancePages />
-      <RouteMotion />
-    </>
+    <FinancePages />
   ) : economia ? (
-    <>
-      <EconomyPages />
-      <RouteMotion />
-    </>
+    <EconomyPages />
   ) : (
-    <>
-      <App />
-      <SiteEnhancements />
-      <MotionDataViz />
-      <FinanceExpansion />
-    </>
+    <App />
   )
+}
+
+// El contenido esencial no espera a animaciones, gráficas o complementos de navegación.
+function PrimaryEffects() {
+  if (carrera) return <CareerMotion />;
+  if (profesion || ocupaciones || compararCarreras || compararEstados || estados ||
+      fondosCNBV || cetesReferencia || compararInstrumentos || inversion ||
+      asesor || finanzas || economia) return <RouteMotion />;
+  return <>
+    <SiteEnhancements />
+    <MotionDataViz />
+    <FinanceExpansion />
+  </>;
+}
+
+function PrimaryCommitted({ onReady }) {
+  React.useEffect(() => { onReady(); }, [onReady]);
+  return null;
 }
 
 function RouteExtras() {
@@ -187,17 +161,31 @@ function RouteExtras() {
     {extras.investmentEntry && <InvestmentEntry />}
     {extras.investmentCompareEntry && <InvestmentCompareEntry />}
     {extras.economyNavigation && <EconomyNavigation />}
-    <JourneyCompanion />
   </>
+}
+
+function RouteExperience() {
+  const [primaryReady, setPrimaryReady] = React.useState(false);
+  const markReady = React.useCallback(() => setPrimaryReady(true), []);
+  return <>
+    <React.Suspense fallback={<main className="ml-route-loading" role="status" aria-label="Cargando sección"><span>Cargando contenido…</span></main>}>
+      <PrimaryRoute />
+      <PrimaryCommitted onReady={markReady} />
+    </React.Suspense>
+    {primaryReady && <React.Suspense fallback={null}>
+      <PrimaryEffects />
+    </React.Suspense>}
+    <React.Suspense fallback={null}>
+      <RouteExtras />
+    </React.Suspense>
+    <React.Suspense fallback={null}>
+      <JourneyCompanion />
+    </React.Suspense>
+  </>;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <React.Suspense fallback={<main className="ml-route-loading" role="status" aria-label="Cargando sección"><span>Cargando contenido…</span></main>}>
-      <PrimaryRoute />
-    </React.Suspense>
-    <React.Suspense fallback={null}>
-      <RouteExtras />
-    </React.Suspense>
+    <RouteExperience />
   </React.StrictMode>,
 )

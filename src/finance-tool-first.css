@@ -1,0 +1,58 @@
+/* Entrada directa a la tarea: solo páginas de herramienta y asesor, nunca el hub editorial. */
+.finance-start-link{
+  display:inline-flex;align-items:center;justify-content:space-between;gap:13px;
+  margin-top:16px;padding:10px 15px;border:1px solid #a8c7df;
+  border-radius:999px;background:#fff;color:#245c93!important;
+  font-size:13px;line-height:1.35;font-weight:800;text-decoration:none;
+}
+.finance-start-link>span{font-size:17px;line-height:1;color:#245c93}
+.finance-start-link:focus-visible{outline:3px solid #2d6caa;outline-offset:3px}
+.finance-start-link:hover{background:#eaf5fc;border-color:#2d6caa}
+.finance-tool-section[id],.advisor-form[id]{scroll-margin-top:20px}
+
+@media(max-width:900px){
+  /* La fotografía repetida ocupa otra pantalla antes del primer campo.
+     El hub de Finanzas y los artículos siguen conservando su fotografía. */
+  .finance-pages .finance-page-hero-tool .finance-page-photo{display:none!important}
+  .finance-pages .finance-page-hero-tool .finance-page-hero-grid{
+    min-height:0;grid-template-columns:minmax(0,1fr);gap:0;
+    padding:clamp(22px,3vw,32px) 0 18px;
+  }
+  .finance-pages .finance-page-hero-tool .finance-page-hero-copy nav{margin-bottom:12px}
+  .finance-pages .finance-page-hero-tool .finance-page-hero-copy h1{
+    max-width:670px;margin:9px 0 11px;
+    font-size:clamp(33px,5vw,46px);line-height:1.06;
+  }
+  .finance-pages .finance-page-hero-tool .finance-page-lede{
+    max-width:680px;font-size:14px;line-height:1.52;
+  }
+  .finance-pages .finance-page-hero-tool .finance-page-proof{margin-top:11px}
+  .finance-pages .finance-page-hero-tool .finance-page-proof span:not(:first-child){display:none}
+  .finance-pages .finance-tool-section{padding:18px 0 60px}
+  .finance-pages .finance-tool-layout{gap:24px}
+  .finance-pages .finance-form-card{padding:20px;border-radius:19px;box-shadow:none}
+  .finance-pages .finance-form-card h2{font-size:clamp(27px,3.5vw,33px);margin-bottom:17px}
+  .finance-pages .finance-field{margin-top:14px}
+  .finance-pages .finance-result-card{padding:19px}
+  .advisor-page .advisor-hero{padding:27px 0 26px}
+  .advisor-page .advisor-hero h1{font-size:clamp(33px,5vw,46px);line-height:1.07;margin:10px 0 12px}
+  .advisor-page .advisor-hero>div>p:not(.eyebrow){font-size:14px;line-height:1.55}
+  .advisor-page .advisor-proof{margin-top:12px}
+  .advisor-page .advisor-proof span:not(:first-child){display:none}
+  .advisor-page .advisor-main{padding:24px 0 65px}
+  .advisor-page .advisor-form{padding:19px;border-radius:19px;box-shadow:none}
+  .advisor-page .advisor-form-head h2{font-size:30px}
+}
+@media(max-width:640px){
+  .finance-pages .finance-page-hero-tool .finance-page-hero-grid{padding:20px 0 13px}
+  .finance-pages .finance-page-hero-tool .finance-page-hero-copy h1{font-size:clamp(30px,8.5vw,38px)}
+  .finance-pages .finance-tool-section{padding:14px 0 48px}
+  .finance-pages .finance-form-card{padding:16px}
+  .finance-pages .finance-result-card{padding:16px}
+  .advisor-page .advisor-hero{padding:18px 0 20px}
+  .advisor-page .advisor-hero h1{font-size:clamp(30px,8.5vw,37px)}
+  .advisor-page .advisor-main{padding-top:18px}
+  .advisor-page .advisor-form{padding:16px}
+  .finance-start-link{width:max-content;max-width:100%;margin-top:11px;padding:10px 14px}
+}
+@media(prefers-reduced-motion:reduce){.finance-start-link{transition:none}}

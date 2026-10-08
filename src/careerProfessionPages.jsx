@@ -1,5 +1,6 @@
 import datos from './data/profesiones.json';
 import AdReserve from './AdReserve.jsx';
+import { enlaceComparacion } from './lib/compareFromProfile.js';
 
 const FOTO_ID = '3184465';
 // Recorte 16:9 anclado abajo: la foto original corta la cabeza (solo se veía la barbilla); así queda el apretón de manos.
@@ -62,7 +63,7 @@ export default function CareerProfessionPages() {
               <p className="eyebrow">Cuánto gana · México 2026</p>
               <h1>{p.consulta}</h1>
               <p className="profession-lede">El Observatorio Laboral reporta un ingreso mensual promedio de <strong>{dinero(p.ingreso)}</strong> para profesionistas ocupados en {p.nombre}. Úsalo como referencia de grupo, no como sueldo inicial ni como oferta de trabajo.</p>
-              <div className="profession-proof"><span>ENOE 2026-T2</span><span>STPS</span><span>INEGI</span></div>
+              <div className="profession-proof"><span>ENOE 2026-T2</span><span>STPS</span><span>INEGI</span></div><a className="ml-compare-context-link" href={enlaceComparacion('carrera', p.slug, datos.profesiones)}>Comparar esta profesión con otra <span aria-hidden="true">→</span></a>
             </div>
             <figure className="profession-hero-media"><img src={foto(1400)} srcSet={`${foto(720)} 720w, ${foto(1400)} 1400w`} sizes="(max-width: 900px) 100vw, 46vw" alt="Profesionales revisando información de trabajo y salarios" loading="eager" /></figure>
           </div>

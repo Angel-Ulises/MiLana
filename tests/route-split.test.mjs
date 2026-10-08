@@ -83,4 +83,5 @@ test('La entrada ofrece lazy-loading por ruta y mantiene intactas las hojas comp
   assert.match(source, /<JourneyCompanion \/>/);
   assert.match(source, /<React\.Suspense fallback=\{null\}>/);
   assert.match(source, /import '\.\/economy-ux\.css'/);
+  assert.match(source, /import '\.\/design-home\.css'/, 'Los estilos globales no pueden esperar al módulo de calculadoras');
 });

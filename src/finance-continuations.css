@@ -16,3 +16,11 @@
 .ml-finance-continuations button:focus-visible,.ml-finance-context-notice button:focus-visible{outline:3px solid #2d6caa;outline-offset:3px}
 @media(max-width:560px){.ml-finance-continuations-actions{display:grid;grid-template-columns:1fr}.ml-finance-continuations-actions button{width:100%}.ml-finance-context-notice{flex-direction:column}.ml-finance-context-notice button{align-self:flex-start}}
 @media(prefers-reduced-motion:reduce){.ml-finance-continuations-actions button{transition:none}}
+
+/* Presupuesto coloca acciones dentro de una superficie azul oscura. */
+.finance-next-box .ml-finance-continuations{border-top-color:#51697c}
+.finance-next-box .ml-finance-continuations-kicker{color:#b9dcfa}
+.finance-next-box .ml-finance-continuations>small{color:#d9e6f1}
+.finance-next-box .ml-finance-continuations>p[role=alert]{color:#ffd3c9!important}
+.finance-next-box .ml-finance-continuations-actions button{background:#f3f9fd;color:#20577d;border-color:#b7d0e1}
+.finance-next-box .ml-finance-continuations-actions button>span{color:#20577d}

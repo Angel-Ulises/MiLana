@@ -11,6 +11,8 @@ import catalogoSituaciones from "./data/situaciones.json";
 import catalogoFotos from "./data/fotos.json";
 import AdReserve from './AdReserve.jsx';
 import { HomeRoutes, SituationCard } from './homeRoutes.jsx';
+import { CalculatorResultContext, ResultNextSteps } from './calculatorResultJourney.jsx';
+import './calculator-result-journey.css';
 
 // ═══════════════════════════════════════════════════════════════
 // DATOS OFICIALES 2026 — SAT / CONASAMI / INEGI
@@ -855,6 +857,7 @@ function ResultBox({ children }) {
       padding:20,marginTop:8
     }}>
       {children}
+      <ResultNextSteps />
       <button onClick={compartirWhatsApp} style={{
         width:'100%',marginTop:16,padding:'10px 16px',background:'var(--ml-green-50)',
         border:'1px solid #bbf7d0',borderRadius:'var(--ml-radius-input)',color:'var(--ml-green-600)',fontSize:13,
@@ -1214,7 +1217,7 @@ function ContenidoCalculadora({ id, ir }) {
     <div style={{ marginTop: 30, paddingTop: 24, borderTop: '1px solid var(--ml-border, #edf0f4)' }}>
       {/* Divulgación progresiva: título + primera oración visibles; el texto completo sigue en el DOM. */}
       {ORDEN_SECCIONES.filter(k => data[k]).map(k => (
-        <Detalle key={k} className="orb-more-plain orb-calc-more" nivel="h2" titulo={TITULOS_SECCION[k]} resumen={primeraOracion(data[k])}>
+        <Detalle key={k} id={k === "interpretacion" ? "ml-calc-interpretation" : undefined} className="orb-more-plain orb-calc-more" nivel="h2" titulo={TITULOS_SECCION[k]} resumen={primeraOracion(data[k])}>
           <p style={{ ...parrafo, fontSize: 15, lineHeight: 1.7 }}>{data[k]}</p>
         </Detalle>
       ))}
@@ -1703,7 +1706,9 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
           </header>
 
           <main className="shell calculator-main" style={{maxWidth:720, paddingBottom:64}}>
-            <Comp />
+            <CalculatorResultContext.Provider value={calc.id}>
+              <Comp />
+            </CalculatorResultContext.Provider>
             <FichaConfianza id={calc.id} />
             <Articulo id={calc.id} />
             <ContenidoCalculadora id={calc.id} ir={setActiva} />

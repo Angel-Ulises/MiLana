@@ -35,6 +35,8 @@ async function run() {
   if(!guide) throw new Error('No hay orientación junto a resultado');
   if(guide.querySelector('a[href="#ml-calc-interpretation"]')===null) throw new Error('Falta explicación');
   if(document.querySelector('#ml-calc-interpretation')===null) throw new Error('Ancla sin destino');
+  guide.querySelector('a[href="#ml-calc-interpretation"]').click();
+  if(!document.querySelector('#ml-calc-interpretation')?.open) throw new Error('La explicación no se abre');
   if(guide.querySelectorAll('.ml-result-next-links a').length!==2) throw new Error('Rutas relacionadas incorrectas');
   if(guide.textContent.includes('20,000')) throw new Error('La orientación reflejó el importe personal');
   document.body.dataset.done='true';document.body.dataset.result='ok';

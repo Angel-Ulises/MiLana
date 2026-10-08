@@ -52,9 +52,11 @@ test('interfaz compartida no utiliza LLM ni modifica fórmulas o campos financie
   assert.match(css,/grid-template-areas:"topics topics" "needs answer"/);
   assert.match(css,/@media\(max-width:760px\)/);
   assert.match(css,/focus-visible/);
-  assert.match(home,/href="\/finanzas">Finanzas/);
-  assert.match(home,/href="\/carreras">Carreras/);
+  assert.match(home,/<SiteHeader \/>/);
+  const sharedNav=readFileSync('src/lib/siteNavigation.js','utf8');
+  assert.match(sharedNav,/\['finanzas', '\/finanzas', 'Finanzas'\]/);
+  assert.match(sharedNav,/\['carreras', '\/carreras', 'Carreras'\]/);
   const legacyNav=readFileSync('src/financeExpansion.jsx','utf8');
-  assert.match(legacyNav,/nav\.querySelector\('a\[href="\/finanzas"\]'\) && nav\.querySelector\('a\[href="\/carreras"\]'\)/);
+  assert.doesNotMatch(legacyNav,/asegurarNavegacion|data-ml-finance-nav/);
   assert.doesNotMatch(ui+comp,/fetch\(|XMLHttpRequest|formData|FormData\(/);
 });

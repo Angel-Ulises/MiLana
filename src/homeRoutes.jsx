@@ -46,19 +46,35 @@ function descartarRuta() {
   try { localStorage.removeItem('ml-orbita-route'); } catch { /* sin almacenamiento */ }
 }
 
+// El primer pantallazo cubre tres necesidades distintas. Las demás rutas
+// permanecen como enlaces normales, disponibles en un desplegable nativo.
+const RUTAS_INICIO = ['Me despidieron', 'Quiero ahorrar', 'Estoy eligiendo carrera'];
+const rutasPrincipales = RUTAS.filter((r) => RUTAS_INICIO.includes(r.label));
+const rutasAdicionales = RUTAS.filter((r) => !RUTAS_INICIO.includes(r.label));
+
+function EnlaceSituacion({ ruta }) {
+  return (
+    <a className={`orb-home-route orb-tone-${ruta.tone}`} href={ruta.href} onClick={() => recordarRuta(ruta)}>
+      <span className="orb-home-route-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={ICONOS[ruta.icon]} /></svg></span>
+      <span>{ruta.label}</span>
+      <b aria-hidden="true">›</b>
+    </a>
+  );
+}
+
 export function HomeRoutes() {
   return (
     <section className="orb-home-routes" id="orb-home-routes" aria-labelledby="orb-home-routes-title">
       <h2 id="orb-home-routes-title">¿Qué estás viviendo?</h2>
       <div className="orb-home-route-grid">
-        {RUTAS.map((ruta) => (
-          <a key={ruta.href} className={`orb-home-route orb-tone-${ruta.tone}`} href={ruta.href} onClick={() => recordarRuta(ruta)}>
-            <span className="orb-home-route-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={ICONOS[ruta.icon]} /></svg></span>
-            <span>{ruta.label}</span>
-            <b aria-hidden="true">›</b>
-          </a>
-        ))}
+        {rutasPrincipales.map((ruta) => <EnlaceSituacion key={ruta.href} ruta={ruta} />)}
       </div>
+      <details className="orb-home-extra">
+        <summary>Ver otras 3 situaciones <span aria-hidden="true">+</span></summary>
+        <div className="orb-home-extra-grid">
+          {rutasAdicionales.map((ruta) => <EnlaceSituacion key={ruta.href} ruta={ruta} />)}
+        </div>
+      </details>
       <button type="button" className="orb-home-search" onClick={() => document.querySelector('[data-orbita-search-open]')?.click()}>
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
         <span>¿Ya sabes qué buscas? <strong>Busca una calculadora</strong></span>

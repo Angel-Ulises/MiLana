@@ -1,25 +1,16 @@
 import { createContext, useContext } from 'react';
 import contenido from './data/contenido-calculadoras.json';
 import catalogo from './data/paginas.json';
+import { rutasDespuesDelResultado } from './lib/calculatorResultRoutes.js';
 
 export const CalculatorResultContext = createContext(null);
 
-// Los destinos se derivan del catálogo y del editorial publicado, no de sugerencias de una IA.
-const rutas = new Map(catalogo.paginas.map(({ id, slug }) => [id, `/calculadoras/${slug}`]));
 const SEGURAS = new Set(['finiquito','liquidacion','aguinaldo','isr','resico','ptu','bruto-neto','vacaciones','infonavit']);
-
-export function rutasDespuesDelResultado(id) {
-  if (!SEGURAS.has(id)) return [];
-  return (contenido[id]?.siguientes || [])
-    .filter((item) => item && typeof item.texto === 'string' && rutas.has(item.destino) && SEGURAS.has(item.destino) && item.destino !== id)
-    .slice(0, 2)
-    .map((item) => ({ titulo: item.texto, href: rutas.get(item.destino) }));
-}
 
 export function ResultNextSteps() {
   const id = useContext(CalculatorResultContext);
   if (!SEGURAS.has(id) || !contenido[id]?.interpretacion) return null;
-  const proximos = rutasDespuesDelResultado(id);
+  const proximos = rutasDespuesDelResultado(id, contenido, catalogo);
   return (
     <section className="ml-result-journey" aria-label="Qué hacer después de calcular">
       <div className="ml-result-journey-heading">

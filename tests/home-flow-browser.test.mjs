@@ -53,3 +53,22 @@ run().catch(error=>{document.body.dataset.error=error.message;document.body.data
     rmSync('src/__home-flow-test.jsx',{force:true});
   }
 });
+
+test('navegador: Inicio muestra tres preguntas y las demás quedan desplegables', async (t) => {
+  if (!browserReady(t, chrome)) return;
+  const server=await createServer({server:{host:'127.0.0.1',port:0},logLevel:'silent'});
+  await server.listen();
+  try {
+    const url=`http://127.0.0.1:${server.httpServer.address().port}/`;
+    const html=await renderDom(chrome,url,{
+      waitMs:7500,
+      until:"!!document.querySelector('.ml-more-questions') && !!document.querySelector('.ml-how-it-works') && !!document.querySelector('.orb-home-routes')",
+    });
+    assert.match(html, /<details class="ml-more-questions"/);
+    assert.match(html, /<details class="ml-how-it-works"/);
+    assert.doesNotMatch(html, /<details class="ml-more-questions" open/);
+    assert.doesNotMatch(html, /<details class="ml-how-it-works" open/);
+    assert.equal((html.match(/class="mlq-card"/g) || []).length,6);
+    assert.doesNotMatch(html,/data-orbita-situation-card="true"/);
+  } finally {await server.close();}
+});

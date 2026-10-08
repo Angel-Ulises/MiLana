@@ -58,7 +58,8 @@ test('búsqueda oculta resultados, muestra vacío y Enter abre el primero',()=>{
   assert.match(inject,/`\/carreras\/profesion\/\$\{x\.slug\}`/);
 });
 test('Calculadoras apunta a ancla real y el verificador exige que exista su id',()=>{
-  assert.match(inject,/\['calculadoras', '\/#calculadoras', 'Calculadoras'\]/);
+  assert.match(inject,/const nav = NAVEGACION_MILANA;/);
+  assert.match(readFileSync('src/lib/siteNavigation.js','utf8'),/\['calculadoras', '\/#calculadoras', 'Calculadoras'\]/);
   assert.match(links,/contieneId\(destino, target\.fragment\)/);
   assert.match(links,/ancla sin id/);
   assert.match(links,/statSync\(directo\)\.isFile\(\)/);

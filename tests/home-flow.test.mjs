@@ -40,3 +40,19 @@ test('conserva el conjunto de seis rutas reales y no altera cálculos', () => {
   }
   assert.doesNotMatch(routes, /FormData|\.value|fetch\(/);
 });
+
+test('el Inicio mantiene las seis preguntas y áreas, pero reduce el contenido inicial', () => {
+  const home = readFileSync('src/financeExpansion.jsx','utf8');
+  const cssHome = readFileSync('src/home-expansion-compact.css','utf8');
+  const main = readFileSync('src/main.jsx','utf8');
+  assert.match(home,/preguntas\.slice\(0, 3\)/);
+  assert.match(home,/preguntas\.slice\(3\)/);
+  assert.match(home,/<details className="ml-more-questions">/);
+  assert.match(home,/\{AREAS\.map\(/);
+  assert.match(home,/\{EDITORIAL\.map\(/);
+  assert.match(cssHome,/#ml-finance-expansion-root \.ml-money-card/);
+  assert.match(cssHome,/\.ml-money-card h3\{grid-column:2/);
+  assert.match(cssHome,/\.ml-discovery-photo\{display:none\}/);
+  assert.match(main,/home-expansion-compact\.css/);
+  assert.match(cssHome,/focus-visible/);
+});

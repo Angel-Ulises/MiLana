@@ -18,15 +18,18 @@ test('approved identity uses self-contained paths and the fixed brand palette', 
 
 test('React brand links retain accessible names and reserve logo dimensions', () => {
   let count = 0;
+  let sharedUsages = 0;
   for (const name of readdirSync('src').filter(name => name.endsWith('.jsx'))) {
     const src = read(`src/${name}`);
+    if (src.includes('<SiteHeader')) sharedUsages++;
     if (!src.includes('className="brand"')) continue;
     count++;
     assert.match(src, /className="brand" href="\/" aria-label="MiLana, inicio"/);
     assert.match(src, /className="brand-logo" src="\/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true"/);
     assert.doesNotMatch(src, /className="brand-mark"/);
   }
-  assert.ok(count >= 14);
+  assert.ok(count + sharedUsages >= 14, 'Los headers compartidos siguen incluyendo un enlace de marca accesible');
+  assert.ok(sharedUsages >= 7, 'La navegación centralizada debe reemplazar siete copias');
 });
 
 test('generated shell uses the same lockup with a 48px accessible link target', () => {

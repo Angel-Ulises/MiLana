@@ -20,7 +20,8 @@ test('cuatro herramientas de Finanzas empiezan en formularios identificables, hu
 test('asesor ofrece entrada al análisis y un menú coherente',()=>{
   assert.match(advisor,/href="#mi-situacion-datos"/);
   assert.match(advisor,/<form className="advisor-form" id="mi-situacion-datos"/);
-  assert.match(advisor,/<a href="\/aprende">Aprende<\/a>/);
+  assert.match(advisor,/<SiteHeader ctaHref="\/finanzas\/presupuesto"/);
+  assert.match(readFileSync('src/lib/siteNavigation.js','utf8'),/\['aprende', '\/aprende', 'Aprende'\]/);
 });
 
 test('estilos reducen pantalla introductoria solo en herramientas y móvil',()=>{

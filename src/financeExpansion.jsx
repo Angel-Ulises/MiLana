@@ -133,23 +133,6 @@ function asegurarDestino() {
   return target;
 }
 
-function asegurarNavegacion() {
-  const nav = document.querySelector('.desktop-nav');
-  if (!nav || nav.querySelector('[data-ml-finance-nav]')) return;
-  // El header React ya incluye ambas áreas: no duplicarlas con el puente legacy.
-  if (nav.querySelector('a[href="/finanzas"]') && nav.querySelector('a[href="/carreras"]')) return;
-  const carreras = document.createElement('a');
-  carreras.href = '/carreras';
-  carreras.textContent = 'Carreras';
-  carreras.dataset.mlFinanceNav = 'true';
-  const finanzas = document.createElement('a');
-  finanzas.href = '/finanzas';
-  finanzas.textContent = 'Finanzas';
-  finanzas.dataset.mlFinanceNav = 'true';
-  nav.insertBefore(carreras, nav.children[2] || null);
-  nav.insertBefore(finanzas, nav.children[3] || null);
-}
-
 function PreguntaCard({ item, abierta, onToggle }) {
   return (
     <article className={`mlq-card${abierta ? ' is-open' : ''}`}>
@@ -273,7 +256,6 @@ export default function FinanceExpansion() {
   useEffect(() => {
     const sincronizar = () => {
       const next = asegurarDestino();
-      asegurarNavegacion();
       setTarget((actual) => actual === next ? actual : next);
     };
     sincronizar();

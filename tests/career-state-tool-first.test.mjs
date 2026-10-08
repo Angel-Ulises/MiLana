@@ -25,10 +25,12 @@ test('comparadores de carreras y estados presentan los selectores sin inventar m
     assert.match(source,/className="(cc|sc)-tool" id="comparar"/);
     assert.match(source,/<select value=\{a\}/);
     assert.match(source,/<select value=\{b\}/);
-    assert.match(source,/href="\/finanzas">Finanzas/);
-    assert.match(source,/href="\/carreras">Carreras/);
+    assert.match(source,/<SiteHeader ctaHref=/);
+    assert.match(source,/<SiteHeader ctaHref=/);
     assert.doesNotMatch(source,/setTimeout|sessionStorage|localStorage/);
   }
+  assert.match(readFileSync('src/lib/siteNavigation.js','utf8'),/\['finanzas', '\/finanzas', 'Finanzas'\]/);
+  assert.match(readFileSync('src/lib/siteNavigation.js','utf8'),/\['carreras', '\/carreras', 'Carreras'\]/);
   assert.match(css,/\.cc-hero/);
   assert.match(css,/\.sc-hero/);
 });

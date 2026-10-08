@@ -1,3 +1,4 @@
+import SiteHeader from './siteHeader.jsx';
 import Detalle, { primeraOracion } from './Detalle.jsx';
 import { calcularISR, calcularAguinaldo, calcularAguinaldoSEPEMS2026, ISR_MENSUAL_2026 } from "./lib/calculos-revisados.mjs";
 import { calcularFiniquito2026, calcularLiquidacion2026, calcularBrutoNeto2026 } from "./lib/calculos-laborales-2026.mjs";
@@ -1648,20 +1649,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
     <>
       <style>{CSS_CALCULADORAS}</style>
 
-      <header className="site-header">
-        <div className="shell header-inner">
-          <a className="brand" href="/" aria-label="MiLana, inicio">
-            <img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" />
-          </a>
-          <nav className="desktop-nav" aria-label="Principal">
-            <a href="/finanzas">Finanzas</a>
-            <a href="/carreras">Carreras</a>
-            <a href="/#calculadoras">Calculadoras</a>
-            <a href="/#aprende">Aprende</a>
-          </nav>
-          <a className="header-cta" href="/finanzas/mi-situacion">Mi situación</a>
-        </div>
-      </header>
+      <SiteHeader />
 
       {situacion && !activa && !cerrando ? (
         <SituationHub situacion={situacion} ir={setActiva} irASituacion={irASituacion} />

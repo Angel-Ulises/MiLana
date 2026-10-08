@@ -1,3 +1,4 @@
+import SiteHeader from './siteHeader.jsx';
 import Detalle from './Detalle.jsx';
 import { useMemo, useState } from 'react';
 import datos from './data/carreras.json';
@@ -35,22 +36,7 @@ function slugActual() {
 }
 
 function Header() {
-  return (
-    <header className="site-header">
-      <div className="shell header-inner">
-        <a className="brand" href="/" aria-label="MiLana, inicio">
-          <img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" />
-        </a>
-        <nav className="desktop-nav" aria-label="Principal">
-          <a href="/finanzas">Finanzas</a>
-          <a href="/carreras">Carreras</a>
-          <a href="/#calculadoras">Calculadoras</a>
-          <a href="/aprende">Aprende</a>
-        </nav>
-        <a className="header-cta" href="/calculadoras/bruto-a-neto">Calcular sueldo</a>
-      </div>
-    </header>
-  );
+  return <SiteHeader ctaHref="/calculadoras/bruto-a-neto" ctaLabel="Calcular sueldo" />;
 }
 
 function Footer() {

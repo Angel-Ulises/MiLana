@@ -53,17 +53,26 @@
     title.textContent = '¿Qué estás viviendo?';
     block.appendChild(title);
 
-    const grid = document.createElement('div');
-    grid.className = 'orb-home-route-grid';
+    const main = document.createElement('div');
+    main.className = 'orb-home-route-grid';
+    const more = document.createElement('details');
+    more.className = 'orb-home-extra';
+    const summary = document.createElement('summary');
+    summary.innerHTML = 'Ver otras 3 situaciones <span aria-hidden="true">+</span>';
+    const moreGrid = document.createElement('div');
+    moreGrid.className = 'orb-home-extra-grid';
+    const important = new Set(['Me despidieron', 'Quiero ahorrar', 'Estoy eligiendo carrera']);
+
     for (const option of options) {
       const a = document.createElement('a');
       a.className = `orb-home-route orb-tone-${option.tone}`;
       a.href = option.href;
       a.innerHTML = `<span class="orb-home-route-icon">${svgIcon(option.icon)}</span><span>${option.label}</span><b aria-hidden="true">›</b>`;
       a.addEventListener('click', () => rememberRoute(option));
-      grid.appendChild(a);
+      (important.has(option.label) ? main : moreGrid).appendChild(a);
     }
-    block.appendChild(grid);
+    more.append(summary, moreGrid);
+    block.append(main, more);
 
     const search = document.createElement('button');
     search.type = 'button';

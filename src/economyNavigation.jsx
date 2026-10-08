@@ -1,17 +1,7 @@
 import { useEffect } from 'react';
 
 function sincronizarEconomia() {
-  const nav = document.querySelector('.desktop-nav');
-  if (nav && !nav.querySelector('[data-ml-economy-nav]')) {
-    const link = document.createElement('a');
-    link.href = '/economia';
-    link.textContent = 'Economía';
-    link.dataset.mlEconomyNav = 'true';
-    const finanzas = [...nav.querySelectorAll('a')].find((a) => a.getAttribute('href') === '/finanzas');
-    if (finanzas?.nextSibling) nav.insertBefore(link, finanzas.nextSibling);
-    else nav.appendChild(link);
-  }
-
+  // La navegación principal se genera desde siteNavigation.js; no insertar enlaces con MutationObserver.
   const head = document.querySelector('.ml-editorial-list-head');
   if (head && !head.querySelector('[data-ml-economy-entry]')) {
     const link = document.createElement('a');

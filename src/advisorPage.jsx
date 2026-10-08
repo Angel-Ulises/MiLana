@@ -1,3 +1,4 @@
+import SiteHeader from './siteHeader.jsx';
 import { useEffect, useMemo, useState } from 'react';
 import { consumirIngresoTemporal } from './lib/netIncomeHandoff.js';
 import IncomeTransferNotice from './incomeTransferNotice.jsx';
@@ -18,7 +19,7 @@ export function esRutaAsesor() {
 }
 
 function Header() {
-  return <header className="site-header"><div className="shell header-inner"><a className="brand" href="/" aria-label="MiLana, inicio"><img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" /></a><nav className="desktop-nav" aria-label="Principal"><a href="/finanzas">Finanzas</a><a href="/carreras">Carreras</a><a href="/#calculadoras">Calculadoras</a><a href="/aprende">Aprende</a></nav><a className="header-cta" href="/finanzas/presupuesto">Presupuesto</a></div></header>;
+  return <SiteHeader ctaHref="/finanzas/presupuesto" ctaLabel="Presupuesto" />;
 }
 
 function Campo({ label, value, onChange, help }) {

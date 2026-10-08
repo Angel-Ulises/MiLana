@@ -1,0 +1,19 @@
+/* Navegación contextual entre perfiles públicos y comparadores. No incluye datos de usuario. */
+.ml-compare-context-link{
+  display:inline-flex;align-items:center;justify-content:space-between;gap:13px;
+  padding:10px 14px;margin:14px 0 0;border:1px solid #b5d0e2;border-radius:999px;
+  background:#fff;color:#235b83!important;text-decoration:none;
+  font:800 13px/1.4 Inter,Arial,sans-serif;max-width:100%;
+}
+.ml-compare-context-link span{color:#235b83;flex:none;font-size:18px;line-height:1}
+.ml-compare-context-link:hover{background:#edf7fc}
+.ml-compare-context-link:focus-visible{outline:3px solid #2d6caa;outline-offset:3px}
+.ml-compare-origin{
+  margin:0 0 14px;padding:9px 12px;border-left:3px solid #2d6caa;
+  background:#f1f7fb;color:#42586c;font-size:12px;line-height:1.55;
+}
+@media(max-width:640px){
+ .ml-compare-context-link{padding:10px 13px;margin-top:12px;font-size:12px}
+ .ml-compare-origin{margin-bottom:12px;font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.ml-compare-context-link{transition:none}}

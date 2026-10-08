@@ -1,13 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { rutasDespuesDelResultado } from '../src/calculatorResultJourney.jsx';
-import editorial from '../src/data/contenido-calculadoras.json';
+import { rutasDespuesDelResultado } from '../src/lib/calculatorResultRoutes.js';
+const editorial = JSON.parse(readFileSync('src/data/contenido-calculadoras.json','utf8'));
+const catalogo = JSON.parse(readFileSync('src/data/paginas.json','utf8'));
 
 test('cada calculadora operativa enlaza rutas relacionadas de su propio editorial', () => {
   const ids = ['finiquito','liquidacion','aguinaldo','isr','resico','ptu','bruto-neto','vacaciones','infonavit'];
   for (const id of ids) {
-    const enlaces = rutasDespuesDelResultado(id);
+    const enlaces = rutasDespuesDelResultado(id, editorial, catalogo);
     assert.equal(enlaces.length, 2, id);
     assert.equal(new Set(enlaces.map(e => e.href)).size, enlaces.length, id);
     assert.ok(editorial[id]?.interpretacion, id);
@@ -17,8 +18,8 @@ test('cada calculadora operativa enlaza rutas relacionadas de su propio editoria
       assert.notEqual(enlace.href, '/calculadoras/pension-imss', id);
     }
   }
-  assert.deepEqual(rutasDespuesDelResultado('pension'), []);
-  assert.deepEqual(rutasDespuesDelResultado('__invalid__'), []);
+  assert.deepEqual(rutasDespuesDelResultado('pension', editorial, catalogo), []);
+  assert.deepEqual(rutasDespuesDelResultado('__invalid__', editorial, catalogo), []);
 });
 
 test('orientación al resultado sin cambiar funciones de cálculo ni guardar importes', () => {

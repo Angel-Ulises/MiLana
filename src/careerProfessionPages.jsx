@@ -1,6 +1,9 @@
 import datos from './data/profesiones.json';
 import AdReserve from './AdReserve.jsx';
 import { enlaceComparacion } from './lib/compareFromProfile.js';
+import { enlaceOcupacionDeCarrera } from './lib/occupationFromProfession.js';
+import ocupaciones from './data/ocupaciones.json';
+import SiteHeader from './siteHeader.jsx';
 
 const FOTO_ID = '3184465';
 // Recorte 16:9 anclado abajo: la foto original corta la cabeza (solo se veía la barbilla); así queda el apretón de manos.
@@ -20,15 +23,7 @@ function profesionActual() {
 }
 
 function Header() {
-  return (
-    <header className="site-header">
-      <div className="shell header-inner">
-        <a className="brand" href="/" aria-label="MiLana, inicio"><img className="brand-logo" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true" /></a>
-        <nav className="desktop-nav" aria-label="Principal"><a href="/carreras">Carreras</a><a href="/finanzas">Finanzas</a><a href="/#calculadoras">Calculadoras</a><a href="/aprende">Aprende</a></nav>
-        <a className="header-cta" href="/calculadoras/bruto-a-neto">Calcular sueldo</a>
-      </div>
-    </header>
-  );
+  return <SiteHeader ctaHref="/calculadoras/bruto-a-neto" ctaLabel="Calcular sueldo" />;
 }
 
 function Footer() {
@@ -63,13 +58,13 @@ export default function CareerProfessionPages() {
               <p className="eyebrow">Cuánto gana · México 2026</p>
               <h1>{p.consulta}</h1>
               <p className="profession-lede">El Observatorio Laboral reporta un ingreso mensual promedio de <strong>{dinero(p.ingreso)}</strong> para profesionistas ocupados en {p.nombre}. Úsalo como referencia de grupo, no como sueldo inicial ni como oferta de trabajo.</p>
-              <div className="profession-proof"><span>ENOE 2026-T2</span><span>STPS</span><span>INEGI</span></div><a className="ml-compare-context-link" href={enlaceComparacion('carrera', p.slug, datos.profesiones)}>Comparar esta profesión con otra <span aria-hidden="true">→</span></a>
+              <div className="profession-proof"><span>ENOE 2026-T2</span><span>STPS</span><span>INEGI</span></div><a className="ml-profession-data-link" href="#datos-profesion">Ver cifras de esta profesión <span aria-hidden="true">↓</span></a><a className="ml-compare-context-link" href={enlaceComparacion('carrera', p.slug, datos.profesiones)}>Comparar esta profesión con otra <span aria-hidden="true">→</span></a>{enlaceOcupacionDeCarrera(p.slug, ocupaciones.ocupaciones) && <a className="ml-occupation-context-link" href={enlaceOcupacionDeCarrera(p.slug, ocupaciones.ocupaciones)}>Comparar formación y ocupación relacionada <span aria-hidden="true">→</span></a>}
             </div>
             <figure className="profession-hero-media"><img src={foto(1400)} srcSet={`${foto(720)} 720w, ${foto(1400)} 1400w`} sizes="(max-width: 900px) 100vw, 46vw" alt="Profesionales revisando información de trabajo y salarios" loading="eager" /></figure>
           </div>
         </section>
 
-        <section className="profession-summary">
+        <section className="profession-summary" id="datos-profesion">
           <div className="shell">
             <div className="profession-metrics">
               <Metric label="Ingreso promedio mensual" value={dinero(p.ingreso)} note={`${diferencia >= 0 ? '+' : ''}${diferenciaPct.toFixed(1)}% frente al promedio profesional nacional`} />

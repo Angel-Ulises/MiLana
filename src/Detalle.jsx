@@ -1,9 +1,9 @@
 // Bloque plegable accesible (divulgación progresiva). Usa <details>/<summary> nativo: teclado y lector de
 // pantalla funcionan sin JS extra y el contenido sigue en el DOM (SEO). Estilos en public/orbita-v3-detalle.css.
-export default function Detalle({ titulo, resumen, children, className = '', abierto = false, nivel = 'span', cta = 'Ver detalle' }) {
+export default function Detalle({ titulo, resumen, children, className = '', abierto = false, nivel = 'span', cta = 'Ver detalle', id }) {
   const Titulo = nivel;
   return (
-    <details className={`orb-more ${className}`.trim()} open={abierto || undefined}>
+    <details id={id} className={`orb-more ${className}`.trim()} open={abierto || undefined}>
       <summary>
         <span className="orb-more-text">
           <Titulo className="orb-more-title">{titulo}</Titulo>

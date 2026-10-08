@@ -48,7 +48,7 @@ export const ETIQUETAS_ORIGEN = Object.freeze({
 function cantidadCapturada(input) {
   if (typeof input !== 'string' && typeof input !== 'number') return null;
   const value = String(input).trim();
-  if (!value || !/^(?:\\d+)(?:\\.\\d{1,2})?$/.test(value)) return null;
+  if (!value || !/^(?:\d+)(?:\.\d{1,2})?$/.test(value)) return null;
   const parsed = Number(value);
   if (!Number.isFinite(parsed) || parsed < 0 || parsed > 100_000_000) return null;
   return value;

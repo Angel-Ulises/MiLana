@@ -1,5 +1,5 @@
 // Solo identificadores publicados en los catálogos de MiLana.
-// Los importes y los datos introducidos en formularios nunca viajan en el enlace.
+// El enlace transporta solamente una clave pública; nunca datos privados.
 const destinos = { estado: '/estados/comparar', carrera: '/carreras/comparar' };
 
 export function resolverParComparacion(lista, busqueda = '') {

@@ -39,7 +39,7 @@ test('Estados conserva 32 fichas indexables con entrada compacta y comparador di
   assert.match(states,/className="state-grid">\{orden\.map/);
   assert.match(states,/href="\/estados\/comparar"/);
   assert.match(states,/className="state-selector"/);
-  assert.match(css,/\.ml-state-directory-more>summary:focus-visible/);
+  assert.match(css,/\.ml-state-directory-more summary:focus-visible/);
   assert.match(css,/\.state-hero/);
   assert.match(main,/career-state-tool-first\.css/);
   assert.match(css,/@media\(max-width:640px\)/);

@@ -67,6 +67,7 @@ import './finance-continuations.css'
 import './finance-tool-first.css'
 import './career-state-tool-first.css'
 import './compare-profile-context.css'
+import './occupation-profession-mobile.css'
 
 const profesion = esRutaProfesion()
 const ocupaciones = esRutaOcupaciones()

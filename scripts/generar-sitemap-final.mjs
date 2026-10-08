@@ -24,6 +24,7 @@ const rutas = [
   ...rutasEstados,
   ...rutasFinanzas,
   '/finanzas/mi-situacion',
+  '/invertir',
   '/finanzas/inversion',
   '/finanzas/inversion/comparar',
   '/finanzas/inversion/cetes',
@@ -40,7 +41,7 @@ const rutas = [
   '/sobre', '/metodo', '/contacto', '/privacidad', '/financiamiento'
 ];
 const prioridad = ruta => ruta === '/' ? '1.0'
-  : ruta === '/carreras' || ruta === '/finanzas' || ruta === '/economia' || ruta === '/estados' ? '0.9'
+  : ruta === '/carreras' || ruta === '/finanzas' || ruta === '/economia' || ruta === '/estados' || ruta === '/invertir' ? '0.9'
   : ruta.startsWith('/calculadoras/') || ruta.startsWith('/situaciones/') || ruta.startsWith('/carreras/') || ruta.startsWith('/estados/') || ruta.startsWith('/finanzas/') || ruta.startsWith('/economia/') ? '0.9'
   : ruta.startsWith('/aprende') ? '0.8'
   : ruta === '/widgets' ? '0.6' : '0.5';

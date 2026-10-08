@@ -9,7 +9,7 @@ const RESERVAS = JSON.parse(await readFile(new URL('./reservas-alturas.json', im
 const SKIP_ROUTES = new Set(['/404', '/widgets']);
 const PROTECTED_PENSION = '/calculadoras/pension-imss';
 const VISUAL_SECTIONS = new Set(['carreras', 'estados', 'finanzas', 'economia', 'aprende']);
-const GLOSSARY_TERMS = ['ISR','UMA','CETES','CAT','RESICO','PTU','SBC','IMSS','LFT'];
+const GLOSSARY_TERMS = ['ISR','UMA','CETES','CAT','RESICO','PTU','SBC','IMSS','LFT','ETF','LIQUIDEZ','DIVERSIFICACIÓN','VOLATILIDAD','SPREAD','RENDIMIENTO','INFLACIÓN','COMISIÓN'];
 const STATIC_TOP_ROUTES = new Set([
   '/aprende',
   '/aprende/aguinaldo-bruto-neto',
@@ -50,13 +50,14 @@ const searchItems = [
   ...financeData.paginas.filter(x=>x.slug).map(x=>[`finanzas-${x.slug}`, `/finanzas/${x.slug}`, cleanTitle(x.titulo)]),
   ['mi-situacion','/finanzas/mi-situacion','Mi situación financiera'],
   ['inversion','/finanzas/inversion','Inversión educativa'],
+  ['invertir-intuitivo','/invertir','Invertir paso a paso'],
   ['inversion-comparar','/finanzas/inversion/comparar','Comparar instrumentos de inversión'],
   ['cetes','/finanzas/inversion/cetes','CETES'],
   ['fondos','/finanzas/inversion/fondos','Fondos de inversión'],
 ];
 const iconSearch = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>';
 const iconMenu = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>';
-const boot = `<script data-orbita-boot>(function(){var q=new URLSearchParams(location.search);var r=document.documentElement;if(q.get('embed')==='1'){r.classList.add('ml-orbita-embed');return}var p=location.pathname.replace(/\\\/$/,'')||'/';r.classList.add('ml-orbita-enabled');var s=p.indexOf('/calculadoras')===0?'calculadoras':p.indexOf('/carreras')===0?'carreras':p.indexOf('/estados')===0?'estados':p.indexOf('/finanzas')===0?'finanzas':p.indexOf('/economia')===0?'economia':p.indexOf('/aprende')===0?'aprende':'inicio';r.dataset.orbitaSection=s;try{if(localStorage.getItem('ml-orbita-easy')==='1')r.classList.add('ml-orbita-easy')}catch(e){}})();</script>`;
+const boot = `<script data-orbita-boot>(function(){var q=new URLSearchParams(location.search);var r=document.documentElement;if(q.get('embed')==='1'){r.classList.add('ml-orbita-embed');return}var p=location.pathname.replace(/\\\/$/,'')||'/';r.classList.add('ml-orbita-enabled');var s=p.indexOf('/calculadoras')===0?'calculadoras':p.indexOf('/carreras')===0?'carreras':p.indexOf('/estados')===0?'estados':p.indexOf('/finanzas')===0?'finanzas':p.indexOf('/invertir')===0?'invertir':p.indexOf('/economia')===0?'economia':p.indexOf('/aprende')===0?'aprende':'inicio';r.dataset.orbitaSection=s;try{if(localStorage.getItem('ml-orbita-easy')==='1')r.classList.add('ml-orbita-easy')}catch(e){}})();</script>`;
 const embedGuard = `<style data-orbita-embed-guard>html.ml-orbita-embed .ml-orbita-shell,html.ml-orbita-embed .ml-orbita-drawer,html.ml-orbita-embed .ml-orbita-search,html.ml-orbita-embed .ml-orbita-skip-link,html.ml-orbita-embed [data-orbita-static-reserve],html.ml-orbita-embed [data-orbita-ad-reserve]{display:none!important}</style>`;
 const baseHead = `${boot}${embedGuard}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=optional" rel="stylesheet"><link rel="stylesheet" href="/orbita-v3-base.css">`;
 const runtimeBlocking = '<link rel="stylesheet" href="/orbita-v3-runtime.css" data-orbita-runtime-bundle>';
@@ -107,7 +108,7 @@ function injectStaticReserves(html,route){
   const section=sectionForRoute(route);
   if(!VISUAL_SECTIONS.has(section)) return html;
   const text=visibleText(html).toUpperCase();
-  const detectedTerms=GLOSSARY_TERMS.filter((term)=>new RegExp(`(^|[^A-ZÁÉÍÓÚÑ])${term}([^A-ZÁÉÍÓÚÑ]|$)`).test(text)).slice(0,5);
+  const detectedTerms=GLOSSARY_TERMS.filter((term)=>new RegExp(`(^|[^A-ZÁÉÍÓÚÑ])${term}([^A-ZÁÉÍÓÚÑ]|$)`).test(text)).slice(0,3);
   const mobileRows=Math.max(1,Math.ceil(detectedTerms.length/2));
   const glossaryM=detectedTerms.length ? 128 + Math.max(0,mobileRows-1)*50 : 0;
   const glossary=detectedTerms.length?`<div class="orb-runtime-reserve orb-glossary-reserve" style="--orb-glossary-reserve-d:104px;--orb-glossary-reserve-m:${glossaryM}px" data-orbita-static-reserve data-orbita-glossary-reserve aria-hidden="true"></div>`:'';

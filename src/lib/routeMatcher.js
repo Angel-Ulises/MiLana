@@ -1,4 +1,5 @@
 // Reglas puras de selección de páginas. Las vistas se descargan solo cuando se necesitan.
+export const esRutaInvertir = (p = locationPath()) => /^\/invertir\/?$/.test(p);
 export const esRutaProfesion = (p = locationPath()) => /^\/carreras\/profesion\/[^/]+\/?$/.test(p);
 export const esRutaOcupaciones = (p = locationPath()) => /^\/carreras\/ocupaciones\/?$/.test(p);
 export const esRutaCompararCarreras = (p = locationPath()) => /^\/carreras\/comparar\/?$/.test(p);

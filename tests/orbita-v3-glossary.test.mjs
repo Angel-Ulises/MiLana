@@ -27,5 +27,5 @@ test('el glosario no usa popup ni elemento flotante', () => {
 test('solo aparecen términos que existen en el contenido visible', () => {
   assert.match(js, /main\.textContent\.toUpperCase\(\)/);
   assert.match(js, /Object\.keys\(TERMS\)\.filter/);
-  assert.match(js, /detected\.slice\(0, 5\)/);
+  assert.match(js, /detected\.slice\(0, 3\)/);
 });

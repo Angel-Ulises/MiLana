@@ -5,7 +5,7 @@ import {
   esRutaProfesion, esRutaOcupaciones, esRutaCompararCarreras,
   esRutaCompararEstados, esRutaEstado, esRutaCarreras,
   esRutaFondosCNBV, esRutaCetesReferencia, esRutaCompararInstrumentos,
-  esRutaInversionEducativa, esRutaAsesor, esRutaFinanzas, esRutaEconomia,
+  esRutaInversionEducativa, esRutaAsesor, esRutaFinanzas, esRutaEconomia, esRutaInvertir,
   rutaConExtras,
 } from '../src/lib/routeMatcher.js';
 
@@ -23,6 +23,7 @@ const selectores = [
   ['asesor', esRutaAsesor],
   ['finanzas', esRutaFinanzas],
   ['economia', esRutaEconomia],
+  ['invertir', esRutaInvertir],
 ];
 const prioridad = [
   ['/carreras/profesion/medicina', 'profesion'],
@@ -40,6 +41,7 @@ const prioridad = [
   ['/finanzas/mi-situacion', 'asesor'],
   ['/finanzas/deuda-y-credito', 'finanzas'],
   ['/economia', 'economia'],
+  ['/invertir', 'invertir'],
   ['/economia/banxico-mantiene-tasa-650-septiembre-2026', 'economia'],
   ['/calculadoras/isr', null],
   ['/', null],

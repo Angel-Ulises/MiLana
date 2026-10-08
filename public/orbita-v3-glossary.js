@@ -8,6 +8,14 @@
     ISR: 'Impuesto Sobre la Renta. Es un impuesto federal que puede retenerse o pagarse sobre ciertos ingresos, según las reglas fiscales aplicables.',
     UMA: 'Unidad de Medida y Actualización. Es una referencia en pesos que se usa para calcular distintos conceptos legales y administrativos.',
     CETES: 'Certificados de la Tesorería de la Federación. Son instrumentos de deuda emitidos por el Gobierno Federal con plazos y rendimientos que cambian con el mercado.',
+    ETF: 'Fondo que se compra y vende en bolsa, como una acción. Puede reunir muchas inversiones, pero también puede perder valor.',
+    LIQUIDEZ: 'Qué tan fácil y rápido puedes convertir una inversión en dinero disponible, y bajo qué condiciones.',
+    DIVERSIFICACIÓN: 'Repartir el dinero entre distintos activos o fuentes de riesgo. Reduce algunas concentraciones, pero no elimina las pérdidas.',
+    VOLATILIDAD: 'Qué tanto cambia el precio de una inversión. Grandes cambios pueden implicar ganancias o pérdidas en poco tiempo.',
+    SPREAD: 'Diferencia entre el precio al que alguien compra y el precio al que alguien vende. También puede representar un costo al operar.',
+    RENDIMIENTO: 'Ganancia o pérdida de una inversión durante un periodo. No siempre es fijo ni está garantizado.',
+    INFLACIÓN: 'Aumento general de precios. Si tu dinero crece menos que los precios, puede comprar menos cosas.',
+    COMISIÓN: 'Cobro por un servicio u operación. Compara también impuestos y otros costos, no solo la comisión visible.',
     CAT: 'Costo Anual Total. Es una medida expresada como porcentaje que ayuda a comparar el costo de distintos créditos al integrar varios componentes del financiamiento.',
     RESICO: 'Régimen Simplificado de Confianza. Es un régimen fiscal con requisitos, tasas y obligaciones específicas para quienes pueden tributar en él.',
     PTU: 'Participación de los Trabajadores en las Utilidades. Es el reparto de una parte de las utilidades de la empresa entre trabajadores con derecho.',
@@ -23,7 +31,7 @@
     section.setAttribute('aria-label', 'Explicaciones rápidas');
     const heading = document.createElement('div');
     heading.className = 'orb-glossary-head';
-    heading.innerHTML = '<span>Palabras claras</span><strong>Toca “¿Qué es?” cuando aparezca un término difícil.</strong>';
+    heading.innerHTML = '<span>En pocas palabras</span><strong>Toca lo que no conozcas.</strong>';
     section.appendChild(heading);
 
     const list = document.createElement('div');
@@ -91,7 +99,7 @@
       main.querySelector('[data-orbita-glossary-reserve]')?.remove();
       return;
     }
-    const strip = makeStrip(detected.slice(0, 5));
+    const strip = makeStrip(detected.slice(0, 3));
     placeStrip(main, strip);
   };
 

@@ -16,6 +16,11 @@ if (process.env.GITHUB_EVENT_PATH) {
 }
 const saveManifest = () => writeFileSync(join(directory, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
+// El build completo reemplaza el encabezado React por el marco fijo de Órbita.
+const visibleHeaderBottom = () => Math.max(0, ...[...document.querySelectorAll('.site-header,.ml-orbita-shell')]
+  .filter(el => el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden')
+  .map(el => el.getBoundingClientRect().bottom));
+
 const server = await preview({ logLevel: 'silent', preview: { host: '127.0.0.1', port: 0 } });
 const origin = 'http://127.0.0.1:' + server.httpServer.address().port;
 try {
@@ -45,7 +50,7 @@ try {
           if (selector) await evaluate(`(() => {
             const target=document.querySelector(${JSON.stringify(selector)});
             target.scrollIntoView({block:'start',behavior:'instant'});
-            const covered=document.querySelector('.site-header').getBoundingClientRect().bottom + 16 - target.getBoundingClientRect().top;
+            const covered=(${visibleHeaderBottom.toString()})() + 16 - target.getBoundingClientRect().top;
             if (covered>0) window.scrollBy({top:-covered,behavior:'instant'});
           })()`);
           await evaluate("Promise.race([document.fonts.ready, new Promise(resolve=>setTimeout(resolve,3000))])");
@@ -101,7 +106,7 @@ try {
         await until("location.pathname === '/finanzas' && !!document.querySelector('.ml-decision-primary')");
         // No forzar scroll: esta imagen demuestra la posición real de regreso.
         await capture('07-retorno', 'Regreso real al hub: pregunta recuperada y ancla visible.');
-        const headingVisible = await evaluate("document.querySelector('.ml-decision h2').getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom");
+        const headingVisible = await evaluate(`document.querySelector('.ml-decision h2').getBoundingClientRect().top >= (${visibleHeaderBottom.toString()})()`);
         if (!headingVisible) throw Error('El encabezado fijo tapa el título al regresar al explorador');
 
         await send('Page.navigate', { url: origin + '/carreras#explorar' }, session);

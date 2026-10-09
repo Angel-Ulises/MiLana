@@ -38,7 +38,9 @@ function browser(send, session) {
   };
   const keyboard = async (selector, key, code, virtualKey) => {
     await evaluate(`document.querySelector(${JSON.stringify(selector)}).focus()`);
-    await send('Input.dispatchKeyEvent', { type: 'keyDown', key, code, windowsVirtualKeyCode: virtualKey }, session);
+    assert.equal(await evaluate(`document.querySelector(${JSON.stringify(selector)}) === document.activeElement`), true, 'El control recibe el foco');
+    const text = key === 'Enter' ? '\r' : key;
+    await send('Input.dispatchKeyEvent', { type: 'keyDown', key, code, windowsVirtualKeyCode: virtualKey, text, unmodifiedText: text }, session);
     await send('Input.dispatchKeyEvent', { type: 'keyUp', key, code, windowsVirtualKeyCode: virtualKey }, session);
     await pause();
   };
@@ -80,9 +82,9 @@ test('Chrome 390px: profundidad continúa de Invertir a Finanzas, Carreras, Econ
     await navigate(origin + routes[0][0], routes[0][1]);
     await keyboard('.ml-result-meaning summary', 'Enter', 'Enter', 13);
     assert.equal(await evaluate("document.querySelector('.ml-result-meaning').open"), false, 'Enter debe cerrar');
-    await evaluate(`const input=document.querySelector('.finance-form-card input');
+    await evaluate(`{ const input=document.querySelector('.finance-form-card input');
       Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,'8000');
-      input.dispatchEvent(new Event('input',{bubbles:true}));`);
+      input.dispatchEvent(new Event('input',{bubbles:true})); }`);
     await pause();
     assert.equal(await evaluate("document.querySelector('.ml-result-meaning').open"), false, 'Recalcular no debe reabrir');
     for (const expected of [true, false, true]) {
@@ -147,12 +149,72 @@ test('Chrome: Atrás y Adelante actualizan el nivel elegido en otra página de l
     await evaluate("document.querySelectorAll('.instrument-depth button')[1].click()");
     await until("sessionStorage.getItem('ml-lectura-v1') === 'experto'");
     await evaluate('history.back()');
-    await until("location.pathname === '/invertir' && document.querySelectorAll('.ml-inv-level button')[2]?.getAttribute('aria-pressed') === 'true'");
+    await until("location.pathname === '/invertir' && document.querySelectorAll('.ml-inv-level button')[2]?.getAttribute('aria-pressed') === 'true' && document.querySelector('.ml-inv-explainer > .ml-inv-more')?.open === true");
     assert.equal(await evaluate("document.querySelector('.ml-inv-explainer > .ml-inv-more').open"), true);
     await evaluate("document.querySelectorAll('.ml-inv-level button')[0].click()");
     await until("sessionStorage.getItem('ml-lectura-v1') === 'inicio'");
     await evaluate('history.forward()');
     await until("location.pathname === '/finanzas/inversion/comparar' && document.querySelectorAll('.instrument-depth button')[0]?.getAttribute('aria-pressed') === 'true'");
     assert.equal(await evaluate('document.documentElement.scrollWidth > innerWidth + 2'), false);
+  });
+});
+
+test('Chrome: la elección manual sobrevive a desmontajes reales por datos vacíos y comparación inválida', async t => {
+  await withSite(t, async ({ evaluate, until, navigate }, origin) => {
+    const setInput = async (selector, value) => {
+      await evaluate(`{ const input=document.querySelector(${JSON.stringify(selector)});
+        Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,${JSON.stringify(value)});
+        input.dispatchEvent(new Event('input',{bubbles:true})); }`);
+      await pause();
+    };
+    const chooseManual = async (selector, expected) => {
+      await evaluate(`window.oldReadingBlock=document.querySelector(${JSON.stringify(selector)}); oldReadingBlock.querySelector('summary').click()`);
+      await pause();
+      assert.equal(await evaluate('oldReadingBlock.open'), expected);
+    };
+    // Both directions: close the expert default, or open the compact default.
+    for (const [levelIndex, expected] of [[2, false], [0, true]]) {
+      await navigate(origin + '/invertir', '.ml-inv-level button');
+      await evaluate(`document.querySelectorAll('.ml-inv-level button')[${levelIndex}].click()`);
+      await until(`document.querySelectorAll('.ml-inv-level button')[${levelIndex}].getAttribute('aria-pressed') === 'true'`);
+      const projection = '.ml-inv-outcome .ml-inv-more';
+      await chooseManual(projection, expected);
+      await setInput('.ml-inv-form input', '');
+      await until("!!document.querySelector('.ml-inv-outcome [role=alert]')");
+      assert.equal(await evaluate('oldReadingBlock.isConnected'), false, 'El test debe desmontar realmente el resultado');
+      await setInput('.ml-inv-form input', '10000');
+      await until(`!!document.querySelector(${JSON.stringify(projection)})`);
+      assert.equal(await evaluate(`document.querySelector(${JSON.stringify(projection)}).open`), expected, 'Simulador restaura la decisión');
+
+      await navigate(origin + '/finanzas/deuda-y-credito', '.finance-form-card input');
+      await setInput('.finance-form-card input', '24000');
+      await until("!!document.querySelector('.ml-result-meaning')");
+      await chooseManual('.ml-result-meaning', expected);
+      await setInput('.finance-form-card input', '');
+      await until("!!document.querySelector('.ml-result-critical') && !document.querySelector('.ml-result-meaning')");
+      assert.equal(await evaluate('oldReadingBlock.isConnected'), false);
+      await setInput('.finance-form-card input', '24000');
+      await until("!!document.querySelector('.ml-result-meaning')");
+      assert.equal(await evaluate("document.querySelector('.ml-result-meaning').open"), expected, 'Finanzas restaura la decisión');
+
+      for (const [route, block, select, warning] of [
+        ['/carreras/comparar', '.cc-card-more', '.cc-selectors select', '.cc-same'],
+        ['/estados/comparar', '.sc-more-dimensions', '.sc-selectors select', '.sc-same'],
+      ]) {
+        await navigate(origin + route, block);
+        await chooseManual(block, expected);
+        await evaluate(`{ const selects=[...document.querySelectorAll(${JSON.stringify(select)})];
+          window.previousComparison=selects[1].value;
+          selects[1].value=selects[0].value;selects[1].dispatchEvent(new Event('change',{bubbles:true})); }`);
+        await until(`!!document.querySelector(${JSON.stringify(warning)})`);
+        assert.equal(await evaluate('oldReadingBlock.isConnected'), false, route + ' debe desmontar la comparación');
+        await evaluate(`{ const select=document.querySelectorAll(${JSON.stringify(select)})[1];
+          select.value=previousComparison;select.dispatchEvent(new Event('change',{bubbles:true})); }`);
+        await until(`!!document.querySelector(${JSON.stringify(block)})`);
+        assert.equal(await evaluate(`document.querySelector(${JSON.stringify(block)}).open`), expected, route + ' restaura la elección manual');
+        assert.equal(await evaluate(`document.querySelectorAll(${JSON.stringify(block)})[1].open`), !expected, route + ' no cambia el otro bloque');
+        assert.equal(await evaluate('document.documentElement.scrollWidth > innerWidth + 2'), false);
+      }
+    }
   });
 });

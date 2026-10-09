@@ -65,6 +65,7 @@ function Entender({ nivel }) {
   </section>;
 }
 function Simulador() {
+  const [inflacionAbierta, setInflacionAbierta] = useState(null);
   const [form, setForm] = useState({ inicial: '10000', mensual: '500', anos: '10', inflacion: '3', costoAnual: '0.5', tasas: ['-5', '5', '10'] });
   const set = (k) => (v) => setForm((x) => ({ ...x, [k]: v }));
   const setTasa = (index) => (v) => setForm((x) => ({ ...x, tasas: x.tasas.map((t, i) => i === index ? v : t) }));
@@ -95,7 +96,7 @@ function Simulador() {
             <strong className="ml-inv-bar-value">{pesos(x.final)}</strong>
             <small>{x.diferencia < 0 ? 'Pérdida vs. aportado: ' : 'Diferencia vs. aportado: '}{pesos(x.diferencia)}</small>
           </div>)}</div>
-          <ReadingDetails className="ml-inv-more"><summary>¿Y si los precios también suben?</summary><p>Al ajustar por la inflación hipotética del {resultado.inflation}% anual, el poder de compra estimado de los saldos sería:</p><ul>{resultado.escenarios.map((x)=><li key={x.nombre}>{x.nombre}: {pesos(x.real)} en pesos de hoy, aproximadamente.</li>)}</ul></ReadingDetails>
+          <ReadingDetails className="ml-inv-more" manualOpen={inflacionAbierta} onManualChange={setInflacionAbierta}><summary>¿Y si los precios también suben?</summary><p>Al ajustar por la inflación hipotética del {resultado.inflation}% anual, el poder de compra estimado de los saldos sería:</p><ul>{resultado.escenarios.map((x)=><li key={x.nombre}>{x.nombre}: {pesos(x.real)} en pesos de hoy, aproximadamente.</li>)}</ul></ReadingDetails>
         </>}
       </div>
     </div>

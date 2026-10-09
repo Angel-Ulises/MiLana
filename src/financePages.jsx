@@ -50,9 +50,10 @@ function Campo({ label, value, onChange, help, placeholder = '0' }) {
 }
 
 function Resultado({ label, value, note, tone = '' }) {
+  const [explicacionAbierta, setExplicacionAbierta] = useState(null);
   // Un resultado pendiente o una advertencia crítica debe verse sin abrir nada.
   const esencial = value === '—' || /no es un límite|sin asumir|sin rendimiento|no se puede calcular|completa los datos|captura ingreso/i.test(note || '');
-  return <article className={`finance-result-card ${tone}`}><span>{label}</span><strong>{value}</strong>{note && (esencial ? <p className="ml-result-critical">{note}</p> : <MeaningOnDemand resumen="Entender esta cifra" detalle={note} />)}</article>;
+  return <article className={`finance-result-card ${tone}`}><span>{label}</span><strong>{value}</strong>{note && (esencial ? <p className="ml-result-critical">{note}</p> : <MeaningOnDemand resumen="Entender esta cifra" detalle={note} manualOpen={explicacionAbierta} onManualChange={setExplicacionAbierta} />)}</article>;
 }
 
 function Hub() {

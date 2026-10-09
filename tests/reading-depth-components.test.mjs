@@ -23,6 +23,11 @@ test('Las explicaciones de resultados heredan la profundidad, sin ocultar su con
       assert.match(html, /<summary>/);
       assert.match(html, /Contexto disponible\./);
     }
+    globalThis.sessionStorage = { getItem: () => 'experto' };
+    const controlled = renderToStaticMarkup(React.createElement(Meaning, {
+      detalle: 'Resultado restaurado.', manualOpen: false, onManualChange() {},
+    }));
+    assert.doesNotMatch(controlled, /<details[^>]* open(?:="")?[ >]/, 'Un bloque restaurado conserva el cierre de su propietario');
   } finally {
     if (previous === undefined) delete globalThis.sessionStorage;
     else globalThis.sessionStorage = previous;

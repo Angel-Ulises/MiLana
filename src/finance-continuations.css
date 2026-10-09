@@ -24,3 +24,9 @@
 .finance-next-box .ml-finance-continuations>p[role=alert]{color:#ffd3c9!important}
 .finance-next-box .ml-finance-continuations-actions button{background:#f3f9fd;color:#20577d;border-color:#b7d0e1}
 .finance-next-box .ml-finance-continuations-actions button>span{color:#20577d}
+
+/* Órbita usa una superficie blanca para el siguiente paso. Mantener legible
+   la nota de privacidad y los errores también después de capturar importes. */
+html.ml-orbita-enabled[data-orbita-section="finanzas"] .finance-next-box .ml-finance-continuations-kicker{color:#245c93}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] .finance-next-box .ml-finance-continuations>small{color:#4b6275}
+html.ml-orbita-enabled[data-orbita-section="finanzas"] .finance-next-box .ml-finance-continuations>p[role=alert]{color:#982e2b!important}

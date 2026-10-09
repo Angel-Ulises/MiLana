@@ -41,5 +41,17 @@ jobs:
       - name: Build completo
         run: npm run build
 
+      - name: Capturar recorridos en escritorio y móvil
+        run: node --experimental-websocket scripts/capturar-recorridos.mjs
+
+      - name: Guardar capturas de revisión
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: recorridos-qa-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .qa/decision-journey/
+          retention-days: 7
+          if-no-files-found: ignore
+
       - name: Diff limpio
         run: git diff --check

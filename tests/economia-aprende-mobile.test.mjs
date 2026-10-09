@@ -40,7 +40,8 @@ test('Economía tiene estilos móvil con métricas antes de fotografía', () => 
 test('Aprende muestra las guías antes del bloque metodológico', () => {
   const s = read('public/aprende/index.html');
   assert.ok(s.indexOf('id="guias"') < s.indexOf('class="learn-method"'));
-  assert.match(s, /href="#guias"/);
+  assert.match(s, /href="#encontrar"/);
+  assert.match(s, /<details class="learn-catalog" id="catalogo">/);
   assert.equal((s.match(/<article class="card">/g) || []).length, 6);
   assert.equal((s.match(/<a class="card-content"/g) || []).length, 6);
   assert.match(s, /rel="canonical"/);

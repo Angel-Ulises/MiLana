@@ -24,6 +24,28 @@
     LFT: 'Ley Federal del Trabajo. Es la ley que regula las relaciones laborales contempladas en su ámbito de aplicación en México.'
   };
 
+  // Primer nivel: frases que se entienden sin haber estudiado finanzas.
+  // El segundo nivel reutiliza intacta la explicación técnica vigente.
+  const BASICS = {
+    ISR:'Impuesto que se paga sobre determinados ingresos.',
+    UMA:'Una cifra de referencia que se usa en varios cálculos oficiales.',
+    CETES:'Le prestas dinero al Gobierno por un plazo.',
+    ETF:'Una canasta de inversiones que se compra o vende en bolsa.',
+    LIQUIDEZ:'Qué tan rápido puedes recuperar tu dinero.',
+    DIVERSIFICACIÓN:'No poner todo tu dinero en el mismo lugar.',
+    VOLATILIDAD:'Qué tanto puede subir o bajar el precio.',
+    SPREAD:'La diferencia entre el precio para comprar y para vender.',
+    RENDIMIENTO:'Lo que ganas o pierdes con tu inversión.',
+    INFLACIÓN:'Cuando suben los precios y el dinero alcanza para menos.',
+    COMISIÓN:'Lo que te cobran por usar un servicio.',
+    CAT:'Un porcentaje que resume varios costos de un crédito.',
+    RESICO:'Un régimen fiscal con reglas para ciertos contribuyentes.',
+    PTU:'Parte de las utilidades que se reparte a trabajadores con derecho.',
+    SBC:'Monto que toma como base el IMSS para ciertos cálculos.',
+    IMSS:'Institución mexicana que administra seguridad social.',
+    LFT:'Ley principal que regula muchas relaciones de trabajo.'
+  };
+
   const makeStrip = (detected) => {
     const section = document.createElement('section');
     section.className = 'orb-glossary';
@@ -39,7 +61,8 @@
     detected.forEach((term) => {
       const details = document.createElement('details');
       details.className = 'orb-glossary-item';
-      details.innerHTML = `<summary><strong>${term}</strong><span>¿Qué es?</span></summary><p>${TERMS[term]}</p>`;
+      const experto = (() => { try { return sessionStorage.getItem('ml-lectura-v1') === 'experto'; } catch { return false; } })();
+      details.innerHTML = `<summary><strong>${term}</strong><span>¿Qué es?</span></summary><p>${BASICS[term] || TERMS[term]}</p><details class="orb-glossary-deeper"${experto ? ' open' : ''}><summary>Profundizar</summary><p>${TERMS[term]}</p></details>`;
       list.appendChild(details);
     });
     section.appendChild(list);

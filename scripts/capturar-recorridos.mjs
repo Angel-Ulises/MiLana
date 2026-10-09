@@ -42,7 +42,12 @@ try {
           throw Error('Captura: no se alcanzó ' + expression);
         };
         const capture = async (name, description, selector) => {
-          if (selector) await evaluate(`document.querySelector(${JSON.stringify(selector)}).scrollIntoView({block:'start',behavior:'instant'})`);
+          if (selector) await evaluate(`(() => {
+            const target=document.querySelector(${JSON.stringify(selector)});
+            target.scrollIntoView({block:'start',behavior:'instant'});
+            const covered=document.querySelector('.site-header').getBoundingClientRect().bottom + 16 - target.getBoundingClientRect().top;
+            if (covered>0) window.scrollBy({top:-covered,behavior:'instant'});
+          })()`);
           await evaluate("Promise.race([document.fonts.ready, new Promise(resolve=>setTimeout(resolve,3000))])");
           await pause(500);
           const { data } = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false }, session);
@@ -53,6 +58,13 @@ try {
         };
         const click = expression => evaluate(expression + '.click()');
         await capture('01-entrada', 'Primera pantalla de Finanzas, sin selección previa.');
+        if (viewport.width === 390) {
+          const visible = await evaluate("(() => { const r=document.querySelector('.ml-decision-need').getBoundingClientRect(); return r.top>=0 && r.bottom<=innerHeight; })()");
+          if (!visible) throw Error('La primera pregunta de Finanzas queda fuera del primer viewport móvil');
+        }
+        const extrasAfter = await evaluate("[...document.querySelectorAll('.orb-glossary,.orb-section-visual')].every(el=>!!(document.querySelector('.ecosystem-shortcuts').compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING))");
+        if (!extrasAfter) throw Error('Un complemento desplaza la elección principal del hub');
+
         await capture('02-preguntas', 'Tres preguntas y accesos directos.', '.ml-decision');
         await click("document.querySelector('.ml-decision-need')");
         await until("!!document.querySelector('.ml-decision-primary')");
@@ -68,11 +80,30 @@ try {
             input.dispatchEvent(new Event('input',{bubbles:true})); })()`);
         }
         await capture('05-herramienta', 'Presupuesto con importes sintéticos y pregunta conservada.');
+        if (viewport.width === 390) {
+          const fieldVisible = await evaluate("document.querySelector('.finance-form-card input').getBoundingClientRect().bottom <= innerHeight");
+          if (!fieldVisible) throw Error('El primer campo de Presupuesto queda detrás de contenido introductorio');
+        }
+
         await capture('06-resultado', 'Resultado y siguientes pasos existentes, con datos sintéticos.', '.finance-results');
+        await capture('06b-traslado', 'Acciones existentes y nota de privacidad legible.', '.ml-finance-continuations');
+        const noteContrast = await evaluate(`(() => {
+          const note=document.querySelector('.ml-finance-continuations>small');
+          const color=getComputedStyle(note).color.match(/[\\d.]+/g).slice(0,3).map(Number);
+          const background=getComputedStyle(note.closest('.finance-next-box')).backgroundColor.match(/[\\d.]+/g).slice(0,3).map(Number);
+          const light=rgb=>rgb.map(x=>{const v=x/255;return v<=0.04045?v/12.92:((v+0.055)/1.055)**2.4}).reduce((sum,x,i)=>sum+x*[0.2126,0.7152,0.0722][i],0);
+          const values=[light(color),light(background)].sort((a,b)=>b-a);
+          return (values[0]+0.05)/(values[1]+0.05);
+        })()`);
+        if (!Number.isFinite(noteContrast) || noteContrast < 4.5) throw Error('Contraste insuficiente en nota de traslado: ' + noteContrast);
+
         await click("document.querySelector('.ml-journey a')");
         await until("location.pathname === '/finanzas' && !!document.querySelector('.ml-decision-primary')");
         // No forzar scroll: esta imagen demuestra la posición real de regreso.
         await capture('07-retorno', 'Regreso real al hub: pregunta recuperada y ancla visible.');
+        const headingVisible = await evaluate("document.querySelector('.ml-decision h2').getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom");
+        if (!headingVisible) throw Error('El encabezado fijo tapa el título al regresar al explorador');
+
         await send('Page.navigate', { url: origin + '/carreras#explorar' }, session);
         await until("location.pathname === '/carreras' && document.querySelectorAll('.ml-decision-need').length === 3");
         await capture('08-carreras', 'Entrada directa de Carreras: tres preguntas propias.');

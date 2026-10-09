@@ -1,5 +1,5 @@
 /* Una superficie progresiva. No se apilan temas, preguntas y respuesta. */
-.ml-decision{color:#13263b;background:#f7fafc;padding:28px 0}
+.ml-decision{scroll-margin-top:84px;color:#13263b;background:#f7fafc;padding:28px 0}
 .ml-decision .ml-decision-shell{width:min(1180px,calc(100% - 40px));margin-inline:auto}
 .ecosystem-hub .ml-decision{padding:0}
 .ecosystem-hub .ml-decision .ml-decision-shell{width:100%}

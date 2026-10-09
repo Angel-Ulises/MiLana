@@ -1,6 +1,6 @@
 /* MiLana · una entrada conectada en lugar de secciones duplicadas.
    Solo afecta a los hubs de Finanzas/Carreras, sin modificar calculadoras. */
-.ecosystem-hub{padding:clamp(26px,4vw,46px) 0;background:#f7fafc;scroll-margin-top:16px}
+.ecosystem-hub{padding:clamp(26px,4vw,46px) 0;background:#f7fafc;scroll-margin-top:84px}
 .ecosystem-hub > .shell{width:min(1180px,calc(100% - 40px));margin-inline:auto}
 .ecosystem-shortcuts{display:flex;align-items:start;gap:16px;border-top:1px solid #dce6ed;padding-top:17px;margin-top:18px}
 .ecosystem-shortcuts-label{display:block;flex:0 0 135px;color:#465d70;font-weight:800;font-size:11px;letter-spacing:.045em;line-height:1.5;padding-top:7px;text-transform:uppercase}
@@ -75,3 +75,11 @@
    Estas dos superficies tienen fondo azul marino: mantener AA en móvil y escritorio. */
 .career-profession-directory .career-money-inline a{color:#fff !important}
 .finance-hub-page .ecosystem-advisor-link small{color:#dce9f5 !important}
+
+/* En móvil la primera decisión precede a la foto decorativa y a los complementos. */
+@media(max-width:760px){
+  .finance-hub-page .finance-page-photo,.career-hero-compact .career-hero-media{display:none!important}
+  .finance-hub-page .finance-page-hero-grid{grid-template-columns:minmax(0,1fr);padding:22px 0;gap:0}
+  .career-hero-compact .career-hero-grid{grid-template-columns:minmax(0,1fr);min-height:0}
+  .career-hero-compact .career-hero-copy{padding:22px 0}
+}

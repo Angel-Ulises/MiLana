@@ -105,3 +105,12 @@ export default function DecisionExplorer({ initialTopic = '' }) {
     </section>
   );
 }
+
+// Los complementos existentes siguen disponibles después de la tarea principal,
+// no entre el encabezado y la primera pregunta/campo. El runtime los reemplaza.
+export function ReadingExtrasAfterTask() {
+  return <>
+    <div className="orb-runtime-reserve orb-glossary-reserve" data-orbita-glossary-reserve="true" aria-hidden="true" />
+    <div className="orb-runtime-reserve orb-visual-reserve" data-orbita-visual-reserve="true" aria-hidden="true" />
+  </>;
+}

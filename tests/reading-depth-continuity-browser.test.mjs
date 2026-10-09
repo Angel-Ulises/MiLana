@@ -1,7 +1,9 @@
-import test from 'node:test';
+import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
-import { createServer } from 'vite';
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { build, preview } from 'vite';
 import { browserReady } from './helpers/chrome-probe.mjs';
 import { renderDom } from './helpers/chrome-dom.mjs';
 
@@ -47,18 +49,32 @@ function browser(send, session) {
   return { evaluate, until, navigate, keyboard };
 }
 
+// A compiled preview avoids the development HMR client's reloads when a page
+// is restored from history. The suite shares the build, never the browser tab.
+let sitePromise;
+let previewDir;
+async function site() {
+  if (!sitePromise) sitePromise = (async () => {
+    previewDir = mkdtempSync(join(tmpdir(), 'milana-reading-depth-'));
+    await build({ logLevel: 'silent', build: { outDir: previewDir, emptyOutDir: true } });
+    const server = await preview({ logLevel: 'silent', build: { outDir: previewDir }, preview: { host: '127.0.0.1', port: 0 } });
+    return { server, origin: 'http://127.0.0.1:' + server.httpServer.address().port };
+  })();
+  return sitePromise;
+}
+after(async () => {
+  const current = await sitePromise?.catch(() => null);
+  if (current) await new Promise(resolve => current.server.httpServer.close(resolve));
+  if (previewDir) rmSync(previewDir, { recursive: true, force: true });
+});
 async function withSite(t, run, beforeNavigate) {
   if (!browserReady(t, chrome)) return;
-  const server = await createServer({ server: { host: '127.0.0.1', port: 0 }, logLevel: 'silent' });
-  await server.listen();
-  const origin = 'http://127.0.0.1:' + server.httpServer.address().port;
-  try {
-    await renderDom(chrome, origin + '/invertir', {
-      viewport: { width: 390, height: 844 }, waitMs: 8000, timeoutMs: 65000,
-      until: "document.querySelectorAll('.ml-inv-level button').length === 3", beforeNavigate,
-      interact: (send, session) => run(browser(send, session), origin),
-    });
-  } finally { await server.close(); }
+  const { origin } = await site();
+  await renderDom(chrome, origin + '/invertir', {
+    viewport: { width: 390, height: 844 }, waitMs: 8000, timeoutMs: 65000,
+    until: "document.querySelectorAll('.ml-inv-level button').length === 3", beforeNavigate,
+    interact: (send, session) => run(browser(send, session), origin),
+  });
 }
 
 test('Chrome 390px: profundidad continúa de Invertir a Finanzas, Carreras, Economía y comparadores', async t => {

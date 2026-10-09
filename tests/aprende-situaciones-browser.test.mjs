@@ -10,7 +10,8 @@ for(const width of [390,1280])test('Chrome Aprende: una pregunta lleva a su guí
  const server=await createServer({server:{host:'127.0.0.1',port:0},logLevel:'silent'});
  await server.listen();
  try{
-  const url='http://127.0.0.1:'+server.httpServer.address().port+'/aprende';
+  // Vite sirve el HTML estático de public/ explícitamente por /index.html; /aprende sin sufijo usa el fallback SPA en dev.
+  const url='http://127.0.0.1:'+server.httpServer.address().port+'/aprende/index.html';
   const expr=`(() => {
     const initial={
       hidden:document.querySelector('[data-learn-result]')?.hidden,

@@ -40,8 +40,30 @@ document.addEventListener('submit',event=>{
  track('calculator_submit',{calculator_id:calculatorId});
 },true);
 
+// Solo registramos tipos de interacción predefinidos, nunca búsquedas, importes ni respuestas.
+let editedInvestmentScenario=false;
+document.addEventListener('change',event=>{
+ if(editedInvestmentScenario)return;
+ if(event.target?.closest?.('.ml-inv-sim')){
+  editedInvestmentScenario=true;
+  track('investment_scenario_edited',{section:'invertir'});
+ }
+},true);
+
 document.addEventListener('click',event=>{
  const button=event.target.closest?.('button');
+ if(button){
+  if(button.matches('[data-orbita-search-open]'))track('intent_search_open');
+  if(button.matches('[data-learn-topic]'))track('learning_topic_selected');
+  if(button.matches('.ml-decision-choice,.ml-decision-need'))track('guided_choice_selected');
+  if(button.closest('.ml-inv-level'))track('reading_depth_changed',{section:'invertir'});
+ }
+ const next=event.target.closest?.('[data-learn-guide],[data-learn-tool]');
+ if(next)track('learning_next_open',{step:next.hasAttribute('data-learn-guide')?'explain':'tool'});
+ const result=event.target.closest?.('[data-orbita-search-item]');
+ if(result)track('intent_search_result_open');
+ const guided=event.target.closest?.('.ml-decision-primary');
+ if(guided)track('guided_next_open');
  if(calculatorId&&button&&!button.form&&/^calcular\b/i.test((button.textContent||'').trim())){
   track('calculator_submit',{calculator_id:calculatorId,interaction:'button'});
  }

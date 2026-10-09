@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { startHomeWhenReady } from './lib/homeStartup.js'
 import {
   esRutaCarreras, esRutaProfesion, esRutaOcupaciones, esRutaCompararCarreras,
   esRutaCompararEstados, esRutaEstado, esRutaFondosCNBV, esRutaCetesReferencia,
@@ -103,7 +104,7 @@ const extras = rutaConExtras()
 
 // Se reserva el espacio del contenido principal mientras llega su módulo.
 // Los complementos cargan de forma independiente para no bloquear la página.
-function PrimaryRoute() {
+function PrimaryRoute({ HomeApp }) {
   return invertir ? (
     <InvestirHomePage />
   ) : profesion ? (
@@ -133,7 +134,7 @@ function PrimaryRoute() {
   ) : economia ? (
     <EconomyPages />
   ) : (
-    <App />
+    HomeApp ? <HomeApp /> : <App />
   )
 }
 
@@ -151,7 +152,7 @@ function PrimaryEffects() {
 }
 
 function PrimaryCommitted({ onReady }) {
-  React.useEffect(() => { onReady(); }, [onReady]);
+  React.useLayoutEffect(() => { onReady(); }, [onReady]);
   return null;
 }
 
@@ -170,12 +171,12 @@ function RouteExtras() {
   </>
 }
 
-function RouteExperience() {
+function RouteExperience({ HomeApp, onInitialReady }) {
   const [primaryReady, setPrimaryReady] = React.useState(false);
-  const markReady = React.useCallback(() => setPrimaryReady(true), []);
+  const markReady = React.useCallback(() => { setPrimaryReady(true); onInitialReady?.(); }, [onInitialReady]);
   return <>
     <React.Suspense fallback={<main className="ml-route-loading" role="status" aria-label="Cargando sección"><span>Cargando contenido…</span></main>}>
-      <PrimaryRoute />
+      <PrimaryRoute HomeApp={HomeApp} />
       <PrimaryCommitted onReady={markReady} />
     </React.Suspense>
     {primaryReady && <React.Suspense fallback={null}>
@@ -190,8 +191,16 @@ function RouteExperience() {
   </>;
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const root = document.getElementById('root');
+const mount = (HomeApp, onInitialReady) => ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <RouteExperience />
+    <RouteExperience HomeApp={HomeApp} onInitialReady={onInitialReady} />
   </React.StrictMode>,
-)
+);
+// En Inicio, conservar el HTML útil hasta tener su módulo. Las demás rutas
+// mantienen su carga separada; ningún complemento retrasa este primer montaje.
+if (location.pathname === '/' && root.querySelector('[data-startup-home]')) {
+  startHomeWhenReady({ root, load: () => import('./App.jsx'), mount });
+} else {
+  mount();
+}

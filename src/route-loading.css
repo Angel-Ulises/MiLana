@@ -23,3 +23,9 @@
 @media(max-width:640px){
   .ml-route-loading{min-height:320px;padding:30px 16px}
 }
+/* El error es pequeño y accionable; la portada y sus enlaces permanecen. */
+.ml-startup-error{max-width:1120px;margin:16px auto;padding:16px 20px;background:#fff4e6;color:#533700;border:1px solid #c9a46e;border-radius:12px}
+.ml-startup-error p{margin:0 0 10px}
+.ml-startup-error button{min-height:44px;padding:9px 18px;border:1px solid currentColor;border-radius:8px;background:#fff;color:#533700;font:inherit;cursor:pointer}
+.ml-startup-error button:focus-visible{outline:3px solid #2d6caa;outline-offset:3px}
+@media(max-width:640px){.ml-startup-error{margin:12px 16px}}

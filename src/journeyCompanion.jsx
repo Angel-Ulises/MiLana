@@ -31,10 +31,12 @@ export default function JourneyCompanion() {
     actualizar();
     window.addEventListener('popstate', actualizar);
     window.addEventListener('pageshow', actualizar);
+    window.addEventListener('milana:journey-change', actualizar);
     window.addEventListener('milana:route-change', actualizar);
     return () => {
       window.removeEventListener('popstate', actualizar);
       window.removeEventListener('pageshow', actualizar);
+      window.removeEventListener('milana:journey-change', actualizar);
       window.removeEventListener('milana:route-change', actualizar);
       observer?.disconnect();
       el?.remove();

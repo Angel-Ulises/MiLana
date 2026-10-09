@@ -5,6 +5,9 @@ const MAX_AGE = 4 * 60 * 60 * 1000;
 const HUBS = ['/finanzas', '/carreras'];
 const path = href => typeof href === 'string' ? (href.split(/[?#]/)[0].replace(/\/$/, '') || '/') : '';
 const hubPorTema = temaId => temaId === 'carrera' ? '/carreras' : '/finanzas';
+const avisarCambio = () => {
+  if (typeof window !== 'undefined') window.dispatchEvent(new Event('milana:journey-change'));
+};
 
 export function resolverRutaAcompanamiento(temaId, opcionId, destino, inicio = hubPorTema(temaId)) {
   const tema = TEMAS_EXPLORADOR.find(t => t.id === temaId);
@@ -27,6 +30,7 @@ export function recordarRutaAcompanamiento(temaId, opcionId, destino, inicio = h
   try {
     // Mismo registro de intención: nunca cifras ni estado de formularios.
     sessionStorage.setItem(KEY, JSON.stringify({ temaId, opcionId, destino: path(destino), inicio, creado: Date.now() }));
+    avisarCambio();
     return true;
   } catch { return false; }
 }
@@ -55,4 +59,5 @@ export function leerRutaAcompanamiento(rutaActual) {
 
 export function borrarRutaAcompanamiento() {
   try { sessionStorage.removeItem(KEY); } catch { /* El navegador puede bloquear almacenamiento. */ }
+  avisarCambio();
 }

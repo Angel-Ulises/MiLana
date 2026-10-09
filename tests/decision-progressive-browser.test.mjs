@@ -137,6 +137,17 @@ test('Chrome 390: otro tema vuelve al hub de origen; una ruta ajena o acceso dir
     assert.equal(await evaluate("document.querySelector('.ml-journey')"), null, 'Un enlace compartido no lleva una pregunta ajena');
     await navigate(origin + '/finanzas#explorar', '.ml-decision-needs');
     await until("(() => { const r=document.querySelector('.ml-decision h3').getBoundingClientRect(); return r.top>=0 && r.bottom<=innerHeight; })()");
+    await clickText('.ml-decision-back', 'tema');
+    await clickText('.ml-decision-choice', 'carrera');
+    await clickText('.ml-decision-need', 'mi estado');
+    await clickText('.ml-decision-alternatives summary', 'Otras');
+    await clickText('.ml-decision-alternatives a', 'profesiones');
+    await until("location.pathname === '/carreras' && !!document.querySelector('.ml-journey') && !!document.querySelector('.ml-decision-needs')");
+    assert.equal(await evaluate("document.querySelector('.ml-journey').textContent.includes('Me interesa mi estado')"), true);
+    await clickText('.ml-decision-need', 'sueldo');
+    await until("!document.querySelector('.ml-journey') && !!document.querySelector('.ml-decision-primary')");
+    assert.equal(await evaluate("sessionStorage.getItem('ml-guide-journey-v1')"), null, 'Una pregunta nueva descarta el recorrido anterior en el mismo documento');
+
   });
 });
 

@@ -43,3 +43,15 @@ jobs:
 
       - name: Diff limpio
         run: git diff --check
+
+      - name: Verificar arranque con caché fría y fallos de red
+        run: node --experimental-websocket scripts/verificar-arranque.mjs
+
+      - name: Guardar evidencia de arranque
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arranque-qa-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .qa/startup/
+          retention-days: 7
+          if-no-files-found: ignore

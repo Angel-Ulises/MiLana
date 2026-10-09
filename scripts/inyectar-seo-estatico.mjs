@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { prerenderHomeHero, preloadHomeModule } from './prerender-home.mjs';
 
 const RAIZ = resolve(new URL('..', import.meta.url).pathname);
 const DIST = resolve(RAIZ, 'dist');
@@ -77,13 +78,14 @@ function cuerpoCalculadora(pagina) {
     </div>`;
 }
 
-function cuerpoInicio() {
+function cuerpoInicio(hero) {
   const calculadoras = catalogo.paginas.map((pagina) =>
     `<li><a href="/calculadoras/${pagina.slug}">${escapar(tituloCorto(pagina))}</a> — ${escapar(pagina.descripcion)}</li>`
   ).join('');
   return `    <div id="root">
-      <main data-static-seo="inicio">
-        <h1>Calculadoras de sueldo, prestaciones e impuestos para México</h1>
+      <main data-static-seo="inicio" data-startup-home>
+        ${hero}
+        <div class="shell" data-startup-links>
         <p>MiLana reúne herramientas gratuitas para estimar y entender sueldo, ISR, aguinaldo, finiquito, liquidación, vacaciones, PTU, RESICO, Infonavit y pensión IMSS con alcance y fuentes visibles.</p>
         <section id="calculadoras"><h2>Calculadoras</h2>
         <ul>${calculadoras}</ul></section>
@@ -104,6 +106,7 @@ function cuerpoInicio() {
           <li><a href="/aprende/pension-imss-ley-97">Pensión IMSS Ley 97</a></li>
         </ul></section>
         <section id="fuentes"><p><a href="/widgets">Calculadoras gratuitas para insertar en otros sitios</a>.</p></section>
+        </div>
       </main>
     </div>`;
 }
@@ -145,7 +148,8 @@ function inyectar(archivo, cuerpo) {
   writeFileSync(archivo, html, 'utf8');
 }
 
-inyectar(resolve(DIST, 'index.html'), cuerpoInicio());
+inyectar(resolve(DIST, 'index.html'), cuerpoInicio(await prerenderHomeHero()));
+preloadHomeModule(DIST);
 for (const pagina of catalogo.paginas) {
   inyectar(resolve(DIST, 'calculadoras', pagina.slug, 'index.html'), cuerpoCalculadora(pagina));
 }

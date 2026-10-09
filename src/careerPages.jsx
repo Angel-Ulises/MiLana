@@ -6,6 +6,7 @@ import profesiones from './data/profesiones.json';
 import ocupacionesEstados from './data/stateOccupations.json';
 import AdReserve from './AdReserve.jsx';
 import DecisionExplorer from './decisionExplorer.jsx';
+import MeaningOnDemand from './MeaningOnDemand.jsx';
 
 const PEXELS = {
   hub: '6147267',
@@ -94,6 +95,11 @@ function Hero({ eyebrow, title, lede, image = PEXELS.salarios, imageAlt, compact
 
 function SalaryRows({ rows, mode = 'income' }) {
   return (
+    <div className="career-ranking-stack">
+    <MeaningOnDemand className="career-meaning" resumen="¿Qué significa este ranking?"
+      detalle={mode === 'income' ? 'Es el ingreso promedio mensual publicado de profesionistas ocupados, no el sueldo de entrada de un recién egresado.' : 'Son profesionistas ocupados en ese grupo; no equivale a vacantes ni indica cuántas empresas están contratando.'}>
+      <p>Compara también región, experiencia, tamaño del grupo y periodo de la fuente antes de sacar conclusiones.</p>
+    </MeaningOnDemand>
     <div className="career-ranking" role="list">
       {rows.map((row, index) => (
         <article className="career-rank-row" key={row.carrera} role="listitem">
@@ -105,6 +111,7 @@ function SalaryRows({ rows, mode = 'income' }) {
           <strong>{mode === 'income' ? `${dinero(row.ingreso)}/mes` : numero(row.ocupados)}</strong>
         </article>
       ))}
+    </div>
     </div>
   );
 }

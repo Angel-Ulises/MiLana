@@ -1,0 +1,27 @@
+/* Una cifra al frente, interpretación al tocar. Sin modales ni desplazamientos inesperados. */
+.ml-result-meaning{margin-top:10px;border-top:1px solid #dce6ee;padding-top:5px;max-width:100%;min-width:0}
+.ml-result-meaning>summary{min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none;cursor:pointer;color:#245b88;font:800 12px/1.4 Inter,system-ui,sans-serif;padding:9px 0}
+.ml-result-meaning>summary::-webkit-details-marker{display:none}
+.ml-result-meaning>summary span{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#e6f2f9;color:#235b84;font-size:16px}
+.ml-result-meaning[open]>summary span{transform:rotate(180deg)}
+.ml-result-meaning-body{padding:2px 0 8px}
+.ml-result-meaning-body p{font:400 12px/1.65 Inter,system-ui,sans-serif!important;color:#425d72!important;margin:0 0 8px!important}
+.ml-result-meaning-body p:last-child{margin-bottom:0!important}
+.ml-result-meaning-body a{color:#1b6199;font-weight:800}
+.ml-result-meaning>summary:focus-visible,.ml-result-meaning-body a:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+.finance-result-card .ml-result-meaning{margin-top:9px}
+.finance-result-card .ml-result-meaning-body p{font-size:12px!important;line-height:1.6!important}
+.finance-result-card>p.ml-result-critical{font-size:12px;color:#465d70;line-height:1.5;margin:8px 0 0}
+.career-meaning{max-width:750px;margin:10px 0 16px}
+.career-meaning>summary{font-size:13px}
+.economy-context-extra{background:#fff;border:1px solid #d8e4ec;border-radius:18px;margin:16px 0;overflow:hidden}
+.economy-context-extra>summary{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:13px 17px;list-style:none;cursor:pointer;color:#1f5c89;font:800 13px/1.4 Inter,system-ui}
+.economy-context-extra>summary::-webkit-details-marker{display:none}
+.economy-context-extra[open]>summary{border-bottom:1px solid #e0e9f0}
+.economy-context-extra>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px}
+.economy-context-extra .economy-step{min-width:0;margin:0}
+.economy-context-extra>summary:focus-visible{outline:3px solid #2563eb;outline-offset:-3px}
+@media(max-width:720px){.economy-context-extra>div{grid-template-columns:1fr;padding:8px}.economy-context-extra .economy-step{padding:13px}}
+@media(prefers-reduced-motion:reduce){.ml-result-meaning>summary span{transition:none}}
+
+.career-ranking-stack{min-width:0;width:100%}

@@ -9,6 +9,7 @@ import AdReserve from './AdReserve.jsx';
 import { estadoPresupuesto } from './lib/financeResultStates.js';
 import DecisionExplorer from './decisionExplorer.jsx';
 import SavingsScenarios from './savingsScenarios.jsx';
+import MeaningOnDemand from './MeaningOnDemand.jsx';
 
 const FOTO_ID = '6963848';
 const foto = (width = 1400) => `https://images.pexels.com/photos/${FOTO_ID}/pexels-photo-${FOTO_ID}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
@@ -49,7 +50,9 @@ function Campo({ label, value, onChange, help, placeholder = '0' }) {
 }
 
 function Resultado({ label, value, note, tone = '' }) {
-  return <article className={`finance-result-card ${tone}`}><span>{label}</span><strong>{value}</strong>{note && <p>{note}</p>}</article>;
+  // Un resultado pendiente o una advertencia crítica debe verse sin abrir nada.
+  const esencial = value === '—' || /no es un límite|sin asumir|sin rendimiento|no se puede calcular|completa los datos|captura ingreso/i.test(note || '');
+  return <article className={`finance-result-card ${tone}`}><span>{label}</span><strong>{value}</strong>{note && (esencial ? <p className="ml-result-critical">{note}</p> : <MeaningOnDemand resumen="Entender esta cifra" detalle={note} />)}</article>;
 }
 
 function Hub() {

@@ -45,8 +45,8 @@ test('Carreras conserva los datos y preguntas sin repetir dos secciones de naveg
 test('el explorador no ocupa espacio con resultados ficticios', () => {
   assert.match(explorador, /decision \? \(/);
   assert.doesNotMatch(explorador, /className="ml-decision-empty"/);
-  assert.match(explorador, /aria-live="polite"/);
-  assert.match(explorador, /aria-pressed=/);
+  assert.match(explorador, /tabIndex=\{-1\}/);
+  assert.match(explorador, /role="group"/);
   assert.doesNotMatch(explorador, /localStorage|sessionStorage|fetch\(/);
 });
 

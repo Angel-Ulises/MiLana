@@ -33,6 +33,6 @@ test('Chrome Android: conserva el recorrido cuando el encabezado llega tarde', a
   assert.match(html,/class="ml-journey"/);
   assert.equal((html.match(/class="ml-journey-mount"/g)||[]).length,1,'No debe duplicar la guía por StrictMode');
   assert.match(html,/No sé cuánto me queda/);
-  assert.match(html,/Armar mi presupuesto/);
+  assert.match(html,/Volver a mi pregunta/);
  }finally{await server.close();rmSync(dir,{recursive:true,force:true});rmSync('src/__journey-lazy-header-test.jsx',{force:true});}
 });

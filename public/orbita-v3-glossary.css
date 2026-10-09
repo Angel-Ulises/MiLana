@@ -12,3 +12,9 @@
 .orb-glossary-item[open]{flex-basis:min(100%,620px);background:#FFF}
 .orb-glossary-item p{margin:0!important;padding:0 12px 12px;color:#4F5F6C!important;font-size:max(13px,calc(var(--orb-fs) * .82))!important;line-height:1.55!important}
 @media(max-width:620px){.orb-glossary{width:calc(100% - 28px);margin-block:18px;padding:14px}.orb-glossary-head{align-items:flex-start;flex-direction:column}.orb-glossary-head>strong{text-align:left}.orb-glossary-list{display:grid;grid-template-columns:1fr 1fr}.orb-glossary-item[open]{grid-column:1/-1}.orb-glossary-item summary{justify-content:space-between}}
+
+/* La idea primero; la explicación técnica aparece al tocar Profundizar. */
+.orb-glossary-item .orb-glossary-deeper{margin:8px 12px 12px;border-top:1px solid #dce7ee;padding-top:4px}
+.orb-glossary-item .orb-glossary-deeper>summary{min-height:38px;padding:7px 0;justify-content:flex-start;color:#245e8d;font-weight:800;font-size:max(12px,calc(var(--orb-fs) * .74))}
+.orb-glossary-item .orb-glossary-deeper>p{padding:2px 0 8px;color:#4f5f6c!important;font-size:max(12px,calc(var(--orb-fs) * .78))!important;line-height:1.55}
+.orb-glossary-item .orb-glossary-deeper>summary:focus-visible{outline:3px solid #2563eb;outline-offset:2px}

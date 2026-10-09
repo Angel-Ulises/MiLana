@@ -118,16 +118,27 @@
   setEasy(root.classList.contains('ml-orbita-easy'), false);
   easyButtons.forEach((button) => button.addEventListener('click', () => setEasy(!root.classList.contains('ml-orbita-easy'))));
 
+  const normalizeSearch = (value) => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es-MX').replace(/[¿?¡!.,;:]/g, ' ').replace(/\s+/g, ' ').trim();
+  const commonWords = new Set(['quiero','saber','necesito','como','cuanto','cuanta','me','mi','el','la','los','las','que','de','del','en','por','para','un','una','estoy','hacer','puedo','tengo']);
+  const searchCount = search?.querySelector('[data-orbita-search-count]');
   const filterSearch = () => {
     if (!search || !searchInput) return [];
-    const q = searchInput.value.trim().toLocaleLowerCase('es-MX');
+    const q = normalizeSearch(searchInput.value);
+    const tokens = q.split(' ').filter((word) => word.length > 2 && !commonWords.has(word));
     const visible=[];
     search.querySelectorAll('[data-orbita-search-item]').forEach((item) => {
-      const match = !q || item.textContent.toLocaleLowerCase('es-MX').includes(q);
-      item.hidden = !match;
-      if (match) visible.push(item);
+      const text = normalizeSearch(item.textContent + ' ' + (item.dataset.searchAliases || ''));
+      const match = !q
+        ? item.dataset.searchFeatured === 'true'
+        : text.includes(q) || (tokens.length > 0 && tokens.every((word) => text.includes(word)));
+      const show = match && visible.length < 10;
+      item.hidden = !show;
+      if (show) visible.push(item);
     });
     if (searchEmpty) searchEmpty.hidden = visible.length !== 0;
+    if (searchCount) searchCount.textContent = !q
+      ? 'Empieza por alguna de estas opciones o escribe lo que necesitas.'
+      : visible.length ? visible.length + ' opciones relacionadas' : 'Prueba otra palabra o una frase más corta.';
     return visible;
   };
   document.querySelectorAll('[data-orbita-search-open]').forEach((button) => button.addEventListener('click', () => {

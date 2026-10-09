@@ -49,3 +49,31 @@
 @media(max-width:780px){.ml-decision-head{display:block}.ml-decision-label{display:inline-block;margin-top:18px}.ml-decision-flow{grid-template-columns:1fr}.ml-decision-result{grid-column:auto}.ml-decision-stage,.ml-decision-result{border-radius:18px}}
 @media(max-width:410px){.ml-decision .ml-decision-shell{width:calc(100% - 32px)}.ml-decision-topics{grid-template-columns:1fr 1fr;gap:8px}.ml-decision-choice{min-height:128px;padding:12px}.ml-decision-choice strong{font-size:13px}.ml-decision-choice>span{font-size:11px}.ml-decision-primary{padding:17px}.ml-decision-stage,.ml-decision-result{padding:16px}.ml-decision-related{align-items:stretch}.ml-decision-related>span{width:100%}}
 @media(prefers-reduced-motion:reduce){.ml-decision-choice,.ml-decision-need{transition:none}}
+
+/* Android: elegir primero, leer detalles solo después de tocar. */
+@media(max-width:780px){
+ .ml-decision{padding:24px 0 32px}
+ .ml-decision-head{margin-bottom:14px}
+ .ml-decision-kicker{margin-bottom:7px;font-size:11px}
+ .ml-decision h2{font-size:clamp(30px,8vw,38px);margin-bottom:8px}
+ .ml-decision-lede{font-size:13px;line-height:1.5}
+ .ml-decision-flow{gap:9px}
+ .ml-decision-step{margin-bottom:10px}
+ .ml-decision-step h3{font-size:23px}
+ .ml-decision-choice{min-height:58px;padding:10px 12px;justify-content:center}
+ .ml-decision-choice strong{font-size:13px}
+ .ml-decision-choice>span{display:none}
+ .ml-decision-need{min-height:48px;padding:10px 13px;font-size:13px}
+ .ml-decision-options{gap:7px}
+ .ml-decision-answer:has(.ml-decision-answer-placeholder){display:none}
+ .ml-decision-result{padding:17px}
+ .ml-decision-explain{font-size:13px;margin-bottom:12px}
+ .ml-decision-primary{padding:14px}
+ .ml-decision-primary em{font-size:12px}
+ .ml-decision-related a{min-height:42px}
+}
+@media(max-width:410px){
+ .ml-decision .ml-decision-shell{width:calc(100% - 28px)}
+ .ml-decision-choice{min-height:58px;padding:10px}
+ .ml-decision-stage{padding:14px}
+}

@@ -37,6 +37,7 @@ export default function DecisionExplorer({ initialTopic = '' }) {
                   key={item.id}
                   type="button"
                   aria-pressed={temaId === item.id}
+                  aria-label={item.titulo + '. ' + item.bajada}
                   onClick={() => cambiarTema(item.id)}
                 >
                   <strong>{item.titulo}</strong>

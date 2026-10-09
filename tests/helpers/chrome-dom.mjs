@@ -6,7 +6,7 @@ import { navigateAndWait } from './chrome-page.mjs';
 
 // Carga `url` en Chrome real (con requestAnimationFrame funcionando, a diferencia de
 // --virtual-time-budget), espera hasta `waitMs` (o hasta que `until` sea verdadero) y devuelve el DOM serializado.
-export async function renderDom(chrome, url, { waitMs = 1500, until = null, timeoutMs = 20000, viewport = null, evaluate = null } = {}) {
+export async function renderDom(chrome, url, { waitMs = 1500, until = null, timeoutMs = 20000, viewport = null, evaluate = null, beforeNavigate = null, interact = null } = {}) {
   const profile = mkdtempSync(join(tmpdir(), 'milana-chrome-'));
   const ownGroup = process.platform === 'linux';
   const child = spawn(chrome, ['--headless=new', '--no-sandbox', '--disable-gpu', '--remote-debugging-port=0', `--user-data-dir=${profile}`, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'], detached: ownGroup });
@@ -47,10 +47,12 @@ export async function renderDom(chrome, url, { waitMs = 1500, until = null, time
         const { sessionId } = await send('Target.attachToTarget', { targetId, flatten: true });
         pageSession = sessionId;
         if (viewport) await send('Emulation.setDeviceMetricsOverride', { width: viewport.width, height: viewport.height, deviceScaleFactor:1, mobile:true }, sessionId);
+        if (beforeNavigate) await beforeNavigate(send, sessionId);
         await navigateAndWait(send, sessionId, url, {
           waitMs, until,
           waitForLoad: () => new Promise((resolve) => { resolvePageLoad = resolve; }),
         });
+        if (interact) await interact(send, sessionId);
         if (evaluate) {
           const measurement = await send('Runtime.evaluate', { expression:evaluate, returnByValue:true }, sessionId);
           if (measurement.exceptionDetails) throw new Error(`Chrome metric evaluation failed: ${measurement.exceptionDetails.text}`);

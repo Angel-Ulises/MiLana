@@ -4,6 +4,32 @@
   if (root.classList.contains('ml-orbita-embed') || new URLSearchParams(location.search).get('embed') === '1') return;
   if (/^\/calculadoras\/pension-imss\/?$/.test(location.pathname)) return;
 
+  // La misma preferencia de lectura que React, sin guardar aperturas individuales.
+  let nivel = 'inicio';
+  let soloEnPagina = false;
+  const bloques = new Map();
+  const leerNivel = () => {
+    if (soloEnPagina) return nivel;
+    try { const valor = sessionStorage.getItem('ml-lectura-v1'); return ['inicio', 'medio', 'experto'].includes(valor) ? valor : 'inicio'; }
+    catch { return nivel; }
+  };
+  const aplicarNivel = (valor) => {
+    if (!['inicio', 'medio', 'experto'].includes(valor)) return;
+    nivel = valor;
+    bloques.forEach((estado, bloque) => {
+      if (estado.manual !== null) return;
+      estado.esperado = nivel === 'experto';
+      bloque.open = estado.esperado;
+    });
+  };
+  nivel = leerNivel();
+  window.addEventListener('ml:reading-depth', (event) => {
+    if (!['inicio', 'medio', 'experto'].includes(event.detail?.nivel)) return;
+    soloEnPagina = event.detail.guardado === false;
+    aplicarNivel(event.detail.nivel);
+  });
+  window.addEventListener('pageshow', () => aplicarNivel(leerNivel()));
+
   const TERMS = {
     ISR: 'Impuesto Sobre la Renta. Es un impuesto federal que puede retenerse o pagarse sobre ciertos ingresos, según las reglas fiscales aplicables.',
     UMA: 'Unidad de Medida y Actualización. Es una referencia en pesos que se usa para calcular distintos conceptos legales y administrativos.',
@@ -61,8 +87,17 @@
     detected.forEach((term) => {
       const details = document.createElement('details');
       details.className = 'orb-glossary-item';
-      const experto = (() => { try { return sessionStorage.getItem('ml-lectura-v1') === 'experto'; } catch { return false; } })();
+      const experto = nivel === 'experto';
       details.innerHTML = `<summary><strong>${term}</strong><span>¿Qué es?</span></summary><p>${BASICS[term] || TERMS[term]}</p><details class="orb-glossary-deeper"${experto ? ' open' : ''}><summary>Profundizar</summary><p>${TERMS[term]}</p></details>`;
+      const profundo = details.querySelector('.orb-glossary-deeper');
+      const estado = { manual: null, esperado: experto };
+      bloques.set(profundo, estado);
+      profundo.addEventListener('toggle', () => {
+        if (profundo.open !== estado.esperado) {
+          estado.manual = profundo.open;
+          estado.esperado = profundo.open;
+        }
+      });
       list.appendChild(details);
     });
     section.appendChild(list);

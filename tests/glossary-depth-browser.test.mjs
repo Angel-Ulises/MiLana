@@ -33,5 +33,24 @@ test('Chrome móvil: explicación corta y profundidad voluntaria',async t=>{
    assert.ok(m.text.length>15);
    assert.equal(m.overflow,false);
   }
+  await renderDom(chrome,url,{viewport:{width:390,height:844},waitMs:4200,until:"document.querySelectorAll('.orb-glossary-item').length===3",interact:async(send,session)=>{
+    const result=await send('Runtime.evaluate',{awaitPromise:true,returnByValue:true,expression:`(async()=>{
+      const {guardarNivelLectura}=await import('/src/lib/readingDepth.js');
+      const wait=()=>new Promise(r=>setTimeout(r,100));
+      const deep=[...document.querySelectorAll('.orb-glossary-deeper')];
+      guardarNivelLectura('experto');await wait();
+      const opened=deep.every(el=>el.open);
+      deep[0].querySelector('summary').click();await wait();
+      guardarNivelLectura('medio');await wait();
+      guardarNivelLectura('experto');await wait();
+      const manual=deep[0].open===false && deep.slice(1).every(el=>el.open);
+      Object.defineProperty(window,'sessionStorage',{configurable:true,value:{getItem:()=> 'experto',setItem(){throw new DOMException('Quota','QuotaExceededError')}}});
+      guardarNivelLectura('medio');await wait();
+      dispatchEvent(new Event('pageshow'));await wait();
+      return {opened,manual,volatile:deep.every(el=>!el.open)};
+    })()`},session);
+    assert.equal(result.exceptionDetails,undefined);
+    assert.deepEqual(result.result.value,{opened:true,manual:true,volatile:true});
+  }});
  }finally{await server.close();rmSync(dir,{recursive:true,force:true});}
 });

@@ -23,7 +23,7 @@ test('Carreras explica qué es un promedio y qué no son vacantes sin modificar 
 });
 test('Economía deja la señal y las herramientas a la vista y el contexto adicional al tocar', () => {
   const code=readFileSync('src/economyPages.jsx','utf8');
-  assert.match(code,/<details className="economy-context-extra">/);
+  assert.match(code,/<ReadingDetails className="economy-context-extra">/);
   assert.match(code,/<summary>¿Por qué importa y a quién afecta\?/);
   assert.match(code,/\{articulo\.quePaso\}/);
   assert.match(code,/\{articulo\.porQueImporta\}/);
@@ -37,7 +37,7 @@ test('Economía deja la señal y las herramientas a la vista y el contexto adici
 test('La divulgación funciona con teclado y HTML nativo, sin nuevas APIs',()=>{
  const c=readFileSync('src/MeaningOnDemand.jsx','utf8');
  const styles=readFileSync('src/result-meaning.css','utf8');
- assert.match(c,/<details className=/);
+ assert.match(c,/<ReadingDetails className=/);
  assert.match(c,/<summary>/);
  assert.doesNotMatch(c,/fetch\(|sessionStorage|localStorage|navigator|XMLHttpRequest|onClick/);
  assert.match(styles,/summary:focus-visible/);

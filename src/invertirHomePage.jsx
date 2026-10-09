@@ -3,7 +3,9 @@ import SiteHeader from './siteHeader.jsx';
 import AdReserve from './AdReserve.jsx';
 import { investmentInstrumentClasses } from './data/investment-instrument-classes.js';
 import { proyectarInversion } from './lib/investmentProjection.js';
-import { leerNivelLectura, guardarNivelLectura } from './lib/readingDepth.js';
+import { guardarNivelLectura } from './lib/readingDepth.js';
+import { useReadingDepth } from './lib/useReadingDepth.js';
+import ReadingDetails from './ReadingDetails.jsx';
 
 const pesos = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(n);
 const lecciones = {
@@ -38,8 +40,8 @@ const enlace = [
 function Campo({ label, value, onChange, min = 0, max = 1000000000, step = 1, suffix = '', help = '' }) {
   return <label className="ml-inv-input"><span>{label}</span><span className="ml-inv-field"><input type="number" inputMode="decimal" min={min} max={max} step={step} value={value} onChange={(e) => onChange(e.target.value)} />{suffix && <b>{suffix}</b>}</span>{help && <small>{help}</small>}</label>;
 }
-function Profundidad({ value, onChange }) {
-  return <fieldset className="ml-inv-level"><legend>¿Cuánto conoces del tema?</legend><div>{niveles.map((item) => <button type="button" aria-pressed={value === item.id} className={value === item.id ? 'active' : ''} key={item.id} onClick={() => onChange(item.id)}>{item.label}</button>)}</div><p>Puedes cambiar cuando quieras. Recordamos solo tu forma de leer en esta pestaña, no tus cifras.</p></fieldset>;
+function Profundidad({ value, onChange, guardado }) {
+  return <fieldset className="ml-inv-level"><legend>¿Cuánto conoces del tema?</legend><div>{niveles.map((item) => <button type="button" aria-pressed={value === item.id} className={value === item.id ? 'active' : ''} key={item.id} onClick={() => onChange(item.id)}>{item.label}</button>)}</div><p aria-live="polite">{guardado === false ? 'Tu navegador no permite recordarlo. El nivel se aplica mientras sigas en esta página.' : 'Esta forma de leer acompaña tus explicaciones por MiLana en esta pestaña. Puedes abrir o cerrar cada bloque. No guardamos tus cifras.'}</p></fieldset>;
 }
 function Entender({ nivel }) {
   const [producto, setProducto] = useState('cetes');
@@ -51,14 +53,14 @@ function Entender({ nivel }) {
     <article className="ml-inv-explainer" aria-live="polite">
       <div><span className="ml-inv-kicker">Estás explorando</span><h3>{actual.nombre}</h3><p>{nivel === 'inicio' ? simple.inicio : nivel === 'medio' ? simple.medio : actual.resumen}</p></div>
       <div className="ml-inv-remember"><strong>Lo que nunca debes olvidar</strong><p>Tu dinero puede perder valor o no estar disponible cuando lo necesites. Comprueba las condiciones del instrumento concreto.</p></div>
-      <details className="ml-inv-more"><summary>¿Quieres saber más sobre {actual.nombre}?</summary>
+      <ReadingDetails className="ml-inv-more"><summary>¿Quieres saber más sobre {actual.nombre}?</summary>
         <dl>
           <div><dt>Plazo y disponibilidad</dt><dd>{actual.dimensiones.plazo} {actual.dimensiones.liquidez}</dd></div>
           <div><dt>Costos</dt><dd>{actual.dimensiones.costos}</dd></div>
           <div><dt>Quién interviene</dt><dd>{actual.dimensiones.custodia}</dd></div>
         </dl>
         <a href={actual.fuente.url} target="_blank" rel="noopener noreferrer">Consultar fuente oficial ↗</a>
-      </details>
+      </ReadingDetails>
     </article>
   </section>;
 }
@@ -93,7 +95,7 @@ function Simulador() {
             <strong className="ml-inv-bar-value">{pesos(x.final)}</strong>
             <small>{x.diferencia < 0 ? 'Pérdida vs. aportado: ' : 'Diferencia vs. aportado: '}{pesos(x.diferencia)}</small>
           </div>)}</div>
-          <details className="ml-inv-more"><summary>¿Y si los precios también suben?</summary><p>Al ajustar por la inflación hipotética del {resultado.inflation}% anual, el poder de compra estimado de los saldos sería:</p><ul>{resultado.escenarios.map((x)=><li key={x.nombre}>{x.nombre}: {pesos(x.real)} en pesos de hoy, aproximadamente.</li>)}</ul></details>
+          <ReadingDetails className="ml-inv-more"><summary>¿Y si los precios también suben?</summary><p>Al ajustar por la inflación hipotética del {resultado.inflation}% anual, el poder de compra estimado de los saldos sería:</p><ul>{resultado.escenarios.map((x)=><li key={x.nombre}>{x.nombre}: {pesos(x.real)} en pesos de hoy, aproximadamente.</li>)}</ul></ReadingDetails>
         </>}
       </div>
     </div>
@@ -102,8 +104,9 @@ function Simulador() {
 }
 
 export default function InvestirHomePage() {
-  const [nivel, setNivel] = useState(leerNivelLectura);
-  const cambiarNivel = (nuevo) => { guardarNivelLectura(nuevo); setNivel(nuevo); };
+  const nivel = useReadingDepth();
+  const [guardado, setGuardado] = useState(null);
+  const cambiarNivel = (nuevo) => setGuardado(guardarNivelLectura(nuevo));
   return <div className="ml-invertir">
     <SiteHeader ctaHref="/finanzas/inversion/comparar" ctaLabel="Comparar opciones" />
     <main>
@@ -114,14 +117,14 @@ export default function InvestirHomePage() {
         <p>No necesitas saber de finanzas para empezar a entenderlas. Toca, compara y prueba escenarios sin arriesgar dinero.</p>
         <nav className="ml-inv-hero-actions" aria-label="Qué hacer"><a href="#entender">Entender un instrumento <span aria-hidden="true">→</span></a><a href="#simular">Probar una simulación <span aria-hidden="true">→</span></a><a href="#explorar">Ver herramientas <span aria-hidden="true">→</span></a></nav>
       </div></section>
-      <div className="shell"><Profundidad value={nivel} onChange={cambiarNivel} /></div>
+      <div className="shell"><Profundidad value={nivel} onChange={cambiarNivel} guardado={guardado} /></div>
       <Entender nivel={nivel} />
       <Simulador />
       <section className="shell ml-inv-paths" id="explorar" aria-labelledby="ml-inv-paths-title">
         <div className="ml-inv-section-title"><span>03 · Seguir explorando</span><h2 id="ml-inv-paths-title">Elige qué quieres revisar ahora.</h2></div>
         <div className="ml-inv-paths-grid">{enlace.map((r) => <a key={r.href} href={r.href}><strong>{r.titulo}</strong><span>{r.detalle}</span><b aria-hidden="true">↗</b></a>)}</div>
       </section>
-      <section className="ml-inv-boundary"><div className="shell"><h2>Aprender aquí es gratis. Operar es otra cosa.</h2><p>MiLana todavía no recibe dinero, no abre cuentas, no compra o vende inversiones y no recomienda productos personalizados. Una futura operación real solo podría ofrecerse con la estructura y autorizaciones correspondientes.</p><details className="ml-inv-more"><summary>¿Qué habría que comprobar antes de operar?</summary><p>Institución autorizada, contrato, costos completos, liquidez, impuestos, riesgos y quién custodia los activos. Ningún rendimiento está garantizado por esta página.</p></details></div></section>
+      <section className="ml-inv-boundary"><div className="shell"><h2>Aprender aquí es gratis. Operar es otra cosa.</h2><p>MiLana todavía no recibe dinero, no abre cuentas, no compra o vende inversiones y no recomienda productos personalizados. Una futura operación real solo podría ofrecerse con la estructura y autorizaciones correspondientes.</p><ReadingDetails className="ml-inv-more"><summary>¿Qué habría que comprobar antes de operar?</summary><p>Institución autorizada, contrato, costos completos, liquidez, impuestos, riesgos y quién custodia los activos. Ningún rendimiento está garantizado por esta página.</p></ReadingDetails></div></section>
     </main>
     <AdReserve size="970x90" />
     <footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Contenido educativo. No constituye asesoría de inversión ni recomendación de compra o venta.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer>

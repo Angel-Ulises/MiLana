@@ -1,3 +1,4 @@
+import ReadingDetails from './ReadingDetails.jsx';
 import Detalle from './Detalle.jsx';
 import { useMemo, useState } from 'react';
 import datos from './data/economia.json';
@@ -121,10 +122,10 @@ function Article({ articulo }) {
 
         <section className="economy-steps-section"><div className="shell economy-steps">
           <article className="economy-step"><span>01</span><div><p className="eyebrow">Qué pasó</p><h2>El dato oficial</h2><p>{articulo.quePaso}</p></div></article>
-          <details className="economy-context-extra"><summary>¿Por qué importa y a quién afecta? <span aria-hidden="true">↓</span></summary><div>
+          <ReadingDetails className="economy-context-extra"><summary>¿Por qué importa y a quién afecta? <span aria-hidden="true">↓</span></summary><div>
           <article className="economy-step"><span>02</span><div><p className="eyebrow">Por qué importa</p><h2>El contexto que falta en un titular</h2><p>{articulo.porQueImporta}</p></div></article>
           <article className="economy-step"><span>03</span><div><p className="eyebrow">A quién afecta</p><h2>Dónde puede aparecer en la vida real</h2><p>{articulo.aQuienAfecta}</p></div></article>
-          </div></details>
+          </div></ReadingDetails>
           <article className="economy-step"><span>04</span><div><p className="eyebrow">Qué hacer con la información</p><h2>Convierte contexto en una revisión útil</h2><p>{articulo.queHacer}</p><div className="economy-actions"><a className="btn btn-primary" href={articulo.herramienta.href}>{articulo.herramienta.texto}</a><a className="btn btn-secondary" href={articulo.herramientaSecundaria.href}>{articulo.herramientaSecundaria.texto}</a></div></div></article>
         </div></section>
 

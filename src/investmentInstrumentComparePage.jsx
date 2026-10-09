@@ -4,7 +4,8 @@ import { compararInstrumentosEducativos } from './lib/investmentInstrumentCompar
 import AdReserve from './AdReserve.jsx';
 import SiteHeader from './siteHeader.jsx';
 import { primeraOracion } from './Detalle.jsx';
-import { leerNivelLectura, guardarNivelLectura } from './lib/readingDepth.js';
+import { guardarNivelLectura } from './lib/readingDepth.js';
+import { useReadingDepth } from './lib/useReadingDepth.js';
 
 export function esRutaCompararInstrumentos() {
   if (typeof window === 'undefined') return false;
@@ -22,8 +23,9 @@ function Selector({ label, value, onChange, exclude }) {
 export default function InvestmentInstrumentComparePage() {
   const [a, setA] = useState('cetes');
   const [b, setB] = useState('fondos-inversion');
-  const [profundizar, setProfundizar] = useState(() => leerNivelLectura() === 'experto');
-  const cambiarProfundidad = (valor) => { setProfundizar(valor); guardarNivelLectura(valor ? 'experto' : 'inicio'); };
+  const profundizar = useReadingDepth() === 'experto';
+  const [guardado, setGuardado] = useState(null);
+  const cambiarProfundidad = (valor) => setGuardado(guardarNivelLectura(valor ? 'experto' : 'inicio'));
   const comparacion = useMemo(() => compararInstrumentosEducativos([a, b]), [a, b]);
   const [izquierda, derecha] = comparacion.instrumentos;
 
@@ -35,6 +37,7 @@ export default function InvestmentInstrumentComparePage() {
       <section className="instrument-compare-tool"><div className="shell"><p className="instrument-compare-back"><a href="/invertir#entender">¿Primera vez? Entiende cada instrumento primero →</a></p><div className="instrument-compare-controls"><Selector label="Instrumento A" value={a} onChange={setA} exclude={b} /><Selector label="Instrumento B" value={b} onChange={setB} exclude={a} /></div>
         <div className="instrument-compare-heads"><article><span>{izquierda.familia}</span><h2>{izquierda.nombre}</h2><p>{izquierda.resumen}</p></article><article><span>{derecha.familia}</span><h2>{derecha.nombre}</h2><p>{derecha.resumen}</p></article></div>
         <div className="instrument-depth" role="group" aria-label="Profundidad de la comparación"><span>¿Cuánto detalle quieres?</span><button type="button" aria-pressed={!profundizar} onClick={() => cambiarProfundidad(false)}>Lo esencial</button><button type="button" aria-pressed={profundizar} onClick={() => cambiarProfundidad(true)}>Profundizar</button></div>
+        {guardado === false && <p role="status">Tu navegador no permite recordarlo. El nivel se aplica mientras sigas en esta página.</p>}
         <div className="instrument-compare-table">{comparacion.dimensiones.filter((d) => profundizar || ['estructura','liquidez','variacion','costos','custodia'].includes(d.id)).map((dimension) => <section key={dimension.id}><h3>{dimension.etiqueta}</h3><div>{dimension.valores.map((valor) => <article key={valor.instrumentoId}><strong className="instrument-side-label">{valor.instrumentoId === izquierda.id ? izquierda.nombre : derecha.nombre}</strong><p>{profundizar ? valor.texto : primeraOracion(valor.texto, 125)}</p>{!profundizar && primeraOracion(valor.texto, 125) !== valor.texto && <details className="instrument-more"><summary>Explicar más</summary><p>{valor.texto}</p></details>}</article>)}</div></section>)}</div>
         <p className="instrument-compare-note">{comparacion.nota}</p>
       </div></section>

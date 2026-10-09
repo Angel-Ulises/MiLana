@@ -15,7 +15,10 @@ test('Cada término aparece con lenguaje sencillo y explicación más profunda b
  assert.match(js,/detected\.slice\(0, 3\)/);
 });
 test('Solo lee el nivel elegido en esta pestaña y no altera explicaciones oficiales',()=>{
- assert.match(js,/sessionStorage\.getItem\('ml-lectura-v1'\) === 'experto'/);
+ assert.match(js,/sessionStorage\.getItem\('ml-lectura-v1'\)/);
+ assert.match(js,/const experto = nivel === 'experto'/);
+ assert.match(js,/ml:reading-depth/);
+ assert.match(js,/estado\.manual !== null/);
  assert.doesNotMatch(js,/sessionStorage\.setItem|localStorage\.setItem|fetch\(|XMLHttpRequest|sendBeacon/);
  assert.match(js,/pension-imss/);
  assert.match(js,/if \(!main \|\| main\.hasAttribute\('data-static-seo'\)\) return/);

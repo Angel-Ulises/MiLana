@@ -6,7 +6,7 @@ test('Comparar carreras mantiene ingreso y población a la vista y composición 
  const code=readFileSync('src/careerComparePage.jsx','utf8');
  assert.match(code,/className="cc-primary"/);
  assert.match(code,/<dt>Profesionistas ocupados<\/dt>/);
- assert.match(code,/<details className="cc-card-more">/);
+ assert.match(code,/<ReadingDetails className="cc-card-more"/);
  assert.match(code,/<summary>Ver composición de este grupo<\/summary>/);
  for(const token of ['Hombres','Mujeres','Diferencia entre promedios de ingreso','No implica que una persona concreta vaya a ganar esa diferencia'])assert.ok(code.includes(token),token);
  assert.match(readFileSync('src/career-compare.css','utf8'),/\.cc-card-more>summary:focus-visible/);
@@ -22,7 +22,7 @@ test('Comparar estados prioriza cifras principales y conserva empleo y vivienda 
  assert.match(code,/className="sc-rules"/);
  assert.match(readFileSync('src/state-compare.css','utf8'),/\.sc-more-dimensions>summary:focus-visible/);
 });
-test('Los controles funcionan sin JS adicional ni nuevas APIs o almacenes',()=>{
+test('Los controles conservan HTML nativo sin nuevas peticiones ni almacenes',()=>{
  for(const file of ['src/stateComparePage.jsx','src/careerComparePage.jsx']){
   const s=readFileSync(file,'utf8');
   assert.doesNotMatch(s,/new XMLHttpRequest|fetch\(|localStorage\.|sessionStorage\./);

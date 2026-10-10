@@ -35,7 +35,7 @@ async function run() {
  await pause();
  const banner=document.querySelector('.ml-journey');
  if(!banner?.textContent.includes('Quiero estar preparado')) throw new Error('No acompañó la pregunta');
- if(!banner?.textContent.includes('fondo de emergencia')) throw new Error('No identificó herramienta actual');
+ if(banner.querySelectorAll('a').length!==1 || !banner.textContent.includes('Volver a mi pregunta')) throw new Error('La guía debe volver, sin competir con el resultado');
  banner.querySelector('button[aria-label="Cerrar este recorrido"]').click();
  await pause();
  if(document.querySelector('.ml-journey')) throw new Error('No se pudo cerrar');

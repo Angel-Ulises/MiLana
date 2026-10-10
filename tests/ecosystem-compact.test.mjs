@@ -45,8 +45,8 @@ test('Carreras conserva los datos y preguntas sin repetir dos secciones de naveg
 test('el explorador no ocupa espacio con resultados ficticios', () => {
   assert.match(explorador, /decision \? \(/);
   assert.doesNotMatch(explorador, /className="ml-decision-empty"/);
-  assert.match(explorador, /aria-live="polite"/);
-  assert.match(explorador, /aria-pressed=/);
+  assert.match(explorador, /tabIndex=\{-1\}/);
+  assert.match(explorador, /role="group"/);
   assert.doesNotMatch(explorador, /localStorage|sessionStorage|fetch\(/);
 });
 
@@ -60,4 +60,26 @@ test('el diseño compacto respeta móvil, accesibilidad y el resto del sitio', (
   assert.match(css, /focus-visible/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(carreras, /<details className="ecosystem-more-questions">/);
+});
+
+
+test('los hubs sitúan sus complementos después de la pregunta y los accesos directos', () => {
+  for (const code of [finanzas, carreras]) {
+    const hub = code.split('function Hub() {')[1];
+    assert.ok(hub.indexOf('<ReadingExtrasAfterTask />') > hub.indexOf('<DecisionExplorer'), 'La pregunta va primero');
+    assert.ok(hub.indexOf('<ReadingExtrasAfterTask />') > hub.indexOf('className="ecosystem-shortcuts"'), 'Accesos directos antes de complementos');
+  }
+  assert.match(explorador, /data-orbita-glossary-reserve="true"/);
+  assert.match(explorador, /data-orbita-visual-reserve="true"/);
+  assert.match(css, /scroll-margin-top:84px/);
+  const glossary = readFileSync('public/orbita-v3-glossary.js', 'utf8');
+  assert.match(glossary, /hub.insertAdjacentElement\('afterend', strip\)/);
+});
+
+
+test('las cuatro herramientas financieras conservan el contenido extra después de sus campos y resultados', () => {
+  for (const [name, next] of [['Presupuesto', 'FondoEmergencia'], ['FondoEmergencia', 'DeudaCredito'], ['DeudaCredito', 'Ahorro'], ['Ahorro', 'Vivienda']]) {
+    const body = finanzas.split(`function ${name}() {`)[1].split(`function ${next}()`)[0];
+    assert.match(body, /<\/section><ReadingExtrasAfterTask \/><\/main>/);
+  }
 });

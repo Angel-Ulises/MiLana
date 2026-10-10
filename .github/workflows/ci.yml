@@ -77,6 +77,8 @@ jobs:
           path: |
             .qa/cloudflare/*.json
             .qa/cloudflare/*.log
+            dist-cloudflare-preview/
+          include-hidden-files: true
           retention-days: 14
           if-no-files-found: ignore
 

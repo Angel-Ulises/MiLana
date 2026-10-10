@@ -41,6 +41,50 @@ jobs:
       - name: Build completo
         run: npm run build
 
+      - name: Preparar paquete estático Cloudflare sin publicar
+        run: npm run package:cloudflare
+
+      - name: Node para Wrangler local
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verificar HTTP en Pages local sin credenciales
+        env:
+          WRANGLER_SEND_METRICS: 'false'
+        run: |
+          npm exec --yes --package wrangler@4.149.0 -- wrangler --version
+          npm exec --yes --package wrangler@4.149.0 -- wrangler pages dev dist-cloudflare-preview --ip 127.0.0.1 --port 8788 --compatibility-date=2026-10-06 > .qa/cloudflare/wrangler-ci.log 2>&1 &
+          pages_pid=$!
+          trap 'kill "$pages_pid" 2>/dev/null || true' EXIT
+          ready=false
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:8788/ > /dev/null; then
+              ready=true
+              break
+            fi
+            if ! kill -0 "$pages_pid" 2>/dev/null; then break; fi
+            sleep 1
+          done
+          if [ "$ready" != true ]; then cat .qa/cloudflare/wrangler-ci.log; exit 1; fi
+          npm run verify:cloudflare -- http://127.0.0.1:8788
+
+      - name: Guardar evidencia Cloudflare
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloudflare-preparacion-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .qa/cloudflare/*.json
+            .qa/cloudflare/*.log
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Restaurar Node del build para regresiones existentes
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Capturar recorridos en escritorio y móvil
         run: node --experimental-websocket scripts/capturar-recorridos.mjs
 

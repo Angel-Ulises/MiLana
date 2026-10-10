@@ -1,0 +1,32 @@
+/* Ayuda voluntaria. Comparte el lenguaje visual de las herramientas, sin un segundo hub. */
+.ml-budget-practice{color:#18344d;font-size:15px;line-height:1.55}
+.ml-budget-practice *{box-sizing:border-box}
+.ml-budget-practice p{margin:0 0 16px;color:#40586b}
+.ml-budget-practice .ml-practice-topline{display:flex;justify-content:space-between;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+.ml-budget-practice .ml-practice-label{font-size:12px;font-weight:750;color:#245c93;margin:0 0 9px}
+.ml-budget-practice h3{font-family:Newsreader,Georgia,serif;font-size:clamp(24px,2.7vw,31px);font-weight:600;line-height:1.15;margin:0 0 16px;color:#18344d;scroll-margin-block:120px 24px}
+.ml-budget-practice button,.ml-practice-entry{font:inherit;cursor:pointer}
+.ml-budget-practice .ml-practice-text-button,.ml-practice-entry{min-height:44px;border:0;background:transparent;color:#245c93;padding:8px 0;font-size:13px;font-weight:750;text-decoration:underline;text-underline-offset:3px;text-align:left}
+.ml-budget-practice .ml-practice-primary{display:flex;justify-content:space-between;gap:12px;align-items:center;min-height:48px;width:100%;padding:13px 15px;border:0;border-radius:10px;background:#245c93;color:#fff!important;font-size:15px;font-weight:750;line-height:1.4;text-align:left;text-decoration:none}
+.ml-practice-amount{display:flex;flex-direction:column;gap:2px;padding:16px 20px;margin-bottom:16px;background:#f1f6fa;border:1px solid #d1dee9;border-radius:12px}
+.ml-practice-amount span{font-size:12px;color:#40586b}
+.ml-practice-amount strong{font-size:36px;font-weight:750;font-variant-numeric:tabular-nums;line-height:1.25}
+.ml-practice-ledger{margin:0 0 16px}
+.ml-practice-ledger>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:10px 0;border-bottom:1px solid #d8e3ec}
+.ml-practice-ledger dt{font-weight:750;font-size:14px}.ml-practice-ledger small{display:block;font-weight:400;font-size:12px;color:#40586b;line-height:1.4}
+.ml-practice-ledger dd{margin:0;font-variant-numeric:tabular-nums;font-weight:750;font-size:15px}
+.ml-practice-ledger .ml-practice-total{padding:12px 0;color:#18344d;border-bottom:0}
+.ml-practice-balance{padding:16px 18px;border:1px solid #d1dee9;background:#f1f6fa;border-radius:12px}
+.ml-practice-balance>span{display:block;font-weight:750;font-size:14px}.ml-practice-balance>strong{display:block;font-size:36px;line-height:1.25;font-variant-numeric:tabular-nums}
+.ml-budget-practice .ml-practice-balance p{font-size:13px;line-height:1.5;margin:8px 0 0;color:inherit}
+.ml-practice-balance-disponible{background:#edf6f0;border-color:#bed9c7;color:#225a42}.ml-practice-balance-faltante{background:#fff2ee;border-color:#eccbc0;color:#803c2b}
+.ml-budget-practice .ml-practice-equation{font-size:13px;line-height:1.5;margin:9px 0 16px;font-variant-numeric:tabular-nums}
+.ml-practice-experiment{margin-bottom:12px}.ml-budget-practice .ml-practice-experiment p{font-size:13px;margin:0 0 9px}
+.ml-practice-experiment-actions{display:flex;flex-wrap:wrap;gap:8px}.ml-practice-experiment-actions button{min-height:44px;padding:9px 11px;background:#fff;border:1px solid #9cb5c9;border-radius:9px;color:#245c93;font-size:13px;font-weight:700}
+.ml-practice-experiment-actions button:disabled{cursor:default;color:#526575;background:#f1f4f6;border-color:#c3ced6}
+.ml-practice-experiment small{display:block;margin-top:8px;font-size:12px;color:#40586b}
+.ml-budget-practice .ml-practice-meaning{margin:8px 0 16px;border-top:1px solid #d8e3ec}.ml-budget-practice .ml-practice-meaning summary{cursor:pointer;min-height:44px;padding:11px 0;color:#245c93;font-size:13px;font-weight:750}.ml-practice-meaning p{font-size:13px}
+.ml-budget-practice .ml-practice-footnote{font-size:12px;line-height:1.5;margin:10px 0 0}.ml-budget-practice .ml-practice-previous{margin-top:6px}
+.ml-practice-help{margin:8px 0 4px}.ml-practice-help .ml-budget-practice{margin:14px 0 20px;padding-top:10px;border-top:1px solid #d8e3ec}
+.ml-decision .ml-practice-entry{display:block;margin-top:10px}.ml-budget-practice :is(button,a,summary,h3):focus-visible,.ml-practice-entry:focus-visible{outline:3px solid #2d6caa;outline-offset:3px}
+@media(max-width:400px){.ml-budget-practice h3{font-size:24px}.ml-practice-ledger>div{gap:8px}.ml-practice-experiment-actions{display:grid;grid-template-columns:1fr}}

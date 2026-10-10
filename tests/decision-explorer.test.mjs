@@ -60,8 +60,9 @@ test('el explorador se integra solo en hubs y usa controles accesibles', () => {
   const css = readFileSync(new URL('../src/decision-explorer.css', import.meta.url), 'utf8');
   assert.match(finances, /<DecisionExplorer initialTopic="dinero" \/>/);
   assert.match(careers, /<DecisionExplorer initialTopic="carrera" \/>/);
-  assert.match(explorer, /aria-pressed=/);
-  assert.match(explorer, /aria-live="polite"/);
+  assert.match(explorer, /role="group"/);
+  assert.match(explorer, /tabIndex=\{-1\}/);
+  assert.match(explorer, /titulo.current\?\.focus/);
   assert.match(explorer, /type="button"/);
   assert.match(explorer, /onClick=\{\(\) => cambiarTema\(item.id\)\}/);
   assert.match(css, /focus-visible/);

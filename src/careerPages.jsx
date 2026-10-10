@@ -5,7 +5,7 @@ import datos from './data/carreras.json';
 import profesiones from './data/profesiones.json';
 import ocupacionesEstados from './data/stateOccupations.json';
 import AdReserve from './AdReserve.jsx';
-import DecisionExplorer from './decisionExplorer.jsx';
+import DecisionExplorer, { ReadingExtrasAfterTask } from './decisionExplorer.jsx';
 import MeaningOnDemand from './MeaningOnDemand.jsx';
 
 const PEXELS = {
@@ -156,7 +156,7 @@ function Hub() {
   ];
   return (
     <>
-      <Hero compact eyebrow="Carreras · Trabajo · Dinero" title="Elegir carrera también es una decisión financiera." lede="Compara ingresos, tamaño del mercado laboral y diferencias regionales con datos públicos. Después convierte esas cifras en ingreso neto, ahorro y decisiones de vida." image={PEXELS.hub} imageAlt="Estudiantes universitarios colaborando frente a una laptop" />
+      <Hero compact eyebrow="Carreras · Trabajo · Dinero" title="Tu siguiente paso laboral." lede="Explora carreras, sueldos y estados con datos públicos. Los promedios no son ofertas de empleo." image={PEXELS.hub} imageAlt="Estudiantes universitarios colaborando frente a una laptop" />
       <main>
         <section className="career-hub-section ecosystem-hub" id="explorar" aria-label="Explorador de carreras y empleos">
           <div className="shell">
@@ -176,6 +176,7 @@ function Hub() {
           </div>
         </section>
 
+        <ReadingExtrasAfterTask />
         <section className="career-snapshot">
           <div className="shell">
             <div className="career-snapshot-head">

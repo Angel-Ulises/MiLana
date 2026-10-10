@@ -51,3 +51,16 @@ test('la UI declara dispositivo local y no usa geolocalización ni serializa est
   assert.doesNotMatch(codigo, /gtag\(|dataLayer|analytics/i);
   assert.match(preference, /localStorage/);
 });
+
+test('denegar acceso a localStorage no rompe la página antes de entrar al try', () => {
+  const original = Object.getOwnPropertyDescriptor(globalThis, 'localStorage');
+  Object.defineProperty(globalThis, 'localStorage', { configurable: true, get() { throw new DOMException('blocked', 'SecurityError'); } });
+  try {
+    assert.equal(leerEstadoGuardado(), '');
+    assert.equal(guardarEstado('puebla'), false);
+    assert.equal(borrarEstadoGuardado(), false);
+  } finally {
+    if (original) Object.defineProperty(globalThis, 'localStorage', original);
+    else delete globalThis.localStorage;
+  }
+});

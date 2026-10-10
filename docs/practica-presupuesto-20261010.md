@@ -42,3 +42,7 @@ No se han validado visualmente los nuevos estados ni ejecutado las nuevas intera
 `scripts/capturar-principiantes.mjs` genera 24 capturas del build completo y un manifiesto con el SHA del checkout/head del PR y comprobaciones. CI guarda el artefacto `principiantes-qa-*` durante siete días. Hace falta inspeccionar esas imágenes y resolver cualquier hallazgo antes de considerar lista la propuesta.
 
 La publicación de una rama/PR, la fusión y el despliegue son decisiones distintas. Este documento no autoriza ninguna de ellas.
+
+## Primer resultado de CI y corrección
+
+[CI 218](https://github.com/Angel-Ulises/MiLana/actions/runs/38042539935) ejecutó 508 pruebas en Chrome: 507 aprobadas, una fallida y ninguna omitida. El caso con almacenamiento bloqueado encontró un fallo anterior en la preferencia de estado: el getter de `localStorage` se evaluaba en un parámetro por defecto, antes del `try`, y podía desmontar el contenido de Finanzas. Se reprodujo con una prueba unitaria que falló antes de corregirlo. La resolución del almacenamiento pasa al interior del `try`, sin cambiar preferencias guardadas, fórmulas ni datos. Se conserva el caso de navegador y se añade la regresión unitaria; la nueva ejecución debe verificar 509 pruebas.

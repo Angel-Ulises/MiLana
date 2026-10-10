@@ -14,8 +14,11 @@ export function estadoPermitido(slug) {
   return typeof slug === 'string' && slugs.has(slug);
 }
 
-export function leerEstadoGuardado(storage = globalThis?.localStorage) {
+export function leerEstadoGuardado(storage) {
   try {
+    // El getter de localStorage también puede lanzar SecurityError.
+    // Resolverlo dentro del try evita desmontar las herramientas de Finanzas.
+    if (storage === undefined) storage = globalThis?.localStorage;
     const slug = storage?.getItem(STATE_PREFERENCE_KEY) || '';
     return estadoPermitido(slug) ? slug : '';
   } catch {
@@ -23,9 +26,12 @@ export function leerEstadoGuardado(storage = globalThis?.localStorage) {
   }
 }
 
-export function guardarEstado(slug, storage = globalThis?.localStorage) {
+export function guardarEstado(slug, storage) {
   if (!estadoPermitido(slug)) return false;
   try {
+    // El getter de localStorage también puede lanzar SecurityError.
+    // Resolverlo dentro del try evita desmontar las herramientas de Finanzas.
+    if (storage === undefined) storage = globalThis?.localStorage;
     storage?.setItem(STATE_PREFERENCE_KEY, slug);
     return true;
   } catch {
@@ -33,8 +39,11 @@ export function guardarEstado(slug, storage = globalThis?.localStorage) {
   }
 }
 
-export function borrarEstadoGuardado(storage = globalThis?.localStorage) {
+export function borrarEstadoGuardado(storage) {
   try {
+    // El getter de localStorage también puede lanzar SecurityError.
+    // Resolverlo dentro del try evita desmontar las herramientas de Finanzas.
+    if (storage === undefined) storage = globalThis?.localStorage;
     storage?.removeItem(STATE_PREFERENCE_KEY);
     return true;
   } catch {

@@ -131,6 +131,14 @@
       return true;
     }
 
+    // El visual puede introducir términos después de que se retiró una reserva
+    // vacía. La ayuda sigue después de la tarea principal, también entonces.
+    const hub = main.querySelector(':scope > .ecosystem-hub,:scope > .finance-tool-section');
+    if (hub) {
+      hub.insertAdjacentElement('afterend', strip);
+      return true;
+    }
+
     const h1 = main.querySelector('h1');
     // Si el h1 vive dentro de un hero (p. ej. con el selector de estado), la tira va después del hero:
     // insertarla dentro empujaría los controles del primer viewport.

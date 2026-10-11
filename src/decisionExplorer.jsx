@@ -1,97 +1,133 @@
-import { useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { TEMAS_EXPLORADOR, obtenerTemaExplorador, resolverDecision } from './lib/decisionRoutes.js';
-import { recordarRutaAcompanamiento } from './lib/journeyIntent.js';
+import { borrarRutaAcompanamiento, leerEleccionExplorador, recordarRutaAcompanamiento } from './lib/journeyIntent.js';
+import ReadingDetails from './ReadingDetails.jsx';
+import BudgetPractice from './budgetPractice.jsx';
 import './decision-explorer.css';
 
-// La respuesta sustituye la orientación de la guía, en vez de agregar otro bloque vertical.
+// Una pregunta por pantalla. Los accesos directos del hub siguen fuera de este flujo.
 export default function DecisionExplorer({ initialTopic = '' }) {
-  const [temaId, setTemaId] = useState(initialTopic);
-  const [opcionId, setOpcionId] = useState('');
+  const inicio = initialTopic === 'carrera' ? '/carreras' : '/finanzas';
+  const restaurar = () => {
+    const ruta = initialTopic ? leerEleccionExplorador(inicio) : null;
+    return { temaId: ruta?.temaId || initialTopic, opcionId: ruta?.opcionId || '' };
+  };
+  const [eleccion, setEleccion] = useState(restaurar);
+  const [practicando, setPracticando] = useState(false);
+  const entradaPractica = useRef(null);
+  const { temaId, opcionId } = eleccion;
   const id = useId();
+  const titulo = useRef(null);
+  const superficie = useRef(null);
+  const enfocar = useRef(false);
   const tema = obtenerTemaExplorador(temaId);
   const decision = resolverDecision(temaId, opcionId);
 
-  const cambiarTema = (nuevoTema) => {
-    setTemaId(nuevoTema);
-    setOpcionId('');
+  useEffect(() => {
+    if (enfocar.current) { titulo.current?.focus({ preventScroll: true }); enfocar.current = false; }
+  }, [temaId, opcionId]);
+  useEffect(() => {
+    const volver = () => { setPracticando(false); setEleccion(restaurar()); };
+    window.addEventListener('pageshow', volver);
+    return () => window.removeEventListener('pageshow', volver);
+  }, [initialTopic]);
+
+  useEffect(() => {
+    // El ancla puede llegar antes del módulo lazy. Resuélvela al montar, sin
+    // sustituir la posición que el navegador restaura con Atrás/Adelante.
+    if (window.location.hash !== '#explorar' || performance.getEntriesByType('navigation')[0]?.type === 'back_forward') return;
+    const frame = requestAnimationFrame(() => {
+      superficie.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+      titulo.current?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  const cambiar = (nuevoTema, nuevaOpcion = '') => {
+    borrarRutaAcompanamiento();
+    setPracticando(false);
+    enfocar.current = true;
+    setEleccion({ temaId: nuevoTema, opcionId: nuevaOpcion });
   };
+  const cambiarTema = nuevoTema => cambiar(nuevoTema);
+  const recordar = destino => recordarRutaAcompanamiento(temaId, opcionId, destino, inicio);
+
+  const cerrarPractica = () => {
+    setPracticando(false);
+    requestAnimationFrame(() => {
+      entradaPractica.current?.focus({ preventScroll: true });
+      entradaPractica.current?.scrollIntoView({ block: 'center', behavior: 'instant' });
+    });
+  };
+  const entradaEjemplo = <button className="ml-practice-entry" type="button" ref={entradaPractica} onClick={() => setPracticando(true)}>¿Primera vez? Entender con un ejemplo</button>;
 
   return (
-    <section className="ml-decision ml-decision-connected" aria-labelledby={`${id}-titulo`}>
+    <section ref={superficie} className="ml-decision ml-decision-progressive" aria-labelledby={`${id}-titulo`}>
       <div className="shell ml-decision-shell">
         <div className="ml-decision-head">
-          <div>
-            <p className="ml-decision-kicker">MiLana te orienta</p>
-            <h2 id={`${id}-titulo`}>¿Qué quieres resolver hoy?</h2>
-            <p className="ml-decision-lede">Elige tu situación. Te mostramos por dónde empezar y qué revisar después.</p>
-          </div>
+          <p className="ml-decision-kicker">Empieza por tu pregunta</p>
+          <h2 id={`${id}-titulo`}>¿Qué quieres resolver hoy?</h2>
         </div>
-
-        <div className="ml-decision-flow">
-          <div className="ml-decision-stage ml-decision-stage-topics">
-            <div className="ml-decision-step"><span>01</span><h3>Elige un tema</h3></div>
-            <div className="ml-decision-options ml-decision-topics" role="group" aria-label="Tema de tu decisión">
-              {TEMAS_EXPLORADOR.map((item) => (
-                <button
-                  className={`ml-decision-choice${temaId === item.id ? ' is-selected' : ''}`}
-                  key={item.id}
-                  type="button"
-                  aria-pressed={temaId === item.id}
-                  aria-label={item.titulo + '. ' + item.bajada}
-                  onClick={() => cambiarTema(item.id)}
-                >
-                  <strong>{item.titulo}</strong>
-                  <span>{item.bajada}</span>
-                </button>
-              ))}
+        <div className="ml-decision-panel">
+          {practicando ? (
+            <BudgetPractice onClose={cerrarPractica} closeLabel={decision ? 'Volver a mi pregunta' : 'Volver a mis preguntas'} continueHref="/finanzas/presupuesto" onContinue={() => recordarRutaAcompanamiento('dinero', 'flujo', '/finanzas/presupuesto', inicio)} />
+          ) : decision ? (
+            <div className="ml-decision-answer">
+              <button className="ml-decision-back" type="button" onClick={() => cambiar(temaId)}>← Cambiar pregunta</button>
+              <h3 ref={titulo} tabIndex={-1}>{decision.opcion.titulo}</h3>
+              <a className="ml-decision-primary" href={decision.opcion.principal.href} onClick={() => recordar(decision.opcion.principal.href)}>
+                <span>{decision.opcion.principal.titulo}</span><b aria-hidden="true">→</b>
+              </a>
+              <p className="ml-decision-detail">{decision.opcion.principal.detalle}</p>
+              {temaId === 'dinero' && opcionId === 'flujo' && entradaEjemplo}
+              <ReadingDetails key={`${temaId}-${opcionId}`} className="ml-decision-explanation">
+                <summary>¿Por qué empezar aquí?</summary>
+                <p>{decision.opcion.explicacion}</p>
+              </ReadingDetails>
+              <details className="ml-decision-alternatives">
+                <summary>Otras herramientas para esta pregunta</summary>
+                <nav aria-label="Otras herramientas para esta pregunta">
+                  {decision.opcion.relacionadas.map(r => <a href={r.href} key={r.href} onClick={() => recordar(r.href)}>{r.titulo} <span aria-hidden="true">→</span></a>)}
+                </nav>
+              </details>
+              <p className="ml-decision-disclaimer">Orientación informativa. Revisa fuentes, fechas y supuestos antes de decidir.</p>
             </div>
-          </div>
-
-          <div className="ml-decision-stage ml-decision-stage-secondary">
-            <div className="ml-decision-step"><span>02</span><h3>{tema ? '¿Qué necesitas saber?' : 'Elige un tema para empezar'}</h3></div>
-            {tema ? (
+          ) : tema ? (
+            <div>
+              <div className="ml-decision-topic-line"><span>{tema.titulo}</span><button className="ml-decision-back" type="button" onClick={() => cambiarTema('')}>Cambiar tema</button></div>
+              <h3 ref={titulo} tabIndex={-1}>{tema.pregunta}</h3>
               <div className="ml-decision-options ml-decision-needs" role="group" aria-label="Qué quieres resolver">
-                {tema.opciones.map((opcion) => (
-                  <button
-                    className={`ml-decision-need${opcionId === opcion.id ? ' is-selected' : ''}`}
-                    key={opcion.id}
-                    type="button"
-                    aria-pressed={opcionId === opcion.id}
-                    onClick={() => setOpcionId(opcion.id)}
-                  >
-                    <span>{opcion.titulo}</span>
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+                {tema.opciones.map(opcion => (
+                  <button className="ml-decision-need" key={opcion.id} type="button" onClick={() => cambiar(temaId, opcion.id)}>
+                    <span>{opcion.titulo}</span><b aria-hidden="true">→</b>
                   </button>
                 ))}
               </div>
-            ) : <p className="ml-decision-hint">Finanzas, trabajo, inversión o mudanza: empieza por lo que necesitas hoy.</p>}
-          </div>
-
-          <div className="ml-decision-answer" aria-live="polite" aria-atomic="true">
-            {decision ? (
-              <div className="ml-decision-result">
-                <div className="ml-decision-result-title"><span>Tu siguiente paso</span><button type="button" onClick={() => { setTemaId(''); setOpcionId(''); }}>Empezar de nuevo</button></div>
-                <p className="ml-decision-explain">{decision.opcion.explicacion}</p>
-                <a className="ml-decision-primary" href={decision.opcion.principal.href} onClick={() => recordarRutaAcompanamiento(temaId, opcionId, decision.opcion.principal.href)}>
-                  <span><small>Empieza aquí</small><strong>{decision.opcion.principal.titulo}</strong><em>{decision.opcion.principal.detalle}</em></span>
-                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
-                </a>
-                <div className="ml-decision-related">
-                  <span>Otras herramientas útiles</span>
-                  {decision.opcion.relacionadas.map((r) => <a href={r.href} key={r.href} onClick={() => recordarRutaAcompanamiento(temaId, opcionId, r.href)}>{r.titulo} <span aria-hidden="true">↗</span></a>)}
-                </div>
-                <p className="ml-decision-disclaimer">Orientación informativa. Consulta fuentes, fechas y supuestos antes de tomar decisiones.</p>
+              {temaId === 'dinero' && entradaEjemplo}
+            </div>
+          ) : (
+            <div>
+              <h3 ref={titulo} tabIndex={-1}>¿Qué tema tienes en mente?</h3>
+              <div className="ml-decision-options ml-decision-topics" role="group" aria-label="Tema de tu decisión">
+                {TEMAS_EXPLORADOR.map(item => (
+                  <button className="ml-decision-choice" key={item.id} type="button" onClick={() => cambiarTema(item.id)}>
+                    <strong>{item.titulo}</strong><span>{item.bajada}</span>
+                  </button>
+                ))}
               </div>
-            ) : (
-              <div className="ml-decision-answer-placeholder">
-                <span>Todo conectado</span>
-                <strong>Una pregunta. Una herramienta útil.</strong>
-                <p>Te ayudamos a empezar sin tener que conocer las secciones de la página.</p>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
   );
+}
+
+// Los complementos existentes siguen disponibles después de la tarea principal,
+// no entre el encabezado y la primera pregunta/campo. El runtime los reemplaza.
+export function ReadingExtrasAfterTask() {
+  return <>
+    <div className="orb-runtime-reserve orb-glossary-reserve" data-orbita-glossary-reserve="true" aria-hidden="true" />
+    <div className="orb-runtime-reserve orb-visual-reserve" data-orbita-visual-reserve="true" aria-hidden="true" />
+  </>;
 }

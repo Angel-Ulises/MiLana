@@ -49,7 +49,9 @@ test('interfaz compartida no utiliza LLM ni modifica fórmulas o campos financie
   assert.match(comp,/aria-label="Tu recorrido en MiLana"/);
   assert.match(comp,/milana:route-change/);
   assert.match(main,/<JourneyCompanion \/>/);
-  assert.match(css,/grid-template-areas:"topics topics" "needs answer"/);
+  assert.doesNotMatch(css,/grid-template-areas/);
+  assert.doesNotMatch(comp,/Después:/);
+  assert.match(comp,/Volver a mi pregunta/);
   assert.match(css,/@media\(max-width:760px\)/);
   assert.match(css,/focus-visible/);
   assert.match(home,/<SiteHeader \/>/);

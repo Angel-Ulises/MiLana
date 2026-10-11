@@ -21,5 +21,5 @@ test('Solo lee el nivel elegido en esta pestaña y no altera explicaciones ofici
  assert.match(js,/estado\.manual !== null/);
  assert.doesNotMatch(js,/sessionStorage\.setItem|localStorage\.setItem|fetch\(|XMLHttpRequest|sendBeacon/);
  assert.match(js,/pension-imss/);
- assert.match(js,/if \(!main \|\| main\.hasAttribute\('data-static-seo'\)\) return/);
+ assert.match(js,/if \(!main \|\| main\.hasAttribute\('data-static-seo'\) \|\| main\.classList\.contains\('ml-route-loading'\)\) return/);
 });

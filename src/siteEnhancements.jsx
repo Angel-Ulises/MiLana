@@ -1,12 +1,7 @@
 import { useEffect } from 'react';
 
 const MILANA_EMAIL = 'contacto.milanaaqui@gmail.com';
-const HERO_PEXELS_ID = '7129713';
-const HERO_WIDTHS = [480, 768, 1024, 1440, 1920, 2400];
-
-function heroUrl(width) {
-  return `https://images.pexels.com/photos/${HERO_PEXELS_ID}/pexels-photo-${HERO_PEXELS_ID}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
-}
+import { HERO_FOCAL, HERO_PEXELS_ID, HERO_SIZES, heroSrcSet, heroUrl } from './lib/heroPhoto.js';
 
 function actualizarHero() {
   const picture = document.querySelector('.hero-media picture');
@@ -15,9 +10,9 @@ function actualizarHero() {
 
   picture.querySelectorAll('source').forEach((source) => source.remove());
   img.src = heroUrl(1440);
-  img.srcset = HERO_WIDTHS.map((width) => `${heroUrl(width)} ${width}w`).join(', ');
-  img.sizes = '(max-width: 1023px) 100vw, (max-width: 1599px) 64vw, 980px';
-  img.style.objectPosition = '68% 46%';
+  img.srcset = heroSrcSet();
+  img.sizes = HERO_SIZES;
+  img.style.objectPosition = HERO_FOCAL;
   img.dataset.heroMilana = HERO_PEXELS_ID;
 }
 

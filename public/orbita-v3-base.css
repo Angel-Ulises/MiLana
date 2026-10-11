@@ -31,3 +31,8 @@ html.ml-orbita-enabled .ml-editorial-note,html.ml-orbita-enabled p[data-milana-s
 .ml-orbita-search-list{max-height:min(52vh,510px);overflow-y:auto;overscroll-behavior:contain}
 .ml-orbita-search input::placeholder{color:#ADBFD2;opacity:1}
 @media(max-width:620px){.ml-orbita-search-inner{padding:15px}.ml-orbita-search h2{font-size:20px}.ml-orbita-search-list{max-height:min(46vh,430px)}}.ml-orbita-drawer a{min-height:64px}.ml-orbita-drawer-label{display:grid;gap:2px;padding-block:9px}.ml-orbita-drawer-label small{color:var(--orb-muted,#5E6B78);font-size:.8em;font-weight:500;line-height:1.35}
+/* Android pinta un recuadro translúcido sobre lo que se toca; con pasos que se deslizan quedaba flotando un instante.
+   Los controles ya tienen su propia respuesta al toque (se hunden ligeramente). */
+html.ml-orbita-enabled :is(a,button,summary,label,select,input,textarea,[role="button"],[tabindex]){-webkit-tap-highlight-color:transparent}
+/* Foco programático en la etiqueta de la pregunta (pantallas táctiles): sin contorno, salvo navegación con teclado. */
+html.ml-orbita-enabled [data-orbita-question-focus="true"]:focus:not(:focus-visible){outline:none}

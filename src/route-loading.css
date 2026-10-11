@@ -6,9 +6,14 @@
   align-items:center;
   padding:48px 24px;
   color:#35516c;
-  background:linear-gradient(165deg,#fbf8f2,#f3f8fc);
+  background:transparent;
   font-family:Inter,system-ui,sans-serif;
 }
+/* Cargas rápidas: el espacio se reserva pero no se pinta nada; el aviso aparece solo si tarda >0.7 s.
+   Antes la caja y su degradado destellaban unos milisegundos en cada cambio de página. */
+@keyframes mlRouteLoadingShow{to{opacity:1}}
+.ml-route-loading span{opacity:0;animation:mlRouteLoadingShow .2s ease .7s forwards}
+@media(prefers-reduced-motion:reduce){.ml-route-loading span{animation-duration:0s}}
 .ml-route-loading span{
   display:block;
   max-width:20rem;

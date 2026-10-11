@@ -165,7 +165,7 @@
     if (document.querySelector('[data-orbita-glossary]')) return;
     const main = document.querySelector('main');
     // El HTML prerenderizado lo reemplaza React: insertar ahí solo mueve el layout y se pierde.
-    if (!main || main.hasAttribute('data-static-seo')) return;
+    if (!main || main.hasAttribute('data-static-seo') || main.classList.contains('ml-route-loading')) return;
     const text = ` ${main.textContent.toUpperCase()} `;
     const detected = Object.keys(TERMS).filter((term) => new RegExp(`(^|[^A-ZÁÉÍÓÚÑ])${term}([^A-ZÁÉÍÓÚÑ]|$)`).test(text));
     if (!detected.length) {

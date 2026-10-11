@@ -1,6 +1,7 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, sep } from 'node:path';
 import { DESCRIPCION_NAVEGACION, NAVEGACION_MILANA } from '../src/lib/siteNavigation.js';
+import { HERO_SIZES, heroSrcSet, heroUrl } from '../src/lib/heroPhoto.js';
 import { SEARCH_INTENTS, SEARCH_FEATURED } from '../src/lib/searchIntent.js';
 
 const DIST = new URL('../dist/', import.meta.url);
@@ -159,7 +160,7 @@ for(const path of originals){
   const staticAttr = STATIC_TOP_ROUTES.has(route) ? ' data-orbita-static-top="true"' : '';
   // Preload estático solo en Inicio, para que lo vea el preload scanner.
   // Justo después de <meta name="viewport"> (antes el viewport por defecto de 980px hacía coincidir la media query); en móvil (≤620px) la foto del hero está oculta, así que no se precarga.
-  if(route==='/') html=html.replace(/(<meta\s+name=["']viewport["'][^>]*>)/i,'$1<link rel="preload" as="image" href="/images/gen/inicio-1440.webp" fetchpriority="high" media="(min-width: 621px)">');
+  if(route==='/') html=html.replace(/(<meta\s+name=["']viewport["'][^>]*>)/i,`$1<link rel="preload" as="image" href="${heroUrl(1440)}" imagesrcset="${heroSrcSet()}" imagesizes="${HERO_SIZES}" fetchpriority="high" media="(min-width: 621px)">`);
   // Sin <link rel="icon" > el navegador pide /favicon.ico (404).
   if(!/<link[^>]+rel="(?:shortcut )?icon"/i.test(html)) html=html.replace('</head>','<link rel="icon" type="image/svg+xml" href="/favicon.svg"></head>');
   html=html.replace('</head>',`${headForRoute(route)}</head>`).replace(/<body([^>]*)>/i,`<body$1${staticAttr}>${frame}`);

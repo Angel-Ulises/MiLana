@@ -21,6 +21,11 @@
   };
   const QUESTION_SELECTOR = 'input:not([type="hidden"]):not([type="submit"]):not([type="button"]), select, textarea';
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // En pantallas táctiles, enfocar un campo de texto abre el teclado y su barra de sugerencias:
+  // al cambiar de pregunta o tocar un monto de ejemplo eso destellaba. Ahí el foco va a la etiqueta.
+  const touchInput = matchMedia('(pointer: coarse)').matches;
+  const opensKeyboard = (control) => control instanceof HTMLTextAreaElement
+    || (control instanceof HTMLInputElement && !['checkbox', 'radio', 'button', 'submit', 'range', 'color', 'file'].includes(control.type));
 
   const sectionForPath = () => {
     const p = location.pathname;
@@ -125,7 +130,18 @@
     if (!(target instanceof HTMLElement)) return;
     target.style.scrollMarginTop = `${HEADER_OFFSET}px`;
     target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-    requestAnimationFrame(() => question.control?.focus?.({ preventScroll: true }));
+    requestAnimationFrame(() => focusQuestion(question));
+  };
+
+  const focusQuestion = (question) => {
+    const control = question?.control;
+    if (!control?.focus) return;
+    if (!touchInput || !opensKeyboard(control)) { control.focus({ preventScroll: true }); return; }
+    const label = labelFor(currentRoot || document, control);
+    if (!(label instanceof HTMLElement)) return;
+    if (!label.hasAttribute('tabindex')) label.setAttribute('tabindex', '-1');
+    label.dataset.orbitaQuestionFocus = 'true';
+    label.focus({ preventScroll: true });
   };
 
   const isInsideResult = (node) => Boolean(node.closest('.ml-result'));
@@ -226,7 +242,7 @@
           : String(value);
         button.addEventListener('click', () => {
           setReactInputValue(control, String(value));
-          control.focus({ preventScroll: true });
+          if (!touchInput || !opensKeyboard(control)) control.focus({ preventScroll: true });
         });
         wrap.appendChild(button);
       }

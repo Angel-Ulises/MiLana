@@ -78,3 +78,11 @@ html.ml-orbita-enabled :is(.ml-premium-reveal,.career-reveal,.route-reveal){opac
 @media(min-width:621px) and (max-width:900px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid{padding-top:0!important}html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{padding:24px 22px!important;border-radius:22px}}
 /* Teléfono: la primera pregunta y «Siguiente» caben en la primera pantalla; la foto queda para tablet y escritorio. */
 @media(max-width:620px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero .calculator-hero-media{display:none!important}}
+/* Calculadoras con asistente: React pinta el formulario completo ~45ms antes de que el asistente lo reduzca
+   a una pregunta; se veían todos los campos destellar. Se oculta (conservando su espacio) hasta que el asistente
+   existe. Si el script no llegara, el formulario aparece igual a los 1.5s. Pensión no carga este archivo. */
+@keyframes orbFormReveal{to{visibility:visible}}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main:not(:has(> .ml-calc-assistant)) > form{visibility:hidden;animation:orbFormReveal 0s linear 1.5s forwards}
+/* Inicio: las listas estáticas para buscadores se veían ~100ms bajo el hero antes de que React las reemplazara.
+   Conservan su espacio; si el arranque falla (aviso de error) vuelven a verse como respaldo. */
+html.js.ml-orbita-enabled #root:not(:has([data-startup-error])) [data-startup-links]{visibility:hidden}

@@ -93,7 +93,9 @@
     section.querySelector('[data-case-try]')?.addEventListener('click', () => {
       const first = form.querySelector('input,select,textarea');
       form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setTimeout(() => first?.focus({ preventScroll: true }), 350);
+      // En táctil no abrir el teclado por código: solo enfocar controles que no lo despliegan.
+      const teclado = first instanceof HTMLTextAreaElement || (first instanceof HTMLInputElement && !['checkbox', 'radio'].includes(first.type));
+      if (!(teclado && matchMedia('(pointer: coarse)').matches)) setTimeout(() => first?.focus({ preventScroll: true }), 350);
       if (typeof window.gtag === 'function') window.gtag('event', 'example_try', { calculator_id: slug, page_path: location.pathname });
     });
   }

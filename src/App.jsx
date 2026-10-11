@@ -12,6 +12,7 @@ import catalogoSituaciones from "./data/situaciones.json";
 import catalogoFotos from "./data/fotos.json";
 import AdReserve from './AdReserve.jsx';
 import { HomeRoutes, SituationCard } from './homeRoutes.jsx';
+import { HERO_FOCAL, HERO_PEXELS_ID, HERO_SIZES, heroSrcSet, heroUrl } from './lib/heroPhoto.js';
 import NetIncomeTransferActions from './netIncomeTransferActions.jsx';
 import { CalculatorResultContext, ResultNextSteps } from './calculatorResultJourney.jsx';
 import './calculator-result-journey.css';
@@ -1733,7 +1734,11 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                 <div className="hero-orbit hero-orbit-one" aria-hidden="true"></div>
                 <div className="hero-orbit hero-orbit-two" aria-hidden="true"></div>
                 <figure className="hero-media">
-                  <Foto name="inicio" sizes="(max-width: 1023px) 102vw, (max-width: 1279px) 88vw, (max-width: 1599px) 83vw, 1230px" eager />
+                  <picture>
+                    <img src={heroUrl(1440)} srcSet={heroSrcSet()} sizes={HERO_SIZES} alt="" aria-hidden="true"
+                         loading="eager" fetchPriority="high" decoding="sync" data-hero-milana={HERO_PEXELS_ID}
+                         style={{objectPosition: HERO_FOCAL}} />
+                  </picture>
                   <figcaption className="orb-home-photo-caption">Calculadoras y guías con fuentes oficiales.</figcaption>
                 </figure>
                 <aside className="hero-note" aria-label="Qué ofrece MiLana" hidden>

@@ -71,7 +71,10 @@ test('la nueva fuente del hero está documentada', () => {
 test('el hero y las anclas usan la corrección visual nueva', () => {
   const mejoras = read('src/siteEnhancements.jsx');
   const overrides = read('src/site-overrides.css');
-  assert.ok(mejoras.includes("HERO_PEXELS_ID = '7129713'"));
+  // La foto del hero (Pexels 7129713) vive en un módulo compartido y se pinta desde el primer render.
+  assert.ok(read('src/lib/heroPhoto.js').includes("HERO_PEXELS_ID = '7129713'"));
+  assert.match(read('src/App.jsx'), /data-hero-milana=\{HERO_PEXELS_ID\}/);
+  assert.match(mejoras, /from '\.\/lib\/heroPhoto\.js'/);
   assert.ok(mejoras.includes('contacto.milanaaqui@gmail.com'));
   assert.match(overrides, /scroll-padding-top:\s*0\s*!important/);
   assert.match(overrides, /scroll-margin-top:\s*12px/);

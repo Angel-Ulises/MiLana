@@ -24,6 +24,8 @@
   const syncContext = () => {
     section = root.dataset.orbitaSection || sectionForPath();
     main = document.querySelector('main');
+    // «Cargando contenido…» es temporal: lo insertado ahí se pintaba un instante y desaparecía con React.
+    if (main?.classList.contains('ml-route-loading')) return false;
     return Boolean(main && supportedSections.has(section));
   };
 

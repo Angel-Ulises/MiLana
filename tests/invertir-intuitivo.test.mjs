@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { proyectarInversion } from '../src/lib/investmentProjection.js';
+import { compararComision, proyectarInversion } from '../src/lib/investmentProjection.js';
 import { esRutaInvertir } from '../src/lib/routeMatcher.js';
 import { NAVEGACION_MILANA } from '../src/lib/siteNavigation.js';
 
@@ -49,4 +49,25 @@ test('Invertir es sección pública, sin compra ni depósitos ni código externo
   assert.doesNotMatch(s,/comprar ahora|deposita ahora|abre una cuenta ya|api[_-]?key|client[_-]?secret|fetch\(|XMLHttpRequest/i);
   assert.match(readFileSync('scripts/generar-inversion.mjs','utf8'),/destino:\['invertir'\]/);
   assert.match(readFileSync('scripts/generar-sitemap-final.mjs','utf8'),/'\/invertir'/);
+});
+test('Comisiones: más costo o más años siempre dejan menos saldo, y cero costo no resta nada',()=>{
+  const ej={inicial:'50000',mensual:'1000',anos:'20',tasa:'7'};
+  const cero=compararComision({...ej,comision:'0'});
+  assert.equal(cero.costo,0);
+  assert.equal(cero.conservas,100);
+  let previo=Infinity;
+  for(const c of ['0.25','1','2','3']){
+    const r=compararComision({...ej,comision:c});
+    assert.equal(r.error,undefined);
+    assert.ok(r.conComision<r.sinComision && r.conComision<previo,c);
+    assert.ok(Math.abs(r.sinComision-r.conComision-r.costo)<1e-6);
+    previo=r.conComision;
+  }
+  const corto=compararComision({...ej,anos:'5',comision:'1'});
+  const largo=compararComision({...ej,anos:'30',comision:'1'});
+  assert.ok(largo.conservas<corto.conservas,'el efecto crece con el plazo');
+  assert.equal(typeof compararComision({...ej,comision:'40'}).error,'string');
+  const s=readFileSync('src/invertirHomePage.jsx','utf8');
+  assert.match(s,/Ejemplo hipotético/);
+  assert.match(s,/id="costos"/);
 });

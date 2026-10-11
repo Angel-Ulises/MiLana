@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import SiteHeader from './siteHeader.jsx';
 import AdReserve from './AdReserve.jsx';
 import { investmentInstrumentClasses } from './data/investment-instrument-classes.js';
-import { proyectarInversion } from './lib/investmentProjection.js';
+import { compararComision, proyectarInversion } from './lib/investmentProjection.js';
 import { guardarNivelLectura } from './lib/readingDepth.js';
 import { useReadingDepth } from './lib/useReadingDepth.js';
 import ReadingDetails from './ReadingDetails.jsx';
@@ -104,6 +104,37 @@ function Simulador() {
   </div></section>;
 }
 
+const PLAZOS = [5, 10, 20, 30];
+// Ejemplo fijo y declarado: lo único que cambia la persona es la comisión y el plazo.
+function CostoComision() {
+  const [comision, setComision] = useState(1);
+  const [anos, setAnos] = useState(20);
+  const r = compararComision({ inicial: '50000', mensual: '1000', anos: String(anos), tasa: '7', comision: String(comision) });
+  return <section className="ml-inv-fees" id="costos" aria-labelledby="ml-inv-fees-title"><div className="shell">
+    <div className="ml-inv-section-title"><span>03 · Costos</span><h2 id="ml-inv-fees-title">Una comisión pequeña, con los años, pesa mucho.</h2><p>Ejemplo hipotético: $50,000 al inicio, $1,000 al mes y un 7% anual supuesto. Mueve la comisión y el plazo.</p></div>
+    <div className="ml-inv-fees-grid">
+      <div className="ml-inv-fees-controls">
+        <label className="ml-inv-fees-range"><span>Comisión anual: <strong>{comision.toFixed(2)}%</strong></span>
+          <input type="range" min="0" max="3" step="0.25" value={comision} onChange={(e) => setComision(Number(e.target.value))} aria-valuetext={`${comision.toFixed(2)}% anual`} />
+          <span className="ml-inv-fees-scale" aria-hidden="true"><b>0%</b><b>1.5%</b><b>3%</b></span>
+        </label>
+        <fieldset className="ml-inv-fees-years"><legend>Plazo</legend><div>{PLAZOS.map((p) => <button type="button" key={p} aria-pressed={anos === p} className={anos === p ? 'active' : ''} onClick={() => setAnos(p)}>{p} años</button>)}</div></fieldset>
+      </div>
+      <div className="ml-inv-fees-result" aria-live="polite">
+        {r.error ? <p role="alert">{r.error}</p> : <>
+          <p className="ml-inv-fees-big"><span>De cada $100 que tendrías sin comisión, te quedarías con</span><strong>${r.conservas.toFixed(0)}</strong></p>
+          <div className="ml-inv-fees-bars">
+            <div><span>Sin comisión</span><i style={{ width: '100%' }} /><b>{pesos(r.sinComision)}</b></div>
+            <div><span>Con {comision.toFixed(2)}% anual</span><i className="is-cost" style={{ width: `${Math.max(2, r.conservas)}%` }} /><b>{pesos(r.conComision)}</b></div>
+          </div>
+          <p className="ml-inv-fees-note">La comisión se llevaría <strong>{pesos(r.costo)}</strong> en {anos} años. Tú habrías aportado {pesos(r.aportado)}.</p>
+        </>}
+        <ReadingDetails className="ml-inv-more"><summary>¿Dónde aparecen estas comisiones?</summary><p>En fondos de inversión se cobran como porcentaje anual del saldo (administración y distribución). En acciones y ETF suele haber comisión por operación, diferencial de compraventa y, en los ETF, un gasto anual propio. Compara siempre el costo total del instrumento y canal concretos; esta cifra es ilustrativa.</p></ReadingDetails>
+      </div>
+    </div>
+  </div></section>;
+}
+
 export default function InvestirHomePage() {
   const nivel = useReadingDepth();
   const [guardado, setGuardado] = useState(null);
@@ -116,13 +147,14 @@ export default function InvestirHomePage() {
         <p className="ml-inv-kicker">MiLana · Inversión sin complicaciones</p>
         <h1>Descubre cómo funciona invertir. A tu ritmo.</h1>
         <p>No necesitas saber de finanzas para empezar a entenderlas. Toca, compara y prueba escenarios sin arriesgar dinero.</p>
-        <nav className="ml-inv-hero-actions" aria-label="Qué hacer"><a href="#entender">Entender un instrumento <span aria-hidden="true">→</span></a><a href="#simular">Probar una simulación <span aria-hidden="true">→</span></a><a href="#explorar">Ver herramientas <span aria-hidden="true">→</span></a></nav>
+        <nav className="ml-inv-hero-actions" aria-label="Qué hacer"><a href="#entender">Entender un instrumento <span aria-hidden="true">→</span></a><a href="#simular">Probar una simulación <span aria-hidden="true">→</span></a><a href="#costos">Ver el peso de las comisiones <span aria-hidden="true">→</span></a></nav>
       </div></section>
       <div className="shell"><Profundidad value={nivel} onChange={cambiarNivel} guardado={guardado} /></div>
       <Entender nivel={nivel} />
       <Simulador />
+      <CostoComision />
       <section className="shell ml-inv-paths" id="explorar" aria-labelledby="ml-inv-paths-title">
-        <div className="ml-inv-section-title"><span>03 · Seguir explorando</span><h2 id="ml-inv-paths-title">Elige qué quieres revisar ahora.</h2></div>
+        <div className="ml-inv-section-title"><span>04 · Seguir explorando</span><h2 id="ml-inv-paths-title">Elige qué quieres revisar ahora.</h2></div>
         <div className="ml-inv-paths-grid">{enlace.map((r) => <a key={r.href} href={r.href}><strong>{r.titulo}</strong><span>{r.detalle}</span><b aria-hidden="true">↗</b></a>)}</div>
       </section>
       <section className="ml-inv-boundary"><div className="shell"><h2>Aprender aquí es gratis. Operar es otra cosa.</h2><p>MiLana todavía no recibe dinero, no abre cuentas, no compra o vende inversiones y no recomienda productos personalizados. Una futura operación real solo podría ofrecerse con la estructura y autorizaciones correspondientes.</p><ReadingDetails className="ml-inv-more"><summary>¿Qué habría que comprobar antes de operar?</summary><p>Institución autorizada, contrato, costos completos, liquidez, impuestos, riesgos y quién custodia los activos. Ningún rendimiento está garantizado por esta página.</p></ReadingDetails></div></section>

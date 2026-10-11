@@ -76,3 +76,5 @@ html.ml-orbita-enabled :is(.ml-premium-reveal,.career-reveal,.route-reveal){opac
 
 /* Inicio en tablet: sin hueco de 56px sobre el panel crema y con margen interior para el texto. */
 @media(min-width:621px) and (max-width:900px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid{padding-top:0!important}html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{padding:24px 22px!important;border-radius:22px}}
+/* Teléfono: la primera pregunta y «Siguiente» caben en la primera pantalla; la foto queda para tablet y escritorio. */
+@media(max-width:620px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero .calculator-hero-media{display:none!important}}

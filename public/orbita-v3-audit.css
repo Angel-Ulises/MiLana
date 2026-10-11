@@ -192,7 +192,8 @@ html.ml-orbita-enabled :is(.calculator-card,.situation-card,.career-question-gri
   html.ml-orbita-enabled :is(.calculator-card,.situation-card,.career-question-grid a,.career-route,.state-action-grid>a,.state-near-grid>a,.finance-route-list>a,.cc-card,.co-card) :is(h2,h3){line-height:1.12!important;text-wrap:balance}
 }
 /* Las fotos de calculadora sí forman parte del encabezado móvil. Prepaint las ocultaba para ahorrar altura,
-   pero eso anulaba los recortes verticales por fotografía y dejaba el encabezado sin contexto visual. */
+   pero eso anulaba los recortes verticales por fotografía y dejaba el encabezado sin contexto visual.
+   En teléfono (≤620px) prepaint la oculta de nuevo: ahí la prioridad es ver la primera pregunta sin desplazarse. */
 @media(max-width:760px){
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media{
     display:block!important;

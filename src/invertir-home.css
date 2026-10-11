@@ -85,4 +85,34 @@
 /* Contraste AA frente a estilos globales: textos claros sobre superficies azul marino. */
 html.ml-orbita-enabled #root .ml-invertir .ml-inv-hero-actions a:first-child,html.ml-orbita-enabled #root .ml-invertir .ml-inv-hero-actions a:first-child:visited{color:#fff!important}
 .ml-invertir .ml-inv-boundary p{color:#dfebf3!important}
-.ml-invertir .ml-inv-boundary .ml-inv-more p{color:#e2f1fa!important}
+.ml-invertir .ml-inv-boundary .ml-inv-more p{color:#e2f1fa!important}/* 03 · Costos: el efecto acumulado de una comisión anual, con un ejemplo fijo y declarado. */
+.ml-inv-fees{padding-block:clamp(32px,5vw,65px);background:var(--inv-cream)}
+.ml-inv-fees-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(16px,3vw,32px);align-items:start}
+.ml-inv-fees-controls{display:grid;gap:18px;padding:20px;border:1px solid var(--inv-line);border-radius:20px;background:#fff}
+.ml-inv-fees-range{display:grid;gap:10px;font-size:15px;font-weight:700;color:var(--inv-ink)}
+.ml-inv-fees-range strong{color:var(--inv-blue);font-size:18px}
+.ml-inv-fees-range input{width:100%;min-height:44px;accent-color:#1d5790;cursor:pointer}
+.ml-inv-fees-scale{display:flex;justify-content:space-between;color:var(--inv-muted);font-size:12px}
+.ml-inv-fees-scale b{font-weight:600}
+.ml-inv-fees-years{margin:0;padding:0;border:0}
+.ml-inv-fees-years legend{margin-bottom:8px;font-size:14px;font-weight:800;color:var(--inv-ink)}
+.ml-inv-fees-years>div{display:flex;flex-wrap:wrap;gap:7px}
+.ml-inv-fees-years button{min-height:44px;padding:9px 14px;border:1px solid #cbdde9;border-radius:999px;background:#fff;color:#2e546d;font:700 13px/1.2 Inter,sans-serif;cursor:pointer}
+.ml-inv-fees-years button.active{background:#153b5e;border-color:#153b5e;color:#fff}
+.ml-inv-fees-years button:focus-visible,.ml-inv-fees-range input:focus-visible{outline:3px solid #8db5da;outline-offset:2px}
+.ml-inv-fees-result{display:grid;gap:16px;padding:clamp(18px,2.6vw,26px);border-radius:20px;background:#13263b;color:#fff}
+.ml-inv-fees-big{display:grid;gap:4px;margin:0}
+.ml-inv-fees-big span{color:#d9e5f0!important;font-size:15px;line-height:1.45}
+.ml-inv-fees-big strong{color:#fff;font:600 clamp(48px,7vw,72px)/1 Newsreader,Georgia,serif;letter-spacing:-.03em}
+.ml-inv-fees-bars{display:grid;gap:12px}
+.ml-inv-fees-bars>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center}
+.ml-inv-fees-bars span{color:#d9e5f0;font-size:13px;font-weight:700}
+.ml-inv-fees-bars b{color:#fff;font:700 14px/1 Inter,sans-serif;font-variant-numeric:tabular-nums}
+.ml-inv-fees-bars i{grid-column:1/-1;grid-row:2;display:block;height:12px;border-radius:999px;background:#7fb4e4;transition:width .25s ease}
+.ml-inv-fees-bars i.is-cost{background:#e8b45c}
+.ml-inv-fees-note{margin:0;color:#e2ecf5!important;font-size:15px;line-height:1.5}
+.ml-inv-fees-note strong{color:#fff}
+.ml-inv-fees-result .ml-inv-more summary{color:#cfe3f5!important}
+.ml-inv-fees-result .ml-inv-more p{color:#e2ecf5!important}
+@media(max-width:760px){.ml-inv-fees-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.ml-inv-fees-bars i{transition:none}}

@@ -30,4 +30,4 @@ html.ml-orbita-enabled .ml-editorial-note,html.ml-orbita-enabled p[data-milana-s
 .ml-orbita-search-count{margin:12px 2px 0;color:#C8D6E7;font-size:12px;line-height:1.5;font-weight:700}
 .ml-orbita-search-list{max-height:min(52vh,510px);overflow-y:auto;overscroll-behavior:contain}
 .ml-orbita-search input::placeholder{color:#ADBFD2;opacity:1}
-@media(max-width:620px){.ml-orbita-search-inner{padding:15px}.ml-orbita-search h2{font-size:20px}.ml-orbita-search-list{max-height:min(46vh,430px)}}
+@media(max-width:620px){.ml-orbita-search-inner{padding:15px}.ml-orbita-search h2{font-size:20px}.ml-orbita-search-list{max-height:min(46vh,430px)}}.ml-orbita-drawer a{min-height:64px}.ml-orbita-drawer-label{display:grid;gap:2px;padding-block:9px}.ml-orbita-drawer-label small{color:var(--orb-muted,#5E6B78);font-size:.8em;font-weight:500;line-height:1.35}

@@ -25,3 +25,13 @@ export function proyectarInversion({ inicial, mensual, anos, inflacion, costoAnu
   });
   return { escenarios, aportado, anos: years, inflation: Number(inflacion), costoAnual: Number(costoAnual) };
 }
+// Mismo cálculo que el simulador, con la tasa fija y dos costos: muestra cuánto del saldo
+// final se va en comisiones. Ejemplo educativo; no describe ningún producto real.
+export function compararComision({ inicial, mensual, anos, tasa, comision }) {
+  const base = proyectarInversion({ inicial, mensual, anos, inflacion: 0, costoAnual: 0, tasas: [tasa, tasa, tasa] });
+  const conCosto = proyectarInversion({ inicial, mensual, anos, inflacion: 0, costoAnual: comision, tasas: [tasa, tasa, tasa] });
+  if (base.error || conCosto.error) return { error: base.error || conCosto.error };
+  const sin = base.escenarios[1].final;
+  const con = conCosto.escenarios[1].final;
+  return { aportado: base.aportado, sinComision: sin, conComision: con, costo: sin - con, conservas: sin > 0 ? (con / sin) * 100 : 0 };
+}

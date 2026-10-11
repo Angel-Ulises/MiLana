@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { NAVEGACION_MILANA, seccionNavegacion } from '../src/lib/siteNavigation.js';
+import { DESCRIPCION_NAVEGACION, NAVEGACION_MILANA, seccionNavegacion } from '../src/lib/siteNavigation.js';
 
 const pages=['src/App.jsx','src/financePages.jsx','src/advisorPage.jsx','src/careerPages.jsx','src/statePages.jsx','src/stateComparePage.jsx','src/careerComparePage.jsx'];
 
@@ -14,7 +14,8 @@ test('Órbita y React comparten las mismas siete secciones en idéntico orden',(
   assert.deepEqual(NAVEGACION_MILANA,expected);
   const generator=readFileSync('scripts/aplicar-orbita-base.mjs','utf8');
   const shared=readFileSync('src/siteHeader.jsx','utf8');
-  assert.match(generator,/import \{ NAVEGACION_MILANA \} from '\.\.\/src\/lib\/siteNavigation\.js'/);
+  assert.match(generator,/import \{ DESCRIPCION_NAVEGACION, NAVEGACION_MILANA \} from '\.\.\/src\/lib\/siteNavigation\.js'/);
+  for (const [id] of NAVEGACION_MILANA) assert.ok(DESCRIPCION_NAVEGACION[id], `Menú móvil describe ${id}`);
   assert.match(generator,/const nav = NAVEGACION_MILANA/);
   assert.match(generator,/const headerNav = nav\.map/);
   assert.match(generator,/const drawerNav =/);

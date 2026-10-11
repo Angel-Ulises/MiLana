@@ -237,3 +237,10 @@ html.ml-orbita-enabled .economy-breadcrumb a{color:#245C93;font-weight:700}
   html.ml-orbita-enabled :is(.ml-hub-hero,.finance-page-hero:not(.finance-page-hero-tool),.ml-inv-hero,.career-hero,.state-hero,.economy-hero,.investment-hero,.hubhead) h1{font-size:clamp(40px,4.2vw,56px)!important}
   html.ml-orbita-enabled :is(.finance-page-hero-tool,.state-detail-hero,.economy-article-hero,.profession-hero,.advisor-hero) h1{font-size:clamp(34px,3.4vw,46px)!important}
 }
+
+/* Saltos dentro de la página: el destino debe quedar debajo de la barra (66px) con aire, también cuando la barra
+   del navegador móvil cambia la altura a mitad del desplazamiento. Varios destinos tenían 0–28px y el título
+   quedaba tapado a medias. La regla general cubre destinos nuevos; las preguntas de calculadora usan su propio
+   valor en línea (gana sobre esta). */
+html.ml-orbita-enabled main [id]{scroll-margin-top:90px}
+html.ml-orbita-enabled :is(#situaciones,#datos-carreras,#datos-profesion,#comparar-trabajos,#comparar,#mis-numeros,#mi-situacion-datos,#costos,#ml-calc-interpretation,#ml-main,#root){scroll-margin-top:90px!important}

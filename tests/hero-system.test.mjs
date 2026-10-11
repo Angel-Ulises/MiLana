@@ -15,3 +15,11 @@ test('todas las secciones comparten tipografía, peso y color de título', () =>
 test('Economía muestra la ruta como el resto de secciones', () => {
   assert.match(readFileSync('src/economyPages.jsx', 'utf8'), /className="economy-breadcrumb" aria-label="Ruta"><a href="\/">Inicio<\/a>/);
 });
+
+test('los saltos dentro de la página aterrizan debajo de la barra (66px) con margen', () => {
+  assert.match(css, /html\.ml-orbita-enabled main \[id\]\{scroll-margin-top:90px\}/);
+  for (const id of ['situaciones', 'datos-carreras', 'datos-profesion', 'comparar-trabajos', 'comparar', 'mis-numeros', 'mi-situacion-datos', 'costos', 'ml-calc-interpretation']) {
+    assert.ok(css.includes(`#${id}`), id);
+  }
+  assert.match(css, /#ml-calc-interpretation,#ml-main,#root\)\{scroll-margin-top:90px!important\}/);
+});

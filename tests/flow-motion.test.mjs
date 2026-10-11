@@ -47,7 +47,7 @@ test('sin destellos al cambiar de página: el contenedor de carga no pinta nada 
 
 test('sin destellos en calculadoras: el formulario completo no se pinta antes del asistente', () => {
   const prepaint = readFileSync('public/orbita-v3-prepaint.css', 'utf8');
-  assert.match(prepaint, /\.calculator-main:not\(:has\(> \.ml-calc-assistant\)\) > form\{visibility:hidden;animation:orbFormReveal 0s linear 1\.5s forwards\}/);
+  assert.match(prepaint, /\.calculator-main:not\(:has\(> \.ml-calc-assistant\)\) > form > :not\(p:first-child\)\{visibility:hidden;animation:orbFormReveal 0s linear 1\.5s forwards\}/);
   assert.match(prepaint, /@keyframes orbFormReveal\{to\{visibility:visible\}\}/);
   assert.match(prepaint, /#root:not\(:has\(\[data-startup-error\]\)\) \[data-startup-links\]\{visibility:hidden\}/);
 });

@@ -1,0 +1,35 @@
+{
+  "_nota": "«En 30 segundos» de cada guía. Solo resume afirmaciones que ya están en el texto de la guía; si cambia la guía, revisa su resumen.",
+  "guias": {
+    "aguinaldo-bruto-neto": [
+      "Por ley te tocan al menos 15 días de salario por un año completo; si tu contrato da más días, cuenta lo que da tu contrato.",
+      "Debe pagarse antes del 20 de diciembre. Si dejaste el trabajo antes, la parte que generaste no se pierde.",
+      "Si no trabajaste todo el año te toca la parte proporcional, y el depósito puede ser menor que el bruto por el tratamiento fiscal."
+    ],
+    "finiquito-vs-liquidacion": [
+      "El finiquito es lo que ya generaste: salario pendiente, aguinaldo, vacaciones y prima vacacional. Aplica aunque renuncies.",
+      "Si te despiden, según la causa pueden sumarse indemnizaciones; un despido no borra lo ya generado.",
+      "Antes de firmar, revisa la propuesta concepto por concepto, no solo el total."
+    ],
+    "leer-recibo-nomina": [
+      "Bruto, base gravable, SBC y neto son cifras distintas, no cuatro nombres de lo mismo.",
+      "El ISR se calcula sobre la base gravable con la tarifa del periodo; el IMSS, sobre el SBC y los días cotizados. Ninguno es un porcentaje fijo del sueldo.",
+      "Tu depósito puede bajar más por créditos, préstamos, pensiones alimenticias u otros descuentos."
+    ],
+    "pension-imss-ley-97": [
+      "Primero confirma bajo qué régimen estás: la fecha de aseguramiento cambia las reglas.",
+      "Edad y semanas son requisitos; cumplirlos no te dice cuánto recibirás.",
+      "El monto depende de tu cuenta individual y de datos oficiales: contrástalos antes de proyectar dinero."
+    ],
+    "resico-ingresos-cobrados": [
+      "Primero confirma que RESICO aplica a tu caso: tiene requisitos de entrada y permanencia.",
+      "Para el cálculo mensual cuenta lo que efectivamente cobraste, no lo que facturaste.",
+      "Captura tus ingresos sin IVA: el IVA tiene su propia mecánica."
+    ],
+    "vacaciones-prima-vacacional": [
+      "Tus días de vacaciones crecen con la antigüedad y se cuentan por aniversario laboral, no por año calendario.",
+      "Al salir, separa los días ya ganados que siguen pendientes de la parte proporcional del ciclo actual.",
+      "La prima vacacional es un pago adicional aparte de los días; tu contrato puede dar más que el mínimo."
+    ]
+  }
+}

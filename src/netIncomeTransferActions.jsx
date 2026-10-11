@@ -20,11 +20,11 @@ export default function NetIncomeTransferActions({ neto }) {
   };
 
   return (
-    <section className="ml-net-transfer" aria-label="Continuar con mi ingreso neto">
-      <span className="ml-net-transfer-kicker">Continúa con este cálculo</span>
+    <section className="ml-net-transfer ml-result-transfer" aria-label="Continuar con mi ingreso neto">
+      <span className="ml-net-transfer-kicker ml-result-transfer-kicker">Siguiente paso</span>
       <strong>¿Qué puedes hacer con tu ingreso neto estimado?</strong>
       <p>Úsalo para planear tu dinero sin volver a escribirlo. Solo se transfiere si eliges una opción; podrás corregirlo al llegar.</p>
-      <div className="ml-net-transfer-actions">
+      <div className="ml-net-transfer-actions ml-result-transfer-actions">
         {OPCIONES.map((opcion) => (
           <button key={opcion.href} type="button" onClick={() => continuar(opcion.href)}>
             {opcion.titulo}<span aria-hidden="true">→</span>

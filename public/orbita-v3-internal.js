@@ -44,6 +44,8 @@
   let currentRoot = null;
   let formHost = null;
   let questions = [];
+  // Dirección del último cambio de paso: la transición entra por la derecha al avanzar y por la izquierda al volver.
+  let lastRenderedStep = null;
   let questionTotal = 0;
   let step = 0;
   let assistant = null;
@@ -407,9 +409,18 @@
       const result = currentRoot.querySelector('.ml-result');
       const showingResult = Boolean(result) && !editing;
 
+      // Sin animación en la carga: solo cuando la persona cambia de pregunta.
+      if (lastRenderedStep !== null && lastRenderedStep !== step) {
+        const dir = step > lastRenderedStep ? 'fwd' : 'back';
+        if (currentRoot.dataset.orbitaStepDir !== dir) currentRoot.dataset.orbitaStepDir = dir;
+        if (currentRoot.dataset.orbitaStepAnimate !== 'true') currentRoot.dataset.orbitaStepAnimate = 'true';
+      }
+      lastRenderedStep = step;
+
       questions.forEach((question, index) => {
         const active = !showingResult && index === step;
         question.nodes.forEach((node) => {
+          if (node instanceof HTMLElement && node.dataset.orbitaStep !== 'true') node.dataset.orbitaStep = 'true';
           if (node.hidden === active) node.hidden = !active;
           const hidden = String(!active);
           if (node.getAttribute('aria-hidden') !== hidden) node.setAttribute('aria-hidden', hidden);
@@ -570,6 +581,7 @@
     currentRoot = null;
     formHost = null;
     questions = [];
+    lastRenderedStep = null;
     questionTotal = 0;
     step = 0;
     assistant = null;

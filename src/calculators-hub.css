@@ -61,3 +61,13 @@
 .ml-hub .ml-hub-result p{color:#E2ECF5!important}
 .ml-hub .ml-hub-result strong{color:#fff!important}
 .ml-hub .ml-hub-result>span{color:#BFD7EE!important}
+/* Selector: progreso de dos tramos y paso que entra según la dirección. */
+.ml-hub-progress{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:4px}
+.ml-hub-progress i{display:block;height:4px;border-radius:999px;background:#D6E3EE;overflow:hidden;position:relative}
+.ml-hub-progress i::after{content:'';position:absolute;inset:0;background:#245C93;transform:scaleX(0);transform-origin:left;transition:transform .32s cubic-bezier(.2,.7,.2,1)}
+.ml-hub-progress i.is-done::after{transform:scaleX(1)}
+@keyframes mlHubFwd{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@keyframes mlHubBack{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+.ml-hub-stage-fwd{animation:mlHubFwd .26s cubic-bezier(.2,.7,.2,1) both}
+.ml-hub-stage-back{animation:mlHubBack .26s cubic-bezier(.2,.7,.2,1) both}
+@media(prefers-reduced-motion:reduce){.ml-hub-stage-fwd,.ml-hub-stage-back{animation:none}.ml-hub-progress i::after{transition:none}}

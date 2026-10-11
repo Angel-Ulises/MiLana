@@ -8,44 +8,51 @@ import { CALCULADORAS_HUB, GRUPOS_HUB, SELECTOR_HUB } from './lib/calculatorsHub
 function Selector() {
   const [tema, setTema] = useState(null);
   const [opcion, setOpcion] = useState(null);
+  const [dir, setDir] = useState('none');
   const resultado = useRef(null);
   const actual = SELECTOR_HUB.find((t) => t.id === tema);
   const elegida = actual?.opciones[opcion];
   const calc = elegida && CALCULADORAS_HUB[elegida.calc];
 
   useEffect(() => { if (calc) resultado.current?.focus({ preventScroll: true }); }, [calc]);
+  const avanzar = (fn) => { setDir('fwd'); fn(); };
+  const volver = () => { setDir('back'); if (calc) setOpcion(null); else setTema(null); };
+  const paso = calc ? 2 : actual ? 1 : 0;
 
   return (
     <section className="ml-hub-chooser" aria-labelledby="ml-hub-chooser-title">
       <div className="ml-hub-chooser-head">
         <span className="ml-hub-step">{calc ? 'Listo' : actual ? 'Paso 2 de 2' : 'Paso 1 de 2'}</span>
+        <div className="ml-hub-progress" aria-hidden="true"><i className={paso >= 1 ? 'is-done' : ''} /><i className={paso >= 2 ? 'is-done' : ''} /></div>
         <h2 id="ml-hub-chooser-title">{calc ? 'Esta es la tuya' : actual ? actual.sigue : '¿Qué está pasando?'}</h2>
       </div>
-      {!actual && (
-        <div className="ml-hub-options" role="group" aria-label="Elige tu situación">
-          {SELECTOR_HUB.map((t) => (
-            <button type="button" key={t.id} onClick={() => { setTema(t.id); setOpcion(null); }}>{t.pregunta}<b aria-hidden="true">›</b></button>
-          ))}
-        </div>
-      )}
-      {actual && !calc && (
-        <div className="ml-hub-options" role="group" aria-label={actual.sigue}>
-          {actual.opciones.map((o, i) => (
-            <button type="button" key={o.texto} onClick={() => setOpcion(i)}>{o.texto}<b aria-hidden="true">›</b></button>
-          ))}
-        </div>
-      )}
-      {calc && (
-        <div className="ml-hub-result" ref={resultado} tabIndex={-1} aria-live="polite">
-          <span>Te sirve</span>
-          <strong>{calc.nombre}</strong>
-          <p>{elegida.porque}</p>
-          <a className="ml-hub-go" href={calc.href}>Abrir calculadora <span aria-hidden="true">→</span></a>
-          {elegida.aprende && <a className="ml-hub-learn" href={elegida.aprende}>Antes, entiende la diferencia</a>}
-        </div>
-      )}
+      <div key={`${tema}-${opcion}`} className={`ml-hub-stage ml-hub-stage-${dir}`}>
+        {!actual && (
+          <div className="ml-hub-options" role="group" aria-label="Elige tu situación">
+            {SELECTOR_HUB.map((t) => (
+              <button type="button" key={t.id} onClick={() => avanzar(() => { setTema(t.id); setOpcion(null); })}>{t.pregunta}<b aria-hidden="true">›</b></button>
+            ))}
+          </div>
+        )}
+        {actual && !calc && (
+          <div className="ml-hub-options" role="group" aria-label={actual.sigue}>
+            {actual.opciones.map((o, i) => (
+              <button type="button" key={o.texto} onClick={() => avanzar(() => setOpcion(i))}>{o.texto}<b aria-hidden="true">›</b></button>
+            ))}
+          </div>
+        )}
+        {calc && (
+          <div className="ml-hub-result" ref={resultado} tabIndex={-1} aria-live="polite">
+            <span>Te sirve</span>
+            <strong>{calc.nombre}</strong>
+            <p>{elegida.porque}</p>
+            <a className="ml-hub-go" href={calc.href}>Abrir calculadora <span aria-hidden="true">→</span></a>
+            {elegida.aprende && <a className="ml-hub-learn" href={elegida.aprende}>Antes, entiende la diferencia</a>}
+          </div>
+        )}
+      </div>
       {actual && (
-        <button type="button" className="ml-hub-back" onClick={() => (calc ? setOpcion(null) : setTema(null))}>
+        <button type="button" className="ml-hub-back" onClick={volver}>
           ← {calc ? 'Cambiar respuesta' : 'Volver a empezar'}
         </button>
       )}

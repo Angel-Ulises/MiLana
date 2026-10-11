@@ -6,6 +6,7 @@ import { compararComision, proyectarInversion } from './lib/investmentProjection
 import { guardarNivelLectura } from './lib/readingDepth.js';
 import { useReadingDepth } from './lib/useReadingDepth.js';
 import ReadingDetails from './ReadingDetails.jsx';
+import { useAnimatedNumber } from './lib/useAnimatedNumber.js';
 
 const pesos = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(n);
 const lecciones = {
@@ -110,6 +111,8 @@ function CostoComision() {
   const [comision, setComision] = useState(1);
   const [anos, setAnos] = useState(20);
   const r = compararComision({ inicial: '50000', mensual: '1000', anos: String(anos), tasa: '7', comision: String(comision) });
+  const conservas = useAnimatedNumber(r.error ? 0 : r.conservas);
+  const costo = useAnimatedNumber(r.error ? 0 : r.costo);
   return <section className="ml-inv-fees" id="costos" aria-labelledby="ml-inv-fees-title"><div className="shell">
     <div className="ml-inv-section-title"><span>03 · Costos</span><h2 id="ml-inv-fees-title">Una comisión pequeña, con los años, pesa mucho.</h2><p>Ejemplo hipotético: $50,000 al inicio, $1,000 al mes y un 7% anual supuesto. Mueve la comisión y el plazo.</p></div>
     <div className="ml-inv-fees-grid">
@@ -120,14 +123,15 @@ function CostoComision() {
         </label>
         <fieldset className="ml-inv-fees-years"><legend>Plazo</legend><div>{PLAZOS.map((p) => <button type="button" key={p} aria-pressed={anos === p} className={anos === p ? 'active' : ''} onClick={() => setAnos(p)}>{p} años</button>)}</div></fieldset>
       </div>
-      <div className="ml-inv-fees-result" aria-live="polite">
+      <div className="ml-inv-fees-result">
         {r.error ? <p role="alert">{r.error}</p> : <>
-          <p className="ml-inv-fees-big"><span>De cada $100 que tendrías sin comisión, te quedarías con</span><strong>${r.conservas.toFixed(0)}</strong></p>
+          <p className="ml-inv-sr" aria-live="polite">{`Con ${comision.toFixed(2)}% anual durante ${anos} años te quedarías con ${r.conservas.toFixed(0)} de cada 100 pesos; la comisión se llevaría ${pesos(r.costo)}.`}</p>
+          <p className="ml-inv-fees-big" aria-hidden="true"><span>De cada $100 que tendrías sin comisión, te quedarías con</span><strong>${conservas.toFixed(0)}</strong></p>
           <div className="ml-inv-fees-bars">
             <div><span>Sin comisión</span><i style={{ width: '100%' }} /><b>{pesos(r.sinComision)}</b></div>
             <div><span>Con {comision.toFixed(2)}% anual</span><i className="is-cost" style={{ width: `${Math.max(2, r.conservas)}%` }} /><b>{pesos(r.conComision)}</b></div>
           </div>
-          <p className="ml-inv-fees-note">La comisión se llevaría <strong>{pesos(r.costo)}</strong> en {anos} años. Tú habrías aportado {pesos(r.aportado)}.</p>
+          <p className="ml-inv-fees-note" aria-hidden="true">La comisión se llevaría <strong>{pesos(costo)}</strong> en {anos} años. Tú habrías aportado {pesos(r.aportado)}.</p>
         </>}
         <ReadingDetails className="ml-inv-more"><summary>¿Dónde aparecen estas comisiones?</summary><p>En fondos de inversión se cobran como porcentaje anual del saldo (administración y distribución). En acciones y ETF suele haber comisión por operación, diferencial de compraventa y, en los ETF, un gasto anual propio. Compara siempre el costo total del instrumento y canal concretos; esta cifra es ilustrativa.</p></ReadingDetails>
       </div>

@@ -166,3 +166,33 @@ html.ml-orbita-enabled[data-orbita-section="aprende"] .cta{border-radius:18px!im
 html.ml-orbita-enabled[data-orbita-section="aprende"] .cta a{min-height:48px;align-items:center;border-radius:12px!important;color:#6C3525!important}
 html.ml-orbita-enabled[data-orbita-section="aprende"] .sources{border-top-color:#E8D8D1!important}
 @media(max-width:680px){html.ml-orbita-enabled[data-orbita-section="aprende"] .grid{grid-template-columns:1fr!important}html.ml-orbita-enabled[data-orbita-section="aprende"] .article :is(p,li){font-size:17px!important}}
+
+/* Movimiento de flujo (fase 3). Solo transform/opacity: no mueve el layout ni retrasa el primer pintado.
+   Los pasos animan únicamente cuando la persona cambia de pregunta; todo se apaga con reduce-motion. */
+@keyframes orbStepInFwd{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes orbStepInBack{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
+@keyframes orbResultIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes orbAmountIn{0%{opacity:0;transform:translateY(8px)}60%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes orbRowIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+html.ml-orbita-enabled [data-orbita-step-animate="true"][data-orbita-step-dir="fwd"] [data-orbita-step="true"]:not([hidden]){animation:orbStepInFwd .28s cubic-bezier(.2,.7,.2,1) both}
+html.ml-orbita-enabled [data-orbita-step-animate="true"][data-orbita-step-dir="back"] [data-orbita-step="true"]:not([hidden]){animation:orbStepInBack .28s cubic-bezier(.2,.7,.2,1) both}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-calc-assistant-progress{transition:width .38s cubic-bezier(.2,.7,.2,1)}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result:not([hidden]){animation:orbResultIn .42s cubic-bezier(.2,.7,.2,1) both}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result:not([hidden]) .orb-result-head strong{display:inline-block;animation:orbAmountIn .6s .12s cubic-bezier(.2,.7,.2,1) both}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result:not([hidden])>div:not(.orb-result-head){animation:orbRowIn .32s cubic-bezier(.2,.7,.2,1) both}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result:not([hidden])>div:nth-child(2){animation-delay:.18s}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result:not([hidden])>div:nth-child(3){animation-delay:.23s}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result:not([hidden])>div:nth-child(4){animation-delay:.28s}
+html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result:not([hidden])>div:nth-child(n+5){animation-delay:.33s}
+/* Respuesta táctil: el control «se hunde» un poco al tocarlo. */
+html.ml-orbita-enabled :is(.orb-home-route,.ml-topic,.ml-hub-options button,.ml-hub-group li a,.calculator-card,.ml-decision-options button,.orb-donut,[data-orbita-calc-next],[data-orbita-calc-back],.ml-inv-fees-years button,.ml-inv-instruments button){transition:transform .12s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}
+html.ml-orbita-enabled :is(.orb-home-route,.ml-topic,.ml-hub-options button,.ml-hub-group li a,.calculator-card,.ml-decision-options button,[data-orbita-calc-next],[data-orbita-calc-back],.ml-inv-fees-years button,.ml-inv-instruments button):active{transform:scale(.98)!important}
+@media(prefers-reduced-motion:reduce){
+  html.ml-orbita-enabled [data-orbita-step="true"],
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result,
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-result *{animation:none!important}
+  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .ml-calc-assistant-progress{transition:none}
+  html.ml-orbita-enabled :is(.orb-home-route,.ml-topic,.ml-hub-options button,.ml-hub-group li a,.calculator-card,.ml-decision-options button,[data-orbita-calc-next],[data-orbita-calc-back],.ml-inv-fees-years button,.ml-inv-instruments button):active{transform:none!important}
+}
+/* «Compartir enlace» es una acción secundaria: botón compacto, no un bloque de dos líneas. */
+html.ml-orbita-enabled button[data-milana-share="true"]{width:auto!important;min-height:44px!important;padding:10px 16px!important;font:700 14px/1.2 Inter,system-ui,sans-serif!important;border-radius:999px!important}

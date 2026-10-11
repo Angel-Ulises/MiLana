@@ -23,3 +23,16 @@
  .ml-income-arrived{flex-direction:column;gap:10px}
 }
 @media(prefers-reduced-motion:reduce){.ml-net-transfer-actions button{transition:none}}
+
+/* «Siguiente paso» con el resultado de una calculadora (aguinaldo, finiquito, liquidación, Infonavit). */
+.ml-result-transfer{display:grid;gap:8px;margin-top:16px;padding:16px;border:1px solid #CFE0EC;border-radius:16px;background:#fff}
+.ml-result-transfer-kicker{color:#245C93;font:800 11px/1.2 Inter,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.ml-result-transfer strong{color:#13263B;font:600 21px/1.2 Newsreader,Georgia,serif}
+.ml-result-transfer p{margin:0;color:#4F6375;font-size:14px;line-height:1.5}
+.ml-result-transfer-actions{display:grid;gap:8px;margin-top:4px}
+.ml-result-transfer-actions button{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:48px;padding:11px 16px;border:1px solid #13263B;border-radius:14px;background:#13263B;color:#fff;font:700 15px/1.25 Inter,system-ui,sans-serif;text-align:left;cursor:pointer}
+.ml-result-transfer-actions button+button{background:#fff;color:#13263B;border-color:#BFD2E4}
+.ml-result-transfer-actions button:focus-visible{outline:3px solid #8DB5DA;outline-offset:2px}
+.ml-result-transfer small{color:#5E6B78;font-size:12px;line-height:1.45}
+.ml-result-transfer-error{color:#A94442!important}
+@media(min-width:640px){.ml-result-transfer-actions{grid-template-columns:1fr 1fr}}

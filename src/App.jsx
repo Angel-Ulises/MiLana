@@ -14,6 +14,18 @@ import AdReserve from './AdReserve.jsx';
 import { HomeRoutes, SituationCard } from './homeRoutes.jsx';
 import { HERO_FOCAL, HERO_PEXELS_ID, HERO_SIZES, heroSrcSet, heroUrl } from './lib/heroPhoto.js';
 import NetIncomeTransferActions from './netIncomeTransferActions.jsx';
+import ResultTransfer from './resultTransfer.jsx';
+
+// Pagos únicos: el resultado puede volverse respaldo o avance de una meta.
+const DESTINOS_PAGO_UNICO = [
+  { href: '/finanzas/fondo-emergencia', campo: 'fondoActual', titulo: 'Empezar mi fondo de emergencia' },
+  { href: '/finanzas/ahorro', campo: 'ahorroMetaActual', titulo: 'Avanzar una meta de ahorro' },
+];
+function PagoUnicoTransfer({ origen, importe }) {
+  return <ResultTransfer origen={origen} importe={importe} destinos={DESTINOS_PAGO_UNICO}
+    titulo="¿Qué harás con este dinero?"
+    texto="Una parte puede convertirse en tu respaldo para emergencias o en el avance de una meta. Llévala y ve cuánto te acerca." />;
+}
 import { CalculatorResultContext, ResultNextSteps } from './calculatorResultJourney.jsx';
 import './calculator-result-journey.css';
 
@@ -183,6 +195,7 @@ function CalcFiniquito() {
         {resultado.aplicaPrimaAntiguedad && <ResultLine label="Prima de antigüedad estimada" value={fmt(resultado.primaAntiguedad)} />}
         <Divider />
         <ResultLine label="Total bruto estimado" value={fmt(resultado.totalBruto)} bold color="#28735A" />
+        <PagoUnicoTransfer origen="/calculadoras/finiquito" importe={resultado.totalBruto} />
         <Note>El total es bruto y no incluye una estimación de ISR por separación. Usa salario fijo y las prestaciones que capturaste; comisiones, bonos u otros conceptos integrables requieren un cálculo adicional con sus propios datos.</Note>
       </ResultBox>}
     </div>
@@ -255,6 +268,7 @@ function CalcLiquidacion() {
         <ResultLine label="Prima de antigüedad" value={fmt(resultado.primaAntiguedad)} />
         <Divider />
         <ResultLine label="Total bruto del escenario" value={fmt(resultado.totalBruto)} bold color="#28735A" />
+        <PagoUnicoTransfer origen="/calculadoras/liquidacion" importe={resultado.totalBruto} />
         <Note>No determina si el despido fue injustificado ni si los 20 días por año proceden en tu caso. No incluye salarios vencidos, intereses ni ISR por pagos de separación.</Note>
       </ResultBox>}
     </div>
@@ -339,6 +353,7 @@ function CalculoRevisado({ tipo }) {
       {resultado.reglaSEP && <ResultLine label="Regla SEP aplicada" value={resultado.reglaSEP} />}
       <ResultLine label="Aguinaldo bruto proyectado" value={fmt(resultado.bruto)} bold />
       <Note>{regimenAguinaldo === 'sep-basica' ? 'SEP federal: el Manual de RH 2025 usa 40 días y define los conceptos que integran la base. Verifica que el importe capturado coincida con tu tipo de plaza.' : regimenAguinaldo === 'sep-ems' ? 'SEP Media Superior: la regla se aplica al salario convencional computable capturado y supone que continúas en servicio hasta el 31 de diciembre de 2026.' : 'La retención de ISR no está incluida. La revisión del bruto no certifica la exención fiscal.'}</Note>
+          <PagoUnicoTransfer origen="/calculadoras/aguinaldo" importe={resultado.bruto} />
     </>}</ResultBox>}
     </div>
   </form>;
@@ -684,6 +699,10 @@ function CalcInfonavit() {
           <ResultLine label="Total solo en intereses" value={fmt(result.totalIntereses)} color="#A94442" />
           <ResultLine label="Pagarás de intereses" value={fmtPct(result.porcentajeIntereses) + " del crédito"} bold color="#A94442" />
           <Note>Esta es una simulación financiera de amortización de capital e intereses, no un cálculo oficial de Infonavit. No incluye seguros, cuotas, aportaciones patronales ni condiciones particulares de tu crédito (VSM, pesos, puntos Infonavit, tasa según tu nivel salarial). Consulta tu contrato o Mi Cuenta Infonavit para tu pago real.</Note>
+
+          <ResultTransfer origen="/calculadoras/infonavit" importe={result.pagoMensual}
+            titulo="¿Cabe esta mensualidad en tu mes?" texto="Súmala a tus pagos de deuda y ve cuánto te quedaría después de tus gastos."
+            destinos={[{ href: '/finanzas/presupuesto', campo: 'pagosDeuda', titulo: 'Agregarla a mi presupuesto' }, { href: '/finanzas/deuda-y-credito', campo: 'pagosDeuda', titulo: 'Ver cuánto de mi ingreso compromete' }]} />
 
           <button onClick={() => setVerTabla(v => !v)} className="ml-btn" style={{
             width:'100%',marginTop:16,padding:'10px 16px',background:'#faf7f0',

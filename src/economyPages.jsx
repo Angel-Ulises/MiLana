@@ -62,6 +62,7 @@ function Hub() {
         <section className="economy-hero">
           <div className="shell economy-hero-grid">
             <div>
+              <nav className="economy-breadcrumb" aria-label="Ruta"><a href="/">Inicio</a><span aria-hidden="true">/</span>Economía</nav>
               <p className="eyebrow">Radar económico · México</p>
               <h1>Economía para entender qué cambia en tu dinero.</h1>
               <p>Inflación, tasas, empleo, consumo y regiones, explicados con una regla simple: primero el dato oficial, después el contexto y al final una herramienta útil.</p>

@@ -35,6 +35,25 @@ export const RUTAS_TRANSFERENCIA = Object.freeze({
     '/finanzas/deuda-y-credito': ['ingresoNeto', 'pagosDeuda'],
     '/finanzas/ahorro': ['metaObjetivo', 'ahorroMetaActual'],
   },
+  // Calculadoras: cada resultado solo viaja al campo que significa lo mismo en el destino.
+  // Pagos únicos (aguinaldo, finiquito, liquidación) → dinero disponible para respaldo o ahorro.
+  '/calculadoras/aguinaldo': {
+    '/finanzas/fondo-emergencia': ['fondoActual'],
+    '/finanzas/ahorro': ['ahorroMetaActual'],
+  },
+  '/calculadoras/finiquito': {
+    '/finanzas/fondo-emergencia': ['fondoActual'],
+    '/finanzas/ahorro': ['ahorroMetaActual'],
+  },
+  '/calculadoras/liquidacion': {
+    '/finanzas/fondo-emergencia': ['fondoActual'],
+    '/finanzas/ahorro': ['ahorroMetaActual'],
+  },
+  // Mensualidad estimada del crédito → pagos de deuda.
+  '/calculadoras/infonavit': {
+    '/finanzas/presupuesto': ['pagosDeuda'],
+    '/finanzas/deuda-y-credito': ['pagosDeuda'],
+  },
 });
 
 export const ETIQUETAS_ORIGEN = Object.freeze({
@@ -43,6 +62,19 @@ export const ETIQUETAS_ORIGEN = Object.freeze({
   '/finanzas/deuda-y-credito': 'Deuda y crédito',
   '/finanzas/ahorro': 'Ahorro',
   '/finanzas/mi-situacion': 'Mi situación',
+  '/calculadoras/aguinaldo': 'Calculadora de aguinaldo',
+  '/calculadoras/finiquito': 'Calculadora de finiquito',
+  '/calculadoras/liquidacion': 'Calculadora de liquidación',
+  '/calculadoras/infonavit': 'Simulador Infonavit',
+});
+
+// Lo que la persona debe saber de una cifra calculada (no capturada) al llegar al destino.
+const BRUTO = 'Es un monto bruto estimado: lo que recibas puede ser menor por ISR u otros descuentos. Si ya tenías dinero guardado, súmalo.';
+export const NOTAS_ORIGEN = Object.freeze({
+  '/calculadoras/aguinaldo': BRUTO,
+  '/calculadoras/finiquito': BRUTO,
+  '/calculadoras/liquidacion': BRUTO,
+  '/calculadoras/infonavit': 'Es el pago mensual estimado por el simulador. Si conoces la mensualidad real de tu crédito, usa esa.',
 });
 
 function cantidadCapturada(input) {
@@ -87,7 +119,7 @@ export function consumirContextoFinanciero(destino, ahora = Date.now()) {
        ahora - item.creado > DURACION) return null;
     const proyectado = proyectoPermitido(item.origen, destino, item.valores);
     if (!proyectado) return null;
-    return { origen: item.origen, titulo: ETIQUETAS_ORIGEN[item.origen], valores: proyectado };
+    return { origen: item.origen, titulo: ETIQUETAS_ORIGEN[item.origen], nota: NOTAS_ORIGEN[item.origen], valores: proyectado };
   } catch {
     try { sessionStorage.removeItem(FINANCE_CONTEXT_KEY); } catch { /* navegadores privados */ }
     return null;

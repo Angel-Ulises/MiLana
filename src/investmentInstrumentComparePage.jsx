@@ -20,7 +20,20 @@ function Selector({ label, value, onChange, exclude }) {
   return <label className="instrument-selector"><span>{label}</span><select value={value} onChange={(e) => onChange(e.target.value)}>{investmentInstrumentClasses.filter((item) => item.id !== exclude).map((item) => <option key={item.id} value={item.id}>{item.nombre} · {item.familia}</option>)}</select></label>;
 }
 
+// Cada dimensión como la pregunta que se haría una persona sin experiencia.
+const PREGUNTAS = {
+  estructura: '¿Qué compro?',
+  plazo: '¿Por cuánto tiempo?',
+  liquidez: '¿Cuándo puedo sacar mi dinero?',
+  variacion: '¿Qué puede cambiar?',
+  diversificacion: '¿Pongo todo en un solo lugar?',
+  costos: '¿Cuánto me cuesta?',
+  custodia: '¿Quién lo guarda?',
+};
+const ESENCIALES = ['estructura', 'liquidez', 'variacion', 'costos', 'custodia'];
+
 export default function InvestmentInstrumentComparePage() {
+  const [foco, setFoco] = useState('estructura');
   const [a, setA] = useState('cetes');
   const [b, setB] = useState('fondos-inversion');
   const profundizar = useReadingDepth() === 'experto';
@@ -28,6 +41,9 @@ export default function InvestmentInstrumentComparePage() {
   const cambiarProfundidad = (valor) => setGuardado(guardarNivelLectura(valor ? 'experto' : 'inicio'));
   const comparacion = useMemo(() => compararInstrumentosEducativos([a, b]), [a, b]);
   const [izquierda, derecha] = comparacion.instrumentos;
+  const visibles = comparacion.dimensiones.filter((d) => profundizar || ESENCIALES.includes(d.id));
+  // Al pasar a «Lo esencial», una pregunta que ya no se muestra vuelve a la primera.
+  const activa = foco === 'todo' || visibles.some((d) => d.id === foco) ? foco : visibles[0]?.id;
 
   return <div className="instrument-compare-page">
     <Header />
@@ -38,7 +54,8 @@ export default function InvestmentInstrumentComparePage() {
         <div className="instrument-compare-heads"><article><span>{izquierda.familia}</span><h2>{izquierda.nombre}</h2><p>{izquierda.resumen}</p></article><article><span>{derecha.familia}</span><h2>{derecha.nombre}</h2><p>{derecha.resumen}</p></article></div>
         <div className="instrument-depth" role="group" aria-label="Profundidad de la comparación"><span>¿Cuánto detalle quieres?</span><button type="button" aria-pressed={!profundizar} onClick={() => cambiarProfundidad(false)}>Lo esencial</button><button type="button" aria-pressed={profundizar} onClick={() => cambiarProfundidad(true)}>Profundizar</button></div>
         {guardado === false && <p role="status">Tu navegador no permite recordarlo. El nivel se aplica mientras sigas en esta página.</p>}
-        <div className="instrument-compare-table">{comparacion.dimensiones.filter((d) => profundizar || ['estructura','liquidez','variacion','costos','custodia'].includes(d.id)).map((dimension) => <section key={dimension.id}><h3>{dimension.etiqueta}</h3><div>{dimension.valores.map((valor) => <article key={valor.instrumentoId}><strong className="instrument-side-label">{valor.instrumentoId === izquierda.id ? izquierda.nombre : derecha.nombre}</strong><p>{profundizar ? valor.texto : primeraOracion(valor.texto, 125)}</p>{!profundizar && primeraOracion(valor.texto, 125) !== valor.texto && <details className="instrument-more"><summary>Explicar más</summary><p>{valor.texto}</p></details>}</article>)}</div></section>)}</div>
+        <p className="instrument-questions-label" id="instrument-questions-label">¿Qué quieres saber?</p><div className="instrument-questions" role="group" aria-labelledby="instrument-questions-label">{visibles.map((d) => <button type="button" key={d.id} aria-pressed={activa === d.id} aria-controls="instrument-compare-table" onClick={() => setFoco(d.id)}>{PREGUNTAS[d.id] || d.etiqueta}</button>)}<button type="button" className="instrument-questions-all" aria-pressed={activa === 'todo'} aria-controls="instrument-compare-table" onClick={() => setFoco('todo')}>Ver todo</button></div>
+        <div className="instrument-compare-table" id="instrument-compare-table" aria-live="polite">{visibles.filter((d) => activa === 'todo' || d.id === activa).map((dimension) => <section key={dimension.id} className={activa === 'todo' ? undefined : 'instrument-focus'}><h3>{dimension.etiqueta}</h3><div>{dimension.valores.map((valor) => <article key={valor.instrumentoId}><strong className="instrument-side-label">{valor.instrumentoId === izquierda.id ? izquierda.nombre : derecha.nombre}</strong><p>{profundizar ? valor.texto : primeraOracion(valor.texto, 125)}</p>{!profundizar && primeraOracion(valor.texto, 125) !== valor.texto && <details className="instrument-more"><summary>Explicar más</summary><p>{valor.texto}</p></details>}</article>)}</div></section>)}</div>
         <p className="instrument-compare-note">{comparacion.nota}</p>
       </div></section>
 

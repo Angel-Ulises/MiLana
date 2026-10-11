@@ -14,4 +14,20 @@
 .instrument-more summary{min-height:40px;cursor:pointer;font-size:12px;font-weight:800;color:#185d93;padding:8px 0}
 .instrument-more p{border-left:3px solid #a3c6db;padding-left:12px}
 .instrument-depth button:focus-visible,.instrument-more summary:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
-@media(max-width:760px){.instrument-compare-hero{padding:30px 0 27px}.instrument-compare-hero nav{margin-bottom:18px}.instrument-compare-hero h1{font-size:39px}.instrument-compare-tool{padding:23px 0 38px}.instrument-compare-heads h2{font-size:30px}.instrument-compare-heads article{padding:18px}.instrument-compare-table h3{font-size:12px}.instrument-compare-table article{padding:14px}.instrument-source-panel{padding:35px 0}.instrument-compare-boundary{padding:34px 0}}
+@media(max-width:760px){.instrument-compare-hero{padding:30px 0 27px}.instrument-compare-hero nav{margin-bottom:18px}.instrument-compare-hero h1{font-size:39px}.instrument-compare-tool{padding:23px 0 38px}.instrument-compare-heads h2{font-size:30px}.instrument-compare-heads article{padding:18px}.instrument-compare-table h3{font-size:12px}.instrument-compare-table article{padding:14px}.instrument-source-panel{padding:35px 0}.instrument-compare-boundary{padding:34px 0}}/* Una pregunta a la vez: chips que eligen la dimensión; «Ver todo» conserva la tabla completa. */
+.instrument-questions{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.instrument-questions button{min-height:44px;padding:9px 14px;border:1px solid #bed3e3;border-radius:999px;background:#fff;color:#1c587d;font:700 13px/1.25 Inter,system-ui,sans-serif;cursor:pointer;text-align:left}
+.instrument-questions button[aria-pressed="true"]{background:#183d5b;border-color:#183d5b;color:#fff}
+.instrument-questions button.instrument-questions-all{border-style:dashed}
+.instrument-questions button:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+@keyframes instrumentFocusIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.instrument-compare-table section.instrument-focus{animation:instrumentFocusIn .24s cubic-bezier(.2,.7,.2,1) both}
+@media(min-width:620px){.instrument-compare-table section.instrument-focus>div{display:grid;grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){.instrument-compare-table section.instrument-focus{animation:none}}
+.instrument-compare-page .instrument-questions-label{margin:14px 0 6px;color:#13263B!important;font:600 20px/1.2 Newsreader,Georgia,serif}
+@media(max-width:620px){
+  /* Fila deslizable tipo pestañas: no apila seis botones uno sobre otro. */
+  .instrument-questions{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;margin-inline:-16px;padding:2px 16px 8px;scrollbar-width:none}
+  .instrument-questions::-webkit-scrollbar{display:none}
+  .instrument-questions button{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap}
+}

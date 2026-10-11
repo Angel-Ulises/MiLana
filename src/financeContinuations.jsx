@@ -52,8 +52,8 @@ export function FinanceContextNotice({ contexto, onClear }) {
     <aside className="ml-finance-context-notice" aria-label="Datos recibidos de otra herramienta">
       <div>
         <span>Datos traídos de {contexto.titulo || ETIQUETAS_ORIGEN[contexto.origen]}</span>
-        <strong>{count === 1 ? 'Ya colocamos 1 dato que capturaste.' : `Ya colocamos ${count} datos que capturaste.`}</strong>
-        <p>Puedes corregir cada cifra. Los campos que no completaste siguen vacíos; no hemos supuesto cantidades ni elegido un producto financiero.</p>
+        <strong>{contexto.nota ? 'Ya colocamos el resultado de tu cálculo.' : count === 1 ? 'Ya colocamos 1 dato que capturaste.' : `Ya colocamos ${count} datos que capturaste.`}</strong>
+        <p>{contexto.nota ? `${contexto.nota} Puedes corregirla como cualquier otra cifra.` : 'Puedes corregir cada cifra. Los campos que no completaste siguen vacíos; no hemos supuesto cantidades ni elegido un producto financiero.'}</p>
       </div>
       <button type="button" onClick={onClear}>Quitar datos traídos</button>
     </aside>

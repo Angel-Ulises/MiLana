@@ -66,3 +66,14 @@ test('build estático genera canonical, schema y sitemap del comparador', () => 
   assert.match(generador, /no recomienda comprar, vender o mantener instrumentos/i);
   assert.match(sitemap, /\/finanzas\/inversion\/comparar/);
 });
+
+test('comparador: una pregunta a la vez, con «Ver todo» y sin ranking', async () => {
+  const { readFileSync } = await import('node:fs');
+  const page = readFileSync('src/investmentInstrumentComparePage.jsx', 'utf8');
+  assert.match(page, /const PREGUNTAS = \{/);
+  for (const q of ['¿Qué compro?', '¿Cuándo puedo sacar mi dinero?', '¿Cuánto me cuesta?']) assert.ok(page.includes(q), q);
+  assert.match(page, />Ver todo<\/button>/);
+  assert.match(page, /visibles\.some\(\(d\) => d\.id === foco\) \? foco : visibles\[0\]\?\.id/);
+  assert.doesNotMatch(page, /score=|ganador=|mejor opción/i);
+  assert.match(readFileSync('public/orbita-v3-visuals.js', 'utf8'), /finanzas\\\/inversion\\\/\(\?:comparar\|cetes\|fondos\)/);
+});

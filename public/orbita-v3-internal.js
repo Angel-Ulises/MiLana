@@ -128,8 +128,18 @@
   const scrollQuestionIntoView = (question) => {
     const target = question?.nodes?.find((node) => node instanceof HTMLElement) || question?.control;
     if (!(target instanceof HTMLElement)) return;
-    target.style.scrollMarginTop = `${HEADER_OFFSET}px`;
-    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    // Solo desplazar si la pregunta no se ve completa: moverla arriba en cada «Siguiente» hacía que la página
+    // «brincara» y dejaba asomar una franja cortada del texto anterior bajo la barra.
+    const caja = target.getBoundingClientRect();
+    const control = question.control?.getBoundingClientRect?.();
+    const fondo = Math.max(caja.bottom, control?.bottom || 0);
+    const visible = caja.top >= HEADER_OFFSET && fondo <= window.innerHeight - 24;
+    if (!visible) {
+      // Encuadre: el encabezado «Paso a paso · Pregunta N de M» justo bajo la barra, con la pregunta debajo.
+      const marco = assistant?.isConnected ? assistant : target;
+      marco.style.scrollMarginTop = marco === assistant ? '66px' : `${HEADER_OFFSET}px`;
+      marco.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    }
     requestAnimationFrame(() => focusQuestion(question));
   };
 

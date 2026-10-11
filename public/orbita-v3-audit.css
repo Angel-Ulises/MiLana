@@ -238,9 +238,8 @@ html.ml-orbita-enabled .economy-breadcrumb a{color:#245C93;font-weight:700}
   html.ml-orbita-enabled :is(.finance-page-hero-tool,.state-detail-hero,.economy-article-hero,.profession-hero,.advisor-hero) h1{font-size:clamp(34px,3.4vw,46px)!important}
 }
 
-/* Saltos dentro de la página: el destino debe quedar debajo de la barra (66px) con aire, también cuando la barra
-   del navegador móvil cambia la altura a mitad del desplazamiento. Varios destinos tenían 0–28px y el título
-   quedaba tapado a medias. La regla general cubre destinos nuevos; las preguntas de calculadora usan su propio
-   valor en línea (gana sobre esta). */
-html.ml-orbita-enabled main [id]{scroll-margin-top:90px}
-html.ml-orbita-enabled :is(#situaciones,#datos-carreras,#datos-profesion,#comparar-trabajos,#comparar,#mis-numeros,#mi-situacion-datos,#costos,#ml-calc-interpretation,#ml-main,#root){scroll-margin-top:90px!important}
+/* Saltos dentro de la página: el destino llega justo bajo la barra fija (66px). Con más margen asomaba cortada la
+   última línea de la sección anterior; con menos, el título quedaba tapado a medias. El aire lo da el relleno superior
+   de cada sección. La regla general cubre destinos nuevos; las preguntas de calculadora usan su valor en línea. */
+html.ml-orbita-enabled main :is([id],section,form,h2,h3,[tabindex="-1"]){scroll-margin-top:66px}
+html.ml-orbita-enabled :is(#situaciones,#datos-carreras,#datos-profesion,#comparar-trabajos,#comparar,#mis-numeros,#mi-situacion-datos,#costos,#entender,#simular,#explorar,#senales,#encontrar,#aprende,#fuentes,#panorama-estado,.ml-decision,#ml-calc-interpretation,#ml-main,#root){scroll-margin-top:66px!important}

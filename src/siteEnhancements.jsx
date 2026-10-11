@@ -50,8 +50,12 @@ const REVEAL_SELECTOR = [
   '.ml-editorial-row'
 ].join(',');
 
+// Pensión no carga prepaint (página protegida), que en el resto del sitio deja visibles estos bloques.
+// Allí ocultarlos tras el primer pintado y volver a mostrarlos producía un parpadeo: se muestran ya visibles.
+const SIN_REVELADO = /^\/calculadoras\/pension-imss\/?$/;
+
 function prepararMovimiento(root = document) {
-  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || SIN_REVELADO.test(window.location.pathname);
   const nodes = [...root.querySelectorAll(REVEAL_SELECTOR)].filter((node) => !node.dataset.mlMotion);
   nodes.forEach((node, index) => {
     node.dataset.mlMotion = 'true';

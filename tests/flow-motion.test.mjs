@@ -66,3 +66,9 @@ test('la foto del hero se pinta una sola vez: misma fuente en React, prerender y
   assert.match(readFileSync('scripts/aplicar-orbita-base.mjs', 'utf8'), /imagesrcset="\$\{heroSrcSet\(\)\}"/);
   assert.match(readFileSync('src/lib/homeStartup.js', 'utf8'), /heroNueva\.replaceWith\(heroPrevia\)/);
 });
+
+test('Pensión: los bloques no se ocultan tras el primer pintado (sin tocar su cálculo)', () => {
+  const s = readFileSync('src/siteEnhancements.jsx', 'utf8');
+  assert.match(s, /const SIN_REVELADO = \/\^\\\/calculadoras\\\/pension-imss\\\/\?\$\//);
+  assert.match(s, /prefers-reduced-motion: reduce\)'\)\.matches \|\| SIN_REVELADO\.test\(window\.location\.pathname\)/);
+});

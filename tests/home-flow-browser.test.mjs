@@ -54,7 +54,7 @@ run().catch(error=>{document.body.dataset.error=error.message;document.body.data
   }
 });
 
-test('navegador: Inicio muestra tres preguntas y las demás quedan desplegables', async (t) => {
+test('navegador: Inicio muestra seis puertas por tema y la explicación queda desplegable', async (t) => {
   if (!browserReady(t, chrome)) return;
   const server=await createServer({server:{host:'127.0.0.1',port:0},logLevel:'silent'});
   await server.listen();
@@ -62,13 +62,12 @@ test('navegador: Inicio muestra tres preguntas y las demás quedan desplegables'
     const url=`http://127.0.0.1:${server.httpServer.address().port}/`;
     const html=await renderDom(chrome,url,{
       waitMs:7500,
-      until:"!!document.querySelector('.ml-more-questions') && !!document.querySelector('.ml-how-it-works') && !!document.querySelector('.orb-home-routes')",
+      until:"!!document.querySelector('.ml-topics') && !!document.querySelector('.ml-how-it-works') && !!document.querySelector('.orb-home-routes')",
     });
-    assert.match(html, /<details class="ml-more-questions"/);
     assert.match(html, /<details class="ml-how-it-works"/);
-    assert.doesNotMatch(html, /<details class="ml-more-questions" open/);
     assert.doesNotMatch(html, /<details class="ml-how-it-works" open/);
-    assert.equal((html.match(/class="mlq-card[^"]*"/g) || []).length,6);
+    assert.equal((html.match(/class="ml-topic ml-topic-[a-z]+"/g) || []).length,6);
+    assert.doesNotMatch(html, /<article class="mlq-card|<section[^>]*class="(?:ml-editorial-section|ml-money-map|ml-discovery-section)/);
     assert.doesNotMatch(html,/data-orbita-situation-card="true"/);
   } finally {await server.close();}
 });

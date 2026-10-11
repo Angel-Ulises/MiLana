@@ -1,4 +1,5 @@
 // Reglas puras de selección de páginas. Las vistas se descargan solo cuando se necesitan.
+export const esRutaCalculadorasHub = (p = locationPath()) => /^\/calculadoras\/?$/.test(p);
 export const esRutaInvertir = (p = locationPath()) => /^\/invertir\/?$/.test(p);
 export const esRutaProfesion = (p = locationPath()) => /^\/carreras\/profesion\/[^/]+\/?$/.test(p);
 export const esRutaOcupaciones = (p = locationPath()) => /^\/carreras\/ocupaciones\/?$/.test(p);
@@ -21,14 +22,14 @@ export function rutaConExtras(pathname = locationPath()) {
   const esFinanzas = p === '/finanzas' || p.startsWith('/finanzas/');
   return {
     occupationEntry: esCarreras,
-    stateEntry: p === '/' || esCarreras,
+    stateEntry: esCarreras,
     stateHousing: esEstados,
     stateOccupations: esEstados,
     stateCompareEntry: esEstados,
     savedStateContext: esFinanzas,
-    advisorEntry: p === '/' || p === '/finanzas' || p.startsWith('/carreras/profesion/'),
+    advisorEntry: p === '/finanzas' || p.startsWith('/carreras/profesion/'),
     investmentEntry: esFinanzas && !p.startsWith('/finanzas/inversion'),
     investmentCompareEntry: p === '/finanzas/inversion',
-    economyNavigation: p === '/',
+    economyNavigation: false,
   };
 }

@@ -56,8 +56,10 @@ test('Las rutas conservan su prioridad sin importar otros módulos de página', 
 });
 test('Los complementos se cargan solo donde sus portales existen', () => {
   const home = rutaConExtras('/');
-  assert.equal(home.stateEntry, true);
-  assert.equal(home.advisorEntry, true);
+  // Inicio enlaza a Estados y Mi situación desde «Explora por tema»; no monta sus portales.
+  assert.equal(home.stateEntry, false);
+  assert.equal(home.advisorEntry, false);
+  assert.equal(home.economyNavigation, false);
   assert.equal(home.stateHousing, false);
   const carrera = rutaConExtras('/carreras');
   assert.equal(carrera.occupationEntry, true);

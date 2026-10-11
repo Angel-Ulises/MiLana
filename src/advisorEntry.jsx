@@ -30,8 +30,7 @@ export default function AdvisorEntry() {
     let intentos = 0;
     const aplicar = () => {
       let listo = false;
-      if (pathname === '/') listo = ajustarEnlace('.ml-advisor-strip a', 'Cuéntame mi situación');
-      else if (pathname === '/finanzas') listo = ajustarEnlace('.finance-advisor-preview a', 'Analizar mi situación');
+      if (pathname === '/finanzas') listo = ajustarEnlace('.finance-advisor-preview a', 'Analizar mi situación');
       else if (pathname.startsWith('/carreras/profesion/')) listo = agregarContextoProfesion(pathname);
       else listo = true;
       intentos += 1;

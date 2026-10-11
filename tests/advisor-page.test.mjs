@@ -24,7 +24,8 @@ test('pantalla usa el núcleo determinista y no recomienda productos', () => {
 });
 
 test('inicio y hub de finanzas enlazan al asesor sin capturar datos en analytics', () => {
-  assert.match(entry, /\.ml-advisor-strip a/);
+  const inicio = fs.readFileSync(new URL('../src/financeExpansion.jsx', import.meta.url), 'utf8');
+  assert.match(inicio, /href="\/finanzas\/mi-situacion"/);
   assert.match(entry, /\.finance-advisor-preview a/);
   assert.match(entry, /\/finanzas\/mi-situacion/);
   assert.doesNotMatch(entry, /localStorage|sessionStorage|fetch\(|navigator\.sendBeacon/);

@@ -21,7 +21,7 @@ const tituloCorto = (pagina) => pagina.titulo.split('|')[0].trim();
 
 function enlazar(destino) {
   const pagina = catalogo.paginas.find((p) => p.id === destino);
-  return pagina ? `/calculadoras/${pagina.slug}` : '/#calculadoras';
+  return pagina ? `/calculadoras/${pagina.slug}` : '/calculadoras';
 }
 
 function casoCalculadora(pagina) {
@@ -46,7 +46,7 @@ function cuerpoCalculadora(pagina) {
 
   return `    <div id="root">
       <main data-static-seo="calculadora">
-        <nav aria-label="Ruta"><a href="/">Inicio</a> / <a href="/#calculadoras">Calculadoras</a></nav>
+        <nav aria-label="Ruta"><a href="/">Inicio</a> / <a href="/calculadoras">Calculadoras</a></nav>
         <h1>${escapar(tituloCorto(pagina))}</h1>
         <p>${escapar(dato.proposito)}</p>
 

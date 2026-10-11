@@ -152,7 +152,7 @@ function construir(pagina) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Inicio", item: origen },
-          { "@type": "ListItem", position: 2, name: "Calculadoras", item: `${origen}/#calculadoras` },
+          { "@type": "ListItem", position: 2, name: "Calculadoras", item: `${origen}/calculadoras` },
           { "@type": "ListItem", position: 3, name: pagina.titulo.split("|")[0].trim(), item: url },
         ],
       },

@@ -125,6 +125,13 @@
       }
     }
 
+    // /calculadoras: primero el selector y la lista; la ayuda de términos va al final.
+    const hubNext = main.querySelector('.ml-hub-next');
+    if (hubNext) {
+      hubNext.insertAdjacentElement('beforebegin', strip);
+      return true;
+    }
+
     const reserve = main.querySelector('[data-orbita-glossary-reserve]');
     if (reserve) {
       reserve.replaceWith(strip);

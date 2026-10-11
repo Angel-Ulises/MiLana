@@ -7,7 +7,7 @@ const pages=['src/App.jsx','src/financePages.jsx','src/advisorPage.jsx','src/car
 
 test('Órbita y React comparten las mismas siete secciones en idéntico orden',()=>{
   const expected=[
-    ['calculadoras','/#calculadoras','Calculadoras'],['carreras','/carreras','Carreras'],
+    ['calculadoras','/calculadoras','Calculadoras'],['carreras','/carreras','Carreras'],
     ['estados','/estados','Estados'],['finanzas','/finanzas','Finanzas'],
     ['invertir','/invertir','Invertir'],['economia','/economia','Economía'],['aprende','/aprende','Aprende']
   ];
@@ -38,7 +38,7 @@ test('React ya no contiene siete copias del menú ni cambios de enlaces después
 
 test('sección actual se selecciona por prefijo completo, sin interferir con rutas distintas',()=>{
   for(const [url,expected] of [
-    ['/calculadoras/isr','calculadoras'],['/calculadoras/bruto-a-neto','calculadoras'],
+    ['/calculadoras','calculadoras'],['/calculadoras/isr','calculadoras'],['/calculadoras/bruto-a-neto','calculadoras'],
     ['/carreras','carreras'],['/carreras/comparar','carreras'],
     ['/estados/nuevo-leon','estados'],['/estados/comparar','estados'],
     ['/finanzas/presupuesto','finanzas'],['/finanzas/inversion','invertir'],['/invertir','invertir'],['/economia','economia'],

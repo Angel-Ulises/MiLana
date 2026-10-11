@@ -5,7 +5,7 @@ import {
   esRutaCarreras, esRutaProfesion, esRutaOcupaciones, esRutaCompararCarreras,
   esRutaCompararEstados, esRutaEstado, esRutaFondosCNBV, esRutaCetesReferencia,
   esRutaCompararInstrumentos, esRutaInversionEducativa, esRutaAsesor,
-  esRutaFinanzas, esRutaEconomia, esRutaInvertir, rutaConExtras,
+  esRutaFinanzas, esRutaEconomia, esRutaInvertir, esRutaCalculadorasHub, rutaConExtras,
 } from './lib/routeMatcher.js'
 
 // Cada página carga únicamente la sección que el visitante pidió.
@@ -37,6 +37,7 @@ const InvestmentEntry = React.lazy(() => import('./investmentEntry.jsx'))
 const InvestmentCompareEntry = React.lazy(() => import('./investmentCompareEntry.jsx'))
 const EconomyPages = React.lazy(() => import('./economyPages.jsx'))
 const InvestirHomePage = React.lazy(() => import('./invertirHomePage.jsx'))
+const CalculatorsHubPage = React.lazy(() => import('./calculatorsHubPage.jsx'))
 const EconomyNavigation = React.lazy(() => import('./economyNavigation.jsx'))
 const CareerMotion = React.lazy(() => import('./careerMotion.jsx'))
 const RouteMotion = React.lazy(() => import('./routeMotion.jsx'))
@@ -85,6 +86,7 @@ import './finance-tool-first.css'
 import './career-state-tool-first.css'
 import './compare-profile-context.css'
 import './occupation-profession-mobile.css'
+import './calculators-hub.css'
 
 const profesion = esRutaProfesion()
 const ocupaciones = esRutaOcupaciones()
@@ -100,12 +102,15 @@ const asesor = esRutaAsesor()
 const finanzas = esRutaFinanzas()
 const economia = esRutaEconomia()
 const invertir = esRutaInvertir()
+const calculadorasHub = esRutaCalculadorasHub()
 const extras = rutaConExtras()
 
 // Se reserva el espacio del contenido principal mientras llega su módulo.
 // Los complementos cargan de forma independiente para no bloquear la página.
 function PrimaryRoute({ HomeApp }) {
-  return invertir ? (
+  return calculadorasHub ? (
+    <CalculatorsHubPage />
+  ) : invertir ? (
     <InvestirHomePage />
   ) : profesion ? (
     <CareerProfessionPages />
@@ -143,7 +148,7 @@ function PrimaryEffects() {
   if (carrera) return <CareerMotion />;
   if (profesion || ocupaciones || compararCarreras || compararEstados || estados ||
       fondosCNBV || cetesReferencia || compararInstrumentos || inversion ||
-      asesor || finanzas || economia || invertir) return <RouteMotion />;
+      asesor || finanzas || economia || invertir || calculadorasHub) return <RouteMotion />;
   return <>
     <SiteEnhancements />
     <MotionDataViz />

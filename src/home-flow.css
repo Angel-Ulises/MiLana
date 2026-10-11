@@ -29,3 +29,13 @@ html.ml-orbita-enabled[data-orbita-section="inicio"] .path-section{
   .ml-how-it-works .path-step{min-height:0}
 }
 @media(prefers-reduced-motion:reduce){.ml-how-it-works>summary b{transition:none}}
+
+/* Inicio móvil: las calculadoras ya tienen su página; aquí basta un acceso compacto de dos columnas. */
+@media(max-width:620px){
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .calculators .calculator-grid{grid-template-columns:1fr 1fr!important;gap:8px!important}
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .calculators .calculator-card{padding:14px!important;border-radius:16px!important}
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .calculators .calculator-card h3{margin:6px 0 10px!important;font-size:19px!important}
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .calculators .calculator-card p{display:none}
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .calculators .calculator-card.quiet-card h3{font-size:15px!important}
+  html.ml-orbita-enabled[data-orbita-section="inicio"] .calculators .calculator-card .card-tag{font-size:10px}
+}

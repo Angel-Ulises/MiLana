@@ -21,10 +21,10 @@ async function run(){
  await new Promise(r=>setTimeout(r,160));
  const nav=document.querySelector('.desktop-nav');
  const links=[...nav.querySelectorAll('a')];
- const expected=['/#calculadoras','/carreras','/estados','/finanzas','/invertir','/economia','/aprende'];
+ const expected=['/calculadoras','/carreras','/estados','/finanzas','/invertir','/economia','/aprende'];
  if(JSON.stringify(links.map(a=>a.getAttribute('href')))!==JSON.stringify(expected))throw Error('Menú no coincide');
  if(nav.querySelectorAll('[aria-current="page"]').length!==1)throw Error('No hay una sola sección activa');
- if(nav.querySelector('[aria-current="page"]').getAttribute('href')!=='${page.startsWith('/estados')?'/estados':'/#calculadoras'}')throw Error('Sección activa incorrecta');
+ if(nav.querySelector('[aria-current="page"]').getAttribute('href')!=='${page.startsWith('/estados')?'/estados':'/calculadoras'}')throw Error('Sección activa incorrecta');
  if(document.querySelectorAll('.site-header').length!==1)throw Error('Header duplicado');
  if(!document.querySelector('a.header-cta[href="/finanzas/mi-situacion"]'))throw Error('CTA perdió destino');
  document.body.dataset.done='true';document.body.dataset.result='ok';

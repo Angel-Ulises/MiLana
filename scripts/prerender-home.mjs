@@ -20,7 +20,7 @@ export async function prerenderHomeHero() {
         const hero = html.slice(start, start + tag.index + tag[0].length);
         // Antes de JavaScript, este control también tiene un destino útil.
         return hero.replace(/<button([^>]*class="orb-home-search"[^>]*)>([\s\S]*?)<\/button>/,
-          '<a$1 href="/#calculadoras">$2</a>');
+          '<a$1 href="/calculadoras">$2</a>');
       }
     }
     throw new Error('El hero de Inicio quedó incompleto');

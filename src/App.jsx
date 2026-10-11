@@ -1574,9 +1574,9 @@ const SITUACIONES = [
 ];
 
 const LECTURAS = [
-  { id: 'finiquito',  min: '5 min', tema: 'Trabajo', titulo: 'Finiquito vs. liquidación: la diferencia que cambia el monto' },
-  { id: 'bruto-neto', min: '4 min', tema: 'Sueldo',  titulo: 'Por qué tu sueldo bruto no es lo que llega a tu cuenta' },
-  { id: 'pension',    min: '6 min', tema: 'Retiro',  titulo: 'Qué revisar antes de confiar en una cifra de pensión' },
+  { id: 'finiquito',  href: '/aprende/finiquito-vs-liquidacion', min: '5 min', tema: 'Trabajo', titulo: 'Finiquito vs. liquidación: la diferencia que cambia el monto' },
+  { id: 'bruto-neto', href: '/aprende/leer-recibo-nomina',       min: '4 min', tema: 'Sueldo',  titulo: 'Por qué tu sueldo bruto no es lo que llega a tu cuenta' },
+  { id: 'pension',    href: '/aprende/pension-imss-ley-97',       min: '6 min', tema: 'Retiro',  titulo: 'Qué revisar antes de confiar en una cifra de pensión' },
 ];
 
 export default function App() { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#18283A',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#17324D'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#17324D'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#17324D'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#17324D'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#17324D'}}>Contacto</h2><p>Para dudas sobre esta política, contáctanos a través de nuestras redes sociales.</p><p style={{fontSize:12,color:'#7A8794',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#2D6CAA'}}>← Volver a MiLana</a></div>); }
@@ -1668,7 +1668,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                 <nav aria-label="Ruta de navegación" style={{fontSize:13,color:'var(--ml-soft)',marginBottom:18}}>
                   <a href="/" onClick={(e) => { e.preventDefault(); cerrarCalc(); }} style={{color:'var(--ml-blue)',textDecoration:'none'}}>Inicio</a>
                   <span aria-hidden="true"> / </span>
-                  <a href="/#calculadoras" style={{color:'var(--ml-blue)',textDecoration:'none'}}>Calculadoras</a>
+                  <a href="/calculadoras" style={{color:'var(--ml-blue)',textDecoration:'none'}}>Calculadoras</a>
                 </nav>
                 <div className="calculator-hero-icon" style={{display:'flex',alignItems:'center',gap:10}}>
                   <CalculatorIcon id={calc.id} />
@@ -1703,7 +1703,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             <Articulo id={calc.id} />
             <ContenidoCalculadora id={calc.id} ir={setActiva} />
             <p style={{marginTop:30}}>
-              <a href="/" onClick={(e) => { e.preventDefault(); cerrarCalc(); }} style={{color:'var(--ml-blue)',fontSize:14,fontWeight:600,textDecoration:'none'}}>
+              <a href="/calculadoras" style={{color:'var(--ml-blue)',fontSize:14,fontWeight:600,textDecoration:'none'}}>
                 ← Todas las calculadoras
               </a>
             </p>
@@ -1719,7 +1719,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                 <p className="hero-lede">Elige lo que estás viviendo y te decimos qué hacer, paso a paso.</p>
                 <div className="hero-actions" hidden>
                   <a className="btn btn-primary" href="/#situaciones">Explorar mi situación</a>
-                  <a className="btn btn-secondary" href="/#calculadoras">Ver calculadoras</a>
+                  <a className="btn btn-secondary" href="/calculadoras">Ver calculadoras</a>
                 </div>
                 <div className="hero-proof" aria-label="Señales de confianza" hidden>
                   <span>Datos 2026</span>
@@ -1801,10 +1801,9 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                   <p className="eyebrow">Herramientas</p>
                   <h2>Calculadoras que explican el resultado.</h2>
                 </div>
-                <button className="text-link standalone" onClick={() => { setFiltro(null); setVerTodas(true); }}
-                        style={{background:'none',border:0,cursor:'pointer',fontFamily:'inherit',padding:0}}>
+                <a className="text-link standalone" href="/calculadoras">
                   Ver las 10 calculadoras <span>→</span>
-                </button>
+                </a>
               </div>
               <div className="calculator-grid">
                 {visibles.map((c, i) => (
@@ -1823,10 +1822,9 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                     <span className="card-tag">Más herramientas</span>
                     <h3>Vacaciones, PTU, Infonavit y pensión</h3>
                     <p>Accede al resto de herramientas cuando tu situación lo necesite.</p>
-                    <button className="text-link" onClick={() => setVerTodas(true)}
-                            style={{background:'none',border:0,cursor:'pointer',fontFamily:'inherit',padding:0}}>
+                    <a className="text-link" href="/calculadoras">
                       Ver todas <span>→</span>
-                    </button>
+                    </a>
                   </article>
                 )}
               </div>
@@ -1840,15 +1838,13 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                 <p className="eyebrow">Aprende antes de decidir</p>
                 <h2>La cifra importa. Entender qué significa importa más.</h2>
                 <p>Los mini-artículos responden la pregunta que aparece justo después del cálculo: “¿y ahora qué hago con esto?”</p>
-                <button className="btn btn-secondary" onClick={() => { setFiltro(null); setVerTodas(true); document.getElementById('calculadoras')?.scrollIntoView({behavior:'smooth'}); }}
-                        style={{cursor:'pointer',fontFamily:'inherit'}}>
+                <a className="btn btn-secondary" href="/aprende">
                   Explorar explicaciones
-                </button>
+                </a>
               </div>
               <div className="article-stack">
                 {LECTURAS.map(l => (
-                  <a key={l.id} className="article-row" href={rutaDe(l.id)}
-                     onClick={(e) => { e.preventDefault(); setActiva(l.id); }}>
+                  <a key={l.id} className="article-row" href={l.href}>
                     <span>{l.min}</span>
                     <div><h3>{l.titulo}</h3><p>{l.tema}</p></div>
                     <b>→</b>

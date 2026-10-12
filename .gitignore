@@ -12,3 +12,8 @@ design-spec/preview-local.html
 # necesita son las variantes de public/images/gen/.
 assets-master/*.jpg
 assets-master/originales-verticales/
+
+# Evidencia local de verificar-arranque (el CI la sube como artefacto) y lockfile
+# que genera npm install; el repo no versiona lockfile.
+.qa/
+package-lock.json

@@ -1,0 +1,5 @@
+# Cloudflare Pages: las vistas previas (*.pages.dev) no deben indexarse ni competir con www.milanaaqui.mx.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex

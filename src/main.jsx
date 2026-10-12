@@ -5,7 +5,7 @@ import {
   esRutaCarreras, esRutaProfesion, esRutaOcupaciones, esRutaCompararCarreras,
   esRutaCompararEstados, esRutaEstado, esRutaFondosCNBV, esRutaCetesReferencia,
   esRutaCompararInstrumentos, esRutaInversionEducativa, esRutaAsesor,
-  esRutaFinanzas, esRutaEconomia, esRutaInvertir, rutaConExtras,
+  esRutaFinanzas, esRutaMatch, esRutaEconomia, esRutaInvertir, rutaConExtras,
 } from './lib/routeMatcher.js'
 
 // Cada página carga únicamente la sección que el visitante pidió.
@@ -27,6 +27,7 @@ const StateOccupations = React.lazy(() => import('./stateOccupations.jsx'))
 const StateCompareEntry = React.lazy(() => import('./stateCompareEntry.jsx'))
 const SavedStateContext = React.lazy(() => import('./savedStateContext.jsx'))
 const FinancePages = React.lazy(() => import('./financePages.jsx'))
+const MatchPages = React.lazy(() => import('./matchPages.jsx'))
 const AdvisorPage = React.lazy(() => import('./advisorPage.jsx'))
 const AdvisorEntry = React.lazy(() => import('./advisorEntry.jsx'))
 const InvestmentReadinessPage = React.lazy(() => import('./investmentReadinessPage.jsx'))
@@ -63,6 +64,7 @@ import './state-compare-entry.css'
 import './saved-state-context.css'
 import './state-entry.css'
 import './finance-pages.css'
+import './match.css'
 import './advisor-page.css'
 import './investment-readiness.css'
 import './investment-decision.css'
@@ -97,7 +99,8 @@ const cetesReferencia = esRutaCetesReferencia()
 const compararInstrumentos = esRutaCompararInstrumentos()
 const inversion = esRutaInversionEducativa()
 const asesor = esRutaAsesor()
-const finanzas = esRutaFinanzas()
+const match = esRutaMatch()
+const finanzas = !match && esRutaFinanzas()
 const economia = esRutaEconomia()
 const invertir = esRutaInvertir()
 const extras = rutaConExtras()
@@ -129,6 +132,8 @@ function PrimaryRoute({ HomeApp }) {
     <InvestmentReadinessPage />
   ) : asesor ? (
     <AdvisorPage />
+  ) : match ? (
+    <MatchPages />
   ) : finanzas ? (
     <FinancePages />
   ) : economia ? (
@@ -143,7 +148,7 @@ function PrimaryEffects() {
   if (carrera) return <CareerMotion />;
   if (profesion || ocupaciones || compararCarreras || compararEstados || estados ||
       fondosCNBV || cetesReferencia || compararInstrumentos || inversion ||
-      asesor || finanzas || economia || invertir) return <RouteMotion />;
+      asesor || match || finanzas || economia || invertir) return <RouteMotion />;
   return <>
     <SiteEnhancements />
     <MotionDataViz />

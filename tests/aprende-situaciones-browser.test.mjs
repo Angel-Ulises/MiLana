@@ -32,7 +32,7 @@ for(const width of [390,1280])test('Chrome Aprende: una pregunta lleva a su guí
   const match=html.match(/data-aprende-test="([^"]+)"/);
   assert.ok(match,'No hay métricas en Chrome');
   const result=JSON.parse(decodeURIComponent(match[1]));
-  assert.deepEqual(result.initial,{hidden:true,collapsed:true,count:7});
+  assert.deepEqual(result.initial,{hidden:true,collapsed:true,count:8});
   assert.equal(result.after.href,'/aprende/leer-recibo-nomina');
   assert.equal(result.after.tool,'/calculadoras/bruto-a-neto');
   assert.equal(result.after.visible,true);

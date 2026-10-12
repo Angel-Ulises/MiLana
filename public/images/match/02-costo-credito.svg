@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1240" viewBox="0 0 900 1240" role="img" aria-labelledby="title desc">
+<title id="title">Lee el crédito a lo largo de todo el contrato</title>
+<desc id="desc">Cuatro momentos de una cotización: lo que recibes, los pagos iniciales, los pagos durante el contrato y cualquier pago final. Revisa capital, intereses, comisiones, seguros e impuestos aplicables sin duplicar conceptos. Esto no es una fórmula para calcular CAT ni un gráfico a escala.</desc>
+<rect width="900" height="1240" fill="#FBF8F2"/>
+<g font-family="Inter, Arial, sans-serif" fill="#13263B">
+<text x="64" y="60" font-size="18" font-weight="700" letter-spacing="2">GUÍA DE LECTURA · MILANA MATCH</text>
+<g font-family="Newsreader, Georgia, serif" font-size="57" font-weight="600"><text x="64" y="139">Mira todo el contrato,</text><text x="64" y="204">paso a paso</text></g>
+<path d="M105 300V902" stroke="#C5D6E5" stroke-width="5"/>
+<g fill="#2D6CAA"><circle cx="105" cy="300" r="32"/><circle cx="105" cy="480" r="32"/><circle cx="105" cy="660" r="32"/><circle cx="105" cy="840" r="32"/></g>
+<g fill="#FFFFFF" font-size="29" font-weight="700" text-anchor="middle"><text x="105" y="310">1</text><text x="105" y="490">2</text><text x="105" y="670">3</text><text x="105" y="850">4</text></g>
+<text x="169" y="306" font-size="34" font-weight="700">Lo que recibes</text><text x="169" y="355" font-size="28">Monto financiado y efectivo</text><text x="169" y="395" font-size="28">que realmente recibes.</text>
+<text x="169" y="486" font-size="34" font-weight="700">Al inicio</text><text x="169" y="535" font-size="28">Enganche y cargos necesarios</text><text x="169" y="575" font-size="28">para contratar, según el producto.</text>
+<text x="169" y="666" font-size="34" font-weight="700">Durante el contrato</text><text x="169" y="715" font-size="28">Pagos, intereses y otros cargos.</text><text x="169" y="755" font-size="28">Comprueba qué incluye cada pago.</text>
+<text x="169" y="846" font-size="34" font-weight="700">Al final</text><text x="169" y="895" font-size="28">Saldo o pago residual, si existe,</text><text x="169" y="935" font-size="28">y condiciones de liquidación.</text>
+<path d="M64 994H836" stroke="#D9E1E8" stroke-width="2"/>
+<text x="64" y="1051" font-size="28" font-weight="700">Revisa cada concepto sin duplicarlo</text>
+<text x="64" y="1098" font-size="25">Capital · intereses · comisiones · seguros</text><text x="64" y="1136" font-size="25">e impuestos que correspondan.</text>
+<text x="64" y="1190" font-size="23" fill="#5E6B78">Esquema de lectura. No es una fórmula de CAT.</text>
+</g></svg>

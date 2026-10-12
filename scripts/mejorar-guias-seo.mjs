@@ -10,7 +10,17 @@ const GUIAS = [
   'vacaciones-prima-vacacional',
   'resico-ingresos-cobrados',
   'pension-imss-ley-97',
+  'cat-y-gat-que-comparan',
+  'mensualidad-y-costo-del-credito',
+  'leer-fuentes-comparador-financiero',
 ];
+
+// Fecha de la última revisión editorial visible en cada guía.
+const REVISADO = {
+  'cat-y-gat-que-comparan': '2026-10-12',
+  'mensualidad-y-costo-del-credito': '2026-10-12',
+  'leer-fuentes-comparador-financiero': '2026-10-12',
+};
 
 const TITULOS = {
   'pension-imss-ley-97': 'Pensión IMSS Ley 97: requisitos y qué revisar | MiLana',
@@ -23,6 +33,9 @@ const IMAGENES = {
   'vacaciones-prima-vacacional': '/images/gen/vacaciones-1024.jpg',
   'resico-ingresos-cobrados': '/images/gen/resico-1024.jpg',
   'pension-imss-ley-97': '/images/gen/pension-1024.jpg',
+  'cat-y-gat-que-comparan': '/images/match/og-cat-y-gat.jpg',
+  'mensualidad-y-costo-del-credito': '/images/match/og-mensualidad-credito.jpg',
+  'leer-fuentes-comparador-financiero': '/images/match/og-leer-fuentes.jpg',
 };
 
 function texto(html, re) {
@@ -102,7 +115,7 @@ function mejorar(slug) {
         description: descripcion,
         url: canonical,
         inLanguage: 'es-MX',
-        dateModified: '2026-09-14',
+        dateModified: REVISADO[slug] || '2026-09-14',
         primaryImageOfPage: {
           '@type': 'ImageObject',
           url: imagen,

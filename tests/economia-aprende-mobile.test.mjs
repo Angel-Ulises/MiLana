@@ -11,6 +11,9 @@ const guiaRutas = {
   'vacaciones-prima-vacacional': ['/calculadoras/vacaciones'],
   'resico-ingresos-cobrados': ['/calculadoras/resico'],
   'pension-imss-ley-97': ['/calculadoras/pension-imss'],
+  'cat-y-gat-que-comparan': ['/finanzas/match/tarjetas', '/finanzas/match/ahorro'],
+  'mensualidad-y-costo-del-credito': ['/finanzas/match/hipotecas', '/finanzas/match/automotriz', '/finanzas/match/creditos-personales'],
+  'leer-fuentes-comparador-financiero': ['/finanzas/match', '/finanzas/match/metodologia'],
 };
 test('Economía usa navegación global y un acceso directo a las señales', () => {
   const s = read('src/economyPages.jsx');
@@ -42,8 +45,8 @@ test('Aprende muestra las guías antes del bloque metodológico', () => {
   assert.ok(s.indexOf('id="guias"') < s.indexOf('class="learn-method"'));
   assert.match(s, /href="#encontrar"/);
   assert.match(s, /<details class="learn-catalog" id="catalogo">/);
-  assert.equal((s.match(/<article class="card">/g) || []).length, 6);
-  assert.equal((s.match(/<a class="card-content"/g) || []).length, 6);
+  assert.equal((s.match(/<article class="card">/g) || []).length, 9);
+  assert.equal((s.match(/<a class="card-content"/g) || []).length, 9);
   assert.match(s, /rel="canonical"/);
 });
 test('Todas las guías muestran destinos reales sin enlaces anidados', () => {
@@ -58,7 +61,7 @@ test('Todas las guías muestran destinos reales sin enlaces anidados', () => {
       assert.ok(hub.includes('href="' + url + '"'), 'Hub: ' + url);
     }
   }
-  assert.equal((hub.match(/<nav class="card-tools"/g) || []).length, 6);
+  assert.equal((hub.match(/<nav class="card-tools"/g) || []).length, 9);
 });
 test('Los CTAs de Aprende son visibles en móvil y respetan movimiento reducido', () => {
   const s = read('public/static-2026.css');

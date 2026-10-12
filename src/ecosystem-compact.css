@@ -113,3 +113,7 @@
    Estas dos superficies tienen fondo azul marino: mantener AA en móvil y escritorio. */
 .career-profession-directory .career-money-inline a{color:#fff !important}
 .finance-hub-page .ecosystem-advisor-link small{color:#dce9f5 !important}
+.ecosystem-match-link{background:#fff;border:1px solid #CFE2D8;color:#13263B}.ecosystem-match-link strong{color:#173D31!important}.ecosystem-match-link small{color:#4F5D6B}.ecosystem-match-link b{color:#1F6B4E}
+.ecosystem-match-link+.ecosystem-advisor-link{margin-top:10px}
+.finance-checklist-next{margin:14px 0 0;font-size:14.5px;line-height:1.6}
+.finance-hub-page .ecosystem-match-link small{color:#4F5D6B!important}

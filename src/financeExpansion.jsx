@@ -98,6 +98,9 @@ const AREAS = [
   { titulo: 'Deuda y crédito', texto: 'Entender costo, mensualidad, plazo y cuánto ingreso ya está comprometido.', href: '/finanzas/deuda-y-credito', clave: '04' },
   { titulo: 'Ahorro', texto: 'Metas, fondo de emergencia y decisiones con horizonte claro.', href: '/finanzas/ahorro', clave: '05' },
   { titulo: 'Retiro', texto: 'Pensión, semanas, ahorro de largo plazo y escenarios futuros.', href: '/calculadoras/pension-imss', clave: '06' },
+  { titulo: 'Invertir', texto: 'Qué compras con CETES, fondos, acciones y ETF, y qué puede variar.', href: '/invertir', clave: '07' },
+  { titulo: 'Comparar productos', texto: 'Créditos, cuentas, ahorro y Afores con CAT, GAT o IRN, fuente y fecha de cada dato.', href: '/finanzas/match', clave: '08' },
+  { titulo: 'Seguros', texto: 'Coberturas, exclusiones y deducibles por ramo, sin ordenar pólizas por una prima que no se publica.', href: '/finanzas/match/seguros', clave: '09' },
 ];
 
 const EDITORIAL = [

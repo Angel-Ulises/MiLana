@@ -11,6 +11,8 @@ export const esRutaCetesReferencia = (p = locationPath()) => /^\/finanzas\/inver
 export const esRutaCompararInstrumentos = (p = locationPath()) => /^\/finanzas\/inversion\/comparar\/?$/.test(p);
 export const esRutaInversionEducativa = (p = locationPath()) => /^\/finanzas\/inversion\/?$/.test(p);
 export const esRutaAsesor = (p = locationPath()) => /^\/finanzas\/mi-situacion\/?$/.test(p);
+// MiLana Match vive dentro de Finanzas, pero tiene su propia vista: se evalúa antes que Finanzas.
+export const esRutaMatch = (p = locationPath()) => /^\/finanzas\/match(?:\/[^/]+){0,2}\/?$/.test(p);
 export const esRutaFinanzas = (p = locationPath()) => /^\/finanzas(?:\/[^/]+)?\/?$/.test(p);
 export const esRutaEconomia = (p = locationPath()) => /^\/economia(?:\/[^/]+)?\/?$/.test(p);
 export function locationPath() { return typeof window === 'undefined' ? '/' : window.location.pathname; }
@@ -18,7 +20,8 @@ export function rutaConExtras(pathname = locationPath()) {
   const p = pathname.replace(/\/$/, '') || '/';
   const esCarreras = p === '/carreras';
   const esEstados = /^\/estados(?:\/[^/]+)?$/.test(p) && p !== '/estados/comparar';
-  const esFinanzas = p === '/finanzas' || p.startsWith('/finanzas/');
+  const esMatch = p === '/finanzas/match' || p.startsWith('/finanzas/match/');
+  const esFinanzas = (p === '/finanzas' || p.startsWith('/finanzas/')) && !esMatch;
   return {
     occupationEntry: esCarreras,
     stateEntry: p === '/' || esCarreras,

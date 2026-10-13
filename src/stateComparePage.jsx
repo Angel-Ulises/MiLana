@@ -1,4 +1,5 @@
 import ReadingDetails from './ReadingDetails.jsx';
+import NextStep from './nextStep.jsx';
 import SiteHeader from './siteHeader.jsx';
 import { useMemo, useState } from 'react';
 import estadosData from './data/estados.json';
@@ -21,7 +22,7 @@ function Header() {
 }
 
 function Footer(){
-  return <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Fuentes: Observatorio Laboral/STPS, ENOE/INEGI y Sociedad Hipotecaria Federal. Cortes 2026-T2.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>;
+  return <><NextStep /><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Fuentes: Observatorio Laboral/STPS, ENOE/INEGI y Sociedad Hipotecaria Federal. Cortes 2026-T2.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>;
 }
 
 function Metric({ label, a, b, formatter = (v) => v, note }){

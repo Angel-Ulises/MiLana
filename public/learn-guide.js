@@ -11,6 +11,7 @@
     resico: { title:'Entiende cuándo un ingreso cuenta', detail:'En RESICO es importante distinguir facturado, cobrado e IVA.', guide:'/aprende/resico-ingresos-cobrados', tool:'/calculadoras/resico', toolLabel:'Explorar RESICO →' },
     retiro: { title:'Antes de confiar en una cifra de pensión', detail:'Primero verifica el régimen, la edad, las semanas y los límites de la herramienta.', guide:'/aprende/pension-imss-ley-97', tool:'/calculadoras/pension-imss', toolLabel:'Consultar alcance →' },
     invertir: { title:'Invierte primero en entender', detail:'Descubre qué compras, cuánto podría variar y qué revisar antes de operar.', guide:'/invertir', tool:'/finanzas/inversion/comparar', guideLabel:'Descubrir Invertir →', toolLabel:'Comparar instrumentos →' },
+    comparar: { title:'Compara con la fuente a la vista', detail:'Antes de contratar, revisa qué mide cada cifra, de cuándo es y qué datos faltan.', guide:'/aprende/leer-fuentes-comparador-financiero', tool:'/finanzas/match', toolLabel:'Abrir MiLana Match →' },
   };
   const buttons=[...root.querySelectorAll('[data-learn-topic]')];
   const answer=root.querySelector('[data-learn-result]');

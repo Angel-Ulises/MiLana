@@ -1,0 +1,4581 @@
+{
+  "titulo": "MiLana Match: catálogo inicial de crédito",
+  "version": "1.0",
+  "fecha_corte": "2026-10-12",
+  "pais": "México",
+  "alcance": "14 fichas de productos. Investigación pública con referencias por campo. Sin solicitud, contratación, contacto ni datos de solicitantes.",
+  "productos": [
+    {
+      "id": "bbva_azul",
+      "categoria": "tarjeta_credito",
+      "nombre": {
+        "valor": "Tarjeta Azul BBVA",
+        "fuente_url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+        "fuente_id": "azul",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Requisitos; costos; información CAT",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "BBVA México, S.A., Institución de Banca Múltiple, Grupo Financiero BBVA México",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": null
+      },
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": "El oficio de 2026 respalda clasificación institucional. No sustituye una consulta de estatus SIPRES/PES en tiempo real ni certifica calidad o aprobación del producto."
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+        "fuente_id": "azul",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Requisitos; costos; información CAT",
+        "nota": null
+      },
+      "campos": {
+        "cat": {
+          "valor": {
+            "porcentaje": 89.4,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "nota_supuestos": "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+          "fuente_id": "azul",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-07-13",
+          "vigente_desde": null,
+          "vigente_hasta": "2027-01-09",
+          "estado": "vigente_al_corte",
+          "localizador": "Requisitos; costos; información CAT",
+          "nota": null
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "variable",
+            "promedio_ponderado_anual_pct": 59.52,
+            "tasa_minima_pct": null,
+            "tasa_maxima_pct": null,
+            "iva": "ND",
+            "referencia": null
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+          "fuente_id": "azul",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos; costos; información CAT",
+          "nota": "La página identifica tasa variable y promedio; no equivale a tasa personalizada ni ofrece aquí fórmula contractual."
+        },
+        "anualidad": {
+          "valor": {
+            "monto": 748,
+            "moneda": "MXN",
+            "periodicidad": "anual",
+            "iva": "más_IVA",
+            "concepto": "Administración de tarjeta del titular"
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+          "fuente_id": "azul",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos; costos; información CAT",
+          "nota": null
+        },
+        "comisiones": {
+          "valor": [
+            {
+              "concepto": "Disposición efectivo",
+              "porcentaje": 7,
+              "base": "monto dispuesto",
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Pago tardío",
+              "monto": 490,
+              "moneda": "MXN",
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Reposición por robo/extravío",
+              "monto": 192,
+              "moneda": "MXN",
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Beneficio 3 MSI",
+              "porcentaje": 5.5,
+              "base": "transacción",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Beneficio 6 MSI",
+              "porcentaje": 7,
+              "base": "transacción",
+              "iva": "más_IVA"
+            }
+          ],
+          "fuente_url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+          "fuente_id": "azul",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos; costos; información CAT",
+          "nota": "Extracto de comisiones relevantes, no inventario exhaustivo. Pagar una comisión por diferir reduce el sentido de “sin intereses” como costo cero."
+        },
+        "requisitos": {
+          "valor": {
+            "edad": "Mayor de 18 años",
+            "residencia": "México",
+            "ingreso_minimo_mensual_mxn": 6000,
+            "documentos": [
+              "Identificación vigente",
+              "Documento migratorio si extranjero",
+              "Comprobantes de ingresos",
+              "Domicilio ≤3 meses",
+              "Solicitud firmada y autorización de consulta de Buró"
+            ]
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+          "fuente_id": "azul",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos; costos; información CAT",
+          "nota": null
+        },
+        "monto": {
+          "valor": null,
+          "fuente_url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+          "fuente_id": "azul",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Requisitos; costos; información CAT",
+          "nota": "No se publica intervalo general verificable de línea de crédito."
+        },
+        "plazo": {
+          "valor": null,
+          "fuente_url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+          "fuente_id": "azul",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Requisitos; costos; información CAT",
+          "nota": "Tarjeta; no se publica plazo único de amortización. MSI y disposiciones son condiciones separadas."
+        },
+        "beneficios": {
+          "valor": {
+            "puntos": "9% de compras en Puntos BBVA; no es 9% de cashback en pesos"
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+          "fuente_id": "azul",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos; costos; información CAT",
+          "nota": null
+        },
+        "aprobacion": {
+          "valor": "Sujeto a aprobación de crédito",
+          "fuente_url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+          "fuente_id": "azul",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos; costos; información CAT",
+          "nota": null
+        }
+      },
+      "discrepancias": [],
+      "historial_no_usar_como_vigente": [],
+      "alertas": [
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ]
+    },
+    {
+      "id": "santander_likeu_mastercard",
+      "categoria": "tarjeta_credito",
+      "nombre": {
+        "valor": "Tarjeta de Crédito LikeU Mastercard",
+        "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/tarjetas-de-credito/likeu",
+        "fuente_id": "likeu",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Requisitos, costos y FAQ",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "Banco Santander México, S.A., Institución de Banca Múltiple, Grupo Financiero Santander México",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": null
+      },
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": "El oficio de 2026 respalda clasificación institucional. No sustituye una consulta de estatus SIPRES/PES en tiempo real ni certifica calidad o aprobación del producto."
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/tarjetas-de-credito/likeu",
+        "fuente_id": "likeu",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Requisitos, costos y FAQ",
+        "nota": null
+      },
+      "campos": {
+        "cat": {
+          "valor": {
+            "porcentaje": 89.1,
+            "tipo": "promedio_ponderado",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "nota_supuestos": "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:eadbc941-a74c-4127-ac61-b4250eb85b52/original/as/Cards_Folleto_TDC_LikeUMastercard_Jun2026_V2_0726.pdf",
+          "fuente_id": "likeu_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-07-01",
+          "vigente_desde": "2026-07-01",
+          "vigente_hasta": "2026-12-31",
+          "estado": "vigente_al_corte",
+          "localizador": "Páginas 26–30",
+          "nota": null
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "variable",
+            "promedio_ponderado_anual_pct": 65.52,
+            "iva": "sin_IVA",
+            "formula_maxima_publicada": "TIIE de fondeo + 59.90 puntos porcentuales, a 28 días",
+            "tasa_minima_pct": null
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:eadbc941-a74c-4127-ac61-b4250eb85b52/original/as/Cards_Folleto_TDC_LikeUMastercard_Jun2026_V2_0726.pdf",
+          "fuente_id": "likeu_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 26–30",
+          "nota": "Conservar redacción de la referencia; no convertir a tasa efectiva ni suponer TIIE futura."
+        },
+        "anualidad": {
+          "valor": {
+            "monto": 0,
+            "moneda": "MXN",
+            "periodicidad": "anual",
+            "iva": "sin_IVA"
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:eadbc941-a74c-4127-ac61-b4250eb85b52/original/as/Cards_Folleto_TDC_LikeUMastercard_Jun2026_V2_0726.pdf",
+          "fuente_id": "likeu_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 26–30",
+          "nota": null
+        },
+        "comisiones": {
+          "valor": [
+            {
+              "concepto": "Mantenimiento/administración titular",
+              "monto": 169,
+              "moneda": "MXN",
+              "periodicidad": "mensual",
+              "iva": "más_IVA",
+              "exencion": "Compras acumuladas del periodo ≥$200 MXN"
+            },
+            {
+              "concepto": "Reposición robo/extravío",
+              "monto": 199,
+              "moneda": "MXN",
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Pago tardío",
+              "monto": 410,
+              "moneda": "MXN",
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Transferencia saldo por internet",
+              "porcentaje": 10,
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Transferencia saldo por ventanilla/teléfono",
+              "porcentaje": 3,
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            }
+          ],
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:eadbc941-a74c-4127-ac61-b4250eb85b52/original/as/Cards_Folleto_TDC_LikeUMastercard_Jun2026_V2_0726.pdf",
+          "fuente_id": "likeu_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 26–30",
+          "nota": "El folleto dice comisiones sin IVA; el banco se reserva cobrar menor. Anualidad cero no significa ausencia de comisión mensual."
+        },
+        "requisitos": {
+          "valor": {
+            "edad_min_anios": 20,
+            "edad_max_anios": 69,
+            "ingreso_minimo_mensual_mxn": 7500,
+            "documentos": [
+              "3 comprobantes de ingresos",
+              "Identificación vigente; pasaporte y FM2 para extranjeros",
+              "Domicilio ≤2 meses",
+              "Solicitud firmada"
+            ]
+          },
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/tarjetas-de-credito/likeu",
+          "fuente_id": "likeu",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos, costos y FAQ",
+          "nota": null
+        },
+        "monto": {
+          "valor": null,
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/tarjetas-de-credito/likeu",
+          "fuente_id": "likeu",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Requisitos, costos y FAQ",
+          "nota": "Los límites iniciales de $1,000/$2,000 citados para un reto por invitación no son rango universal del producto."
+        },
+        "plazo": {
+          "valor": null,
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:eadbc941-a74c-4127-ac61-b4250eb85b52/original/as/Cards_Folleto_TDC_LikeUMastercard_Jun2026_V2_0726.pdf",
+          "fuente_id": "likeu_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Páginas 26–30",
+          "nota": "No se publica un plazo único de amortización general."
+        },
+        "acceso_digital": {
+          "valor": "Contratación en app para clientes con oferta preaprobada; la página también remite a sucursal",
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/tarjetas-de-credito/likeu",
+          "fuente_id": "likeu",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos, costos y FAQ",
+          "nota": null
+        }
+      },
+      "discrepancias": [
+        {
+          "valor": {
+            "campo": "tasa_promedio",
+            "valor_alternativo_pct": 66.35,
+            "decision": "Usar 65.52% del bloque fechado y folleto coincidente; mantener FAQ como discrepancia"
+          },
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/tarjetas-de-credito/likeu",
+          "fuente_id": "likeu",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "discrepante",
+          "localizador": "Requisitos, costos y FAQ",
+          "nota": "La FAQ no informa fecha propia del 66.35%."
+        }
+      ],
+      "historial_no_usar_como_vigente": [],
+      "alertas": [
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ]
+    },
+    {
+      "id": "hsbc_zero",
+      "categoria": "tarjeta_credito",
+      "nombre": {
+        "valor": "Tarjeta de Crédito HSBC Zero",
+        "fuente_url": "https://www.hsbc.com.mx/tarjetas-de-credito/productos/zero/",
+        "fuente_id": "zero",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Requisitos y legales",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "HSBC México, S.A., Institución de Banca Múltiple, Grupo Financiero HSBC",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": null
+      },
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": "El oficio de 2026 respalda clasificación institucional. No sustituye una consulta de estatus SIPRES/PES en tiempo real ni certifica calidad o aprobación del producto."
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.hsbc.com.mx/tarjetas-de-credito/productos/zero/",
+        "fuente_id": "zero",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Requisitos y legales",
+        "nota": null
+      },
+      "campos": {
+        "cat": {
+          "valor": {
+            "porcentaje": 95.5,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "nota_supuestos": "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
+          },
+          "fuente_url": "https://www.hsbc.com.mx/tarjetas-de-credito/productos/zero/",
+          "fuente_id": "zero",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-08-07",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-12-07",
+          "estado": "vigente_al_corte",
+          "localizador": "Requisitos y legales",
+          "nota": null
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "variable",
+            "promedio_ponderado_anual_pct": 45.71,
+            "iva": "ND",
+            "formula_maxima_publicada": "TIIE a 28 días + hasta 70 puntos porcentuales"
+          },
+          "fuente_url": "https://www.hsbc.com.mx/content/dam/hsbc/mx/documents/tarjetas/tarjeta_credito.pdf",
+          "fuente_id": "zero_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 1–3; tabla visual verificada",
+          "nota": "La tasa personalizada se consulta en carátula/estado de cuenta. No mezclar con tasas promocionales de transferencia."
+        },
+        "anualidad": {
+          "valor": {
+            "monto": 0,
+            "moneda": "MXN",
+            "periodicidad": "anual",
+            "iva": "sin_IVA"
+          },
+          "fuente_url": "https://www.hsbc.com.mx/tarjetas-de-credito/productos/zero/",
+          "fuente_id": "zero",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos y legales",
+          "nota": null
+        },
+        "comisiones": {
+          "valor": [
+            {
+              "concepto": "Administración titular",
+              "monto": 186,
+              "moneda": "MXN",
+              "periodicidad": "mensual",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Pago tardío",
+              "monto": 509,
+              "moneda": "MXN",
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Disposición de crédito",
+              "valor_literal": "No Aplica",
+              "iva": "no_aplica"
+            },
+            {
+              "concepto": "Reposición",
+              "valor_literal": "No Aplica",
+              "iva": "no_aplica"
+            }
+          ],
+          "fuente_url": "https://www.hsbc.com.mx/content/dam/hsbc/mx/documents/tarjetas/tarjeta_credito.pdf",
+          "fuente_id": "zero_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 1–3; tabla visual verificada",
+          "nota": "Tabla visual verificada. “No Aplica” se conserva sin transformarlo en dato numérico cero."
+        },
+        "intereses_disposicion": {
+          "valor": "La disposición de efectivo genera intereses desde el día siguiente hasta liquidar el monto dispuesto",
+          "fuente_url": "https://www.hsbc.com.mx/tarjetas-de-credito/productos/zero/",
+          "fuente_id": "zero",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos y legales",
+          "nota": "Comisión por disposición e intereses de disposición son conceptos distintos."
+        },
+        "exencion_administracion": {
+          "valor": {
+            "acumulado_minimo_mensual_mxn": 300,
+            "operaciones": "Compras, cargos automáticos, disposición efectivo, transferencias o saldo a plazos; titular/adicionales; entre cortes"
+          },
+          "fuente_url": "https://www.hsbc.com.mx/tarjetas-de-credito/productos/zero/",
+          "fuente_id": "zero",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos y legales",
+          "nota": null
+        },
+        "requisitos": {
+          "valor": {
+            "tipo_persona": "física",
+            "edad": "18 a 74 años 11 meses",
+            "ingreso_minimo_mensual_mxn": 25000,
+            "ingreso_minimo_con_nomina_hsbc_mxn": 5000,
+            "historial": "≥6 meses en Buró y buen historial",
+            "documentos": [
+              "INE o FM2 y pasaporte",
+              "Domicilio ≤2 meses",
+              "Prueba de ingresos admitida por banco"
+            ]
+          },
+          "fuente_url": "https://www.hsbc.com.mx/tarjetas-de-credito/productos/zero/",
+          "fuente_id": "zero",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos y legales",
+          "nota": null
+        },
+        "monto": {
+          "valor": null,
+          "fuente_url": "https://www.hsbc.com.mx/tarjetas-de-credito/productos/zero/",
+          "fuente_id": "zero",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Requisitos y legales",
+          "nota": "Línea individual no divulgada como rango general."
+        },
+        "plazo": {
+          "valor": null,
+          "fuente_url": "https://www.hsbc.com.mx/tarjetas-de-credito/productos/zero/",
+          "fuente_id": "zero",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Requisitos y legales",
+          "nota": "Sin plazo único general; transferencias a plazos son otra operación."
+        }
+      },
+      "discrepancias": [
+        {
+          "valor": {
+            "campo": "tasa_promedio_antigua",
+            "valor_pct": 49.04,
+            "decision": "No usar: pertenece a bloque vencido del comparador"
+          },
+          "fuente_url": "https://www.hsbc.com.mx/tarjetas-de-credito/comparador-de-tarjetas-de-credito/zero/",
+          "fuente_id": "zero_ant",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-03-10",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-09-10",
+          "estado": "vencido",
+          "localizador": "Legales",
+          "nota": null
+        }
+      ],
+      "historial_no_usar_como_vigente": [
+        {
+          "valor": {
+            "porcentaje": 95.5,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "nota_supuestos": "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
+          },
+          "fuente_url": "https://www.hsbc.com.mx/tarjetas-de-credito/comparador-de-tarjetas-de-credito/zero/",
+          "fuente_id": "zero_ant",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-03-10",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-09-10",
+          "estado": "vencido",
+          "localizador": "Legales",
+          "nota": null
+        }
+      ],
+      "alertas": [
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ]
+    },
+    {
+      "id": "banregio_win",
+      "categoria": "tarjeta_credito",
+      "nombre": {
+        "valor": "Tarjeta Win Banregio",
+        "fuente_url": "https://www.banregio.com/personas/tarjetas/banregio.php",
+        "fuente_id": "win",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Requisitos y Ley de Transparencia",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "Banco Regional, S.A., Institución de Banca Múltiple, Banregio Grupo Financiero",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": null
+      },
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": "El oficio de 2026 respalda clasificación institucional. No sustituye una consulta de estatus SIPRES/PES en tiempo real ni certifica calidad o aprobación del producto."
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.banregio.com/personas/tarjetas/banregio.php",
+        "fuente_id": "win",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Requisitos y Ley de Transparencia",
+        "nota": null
+      },
+      "campos": {
+        "cat": {
+          "valor": {
+            "porcentaje": 40.6,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "nota_supuestos": "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
+          },
+          "fuente_url": "https://www.banregio.com/personas/tarjetas/banregio.php",
+          "fuente_id": "win",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-04-30",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-10-30",
+          "estado": "vigente_al_corte",
+          "localizador": "Requisitos y Ley de Transparencia",
+          "nota": null
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "variable",
+            "promedio_ponderado_anual_pct": 34.2,
+            "iva": "ND",
+            "formula_minima": "TIIE de fondeo compuesta por adelantado a 28 días + 27 puntos porcentuales",
+            "formula_maxima": "Misma TIIE + 42 puntos porcentuales"
+          },
+          "fuente_url": "https://portalbanregio.s3.amazonaws.com/assets/naranja/img/Tarjetas-Credito.pdf",
+          "fuente_id": "win_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 3–6",
+          "nota": null
+        },
+        "anualidad": {
+          "valor": {
+            "monto": 0,
+            "moneda": "MXN",
+            "periodicidad": "anual",
+            "iva": "sin_IVA"
+          },
+          "fuente_url": "https://www.banregio.com/personas/tarjetas/banregio.php",
+          "fuente_id": "win",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos y Ley de Transparencia",
+          "nota": null
+        },
+        "comisiones": {
+          "valor": [
+            {
+              "concepto": "Disposición efectivo",
+              "porcentaje": 5,
+              "base": "transacción",
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Reposición por robo/extravío",
+              "monto": 190,
+              "moneda": "MXN",
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Pago tardío",
+              "monto_maximo": 300,
+              "moneda": "MXN",
+              "regla": "Menor entre $300 y pago mínimo",
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Alerta SMS de compras diarias ≤$1,000",
+              "monto": 1.5,
+              "moneda": "MXN",
+              "periodicidad": "mensaje",
+              "iva": "más_IVA"
+            }
+          ],
+          "fuente_url": "https://portalbanregio.s3.amazonaws.com/assets/naranja/img/Tarjetas-Credito.pdf",
+          "fuente_id": "win_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 3–6",
+          "nota": "Comisiones de cajeros de otros bancos pueden agregarse."
+        },
+        "requisitos": {
+          "valor": {
+            "tipo_persona": "física o uso personal de persona física con actividad empresarial",
+            "edad": "18 a 79 años 11 meses",
+            "ingreso_minimo_mensual_mxn": 50000,
+            "documentos": [
+              "Solicitud firmada",
+              "Identificación vigente",
+              "Domicilio vigente",
+              "2 meses de nómina o 3 estados de cheques"
+            ]
+          },
+          "fuente_url": "https://www.banregio.com/personas/tarjetas/banregio.php",
+          "fuente_id": "win",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos y Ley de Transparencia",
+          "nota": null
+        },
+        "monto": {
+          "valor": null,
+          "fuente_url": "https://www.banregio.com/personas/tarjetas/banregio.php",
+          "fuente_id": "win",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Requisitos y Ley de Transparencia",
+          "nota": "No se divulga rango de línea de crédito general."
+        },
+        "plazo": {
+          "valor": null,
+          "fuente_url": "https://www.banregio.com/personas/tarjetas/banregio.php",
+          "fuente_id": "win",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Requisitos y Ley de Transparencia",
+          "nota": "No convertir diferimiento de hasta 24 meses en plazo de toda la tarjeta."
+        },
+        "beneficios": {
+          "valor": {
+            "recompensas_fisica_pct": 1,
+            "recompensas_virtual_en_linea_pct": 2
+          },
+          "fuente_url": "https://www.banregio.com/personas/tarjetas/banregio.php",
+          "fuente_id": "win",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos y Ley de Transparencia",
+          "nota": "Sujeto a términos del programa; no se calculó valor neto."
+        },
+        "aprobacion": {
+          "valor": "Sujeto a aprobación de crédito",
+          "fuente_url": "https://www.banregio.com/personas/tarjetas/banregio.php",
+          "fuente_id": "win",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos y Ley de Transparencia",
+          "nota": null
+        }
+      },
+      "discrepancias": [],
+      "historial_no_usar_como_vigente": [],
+      "alertas": [
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ]
+    },
+    {
+      "id": "bbva_personal_inmediato",
+      "categoria": "credito_personal",
+      "nombre": {
+        "valor": "Préstamo Personal Inmediato BBVA",
+        "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+        "fuente_id": "ppi",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Características, requisitos y costos",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "BBVA México, S.A., Institución de Banca Múltiple, Grupo Financiero BBVA México",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": null
+      },
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": "El oficio de 2026 respalda clasificación institucional. No sustituye una consulta de estatus SIPRES/PES en tiempo real ni certifica calidad o aprobación del producto."
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+        "fuente_id": "ppi",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Características, requisitos y costos",
+        "nota": null
+      },
+      "campos": {
+        "cat": {
+          "valor": {
+            "porcentaje": 36.1,
+            "tipo": "promedio_ponderado",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "nota_supuestos": "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+          "fuente_id": "ppi",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-07-10",
+          "vigente_desde": null,
+          "vigente_hasta": "2027-01-10",
+          "estado": "vigente_al_corte",
+          "localizador": "Características, requisitos y costos",
+          "nota": null
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "fija",
+            "minima_anual_pct": 25.75,
+            "maxima_anual_pct": 39.95,
+            "iva": "sin_IVA"
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+          "fuente_id": "ppi",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos y costos",
+          "nota": "La tasa depende de evaluación individual."
+        },
+        "comisiones": {
+          "valor": [
+            {
+              "concepto": "Contratación",
+              "porcentaje": 2.75,
+              "base": "monto del crédito",
+              "periodicidad": "única al contratar",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Prepago",
+              "monto": 0,
+              "moneda": "MXN",
+              "iva": "no_especificado"
+            }
+          ],
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+          "fuente_id": "ppi",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos y costos",
+          "nota": null
+        },
+        "monto": {
+          "valor": {
+            "minimo": 3000,
+            "maximo": 1500000,
+            "moneda": "MXN"
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+          "fuente_id": "ppi",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos y costos",
+          "nota": null
+        },
+        "plazo": {
+          "valor": {
+            "minimo_meses": 6,
+            "maximo_meses": 72
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+          "fuente_id": "ppi",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos y costos",
+          "nota": null
+        },
+        "pagos": {
+          "valor": {
+            "frecuencia": [
+              "mensual",
+              "quincenal"
+            ],
+            "fijos_antes_iva": true,
+            "primer_pago": "Irregular, solo intereses más IVA"
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+          "fuente_id": "ppi",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos y costos",
+          "nota": null
+        },
+        "requisitos": {
+          "valor": {
+            "cliente": "Persona física o con actividad empresarial; cuenta de depósito o tarjeta BBVA; oferta vigente preaprobada",
+            "edad": "18 a 84 años; edad + plazo ≤84 años y 364 días",
+            "historial": "Buen historial y capacidad de pago",
+            "documentos": [
+              "Identificación y documento migratorio si aplica",
+              "Domicilio ≤3 meses",
+              "Estado de cuenta bancario",
+              "Comprobante de ingreso último mes"
+            ]
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+          "fuente_id": "ppi",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos y costos",
+          "nota": null
+        },
+        "seguro": {
+          "valor": {
+            "cobro": false
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+          "fuente_id": "ppi",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos y costos",
+          "nota": "La fuente dice sin cobro de seguro; no equivale a cobertura universal."
+        },
+        "garantia": {
+          "valor": "Sin aval ni garantía",
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+          "fuente_id": "ppi",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos y costos",
+          "nota": null
+        },
+        "ingreso_minimo": {
+          "valor": null,
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+          "fuente_id": "ppi",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Características, requisitos y costos",
+          "nota": "No divulgado en la página consultada."
+        }
+      },
+      "discrepancias": [],
+      "historial_no_usar_como_vigente": [
+        {
+          "valor": {
+            "porcentaje": 33.7,
+            "tipo": "promedio_ponderado",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "nota_supuestos": "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
+          },
+          "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/prestamos-personales/ppi/ficha-tecnica-prestamo-personal-inmediato.pdf",
+          "fuente_id": "ppi_ant",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2021-06-01",
+          "fecha_calculo": "2025-11-03",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-05-03",
+          "estado": "vencido",
+          "localizador": "Página 1",
+          "nota": null
+        }
+      ],
+      "alertas": [
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ]
+    },
+    {
+      "id": "santander_personal",
+      "categoria": "credito_personal",
+      "nombre": {
+        "valor": "Crédito Personal Santander",
+        "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-personales/credito-personal-santander/",
+        "fuente_id": "personal_santander",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Características y costos",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "Banco Santander México, S.A., Institución de Banca Múltiple, Grupo Financiero Santander México",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": null
+      },
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": "El oficio de 2026 respalda clasificación institucional. No sustituye una consulta de estatus SIPRES/PES en tiempo real ni certifica calidad o aprobación del producto."
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-personales/credito-personal-santander/",
+        "fuente_id": "personal_santander",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Características y costos",
+        "nota": null
+      },
+      "campos": {
+        "cat": {
+          "valor": {
+            "porcentaje": 36.9,
+            "tipo": "promedio_ponderado",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "nota_supuestos": "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:95f815f3-9707-4ddf-99b1-9ac025c2699a/original/as/folleto-electronico-ajuste-comision.pdf",
+          "fuente_id": "personal_santander_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-10",
+          "fecha_calculo": "2026-08-31",
+          "vigente_desde": null,
+          "vigente_hasta": "2027-02-28",
+          "estado": "vigente_al_corte",
+          "localizador": "Páginas 2, 3 y 6",
+          "nota": null
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "fija",
+            "promedio_ponderado_anual_pct": 28.32,
+            "iva": "no_especificado_en_ese_campo"
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:95f815f3-9707-4ddf-99b1-9ac025c2699a/original/as/folleto-electronico-ajuste-comision.pdf",
+          "fuente_id": "personal_santander_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-10",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 2, 3 y 6",
+          "nota": null
+        },
+        "tasa_maxima_publicada": {
+          "valor": {
+            "maxima_anual_pct": 60,
+            "iva": "no_especificado"
+          },
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-personales/credito-personal-santander/",
+          "fuente_id": "personal_santander",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-03-01",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-09-30",
+          "estado": "vencido",
+          "localizador": "Características y costos",
+          "nota": "Bloque HTML con oferta fechada al 30 septiembre 2026; no usar esta tasa máxima como condición vigente garantizada."
+        },
+        "comisiones": {
+          "valor": [
+            {
+              "concepto": "Disposición",
+              "porcentaje": 1.75,
+              "base": "monto contratado",
+              "periodicidad": "evento",
+              "iva": "ND_en_folleto_actual"
+            },
+            {
+              "concepto": "Gastos cobranza/penalización",
+              "monto": 200,
+              "moneda": "MXN",
+              "periodicidad": "evento mensual, máximo 3 consecutivos",
+              "iva": "ND_en_folleto_actual"
+            }
+          ],
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:95f815f3-9707-4ddf-99b1-9ac025c2699a/original/as/folleto-electronico-ajuste-comision.pdf",
+          "fuente_id": "personal_santander_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-10",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 2, 3 y 6",
+          "nota": "El HTML anterior sí explicita +IVA para disposición; el PDF actual no etiqueta IVA de esas comisiones. No inferir precio con IVA."
+        },
+        "iva_disposicion_fuente_anterior": {
+          "valor": "Más IVA",
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-personales/credito-personal-santander/",
+          "fuente_id": "personal_santander",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": "2026-09-30",
+          "estado": "vencido",
+          "localizador": "Características y costos",
+          "nota": "Evidencia conservada de la oferta anterior, no impuesta silenciosamente al documento nuevo."
+        },
+        "monto": {
+          "valor": {
+            "minimo": null,
+            "maximo": 3000000,
+            "moneda": "MXN"
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:95f815f3-9707-4ddf-99b1-9ac025c2699a/original/as/folleto-electronico-ajuste-comision.pdf",
+          "fuente_id": "personal_santander_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-10",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 2, 3 y 6",
+          "nota": null
+        },
+        "plazo": {
+          "valor": {
+            "minimo_meses": 6,
+            "maximo_meses": 72
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:95f815f3-9707-4ddf-99b1-9ac025c2699a/original/as/folleto-electronico-ajuste-comision.pdf",
+          "fuente_id": "personal_santander_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-10",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 2, 3 y 6",
+          "nota": null
+        },
+        "requisitos": {
+          "valor": {
+            "edad": "20 a 81 años; sujeta a evaluación",
+            "ingreso_minimo_mxn": 3000,
+            "periodicidad_ingreso": "ND en renglón del producto",
+            "asalariados": "2 años de continuidad sumando empleo actual/anterior; ≥3 meses en actual",
+            "independientes": "2 años continuos en actividad",
+            "historial": "Bueno si existe",
+            "documentos": [
+              "Identificación vigente",
+              "Domicilio ≤2 meses",
+              "Ingresos 3 meses"
+            ]
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:95f815f3-9707-4ddf-99b1-9ac025c2699a/original/as/folleto-electronico-ajuste-comision.pdf",
+          "fuente_id": "personal_santander_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-10",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 2, 3 y 6",
+          "nota": null
+        },
+        "seguro": {
+          "valor": {
+            "obligatorio": true,
+            "tipo": "Vida e invalidez total y permanente; saldo insoluto; Santander beneficiario preferente",
+            "aseguradora": "Santander o tercero que cumpla requisitos",
+            "prima": null
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:95f815f3-9707-4ddf-99b1-9ac025c2699a/original/as/folleto-electronico-ajuste-comision.pdf",
+          "fuente_id": "personal_santander_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-10",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 2, 3 y 6",
+          "nota": null
+        },
+        "prepago": {
+          "valor": "Sin penalización estando al corriente",
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:95f815f3-9707-4ddf-99b1-9ac025c2699a/original/as/folleto-electronico-ajuste-comision.pdf",
+          "fuente_id": "personal_santander_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-10",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 2, 3 y 6",
+          "nota": null
+        },
+        "garantia": {
+          "valor": "Sin garantía",
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:95f815f3-9707-4ddf-99b1-9ac025c2699a/original/as/folleto-electronico-ajuste-comision.pdf",
+          "fuente_id": "personal_santander_pdf",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-10",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 2, 3 y 6",
+          "nota": null
+        }
+      },
+      "discrepancias": [
+        {
+          "valor": {
+            "campo": "plazo_minimo",
+            "alternativo_meses": 3,
+            "seleccionado_meses": 6,
+            "decision": "Usar ficha producto y folleto: 6 meses; el beneficio HTML mezcla 3 meses"
+          },
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-personales/credito-personal-santander/",
+          "fuente_id": "personal_santander",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "discrepante",
+          "localizador": "Características y costos",
+          "nota": null
+        }
+      ],
+      "historial_no_usar_como_vigente": [
+        {
+          "valor": {
+            "porcentaje": 36.9,
+            "tipo": "promedio_ponderado",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "nota_supuestos": "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
+          },
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-personales/credito-personal-santander/",
+          "fuente_id": "personal_santander",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-03-01",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-09-30",
+          "estado": "vencido",
+          "localizador": "Características y costos",
+          "nota": null
+        }
+      ],
+      "alertas": [
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ]
+    },
+    {
+      "id": "hsbc_personal",
+      "categoria": "credito_personal",
+      "nombre": {
+        "valor": "Crédito Personal HSBC",
+        "fuente_url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+        "fuente_id": "personal_hsbc",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Beneficios, costos, requisitos y legales",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "HSBC México, S.A., Institución de Banca Múltiple, Grupo Financiero HSBC",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": null
+      },
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": "El oficio de 2026 respalda clasificación institucional. No sustituye una consulta de estatus SIPRES/PES en tiempo real ni certifica calidad o aprobación del producto."
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+        "fuente_id": "personal_hsbc",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Beneficios, costos, requisitos y legales",
+        "nota": null
+      },
+      "campos": {
+        "cat": {
+          "valor": {
+            "porcentaje": 37.3,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "nota_supuestos": "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
+          },
+          "fuente_url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+          "fuente_id": "personal_hsbc",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-06-30",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-12-31",
+          "estado": "vigente_al_corte",
+          "localizador": "Beneficios, costos, requisitos y legales",
+          "nota": null
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "fija",
+            "minima_anual_pct": null,
+            "maxima_anual_pct": null,
+            "promedio_anual_pct": null,
+            "iva": "ND"
+          },
+          "fuente_url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+          "fuente_id": "personal_hsbc",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Beneficios, costos, requisitos y legales",
+          "nota": "No se publica porcentaje vigente en la página; no recuperar rangos de artículos ajenos o del segmento Premier."
+        },
+        "comisiones": {
+          "valor": [
+            {
+              "concepto": "Contratación",
+              "porcentaje": 1.77,
+              "periodicidad": "una vez por disposición",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Pago tardío simple mensual/quincenal",
+              "monto": 366,
+              "moneda": "MXN",
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            },
+            {
+              "concepto": "Pago tardío simple semanal/cuenta corriente",
+              "monto": 100,
+              "moneda": "MXN",
+              "periodicidad": "evento",
+              "iva": "más_IVA"
+            }
+          ],
+          "fuente_url": "https://www.hsbc.com.mx/content/dam/hsbc/mx/documents/creditos/tarifas_comisiones_cred_personal.pdf",
+          "fuente_id": "personal_hsbc_com",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2025-07-07",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Página 1",
+          "nota": "Anexo emitido 7 julio 2025 enlazado actualmente; no publica fecha final de vigencia."
+        },
+        "monto": {
+          "valor": {
+            "minimo": null,
+            "maximo": 1000000,
+            "moneda": "MXN"
+          },
+          "fuente_url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+          "fuente_id": "personal_hsbc",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Beneficios, costos, requisitos y legales",
+          "nota": null
+        },
+        "plazo": {
+          "valor": {
+            "minimo_meses": 6,
+            "maximo_meses": 60
+          },
+          "fuente_url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+          "fuente_id": "personal_hsbc",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Beneficios, costos, requisitos y legales",
+          "nota": "El folleto vencido dice hasta 72 meses; no ampliar la oferta actual con él."
+        },
+        "pagos": {
+          "valor": {
+            "fijos": true
+          },
+          "fuente_url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+          "fuente_id": "personal_hsbc",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Beneficios, costos, requisitos y legales",
+          "nota": null
+        },
+        "requisitos": {
+          "valor": {
+            "edad": "18 a 74 años 11 meses",
+            "ingreso_mensual_mxn": {
+              "operador": ">",
+              "valor": 5000
+            },
+            "historial": "Bueno",
+            "documentos": [
+              "INE o pasaporte; tarjeta de residencia si extranjero",
+              "Domicilio ≤2 meses",
+              "Ingresos de 2 meses o 6 estados de cuenta",
+              "Solicitud firmada"
+            ]
+          },
+          "fuente_url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+          "fuente_id": "personal_hsbc",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Beneficios, costos, requisitos y legales",
+          "nota": null
+        },
+        "segmento": {
+          "valor": "El encabezado de la página aún dice cliente HSBC Advance; acceso por oferta en canales o evaluación en sucursal",
+          "fuente_url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+          "fuente_id": "personal_hsbc",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Beneficios, costos, requisitos y legales",
+          "nota": "No convertir “Advance” heredado en rechazo automático sin confirmar política vigente."
+        },
+        "seguro": {
+          "valor": null,
+          "fuente_url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+          "fuente_id": "personal_hsbc",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Beneficios, costos, requisitos y legales",
+          "nota": "La página describe condonación al fallecimiento, no prima de seguro ni requisitos exhaustivos de aseguramiento."
+        },
+        "aprobacion": {
+          "valor": "Sujeto a aprobación y capacidad de pago",
+          "fuente_url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+          "fuente_id": "personal_hsbc",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Beneficios, costos, requisitos y legales",
+          "nota": null
+        }
+      },
+      "discrepancias": [
+        {
+          "valor": {
+            "campo": "plazo_maximo",
+            "alternativo_meses": 72,
+            "seleccionado_meses": 60,
+            "decision": "No usar 72 meses del folleto vencido"
+          },
+          "fuente_url": "https://www.hsbc.com.mx/content/dam/hsbc/mx/documents/creditos/folleto_digital_personal.pdf",
+          "fuente_id": "personal_hsbc_ant",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": "2026-04-30",
+          "estado": "vencido",
+          "localizador": "Páginas 1–2",
+          "nota": null
+        }
+      ],
+      "historial_no_usar_como_vigente": [
+        {
+          "valor": {
+            "porcentaje": 40.4,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "nota_supuestos": "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
+          },
+          "fuente_url": "https://www.hsbc.com.mx/content/dam/hsbc/mx/documents/creditos/folleto_digital_personal.pdf",
+          "fuente_id": "personal_hsbc_ant",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2025-10-31",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-04-30",
+          "estado": "vencido",
+          "localizador": "Páginas 1–2",
+          "nota": null
+        }
+      ],
+      "alertas": [
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ]
+    },
+    {
+      "id": "banamex_personal",
+      "categoria": "credito_personal",
+      "nombre": {
+        "valor": "Crédito Personal Banamex",
+        "fuente_url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+        "fuente_id": "personal_banamex",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Características, requisitos, simulador público y legales",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "Banco Nacional de México, S.A., integrante del Grupo Financiero Banamex",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": null
+      },
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fuente_id": "regulador",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Sección IV, Banca Múltiple",
+        "nota": "El oficio de 2026 respalda clasificación institucional. No sustituye una consulta de estatus SIPRES/PES en tiempo real ni certifica calidad o aprobación del producto."
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+        "fuente_id": "personal_banamex",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": "Características, requisitos, simulador público y legales",
+        "nota": null
+      },
+      "campos": {
+        "cat": {
+          "valor": null,
+          "fuente_url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+          "fuente_id": "personal_banamex",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Características, requisitos, simulador público y legales",
+          "nota": "El HTML y la extracción de página dejan CAT, cálculo y vigencia vacíos. La ficha IFIT indexa 36.8%, pero devuelve HTTP 502: no se certifica vigencia ni IVA por ese snippet."
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "fija",
+            "desde_anual_pct": 20,
+            "maxima_anual_pct": 50,
+            "iva": "más_IVA_en_maxima"
+          },
+          "fuente_url": "https://www.banamex.com/efectivo-para-ti/index.html",
+          "fuente_id": "personal_banamex_efectivo",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Crédito Personal y notas 9–12",
+          "nota": "Desde depende del perfil; no supone oferta para cualquier solicitante."
+        },
+        "comision_contratacion": {
+          "valor": {
+            "monto": 0,
+            "moneda": "MXN",
+            "iva": "no_especificado",
+            "caracter": "Promoción sin vigencia comprobable"
+          },
+          "fuente_url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+          "fuente_id": "personal_banamex",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos, simulador público y legales",
+          "nota": "No usar exención como costo permanente. El mismo HTML muestra cero dentro del simulador y de una promoción."
+        },
+        "comisiones": {
+          "valor": [
+            {
+              "concepto": "Disposición para transferencia de saldo",
+              "monto": 150,
+              "moneda": "MXN",
+              "iva": "más_IVA",
+              "aplicacion": "Nota 6 de redisposición"
+            }
+          ],
+          "fuente_url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+          "fuente_id": "personal_banamex",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos, simulador público y legales",
+          "nota": "No extender esta comisión a toda disposición inicial."
+        },
+        "monto": {
+          "valor": {
+            "minimo": 10000,
+            "maximo": 750000,
+            "moneda": "MXN"
+          },
+          "fuente_url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+          "fuente_id": "personal_banamex",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos, simulador público y legales",
+          "nota": "Límites del simulador público y máximo de la ficha; sujeto a capacidad de pago."
+        },
+        "plazo": {
+          "valor": {
+            "opciones_meses": [
+              24,
+              36,
+              48,
+              60
+            ]
+          },
+          "fuente_url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+          "fuente_id": "personal_banamex",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos, simulador público y legales",
+          "nota": null
+        },
+        "requisitos": {
+          "valor": {
+            "invitacion": true,
+            "edad": "21 a 79 años; FAQ precisa 79 años 11 meses",
+            "ingreso_minimo_mxn": 8000,
+            "periodicidad_ingreso": "ND en bloque consultado",
+            "cliente": "Cuenta cheques, maestra o perfiles según FAQ",
+            "documentos": [
+              "Identificación vigente y CURP o residencia permanente",
+              "Domicilio ≤3 meses",
+              "Teléfono actualizado"
+            ]
+          },
+          "fuente_url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+          "fuente_id": "personal_banamex",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos, simulador público y legales",
+          "nota": null
+        },
+        "prepago": {
+          "valor": "Sin penalización",
+          "fuente_url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+          "fuente_id": "personal_banamex",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos, simulador público y legales",
+          "nota": null
+        },
+        "seguro": {
+          "valor": {
+            "tipo": "Liberación de adeudo por fallecimiento",
+            "costo": 0,
+            "condicion": "Al corriente en pagos; términos del contrato"
+          },
+          "fuente_url": "https://www.banamex.com/efectivo-para-ti/index.html",
+          "fuente_id": "personal_banamex_efectivo",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Crédito Personal y notas 9–12",
+          "nota": null
+        },
+        "garantia": {
+          "valor": "Sin aval",
+          "fuente_url": "https://www.banamex.com/efectivo-para-ti/index.html",
+          "fuente_id": "personal_banamex_efectivo",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Crédito Personal y notas 9–12",
+          "nota": null
+        },
+        "reca": {
+          "valor": "0300-140-000731/ (primeras tres series; no número completo vigente)",
+          "fuente_url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+          "fuente_id": "personal_banamex",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Características, requisitos, simulador público y legales",
+          "nota": null
+        }
+      },
+      "discrepancias": [
+        {
+          "valor": {
+            "campo": "simulador_tasa",
+            "valores_no_adoptados_pct": [
+              12,
+              14
+            ],
+            "decision": "Son valores de plantilla/simulador; usar desde 20% y máximo 50% del texto de producto"
+          },
+          "fuente_url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+          "fuente_id": "personal_banamex",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "discrepante",
+          "localizador": "Características, requisitos, simulador público y legales",
+          "nota": null
+        },
+        {
+          "valor": {
+            "campo": "cat_snippet_ifit",
+            "valor_indexado_pct": 36.8,
+            "decision": "Solo pista de verificación; no CAT listo para comparación"
+          },
+          "fuente_url": "https://ifit.condusef.gob.mx/ifit/ft_general_final.php?b=1&idnc=40633",
+          "fuente_id": "personal_banamex_ifit",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "no_verificado_completo",
+          "localizador": "Resultado indexado; apertura falló HTTP 502",
+          "nota": null
+        }
+      ],
+      "historial_no_usar_como_vigente": [],
+      "alertas": [
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ]
+    },
+    {
+      "id": "mx-hipoteca-bbva-fija",
+      "categoria": "credito_hipotecario",
+      "nombre": {
+        "valor": "Hipoteca Fija BBVA",
+        "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "Título",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "BBVA México, S.A., Institución de Banca Múltiple, Grupo Financiero BBVA México",
+        "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/hipotecario/folleto-informativo-hipotecario.pdf",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "p. 6",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "nota": null
+      },
+      "campos": {
+        "destino": {
+          "valor": "Adquisición de vivienda nueva o usada",
+          "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/hipotecario/folleto-informativo-hipotecario.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 6",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "cat": {
+          "valor": {
+            "porcentaje": 13.3,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "fecha_calculo": "2026-06-30",
+            "vigencia_hasta": "2026-12-27",
+            "estado_al_corte": "vigente_segun_fecha_publicada"
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Tasa de interés y CAT",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-06-30",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-12-27",
+          "estado": "vigente_al_corte",
+          "nota": null
+        },
+        "supuestos_cat": {
+          "valor": {
+            "tasa_ordinaria_anual_porcentaje": 11.2,
+            "aforo_porcentaje": 80,
+            "plazo_anios": 15,
+            "valores_vivienda_MXN": {
+              "economica": 769264.78,
+              "media": 1824244.42,
+              "residencial": 4000139.93,
+              "residencial_plus": 8395888.43
+            }
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Tasa de interés y CAT",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "cat_por_tipo_vivienda": {
+          "valor": {
+            "economica": 13.6,
+            "media": 13.3,
+            "residencial": 12,
+            "residencial_plus": 11.4,
+            "iva": "sin_IVA",
+            "aforo_porcentaje": 80,
+            "fecha_calculo": "2026-06-30",
+            "vigencia_hasta": "2026-12-27"
+          },
+          "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/hipotecario/folleto-informativo-hipotecario.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 7",
+          "nota": "Escenarios del folleto; no sustituir por un promedio calculado por MiLana.",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-06-30",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-12-27",
+          "estado": "vigente_al_corte"
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "fija_anual",
+            "desde_porcentaje": 9.15,
+            "maximo_porcentaje": null,
+            "maximo_estado": "ND",
+            "iva": "ND"
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Bloque Tasa Anual Fija, 9.15%; hero de la misma página, 9.05%",
+          "nota": "Hay conflicto dentro de la misma web: hero 9.05% y bloque Tasa Anual Fija 9.15%. La tasa final depende de historial, monto, aforo y plazo. No elegir automáticamente una mínima definitiva.",
+          "estado": "discrepante",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null
+        },
+        "tasa_alternativa_documental": {
+          "valor": {
+            "tipo": "fija_anual",
+            "desde_porcentaje": 9.05
+          },
+          "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/hipotecario/folleto-informativo-hipotecario.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 6",
+          "nota": "Folleto 9.05%, coincidente con hero web; el bloque Tasa Anual Fija de esa misma web dice 9.15%.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "comisiones": [
+          {
+            "valor": {
+              "concepto": "Contratación",
+              "porcentaje": 1,
+              "base": "monto financiado",
+              "periodicidad": "única",
+              "iva": "exenta_segun_web"
+            },
+            "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Costos",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Contratación con programa de apoyo",
+              "porcentaje": 0.5,
+              "base": "monto financiado",
+              "periodicidad": "única",
+              "iva": "ND"
+            },
+            "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/hipotecario/folleto-informativo-hipotecario.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 7",
+            "nota": "Condición específica de programas; confirmar alcance del IVA.",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita"
+          },
+          {
+            "valor": {
+              "concepto": "Administración de crédito diferido",
+              "porcentaje": 0.03,
+              "base": "monto financiado",
+              "periodicidad": "mensual",
+              "iva": "exenta_segun_declaracion_general_web"
+            },
+            "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Costos",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Preoriginación/aprobación",
+              "monto_MXN": 672.41,
+              "periodicidad": "única por solicitante",
+              "iva": "mas_IVA"
+            },
+            "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Costos",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Pago tardío",
+              "formula": "Menor de 70 UDI y monto incumplido",
+              "periodicidad": "evento",
+              "iva": "mas_IVA"
+            },
+            "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Costos",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Prepago",
+              "estado": "sin_penalizacion",
+              "monto_MXN": 0
+            },
+            "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Pagos anticipados",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          }
+        ],
+        "otros_costos": [
+          {
+            "valor": {
+              "concepto": "Avalúo",
+              "importe": "Tabulador por valor declarado",
+              "iva": "incluido_en_tabla"
+            },
+            "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Tarifas de avalúo",
+            "nota": "El importe exacto requiere valor de vivienda.",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita"
+          },
+          {
+            "valor": {
+              "concepto": "Notariales",
+              "rango_porcentaje": [
+                5,
+                9
+              ],
+              "base": "valor vivienda",
+              "iva": "ND"
+            },
+            "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Costos",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Seguros",
+              "obligatorios": [
+                "vida",
+                "daños"
+              ],
+              "proveedor": "Puede ser distinto de BBVA",
+              "prima_total_MXN": null,
+              "estado_prima": "ND"
+            },
+            "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Requisitos y seguros",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          }
+        ],
+        "requisitos": {
+          "valor": {
+            "edad": "Más de 26; terminar antes de 85",
+            "residencia": "México",
+            "perfil": [
+              "asalariado",
+              "independiente",
+              "actividad empresarial"
+            ],
+            "historial": "bueno",
+            "antiguedad": "3 meses si vivienda <=1.5 millones; 1 año si mayor y con dependientes; 2 años si mayor y sin dependientes",
+            "documentos": [
+              "identificación",
+              "comprobante ingresos",
+              "domicilio si no consta en identificación",
+              "solicitud y autorización de buró"
+            ]
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Requisitos del solicitante y documentación",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "variante_edad": {
+          "valor": {
+            "sin_apoyo_min_anios": 26,
+            "con_apoyo_min_anios": 18,
+            "edad_mas_plazo_max_anios": 85
+          },
+          "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/hipotecario/folleto-informativo-hipotecario.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 33",
+          "nota": "La web dice >26 y terminar antes de 85; el folleto usa mínimos y no exceder. No aplicar un límite universal sin distinguir programa.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "ingreso_minimo": {
+          "valor": null,
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Requisitos",
+          "nota": "No se encontró umbral numérico general.",
+          "estado": "ND",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null
+        },
+        "montos": {
+          "valor": {
+            "credito_minimo_MXN": 50000,
+            "credito_maximo_MXN": null,
+            "maximo_estado": "ND",
+            "aforo_publicitado_hasta_porcentaje": 95
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Ventajas",
+          "nota": "95% es techo publicitado; no suponerlo universal.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "vivienda_minima": {
+          "valor": {
+            "valor_MXN": 180000
+          },
+          "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/hipotecario/folleto-informativo-hipotecario.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 7",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "plazos": {
+          "valor": {
+            "anios": [
+              5,
+              10,
+              15,
+              20
+            ]
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Ventajas",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "tasa_hero_web": {
+          "valor": {
+            "tipo": "fija_anual",
+            "desde_porcentaje": 9.05
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Hero, debajo de título Hipoteca Fija BBVA",
+          "estado": "discrepante",
+          "nota": "Coexiste con 9.15% en bloque Tasa Anual Fija.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null
+        }
+      },
+      "alertas": [
+        "Conflicto interno de tasa mínima web (hero 9.05% / bloque 9.15%); folleto 9.05% coincide con hero.",
+        "CAT general y CAT por vivienda deben permanecer identificados.",
+        "Requisitos de programa y edad tienen matices distintos entre fuentes.",
+        "No hay evaluación ni aprobación del solicitante.",
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ],
+      "discrepancias": [],
+      "historial_no_usar_como_vigente": [],
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "localizador": "Sección IV",
+        "nota": "Clasificación documental 2026; no certificado SIPRES/PES en tiempo real.",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita"
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+        "fecha_consulta": "2026-10-12",
+        "nota": "Las cantidades monetarias del catálogo se conservan en pesos salvo que el campo indique otra unidad.",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": null
+      }
+    },
+    {
+      "id": "mx-hipoteca-banorte-fuerte-adquisicion",
+      "categoria": "credito_hipotecario",
+      "nombre": {
+        "valor": "Hipoteca Fuerte Banorte, adquisición de vivienda",
+        "fuente_url": "https://www.banorte.com/Personal/Creditos-Hipotecarios/Adquisicion-de-Vivienda//Hipoteca-Fuerte",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "Título y costos",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "Banco Mercantil del Norte, S.A., Institución de Banca Múltiple, Grupo Financiero Banorte",
+        "fuente_url": "https://www.banorte.com/Personal/Creditos-Hipotecarios/Adquisicion-de-Vivienda//Hipoteca-Fuerte",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "Leyenda legal",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "nota": null
+      },
+      "campos": {
+        "destino": {
+          "valor": "Vivienda nueva o usada; ficha enfocada a adquisición tradicional",
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-Hipotecarios/Adquisicion-de-Vivienda//Hipoteca-Fuerte",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Beneficios",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "cat": {
+          "valor": {
+            "porcentaje": 12.2,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "fecha_calculo": "2026-08-10",
+            "vigencia_hasta": "2027-02-10",
+            "estado_al_corte": "vigente_segun_fecha_publicada"
+          },
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-Hipotecarios/Adquisicion-de-Vivienda//Hipoteca-Fuerte",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Leyenda legal",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-08-10",
+          "vigente_desde": null,
+          "vigente_hasta": "2027-02-10",
+          "estado": "vigente_al_corte",
+          "nota": null
+        },
+        "supuestos_cat": {
+          "valor": {
+            "base": "Promedio de créditos otorgados del producto",
+            "monto_MXN": null,
+            "plazo": null,
+            "aforo": null,
+            "detalle_faltante": "ND"
+          },
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-Hipotecarios/Adquisicion-de-Vivienda//Hipoteca-Fuerte",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Leyenda legal",
+          "nota": "No se publicó aquí un caso homogéneo con monto, plazo y aforo.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "fija_anual",
+            "desde_porcentaje": 8.8,
+            "opciones_por_perfil_porcentaje": [
+              8.8,
+              9.75,
+              10.8
+            ],
+            "iva": "ND"
+          },
+          "fuente_url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 2",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "comisiones": [
+          {
+            "valor": {
+              "concepto": "Contratación adquisición",
+              "porcentaje": 1,
+              "periodicidad": "única",
+              "iva": "ND",
+              "financiable": "Tradicional y Apoyo Infonavit; contado Cofinavit"
+            },
+            "fuente_url": "https://www.banorte.com/Personal/Creditos-Hipotecarios/Adquisicion-de-Vivienda//Hipoteca-Fuerte",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Costos",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Aprobación",
+              "monto_MXN": 750,
+              "periodicidad": "única",
+              "iva": "incluido"
+            },
+            "fuente_url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 2",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Administración crédito diferido",
+              "monto_MXN": 299,
+              "periodicidad": "mensual",
+              "iva": "incluido"
+            },
+            "fuente_url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 2",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Pago tardío",
+              "porcentaje": 5,
+              "base": "saldo vencido",
+              "iva": "mas_IVA",
+              "periodicidad": "cuando aplique"
+            },
+            "fuente_url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 2",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Sustitución de deudor",
+              "porcentaje": 1.5,
+              "minimo_MXN": 1500,
+              "base": "saldo insoluto",
+              "iva": "mas_IVA",
+              "periodicidad": "cuando aplique"
+            },
+            "fuente_url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 2",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Prepago",
+              "estado": "sin_penalizacion",
+              "monto_MXN": 0
+            },
+            "fuente_url": "https://www.banorte.com/Personal/Creditos-Hipotecarios/Adquisicion-de-Vivienda//Hipoteca-Fuerte",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Preguntas frecuentes",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          }
+        ],
+        "otros_costos": [
+          {
+            "valor": {
+              "concepto": "Avalúo",
+              "importe": "Tabulador por valor de inmueble",
+              "iva": "mas_IVA"
+            },
+            "fuente_url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 16",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Notariales adquisición",
+              "rango_porcentaje": [
+                4,
+                9
+              ],
+              "iva": "ND"
+            },
+            "fuente_url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 2",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Seguros",
+              "obligatorios": [
+                "vida",
+                "invalidez total permanente",
+                "daños"
+              ],
+              "prima_total_MXN": null,
+              "estado_prima": "ND"
+            },
+            "fuente_url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 16",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          }
+        ],
+        "requisitos": {
+          "valor": {
+            "persona": "Física con/sin actividad empresarial",
+            "edad_min_anios": 25,
+            "edad_max": "69 años 11 meses",
+            "edad_mas_plazo_max_anios": 80,
+            "antiguedad_laboral_min_anios": 2,
+            "ingreso_min_bruto_MXN": 10000,
+            "periodicidad_ingreso": "ND en el pasaje",
+            "historial": "bueno"
+          },
+          "fuente_url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 16",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "documentos": {
+          "valor": [
+            "solicitud",
+            "identificación vigente",
+            "domicilio de máximo 3 meses",
+            "comprobante ingresos"
+          ],
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-Hipotecarios/Adquisicion-de-Vivienda//Hipoteca-Fuerte",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Requisitos",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "montos": {
+          "valor": {
+            "credito_minimo_MXN": 75000,
+            "credito_maximo_MXN": null,
+            "maximo_estado": "ND",
+            "vivienda_minima_MXN": 350000,
+            "aforo_tradicional_max_porcentaje": 90,
+            "aforo_programas_infonavit_max_porcentaje": 95
+          },
+          "fuente_url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 2",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "plazos": {
+          "valor": {
+            "anios": [
+              5,
+              10,
+              15,
+              20
+            ]
+          },
+          "fuente_url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 2, cuadro factores",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        }
+      },
+      "alertas": [
+        "No interpretar la tasa desde como una tasa aprobada.",
+        "El IVA de contratación no se determina en la fuente; no inferir exención.",
+        "Faltan supuestos numéricos del CAT para recalcularlo.",
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ],
+      "discrepancias": [],
+      "historial_no_usar_como_vigente": [],
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "localizador": "Sección IV",
+        "nota": "Clasificación documental 2026; no certificado SIPRES/PES en tiempo real.",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita"
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.banorte.com/Personal/Creditos-Hipotecarios/Adquisicion-de-Vivienda//Hipoteca-Fuerte",
+        "fecha_consulta": "2026-10-12",
+        "nota": "Las cantidades monetarias del catálogo se conservan en pesos salvo que el campo indique otra unidad.",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": null
+      }
+    },
+    {
+      "id": "mx-hipoteca-santander-adquisicion",
+      "categoria": "credito_hipotecario",
+      "nombre": {
+        "valor": "Hipoteca Santander",
+        "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "Título",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "Banco Santander México, S.A., Institución de Banca Múltiple, Grupo Financiero Santander México",
+        "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "Descripción",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "nota": null
+      },
+      "campos": {
+        "destino": {
+          "valor": "Adquisición de vivienda; variantes de pagos fijos/crecientes",
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:0fa774e7-df53-432e-97bd-2f7ada408b4f/original/as/folleto-informativo-hipoteca-santander-0326.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "pp. 1-4",
+          "fecha_emision": "2026-09-07",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "cat": {
+          "valor": {
+            "porcentaje": null,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "fecha_calculo": "2026-09-04",
+            "vigencia_hasta": "2027-03-04",
+            "estado_al_corte": "vigente_segun_fecha_publicada",
+            "porcentaje_estado": "depende_tipo_vivienda",
+            "escenarios_porcentaje": {
+              "media": 12.3,
+              "residencial": 12.2,
+              "residencial_plus": 12.2
+            }
+          },
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Costos",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-09-04",
+          "vigente_desde": null,
+          "vigente_hasta": "2027-03-04",
+          "estado": "vigente_al_corte",
+          "nota": null
+        },
+        "supuestos_cat": {
+          "valor": {
+            "base": "Promedio ponderado de créditos otorgados, circular 9/2015",
+            "monto_MXN": null,
+            "plazo": null,
+            "aforo": null,
+            "detalle_faltante": "ND"
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:0fa774e7-df53-432e-97bd-2f7ada408b4f/original/as/folleto-informativo-hipoteca-santander-0326.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 6",
+          "nota": "No importar supuestos del apartado Hipoteca Verde.",
+          "fecha_emision": "2026-09-07",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "fija_anual",
+            "desde_porcentaje": 9.9,
+            "hasta_porcentaje": 13.25,
+            "iva": "ND"
+          },
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Costos",
+          "nota": "El esquema de prepago puede cambiar el máximo.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "tasa_sin_penalizacion_prepago": {
+          "valor": {
+            "tipo": "fija_anual",
+            "porcentaje": 14.25,
+            "aplicacion": "Destinos distintos de sustitución, alternativa sin comisión por prepago total"
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:0fa774e7-df53-432e-97bd-2f7ada408b4f/original/as/folleto-informativo-hipoteca-santander-0326.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 6, nota 2",
+          "fecha_emision": "2026-09-07",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "comisiones": [
+          {
+            "valor": {
+              "concepto": "Contratación",
+              "porcentaje": 0,
+              "iva": "sin_IVA_segun_nota_general"
+            },
+            "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:67af07d0-f572-472a-b689-4ec7d8dd253b/original/as/comisiones-hipoteca-santander.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "pp. 1 y 3",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Administración crédito diferido",
+              "monto_MXN": 350,
+              "periodicidad": "mensual",
+              "iva": "mas_IVA"
+            },
+            "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:67af07d0-f572-472a-b689-4ec7d8dd253b/original/as/comisiones-hipoteca-santander.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 1",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Prepago total",
+              "porcentaje": 2.8,
+              "base": "saldo insoluto",
+              "periodicidad": "una vez por evento",
+              "iva": "mas_IVA_segun_nota_general",
+              "condicion": "Intercambiable por otra tasa; no universal"
+            },
+            "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:0fa774e7-df53-432e-97bd-2f7ada408b4f/original/as/folleto-informativo-hipoteca-santander-0326.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 6",
+            "fecha_emision": "2026-09-07",
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": null,
+            "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Costos",
+            "nota": "Comisión específica por pago tardío no determinada; no equivale a cero.",
+            "estado": "ND",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null
+          }
+        ],
+        "otros_costos": [
+          {
+            "valor": {
+              "concepto": "Avalúo",
+              "rango_MXN": [
+                2000,
+                24000
+              ],
+              "base": "tramos por valor inmueble",
+              "iva": "mas_IVA",
+              "periodicidad": "única, aun sin formalización"
+            },
+            "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:67af07d0-f572-472a-b689-4ec7d8dd253b/original/as/comisiones-hipoteca-santander.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "pp. 1-3",
+            "nota": "Consultar tabla para el tramo exacto; no usar un importe fijo.",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita"
+          },
+          {
+            "valor": {
+              "concepto": "Notariales",
+              "rango_porcentaje": [
+                3,
+                9
+              ],
+              "base": "operación y entidad federativa",
+              "iva": "ND"
+            },
+            "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Escrituración",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Seguros",
+              "obligatorios": [
+                "vida",
+                "daños",
+                "desempleo"
+              ],
+              "proveedor": "Libre elección sujeto a requisitos",
+              "prima_total_MXN": null,
+              "estado_prima": "ND"
+            },
+            "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Requisitos",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Interés moratorio",
+              "factor_sobre_tasa_ordinaria": 1.5,
+              "iva": "ND"
+            },
+            "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:0fa774e7-df53-432e-97bd-2f7ada408b4f/original/as/folleto-informativo-hipoteca-santander-0326.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 4",
+            "fecha_emision": "2026-09-07",
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          }
+        ],
+        "requisitos": {
+          "valor": {
+            "edad_min_anios": 21,
+            "edad_mas_plazo_max": "80 años 6 meses",
+            "ingreso_asalariado_neto_mensual_MXN": 7500,
+            "ingreso_independiente_anual_MXN": 360000,
+            "antiguedad_asalariado_meses": 6,
+            "antiguedad_independiente_anios": 2,
+            "historial": "No indispensable; si existe, bueno",
+            "vivienda": "Habitacional urbana, terminada, servicios y regularizada"
+          },
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Requisitos",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "documentos": {
+          "valor": [
+            "solicitud",
+            "identificación",
+            "CURP",
+            "domicilio",
+            "estado civil",
+            "antigüedad laboral",
+            "ingresos"
+          ],
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:0fa774e7-df53-432e-97bd-2f7ada408b4f/original/as/folleto-informativo-hipoteca-santander-0326.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "pp. 15-16",
+          "nota": "Resumen de documentos generales; requisitos adicionales por perfil y formalización.",
+          "fecha_emision": "2026-09-07",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "montos": {
+          "valor": {
+            "credito_minimo_MXN": 100000,
+            "credito_maximo_MXN": null,
+            "maximo_estado": "ND",
+            "vivienda_minima_MXN": 250000,
+            "aforo_adquisicion_max_porcentaje": 90,
+            "aforo_apoyo_infonavit_max_porcentaje": 95
+          },
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Aforos y montos",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "montos_alternativa_documental": {
+          "valor": {
+            "aforo_adquisicion_max_porcentaje": 95,
+            "aforo_apoyo_infonavit_max_porcentaje": 95
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:0fa774e7-df53-432e-97bd-2f7ada408b4f/original/as/folleto-informativo-hipoteca-santander-0326.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 4",
+          "nota": "Folleto emitido 2026-09-07; distinto del 90% web.",
+          "fecha_emision": "2026-09-07",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "plazos": {
+          "valor": {
+            "pagos_fijos_anios": "7 a 20",
+            "pagos_crecientes_anios": [
+              15,
+              20
+            ]
+          },
+          "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Plazo",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "plazos_alternativa_documental": {
+          "valor": {
+            "pagos_fijos_anios": "7 a 15, 20 y 25",
+            "pagos_crecientes_anios": [
+              15,
+              20,
+              25
+            ]
+          },
+          "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:0fa774e7-df53-432e-97bd-2f7ada408b4f/original/as/folleto-informativo-hipoteca-santander-0326.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 4",
+          "nota": "Folleto emitido 2026-09-07; distinto de la web.",
+          "fecha_emision": "2026-09-07",
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        }
+      },
+      "alertas": [
+        "Discrepancia aforo/plazo web frente al folleto vigente.",
+        "No omitir la alternativa tasa/penalización de prepago total.",
+        "Requisitos PDF noviembre 2024 aún enlazado indica edad+plazo 78; web y folleto septiembre 2026 indican 80.5.",
+        "No hay aprobación ni ranking.",
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ],
+      "discrepancias": [],
+      "historial_no_usar_como_vigente": [],
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "localizador": "Sección IV",
+        "nota": "Clasificación documental 2026; no certificado SIPRES/PES en tiempo real.",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita"
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+        "fecha_consulta": "2026-10-12",
+        "nota": "Las cantidades monetarias del catálogo se conservan en pesos salvo que el campo indique otra unidad.",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": null
+      }
+    },
+    {
+      "id": "mx-auto-bbva-consumer-finance",
+      "categoria": "credito_automotriz",
+      "nombre": {
+        "valor": "BBVA Consumer Finance",
+        "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/credito-auto/caratula-credito-auto-Consumer-Finance.pdf",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "Nombre comercial",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "BBVA México, S.A., Institución de Banca Múltiple, Grupo Financiero BBVA México",
+        "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/credito-auto/contrato-credito-auto-Consumer-Finance.pdf",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "p. 1",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "nota": null
+      },
+      "campos": {
+        "destino": {
+          "valor": "Compra de automóvil de uso particular, garantía prendaria",
+          "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/credito-auto/contrato-credito-auto-Consumer-Finance.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "pp. 1 y 4",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "cat": {
+          "valor": {
+            "porcentaje": 24.7,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "fecha_calculo": "2026-06-30",
+            "vigencia_hasta": "2026-12-31",
+            "estado_al_corte": "vigente_segun_fecha_publicada"
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-auto.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Consumer Finance / CAT",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-06-30",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-12-31",
+          "estado": "vigente_al_corte",
+          "nota": null
+        },
+        "supuestos_cat": {
+          "valor": null,
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-auto.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Consumer Finance / CAT",
+          "nota": "Monto, plazo, enganche y prima usados para el promedio no publicados en el apartado.",
+          "estado": "ND",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "fija_anual",
+            "maximo_porcentaje": 19.49,
+            "minimo_porcentaje": null,
+            "minimo_estado": "ND",
+            "iva": "sin_IVA"
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-auto.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Consumer Finance / tasa máxima",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "comisiones": [
+          {
+            "valor": {
+              "concepto": "Contratación",
+              "porcentaje": 3,
+              "base": "importe total financiado",
+              "periodicidad": "única",
+              "iva": "mas_IVA",
+              "variacion": "Puede bajar según paquete"
+            },
+            "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-auto.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Consumer Finance / comisiones",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Pago tardío",
+              "monto_MXN": 670,
+              "periodicidad": "evento",
+              "iva": "mas_IVA"
+            },
+            "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/credito-auto/caratula-credito-auto-Consumer-Finance.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Comisiones relevantes",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": null,
+            "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-auto.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Consumer Finance",
+            "nota": "Comisión de prepago no determinada para esta ficha general.",
+            "estado": "ND",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null
+          }
+        ],
+        "otros_costos": {
+          "valor": {
+            "seguros_obligatorios": [
+              "vida",
+              "daños"
+            ],
+            "primas_MXN": null,
+            "estado_primas": "ND"
+          },
+          "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/credito-auto/caratula-credito-auto-Consumer-Finance.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Seguros",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "requisitos": {
+          "valor": {
+            "historial": "No necesariamente requerido",
+            "identificacion": "Oficial vigente",
+            "ingresos": "Comprobantes pueden exigirse según marca y financiamiento"
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-auto.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Preguntas frecuentes",
+          "nota": "No equiparar requisitos de banca patrimonial/privada con el producto general.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "requisitos_no_determinados": {
+          "valor": null,
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-auto.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Página general",
+          "nota": "Edad, ingreso mínimo y antigüedad laboral numéricos no determinados en la página revisada.",
+          "estado": "ND",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null
+        },
+        "montos": {
+          "valor": null,
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-auto.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Página general y Consumer Finance",
+          "nota": "No se identificaron límites de crédito ni enganche mínimo exclusivo de Consumer Finance. El 5% publicitado corresponde a híbridos/eléctricos nuevos.",
+          "estado": "ND",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null
+        },
+        "plazos": {
+          "valor": {
+            "min_meses": 12,
+            "max_meses": 72,
+            "ambito": "anaquel general"
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-auto.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Ventajas",
+          "nota": "La disponibilidad concreta depende del vehículo y plan.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "vehiculos": {
+          "valor": {
+            "nuevos": true,
+            "seminuevos_antiguedad_max_anios_persona_fisica": 8,
+            "seminuevos_antiguedad_max_anios_PFAE_moral": 5
+          },
+          "fuente_url": "https://www.bbva.mx/personas/productos/creditos/credito-auto.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Preguntas frecuentes",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "restricciones": {
+          "valor": {
+            "uso": "Particular",
+            "uso_transporte_apps": "El contrato prevé vencimiento si se destina a usos distintos"
+          },
+          "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/credito-auto/contrato-credito-auto-Consumer-Finance.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 4, cláusula 12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "registro_contrato": {
+          "valor": "0305-139-013087/17-00624-0326",
+          "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/credito-auto/contrato-credito-auto-Consumer-Finance.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 9",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        }
+      },
+      "alertas": [
+        "No asignar a Consumer Finance los CAT de Honda, Acura, Suzuki o autos verdes.",
+        "CAT, tasa, monto y pago individual permanecen en blanco en la carátula modelo.",
+        "El máximo de 19.49% no es una oferta personalizada.",
+        "Faltan umbrales públicos para filtros de elegibilidad excluyentes.",
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ],
+      "discrepancias": [],
+      "historial_no_usar_como_vigente": [],
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "localizador": "Sección IV",
+        "nota": "Clasificación documental 2026; no certificado SIPRES/PES en tiempo real.",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita"
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/credito-auto/caratula-credito-auto-Consumer-Finance.pdf",
+        "fecha_consulta": "2026-10-12",
+        "nota": "Las cantidades monetarias del catálogo se conservan en pesos salvo que el campo indique otra unidad.",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": null
+      }
+    },
+    {
+      "id": "mx-auto-banorte-autoestrene-tradicional",
+      "categoria": "credito_automotriz",
+      "nombre": {
+        "valor": "Autoestrene Banorte / Autoestrene Tradicional",
+        "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "Título y costos",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "Banco Mercantil del Norte, S.A., Institución de Banca Múltiple, Grupo Financiero Banorte",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "Sección IV, entidad 21",
+        "nota": "Razón social y categoría en oficio de cuotas CNBV 2026; vinculación de marca/producto en la página de Autoestrene. No es verificación SIPRES en tiempo real.",
+        "fecha_emision": "2026-05-19",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita"
+      },
+      "campos": {
+        "destino": {
+          "valor": "Adquisición de auto nuevo",
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Beneficios",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "cat": {
+          "valor": {
+            "porcentaje": 22,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "fecha_calculo": "2026-05-31",
+            "vigencia_hasta": "2026-11-30",
+            "estado_al_corte": "vigente_segun_fecha_publicada"
+          },
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "CAT y leyenda legal",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-05-31",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-11-30",
+          "estado": "vigente_al_corte",
+          "nota": null
+        },
+        "supuestos_cat": {
+          "valor": null,
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Leyenda legal CAT",
+          "nota": "Monto, enganche, plazo y seguros del promedio no desglosados.",
+          "estado": "ND",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "fija_anual",
+            "desde_porcentaje": 14.99,
+            "maximo_porcentaje": null,
+            "maximo_estado": "ND",
+            "iva": "ND"
+          },
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Costos",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "comisiones": [
+          {
+            "valor": {
+              "concepto": "Contratación",
+              "porcentaje": 2.5,
+              "base": "monto financiado",
+              "iva": "mas_IVA",
+              "periodicidad": "ND"
+            },
+            "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Costos",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Prepago",
+              "estado": "sin_penalizacion",
+              "monto_MXN": 0
+            },
+            "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Beneficios y preguntas",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": null,
+            "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Costos",
+            "nota": "Pago tardío y otros cargos no determinados; listado no exhaustivo.",
+            "estado": "ND",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null
+          }
+        ],
+        "otros_costos": {
+          "valor": {
+            "seguro": "Auto cobertura amplia multianual; endoso preferente Banorte si póliza externa",
+            "primas_MXN": null,
+            "estado_primas": "ND"
+          },
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Preguntas frecuentes",
+          "nota": "El financiamiento de seguros con Seguros Banorte es una opción publicada.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "requisitos": {
+          "valor": {
+            "documentos": [
+              "solicitud",
+              "identificación vigente",
+              "domicilio vigente",
+              "nómina último mes"
+            ],
+            "PFAE_adicional": [
+              "alta SHCP",
+              "declaración anual y parciales",
+              "3 estados de cuenta"
+            ],
+            "edad": null,
+            "ingreso_minimo": null,
+            "antiguedad_laboral": null,
+            "estado_umbrales": "ND"
+          },
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Requisitos",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "montos": {
+          "valor": {
+            "credito_minimo_MXN": null,
+            "credito_maximo_MXN": null,
+            "estado_limites": "ND",
+            "financiamiento_max_porcentaje": 90,
+            "base": "factura incluyendo IVA",
+            "enganche_min_porcentaje": 10
+          },
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Beneficios y preguntas",
+          "nota": "Sujeto a perfil y antecedentes internos.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "plazos": {
+          "valor": {
+            "max_meses": 72,
+            "min_meses": null,
+            "minimo_estado": "ND"
+          },
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Beneficios",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "marca": {
+          "valor": "Banorte",
+          "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Título",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        }
+      },
+      "alertas": [
+        "No transferir CAT o condiciones de seminuevos, nómina o verde.",
+        "Faltan límites de monto y varios umbrales públicos en la página revisada.",
+        "No se infiere IVA de intereses ni gratuidad de cargos no publicados.",
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ],
+      "discrepancias": [],
+      "historial_no_usar_como_vigente": [],
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "localizador": "Sección IV",
+        "nota": "Clasificación documental 2026; no certificado SIPRES/PES en tiempo real.",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita"
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+        "fecha_consulta": "2026-10-12",
+        "nota": "Las cantidades monetarias del catálogo se conservan en pesos salvo que el campo indique otra unidad.",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": null
+      }
+    },
+    {
+      "id": "mx-auto-scotiabank-crediauto-mas",
+      "categoria": "credito_automotriz",
+      "nombre": {
+        "valor": "CrediAuto MAS",
+        "fuente_url": "https://cdn.aglty.io/scotia-bank-mexico/pdf/transparencia/costos-comisiones/CardexCrediAuto.pdf",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "p. 1, fila producto",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "nota": null
+      },
+      "entidad": {
+        "valor": "Scotiabank Inverlat, S.A., Institución de Banca Múltiple, Grupo Financiero Scotiabank Inverlat",
+        "fuente_url": "https://cdn.aglty.io/scotia-bank-mexico/pdf/transparencia/costos-comisiones/CardexCrediAuto.pdf",
+        "fecha_consulta": "2026-10-12",
+        "localizador": "p. 1",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "nota": null
+      },
+      "campos": {
+        "destino": {
+          "valor": "Financiamiento de vehículo nuevo o usado de hasta 6 años",
+          "fuente_url": "https://www.scotiabank.com.mx/Personas/Creditos/Automotriz/crediauto.aspx",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Legales / CrediAuto MAS",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "cat": {
+          "valor": {
+            "porcentaje": 36.2,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "fecha_calculo": "2026-04-30",
+            "vigencia_hasta": "2026-10-30",
+            "estado_al_corte": "vigente_segun_fecha_publicada"
+          },
+          "fuente_url": "https://cdn.aglty.io/scotia-bank-mexico/pdf/transparencia/costos-comisiones/CardexCrediAuto.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 1, CrediAuto MAS",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-04-30",
+          "vigente_desde": null,
+          "vigente_hasta": "2026-10-30",
+          "estado": "vigente_al_corte",
+          "nota": null
+        },
+        "supuestos_cat": {
+          "valor": {
+            "credito_promedio_MXN": 326637.72,
+            "plazo": null,
+            "enganche": null,
+            "primas": null,
+            "estado_faltantes": "ND"
+          },
+          "fuente_url": "https://cdn.aglty.io/scotia-bank-mexico/pdf/transparencia/costos-comisiones/CardexCrediAuto.pdf",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "p. 1",
+          "nota": "Monto promedio no equivale a monto mínimo ni máximo permitido.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "tasa": {
+          "valor": {
+            "tipo": "fija_anual",
+            "hasta_porcentaje": 17.99,
+            "minimo_porcentaje": null,
+            "minimo_estado": "ND",
+            "iva": "ND"
+          },
+          "fuente_url": "https://www.scotiabank.com.mx/Personas/Creditos/Automotriz/crediauto.aspx",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Tabla CrediAuto MAS",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "comisiones": [
+          {
+            "valor": {
+              "concepto": "Contratación",
+              "porcentaje": 2.5,
+              "base": "monto total crédito",
+              "periodicidad": "única",
+              "iva": "mas_IVA"
+            },
+            "fuente_url": "https://cdn.aglty.io/scotia-bank-mexico/pdf/transparencia/costos-comisiones/CardexCrediAuto.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 1",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Pago tardío",
+              "tope_MXN": 500,
+              "formula": "Menor del incumplimiento y tarifa de 500",
+              "periodicidad": "evento",
+              "iva": "mas_IVA"
+            },
+            "fuente_url": "https://cdn.aglty.io/scotia-bank-mexico/pdf/transparencia/costos-comisiones/CardexCrediAuto.pdf",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "p. 1",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          },
+          {
+            "valor": {
+              "concepto": "Prepago",
+              "estado": "sin_penalizacion",
+              "monto_MXN": 0,
+              "ambito": "beneficio general CrediAuto"
+            },
+            "fuente_url": "https://www.scotiabank.com.mx/Personas/Creditos/Automotriz/crediauto.aspx",
+            "fecha_consulta": "2026-10-12",
+            "localizador": "Estrena auto",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "nota": null
+          }
+        ],
+        "otros_costos": {
+          "valor": {
+            "seguros": "Requeridos; se permite tercero independiente",
+            "primas_MXN": null,
+            "estado_primas": "ND"
+          },
+          "fuente_url": "https://www.scotiabank.com.mx/Personas/Creditos/Automotriz/crediauto.aspx",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Legales",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "requisitos": {
+          "valor": {
+            "edad_min_anios": 25,
+            "edad_max": "69 años 11 meses",
+            "excepcion_21_a_24_11": "Obligado solidario o enganche 35%",
+            "ingreso_min_mensual_MXN": 8000,
+            "antiguedad_empleado": "1 año actual+anterior; mínimo 6 meses actual",
+            "independiente_antiguedad_min_anios": 3,
+            "antiguedad_domicilio": "1 año actual+anterior; mínimo 6 meses actual",
+            "telefonos": "Empleo y domicilio",
+            "documentos": [
+              "identificación",
+              "domicilio",
+              "solicitud firmada",
+              "ingresos según historial"
+            ]
+          },
+          "fuente_url": "https://www.scotiabank.com.mx/Personas/Creditos/Automotriz/crediauto.aspx",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Requisitos y legales",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        },
+        "montos": {
+          "valor": {
+            "credito_minimo_MXN": null,
+            "credito_maximo_MXN": null,
+            "estado_limites": "ND",
+            "enganche_desde_porcentaje": 5,
+            "ambito_enganche": "beneficio general CrediAuto"
+          },
+          "fuente_url": "https://www.scotiabank.com.mx/Personas/Creditos/Automotriz/crediauto.aspx",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Estrena auto y legales",
+          "nota": "No convertir el monto promedio del CAT en límite de crédito.",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita"
+        },
+        "plazos": {
+          "valor": {
+            "meses": [
+              12,
+              18,
+              24,
+              36,
+              48,
+              60,
+              72
+            ],
+            "condicion_72": "Tabla MAS: nuevos del año, prelanzamientos y hasta 1 año de antigüedad; beneficio general restringe a nuevos/prelanzamientos"
+          },
+          "fuente_url": "https://www.scotiabank.com.mx/Personas/Creditos/Automotriz/crediauto.aspx",
+          "fecha_consulta": "2026-10-12",
+          "localizador": "Tabla CrediAuto MAS, notas",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "nota": null
+        }
+      },
+      "alertas": [
+        "CAT vence en 18 días al corte; revisar después del 2026-10-30.",
+        "No confundir con CrediAuto Green CAT 25.6% ni otros planes.",
+        "Matiz oficial sobre antigüedad del auto admisible a 72 meses; conservar nota.",
+        "No hay evaluación de capacidad de pago ni aprobación.",
+        "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
+      ],
+      "discrepancias": [],
+      "historial_no_usar_como_vigente": [],
+      "tipo_entidad": {
+        "valor": "Institución de Banca Múltiple",
+        "fuente_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+        "fecha_consulta": "2026-10-12",
+        "fecha_emision": "2026-05-19",
+        "localizador": "Sección IV",
+        "nota": "Clasificación documental 2026; no certificado SIPRES/PES en tiempo real.",
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita"
+      },
+      "moneda": {
+        "valor": "MXN",
+        "fuente_url": "https://cdn.aglty.io/scotia-bank-mexico/pdf/transparencia/costos-comisiones/CardexCrediAuto.pdf",
+        "fecha_consulta": "2026-10-12",
+        "nota": "Las cantidades monetarias del catálogo se conservan en pesos salvo que el campo indique otra unidad.",
+        "fecha_emision": null,
+        "fecha_calculo": null,
+        "vigente_desde": null,
+        "vigente_hasta": null,
+        "estado": "observado_sin_vigencia_explicita",
+        "localizador": null
+      }
+    }
+  ],
+  "historial_no_usar_como_vigente": [
+    {
+      "producto_id": "mx-hipoteca-banorte-fuerte-adquisicion",
+      "cat_porcentaje": 12.4,
+      "iva": "sin_IVA",
+      "fecha_calculo": "2026-04-06",
+      "vigencia_hasta": "2026-10-04",
+      "estado": "vencido_y_solo_snippet_indexado",
+      "fuente_url": "https://www.banorte.com/Personal/Creditos-Hipotecarios/Adquisicion-de-Vivienda//Hipoteca-Fuerte",
+      "fecha_consulta": "2026-10-12",
+      "observacion": "Resultado del buscador conservaba versión anterior; página abierta y folleto coinciden en 12.2% con vigencia 2027-02-10. No es captura histórica íntegra."
+    },
+    {
+      "producto_id": "mx-hipoteca-santander-adquisicion",
+      "campo": "edad_mas_plazo_max_anios",
+      "valor": 78,
+      "fecha_documento": "2024-11",
+      "estado": "documento_anterior_sin_vigencia_explicita",
+      "fuente_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:fb9fbc6c-68a4-4421-8604-d2d05b0d22c3/original/as/documentacion-requerida.pdf",
+      "fecha_consulta": "2026-10-12",
+      "observacion": "PDF todavía enlazado; sustituido documentalmente para este campo por web y folleto septiembre 2026 con 80 años 6 meses."
+    }
+  ],
+  "fuentes": [
+    {
+      "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5789460",
+      "titulo": "Cuotas CNBV 2026, oficio SHCP de 19 mayo 2026",
+      "fecha_emision": "2026-05-19",
+      "localizador": "Sección IV, Banca Múltiple",
+      "id": "regulador",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+      "titulo": "Tarjeta Azul BBVA",
+      "localizador": "Requisitos; costos; información CAT",
+      "id": "azul",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.santander.com.mx/personas/credito-y-financiamiento/tarjetas-de-credito/likeu",
+      "titulo": "Tarjeta de Crédito LikeU",
+      "localizador": "Requisitos, costos y FAQ",
+      "id": "likeu",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:eadbc941-a74c-4127-ac61-b4250eb85b52/original/as/Cards_Folleto_TDC_LikeUMastercard_Jun2026_V2_0726.pdf",
+      "titulo": "Folleto LikeU Mastercard",
+      "localizador": "Páginas 26–30",
+      "id": "likeu_pdf",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.hsbc.com.mx/tarjetas-de-credito/productos/zero/",
+      "titulo": "HSBC Zero",
+      "localizador": "Requisitos y legales",
+      "id": "zero",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.hsbc.com.mx/content/dam/hsbc/mx/documents/tarjetas/tarjeta_credito.pdf",
+      "titulo": "HSBC: costos y comisiones tarjetas",
+      "localizador": "Páginas 1–3; tabla visual verificada",
+      "id": "zero_pdf",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.hsbc.com.mx/tarjetas-de-credito/comparador-de-tarjetas-de-credito/zero/",
+      "titulo": "Comparador HSBC Zero, bloque anterior",
+      "localizador": "Legales",
+      "id": "zero_ant",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.banregio.com/personas/tarjetas/banregio.php",
+      "titulo": "Tarjeta Win Banregio",
+      "localizador": "Requisitos y Ley de Transparencia",
+      "id": "win",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://portalbanregio.s3.amazonaws.com/assets/naranja/img/Tarjetas-Credito.pdf",
+      "titulo": "Folleto tarjetas de crédito Banregio",
+      "localizador": "Páginas 3–6",
+      "id": "win_pdf",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.bbva.mx/personas/productos/creditos/prestamos-personales/prestamo-personal-inmediato.html",
+      "titulo": "Préstamo Personal Inmediato BBVA",
+      "localizador": "Características, requisitos y costos",
+      "id": "ppi",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/prestamos-personales/ppi/ficha-tecnica-prestamo-personal-inmediato.pdf",
+      "titulo": "Ficha técnica BBVA PPI, bloque anterior",
+      "fecha_emision": "2021-06-01",
+      "localizador": "Página 1",
+      "id": "ppi_ant",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-personales/credito-personal-santander/",
+      "titulo": "Crédito Personal Santander, página con vigencia anterior",
+      "localizador": "Características y costos",
+      "id": "personal_santander",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:95f815f3-9707-4ddf-99b1-9ac025c2699a/original/as/folleto-electronico-ajuste-comision.pdf",
+      "titulo": "Folleto Crédito Consumo Santander, octubre 2026",
+      "fecha_emision": "2026-10",
+      "localizador": "Páginas 2, 3 y 6",
+      "id": "personal_santander_pdf",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:ca66cd6c-1c69-4add-b652-e7d850b020c6/original/as/tarifas-y-comisiones-consumo-ajuste-comision.pdf",
+      "titulo": "Tarifas consumo Santander",
+      "localizador": "Tabla única",
+      "id": "personal_santander_tarifa",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.hsbc.com.mx/creditos/personales/personal/",
+      "titulo": "Crédito Personal HSBC",
+      "localizador": "Beneficios, costos, requisitos y legales",
+      "id": "personal_hsbc",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.hsbc.com.mx/content/dam/hsbc/mx/documents/creditos/tarifas_comisiones_cred_personal.pdf",
+      "titulo": "Anexo de comisiones Crédito Personal HSBC",
+      "fecha_emision": "2025-07-07",
+      "localizador": "Página 1",
+      "id": "personal_hsbc_com",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.hsbc.com.mx/content/dam/hsbc/mx/documents/creditos/folleto_digital_personal.pdf",
+      "titulo": "Folleto HSBC Personal con CAT vencido",
+      "localizador": "Páginas 1–2",
+      "id": "personal_hsbc_ant",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.banamex.com/es/personas/creditos/credito-personal.html",
+      "titulo": "Crédito Personal Banamex",
+      "localizador": "Características, requisitos, simulador público y legales",
+      "id": "personal_banamex",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.banamex.com/efectivo-para-ti/index.html",
+      "titulo": "Soluciones en efectivo Banamex",
+      "localizador": "Crédito Personal y notas 9–12",
+      "id": "personal_banamex_efectivo",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.banamex.com/resources/pdf/es/personas/creditos/credito_personal/contrato_credito_personal.pdf",
+      "titulo": "Contrato Crédito Personal Banamex",
+      "localizador": "Contrato y carátula sin datos individuales",
+      "id": "personal_banamex_contrato",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://ifit.condusef.gob.mx/ifit/ft_general_final.php?b=1&idnc=40633",
+      "titulo": "IFIT CONDUSEF, Crédito Personal Banamex",
+      "localizador": "Resultado indexado; apertura falló HTTP 502",
+      "acceso": "solo_snippet_no_verificacion_completa",
+      "id": "personal_banamex_ifit",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "url": "https://www.banxico.org.mx/CATWebTarjetas/CATWebTarjetas.xhtml",
+      "titulo": "Banxico, metodología CAT de tarjetas",
+      "localizador": "Supuestos y CAT de publicidad",
+      "id": "banxico_cat",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria"
+    },
+    {
+      "id": "BWH",
+      "url": "https://www.bbva.mx/personas/productos/creditos/credito-hipotecario/hipoteca-fija.html",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "pagina_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "BPH",
+      "url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/hipotecario/folleto-informativo-hipotecario.pdf",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "PDF_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "NWH",
+      "url": "https://www.banorte.com/Personal/Creditos-Hipotecarios/Adquisicion-de-Vivienda//Hipoteca-Fuerte",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "pagina_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "NPH",
+      "url": "https://www.banorte.com/dam/jcr:295b2de5-5876-4fbb-9892-191a3493b49b/Folleto-Ley-de-Transparencia.pdf",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "PDF_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "SWH",
+      "url": "https://www.santander.com.mx/personas/credito-y-financiamiento/creditos-hipotecarios/hipoteca-santander",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "pagina_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "SPH",
+      "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:0fa774e7-df53-432e-97bd-2f7ada408b4f/original/as/folleto-informativo-hipoteca-santander-0326.pdf",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "PDF_oficial",
+      "fecha_emision": "2026-09-07"
+    },
+    {
+      "id": "SPC",
+      "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:67af07d0-f572-472a-b689-4ec7d8dd253b/original/as/comisiones-hipoteca-santander.pdf",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "PDF_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "SPR",
+      "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:fb9fbc6c-68a4-4421-8604-d2d05b0d22c3/original/as/documentacion-requerida.pdf",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "PDF_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "BWA",
+      "url": "https://www.bbva.mx/personas/productos/creditos/credito-auto.html",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "pagina_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "BAC",
+      "url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/credito-auto/contrato-credito-auto-Consumer-Finance.pdf",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "PDF_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "BAP",
+      "url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/credito-auto/caratula-credito-auto-Consumer-Finance.pdf",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "PDF_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "BAA",
+      "url": "https://www.bbva.mx/content/dam/public-web/mexico/documents/personas/creditos/credito-auto/anexo-credito-auto-Consumer-Finance.pdf",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "PDF_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "NWA",
+      "url": "https://www.banorte.com/Personal/Creditos-de-Auto/Autoestrene-Banorte.html",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "pagina_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "SWA",
+      "url": "https://www.scotiabank.com.mx/Personas/Creditos/Automotriz/crediauto.aspx",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "pagina_oficial",
+      "fecha_emision": null
+    },
+    {
+      "id": "SPA",
+      "url": "https://cdn.aglty.io/scotia-bank-mexico/pdf/transparencia/costos-comisiones/CardexCrediAuto.pdf",
+      "fecha_consulta": "2026-10-12",
+      "tipo": "PDF_oficial",
+      "fecha_emision": null
+    }
+  ],
+  "reglas_lectura": [
+    "ND=null; no significa cero, gratis, no aplica ni no elegible.",
+    "CAT es indicador publicitario informativo; no oferta individual ni ranking universal.",
+    "No se homologaron monto, plazo, perfil, seguros ni escenarios entre productos.",
+    "Los requisitos públicos no prueban aprobación ni monto disponible para una persona.",
+    "Vigente al corte describe el intervalo impreso consultado, no garantiza que el banco mantenga una oferta.",
+    "No mezclar CAT, tasa, comisión o exención entre productos, segmentos, operaciones ni versiones."
+  ],
+  "limitaciones_generales": [
+    "Muestra editorial de disponibilidad documental; no representa todo el mercado ni todos los tipos de entidad.",
+    "No es una recomendación personalizada ni oferta vinculante.",
+    "Los CAT no fueron recalculados bajo un escenario común; se prohíbe presentarlos como ranking universal.",
+    "Los importes de seguros, impuestos y notariales faltantes requieren cotización para un costo individual completo.",
+    "No hay puntuación o probabilidad de aprobación. No usar vacíos para asignar elegibilidad.",
+    "Fuentes dinámicas pueden conservar versiones viejas. Las contradicciones están preservadas.",
+    "Los documentos descargados para inspección no son entregables publicables por defecto."
+  ]
+}

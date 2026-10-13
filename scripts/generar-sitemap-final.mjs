@@ -7,11 +7,13 @@ const profesiones = JSON.parse(readFileSync('src/data/profesiones.json','utf8'))
 const estados = JSON.parse(readFileSync('src/data/estados.json','utf8')).estados;
 const finanzas = JSON.parse(readFileSync('src/data/finanzas.json','utf8')).paginas;
 const economia = JSON.parse(readFileSync('src/data/economia.json','utf8'));
+const match = JSON.parse(readFileSync('src/data/match-catalogo.json','utf8'));
 const origen = paginas.sitio.origen;
 const rutasCarreras = carreras.map(p => p.slug ? `/carreras/${p.slug}` : '/carreras');
 const rutasProfesiones = profesiones.map(p => `/carreras/profesion/${p.slug}`);
 const rutasEstados = ['/estados', '/estados/comparar', ...estados.map(e => `/estados/${e.slug}`)];
 const rutasFinanzas = finanzas.map(p => p.slug ? `/finanzas/${p.slug}` : '/finanzas');
+const rutasMatch = ['/finanzas/match', '/finanzas/match/metodologia', ...match.categorias.map(c => `/finanzas/match/${c.slug}`), ...match.productos.map(p => `/finanzas/match/${match.categorias.find(c => c.id === p.categoria).slug}/${p.slug}`)];
 const rutasEconomia = ['/economia', ...economia.articulos.map(a => `/economia/${a.slug}`)];
 const rutas = [
   '/',
@@ -30,6 +32,7 @@ const rutas = [
   '/finanzas/inversion/comparar',
   '/finanzas/inversion/cetes',
   '/finanzas/inversion/fondos',
+  ...rutasMatch,
   ...rutasEconomia,
   '/aprende',
   '/aprende/finiquito-vs-liquidacion',
@@ -38,6 +41,9 @@ const rutas = [
   '/aprende/vacaciones-prima-vacacional',
   '/aprende/resico-ingresos-cobrados',
   '/aprende/pension-imss-ley-97',
+  '/aprende/cat-y-gat-que-comparan',
+  '/aprende/mensualidad-y-costo-del-credito',
+  '/aprende/leer-fuentes-comparador-financiero',
   '/widgets',
   '/sobre', '/metodo', '/contacto', '/privacidad', '/financiamiento'
 ];

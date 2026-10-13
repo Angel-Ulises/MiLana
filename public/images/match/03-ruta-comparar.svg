@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1280" viewBox="0 0 900 1280" role="img" aria-labelledby="title desc">
+<title id="title">Cinco pasos para comparar con contexto</title>
+<desc id="desc">Elige una categoría, revisa condiciones equivalentes, compara datos con fuente y fecha, identifica lo que falta y confirma con la institución. La ruta es educativa y no determina aprobación ni idoneidad personal.</desc>
+<rect width="900" height="1280" fill="#FBF8F2"/>
+<g font-family="Inter, Arial, sans-serif" fill="#13263B">
+<text x="64" y="60" font-size="18" font-weight="700" letter-spacing="2">GUÍA DE LECTURA · MILANA MATCH</text>
+<g font-family="Newsreader, Georgia, serif" font-size="57" font-weight="600"><text x="64" y="139">Una ruta para comparar</text><text x="64" y="204">con más contexto</text></g>
+<g fill="#FFFFFF" stroke="#D9E1E8" stroke-width="2"><rect x="64" y="254" width="772" height="154" rx="20"/><rect x="64" y="438" width="772" height="154" rx="20"/><rect x="64" y="622" width="772" height="154" rx="20"/><rect x="64" y="806" width="772" height="154" rx="20"/><rect x="64" y="990" width="772" height="154" rx="20"/></g>
+<g fill="#2D6CAA" font-family="Newsreader, Georgia, serif" font-size="55" font-weight="600"><text x="98" y="326">01</text><text x="98" y="510">02</text><text x="98" y="694">03</text><text x="98" y="878">04</text><text x="98" y="1062">05</text></g>
+<text x="185" y="311" font-size="31" font-weight="700">Elige una categoría</text><text x="185" y="357" font-size="26">Crédito, cuenta, ahorro u otra decisión.</text>
+<text x="185" y="495" font-size="31" font-weight="700">Revisa los supuestos</text><text x="185" y="541" font-size="26">Monto, plazo y condiciones equivalentes.</text>
+<text x="185" y="679" font-size="31" font-weight="700">Compara la evidencia</text><text x="185" y="725" font-size="26">Abre la fuente y mira la fecha de cada dato.</text>
+<text x="185" y="863" font-size="31" font-weight="700">Identifica lo que falta</text><text x="185" y="909" font-size="26">N/D no significa cero. Anota tus preguntas.</text>
+<text x="185" y="1047" font-size="31" font-weight="700">Confirma las condiciones</text><text x="185" y="1093" font-size="26">Consulta la oferta y el contrato del proveedor.</text>
+<text x="64" y="1201" font-size="24" fill="#5E6B78">Ruta educativa. No determina aprobación</text><text x="64" y="1238" font-size="24" fill="#5E6B78">ni idoneidad personal de un producto.</text>
+</g></svg>

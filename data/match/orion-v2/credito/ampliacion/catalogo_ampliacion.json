@@ -1,0 +1,3632 @@
+{
+  "titulo": "MiLana ampliación de seis candidatos de crédito",
+  "fecha_corte": "2026-10-12",
+  "version": "ampliacion-1.0",
+  "pais": "México",
+  "nota_version": "Anexo separado. Los archivos v1 no se alteran.",
+  "interpretacion_estados": "oferta_vigente_verificada indica evidencia CAT con intervalo que abarca el corte; no significa disponibilidad individual, aprobación ni comprobación de cada comisión. False incluye vigencia ND o inconsistente, no significa producto cerrado.",
+  "regla_uso": "No ranking universal de CAT ni predicción de aprobación. Toda condición personal se confirma en carátula. ND y null no son cero.",
+  "productos": [
+    {
+      "id": "nu_tarjeta_credito",
+      "categoria": "tarjeta_credito",
+      "nombre_corto": "Tarjeta de Crédito Nu",
+      "decision_editorial": "incluir_ficha_con_alerta; CAT de vigencia indeterminable",
+      "oferta_vigente_verificada": false,
+      "motivo_exclusion": null,
+      "datos": {
+        "nombre": {
+          "valor": "Tarjeta de Crédito Nu",
+          "fuente_url": "https://nubank.com.mx/credito/",
+          "fuente_id": "nu_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos, comisiones y legal inferior",
+          "nota": null
+        },
+        "entidad": {
+          "valor": "Nubank, S.A., Institución de Banca Múltiple",
+          "fuente_url": "https://cdn.nubank.com.mx/mex/credito/contrato.pdf",
+          "fuente_id": "nu_contrato",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "RECA 17455-999-044118/01-01639-0726; I.1.2, I.2.6, I.2.9 y II.1",
+          "nota": null
+        },
+        "tipo_entidad": {
+          "valor": "Institución de Banca Múltiple",
+          "fuente_url": "https://blog.nu.com.mx/nubank/tarjeta-de-credito-nu-banco/",
+          "fuente_id": "nu_banco",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-10-07",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Emisor, inicio de operaciones y transformación",
+          "nota": "Nu comunica transformación completada 2026-08-06. La categoría digital no implica entidad no bancaria. No es verificación en tiempo real del padrón."
+        },
+        "moneda": {
+          "valor": "MXN",
+          "fuente_url": "https://cdn.nubank.com.mx/mex/credito/folleto-informativo.pdf",
+          "fuente_id": "nu_folleto",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 1–2",
+          "nota": null
+        },
+        "cat": {
+          "valor": {
+            "porcentaje": 150.1,
+            "tipo": "promedio ponderado",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "supuestos": "Ponderado; escenario numérico completo ND.",
+            "vigencia_literal": "del 8 de octubre al 9 de febrero de 2026"
+          },
+          "fuente_url": "https://cdn.nubank.com.mx/mex/credito/folleto-informativo.pdf",
+          "fuente_id": "nu_folleto",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-08-13",
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "vigencia_inconsistente",
+          "localizador": "Páginas 1–2",
+          "nota": "Rango temporal inconsistente con cálculo 13-ago-2026. No se corrige el año ni se infiere febrero 2027. Fechas normalizadas null; CAT no etiquetado vigente."
+        },
+        "tasa_promedio": {
+          "valor": {
+            "porcentaje_anual": 94.6,
+            "tipo": "fija promedio ponderada por saldo",
+            "iva": "sin_IVA"
+          },
+          "fuente_url": "https://cdn.nubank.com.mx/mex/costos-y-comisiones.pdf",
+          "fuente_id": "nu_costos",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-08-13",
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "vigencia_inconsistente",
+          "localizador": "Página 1, exclusivamente Tarjeta de Crédito Nu",
+          "nota": "Comparte el bloque de CAT con vigencia errónea; tasa observada, no oferta individual."
+        },
+        "tasa_intervalo": {
+          "valor": {
+            "min_anual_pct": 39,
+            "max_anual_pct": 139,
+            "tipo": "fija ordinaria",
+            "iva": "sin_IVA"
+          },
+          "fuente_url": "https://cdn.nubank.com.mx/mex/costos-y-comisiones.pdf",
+          "fuente_id": "nu_costos",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Página 1, exclusivamente Tarjeta de Crédito Nu",
+          "nota": "Intervalo publicado en tarifario con vigencia CAT inconsistente. Oferta individual en carátula."
+        },
+        "anualidad": {
+          "valor": {
+            "monto": 0,
+            "moneda": "MXN",
+            "iva": "sin_IVA",
+            "periodicidad": "anual"
+          },
+          "fuente_url": "https://cdn.nubank.com.mx/mex/credito/folleto-informativo.pdf",
+          "fuente_id": "nu_folleto",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Páginas 1–2",
+          "nota": null
+        },
+        "otras_comisiones": {
+          "valor": {
+            "reposicion": {
+              "monto": 0,
+              "moneda": "MXN",
+              "iva": "ND"
+            },
+            "retiro_cajero_comision_emisor": {
+              "monto": 0,
+              "moneda": "MXN",
+              "iva": "ND"
+            },
+            "uso_extranjero": {
+              "monto": 0,
+              "moneda": "MXN",
+              "iva": "ND"
+            },
+            "gastos_cobranza": {
+              "monto": 0,
+              "moneda": "MXN",
+              "iva": "ND"
+            },
+            "pago_tardio": {
+              "monto": 400,
+              "moneda": "MXN",
+              "iva": "mas_IVA",
+              "periodicidad": "por_evento"
+            }
+          },
+          "fuente_url": "https://cdn.nubank.com.mx/mex/costos-y-comisiones.pdf",
+          "fuente_id": "nu_costos",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Página 1, exclusivamente Tarjeta de Crédito Nu",
+          "nota": null
+        },
+        "condiciones_comisiones": {
+          "valor": "El retiro puede generar la comisión del operador del cajero. No hay penalización por uso mínimo. Anticipar pagos no lleva penalización.",
+          "fuente_url": "https://nubank.com.mx/credito/",
+          "fuente_id": "nu_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos, comisiones y legal inferior",
+          "nota": null
+        },
+        "disparador_pago_tardio": {
+          "valor": "No cubrir al menos el pago mínimo antes de la fecha límite; cargo en el siguiente periodo.",
+          "fuente_url": "https://cdn.nubank.com.mx/mex/credito/contrato.pdf",
+          "fuente_id": "nu_contrato",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "RECA 17455-999-044118/01-01639-0726; I.1.2, I.2.6, I.2.9 y II.1",
+          "nota": null
+        },
+        "intereses": {
+          "valor": "Interés ordinario sobre promedio diario de saldos insolutos; tasa de carátula y base 360. El importe de intereses causa IVA.",
+          "fuente_url": "https://cdn.nubank.com.mx/mex/credito/contrato.pdf",
+          "fuente_id": "nu_contrato",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "RECA 17455-999-044118/01-01639-0726; I.1.2, I.2.6, I.2.9 y II.1",
+          "nota": null
+        },
+        "requisitos": {
+          "valor": {
+            "edad": "mayor de edad",
+            "residencia": "México",
+            "identificacion": [
+              "INE vigente",
+              "pasaporte vigente",
+              "tarjeta de residencia vigente"
+            ],
+            "selfie": true,
+            "autorizacion_consulta_historial": true,
+            "comprobante_domicilio": "en algunos casos",
+            "ingreso_minimo_publico": null,
+            "antiguedad_laboral": null
+          },
+          "fuente_url": "https://nubank.com.mx/credito/",
+          "fuente_id": "nu_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos, comisiones y legal inferior",
+          "nota": "Son requisitos de solicitud, no garantía de aprobación. CURP/RFC se calculan a partir de datos aportados, según la web."
+        },
+        "limite_credito": {
+          "valor": {
+            "minimo_mxn": null,
+            "maximo_mxn": null,
+            "determinacion": "individual, indicado en carátula"
+          },
+          "fuente_url": "https://cdn.nubank.com.mx/mex/credito/contrato.pdf",
+          "fuente_id": "nu_contrato",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "RECA 17455-999-044118/01-01639-0726; I.1.2, I.2.6, I.2.9 y II.1",
+          "nota": null
+        },
+        "plazo": {
+          "valor": {
+            "contrato": "tiempo indefinido",
+            "plazo_meses": null,
+            "naturaleza": "crédito en cuenta corriente"
+          },
+          "fuente_url": "https://cdn.nubank.com.mx/mex/credito/contrato.pdf",
+          "fuente_id": "nu_contrato",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "RECA 17455-999-044118/01-01639-0726; I.1.2, I.2.6, I.2.9 y II.1",
+          "nota": null
+        },
+        "seguro_obligatorio": {
+          "valor": null,
+          "fuente_url": "https://nubank.com.mx/credito/",
+          "fuente_id": "nu_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Requisitos, comisiones y legal inferior",
+          "nota": "No se verificó seguro obligatorio ni prima en las fuentes de esta ficha."
+        },
+        "contrato_reca": {
+          "valor": "17455-999-044118/01-01639-0726",
+          "fuente_url": "https://cdn.nubank.com.mx/mex/credito/contrato.pdf",
+          "fuente_id": "nu_contrato",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "RECA 17455-999-044118/01-01639-0726; I.1.2, I.2.6, I.2.9 y II.1",
+          "nota": "Número impreso en contrato; no validación de estatus en vivo."
+        },
+        "version_producto": {
+          "valor": "Tarjeta Nu ordinaria, sección II.1 del contrato; no se atribuyen a ella condiciones de Tarjeta con Límite Garantizado ni del préstamo Nu.",
+          "fuente_url": "https://cdn.nubank.com.mx/mex/credito/contrato.pdf",
+          "fuente_id": "nu_contrato",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "RECA 17455-999-044118/01-01639-0726; I.1.2, I.2.6, I.2.9 y II.1",
+          "nota": null
+        },
+        "discrepancias": [
+          {
+            "valor": "La web de CAT conserva 148.1% y tasa 93.6% con vigencia vencida; los PDF muestran 150.1% y 94.6% con rango de vigencia invertido. Mantener ambas observaciones, sin declarar que una resuelve la otra.",
+            "fuente_url": "https://nubank.com.mx/cat/",
+            "fuente_id": "nu_cat",
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "localizador": "Bloque CAT y vigencia",
+            "nota": null
+          },
+          {
+            "valor": "El folleto afirma domiciliación disponible; el contrato I.2.11 dice que Nu la habilitará desde 2027-01-10. No presentar disponibilidad inmediata como verificada.",
+            "fuente_url": "https://cdn.nubank.com.mx/mex/credito/contrato.pdf",
+            "fuente_id": "nu_contrato",
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "localizador": "RECA 17455-999-044118/01-01639-0726; I.1.2, I.2.6, I.2.9 y II.1",
+            "nota": null
+          }
+        ],
+        "historial_no_usar_como_vigente": [
+          {
+            "valor": {
+              "cat_pct": 148.1,
+              "cat_tipo": "promedio ponderado",
+              "cat_iva": "sin_IVA",
+              "tasa_anual_pct": 93.6,
+              "tasa_tipo": "fija promedio ponderada",
+              "tasa_iva": "sin_IVA",
+              "anualidad_mxn": 0
+            },
+            "fuente_url": "https://nubank.com.mx/cat/",
+            "fuente_id": "nu_cat",
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": "2026-04-10",
+            "fecha_referencia": null,
+            "vigente_desde": "2026-06-03",
+            "vigente_hasta": "2026-10-07",
+            "estado": "vencido_al_corte",
+            "localizador": "Bloque CAT y vigencia",
+            "nota": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "klar_tarjeta_credito",
+      "categoria": "tarjeta_credito",
+      "nombre_corto": "Tarjeta de Crédito Klar sin garantía",
+      "decision_editorial": "incluir; datos HTML con vigencia CAT confirmada; documentos no leídos señalados",
+      "oferta_vigente_verificada": true,
+      "motivo_exclusion": null,
+      "datos": {
+        "nombre": {
+          "valor": "Tarjeta de Crédito Klar sin garantía",
+          "fuente_url": "https://www.klar.mx/credito",
+          "fuente_id": "klar_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos, límites, costos y entidad del pie",
+          "nota": null
+        },
+        "entidad": {
+          "valor": "Klar Technologies, S.A. de C.V., S.F.P.",
+          "fuente_url": "https://www.klar.mx/klar-legal",
+          "fuente_id": "klar_legal",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Emisor y documentos legales enlazados",
+          "nota": null
+        },
+        "tipo_entidad": {
+          "valor": "Sociedad Financiera Popular",
+          "fuente_url": "https://www.klar.mx/klar-legal",
+          "fuente_id": "klar_legal",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Emisor y documentos legales enlazados",
+          "nota": "El emisor se identifica como S.F.P., autorizada CNBV bajo Ley de Ahorro y Crédito Popular; IFIT no pudo leerse. No presentarlo como banco por premios publicitarios."
+        },
+        "moneda": {
+          "valor": "MXN",
+          "fuente_url": "https://www.klar.mx/cat",
+          "fuente_id": "klar_cat",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Sección Tarjeta de Crédito con o sin Garantía, no Uber ni Platino",
+          "nota": null
+        },
+        "cat": {
+          "valor": {
+            "porcentaje": 187.0,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "supuesto_monto": null,
+            "supuesto_plazo": null,
+            "supuesto_linea_credito": null,
+            "supuestos": "El bloque oficial agrupa tarjeta con y sin garantía. No publica escenario individual."
+          },
+          "fuente_url": "https://www.klar.mx/cat",
+          "fuente_id": "klar_cat",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-05-01",
+          "fecha_referencia": null,
+          "vigente_desde": "2026-05-01",
+          "vigente_hasta": "2026-11-01",
+          "estado": "vigente_al_corte",
+          "localizador": "Sección Tarjeta de Crédito con o sin Garantía, no Uber ni Platino",
+          "nota": null
+        },
+        "tasa": {
+          "valor": {
+            "anual_pct": 123.1,
+            "tipo": "fija",
+            "iva": null,
+            "min_anual_pct": null,
+            "max_anual_pct": null
+          },
+          "fuente_url": "https://www.klar.mx/cat",
+          "fuente_id": "klar_cat",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": "2026-02-01",
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Sección Tarjeta de Crédito con o sin Garantía, no Uber ni Platino",
+          "nota": "La tasa se publica con fecha de referencia 1-feb-2026. El IVA de la tasa no se explicita; sin IVA del CAT no se hereda."
+        },
+        "comisiones_cero": {
+          "valor": {
+            "anualidad_mxn": 0,
+            "apertura_contratacion_mxn": 0,
+            "mantenimiento_mxn": 0,
+            "penalizacion_uso_minimo_mxn": 0,
+            "reposicion_mxn": 0,
+            "iva": "ND"
+          },
+          "fuente_url": "https://www.klar.mx/credito",
+          "fuente_id": "klar_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos, límites, costos y entidad del pie",
+          "nota": null
+        },
+        "comisiones_eventuales": {
+          "valor": {
+            "gastos_cobranza": {
+              "monto_mxn": 300,
+              "iva": "mas_IVA",
+              "periodicidad": "por_evento",
+              "disparador": "pago vencido no cubierto después de 4 días naturales desde fecha límite"
+            },
+            "disposicion_efectivo": {
+              "porcentaje_monto_dispuesto": 10,
+              "iva": "mas_IVA",
+              "periodicidad": "por_evento"
+            },
+            "corresponsal": "No aplica"
+          },
+          "fuente_url": "https://www.klar.mx/cat",
+          "fuente_id": "klar_cat",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Sección Tarjeta de Crédito con o sin Garantía, no Uber ni Platino",
+          "nota": null
+        },
+        "requisitos": {
+          "valor": {
+            "edad": "mayor de edad",
+            "residencia": "México",
+            "identificacion": [
+              "INE",
+              "pasaporte"
+            ],
+            "identificacion_vigente": true,
+            "curp": true,
+            "consulta_historial": "requiere autorización",
+            "evaluacion_crediticia": true,
+            "ingreso_minimo_mxn": null,
+            "antiguedad_laboral": null
+          },
+          "fuente_url": "https://www.klar.mx/credito",
+          "fuente_id": "klar_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos, límites, costos y entidad del pie",
+          "nota": "Ningún requisito público garantiza aprobación. No se usan promesas de respuesta en minutos como compromiso."
+        },
+        "limite_credito": {
+          "valor": {
+            "minimo_mxn": null,
+            "maximo_mxn": null,
+            "determinacion": "puntaje y comportamiento crediticio"
+          },
+          "fuente_url": "https://www.klar.mx/credito",
+          "fuente_id": "klar_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos, límites, costos y entidad del pie",
+          "nota": null
+        },
+        "plazo": {
+          "valor": null,
+          "fuente_url": "https://www.klar.mx/credito",
+          "fuente_id": "klar_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Requisitos, límites, costos y entidad del pie",
+          "nota": "No se verificó plazo contractual ni plazo universal de financiamiento; no inferirlo de MSI."
+        },
+        "seguro_obligatorio": {
+          "valor": null,
+          "fuente_url": "https://www.klar.mx/credito",
+          "fuente_id": "klar_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Requisitos, límites, costos y entidad del pie",
+          "nota": "No verificado en HTML; no se supone que exista o no exista."
+        },
+        "efectivo": {
+          "valor": "Puede habilitarse una parte de la línea según perfil crediticio; no equivale a retiro gratuito.",
+          "fuente_url": "https://www.klar.mx/credito",
+          "fuente_id": "klar_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Requisitos, límites, costos y entidad del pie",
+          "nota": null
+        },
+        "contrato_reca": {
+          "valor": null,
+          "fuente_url": "https://www.klar.mx/klar-legal",
+          "fuente_id": "klar_legal",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Emisor y documentos legales enlazados",
+          "nota": "Enlace de contrato no accesible por herramienta; número no verificado."
+        },
+        "folleto_exclusivos": {
+          "valor": null,
+          "fuente_url": "https://cdn.prod.website-files.com/630e13ca92151d578bc2ed8b/6a3d5dfb437749c9d023479a_%28KL-V23062026%29-Folleto-Informativo-Tarjeta-de-Cre-dito-.pdf",
+          "fuente_id": "klar_folleto",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Contenido no leído",
+          "nota": "Contenido no leído. No sustituido por tasas de comparadores ni por supuestos."
+        },
+        "registro_condusef": {
+          "valor": null,
+          "fuente_url": "https://ifit.condusef.gob.mx/ifit/ft_general_final.php?b=1&idnc=43424",
+          "fuente_id": "klar_ifit",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Contenido no leído",
+          "nota": "Consulta retornó 502. No se adoptó snippet como verificación documental."
+        },
+        "discrepancias": [
+          {
+            "valor": "El mensaje comercial general de ausencia de comisiones no es exhaustivo: la ficha CAT sí cobra cobranza y efectivo. Se conservan esos cargos.",
+            "fuente_url": "https://www.klar.mx/cat",
+            "fuente_id": "klar_cat",
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "localizador": "Sección Tarjeta de Crédito con o sin Garantía, no Uber ni Platino",
+            "nota": null
+          },
+          {
+            "valor": "La tabla CAT dice reposición No aplica mientras el bloque superior y página comercial dicen $0. Se presenta $0 por fuente explícita, conservando la diferencia de etiquetas.",
+            "fuente_url": "https://www.klar.mx/cat",
+            "fuente_id": "klar_cat",
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "localizador": "Sección Tarjeta de Crédito con o sin Garantía, no Uber ni Platino",
+            "nota": null
+          }
+        ],
+        "historial_no_usar_como_vigente": []
+      }
+    },
+    {
+      "id": "stori_green_clasica_mx",
+      "categoria": "tarjeta_credito",
+      "nombre_corto": "STORI GREEN CLÁSICA",
+      "decision_editorial": "Listable con conflicto visible de CAT/nombre comercial y condiciones individualizadas",
+      "oferta_vigente_verificada": true,
+      "motivo_exclusion": null,
+      "datos": {
+        "nombre_producto": {
+          "valor": "STORI GREEN CLÁSICA",
+          "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+          "fuente_id": "S2",
+          "fuente_urls": [
+            "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S2"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 2",
+          "nota": null
+        },
+        "emisor": {
+          "valor": "Stori México, S.A. de C.V., Sociedad Financiera Popular",
+          "fuente_url": "https://www.storicard.com/files/contrato-multiple-credito.pdf",
+          "fuente_id": "S4",
+          "fuente_urls": [
+            "https://www.storicard.com/files/contrato-multiple-credito.pdf"
+          ],
+          "fuente_ids": [
+            "S4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 1, encabezado y declaración I",
+          "nota": null
+        },
+        "sector_regulado": {
+          "valor": "Sociedad Financiera Popular autorizada y sujeta a supervisión CNBV",
+          "fuente_url": "https://www.storicard.com/files/contrato-multiple-credito.pdf",
+          "fuente_id": "S4",
+          "fuente_urls": [
+            "https://www.storicard.com/files/contrato-multiple-credito.pdf",
+            "https://sidof.segob.gob.mx/notas/docFuente/5744631"
+          ],
+          "fuente_ids": [
+            "S4",
+            "S5"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "Contrato p. 1; oficio CNBV bases primera y séptima",
+          "nota": null,
+          "contexto": {
+            "alcance_verificacion": "Contrato vigente enlazado y oficio CNBV consultados. No se afirma una consulta de padrón en vivo."
+          }
+        },
+        "reca": {
+          "valor": "2685-999-040251/05-02710-1025",
+          "fuente_url": "https://www.storicard.com/files/contrato-multiple-credito.pdf",
+          "fuente_id": "S4",
+          "fuente_urls": [
+            "https://www.storicard.com/files/contrato-multiple-credito.pdf"
+          ],
+          "fuente_ids": [
+            "S4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "Encabezados PDF",
+          "nota": null
+        },
+        "tipo": {
+          "valor": "Crédito revolvente en cuenta corriente, moneda MXN",
+          "fuente_url": "https://www.storicard.com/files/contrato-multiple-credito.pdf",
+          "fuente_id": "S4",
+          "fuente_urls": [
+            "https://www.storicard.com/files/contrato-multiple-credito.pdf"
+          ],
+          "fuente_ids": [
+            "S4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF pp. 1 y 3",
+          "nota": null
+        },
+        "cat": {
+          "valor": 186.2,
+          "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+          "fuente_id": "S2",
+          "fuente_urls": [
+            "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S2",
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-07-01",
+          "fecha_referencia": null,
+          "vigente_desde": "2026-07-01",
+          "vigente_hasta": "2026-12-31",
+          "estado": "verificado",
+          "localizador": "Tarifario p. 2; folleto p. 6",
+          "nota": null,
+          "contexto": {
+            "unidad": "porcentaje_anual",
+            "modalidad": "promedio ponderado",
+            "iva": "sin IVA",
+            "vigente_a_consulta": true
+          }
+        },
+        "supuestos_cat": {
+          "valor": null,
+          "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+          "fuente_id": "S2",
+          "fuente_urls": [
+            "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S2",
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Bloques CAT de STORI GREEN CLÁSICA",
+          "nota": "No se publican monto, plazo, patrón de disposición ni pagos usados en el cálculo. No reemplazar el CAT promedio por un CAT personalizado."
+        },
+        "tasa_ordinaria": {
+          "valor": 109.9,
+          "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+          "fuente_id": "S2",
+          "fuente_urls": [
+            "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S2",
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-07-01",
+          "fecha_referencia": null,
+          "vigente_desde": "2026-07-01",
+          "vigente_hasta": "2026-12-31",
+          "estado": "verificado",
+          "localizador": "Tarifario p. 2; folleto p. 6",
+          "nota": "Tasa contractual individual se informa en carátula; no es oferta universal.",
+          "contexto": {
+            "unidad": "porcentaje_anual",
+            "modalidad": "fija promedio ponderada",
+            "iva": "sin IVA"
+          }
+        },
+        "rango_tasa_individual": {
+          "valor": null,
+          "fuente_url": "https://www.storicard.com/files/contrato-multiple-credito.pdf",
+          "fuente_id": "S4",
+          "fuente_urls": [
+            "https://www.storicard.com/files/contrato-multiple-credito.pdf"
+          ],
+          "fuente_ids": [
+            "S4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "PDF p. 7 cláusula 14",
+          "nota": "Carátula individual no disponible; contrato sólo fija metodología y carácter fijo."
+        },
+        "monto_minimo": {
+          "valor": 2000,
+          "fuente_url": "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213",
+          "fuente_id": "S3",
+          "fuente_urls": [
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 5, STORI GREEN CLÁSICA",
+          "nota": null,
+          "contexto": {
+            "unidad": "MXN"
+          }
+        },
+        "monto_maximo": {
+          "valor": 23000,
+          "fuente_url": "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213",
+          "fuente_id": "S3",
+          "fuente_urls": [
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 5, STORI GREEN CLÁSICA",
+          "nota": "No aplicar el máximo de $220,000 anunciado para la familia en S1 a esta variante.",
+          "contexto": {
+            "unidad": "MXN"
+          }
+        },
+        "asignacion_linea": {
+          "valor": "Sujeta a evaluación; importe individual en carátula",
+          "fuente_url": "https://www.storicard.com/files/contrato-multiple-credito.pdf",
+          "fuente_id": "S4",
+          "fuente_urls": [
+            "https://www.storicard.com/files/contrato-multiple-credito.pdf"
+          ],
+          "fuente_ids": [
+            "S4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 3 cláusula 1",
+          "nota": null
+        },
+        "plazo_contrato": {
+          "valor": "Indeterminado",
+          "fuente_url": "https://www.storicard.com/files/contrato-multiple-credito.pdf",
+          "fuente_id": "S4",
+          "fuente_urls": [
+            "https://www.storicard.com/files/contrato-multiple-credito.pdf"
+          ],
+          "fuente_ids": [
+            "S4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 11 cláusula 27",
+          "nota": "No equivale a meses para liquidar un saldo ni a un préstamo amortizable."
+        },
+        "plazo_pago": {
+          "valor": null,
+          "fuente_url": "https://www.storicard.com/files/contrato-multiple-credito.pdf",
+          "fuente_id": "S4",
+          "fuente_urls": [
+            "https://www.storicard.com/files/contrato-multiple-credito.pdf"
+          ],
+          "fuente_ids": [
+            "S4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "PDF p. 2 definiciones de fecha de corte y fecha límite",
+          "nota": "Fechas individualizadas en estado de cuenta/carátula; no hay plazo universal para liquidar."
+        },
+        "comisiones": [
+          {
+            "valor": 0,
+            "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "fuente_id": "S2",
+            "fuente_urls": [
+              "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 2, bloque STORI GREEN CLÁSICA",
+            "nota": null,
+            "contexto": {
+              "concepto": "Anualidad",
+              "unidad": "MXN",
+              "iva": "sin IVA",
+              "periodicidad": "anual"
+            }
+          },
+          {
+            "valor": 300,
+            "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "fuente_id": "S2",
+            "fuente_urls": [
+              "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 2, bloque STORI GREEN CLÁSICA",
+            "nota": null,
+            "contexto": {
+              "concepto": "Aclaración improcedente",
+              "unidad": "MXN",
+              "iva": "más IVA",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": 300,
+            "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "fuente_id": "S2",
+            "fuente_urls": [
+              "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 2, bloque STORI GREEN CLÁSICA",
+            "nota": null,
+            "contexto": {
+              "concepto": "Falta de pago mínimo a fecha límite",
+              "unidad": "MXN",
+              "iva": "más IVA",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": 150,
+            "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "fuente_id": "S2",
+            "fuente_urls": [
+              "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 2, bloque STORI GREEN CLÁSICA",
+            "nota": null,
+            "contexto": {
+              "concepto": "Reposición por deterioro",
+              "unidad": "MXN",
+              "iva": "más IVA",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": 150,
+            "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "fuente_id": "S2",
+            "fuente_urls": [
+              "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 2, bloque STORI GREEN CLÁSICA",
+            "nota": null,
+            "contexto": {
+              "concepto": "Reposición por robo/extravío",
+              "unidad": "MXN",
+              "iva": "más IVA",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": 25,
+            "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "fuente_id": "S2",
+            "fuente_urls": [
+              "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 2, bloque STORI GREEN CLÁSICA",
+            "nota": null,
+            "contexto": {
+              "concepto": "Consulta de saldo cajero extranjero",
+              "unidad": "MXN",
+              "iva": "más IVA",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": 10,
+            "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "fuente_id": "S2",
+            "fuente_urls": [
+              "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 2, bloque STORI GREEN CLÁSICA",
+            "nota": "Tarifario superpone referencia al extranjero con fila de $25; no decidir tarifa aplicable a un cajero concreto.",
+            "contexto": {
+              "concepto": "Consulta de saldo cajero de otras entidades y/o extranjero",
+              "unidad": "MXN",
+              "iva": "más IVA",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": 10,
+            "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "fuente_id": "S2",
+            "fuente_urls": [
+              "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 2, bloque STORI GREEN CLÁSICA",
+            "nota": "Contrato prevé IVA que corresponda sobre comisiones; no afirmar que 10% lo incluye.",
+            "contexto": {
+              "concepto": "Disposición de efectivo en cajero nacional de otras entidades",
+              "unidad": "porcentaje del monto dispuesto",
+              "iva": "ND en esta fila",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": 10,
+            "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "fuente_id": "S2",
+            "fuente_urls": [
+              "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 2, bloque STORI GREEN CLÁSICA",
+            "nota": "Contrato prevé IVA que corresponda sobre comisiones; no afirmar que 10% lo incluye.",
+            "contexto": {
+              "concepto": "Disposición de efectivo en cajero extranjero",
+              "unidad": "porcentaje del monto dispuesto",
+              "iva": "ND en esta fila",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": null,
+            "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "fuente_id": "S2",
+            "fuente_urls": [
+              "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "ND",
+            "localizador": "PDF p. 2, bloque STORI GREEN CLÁSICA",
+            "nota": "No aparece monto de apertura en bloque Clásica. Ausencia no se transforma en $0. No transferir $500 de STORI GREEN.",
+            "contexto": {
+              "concepto": "Apertura",
+              "unidad": "MXN",
+              "iva": "ND",
+              "periodicidad": "por evento"
+            }
+          }
+        ],
+        "requisitos": {
+          "valor": [
+            "Mayor de edad",
+            "Identificación oficial vigente",
+            "Comprobante de domicilio",
+            "Vivir en México"
+          ],
+          "fuente_url": "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213",
+          "fuente_id": "S3",
+          "fuente_urls": [
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 5",
+          "nota": null
+        },
+        "edad_minima": {
+          "valor": 18,
+          "fuente_url": "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213",
+          "fuente_id": "S3",
+          "fuente_urls": [
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "normalizado",
+          "localizador": "PDF p. 5, requisito de mayoría de edad",
+          "nota": null,
+          "contexto": {
+            "unidad": "años"
+          }
+        },
+        "edad_maxima": {
+          "valor": null,
+          "fuente_url": "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213",
+          "fuente_id": "S3",
+          "fuente_urls": [
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "PDF p. 5",
+          "nota": "No publicada"
+        },
+        "ingreso_minimo": {
+          "valor": null,
+          "fuente_url": "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213",
+          "fuente_id": "S3",
+          "fuente_urls": [
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "PDF p. 5",
+          "nota": "No publicado; no significa ingreso cero ni ausencia de evaluación.",
+          "contexto": {
+            "unidad": "MXN"
+          }
+        },
+        "score_minimo": {
+          "valor": null,
+          "fuente_url": "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213",
+          "fuente_id": "S3",
+          "fuente_urls": [
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "PDF p. 5",
+          "nota": "No publicado"
+        },
+        "historial_crediticio": {
+          "valor": "El contrato permite consultas periódicas con autorización; el crédito pasa por evaluación",
+          "fuente_url": "https://www.storicard.com/files/contrato-multiple-credito.pdf",
+          "fuente_id": "S4",
+          "fuente_urls": [
+            "https://www.storicard.com/files/contrato-multiple-credito.pdf"
+          ],
+          "fuente_ids": [
+            "S4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF pp. 3 y 13",
+          "nota": null
+        },
+        "garantia": {
+          "valor": null,
+          "fuente_url": "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213",
+          "fuente_id": "S3",
+          "fuente_urls": [
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213",
+            "https://www.storicard.com/files/contrato-multiple-credito.pdf"
+          ],
+          "fuente_ids": [
+            "S3",
+            "S4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Folleto pp. 5-6; contrato",
+          "nota": "No se fija depósito para esta variante en los apartados leídos. No mezclar con Stori con Garantía."
+        },
+        "elegibilidad_catalogo": {
+          "valor": "Listable con conflicto visible de CAT/nombre comercial y condiciones individualizadas",
+          "fuente_url": "https://www.storicard.com/stori-card",
+          "fuente_id": "S1",
+          "fuente_urls": [
+            "https://www.storicard.com/stori-card",
+            "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S1",
+            "S2",
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "criterio_editorial",
+          "localizador": "Comparación de documentación",
+          "nota": "No usar como predicción de aprobación ni presentar 164.9% como CAT de STORI GREEN CLÁSICA sin aclaración."
+        },
+        "conflictos": [
+          {
+            "valor": {
+              "pagina_nombre": "Stori Clásica",
+              "pagina_cat": 164.9,
+              "pagina_calculo": "2026-04-16",
+              "pagina_vigencia_hasta": "2026-12-31",
+              "documento_nombre": "STORI GREEN CLÁSICA",
+              "documento_cat": 186.2,
+              "documento_calculo": "2026-07-01",
+              "documento_vigencia_hasta": "2026-12-31"
+            },
+            "fuente_url": "https://www.storicard.com/stori-card",
+            "fuente_id": "S1",
+            "fuente_urls": [
+              "https://www.storicard.com/stori-card",
+              "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+              "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "conflicto_conservado",
+            "localizador": "Página bloque CAT vs tarifario p. 2 y folleto p. 6",
+            "nota": null,
+            "contexto": {
+              "resolucion": "Usar nombre exacto y dato documental más reciente; equivalencia entre etiquetas no confirmada."
+            }
+          },
+          {
+            "valor": {
+              "familia_maximo_mxn": 220000,
+              "variante_folleto_maximo_mxn": 23000
+            },
+            "fuente_url": "https://www.storicard.com/stori-card",
+            "fuente_id": "S1",
+            "fuente_urls": [
+              "https://www.storicard.com/stori-card",
+              "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+            ],
+            "fuente_ids": [
+              "S1",
+              "S3"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "diferencia_de_alcance",
+            "localizador": "Página beneficio principal vs folleto p. 5",
+            "nota": null,
+            "contexto": {
+              "resolucion": "Conservar máximo específico del folleto; no mezclar cartera completa con variante."
+            }
+          }
+        ],
+        "exclusiones": {
+          "valor": [
+            "STORI GREEN",
+            "Stori Green Líder",
+            "Stori Green Rock",
+            "Nivel 2",
+            "Black",
+            "SHEIN y demás alianzas",
+            "Stori con Garantía"
+          ],
+          "fuente_url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+          "fuente_id": "S2",
+          "fuente_urls": [
+            "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+            "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213"
+          ],
+          "fuente_ids": [
+            "S2",
+            "S3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "Productos separados en tarifario/folleto",
+          "nota": "No heredar condiciones. Líder/Rock sin oferta actual; Green Clásica, Líder, Rock y SHEIN Nivel 2 figuran próximamente. STORI GREEN NIVEL 2 es otra variante con CAT propio y no se incorpora a esta ficha."
+        }
+      }
+    },
+    {
+      "id": "uala_tarjeta_credito_clasica_mx",
+      "categoria": "tarjeta_credito",
+      "nombre_corto": "Tarjeta de crédito Ualá (clásica)",
+      "decision_editorial": "Listable con vigencia, requisitos y huecos visibles",
+      "oferta_vigente_verificada": true,
+      "motivo_exclusion": null,
+      "datos": {
+        "nombre_producto": {
+          "valor": "Tarjeta de crédito Ualá (clásica)",
+          "fuente_url": "https://www.uala.mx/tarjeta-credito",
+          "fuente_id": "U1",
+          "fuente_urls": [
+            "https://www.uala.mx/tarjeta-credito",
+            "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf"
+          ],
+          "fuente_ids": [
+            "U1",
+            "U2"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "Página pie CAT; tabla productos de crédito p. 2",
+          "nota": null
+        },
+        "emisor": {
+          "valor": "Ualá, S.A., Institución de Banca Múltiple",
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf",
+          "fuente_id": "U4",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf"
+          ],
+          "fuente_ids": [
+            "U4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF pp. 1-2",
+          "nota": null
+        },
+        "sector_regulado": {
+          "valor": "Institución de Banca Múltiple autorizada",
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf",
+          "fuente_id": "U4",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf",
+            "https://sidof.segob.gob.mx/notas/getNewsletter/28-02-2025/Matutina/319682"
+          ],
+          "fuente_ids": [
+            "U4",
+            "U7"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "Contrato p. 2; DOF pp. 20-21, oficio CNBV 312-2/9248/2025",
+          "nota": null,
+          "contexto": {
+            "alcance_verificacion": "Oficio de autorización con nueva denominación consultado. Comunicado estadístico CNBV alternativo dio 502, sin impedir verificar autorización en DOF."
+          }
+        },
+        "reca": {
+          "valor": "1621-999-041364/09-01664-0726",
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf",
+          "fuente_id": "U4",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf"
+          ],
+          "fuente_ids": [
+            "U4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "Encabezados/pies PDF",
+          "nota": null
+        },
+        "tipo": {
+          "valor": "Crédito revolvente en cuenta corriente, moneda MXN",
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf",
+          "fuente_id": "U4",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf"
+          ],
+          "fuente_ids": [
+            "U4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 5 capítulo II cláusula primera",
+          "nota": null
+        },
+        "cat": {
+          "valor": 172.1,
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf",
+          "fuente_id": "U2",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf",
+            "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+            "https://www.uala.mx/tarjeta-credito"
+          ],
+          "fuente_ids": [
+            "U2",
+            "U3",
+            "U1"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-08-28",
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": "2027-02-28",
+          "estado": "verificado",
+          "localizador": "Tarifario p. 2; folleto p. 3; pie CAT página",
+          "nota": null,
+          "contexto": {
+            "unidad": "porcentaje_anual",
+            "modalidad": "promedio",
+            "iva": "sin IVA",
+            "vigente_a_consulta": true
+          }
+        },
+        "supuestos_cat": {
+          "valor": null,
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf",
+          "fuente_id": "U2",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf",
+            "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf"
+          ],
+          "fuente_ids": [
+            "U2",
+            "U3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Bloques CAT",
+          "nota": "No desglosan monto, plazo, patrón de disposición ni pagos del cálculo. Es informativo; no simularlo como costo individual."
+        },
+        "tasa_ordinaria": {
+          "valor": 103.47,
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf",
+          "fuente_id": "U2",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf"
+          ],
+          "fuente_ids": [
+            "U2"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-08-28",
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": "2027-02-28",
+          "estado": "verificado",
+          "localizador": "PDF p. 2 columna Tarjeta de Crédito Ualá",
+          "nota": "Se asigna por evaluación crediticia; sujeta a aprobación.",
+          "contexto": {
+            "unidad": "porcentaje_anual",
+            "modalidad": "fija anual promedio",
+            "iva": "No se rotula expresamente sin IVA; contrato incluye IVA que causen intereses"
+          }
+        },
+        "rango_tasa_individual": {
+          "valor": null,
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf",
+          "fuente_id": "U4",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf"
+          ],
+          "fuente_ids": [
+            "U4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "PDF p. 18 cláusula décima b",
+          "nota": "Tasa individual en carátula; rango no publicado en documentos consultados."
+        },
+        "monto_minimo": {
+          "valor": null,
+          "fuente_url": "https://www.uala.mx/tarjeta-credito",
+          "fuente_id": "U1",
+          "fuente_urls": [
+            "https://www.uala.mx/tarjeta-credito",
+            "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+            "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf"
+          ],
+          "fuente_ids": [
+            "U1",
+            "U3",
+            "U4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Página producto; folleto; contrato p. 5",
+          "nota": "Sin rango público verificado; banco determina monto y lo notifica en carátula.",
+          "contexto": {
+            "unidad": "MXN"
+          }
+        },
+        "monto_maximo": {
+          "valor": null,
+          "fuente_url": "https://www.uala.mx/tarjeta-credito",
+          "fuente_id": "U1",
+          "fuente_urls": [
+            "https://www.uala.mx/tarjeta-credito",
+            "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+            "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf"
+          ],
+          "fuente_ids": [
+            "U1",
+            "U3",
+            "U4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Página producto; folleto; contrato p. 5",
+          "nota": "No usar cifras de sitios comparadores o Ualá Argentina.",
+          "contexto": {
+            "unidad": "MXN"
+          }
+        },
+        "asignacion_linea": {
+          "valor": "Banco determina y notifica importe en carátula",
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf",
+          "fuente_id": "U4",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf"
+          ],
+          "fuente_ids": [
+            "U4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 5 capítulo II cláusula primera",
+          "nota": null
+        },
+        "plazo_contrato": {
+          "valor": 12,
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf",
+          "fuente_id": "U4",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf"
+          ],
+          "fuente_ids": [
+            "U4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 31 capítulo VI cláusula segunda",
+          "nota": "Un año desde firma de solicitud y autorización; prórroga automática anual. No es plazo universal de amortización.",
+          "contexto": {
+            "unidad": "meses"
+          }
+        },
+        "plazo_pago": {
+          "valor": null,
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf",
+          "fuente_id": "U4",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf"
+          ],
+          "fuente_ids": [
+            "U4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "PDF cláusula décima y carátula",
+          "nota": "Pago y fecha límite individualizados; diferimientos dependen de oferta."
+        },
+        "comisiones": [
+          {
+            "valor": 0,
+            "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf",
+            "fuente_id": "U2",
+            "fuente_urls": [
+              "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf"
+            ],
+            "fuente_ids": [
+              "U2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 2 nota 2",
+            "nota": null,
+            "contexto": {
+              "concepto": "Anualidad",
+              "unidad": "MXN",
+              "iva": "sin IVA",
+              "periodicidad": "anual"
+            }
+          },
+          {
+            "valor": 399,
+            "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf",
+            "fuente_id": "U2",
+            "fuente_urls": [
+              "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf"
+            ],
+            "fuente_ids": [
+              "U2"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 2 y nota 3",
+            "nota": null,
+            "contexto": {
+              "concepto": "Pago tardío",
+              "unidad": "MXN",
+              "iva": "más IVA",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": 0,
+            "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+            "fuente_id": "U3",
+            "fuente_urls": [
+              "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf"
+            ],
+            "fuente_ids": [
+              "U3"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 3",
+            "nota": null,
+            "contexto": {
+              "concepto": "Aclaración improcedente",
+              "unidad": "MXN",
+              "iva": "más IVA según nota general",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": 0,
+            "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+            "fuente_id": "U3",
+            "fuente_urls": [
+              "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf"
+            ],
+            "fuente_ids": [
+              "U3"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 3",
+            "nota": null,
+            "contexto": {
+              "concepto": "Gastos de cobranza",
+              "unidad": "MXN",
+              "iva": "más IVA según nota general",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": 0,
+            "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+            "fuente_id": "U3",
+            "fuente_urls": [
+              "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf"
+            ],
+            "fuente_ids": [
+              "U3"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 3",
+            "nota": "Cajero de terceros puede cobrar tarifa adicional; importe ND.",
+            "contexto": {
+              "concepto": "Disposición de efectivo cobrada por Ualá",
+              "unidad": "MXN",
+              "iva": "más IVA según nota general",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": 0,
+            "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+            "fuente_id": "U3",
+            "fuente_urls": [
+              "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf"
+            ],
+            "fuente_ids": [
+              "U3"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "PDF p. 3",
+            "nota": null,
+            "contexto": {
+              "concepto": "Banca móvil",
+              "unidad": "MXN",
+              "iva": "más IVA según nota general",
+              "periodicidad": "mensual"
+            }
+          },
+          {
+            "valor": 0,
+            "fuente_url": "https://www.uala.mx/tarjeta-credito",
+            "fuente_id": "U1",
+            "fuente_urls": [
+              "https://www.uala.mx/tarjeta-credito"
+            ],
+            "fuente_ids": [
+              "U1"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "FAQ requisitos/solicitud",
+            "nota": null,
+            "contexto": {
+              "concepto": "Emisión",
+              "unidad": "MXN",
+              "iva": "ND expresamente; importe cero",
+              "periodicidad": "por emisión"
+            }
+          },
+          {
+            "valor": 0,
+            "fuente_url": "https://www.uala.mx/tarjeta-credito",
+            "fuente_id": "U1",
+            "fuente_urls": [
+              "https://www.uala.mx/tarjeta-credito"
+            ],
+            "fuente_ids": [
+              "U1"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "FAQ solicitud",
+            "nota": null,
+            "contexto": {
+              "concepto": "Envío",
+              "unidad": "MXN",
+              "iva": "ND expresamente; importe cero",
+              "periodicidad": "por envío"
+            }
+          },
+          {
+            "valor": 0,
+            "fuente_url": "https://www.uala.mx/tarjeta-credito",
+            "fuente_id": "U1",
+            "fuente_urls": [
+              "https://www.uala.mx/tarjeta-credito"
+            ],
+            "fuente_ids": [
+              "U1"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "verificado",
+            "localizador": "FAQ reimpresión",
+            "nota": "FAQ lo condiciona a por el momento; sin vigencia publicada.",
+            "contexto": {
+              "concepto": "Reimpresión",
+              "unidad": "MXN",
+              "iva": "ND expresamente; importe cero",
+              "periodicidad": "por evento"
+            }
+          },
+          {
+            "valor": null,
+            "fuente_url": "https://www.uala.mx/tarjeta-credito",
+            "fuente_id": "U1",
+            "fuente_urls": [
+              "https://www.uala.mx/tarjeta-credito"
+            ],
+            "fuente_ids": [
+              "U1"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "ND",
+            "localizador": "FAQ adelanto en cajero",
+            "nota": "Puede cobrar tarifa; no equivale a retiro totalmente gratuito.",
+            "contexto": {
+              "concepto": "Cajero de terceros",
+              "unidad": "MXN",
+              "iva": "ND",
+              "periodicidad": "por evento"
+            }
+          }
+        ],
+        "requisitos": {
+          "valor": [
+            "Persona física con cuenta Ualá",
+            "Edad entre 18 y 70 años",
+            "Buen historial y capacidad de pago",
+            "Identificación vigente: INE o tarjeta de residencia",
+            "Comprobante de domicilio de máximo tres meses",
+            "Reporte de información crediticia",
+            "RFC y datos fiscales"
+          ],
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+          "fuente_id": "U3",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf"
+          ],
+          "fuente_ids": [
+            "U3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 2",
+          "nota": null
+        },
+        "requisitos_complementarios": {
+          "valor": [
+            "CURP",
+            "Constancia de Situación Fiscal"
+          ],
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/HyA2lLgDbuwOiEW9fMggN/8c93f6c5c617d44036ab9c6e5fc20699/Requisitos_de_contrataci%C3%83_n_Septiembre2025.pdf",
+          "fuente_id": "U5",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/HyA2lLgDbuwOiEW9fMggN/8c93f6c5c617d44036ab9c6e5fc20699/Requisitos_de_contrataci%C3%83_n_Septiembre2025.pdf"
+          ],
+          "fuente_ids": [
+            "U5"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 2 columna Tarjeta de Crédito Ualá",
+          "nota": "Documento aún enlazado, versión septiembre 2025 sin caducidad publicada; folleto septiembre 2026 menciona RFC/datos fiscales."
+        },
+        "requisito_historial_faq": {
+          "valor": "no tener deudas registradas en los últimos 24 meses",
+          "fuente_url": "https://www.uala.mx/tarjeta-credito",
+          "fuente_id": "U1",
+          "fuente_urls": [
+            "https://www.uala.mx/tarjeta-credito"
+          ],
+          "fuente_ids": [
+            "U1"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "FAQ requisitos, JSON público HTML",
+          "nota": "Redacción literal de la entidad. No reinterpretar como score mínimo, ausencia absoluta de créditos o garantía de aprobación; difiere de formulación genérica de folleto."
+        },
+        "edad_minima": {
+          "valor": 18,
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+          "fuente_id": "U3",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf"
+          ],
+          "fuente_ids": [
+            "U3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 2",
+          "nota": null,
+          "contexto": {
+            "unidad": "años"
+          }
+        },
+        "edad_maxima": {
+          "valor": 70,
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+          "fuente_id": "U3",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf"
+          ],
+          "fuente_ids": [
+            "U3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 2",
+          "nota": null,
+          "contexto": {
+            "unidad": "años"
+          }
+        },
+        "residencia": {
+          "valor": "Ciudadano mexicano o residente, con domicilio en México",
+          "fuente_url": "https://www.uala.mx/tarjeta-credito",
+          "fuente_id": "U1",
+          "fuente_urls": [
+            "https://www.uala.mx/tarjeta-credito"
+          ],
+          "fuente_ids": [
+            "U1"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "FAQ requisitos",
+          "nota": null
+        },
+        "ingreso_minimo": {
+          "valor": null,
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+          "fuente_id": "U3",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf"
+          ],
+          "fuente_ids": [
+            "U3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "PDF p. 2",
+          "nota": "No publica monto; exige capacidad de pago.",
+          "contexto": {
+            "unidad": "MXN"
+          }
+        },
+        "score_minimo": {
+          "valor": null,
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+          "fuente_id": "U3",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf"
+          ],
+          "fuente_ids": [
+            "U3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "PDF p. 2",
+          "nota": "Buen historial, sin puntuación mínima publicada."
+        },
+        "garantia": {
+          "valor": null,
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf",
+          "fuente_id": "U4",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf"
+          ],
+          "fuente_ids": [
+            "U4"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Capítulo II vs capítulo III",
+          "nota": "Variante elegida ordinaria. No heredar depósito de tarjeta garantizada, regulada por capítulo distinto."
+        },
+        "limite_retiro": {
+          "valor": 1,
+          "fuente_url": "https://www.uala.mx/tarjeta-credito",
+          "fuente_id": "U1",
+          "fuente_urls": [
+            "https://www.uala.mx/tarjeta-credito"
+          ],
+          "fuente_ids": [
+            "U1"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "FAQ adelanto en cajero",
+          "nota": "No se especifica periodicidad; no convertir a límite diario.",
+          "contexto": {
+            "unidad": "porcentaje de línea total"
+          }
+        },
+        "elegibilidad_catalogo": {
+          "valor": "Listable con vigencia, requisitos y huecos visibles",
+          "fuente_url": "https://www.uala.mx/tarjeta-credito",
+          "fuente_id": "U1",
+          "fuente_urls": [
+            "https://www.uala.mx/tarjeta-credito",
+            "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf",
+            "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf"
+          ],
+          "fuente_ids": [
+            "U1",
+            "U2",
+            "U3"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "criterio_editorial",
+          "localizador": "Cruce de fuentes",
+          "nota": "No predecir aprobación ni inferir límite monetario."
+        },
+        "historico_caducado": [
+          {
+            "valor": {
+              "cat": 167.4,
+              "tasa_fija_anual_promedio": 101.67
+            },
+            "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/4fa71b05de591367f2494cbde7e3801f/Tabla_de_comisiones_y_rendimientos_May1.pdf",
+            "fuente_id": "U6",
+            "fuente_urls": [
+              "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/4fa71b05de591367f2494cbde7e3801f/Tabla_de_comisiones_y_rendimientos_May1.pdf"
+            ],
+            "fuente_ids": [
+              "U6"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": "2026-03-04",
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": "2026-08-31",
+            "estado": "caducado",
+            "localizador": "PDF p. 2, Tarjeta de Crédito Ualá",
+            "nota": null,
+            "contexto": {
+              "iva_cat": "sin IVA",
+              "resolucion": "Conservado para auditoría; excluido de datos activos."
+            }
+          }
+        ],
+        "conflictos": [
+          {
+            "valor": "FAQ exige ausencia de deudas registradas en 24 meses; folleto sólo expresa buen historial/capacidad. Documento de requisitos más viejo añade CURP y constancia fiscal.",
+            "fuente_url": "https://www.uala.mx/tarjeta-credito",
+            "fuente_id": "U1",
+            "fuente_urls": [
+              "https://www.uala.mx/tarjeta-credito",
+              "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+              "https://assets.ctfassets.net/6n252fx9hkkr/HyA2lLgDbuwOiEW9fMggN/8c93f6c5c617d44036ab9c6e5fc20699/Requisitos_de_contrataci%C3%83_n_Septiembre2025.pdf"
+            ],
+            "fuente_ids": [
+              "U1",
+              "U3",
+              "U5"
+            ],
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "diferencia_de_detalle_conservada",
+            "localizador": "FAQ; folleto p. 2; requisitos p. 2",
+            "nota": null,
+            "contexto": {
+              "resolucion": "Mostrar requisito literal si se usa, no convertirlo en regla automática de elegibilidad."
+            }
+          }
+        ],
+        "exclusiones": {
+          "valor": [
+            "Tarjeta de Crédito Garantizada Ualá",
+            "Tarjeta de Crédito Ualá ABC Básica",
+            "Tarjetas de Ualá Argentina/Colombia"
+          ],
+          "fuente_url": "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf",
+          "fuente_id": "U2",
+          "fuente_urls": [
+            "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf"
+          ],
+          "fuente_ids": [
+            "U2"
+          ],
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "verificado",
+          "localizador": "PDF p. 2",
+          "nota": "Productos separados; no combinar CAT ni tasas."
+        }
+      }
+    },
+    {
+      "id": "digitt_refinanciamiento",
+      "categoria": "credito_personal_consolidacion",
+      "nombre_corto": "Préstamo Digitt para refinanciar deuda de tarjetas",
+      "decision_editorial": "excluido_de_ofertas_vigentes; evidencia documental conservada",
+      "oferta_vigente_verificada": false,
+      "motivo_exclusion": "No se pudo verificar CAT vigente fechado ni vigencia de condiciones económicas. Tarifas FAQ 2023/2024 y forma jurídica distinta a entidad financiera supervisada.",
+      "datos": {
+        "nombre": {
+          "valor": "Préstamo Digitt para refinanciar deuda de tarjetas",
+          "fuente_url": "https://www.digitt.com/",
+          "fuente_id": "dig_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Producto, requisitos y razón social",
+          "nota": null
+        },
+        "entidad": {
+          "valor": "PAGOSAFE, S.A.P.I. de C.V.",
+          "fuente_url": "https://www.digitt.com/terminos-condiciones",
+          "fuente_id": "dig_terminos",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2018-01-02",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Introducción y carácter ilustrativo de condiciones",
+          "nota": null
+        },
+        "tipo_entidad": {
+          "valor": "Sociedad mercantil S.A.P.I. de C.V.; el proveedor dice que no es SOFOM ni SOFIPO y que no lo regula CONDUSEF.",
+          "fuente_url": "https://www.digitt.com/blog/digitt-es-confiable",
+          "fuente_id": "dig_reg",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Transparencia y confianza",
+          "nota": "El proveedor declara contrato registrado en PROFECO. No se verificó ficha registral; no etiquetar institución financiera autorizada por CNBV/CONDUSEF."
+        },
+        "moneda": {
+          "valor": "MXN",
+          "fuente_url": "https://www.digitt.com/",
+          "fuente_id": "dig_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Producto, requisitos y razón social",
+          "nota": null
+        },
+        "cat": {
+          "valor": null,
+          "fuente_url": "https://www.digitt.com/",
+          "fuente_id": "dig_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Producto, requisitos y razón social",
+          "nota": "No se encontró CAT completo con fecha de cálculo, supuestos y vigencia en página principal ni FAQ económica consultada. Ejemplos comparativos no adoptados como CAT de oferta vigente."
+        },
+        "tasa_observada": {
+          "valor": {
+            "min_anual_pct": 23,
+            "max_anual_pct": 42,
+            "tipo": null,
+            "iva": null
+          },
+          "fuente_url": "https://www.digitt.com/ayuda/de-que-depende-la-tasa-de-interes-de-mi-prestamo-digitt",
+          "fuente_id": "dig_tasa",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2024-03-19",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "historico_sin_vigencia_confirmada",
+          "localizador": "Artículo FAQ",
+          "nota": "FAQ de marzo 2024 aún accesible. No prueba vigencia al corte; tasa personalizada por historial. No confundir intervalo con cotización."
+        },
+        "comisiones_observadas": {
+          "valor": {
+            "apertura_mxn": 0,
+            "pago_tardio_mxn": 0,
+            "pago_anticipado_mxn": 0,
+            "liquidacion_anticipada_mxn": 0,
+            "iva": "ND"
+          },
+          "fuente_url": "https://www.digitt.com/ayuda/digitt-cobra-comisiones",
+          "fuente_id": "dig_fees",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2023-02-02",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "historico_sin_vigencia_confirmada",
+          "localizador": "Artículo FAQ",
+          "nota": "Declaración FAQ 2023; la portada aún anuncia cero comisiones, sin tarifario fechado verificable."
+        },
+        "monto": {
+          "valor": {
+            "maximo_mxn": 150000,
+            "minimo_mxn": null,
+            "deuda_objetivo": "La página alterna mayor a $10,000 y al menos $10,000."
+          },
+          "fuente_url": "https://www.digitt.com/",
+          "fuente_id": "dig_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Producto, requisitos y razón social",
+          "nota": null
+        },
+        "destino": {
+          "valor": "El proveedor paga directamente deudas de tarjetas al banco; no se documenta efectivo de libre destino.",
+          "fuente_url": "https://www.digitt.com/",
+          "fuente_id": "dig_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Producto, requisitos y razón social",
+          "nota": null
+        },
+        "plazo": {
+          "valor": {
+            "minimo_meses": null,
+            "maximo_meses": null,
+            "ejemplo_historico": {
+              "monto_mxn": 30000,
+              "plazos_meses": [
+                6,
+                9,
+                12,
+                15
+              ]
+            }
+          },
+          "fuente_url": "https://www.digitt.com/ayuda/que-plazos-ofrece-digitt-para-pagar-mi-prestamo",
+          "fuente_id": "dig_plazo",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2023-01-25",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "historico_sin_vigencia_confirmada",
+          "localizador": "Texto y tabla de plazos no transcrita",
+          "nota": "Ejemplo específico de enero 2023; tabla gráfica de rango general no leída. No convertir ejemplo en rango vigente."
+        },
+        "requisitos": {
+          "valor": {
+            "historial": "evalúa puntualidad, endeudamiento e ingresos suficientes",
+            "documentos": [
+              "identificación oficial vigente",
+              "estado de cuenta reciente de tarjeta",
+              "comprobante de ingreso: nómina o estado bancario"
+            ],
+            "ingreso_minimo_mxn": null,
+            "edad_maxima": null,
+            "antiguedad_laboral": null
+          },
+          "fuente_url": "https://www.digitt.com/",
+          "fuente_id": "dig_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Producto, requisitos y razón social",
+          "nota": null
+        },
+        "edad_minima_sitio": {
+          "valor": 18,
+          "fuente_url": "https://www.digitt.com/terminos-condiciones",
+          "fuente_id": "dig_terminos",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2018-01-02",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Introducción y carácter ilustrativo de condiciones",
+          "nota": "Mínimo para utilizar/solicitar servicios en sitio; no equivale a edad máxima ni a aprobación."
+        },
+        "requisitos_historicos": {
+          "valor": "FAQ de 2023 menciona no tener atrasos mayores a 90 días. No sustituye el criterio actual de historial saludable de la portada.",
+          "fuente_url": "https://www.digitt.com/ayuda/que-necesito-para-obtener-mi-prestamo-digitt",
+          "fuente_id": "dig_req",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2023-01-25",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "historico_sin_vigencia_confirmada",
+          "localizador": "Artículo FAQ",
+          "nota": null
+        },
+        "seguro_prima": {
+          "valor": null,
+          "fuente_url": "https://www.digitt.com/",
+          "fuente_id": "dig_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Producto, requisitos y razón social",
+          "nota": "ND en fuentes consultadas."
+        },
+        "interes_moratorio": {
+          "valor": null,
+          "fuente_url": "https://www.digitt.com/ayuda/digitt-cobra-comisiones",
+          "fuente_id": "dig_fees",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2023-02-02",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Artículo FAQ",
+          "nota": "Cero comisión de atraso no prueba tasa moratoria cero."
+        },
+        "contrato_numero_registro": {
+          "valor": null,
+          "fuente_url": "https://www.digitt.com/blog/digitt-es-confiable",
+          "fuente_id": "dig_reg",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Transparencia y confianza",
+          "nota": "No se verificó registro individual; no asumir RECA financiero."
+        },
+        "discrepancias": [
+          {
+            "valor": "Umbral de deuda en portada: mayor a 10,000 vs al menos 10,000. No aplicar filtro inclusivo/exclusivo definitivo.",
+            "fuente_url": "https://www.digitt.com/",
+            "fuente_id": "dig_web",
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "localizador": "Producto, requisitos y razón social",
+            "nota": null
+          }
+        ],
+        "historial_no_usar_como_vigente": []
+      }
+    },
+    {
+      "id": "yotepresto_personal",
+      "categoria": "credito_personal_financiamiento_colectivo",
+      "nombre_corto": "Préstamo personal en línea YoTePresto",
+      "decision_editorial": "ficha_evidencia; excluido_de_ofertas_con_vigencia_confirmada",
+      "oferta_vigente_verificada": false,
+      "motivo_exclusion": "Producto y costos presentes en sitio oficial, pero CAT no declara intervalo de vigencia. Se conserva ficha; no cumple filtro estricto de oferta vigente inequívocamente verificable.",
+      "datos": {
+        "nombre": {
+          "valor": "Préstamo personal en línea YoTePresto",
+          "fuente_url": "https://www.yotepresto.com/prestamos-en-linea",
+          "fuente_id": "yt_prod",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Montos, requisitos y condiciones",
+          "nota": null
+        },
+        "entidad": {
+          "valor": "Comunidad de Préstamos, S.A.P.I. de C.V., Institución de Financiamiento Colectivo",
+          "fuente_url": "https://dof.gob.mx/nota_detalle.php?codigo=5651693&fecha=11/05/2022",
+          "fuente_id": "yt_dof",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2022-05-11",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Oficio P127/2021 publicado DOF",
+          "nota": null
+        },
+        "tipo_entidad": {
+          "valor": "Institución de Financiamiento Colectivo",
+          "fuente_url": "https://dof.gob.mx/nota_detalle.php?codigo=5651693&fecha=11/05/2022",
+          "fuente_id": "yt_dof",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2022-05-11",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Oficio P127/2021 publicado DOF",
+          "nota": "Autorización CNBV P127/2021 publicada 11-may-2022. No equivale a verificación del padrón en vivo ni garantía pública del crédito."
+        },
+        "moneda": {
+          "valor": "MXN",
+          "fuente_url": "https://www.yotepresto.com/",
+          "fuente_id": "yt_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "CAT legal, ejemplo representativo y producto",
+          "nota": null
+        },
+        "cat": {
+          "valor": {
+            "porcentaje": 26.2,
+            "tipo": "promedio",
+            "iva": "sin_IVA",
+            "escenario_adjunto": {
+              "monto_mxn": 425000,
+              "tasa_anual_pct": 18.6,
+              "plazo_meses": 36,
+              "total_pagar_mxn": 567026.99,
+              "iva_total": "sin_IVA"
+            },
+            "identidad_escenario_CAT": "ND: se publica como ejemplo representativo junto al CAT, no se demuestra que reproduzca el promedio."
+          },
+          "fuente_url": "https://www.yotepresto.com/",
+          "fuente_id": "yt_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-06-15",
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "vigencia_no_publicada",
+          "localizador": "CAT legal, ejemplo representativo y producto",
+          "nota": "No se inventa fecha de expiración ni se declara vigente sólo por estar visible."
+        },
+        "tasa": {
+          "valor": {
+            "min_anual_pct": 8.9,
+            "max_anual_pct": 38.9,
+            "tipo": "fija",
+            "iva": "sin_IVA"
+          },
+          "fuente_url": "https://www.yotepresto.com/",
+          "fuente_id": "yt_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": "2026-06-15",
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "vigencia_no_publicada",
+          "localizador": "CAT legal, ejemplo representativo y producto",
+          "nota": "Sujeta a evaluación y calificación, no tasa garantizada."
+        },
+        "apertura": {
+          "valor": {
+            "a1_a3_pct": 2.9,
+            "a4_a7_pct": 3.9,
+            "b1_c7_pct": 4.9,
+            "base": "monto del préstamo obtenido",
+            "iva": "mas_IVA",
+            "periodicidad": "una vez al obtener el préstamo",
+            "cobro": "descontada de lo fondeado antes del depósito"
+          },
+          "fuente_url": "https://www.yotepresto.com/tasas-comisiones",
+          "fuente_id": "yt_fees",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Acreditados; no sección de inversionistas",
+          "nota": null
+        },
+        "administracion": {
+          "valor": {
+            "monto": null,
+            "periodicidad": "mensual",
+            "iva": "incluido",
+            "incluye": "seguro que cubre capital pendiente si fallece el acreditado"
+          },
+          "fuente_url": "https://www.yotepresto.com/tasas-comisiones",
+          "fuente_id": "yt_fees",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Acreditados; no sección de inversionistas",
+          "nota": "El importe se presenta como imagen que no pudo leerse. No sustituir por cifras de terceros; prima separada ND."
+        },
+        "atraso": {
+          "valor": {
+            "monto_mxn": 300,
+            "iva": "mas_IVA",
+            "disparador": "3 o más días hábiles de atraso o cargo domiciliado incompleto por saldo insuficiente",
+            "periodicidad": null
+          },
+          "fuente_url": "https://www.yotepresto.com/tasas-comisiones",
+          "fuente_id": "yt_fees",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Acreditados; no sección de inversionistas",
+          "nota": null
+        },
+        "cobranza_extrajudicial": {
+          "valor": {
+            "max_pct": 20,
+            "base": "monto pagado",
+            "iva": null,
+            "disparador": "cuenta atrasada y gastos extrajudiciales incurridos",
+            "periodicidad": null
+          },
+          "fuente_url": "https://www.yotepresto.com/tasas-comisiones",
+          "fuente_id": "yt_fees",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Acreditados; no sección de inversionistas",
+          "nota": "Conservar base publicada monto pagado; no cambiarla por saldo vencido."
+        },
+        "prepago": {
+          "valor": {
+            "comision_mxn": 0,
+            "aplica": "adelantar pagos o liquidar anticipadamente"
+          },
+          "fuente_url": "https://www.yotepresto.com/",
+          "fuente_id": "yt_web",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "CAT legal, ejemplo representativo y producto",
+          "nota": null
+        },
+        "monto": {
+          "valor": {
+            "minimo_mxn": 10000,
+            "maximo_mxn": 425000
+          },
+          "fuente_url": "https://centrodeayuda.yotepresto.com/hc/es-419/articles/4412660088461--Cu%C3%A1nto-puedo-pedir",
+          "fuente_id": "yt_monto",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2025-08-08",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Artículo oficial; comentarios de usuarios no utilizados",
+          "nota": "Monto aprobado depende de capacidad y plazo; límites públicos no promesa."
+        },
+        "plazo": {
+          "valor": {
+            "meses": [
+              6,
+              12,
+              18,
+              24,
+              30,
+              36
+            ]
+          },
+          "fuente_url": "https://centrodeayuda.yotepresto.com/hc/es-419/articles/4412653266189--Cu%C3%A1les-son-los-plazos-en-los-que-puedo-pagar-mi-pr%C3%A9stamo",
+          "fuente_id": "yt_plazo",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-09-17",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Artículo del centro oficial",
+          "nota": null
+        },
+        "requisitos": {
+          "valor": {
+            "historial": "buen historial bancario verificado en Buró",
+            "cuenta_bancaria_propia": true,
+            "comprobante_ingresos": [
+              "nómina",
+              "estado bancario"
+            ],
+            "no_acepta_como_ingreso": [
+              "notas de venta",
+              "facturas"
+            ],
+            "ingreso_minimo_mxn": null,
+            "edad_minima": null,
+            "edad_maxima": null,
+            "antiguedad_laboral": null
+          },
+          "fuente_url": "https://centrodeayuda.yotepresto.com/hc/es-419/articles/4412653121677--Cu%C3%A1les-son-los-requisitos-para-obtener-un-pr%C3%A9stamo",
+          "fuente_id": "yt_req",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-09-17",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Artículo del centro oficial",
+          "nota": null
+        },
+        "experiencia_crediticia": {
+          "valor": "La página comercial pide al menos 2 años de experiencia con créditos bancarios o de instituciones financieras.",
+          "fuente_url": "https://www.yotepresto.com/prestamos-en-linea",
+          "fuente_id": "yt_prod",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Montos, requisitos y condiciones",
+          "nota": null
+        },
+        "documentos": {
+          "valor": [
+            "identificación oficial",
+            "comprobante de domicilio",
+            "comprobante de ingresos",
+            "comprobante de actividad: alta fiscal o constancia de situación fiscal"
+          ],
+          "fuente_url": "https://centrodeayuda.yotepresto.com/hc/es-419/articles/4412837835405-Mi-cr%C3%A9dito-est%C3%A1-preaprobado-qu%C3%A9-documentos-necesito",
+          "fuente_id": "yt_docs",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": "2026-09-17",
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Artículo del centro oficial",
+          "nota": null
+        },
+        "garantia_y_fondeo": {
+          "valor": "La página anuncia sin aval. Crédito sujeto a evaluación, propuesta, fondeo por inversionistas y firma; una preaprobación no equivale a desembolso.",
+          "fuente_url": "https://www.yotepresto.com/prestamos-en-linea",
+          "fuente_id": "yt_prod",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "observado_sin_vigencia_explicita",
+          "localizador": "Montos, requisitos y condiciones",
+          "nota": null
+        },
+        "contrato_reca": {
+          "valor": null,
+          "fuente_url": "https://cdn.prod.website-files.com/60fee83d8392d802267e7efc/6a4822657a3aff71d31a306d_ca9cf7fee0c5900c03fb94ff7e5e9652_20260702-%20Contrato%20Prestamo%20Mercantil.pdf",
+          "fuente_id": "yt_contrato",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Contenido no leído",
+          "nota": "Contrato enlazado inaccesible; no inferir número ni fecha de emisión del nombre del archivo."
+        },
+        "interes_moratorio": {
+          "valor": null,
+          "fuente_url": "https://www.yotepresto.com/tasas-comisiones",
+          "fuente_id": "yt_fees",
+          "fecha_consulta": "2026-10-12",
+          "fecha_emision": null,
+          "fecha_calculo": null,
+          "fecha_referencia": null,
+          "vigente_desde": null,
+          "vigente_hasta": null,
+          "estado": "ND",
+          "localizador": "Acreditados; no sección de inversionistas",
+          "nota": "Tasa no verificada en fuentes legibles."
+        },
+        "discrepancias": [
+          {
+            "valor": "Simulador portada etiqueta tasa promedio 18.5%; el ejemplo legal usa 18.6%.",
+            "fuente_url": "https://www.yotepresto.com/",
+            "fuente_id": "yt_web",
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "localizador": "CAT legal, ejemplo representativo y producto",
+            "nota": null
+          },
+          {
+            "valor": "FAQ de página comercial usa tasa promedio 19%. Se preservan etiquetas 18.5/18.6/19 sin sustituir intervalo 8.9–38.9 ni recalcular CAT.",
+            "fuente_url": "https://www.yotepresto.com/prestamos-en-linea",
+            "fuente_id": "yt_prod",
+            "fecha_consulta": "2026-10-12",
+            "fecha_emision": null,
+            "fecha_calculo": null,
+            "fecha_referencia": null,
+            "vigente_desde": null,
+            "vigente_hasta": null,
+            "estado": "observado_sin_vigencia_explicita",
+            "localizador": "Montos, requisitos y condiciones",
+            "nota": null
+          }
+        ],
+        "historial_no_usar_como_vigente": []
+      }
+    }
+  ],
+  "fuentes": [
+    {
+      "id": "nu_web",
+      "url": "https://nubank.com.mx/credito/",
+      "titulo": "Tarjeta de crédito Nu",
+      "localizador": "Requisitos, comisiones y legal inferior",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "nu_cat",
+      "url": "https://nubank.com.mx/cat/",
+      "titulo": "CAT Nu publicado en HTML",
+      "localizador": "Bloque CAT y vigencia",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "nu_folleto",
+      "url": "https://cdn.nubank.com.mx/mex/credito/folleto-informativo.pdf",
+      "titulo": "Folleto Tarjeta de Crédito Nu",
+      "localizador": "Páginas 1–2",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "nu_costos",
+      "url": "https://cdn.nubank.com.mx/mex/costos-y-comisiones.pdf",
+      "titulo": "Costos y comisiones Nu",
+      "localizador": "Página 1, exclusivamente Tarjeta de Crédito Nu",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "nu_contrato",
+      "url": "https://cdn.nubank.com.mx/mex/credito/contrato.pdf",
+      "titulo": "Contrato único de tarjetas Nu",
+      "localizador": "RECA 17455-999-044118/01-01639-0726; I.1.2, I.2.6, I.2.9 y II.1",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "nu_banco",
+      "url": "https://blog.nu.com.mx/nubank/tarjeta-de-credito-nu-banco/",
+      "titulo": "Nu informa migración de tarjeta a banco",
+      "localizador": "Emisor, inicio de operaciones y transformación",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": "2026-10-07",
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "klar_web",
+      "url": "https://www.klar.mx/credito",
+      "titulo": "Tarjeta de Crédito Klar",
+      "localizador": "Requisitos, límites, costos y entidad del pie",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "klar_cat",
+      "url": "https://www.klar.mx/cat",
+      "titulo": "Klar CAT",
+      "localizador": "Sección Tarjeta de Crédito con o sin Garantía, no Uber ni Platino",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "klar_legal",
+      "url": "https://www.klar.mx/klar-legal",
+      "titulo": "Información legal Klar",
+      "localizador": "Emisor y documentos legales enlazados",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "klar_folleto",
+      "url": "https://cdn.prod.website-files.com/630e13ca92151d578bc2ed8b/6a3d5dfb437749c9d023479a_%28KL-V23062026%29-Folleto-Informativo-Tarjeta-de-Cre-dito-.pdf",
+      "titulo": "Folleto enlazado desde página de crédito Klar",
+      "localizador": "Contenido no leído",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "inaccesible; lectura alternativa cancelada, no reintentada"
+    },
+    {
+      "id": "klar_ifit",
+      "url": "https://ifit.condusef.gob.mx/ifit/ft_general_final.php?b=1&idnc=43424",
+      "titulo": "CONDUSEF IFIT candidato Klar",
+      "localizador": "Contenido no leído",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "502; no adoptar datos de snippet"
+    },
+    {
+      "id": "dig_web",
+      "url": "https://www.digitt.com/",
+      "titulo": "Préstamo Digitt para refinanciar tarjetas",
+      "localizador": "Producto, requisitos y razón social",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "dig_terminos",
+      "url": "https://www.digitt.com/terminos-condiciones",
+      "titulo": "Términos Digitt",
+      "localizador": "Introducción y carácter ilustrativo de condiciones",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": "2018-01-02",
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "dig_reg",
+      "url": "https://www.digitt.com/blog/digitt-es-confiable",
+      "titulo": "Digitt explica forma jurídica",
+      "localizador": "Transparencia y confianza",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "dig_tasa",
+      "url": "https://www.digitt.com/ayuda/de-que-depende-la-tasa-de-interes-de-mi-prestamo-digitt",
+      "titulo": "Tasa préstamo Digitt",
+      "localizador": "Artículo FAQ",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": "2024-03-19",
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "dig_fees",
+      "url": "https://www.digitt.com/ayuda/digitt-cobra-comisiones",
+      "titulo": "Comisiones Digitt",
+      "localizador": "Artículo FAQ",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": "2023-02-02",
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "dig_plazo",
+      "url": "https://www.digitt.com/ayuda/que-plazos-ofrece-digitt-para-pagar-mi-prestamo",
+      "titulo": "Plazos Digitt",
+      "localizador": "Texto y tabla de plazos no transcrita",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": "2023-01-25",
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "dig_req",
+      "url": "https://www.digitt.com/ayuda/que-necesito-para-obtener-mi-prestamo-digitt",
+      "titulo": "Requisitos Digitt",
+      "localizador": "Artículo FAQ",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": "2023-01-25",
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "yt_web",
+      "url": "https://www.yotepresto.com/",
+      "titulo": "YoTePresto",
+      "localizador": "CAT legal, ejemplo representativo y producto",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "yt_prod",
+      "url": "https://www.yotepresto.com/prestamos-en-linea",
+      "titulo": "Préstamo en línea YoTePresto",
+      "localizador": "Montos, requisitos y condiciones",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "yt_fees",
+      "url": "https://www.yotepresto.com/tasas-comisiones",
+      "titulo": "Tasas y comisiones YoTePresto",
+      "localizador": "Acreditados; no sección de inversionistas",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "yt_dof",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5651693&fecha=11/05/2022",
+      "titulo": "Autorización IFC Comunidad de Préstamos",
+      "localizador": "Oficio P127/2021 publicado DOF",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": "2022-05-11",
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "yt_req",
+      "url": "https://centrodeayuda.yotepresto.com/hc/es-419/articles/4412653121677--Cu%C3%A1les-son-los-requisitos-para-obtener-un-pr%C3%A9stamo",
+      "titulo": "Requisitos YoTePresto",
+      "localizador": "Artículo del centro oficial",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": "2026-09-17",
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "yt_docs",
+      "url": "https://centrodeayuda.yotepresto.com/hc/es-419/articles/4412837835405-Mi-cr%C3%A9dito-est%C3%A1-preaprobado-qu%C3%A9-documentos-necesito",
+      "titulo": "Documentos YoTePresto",
+      "localizador": "Artículo del centro oficial",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": "2026-09-17",
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "yt_plazo",
+      "url": "https://centrodeayuda.yotepresto.com/hc/es-419/articles/4412653266189--Cu%C3%A1les-son-los-plazos-en-los-que-puedo-pagar-mi-pr%C3%A9stamo",
+      "titulo": "Plazos YoTePresto",
+      "localizador": "Artículo del centro oficial",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": "2026-09-17",
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "yt_monto",
+      "url": "https://centrodeayuda.yotepresto.com/hc/es-419/articles/4412660088461--Cu%C3%A1nto-puedo-pedir",
+      "titulo": "Montos YoTePresto",
+      "localizador": "Artículo oficial; comentarios de usuarios no utilizados",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": "2025-08-08",
+      "tipo": "primaria",
+      "acceso": "consultada"
+    },
+    {
+      "id": "yt_contrato",
+      "url": "https://cdn.prod.website-files.com/60fee83d8392d802267e7efc/6a4822657a3aff71d31a306d_ca9cf7fee0c5900c03fb94ff7e5e9652_20260702-%20Contrato%20Prestamo%20Mercantil.pdf",
+      "titulo": "Contrato préstamo mercantil YoTePresto enlazado",
+      "localizador": "Contenido no leído",
+      "fecha_consulta": "2026-10-12",
+      "fecha_emision": null,
+      "tipo": "primaria",
+      "acceso": "no accesible por herramienta web"
+    },
+    {
+      "url": "https://www.storicard.com/stori-card",
+      "titulo": "Página comercial Stori Card",
+      "archivo": "stori_producto.html",
+      "fecha_calculo": "2026-04-16",
+      "vigencia_hasta": "2026-12-31",
+      "fecha_emision": null,
+      "id": "S1",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_entidad",
+      "acceso": "verificado",
+      "sha256": "66a59886e775750bae8fa03d0b21d5e0f2ae21b503cc2392ed84a2afecd42638",
+      "fecha_consulta": "2026-10-12"
+    },
+    {
+      "url": "https://www.storicard.com/files/costos-y-comisiones-credito.pdf?v=20260213",
+      "titulo": "Costos y comisiones Stori",
+      "archivo": "stori_tarifario.pdf",
+      "fecha_calculo": "2026-07-01",
+      "vigencia_desde": "2026-07-01",
+      "vigencia_hasta": "2026-12-31",
+      "fecha_emision": null,
+      "nota": "Fecha v=20260213 de URL no equivale a fecha de cálculo del contenido.",
+      "id": "S2",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_entidad",
+      "acceso": "verificado",
+      "sha256": "7414737bfd5cb9bbb5e63bdd9919dfa2093ecf7e5284d0ed34099282587b67e5",
+      "fecha_consulta": "2026-10-12"
+    },
+    {
+      "url": "https://www.storicard.com/files/folleto-informativo-credito.pdf?v=20260213",
+      "titulo": "Folleto de tarjetas de crédito Stori",
+      "archivo": "stori_folleto.pdf",
+      "fecha_calculo": "2026-07-01",
+      "vigencia_desde": "2026-07-01",
+      "vigencia_hasta": "2026-12-31",
+      "fecha_emision": null,
+      "id": "S3",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_entidad",
+      "acceso": "verificado",
+      "sha256": "ca7a50d28e0761b1c47226ee2ab4348edb8362c8be32882747501c7f639b0786",
+      "fecha_consulta": "2026-10-12"
+    },
+    {
+      "url": "https://www.storicard.com/files/contrato-multiple-credito.pdf",
+      "titulo": "Contrato múltiple Stori",
+      "archivo": "stori_contrato.pdf",
+      "fecha_emision": null,
+      "version_reca": "2685-999-040251/05-02710-1025",
+      "metadata_creacion_pdf": "2025-10-08T21:50:16Z",
+      "nota": "Metadatos PDF no se asumen fecha de vigencia contractual.",
+      "id": "S4",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_entidad",
+      "acceso": "verificado",
+      "sha256": "60b0505ca189912c44b428d953e448984135b73ab8dd07b9e83bec6a8279ea13",
+      "fecha_consulta": "2026-10-12"
+    },
+    {
+      "url": "https://www.uala.mx/tarjeta-credito",
+      "titulo": "Tarjeta de crédito Ualá y preguntas frecuentes",
+      "archivo": "uala_producto.html",
+      "fecha_emision": null,
+      "fecha_calculo": "2026-08-28",
+      "vigencia_hasta": "2027-02-28",
+      "nota": "Preguntas frecuentes extraídas del JSON público incorporado en el HTML; el lector web no expandía las respuestas.",
+      "id": "U1",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_entidad",
+      "acceso": "verificado",
+      "sha256": "13ca26db306192e0aa95cfeb5b122d65370600800f77d42458bdf63a0af3aa35",
+      "fecha_consulta": "2026-10-12"
+    },
+    {
+      "url": "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/a12745ac70c5a027cf3b94fa3298d259/Tabla_de_comisiones_y_rendimientos_VSep2.pdf",
+      "pagina_enlace": "https://www.uala.mx/tabla-costos",
+      "titulo": "Costos y comisiones Ualá Sep/2026-V2",
+      "archivo": "uala_tarifario.pdf",
+      "version": "Sep/2026-V2",
+      "fecha_emision": "2026-09 (día ND)",
+      "fecha_calculo": "2026-08-28",
+      "vigencia_hasta": "2027-02-28",
+      "id": "U2",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_entidad",
+      "acceso": "verificado",
+      "sha256": "d62e752ed11ec3a3506a591a1a1bfb3ba818c673bd6c07530225450bae2b5713",
+      "fecha_consulta": "2026-10-12"
+    },
+    {
+      "url": "https://assets.ctfassets.net/6n252fx9hkkr/5Ljbx58n9BYrgFznWHPotc/9fe9ba4acea452b2091e237bdccbcdee/Tarjeta_de_Cre_dito_Uala___sepV1.pdf",
+      "pagina_enlace": "https://www.uala.mx/folletos/tarjeta-credito",
+      "titulo": "Folleto Tarjeta de Crédito Ualá Sep/2026-V2",
+      "archivo": "uala_folleto.pdf",
+      "version": "Sep/2026-V2",
+      "fecha_emision": "2026-09 (día ND)",
+      "fecha_calculo": "2026-08-28",
+      "vigencia_hasta": "2027-02-28",
+      "nota": "Se toma versión impresa Sep/2026-V2; el nombre del archivo termina sepV1.",
+      "id": "U3",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_entidad",
+      "acceso": "verificado",
+      "sha256": "eafb3c8cebf93f5a590d25fc91e9f1631fe29dbf40630929b239406e0b2507d1",
+      "fecha_consulta": "2026-10-12"
+    },
+    {
+      "url": "https://assets.ctfassets.net/6n252fx9hkkr/2QQfkomqGg6qxCjRNr1CWc/aa0e631c6200ad1a3578cc8abbb73170/CONTRATO_MULTIPLE_DE_TDC_UALA.pdf",
+      "pagina_enlace": "https://www.uala.mx/contratos/tarjeta-credito",
+      "titulo": "Contrato múltiple de TDC Ualá",
+      "archivo": "uala_contrato.pdf",
+      "fecha_emision": null,
+      "version_reca": "1621-999-041364/09-01664-0726",
+      "metadata_creacion_pdf": "2026-08-20T10:35:54-06:00",
+      "nota": "Lector web falló; PDF descargado por HTTPS desde iframe oficial y leído localmente. Metadata no acredita fecha de vigencia.",
+      "id": "U4",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_entidad",
+      "acceso": "verificado",
+      "sha256": "390962401b150f84e8fd91d811ff5803081cf93261c3bff76b50045f5251654b",
+      "fecha_consulta": "2026-10-12"
+    },
+    {
+      "url": "https://assets.ctfassets.net/6n252fx9hkkr/HyA2lLgDbuwOiEW9fMggN/8c93f6c5c617d44036ab9c6e5fc20699/Requisitos_de_contrataci%C3%83_n_Septiembre2025.pdf",
+      "pagina_enlace": "https://www.uala.mx/documentos/requisitos-contratacion",
+      "titulo": "Requisitos de contratación Ualá Septiembre/2025-V01",
+      "archivo": "uala_requisitos.pdf",
+      "version": "Septiembre/2025-V01",
+      "fecha_emision": "2025-09 (día ND)",
+      "vigencia_hasta": null,
+      "id": "U5",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_entidad",
+      "acceso": "verificado",
+      "sha256": "181555ce32308dd119fb6269d87924dbeea6f5b5c9be9b8308245f3138664605",
+      "fecha_consulta": "2026-10-12"
+    },
+    {
+      "url": "https://assets.ctfassets.net/6n252fx9hkkr/4TJna9QS6q4PeQDt2SJtg3/4fa71b05de591367f2494cbde7e3801f/Tabla_de_comisiones_y_rendimientos_May1.pdf",
+      "titulo": "Tarifario histórico Ualá May/2026-V1",
+      "archivo": "uala_tarifario_historico_may2026.pdf",
+      "version": "May/2026-V1",
+      "fecha_emision": "2026-05 (día ND)",
+      "fecha_calculo": "2026-03-04",
+      "vigencia_hasta": "2026-08-31",
+      "id": "U6",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_entidad",
+      "acceso": "verificado",
+      "sha256": "7e19859b4dec806986519aef92a07c6c093974a7e2553c6a0ac031d621d65a69",
+      "fecha_consulta": "2026-10-12"
+    },
+    {
+      "id": "S5",
+      "url": "https://sidof.segob.gob.mx/notas/docFuente/5744631",
+      "archivo": "stori_autorizacion_dof_5744631.html",
+      "titulo": "Oficio CNBV 311-58784/2024, autorización Stori México S.F.P.",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_regulador",
+      "fecha_emision": "2024-11-27",
+      "fecha_publicacion": "2024-12-06",
+      "acceso": "verificado",
+      "sha256": "f640a8e00bc7fe8b5a11028f49fb47212d97d690b99eb151f4c32f5b666c7342",
+      "fecha_consulta": "2026-10-12"
+    },
+    {
+      "id": "U7",
+      "url": "https://sidof.segob.gob.mx/notas/getNewsletter/28-02-2025/Matutina/319682",
+      "archivo": "uala_dof_cambio_denominacion_20250228.pdf",
+      "titulo": "DOF, oficio CNBV 312-2/9248/2025, autorización Ualá",
+      "consultado_el": "2026-10-12",
+      "tipo": "primaria_oficial_regulador",
+      "fecha_emision": "2025-02-13",
+      "fecha_publicacion": "2025-02-28",
+      "acceso": "verificado",
+      "sha256": "3fd961dab8561238e837417d86e48af1fdc67959a932808cf592680d08a576a5",
+      "fecha_consulta": "2026-10-12"
+    }
+  ],
+  "accesos_no_concluyentes": [
+    {
+      "url": "https://ifit.condusef.gob.mx/ifit/ft_general_final.php?b=1&idnc=46251",
+      "consultado_el": "2026-10-12",
+      "resultado": "Buscador indexa variante STORI GREEN CLASICA NIVEL 2; acceso directo devuelve HTTP 502",
+      "uso": "No se atribuyen condiciones al producto seleccionado"
+    },
+    {
+      "url": "https://www.cnbv.gob.mx/SECTORES-SUPERVISADOS/BANCA-MULTIPLE/Prensa%20%20Sector%20Bancario/Comunicado%208%20ICAP%20febrero%202026.pdf",
+      "consultado_el": "2026-10-12",
+      "resultado": "Buscador muestra Banco Ualá; acceso directo y descarga HTTP 502",
+      "uso": "No se usa como prueba descargada de autorización"
+    },
+    {
+      "url": "https://www.storicard.com/files/COSTOS-Y-COMISIONES-TDC.pdf?v=20250120",
+      "consultado_el": "2026-10-12",
+      "resultado": "Enlace histórico inaccesible en lector web",
+      "uso": "Sin cifras activas extraídas de snippet; se prioriza enlace actual del sitio"
+    }
+  ]
+}

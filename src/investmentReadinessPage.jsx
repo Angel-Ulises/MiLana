@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import NextStep from './nextStep.jsx';
 import { crearMapaPreparacionInversion, crearPlanDecisionInversion, crearRadiografiaFinanciera } from './lib/advisorCore.js';
 import { crearContextoDeuda } from './lib/debtDecisionContext.js';
 import AdReserve from './AdReserve.jsx';
@@ -92,6 +93,6 @@ export default function InvestmentReadinessPage() {
       <section className="investment-next"><div className="shell"><div><p className="eyebrow">Siguiente paso</p><h2>Vuelve a tus números, no a un catálogo.</h2><p>Si algo falta en el mapa o en el plan de decisión, puedes trabajar esa pieza por separado sin abrir una cuenta de inversión.</p></div><div><a href="/finanzas/mi-situacion">Mi situación <span>→</span></a><a href="/finanzas/fondo-emergencia">Fondo de emergencia <span>→</span></a><a href="/finanzas/deuda-y-credito">Deuda y crédito <span>→</span></a><a href="/finanzas/ahorro">Meta de ahorro <span>→</span></a></div></div></section>
     </main>
 
-    <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Contenido educativo. No constituye asesoría de inversión, recomendación de producto ni oferta para comprar o vender valores.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>
+    <><NextStep /><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Contenido educativo. No constituye asesoría de inversión, recomendación de producto ni oferta para comprar o vender valores.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>
   </div>;
 }

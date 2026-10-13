@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import NextStep from './nextStep.jsx';
 import SiteHeader from './siteHeader.jsx';
 import AdReserve from './AdReserve.jsx';
 import { investmentInstrumentClasses } from './data/investment-instrument-classes.js';
@@ -164,6 +165,7 @@ export default function InvestirHomePage() {
       <section className="ml-inv-boundary"><div className="shell"><h2>Aprender aquí es gratis. Operar es otra cosa.</h2><p>MiLana todavía no recibe dinero, no abre cuentas, no compra o vende inversiones y no recomienda productos personalizados. Una futura operación real solo podría ofrecerse con la estructura y autorizaciones correspondientes.</p><ReadingDetails className="ml-inv-more"><summary>¿Qué habría que comprobar antes de operar?</summary><p>Institución autorizada, contrato, costos completos, liquidez, impuestos, riesgos y quién custodia los activos. Ningún rendimiento está garantizado por esta página.</p></ReadingDetails></div></section>
     </main>
     <AdReserve size="970x90" />
+    <NextStep />
     <footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Contenido educativo. No constituye asesoría de inversión ni recomendación de compra o venta.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer>
   </div>;
 }

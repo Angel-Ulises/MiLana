@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import NextStep from './nextStep.jsx';
 import SiteHeader from './siteHeader.jsx';
 import catalogo from './data/match-catalogo.json';
 import {
@@ -479,6 +480,7 @@ export default function MatchPages() {
     {ruta.vista === 'categoria' && <Categoria categoria={ruta.categoria} hoy={hoy} />}
     {ruta.vista === 'ficha' && <Ficha categoria={ruta.categoria} producto={ruta.producto} hoy={hoy} />}
     {(ruta.vista === 'no-encontrado' || ruta.vista === 'fuera') && <NoEncontrado categoria={ruta.categoria} />}
+    {ruta.vista === 'categoria' && <NextStep />}
     <Footer />
   </div>;
 }

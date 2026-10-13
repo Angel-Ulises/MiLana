@@ -1,4 +1,5 @@
 import ReadingDetails from './ReadingDetails.jsx';
+import NextStep from './nextStep.jsx';
 import SiteHeader from './siteHeader.jsx';
 import { useMemo, useState } from 'react';
 import datos from './data/profesiones.json';
@@ -17,7 +18,7 @@ function Header() {
   return <SiteHeader ctaHref="/finanzas/mi-situacion" ctaLabel="Mi situación" />;
 }
 
-function Footer(){return <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>{datos.nota}</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>}
+function Footer(){return <><NextStep /><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>{datos.nota}</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>}
 
 function Card({ p, label, manualOpen, onManualChange }){
   return <article className="cc-card"><span className="cc-label">{label}</span><p className="cc-area">{p.area}</p><h2>{p.nombre}</h2><div className="cc-primary"><span>Ingreso promedio mensual</span><strong>{dinero(p.ingreso)}</strong></div><dl><div><dt>Profesionistas ocupados</dt><dd>{numero(p.ocupados)}</dd></div></dl><ReadingDetails className="cc-card-more" manualOpen={manualOpen} onManualChange={onManualChange}><summary>Ver composición de este grupo</summary><dl><div><dt>Hombres</dt><dd>{p.hombres}%</dd></div><div><dt>Mujeres</dt><dd>{p.mujeres}%</dd></div></dl></ReadingDetails><a href={`/carreras/profesion/${p.slug}`}>Abrir perfil completo →</a></article>

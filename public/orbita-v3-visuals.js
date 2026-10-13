@@ -198,6 +198,8 @@
     // Comparar, CETES y fondos ya son herramientas concretas: la tarjeta genérica Ahorro/CETES/Casa solo empujaba
     // la herramienta ~800px hacia abajo en móvil.
     if (/^\/finanzas\/inversion\/(?:comparar|cetes|fondos)\/?$/.test(location.pathname)) return null;
+    // MiLana Match ya muestra fichas con fuente y fecha: una proyección genérica competiría con sus datos.
+    if (/^\/finanzas\/match(\/|$)/.test(location.pathname)) return null;
     const visual = card('Finanzas', 'Proyección para entender la ruta', 'Ahorro, CETES y vivienda se comportan distinto. Esta vista no inventa tasas ni rendimientos: te lleva a la herramienta que sí calcula cada caso.');
     const tabs = document.createElement('div');
     tabs.className = 'orb-projection-tabs';

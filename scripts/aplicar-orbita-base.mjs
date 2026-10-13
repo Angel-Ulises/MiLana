@@ -20,15 +20,19 @@ const STATIC_TOP_ROUTES = new Set([
   '/aprende/pension-imss-ley-97',
   '/aprende/resico-ingresos-cobrados',
   '/aprende/vacaciones-prima-vacacional',
+  '/aprende/cat-y-gat-que-comparan',
+  '/aprende/mensualidad-y-costo-del-credito',
+  '/aprende/leer-fuentes-comparador-financiero',
   '/sobre', '/contacto', '/metodo', '/privacidad', '/financiamiento',
 ]);
 const nav = NAVEGACION_MILANA;
 
-const [careerData, stateData, financeData, professionData] = await Promise.all([
+const [careerData, stateData, financeData, professionData, matchData] = await Promise.all([
   readFile(new URL('../src/data/carreras.json', import.meta.url), 'utf8').then(JSON.parse),
   readFile(new URL('../src/data/estados.json', import.meta.url), 'utf8').then(JSON.parse),
   readFile(new URL('../src/data/finanzas.json', import.meta.url), 'utf8').then(JSON.parse),
   readFile(new URL('../src/data/profesiones.json', import.meta.url), 'utf8').then(JSON.parse),
+  readFile(new URL('../src/data/match-catalogo.json', import.meta.url), 'utf8').then(JSON.parse),
 ]);
 const cleanTitle = (title='') => title.replace(/\s*\|\s*MiLana.*$/i, '').trim();
 const searchItems = [
@@ -56,6 +60,9 @@ const searchItems = [
   ['inversion-comparar','/finanzas/inversion/comparar','Comparar instrumentos de inversión'],
   ['cetes','/finanzas/inversion/cetes','CETES'],
   ['fondos','/finanzas/inversion/fondos','Fondos de inversión'],
+  ['match','/finanzas/match','MiLana Match: comparar productos financieros'],
+  ...matchData.categorias.map(c=>[`match-${c.slug}`, `/finanzas/match/${c.slug}`, `Comparar ${c.nombre.toLowerCase()}`]),
+  ['match-metodologia','/finanzas/match/metodologia','Metodología de MiLana Match'],
 ];
 const iconSearch = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>';
 const iconMenu = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>';

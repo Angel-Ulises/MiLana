@@ -1,0 +1,201 @@
+{
+  "version": "2.0",
+  "fecha_corte_investigacion": "2026-10-12",
+  "productos_unicos": 45,
+  "categorias": 9,
+  "estado": "entrega_documental_sin_despliegue",
+  "supersede": "Ampliación acumulativa de la entrega v1; los metadatos CONSAR corregidos sustituyen a los iniciales. Primera entrega preservada.",
+  "zip_v1_sha256": "7f1c618b618fbf02e822f18831dd7b6790a0f2563e610d86a25b3dbe73d2eea5",
+  "archivos": [
+    {
+      "archivo": "LEEME-v2.md",
+      "bytes": 4755,
+      "sha256": "1d592d2139d156bb6fe18f753c1714c01cc1465134800db8415fa44ae3e34fc7"
+    },
+    {
+      "archivo": "ahorro-inversion/afore-qa.json",
+      "bytes": 225,
+      "sha256": "a336cab80c3e0f55ddb24408c55737f3520de9be25684c9297bba539818a3225"
+    },
+    {
+      "archivo": "ahorro-inversion/afore-universo-completo.json",
+      "bytes": 197783,
+      "sha256": "753a05c363077dae870b636deb40c8ff7e9c534589195685832b038ed2cb9c2e"
+    },
+    {
+      "archivo": "ahorro-inversion/afore-universo-manifiesto.json",
+      "bytes": 4138,
+      "sha256": "271596ce49f2e5103f0b5ca88cc21c7eb1511c09e86501a99b56f108b5b3720f"
+    },
+    {
+      "archivo": "ahorro-inversion/base-v1-integridad.json",
+      "bytes": 1070,
+      "sha256": "ac874af188e3f7af82b4fb8effc103eb50072918969d998a6704c250e76cd55a"
+    },
+    {
+      "archivo": "ahorro-inversion/catalogo-acumulativo.json",
+      "bytes": 491002,
+      "sha256": "d19301572bbfe0c164138fa5648bef8588f1a42779f9c4531484aaf77824e70a"
+    },
+    {
+      "archivo": "ahorro-inversion/catalogo-ampliacion.json",
+      "bytes": 216766,
+      "sha256": "09bf0dc3f046aa17762f7b0ddc4448f180e15015482b2ea065429a467038d826"
+    },
+    {
+      "archivo": "ahorro-inversion/correccion-v1/LEEME.md",
+      "bytes": 1535,
+      "sha256": "c896c7ecd5cf085f11c03fe1b2d7936d32f9f77a82106cc3276a0ea8a6b74e2b"
+    },
+    {
+      "archivo": "ahorro-inversion/correccion-v1/correccion-manifiesto.json",
+      "bytes": 11244,
+      "sha256": "c3c7ac12067a38e59189929028b61827c89ae069a8ffcd66ec0fa92198ba8593"
+    },
+    {
+      "archivo": "ahorro-inversion/fichas-acumulativas.md",
+      "bytes": 59596,
+      "sha256": "58e29e7ab8c5ed3c274c201b09dbcc2d6a525bcf8c165fba296d13a7bfdeac71"
+    },
+    {
+      "archivo": "ahorro-inversion/fuentes-acumulativas.json",
+      "bytes": 32189,
+      "sha256": "04b9403b35c9226985b7f3706dd13f26c66b0e571a7e6993174b6dce0aca3b79"
+    },
+    {
+      "archivo": "ahorro-inversion/qa-ampliacion.json",
+      "bytes": 674,
+      "sha256": "f7ebf6652307e07afa3534df06de7b8c1da1fe4ac24f1703b6fe7080a6910869"
+    },
+    {
+      "archivo": "ahorro-inversion/resumen.md",
+      "bytes": 3024,
+      "sha256": "9819e65fc430b01ac8cdf76205cc89b57972c4f65d79053fe6e65fc55a21a129"
+    },
+    {
+      "archivo": "ahorro-inversion/seguros-pares-documentales.json",
+      "bytes": 789,
+      "sha256": "b2231b7ff434a75ed89fb7c85fe1702065b2c6cc3cf165dfd4777e775f0f3fe0"
+    },
+    {
+      "archivo": "assets/01-cat-gat.svg",
+      "bytes": 2554,
+      "sha256": "76e9710f308454df3e725bbfce36d8b54150e5b13c981630ceb8618189f8ce84"
+    },
+    {
+      "archivo": "assets/02-costo-credito.svg",
+      "bytes": 2649,
+      "sha256": "5dbb481edc3beb1a4bcc0ad41b478e403ab8cafcd0288e0d326cf5367e6436c4"
+    },
+    {
+      "archivo": "assets/03-ruta-comparar.svg",
+      "bytes": 2477,
+      "sha256": "aa156fbaaa4298270efe6a673065ee5fa98bc4de8d784552e89462946a3bcb86"
+    },
+    {
+      "archivo": "assets/README.md",
+      "bytes": 3421,
+      "sha256": "d64877f8a2e788bf026437958d284effdb073b77e68daa1ee4abce1bdc8808e8"
+    },
+    {
+      "archivo": "credito/ampliacion/campo_fuente_fecha.json",
+      "bytes": 350243,
+      "sha256": "d6a0dd3464201a10b27efa85d55b377b4e83c3d85a91cc79f261b93f86d0616a"
+    },
+    {
+      "archivo": "credito/ampliacion/catalogo_ampliacion.json",
+      "bytes": 145551,
+      "sha256": "91e203fe0a74f27b9917ae68e177472892b60d800bb02beca399f66a79990b6b"
+    },
+    {
+      "archivo": "credito/ampliacion/esquema_campo_fuente_fecha.schema.json",
+      "bytes": 3520,
+      "sha256": "e1d437f178619bdd974e9942e5dd7f6154733379d5c804f430511d9be18daece"
+    },
+    {
+      "archivo": "credito/ampliacion/fichas-publicables.md",
+      "bytes": 23753,
+      "sha256": "d9952d3c3d8b7682348601f8dbf59d0e77f8910e2f46d6bad45289d4772f0424"
+    },
+    {
+      "archivo": "credito/ampliacion/manifest_entrega.json",
+      "bytes": 1443,
+      "sha256": "c15a1f7c25ec04f5c14c41d6fb366ff91e11735fd828dcadba9ef703482af370"
+    },
+    {
+      "archivo": "credito/ampliacion/qa_ampliacion.json",
+      "bytes": 631,
+      "sha256": "127d1cf9df954487253559da5c8a37f5096c4add62651e166de8657f9ee5677e"
+    },
+    {
+      "archivo": "credito/ampliacion/resumen_fuentes_limitaciones.md",
+      "bytes": 4667,
+      "sha256": "71f77a36617651a1fa67449be05090129b30efe1a3fa68261a5d25e87e953e5a"
+    },
+    {
+      "archivo": "credito/base-v1/campo_fuente_fecha.csv",
+      "bytes": 309474,
+      "sha256": "9240e67f7f9d510cfc68f6942768b056716b19b28328ec0153644549e0669058"
+    },
+    {
+      "archivo": "credito/base-v1/campo_fuente_fecha.json",
+      "bytes": 592840,
+      "sha256": "250294776418a56477814c8ed6fa67aff6c99d32fe30d52a09773de4f8bf0b2a"
+    },
+    {
+      "archivo": "credito/base-v1/catalogo_credito.json",
+      "bytes": 184679,
+      "sha256": "ab0b2eebe3b14a3873cc3262b9c1af9d0ff8d1256ae8c0c2b1b3e72f80a0aeb9"
+    },
+    {
+      "archivo": "credito/base-v1/esquema_campo_fuente_fecha.schema.json",
+      "bytes": 2900,
+      "sha256": "17fba7862857faafd3fadcff0c0a14954d0f23284e722dbca7fc64c92317ba1a"
+    },
+    {
+      "archivo": "credito/base-v1/fichas-publicables.md",
+      "bytes": 49532,
+      "sha256": "b5507f6188606dbf99219c6b0add5996ed6c95441b84b3f2c71aa624d266542f"
+    },
+    {
+      "archivo": "credito/base-v1/manifest_entrega.json",
+      "bytes": 1352,
+      "sha256": "4d240efa9eeb17b63878fd747b239574d42738971835b6b29d41a8b47788d564"
+    },
+    {
+      "archivo": "credito/base-v1/qa_catalogo.json",
+      "bytes": 859,
+      "sha256": "19a34d29e66e30ee5e25b52d7daa4391e0fd5656ea8352a8d7e4e94061f06e79"
+    },
+    {
+      "archivo": "credito/base-v1/resumen_fuentes_limitaciones.txt",
+      "bytes": 5758,
+      "sha256": "8f21d967ce813fcbf1ca3afa73377e359cdd0454143f77044817ba6e6420cd8d"
+    },
+    {
+      "archivo": "criterios-integracion-orion.md",
+      "bytes": 3518,
+      "sha256": "31ff651151c8c1443afa053ed646adba65f09e557395aca4f21a0d41a1243054"
+    },
+    {
+      "archivo": "indice-catalogo-acumulativo.json",
+      "bytes": 22983,
+      "sha256": "d600ae75113dca2d2c6119226894ad90c3239fb5474cf7a690a54d023fa565c4"
+    },
+    {
+      "archivo": "indice-fuentes-acumulativo.json",
+      "bytes": 106985,
+      "sha256": "92e03773f0be4c77a8e011003cb8be59fb4c5883c72fa964a7d27376372b3363"
+    },
+    {
+      "archivo": "metodologia-ux.md",
+      "bytes": 69082,
+      "sha256": "7844f0cb6d38ed425522cf34b30fdc118c081b00e548b3af05d58133e131ea29"
+    },
+    {
+      "archivo": "qa-consolidacion.json",
+      "bytes": 1183,
+      "sha256": "dd26c9d38b2b9e40cdf62bb7544822e85b56a2142f7c6d7c23e195ce831c6a5f"
+    }
+  ]
+}

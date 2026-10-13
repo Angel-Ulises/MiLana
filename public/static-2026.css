@@ -105,3 +105,5 @@
 @media(max-width:580px){.guide-more>summary h2{font-size:21px}.guide-tldr{padding:16px}}
 @media(prefers-reduced-motion:reduce){.guide-more>summary::after{transition:none}.guide-more[open] .guide-more-body{animation:none}}
 @media(max-width:580px){html.ml-orbita-enabled .article h1{font-size:34px;line-height:1.06}}
+/* Ilustraciones de guías: flujo normal, sin recorte del texto del SVG. */
+.guide-figure{margin:28px 0;padding:16px;border:1px solid #D9E1E8;border-radius:16px;background:#FBF8F2}.guide-figure img{display:block;width:100%;max-width:480px;height:auto;margin:0 auto}.guide-figure figcaption{margin-top:10px;color:#4F5D6B;font-size:14px;line-height:1.5;text-align:center}

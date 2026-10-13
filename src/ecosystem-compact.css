@@ -83,3 +83,7 @@
   .career-hero-compact .career-hero-grid{grid-template-columns:minmax(0,1fr);min-height:0}
   .career-hero-compact .career-hero-copy{padding:22px 0}
 }
+.ecosystem-match-link{background:#fff;border:1px solid #CFE2D8;color:#13263B}.ecosystem-match-link strong{color:#173D31!important}.ecosystem-match-link small{color:#4F5D6B}.ecosystem-match-link b{color:#1F6B4E}
+.ecosystem-match-link+.ecosystem-advisor-link{margin-top:10px}
+.finance-checklist-next{margin:14px 0 0;font-size:14.5px;line-height:1.6}
+.finance-hub-page .ecosystem-match-link small{color:#4F5D6B!important}

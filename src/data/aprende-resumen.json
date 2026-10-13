@@ -30,6 +30,21 @@
       "Tus días de vacaciones crecen con la antigüedad y se cuentan por aniversario laboral, no por año calendario.",
       "Al salir, separa los días ya ganados que siguen pendientes de la parte proporcional del ciclo actual.",
       "La prima vacacional es un pago adicional aparte de los días; tu contrato puede dar más que el mínimo."
+    ],
+    "cat-y-gat-que-comparan": [
+      "El CAT describe el costo anual de un crédito bajo los supuestos con que se calculó; la tasa es sólo una parte.",
+      "La GAT describe el rendimiento de ciertos productos de ahorro, antes de impuestos; no promete tu rendimiento real.",
+      "Para usar cualquiera, anota producto, monto o saldo, plazo y fecha del dato, y revisa promociones o topes."
+    ],
+    "mensualidad-y-costo-del-credito": [
+      "Empieza por el monto que recibes y el calendario completo: qué pagas al inicio, durante y al final.",
+      "Capital, intereses, comisiones, seguros e impuestos se revisan por separado; el CAT no es su suma.",
+      "Compara cotizaciones con el mismo monto, plazo y frecuencia; un espacio vacío no significa costo cero."
+    ],
+    "leer-fuentes-comparador-financiero": [
+      "Antes de usar un dato, abre su fuente y confirma que corresponde al producto y a la institución.",
+      "Consulta, cálculo o corte y vigencia son fechas distintas: reabrir una promoción vencida no la vuelve vigente.",
+      "N/D, «requiere cotización» y «caducado» no equivalen a cero; una relación comercial debe declararse."
     ]
   }
 }

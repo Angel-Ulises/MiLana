@@ -1,0 +1,35 @@
+{
+  "estado": "PASS",
+  "fecha_revision_utc": "2026-10-12T18:21:55.390787+00:00",
+  "productos_unicos": 45,
+  "ids_duplicados": [],
+  "cobertura_credito": {
+    "base": 14,
+    "nuevos": 6,
+    "total": 20,
+    "cat_con_vigencia_al_corte": 16,
+    "cat_ND_base": 1,
+    "nuevos_sin_vigencia_inequivoca": 3,
+    "ranking_homogeneo_habilitado": false
+  },
+  "cobertura_ahorro_inversion": {
+    "base": 16,
+    "nuevos": 9,
+    "total": 25,
+    "afores_mismo_corte_cohorte": 10,
+    "seguros": 6,
+    "primas_seguros_ND": 6
+  },
+  "fuentes_registros": 130,
+  "fuentes_urls_distintas_exactas": 129,
+  "credito_observaciones_base": 871,
+  "credito_observaciones_nuevas": 438,
+  "ahorro_inversion_campos_auditados": 338,
+  "nota_unidades_qa": "No sumar observaciones atómicas de crédito y campos agregados de ahorro como una sola métrica.",
+  "consar_apariciones_en_campos_validadas": 100,
+  "v1_archivos_originales_cotejados": 25,
+  "v1_archivos_alterados": [],
+  "zip_v1_sha256": "7f1c618b618fbf02e822f18831dd7b6790a0f2563e610d86a25b3dbe73d2eea5",
+  "errores": [],
+  "alcance": "Integridad, estructura, cobertura y consistencia; no certificación regulatoria ni nueva cotización."
+}

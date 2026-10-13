@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1120" viewBox="0 0 900 1120" role="img" aria-labelledby="title desc">
+<title id="title">CAT y GAT responden preguntas distintas</title>
+<desc id="desc">El CAT describe el costo anual del crédito bajo sus supuestos. La GAT describe el rendimiento total de ciertos productos de ahorro o inversión y se expresa antes de impuestos. Ambas cifras requieren fuente, fecha y condiciones. Diagrama conceptual sin tasas de mercado.</desc>
+<rect width="900" height="1120" fill="#FBF8F2"/>
+<g font-family="Inter, Arial, sans-serif" fill="#13263B">
+<text x="64" y="60" font-size="18" font-weight="700" letter-spacing="2">GUÍA DE LECTURA · MILANA MATCH</text>
+<g font-family="Newsreader, Georgia, serif" font-size="57" font-weight="600"><text x="64" y="139">Cada indicador responde</text><text x="64" y="204">una pregunta distinta</text></g>
+<rect x="64" y="252" width="772" height="332" rx="24" fill="#FFFFFF" stroke="#D9E1E8" stroke-width="2"/>
+<circle cx="126" cy="318" r="28" fill="#EAF3FC"/>
+<path d="M112 318h29m-10-10 10 10-10 10" fill="none" stroke="#2D6CAA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="174" y="336" font-size="50" font-weight="700" fill="#2D6CAA">CAT</text>
+<text x="104" y="397" font-size="31" font-weight="700">Costo anual del crédito</text>
+<text x="104" y="442" font-size="28">Ayuda a revisar cuánto cuesta financiarte,</text><text x="104" y="483" font-size="28">bajo los supuestos de su cálculo.</text>
+<text x="104" y="544" font-size="24" fill="#5E6B78">Revisa monto, plazo y costos considerados.</text>
+<rect x="64" y="612" width="772" height="332" rx="24" fill="#FFFFFF" stroke="#D9E1E8" stroke-width="2"/>
+<circle cx="126" cy="678" r="28" fill="#EAF3FC"/>
+<path d="M112 688v-12h12v-12h14" fill="none" stroke="#2D6CAA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="174" y="696" font-size="50" font-weight="700" fill="#2D6CAA">GAT</text>
+<text x="104" y="757" font-size="31" font-weight="700">Rendimiento total antes de impuestos</text>
+<text x="104" y="802" font-size="28">Para ciertos productos de ahorro</text><text x="104" y="843" font-size="28">o inversión. Se expresa nominal y real.</text>
+<text x="104" y="904" font-size="24" fill="#5E6B78">Revisa saldo, plazo y condiciones.</text>
+<text x="64" y="1010" font-size="30" font-weight="700">Fuente y fecha junto a cada cifra</text>
+<text x="64" y="1055" font-size="24" fill="#5E6B78">Esquema conceptual. Sin ofertas ni tasas vigentes.</text>
+</g></svg>

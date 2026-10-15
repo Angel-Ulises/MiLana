@@ -110,6 +110,7 @@ test('el build genera sitemap final sin lastmod artificial', () => {
   const script = read('scripts/generar-sitemap-final.mjs');
   assert.ok(!script.includes('<lastmod>'));
   assert.ok(script.includes('/aprende/finiquito-vs-liquidacion'));
+  assert.ok(script.includes("'/calculadoras'"));
   assert.ok(script.includes('/widgets'));
 });
 

@@ -152,7 +152,7 @@ function construir(pagina) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Inicio", item: origen },
-          { "@type": "ListItem", position: 2, name: "Calculadoras", item: `${origen}/#calculadoras` },
+          { "@type": "ListItem", position: 2, name: "Calculadoras", item: `${origen}/calculadoras` },
           { "@type": "ListItem", position: 3, name: pagina.titulo.split("|")[0].trim(), item: url },
         ],
       },
@@ -329,6 +329,60 @@ function construirSituacion(s) {
   return url;
 }
 
+function construirHub() {
+  const url = `${origen}/calculadoras`;
+  const titulo = "Calculadoras laborales y de sueldo 2026 en México | MiLana";
+  const descripcion = "Finiquito, liquidación, aguinaldo, ISR, RESICO, PTU, bruto a neto, vacaciones, Infonavit y pensión IMSS: elige la calculadora según tu situación, gratis y con fuentes oficiales.";
+  let html = plantilla;
+  html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/gi, "");
+  html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapar(titulo)}</title>`);
+  html = ponerMeta(html, "description", descripcion);
+  html = ponerMeta(html, "og:title", titulo, true);
+  html = ponerMeta(html, "og:description", descripcion, true);
+  html = ponerMeta(html, "og:url", url, true);
+  html = ponerMeta(html, "og:type", "website", true);
+  html = ponerMeta(html, "twitter:title", titulo);
+  html = ponerMeta(html, "twitter:description", descripcion);
+  const canonical = `<link rel="canonical" href="${url}" />`;
+  html = /<link\s+rel=["']canonical["'][^>]*>/i.test(html)
+    ? html.replace(/<link\s+rel=["']canonical["'][^>]*>/i, canonical)
+    : html.replace("</head>", `    ${canonical}\n  </head>`);
+  const datos = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        name: "Calculadoras de MiLana",
+        url,
+        description: descripcion,
+        inLanguage: "es-MX",
+        publisher: { "@type": "Organization", name: nombre, url: origen },
+        hasPart: paginas.map((pagina) => ({
+          "@type": "WebApplication",
+          name: pagina.titulo.split("|")[0].trim(),
+          url: `${origen}/calculadoras/${pagina.slug}`,
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Inicio", item: `${origen}/` },
+          { "@type": "ListItem", position: 2, name: "Calculadoras", item: url },
+        ],
+      },
+    ],
+  };
+  html = html.replace("</head>", `    <script type="application/ld+json">${JSON.stringify(datos)}</script>\n  </head>`);
+  const cuerpo = `<div id="root"><main data-static-seo="calculadoras"><nav aria-label="Ruta"><a href="/">Inicio</a> / Calculadoras</nav><h1>Calculadoras de trabajo y sueldo</h1><p>Gratis, sin registro y con la fuente de cada cifra. Elige según lo que te está pasando.</p><h2>Dejé o perdí mi trabajo</h2><ul><li><a href="/calculadoras/finiquito"><strong>Finiquito</strong></a> — Renunciaste o terminó tu contrato y quieres saber qué te deben pagar.</li><li><a href="/calculadoras/liquidacion"><strong>Liquidación</strong></a> — Te despidieron sin causa justificada y quieres estimar la indemnización.</li></ul><p><a href="/aprende/finiquito-vs-liquidacion">¿Finiquito o liquidación? La diferencia en 5 minutos</a></p><h2>Quiero entender mi sueldo</h2><ul><li><a href="/calculadoras/bruto-a-neto"><strong>Bruto a neto</strong></a> — Conoces tu sueldo bruto y quieres saber cuánto te llega después de ISR y seguridad social.</li><li><a href="/calculadoras/isr"><strong>ISR mensual</strong></a> — Quieres revisar si la retención de impuesto de tu recibo tiene sentido.</li><li><a href="/calculadoras/resico"><strong>RESICO</strong></a> — Trabajas por tu cuenta en el Régimen Simplificado de Confianza.</li></ul><p><a href="/aprende/leer-recibo-nomina">Cómo leer tu recibo de nómina</a></p><h2>Me toca una prestación</h2><ul><li><a href="/calculadoras/aguinaldo"><strong>Aguinaldo</strong></a> — Quieres saber cuánto aguinaldo te toca, completo o proporcional.</li><li><a href="/calculadoras/vacaciones"><strong>Vacaciones</strong></a> — Quieres saber cuántos días de vacaciones y prima te corresponden.</li><li><a href="/calculadoras/ptu"><strong>PTU</strong></a> — Tu empresa reparte utilidades y quieres revisar tu parte.</li></ul><p><a href="/aprende/aguinaldo-bruto-neto">Por qué tu aguinaldo llega con descuento</a></p><h2>Vivienda y retiro</h2><ul><li><a href="/calculadoras/infonavit"><strong>Infonavit</strong></a> — Tienes o piensas tomar un crédito Infonavit y quieres ver capital e intereses.</li><li><a href="/calculadoras/pension-imss"><strong>Pensión IMSS</strong></a> — Quieres revisar los requisitos de pensión de la Ley 97 antes de proyectar una cifra.</li></ul><p><a href="/aprende/pension-imss-ley-97">Qué revisar antes de confiar en una cifra de pensión</a></p><h2>¿Ya tienes tu resultado?</h2><p>Llévalo a tu presupuesto para ver cuánto te queda cada mes: <a href="/finanzas/presupuesto">Ordenar mi dinero</a>.</p></main></div>`;
+  if (!html.includes('<div id="root"></div>')) throw new Error("La portada ya no tiene root vacío; no se puede emitir /calculadoras");
+  html = html.replace('<div id="root"></div>', cuerpo);
+  const destino = resolve(DIST, "calculadoras", "index.html");
+  mkdirSync(dirname(destino), { recursive: true });
+  writeFileSync(destino, html, "utf8");
+  return url;
+}
+
+construirHub();
 const urls = paginas.map(construir);
 const urlsSituacion = situaciones.map(construirSituacion);
 sitemap(urls, urlsSituacion);

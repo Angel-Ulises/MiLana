@@ -1,4 +1,5 @@
 import SiteHeader from './siteHeader.jsx';
+import NextStep from './nextStep.jsx';
 import { useEffect, useMemo, useState } from 'react';
 import { consumirIngresoTemporal } from './lib/netIncomeHandoff.js';
 import IncomeTransferNotice from './incomeTransferNotice.jsx';
@@ -33,7 +34,7 @@ function Header() {
 }
 
 function Footer() {
-  return <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>{datos.nota}</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>;
+  return <><NextStep /><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>{datos.nota}</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>;
 }
 
 function Fuente({ tipo }) {

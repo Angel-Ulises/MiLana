@@ -6,6 +6,11 @@ export async function navigateAndWait(send, sessionId, url, {
   waitMs, until, waitForLoad, now = Date.now, pause = sleep, loadTimeoutMs = 10000,
 }) {
   await send('Page.enable', {}, sessionId);
+  // La hoja de Google Fonts bloquea el evento load. En una corrida larga se queda
+  // colgada y la página nunca pasa de readyState "loading". El diseño ya tiene
+  // fallback de sistema; las pruebas no deben depender de esa red.
+  await send('Network.enable', {}, sessionId);
+  await send('Network.setBlockedURLs', { urls: ['*://fonts.googleapis.com/*', '*://fonts.gstatic.com/*'] }, sessionId);
   const loaded = waitForLoad();
   const navigation = await send('Page.navigate', { url }, sessionId);
   if (navigation.errorText) throw new Error(`Chrome navigation failed: ${navigation.errorText}`);

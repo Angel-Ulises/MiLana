@@ -2,6 +2,7 @@ import { createContext, useContext } from 'react';
 import contenido from './data/contenido-calculadoras.json';
 import catalogo from './data/paginas.json';
 import { rutasDespuesDelResultado } from './lib/calculatorResultRoutes.js';
+import NextStep from './nextStep.jsx';
 
 export const CalculatorResultContext = createContext(null);
 
@@ -31,6 +32,7 @@ export function ResultNextSteps() {
           ))}
         </div>
       )}
+      <NextStep compacto />
       <p>Son estimaciones informativas. Antes de decidir, revisa los supuestos y fuentes de esta página.</p>
     </section>
   );

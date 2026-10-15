@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import NextStep from './nextStep.jsx';
 import carreras from './data/profesiones.json';
 import ocupaciones from './data/ocupaciones.json';
 import AdReserve from './AdReserve.jsx';
@@ -18,7 +19,7 @@ function Header() {
 }
 
 function Footer() {
-  return <><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Carrera y ocupación son estadísticas distintas; MiLana no las convierte en una sola cifra.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>;
+  return <><NextStep /><AdReserve size="970x90" /><footer className="site-footer"><div className="shell footer-inner"><div><span className="brand-name">MiLana</span><p>Dinero claro para decidir mejor.</p><p>Carrera y ocupación son estadísticas distintas; MiLana no las convierte en una sola cifra.</p></div><p>MiLana © 2026 · Hecho en México</p></div></footer></>;
 }
 
 function TarjetaCarrera({ carrera }) {

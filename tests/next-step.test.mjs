@@ -16,6 +16,7 @@ test('cada siguiente paso tiene una acción principal y como mucho dos alternati
     assert.ok(otras.length <= 2, ruta);
     for (const destino of [paso.principal, ...otras]) {
       assert.ok(publicadas.has(destino.href), `${ruta} → destino no publicado ${destino.href}`);
+      assert.equal(destino.href.endsWith('/'), false, `${ruta} → ${destino.href} debe ir sin barra final`);
       assert.notEqual(destino.href, ruta, `${ruta} no enlaza a sí misma`);
     }
     assert.equal(new Set([paso.principal.href, ...otras.map((o) => o.href)]).size, 1 + otras.length, `${ruta} sin destinos repetidos`);

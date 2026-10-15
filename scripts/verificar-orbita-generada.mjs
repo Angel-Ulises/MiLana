@@ -4,13 +4,14 @@ import { join, resolve } from 'node:path';
 const DIST = resolve('dist');
 const calcDir = join(DIST, 'calculadoras');
 const errors = [];
-const slugs = readdirSync(calcDir, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory() && existsSync(join(calcDir, entry.name, 'index.html')))
-  .map((entry) => entry.name)
-  .sort();
+const slugs = readdirSync(calcDir, { withFileTypes: true }).flatMap((entry) => {
+  if (entry.isDirectory() && existsSync(join(calcDir, entry.name, 'index.html'))) return [entry.name];
+  if (entry.isFile() && entry.name.endsWith('.html') && entry.name !== 'index.html') return [entry.name.slice(0, -'.html'.length)];
+  return [];
+}).sort();
 
 for (const slug of slugs) {
-  const fullPath = join(calcDir, slug, 'index.html');
+  const fullPath = existsSync(join(calcDir, `${slug}.html`)) ? join(calcDir, `${slug}.html`) : join(calcDir, slug, 'index.html');
   const full = readFileSync(fullPath, 'utf8');
   if (!full.includes('data-orbita-shell')) errors.push(`${slug}: la calculadora completa perdió el shell Órbita`);
   if (!full.includes("q.get('embed')==='1'")) errors.push(`${slug}: falta protección de ?embed=1 en el boot generado`);

@@ -18,6 +18,7 @@ function rutaArchivo(archivo) {
   const rel = relative(DIST, archivo).split(sep).join('/');
   if (rel === 'index.html') return '/';
   if (rel.endsWith('/index.html')) return `/${rel.slice(0, -'/index.html'.length)}`;
+  if (rel.endsWith('.html')) return `/${rel.slice(0, -'.html'.length)}`;
   return `/${rel}`;
 }
 
@@ -41,6 +42,8 @@ function archivoDestino(pathname) {
   const rel = pathname.replace(/^\/+|\/+$/g, '');
   const directo = join(DIST, rel);
   if (existsSync(directo) && statSync(directo).isFile()) return directo;
+  const limpio = join(DIST, `${rel}.html`);
+  if (existsSync(limpio)) return limpio;
   const index = join(directo, 'index.html');
   return existsSync(index) ? index : null;
 }

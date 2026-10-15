@@ -8,9 +8,12 @@ const rutas = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
   .map((m) => new URL(m[1]).pathname.replace(/\/$/, '') || '/');
 const universo = new Set(rutas);
 
-const archivoDe = (ruta) => ruta === '/'
-  ? resolve(DIST, 'index.html')
-  : resolve(DIST, `.${ruta}`, 'index.html');
+const archivoDe = (ruta) => {
+  if (ruta === '/') return resolve(DIST, 'index.html');
+  const limpio = resolve(DIST, `${ruta.slice(1)}.html`);
+  if (existsSync(limpio)) return limpio;
+  return resolve(DIST, ruta.slice(1), 'index.html');
+};
 
 const grafo = new Map();
 const entrada = new Map(rutas.map((ruta) => [ruta, 0]));

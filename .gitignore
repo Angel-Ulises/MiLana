@@ -16,4 +16,5 @@ assets-master/originales-verticales/
 # Evidencia local de verificar-arranque (el CI la sube como artefacto) y lockfile
 # que genera npm install; el repo no versiona lockfile.
 .qa/
+.wrangler/
 package-lock.json

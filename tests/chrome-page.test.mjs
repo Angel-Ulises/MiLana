@@ -14,7 +14,7 @@ test('el navegador espera load antes de evaluar la condición del runtime', asyn
     waitMs: 100, until: 'ready', waitForLoad: () => { calls.push('subscribe-load'); return loaded; },
   });
   await new Promise((resolve) => setImmediate(resolve));
-  assert.deepEqual(calls, ['Page.enable', 'subscribe-load', 'Page.navigate']);
+  assert.deepEqual(calls, ['Page.enable', 'Network.enable', 'Network.setBlockedURLs', 'subscribe-load', 'Page.navigate']);
   releaseLoad();
   await waiting;
   assert.equal(calls.at(-1), 'Runtime.evaluate');

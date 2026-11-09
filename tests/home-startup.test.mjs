@@ -54,10 +54,10 @@ test('App fallido conserva enlaces, informa y recarga una sola vez al pulsar Rei
 test('El hero estático sale de App y contiene título, las tres rutas y el desplegable nativo', async () => {
   const html = await prerenderHomeHero();
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
-  assert.match(html, /Entiende tu/);
-  for (const href of ['/calculadoras/liquidacion', '/finanzas/ahorro', '/carreras']) assert.ok(html.includes(`href="${href}"`));
-  assert.match(html, /<details class="orb-home-extra">/);
-  assert.match(html, /<summary>Ver otras 3 situaciones/);
+  assert.match(html, /Calcula cuánta/);
+  // Mejora 2026-11: todas las situaciones visibles desde el HTML inicial, sin desplegable.
+  for (const href of ['/calculadoras/aguinaldo', '/calculadoras/liquidacion', '/calculadoras/finiquito', '/calculadoras/pension-imss', '/finanzas/ahorro']) assert.ok(html.includes(`href="${href}"`));
+  assert.doesNotMatch(html, /orb-home-extra/);
   assert.doesNotMatch(html, /Cargando contenido|<script/);
 });
 

@@ -36,3 +36,7 @@ html.ml-orbita-enabled .ml-editorial-note,html.ml-orbita-enabled p[data-milana-s
 html.ml-orbita-enabled :is(a,button,summary,label,select,input,textarea,[role="button"],[tabindex]){-webkit-tap-highlight-color:transparent}
 /* Foco programático en la etiqueta de la pregunta (pantallas táctiles): sin contorno, salvo navegación con teclado. */
 html.ml-orbita-enabled [data-orbita-question-focus="true"]:focus:not(:focus-visible){outline:none}
+/* Mejora 2026-11: menú esencial + «Más temas» compacto. */
+.ml-orbita-drawer-more{margin:14px 10px 4px;font-size:.8em;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--orb-muted,#94a3b8)}
+.ml-orbita-drawer .ml-orbita-drawer-mini{display:flex;flex-wrap:wrap;gap:4px 8px;padding:0 4px 8px}
+.ml-orbita-drawer .ml-orbita-drawer-mini a{min-height:44px;border:0;padding:0 8px;font-weight:600;font-size:.95em}

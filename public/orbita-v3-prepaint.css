@@ -96,3 +96,12 @@ html.js.ml-orbita-enabled #root:not(:has([data-startup-error])) [data-startup-li
 /* Teléfono: sin la foto hay espacio; la frase de propósito va completa desde el primer pintado (antes se recortaba
    a 2 líneas y se expandía después, lo que movía el texto y retrasaba el LCP). */
 @media(max-width:620px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-purpose{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important}}
+/* Mejora 2026-11 — Inicio sin foto de stock: una sola columna con todas las situaciones, sin altura reservada para la imagen. */
+html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero{min-height:0!important;height:auto!important}
+html[data-orbita-section="inicio"] .hero-grid{display:block!important;min-height:0!important;max-width:880px}
+html[data-orbita-section="inicio"] .hero-media-wrap{display:none!important}
+html[data-orbita-section="inicio"] .orb-home-route-grid-todas{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}
+@media(min-width:621px){html[data-orbita-section="inicio"] .orb-home-route-grid-todas{grid-template-columns:1fr 1fr!important}}
+html[data-orbita-section="inicio"] .orb-home-route-temporada{border:2px solid #c2410c!important}
+.orb-home-route .orb-home-route-badge{display:inline-block!important;margin-left:8px;padding:2px 8px;border-radius:999px;background:#9a3412!important;color:#fff!important;font-size:12px!important;font-weight:700;line-height:1.4;vertical-align:middle}
+@media(min-width:901px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{max-width:880px!important;width:100%!important;grid-column:1/-1!important}html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid{display:block!important}}

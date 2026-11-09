@@ -1,13 +1,17 @@
 // Una sola fuente de rutas para Órbita (HTML estático) y encabezados React.
 // /calculadoras es la página de entrada a todas las calculadoras, agrupadas por situación.
+// Mejora 2026-11: el menú principal se reduce a lo esencial (calculadoras, finanzas y guías).
+// Las demás secciones siguen publicadas y se listan en el menú desplegable bajo «Más temas».
 export const NAVEGACION_MILANA = Object.freeze([
   ['calculadoras', '/calculadoras', 'Calculadoras'],
+  ['finanzas', '/finanzas', 'Finanzas'],
+  ['aprende', '/aprende', 'Aprende'],
+]);
+export const NAVEGACION_MAS = Object.freeze([
   ['carreras', '/carreras', 'Carreras'],
   ['estados', '/estados', 'Estados'],
-  ['finanzas', '/finanzas', 'Finanzas'],
   ['invertir', '/invertir', 'Invertir'],
   ['economia', '/economia', 'Economía'],
-  ['aprende', '/aprende', 'Aprende'],
 ]);
 
 // Una línea por sección para el menú móvil: qué encuentra ahí quien no conoce el término.
@@ -25,6 +29,6 @@ export const DESCRIPCION_NAVEGACION = Object.freeze({
 export function seccionNavegacion(pathname = '/') {
   const p = typeof pathname === 'string' ? pathname : '/';
   if (p === '/finanzas/inversion' || p.startsWith('/finanzas/inversion/')) return 'invertir';
-  const match = NAVEGACION_MILANA.find(([id]) => p.startsWith('/' + id) && (p.length === id.length + 1 || p[id.length + 1] === '/'));
+  const match = [...NAVEGACION_MILANA, ...NAVEGACION_MAS].find(([id]) => p.startsWith('/' + id) && (p.length === id.length + 1 || p[id.length + 1] === '/'));
   return match ? match[0] : null;
 }

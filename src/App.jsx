@@ -12,7 +12,6 @@ import catalogoSituaciones from "./data/situaciones.json";
 import catalogoFotos from "./data/fotos.json";
 import AdReserve from './AdReserve.jsx';
 import { HomeRoutes, SituationCard } from './homeRoutes.jsx';
-import { HERO_FOCAL, HERO_PEXELS_ID, HERO_SIZES, heroSrcSet, heroUrl } from './lib/heroPhoto.js';
 import NetIncomeTransferActions from './netIncomeTransferActions.jsx';
 import CalcAguinaldoDirecta from './calcAguinaldo.jsx';
 import { CalcFiniquitoDirecta, CalcLiquidacionDirecta, CalcISRDirecta, CalcBrutoNetoDirecta, CalcRESICODirecta, CalcPTUDirecta, CalcVacacionesDirecta, CalcInfonavitDirecta, CalcPensionDirecta } from './calculadorasDirectas.jsx';
@@ -1302,36 +1301,9 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             <div className="shell hero-grid">
               <div className="hero-copy">
                 <p className="eyebrow orb-home-kicker">Gratis · sin registro · datos 2026</p>
-                <h1>Entiende tu <span className="orb-home-accent">lana</span> en un minuto</h1>
-                <p className="hero-lede">Elige lo que estás viviendo y te decimos qué hacer, paso a paso.</p>
-                <div className="hero-actions" hidden>
-                  <a className="btn btn-primary" href="/#situaciones">Explorar mi situación</a>
-                  <a className="btn btn-secondary" href="/calculadoras">Ver calculadoras</a>
-                </div>
-                <div className="hero-proof" aria-label="Señales de confianza" hidden>
-                  <span>Datos 2026</span>
-                  <span>Fuentes oficiales</span>
-                  <span>Sin registro</span>
-                </div>
+                <h1>Calcula cuánta <span className="orb-home-accent">lana</span> te toca</h1>
+                <p className="hero-lede">Toca tu caso y lo calculas en un minuto.</p>
                 <HomeRoutes />
-              </div>
-
-              <div className="hero-media-wrap">
-                <div className="hero-orbit hero-orbit-one" aria-hidden="true"></div>
-                <div className="hero-orbit hero-orbit-two" aria-hidden="true"></div>
-                <figure className="hero-media">
-                  <picture>
-                    <img src={heroUrl(1440)} srcSet={heroSrcSet()} sizes={HERO_SIZES} alt="" aria-hidden="true"
-                         loading="eager" fetchPriority="high" decoding="sync" data-hero-milana={HERO_PEXELS_ID}
-                         style={{objectPosition: HERO_FOCAL}} />
-                  </picture>
-                  <figcaption className="orb-home-photo-caption">Calculadoras y guías con fuentes oficiales.</figcaption>
-                </figure>
-                <aside className="hero-note" aria-label="Qué ofrece MiLana" hidden>
-                  <span className="hero-note-kicker">Primero entiende</span>
-                  <strong>Luego compara escenarios.</strong>
-                  <span className="hero-note-copy">Y decide con números que sí puedes explicar.</span>
-                </aside>
               </div>
             </div>
           </section>
@@ -1354,34 +1326,6 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                   ))}
                 </div>
               </Detalle>
-            </div>
-          </section>
-
-          <section className="section path-section">
-            <div className="shell">
-              <details className="ml-how-it-works">
-                <summary>
-                  <span><strong>¿Cómo funciona MiLana?</strong><small>Entender · Comparar · Decidir</small></span>
-                  <b aria-hidden="true">+</b>
-                </summary>
-                <div className="ml-how-it-works-body">
-                  <h2 className="path-title">De “no entiendo” a “sé por qué elegir esto”.</h2>
-                  <div className="path-grid">
-                    <div className="path-step">
-                      <span className="path-number">1</span>
-                      <div><h3>Entender</h3><p>Traducimos conceptos y reglas a lenguaje normal.</p></div>
-                    </div>
-                    <div className="path-step">
-                      <span className="path-number">2</span>
-                      <div><h3>Comparar</h3><p>Prueba números y escenarios sin perder el contexto.</p></div>
-                    </div>
-                    <div className="path-step">
-                      <span className="path-number">3</span>
-                      <div><h3>Decidir</h3><p>Qué cambia, qué revisar y qué conviene preguntar antes de actuar.</p></div>
-                    </div>
-                  </div>
-                </div>
-              </details>
             </div>
           </section>
 

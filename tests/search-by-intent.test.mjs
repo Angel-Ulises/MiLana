@@ -28,5 +28,8 @@ test('Sugerencias son locales y no usan servicios externos', () => {
   const ui = readFileSync('public/orbita-v3-base.js', 'utf8');
   for (const token of ['data-search-aliases=', 'data-search-featured=', 'Buscar por problema, tema o herramienta']) assert.ok(script.includes(token), token);
   for (const token of ['searchCount.textContent','visible.length < 10','item.dataset.searchAliases','if (searchEmpty) searchEmpty.hidden = visible.length !== 0']) assert.ok(ui.includes(token), token);
-  for (const token of ['fetch(', 'XMLHttpRequest', 'sendBeacon']) assert.ok(!ui.includes(token), token);
+  // Mejora 2026-11: el índice se descarga del mismo sitio (/buscar-indice.json) al abrir el buscador; nada sale a terceros.
+  assert.ok(ui.includes("fetch('/buscar-indice.json')"));
+  assert.equal((ui.match(/fetch\(/g) || []).length, 1);
+  for (const token of ['XMLHttpRequest', 'sendBeacon', 'https://']) assert.ok(!ui.includes(token), token);
 });

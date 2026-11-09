@@ -72,8 +72,8 @@ test('el hero y las anclas usan la corrección visual nueva', () => {
   const mejoras = read('src/siteEnhancements.jsx');
   const overrides = read('src/site-overrides.css');
   // La foto del hero (Pexels 7129713) vive en un módulo compartido y se pinta desde el primer render.
-  assert.ok(read('src/lib/heroPhoto.js').includes("HERO_PEXELS_ID = '7129713'"));
-  assert.match(read('src/App.jsx'), /data-hero-milana=\{HERO_PEXELS_ID\}/);
+  // Mejora 2026-11: Inicio ya no muestra la foto de stock.
+  assert.doesNotMatch(read('src/App.jsx'), /data-hero-milana/);
   assert.match(mejoras, /from '\.\/lib\/heroPhoto\.js'/);
   assert.ok(mejoras.includes('contacto.milanaaqui@gmail.com'));
   assert.match(overrides, /scroll-padding-top:\s*0\s*!important/);

@@ -141,10 +141,32 @@
       : visible.length ? visible.length + ' opciones relacionadas' : 'Prueba otra palabra o una frase más corta.';
     return visible;
   };
+  // Mejora 2026-11: el índice completo del buscador ya no viaja en cada HTML; se descarga al abrirlo.
+  let searchIndexLoaded = false;
+  const loadSearchIndex = () => {
+    if (searchIndexLoaded || !search) return Promise.resolve();
+    searchIndexLoaded = true;
+    const list = search.querySelector('.ml-orbita-search-list');
+    return fetch('/buscar-indice.json').then((r) => (r.ok ? r.json() : [])).then((items) => {
+      if (!list || !Array.isArray(items)) return;
+      const existing = new Set([...list.querySelectorAll('[data-orbita-search-item]')].map((a) => a.getAttribute('href')));
+      for (const item of items) {
+        if (!item || typeof item.href !== 'string' || !item.href.startsWith('/') || existing.has(item.href)) continue;
+        const a = document.createElement('a');
+        a.dataset.orbitaSearchItem = '';
+        a.href = item.href;
+        a.dataset.searchAliases = String(item.aliases || '');
+        a.dataset.searchFeatured = String(Boolean(item.featured));
+        a.textContent = String(item.label || '');
+        list.appendChild(a);
+      }
+    }).catch(() => { searchIndexLoaded = false; });
+  };
   document.querySelectorAll('[data-orbita-search-open]').forEach((button) => button.addEventListener('click', () => {
     if (!search) return;
     search.showModal();
     requestAnimationFrame(() => { searchInput?.focus(); filterSearch(); });
+    loadSearchIndex().then(filterSearch);
   }));
   search?.querySelector('[data-orbita-search-close]')?.addEventListener('click', () => search.close());
   search?.addEventListener('click', (event) => { if (event.target === search) search.close(); });

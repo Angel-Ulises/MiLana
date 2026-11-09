@@ -16,10 +16,9 @@ test('portada V4 carga después del guard de embed y nunca en Pensión', () => {
 
 test('portada usa el copy aprobado y las seis situaciones', () => {
   for (const text of [
-    'Entiende tu ', 'lana', ' en un minuto',
     '¿Qué estás viviendo?',
-    'Me despidieron', 'Renuncié', 'Voy a cobrar aguinaldo',
-    'Quiero ahorrar', 'Estoy eligiendo carrera', 'Pienso mudarme de estado',
+    'Voy a cobrar aguinaldo', 'Me despidieron', 'Renuncié o terminó mi trabajo',
+    '¿Cuánto me llega de sueldo?', '¿Ya me puedo pensionar?', 'Quiero ahorrar',
     'Busca una calculadora'
   ]) assert.ok(js.includes(text), `falta copy de portada: ${text}`);
 });

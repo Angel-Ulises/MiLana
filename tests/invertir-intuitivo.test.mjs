@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { compararComision, proyectarInversion } from '../src/lib/investmentProjection.js';
 import { esRutaInvertir } from '../src/lib/routeMatcher.js';
-import { NAVEGACION_MILANA } from '../src/lib/siteNavigation.js';
+import { NAVEGACION_MAS } from '../src/lib/siteNavigation.js';
 
 const base = { inicial:'10000', mensual:'500', anos:'10', inflacion:'3', costoAnual:'0.5', tasas:['-5','5','10'] };
 
@@ -40,7 +40,7 @@ test('Invertir es sección pública, sin compra ni depósitos ni código externo
   assert.equal(esRutaInvertir('/invertir'),true);
   assert.equal(esRutaInvertir('/invertir/'),true);
   assert.equal(esRutaInvertir('/invertir-otro'),false);
-  assert.ok(NAVEGACION_MILANA.some(([id,url])=>id==='invertir'&&url==='/invertir'));
+  assert.ok(NAVEGACION_MAS.some(([id,url])=>id==='invertir'&&url==='/invertir'));
   const s=readFileSync('src/invertirHomePage.jsx','utf8');
   assert.match(s,/aria-pressed=\{value === item.id\}/);
   assert.match(s,/className="ml-inv-sim"/);

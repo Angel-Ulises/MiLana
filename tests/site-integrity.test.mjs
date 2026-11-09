@@ -201,11 +201,12 @@ test('las calculadoras separan LFT, IMSS e ISSSTE antes de aplicar fórmulas de 
 test('el editorial no contradice los nuevos alcances público/privado', () => {
   const contenido = JSON.parse(read('src/data/contenido-calculadoras.json'));
   const casos = JSON.parse(read('public/casos-calculadoras.json'));
-  assert.match(contenido.aguinaldo.fundamento, /LFTSE/);
-  assert.match(contenido.aguinaldo.metodologia, /Educación Media Superior/);
+  // Mejora 2026-11: el caso común (empresa privada) va primero; gobierno y SEP siguen citados y disponibles.
+  assert.match(contenido.aguinaldo.fundamento, /Trabajadores al Servicio del Estado/);
+  assert.match(contenido.aguinaldo.fundamento, /SEP/);
   assert.match(contenido.vacaciones.metodologia, /prima de 30%/);
   assert.match(contenido.vacaciones.metodologia, /prima de 60%/);
   assert.match(contenido.ptu.proposito, /únicamente el monto total/);
   assert.doesNotMatch(contenido.ptu.proposito, /participación individual/i);
-  assert.match(casos.aguinaldo.titulo, /Ejemplo LFT/);
+  assert.match(casos.aguinaldo.resumen, /empresa privada/);
 });

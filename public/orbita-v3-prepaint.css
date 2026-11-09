@@ -46,9 +46,7 @@ html.ml-orbita-enabled[data-orbita-section="finanzas"] .orb-section-visual{min-h
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero-media{display:block!important;position:relative!important;width:100vw!important;height:220px!important;min-height:220px!important;margin:16px 0 0 calc(50% - 50vw)!important;border-radius:0!important;box-shadow:none!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] body:has(.calculator-hero) .calc-intro{display:none!important}
   html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main{padding-top:6px!important}
-  /* Reserva exactamente el bloque Paso a paso hasta que el internal.js lo inserta. */
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main::before{content:'';display:block;height:131px;min-height:131px}
-  html.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-main:has(> .ml-calc-assistant)::before{display:none;height:0;min-height:0}
+  /* Mejora 2026-11: sin asistente «Paso a paso»; ya no se reserva su altura. */
   .orb-runtime-reserve{width:calc(100% - 28px);margin-block:18px}
   .orb-glossary-reserve{min-height:var(--orb-glossary-reserve-m,178px)!important}
   .orb-visual-reserve{min-height:var(--orb-reserve-m,420px)!important}
@@ -78,6 +76,15 @@ html.ml-orbita-enabled :is(.ml-premium-reveal,.career-reveal,.route-reveal){opac
 @media(min-width:621px) and (max-width:900px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid{padding-top:0!important}html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{padding:24px 22px!important;border-radius:22px}}
 /* Teléfono: la primera pregunta y «Siguiente» caben en la primera pantalla; la foto queda para tablet y escritorio. */
 @media(max-width:620px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="calculadoras"] .calculator-hero .calculator-hero-media{display:none!important}}
+/* Mejora 2026-11 — calculadora visible sin scroll en celular: arriba solo título y una línea. */
+@media(max-width:760px){
+  html[data-orbita-section="calculadoras"] .calculator-hero nav,
+  html[data-orbita-section="calculadoras"] .calculator-hero .calculator-hero-icon{display:none!important}
+  html[data-orbita-section="calculadoras"] .calculator-hero{padding:12px 0 6px!important;min-height:0!important}
+  html[data-orbita-section="calculadoras"] .calculator-hero h1{font-size:28px!important;line-height:1.15!important;margin:0!important}
+  html[data-orbita-section="calculadoras"] .calculator-hero .calculator-purpose{font-size:15px!important;line-height:1.4!important;margin:4px 0 0!important}
+  html[data-orbita-section="calculadoras"] .calculator-main{padding-top:4px!important}
+}
 /* Calculadoras con asistente: React pinta el formulario completo ~45ms antes de que el asistente lo reduzca
    a una pregunta; se veían todos los campos destellar. Se oculta (conservando su espacio) hasta que el asistente
    existe. Si el script no llegara, el formulario aparece igual a los 1.5s. Pensión no carga este archivo. */

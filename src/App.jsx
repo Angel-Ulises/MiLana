@@ -15,6 +15,7 @@ import { HomeRoutes, SituationCard } from './homeRoutes.jsx';
 import { HERO_FOCAL, HERO_PEXELS_ID, HERO_SIZES, heroSrcSet, heroUrl } from './lib/heroPhoto.js';
 import NetIncomeTransferActions from './netIncomeTransferActions.jsx';
 import ResultTransfer from './resultTransfer.jsx';
+import CalcAguinaldoDirecta from './calcAguinaldo.jsx';
 
 // Pagos únicos: el resultado puede volverse respaldo o avance de una meta.
 const DESTINOS_PAGO_UNICO = [
@@ -275,14 +276,15 @@ function CalcLiquidacion() {
   </form>;
 }
 
-function CalcAguinaldo() { return <CalculoRevisado tipo="aguinaldo" />; }
+function AguinaldoGobierno() { return <CalculoRevisado tipo="aguinaldo" regimenInicial="lftse" />; }
+function CalcAguinaldo() { return <CalcAguinaldoDirecta modoGobierno={AguinaldoGobierno} />; }
 function CalcISR() { return <CalculoRevisado tipo="isr" />; }
 
-function CalculoRevisado({ tipo }) {
+function CalculoRevisado({ tipo, regimenInicial = 'lft' }) {
   const isISR = tipo === 'isr';
   const [importe, setImporte] = useState('');
-  const [dias, setDias] = useState('15');
-  const [regimenAguinaldo, setRegimenAguinaldo] = useState('lft');
+  const [dias, setDias] = useState(regimenInicial === 'lft' ? '15' : '40');
+  const [regimenAguinaldo, setRegimenAguinaldo] = useState(regimenInicial);
   const [fecha, setFecha] = useState('');
   const [minimo, setMinimo] = useState('');
   const [periodo, setPeriodo] = useState('2026-09');

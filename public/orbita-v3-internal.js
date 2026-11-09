@@ -6,6 +6,7 @@
   if (html.classList.contains('ml-orbita-embed') || params.get('embed') === '1') return;
 
   const PENSION_PATH = /^\/calculadoras\/pension-imss\/?$/;
+  const CALCULADORA_DIRECTA = true;
   const HEADER_OFFSET = 82;
   const PURPOSE_MEDIA = matchMedia('(max-width: 760px)');
   const COMPACT_PURPOSES = {
@@ -621,7 +622,9 @@
   const enhanceCalculator = () => {
     syncSection();
     if (html.dataset.orbitaSection !== 'calculadoras' || !html.classList.contains('ml-orbita-enabled')) return;
-    if (PENSION_PATH.test(location.pathname)) {
+    // Mejora 2026-11: las calculadoras muestran el formulario corto completo, con el resultado
+    // en vivo. El asistente «una pregunta a la vez» ya no se monta en ninguna calculadora.
+    if (CALCULADORA_DIRECTA || PENSION_PATH.test(location.pathname)) {
       resetCalculatorState();
       html.classList.remove('orb-purpose-ready');
       return;

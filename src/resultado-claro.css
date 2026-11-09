@@ -1,0 +1,45 @@
+/* Mejora 2026-11: formulario corto y resultado claro, diseñados primero para celular. */
+.cc-form{display:grid;gap:14px;margin:4px 0 0}
+.cc-campo{display:grid;gap:6px}
+.cc-campo label,.cc-legend{font-size:15px;font-weight:600;color:var(--ml-slate-900,#0f172a)}
+.cc-campo input,.cc-campo select{width:100%;box-sizing:border-box;min-height:52px;padding:12px 14px;font-size:18px;border:2px solid var(--ml-slate-200,#cbd5e1);border-radius:12px;background:#fff;color:inherit}
+.cc-campo input:focus,.cc-campo select:focus{outline:none;border-color:var(--ml-blue-600,#2563eb);box-shadow:0 0 0 3px rgba(37,99,235,.18)}
+.cc-dinero{position:relative}
+.cc-dinero::before{content:'$';position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--ml-slate-600,#475569);pointer-events:none}
+.cc-dinero input{padding-left:30px}
+.cc-ayuda{margin:0;font-size:13px;color:var(--ml-slate-600,#475569);line-height:1.4}
+.cc-opciones{display:grid;grid-template-columns:1fr 1fr;gap:8px;border:0;padding:0;margin:0}
+.cc-opciones legend{margin-bottom:6px}
+.cc-opcion{position:relative}
+.cc-opcion input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.cc-opcion span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:8px 10px;border:2px solid var(--ml-slate-200,#cbd5e1);border-radius:12px;font-size:15px;font-weight:600;background:#fff}
+.cc-opcion input:checked+span{border-color:var(--ml-blue-600,#2563eb);background:var(--ml-blue-50,#eff6ff);color:var(--ml-blue-700,#1d4ed8)}
+.cc-opcion input:focus-visible+span{box-shadow:0 0 0 3px rgba(37,99,235,.3)}
+.cc-mas{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;font-size:14px}
+.cc-enlace{background:none;border:0;padding:4px 0;font:inherit;font-size:14px;font-weight:600;color:var(--ml-blue-700,#1d4ed8);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cc-error{margin:0;color:#b42318;font-size:14px}
+.cc-error:empty{display:none}
+.cc-boton{min-height:52px;border:0;border-radius:12px;background:var(--ml-blue-700,#1d4ed8);color:#fff;font-size:17px;font-weight:700;cursor:pointer}
+.cc-panel{border:1px solid var(--ml-slate-200,#e2e8f0);border-radius:14px;padding:14px;background:var(--ml-blue-50,#f8fafc)}
+.cc-panel>p{margin:0 0 10px;font-size:14px}
+
+.rc{margin:16px 0 8px;padding:18px 16px;border-radius:16px;background:#fff;border:2px solid var(--ml-blue-600,#2563eb);box-shadow:0 8px 24px rgba(15,23,42,.08)}
+.rc p,.rc div{margin:0}
+.rc-etiqueta{font-size:15px;font-weight:600;color:var(--ml-slate-600,#475569)}
+.rc-monto{font-size:clamp(34px,10vw,46px);line-height:1.1;font-weight:800;letter-spacing:-.02em;color:var(--ml-slate-900,#0f172a);margin:4px 0 6px!important;font-variant-numeric:tabular-nums}
+.rc-linea{font-size:15px;line-height:1.45;color:var(--ml-slate-700,#334155)}
+.rc-secundarios{display:grid;gap:6px;margin:12px 0 0;padding:10px 0 0;border-top:1px solid var(--ml-slate-200,#e2e8f0)}
+.rc-secundarios div{display:flex;justify-content:space-between;gap:12px;font-size:15px}
+.rc-secundarios dt{color:var(--ml-slate-600,#475569)}
+.rc-secundarios dd{margin:0;font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+.rc-detalle{margin-top:12px;border-top:1px solid var(--ml-slate-200,#e2e8f0);padding-top:8px}
+.rc-detalle summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--ml-blue-700,#1d4ed8);min-height:36px;display:flex;align-items:center}
+.rc-detalle-cuerpo{font-size:14px;line-height:1.55;color:var(--ml-slate-700,#334155)}
+.rc-detalle-cuerpo ol,.rc-detalle-cuerpo ul{padding-left:20px;margin:6px 0}
+.rc-siguiente{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--ml-blue-50,#eff6ff);color:var(--ml-slate-900,#0f172a);text-decoration:none}
+.rc-siguiente-kicker{grid-column:1;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ml-blue-700,#1d4ed8)}
+.rc-siguiente-texto{grid-column:1;font-size:15px;font-weight:600;line-height:1.35}
+.rc-flecha{grid-column:2;grid-row:1/3;font-size:20px;color:var(--ml-blue-700,#1d4ed8)}
+.rc-whatsapp{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;margin-top:10px;border-radius:12px;background:#0b6e3a;color:#fff!important;font-size:16px;font-weight:700;text-decoration:none}
+.rc-actualizado{margin-top:10px!important;font-size:12px;color:var(--ml-slate-600,#475569)}
+@media(min-width:761px){.rc{padding:22px}}

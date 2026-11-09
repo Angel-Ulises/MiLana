@@ -88,8 +88,10 @@
     wrap.innerHTML = htmlCaso(caso, slug);
     const section = wrap.firstElementChild;
     // Después del glosario de la calculadora (si ya está) para no empujarlo en el primer viewport.
-    const glosario = form.nextElementSibling?.matches?.('.orb-glossary-after-calculator') ? form.nextElementSibling : null;
-    (glosario || form).insertAdjacentElement('afterend', section);
+    // Mejora 2026-11: con la calculadora directa, el caso va después del resultado, nunca entre formulario y resultado.
+    const ancla = form.closest('[data-calc-directo]') || form;
+    const glosario = ancla.nextElementSibling?.matches?.('.orb-glossary-after-calculator') ? ancla.nextElementSibling : null;
+    (glosario || ancla).insertAdjacentElement('afterend', section);
     section.querySelector('[data-case-try]')?.addEventListener('click', () => {
       const first = form.querySelector('input,select,textarea');
       form.scrollIntoView({ behavior: 'smooth', block: 'start' });

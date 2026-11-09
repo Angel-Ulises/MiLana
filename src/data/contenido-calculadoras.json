@@ -113,58 +113,54 @@
     ]
   },
   "aguinaldo": {
-    "proposito": "Proyecta el aguinaldo bruto 2026 según el régimen que selecciones. Distingue LFT, servicio público federal sujeto a LFTSE y reglas SEP federales; no incluye la retención de ISR.",
-    "interpretacion": "El resultado depende del régimen, la base salarial y el tiempo de servicio. En LFT y LFTSE pueden existir prestaciones superiores al mínimo. En SEP federal la nómina puede usar conceptos computables o salario convencional propios, por lo que conviene comparar la base capturada con tu recibo y tu tipo de plaza. Si trabajaste solo parte del año, revisa también qué regla proporcional aplicó la calculadora.",
-    "significado": "El aguinaldo es una prestación independiente del salario ordinario y no depende de que la relación laboral continúe hasta diciembre para haber generado una parte proporcional. Lo importante para interpretar el resultado es distinguir tres elementos: cuánto aguinaldo reconoce tu relación laboral, qué parte del periodo efectivamente generaste y qué salario se está utilizando como base. Una diferencia en cualquiera de esos elementos puede explicar por qué tu recibo y la estimación no coinciden.",
-    "metodologia": "En LFT y en el modo federal general, MiLana parte del salario diario y de los días de prestación aplicables. Para SEP Educación Básica/apoyo utiliza la referencia de 40 días y la base computable indicada por el Manual SEP 2025. Para SEP Educación Media Superior aplica automáticamente la regla por tiempo de servicio del mismo Manual: 40 días con seis meses o más, 20 días con más de tres y menos de seis meses, y hasta tres meses una proporción sobre la base anual de 40 días. El modo supone servicio continuo hasta el 31 de diciembre de 2026 y no calcula ISR.",
-    "supuestos": "La estimación supone que seleccionaste el régimen correcto y capturaste la base salarial que corresponde a tu plaza. En relaciones LFT puede existir una prestación superior por contrato o convenio. En servicio público federal y SEP pueden existir conceptos computables, incidencias, nombramientos o condiciones colectivas que cambien la base o mejoren la prestación. Salarios variables, cambios de plaza o interrupciones de servicio pueden requerir revisión adicional. El resultado es informativo y no sustituye el recibo de nómina ni determina el tratamiento fiscal final.",
-    "fundamento": "Para relaciones regidas por la LFT, el artículo 87 establece el aguinaldo anual y su parte proporcional. Para personas trabajadoras federales sujetas a la LFTSE, el artículo 42 Bis establece un aguinaldo anual de al menos 40 días. En SEP federal, el Manual de Normas para la Administración de Recursos Humanos 2025 define bases y reglas específicas; en Educación Media Superior distingue 40, 20 o proporcional según el tiempo de servicio. MiLana separa estos regímenes para no trasladar automáticamente una regla privada a una plaza pública.",
+    "proposito": "Cuánto te toca de aguinaldo 2026 y cuánto te llega después de impuestos.",
+    "interpretacion": "La cifra grande es lo que te llega a la cuenta: el aguinaldo menos el ISR que retiene tu empresa. Si tu recibo dice otra cosa, revisa tres cosas: el sueldo que usaron, los días que te dan y desde qué fecha cuentan.",
+    "significado": "El aguinaldo es un pago extra al año, aparte de tu sueldo. Te toca aunque no hayas trabajado el año completo: en ese caso recibes la parte proporcional a los días que trabajaste. Y si dejas la empresa antes de diciembre, también te lo deben pagar en tu finiquito.",
+    "metodologia": "Tu sueldo mensual entre 30 da tu sueldo diario. Eso por 15 días (o los que te dé tu empresa) es tu aguinaldo de un año completo. Si entraste en 2026, se multiplica por los días que trabajaste entre 365. Los primeros $3,519.30 no pagan impuesto (30 veces la UMA de $117.31). Lo que pasa de esa cantidad se suma a tu sueldo del mes y se calcula el ISR con la tabla mensual del SAT 2026; la diferencia es lo que te retienen.",
+    "supuestos": "Supone un sueldo fijo durante el año, que sigues trabajando hasta el 31 de diciembre y que tu empresa usa el método general de retención. Algunas empresas usan otro método permitido por el Reglamento del ISR (artículo 174) que a veces retiene un poco menos. Si tu sueldo tiene comisiones o bonos, o cambió durante el año, toma el resultado como referencia. Es una estimación: tu recibo de nómina manda.",
+    "fundamento": "Ley Federal del Trabajo, artículo 87: al menos 15 días de salario, pagados antes del 20 de diciembre, y la parte proporcional si no completaste el año. Ley del ISR, artículo 93, fracción XIV: el aguinaldo no paga impuesto hasta 30 días de salario mínimo, que desde 2016 se calculan con la UMA. Ley del ISR, artículo 96, y Anexo 8 de la Resolución Miscelánea Fiscal 2026: tabla mensual para la retención. UMA 2026 publicada por el INEGI: $117.31 diarios. Para gobierno federal (40 días, Ley Federal de los Trabajadores al Servicio del Estado, artículo 42 Bis) y SEP (Manual de Recursos Humanos 2025) usa el enlace «¿Trabajas en gobierno o SEP?».",
     "faq": [
       {
-        "pregunta": "¿Qué cambia si trabajo en SEP o en otra dependencia federal?",
-        "respuesta": "No debes asumir automáticamente el mínimo de 15 días de la LFT. El servicio público federal sujeto a LFTSE parte de al menos 40 días, y SEP tiene reglas y bases específicas según el tipo de plaza. Por eso MiLana pide primero el régimen y, en Educación Media Superior, aplica la regla de tiempo de servicio correspondiente."
+        "pregunta": "¿Cuánto me toca de aguinaldo si gano $10,000 al mes?",
+        "respuesta": "Con 15 días y el año completo, tu aguinaldo es de $5,000 ($10,000 ÷ 30 × 15). De eso, $3,519.30 no pagan impuesto. Escribe tu sueldo arriba para ver el ISR y lo que te llega."
       },
       {
-        "pregunta": "¿Cómo se calcula el aguinaldo si entré durante 2026?",
-        "respuesta": "Depende del régimen seleccionado. En LFT se reconoce la parte proporcional correspondiente al tiempo trabajado. En SEP Educación Media Superior, el Manual 2025 distingue entre seis meses o más, más de tres y menos de seis meses, y hasta tres meses; MiLana aplica esa regla específica cuando eliges ese modo."
+        "pregunta": "¿Cuándo me tienen que pagar el aguinaldo?",
+        "respuesta": "A más tardar el 19 de diciembre: la ley dice que se paga antes del día 20."
       },
       {
-        "pregunta": "¿Por qué mi empresa puede pagar más de lo que muestra una estimación con el mínimo legal?",
-        "respuesta": "Porque el mínimo de la Ley funciona como piso. Un contrato, convenio, contrato colectivo o política laboral puede establecer un número mayor de días de aguinaldo, y esa condición superior modifica el cálculo."
+        "pregunta": "Entré a trabajar este año, ¿me toca aguinaldo?",
+        "respuesta": "Sí. Te toca la parte proporcional a los días que trabajaste en 2026. Elige «Entré en 2026» y pon tu fecha de ingreso."
       },
       {
-        "pregunta": "¿El resultado de MiLana es bruto o exactamente lo que llegará a mi cuenta?",
-        "respuesta": "La estimación laboral de la prestación y el importe efectivamente depositado pueden no ser iguales. En nómina pueden existir efectos fiscales u otros ajustes. Por eso conviene revisar primero el monto de la prestación y después, por separado, cualquier retención aplicable."
+        "pregunta": "¿Por qué me llega menos de lo que dice mi aguinaldo?",
+        "respuesta": "Porque la parte que pasa de $3,519.30 paga ISR y tu empresa lo retiene. La calculadora te muestra ese descuento y lo que te llega."
       },
       {
-        "pregunta": "¿Qué pasa si mi salario cambió durante el año?",
-        "respuesta": "Un cambio salarial puede hacer que una estimación simplificada no coincida exactamente con la metodología utilizada en la nómina real, especialmente si las condiciones de pago no fueron uniformes durante todo el periodo. Revisa qué salario utiliza la calculadora y compáralo con tus recibos."
+        "pregunta": "Mi empresa me da más de 15 días, ¿cómo lo calculo?",
+        "respuesta": "Toca «¿Te dan más de 15 días?» y escribe los días que te da tu contrato. La ley pone 15 como mínimo; tu empresa puede dar más, nunca menos."
       },
       {
-        "pregunta": "¿Bonos y comisiones forman automáticamente parte del salario usado para el aguinaldo?",
-        "respuesta": "No conviene asumirlo automáticamente. La forma de remuneración y las características de cada percepción pueden modificar la base que deba revisarse. Si tu ingreso tiene componentes variables, el resultado de una calculadora basada en un salario fijo debe tratarse como una referencia."
+        "pregunta": "Trabajo en gobierno o en la SEP, ¿esto aplica para mí?",
+        "respuesta": "No del todo: en gobierno federal son al menos 40 días y la SEP tiene reglas propias. Toca «¿Trabajas en gobierno o SEP?» para usar el cálculo de tu caso."
       },
       {
-        "pregunta": "¿Cómo puedo comprobar si el periodo proporcional está bien calculado?",
-        "respuesta": "Verifica la fecha desde la que comenzó a generarse la prestación dentro del periodo correspondiente y la fecha hasta la que se reconoce el servicio. Después confirma que la calculadora esté utilizando los días de aguinaldo que realmente te corresponden."
+        "pregunta": "¿Las comisiones y bonos cuentan para el aguinaldo?",
+        "respuesta": "Depende de cómo te los paguen. La calculadora usa un sueldo fijo; si tu ingreso cambia mucho, toma el resultado como referencia y compáralo con tu recibo."
       },
       {
-        "pregunta": "¿El aguinaldo sustituye otras prestaciones pendientes cuando termina una relación laboral?",
-        "respuesta": "No. El aguinaldo proporcional es un concepto distinto. Vacaciones, prima vacacional, salarios pendientes u otros derechos deben revisarse por separado cuando correspondan."
+        "pregunta": "Me despidieron o renuncié, ¿pierdo el aguinaldo?",
+        "respuesta": "No. Te deben pagar la parte proporcional en tu finiquito, junto con vacaciones y otros pagos pendientes."
       }
     ],
     "siguientes": [
       {
-        "texto": "Consulta el ISR del sueldo mensual ordinario; no calcula el ISR del aguinaldo",
-        "destino": "isr"
-      },
-      {
-        "texto": "Comprueba tus vacaciones y prima vacacional por separado",
-        "destino": "vacaciones"
-      },
-      {
-        "texto": "Si terminó tu relación laboral, revisa los demás conceptos pendientes",
+        "texto": "Calcula tu finiquito si dejaste el trabajo",
         "destino": "finiquito"
+      },
+      {
+        "texto": "Revisa cuántos días de vacaciones te tocan",
+        "destino": "vacaciones"
       }
     ]
   },

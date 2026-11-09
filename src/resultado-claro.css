@@ -43,3 +43,18 @@
 .rc-whatsapp{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;margin-top:10px;border-radius:12px;background:#0b6e3a;color:#fff!important;font-size:16px;font-weight:700;text-decoration:none}
 .rc-actualizado{margin-top:10px!important;font-size:12px;color:var(--ml-slate-600,#475569)}
 @media(min-width:761px){.rc{padding:22px}}
+.cc-casilla{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.4;min-height:44px;padding:4px 0}
+.cc-casilla input{width:22px;height:22px;flex:none;margin-top:1px}
+.cc-panel{display:grid;gap:12px}
+.cc-tabla{width:100%;border-collapse:collapse;font-size:13px}
+.cc-tabla th,.cc-tabla td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--ml-slate-200,#e2e8f0)}
+.cc-tabla th:first-child,.cc-tabla td:first-child{text-align:left}
+.cc-tabla-caja{max-height:300px;overflow:auto;border:1px solid var(--ml-slate-200,#e2e8f0);border-radius:10px;margin-top:8px}
+/* Encabezado de calculadora en celular: solo título y una línea (también en Pensión IMSS, que no carga la capa Órbita). */
+@media(max-width:760px){
+  .ml-panel .calculator-hero nav,.ml-panel .calculator-hero .calculator-hero-icon,.ml-panel .calculator-hero .calculator-hero-media{display:none!important}
+  .ml-panel .calculator-hero{padding:12px 0 6px!important;min-height:0!important}
+  .ml-panel .calculator-hero h1{font-size:28px!important;line-height:1.15!important;margin:0!important}
+  .ml-panel .calculator-hero .calculator-purpose{font-size:15px!important;line-height:1.4!important;margin:4px 0 0!important}
+  .ml-panel .calculator-main{padding-top:4px!important}
+}

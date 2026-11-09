@@ -31,8 +31,11 @@ test('un pago único no puede llegar como ingreso mensual ni al presupuesto', ()
 test('las calculadoras ofrecen el siguiente paso solo con un resultado válido y sin enviar nada sola', () => {
   const app = readFileSync('src/App.jsx', 'utf8');
   const comp = readFileSync('src/resultTransfer.jsx', 'utf8');
-  for (const o of ['aguinaldo', 'finiquito', 'liquidacion']) assert.match(app, new RegExp(`PagoUnicoTransfer origen="/calculadoras/${o}"`));
-  assert.match(app, /ResultTransfer origen="\/calculadoras\/infonavit" importe=\{result\.pagoMensual\}/);
+  // Mejora 2026-11: cada calculadora cierra con UNA sola sugerencia (enlace), que solo aparece con un resultado válido.
+  const directas = readFileSync('src/calculadorasDirectas.jsx', 'utf8') + readFileSync('src/calcAguinaldo.jsx', 'utf8');
+  for (const o of ['aguinaldo', 'finiquito', 'liquidacion', 'infonavit']) assert.match(directas, new RegExp(`\\{r && <ResultadoClaro calculadora="${o}"|calculadora="${o}"`));
+  assert.match(directas, /\{r && <ResultadoClaro/);
+  assert.doesNotMatch(app, /<PagoUnicoTransfer origen=/);
   assert.match(comp, /importe > 0 \? importe\.toFixed\(2\) : null/);
   assert.match(comp, /onClick=\{\(\) => ir\(d\.href\)\}/);
   assert.doesNotMatch(comp, /useEffect|URLSearchParams|localStorage|fetch\(/);

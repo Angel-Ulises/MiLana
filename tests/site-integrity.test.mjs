@@ -186,11 +186,14 @@ test('no quedan mensajes públicos de canal o importes pendientes', () => {
 test('las calculadoras separan LFT, IMSS e ISSSTE antes de aplicar fórmulas de régimen privado', () => {
   const app = read('src/App.jsx');
   const calculos = read('src/lib/calculos-laborales-2026.mjs');
-  for (const id of ['fin-regimen', 'liq-regimen', 'agu-regimen', 'bn-seguridad', 'vac-regimen']) {
-    assert.ok(app.includes(id), `falta selector ${id}`);
-  }
+  // Mejora 2026-11: el caso común (LFT/IMSS) va por defecto; gobierno, SEP e ISSSTE quedan tras un enlace
+  // que abre el modo detallado (aguinaldo, vacaciones, bruto a neto) o detiene la fórmula LFT (finiquito, liquidación).
+  const directas = read('src/calculadorasDirectas.jsx') + read('src/calcAguinaldo.jsx');
+  for (const id of ['agu-regimen', 'bn-seguridad', 'vac-regimen']) assert.ok(app.includes(id), `falta selector ${id}`);
+  assert.equal((directas.match(/¿Trabajas en gobierno o SEP/g) || []).length, 5, 'enlace de gobierno/SEP en las 5 calculadoras laborales');
+  assert.match(directas, /AvisoGobierno onVolver/);
   assert.ok(app.includes('FOVISSSTE'));
-  assert.ok(app.includes('No aplica a una pensión ISSSTE'));
+  assert.ok(directas.includes('No aplica a ISSSTE'));
   assert.ok(calculos.includes("seguridadSocial = 'imss'"));
   assert.ok(calculos.includes('calcularCuotaTrabajadorISSSTE2026'));
   assert.ok(app.includes('calcularAguinaldoSEPEMS2026'));
@@ -206,7 +209,7 @@ test('el editorial no contradice los nuevos alcances público/privado', () => {
   assert.match(contenido.aguinaldo.fundamento, /SEP/);
   assert.match(contenido.vacaciones.metodologia, /prima de 30%/);
   assert.match(contenido.vacaciones.metodologia, /prima de 60%/);
-  assert.match(contenido.ptu.proposito, /únicamente el monto total/);
+  assert.match(contenido.ptu.proposito, /reparte tu empresa/);
   assert.doesNotMatch(contenido.ptu.proposito, /participación individual/i);
   assert.match(casos.aguinaldo.resumen, /empresa privada/);
 });

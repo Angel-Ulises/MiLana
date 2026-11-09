@@ -87,3 +87,14 @@
 .ecosystem-match-link+.ecosystem-advisor-link{margin-top:10px}
 .finance-checklist-next{margin:14px 0 0;font-size:14.5px;line-height:1.6}
 .finance-hub-page .ecosystem-match-link small{color:#4F5D6B!important}
+
+/* Escritorio ancho: el panel de decisión mide 850 px y dejaba vacía la columna derecha.
+   Los accesos a MiLana Match y Mi situación pasan a esa columna; móvil y tablet no cambian. */
+@media(min-width:1100px){
+  .finance-hub-page .ecosystem-hub>.shell{display:grid;grid-template-columns:minmax(0,850px) minmax(260px,1fr);grid-template-rows:1fr auto auto;column-gap:28px;row-gap:10px}
+  .finance-hub-page .ecosystem-hub>.shell>.ml-decision{grid-column:1;grid-row:1/span 2}
+  .finance-hub-page .ecosystem-hub>.shell>.ecosystem-match-link{grid-column:2;grid-row:1;align-self:end;margin-top:0}
+  .finance-hub-page .ecosystem-hub>.shell>.ecosystem-advisor-link:not(.ecosystem-match-link){grid-column:2;grid-row:2;margin-top:0}
+  .finance-hub-page .ecosystem-hub>.shell>.ecosystem-shortcuts{grid-column:1/-1;grid-row:3}
+  .finance-hub-page .ecosystem-hub>.shell>.ecosystem-advisor-link{align-items:flex-start;padding:16px 18px}
+}

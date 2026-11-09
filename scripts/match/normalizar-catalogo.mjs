@@ -4,6 +4,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { CETES_REFERENCE } from '../../src/data/cetes-reference.js';
 
 const RAIZ = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const ORIGEN = resolve(RAIZ, 'data/match/orion-v2');
@@ -62,7 +63,8 @@ const ACRONIMO_UNIDAD = [
 export function humanizar(clave, anidado = false) {
   if (!anidado && ETIQUETAS[clave]) return ETIQUETAS[clave];
   let base = String(clave);
-  for (const [re] of ACRONIMO_UNIDAD) base = base.replace(re, '');
+  // «3_meses» o «1_anio» nombran un plazo, no una unidad: sólo se quita el sufijo de unidad si no empieza con número.
+  if (!/^\d/.test(base)) for (const [re] of ACRONIMO_UNIDAD) base = base.replace(re, '');
   const palabras = base.split('_').filter(Boolean).map((p) => {
     const l = p.toLowerCase();
     if (SIGLAS[l]) return SIGLAS[l];
@@ -153,7 +155,9 @@ export function formatearValor(valor, unidad, clave) {
 }
 
 function unidadHija(unidad) {
-  return ['porcentaje', 'MXN', 'MXN cuando numérico', 'anios', 'UDI'].includes(unidad) ? unidad : null;
+  // Un objeto de porcentajes (p. ej. tasas por plazo) hereda la unidad del campo, no la que sugiera cada clave.
+  if (String(unidad || '').startsWith('porcentaje')) return unidad;
+  return ['MXN', 'MXN cuando numérico', 'anios', 'UDI'].includes(unidad) ? unidad : null;
 }
 
 function lineaObjeto(o, unidad) {
@@ -439,6 +443,43 @@ function enlaceOficial(datos, preferidas) {
 
 function slugDe(id) { return id.toLowerCase().replace(/_/g, '-'); }
 
+// Actualización verificada de la ficha CETES de Match (issue #103).
+// Los JSON de Orion no se tocan (su SHA-256 se valida). Sólo los campos cuya fuente es la misma tabla
+// oficial cetes.html se sustituyen por el snapshot verificado de src/data/cetes-reference.js, con su fecha
+// explícita. Los demás campos conservan su fuente y su fecha de consulta originales.
+const CETES_TABLA = 'https://www.cetesdirecto.com/tablas/valores_gubernamentales/cetes.html';
+const CAMPOS_TABLA_CETES = ['tasa_observada', 'plazo_tabla', 'precio_indicativo', 'otras_tasas_por_plazo'];
+const MESES_TEXTO = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const fechaTexto = (iso) => { const [y, m, d] = iso.split('-').map(Number); return `${d} de ${MESES_TEXTO[m - 1]} de ${y}`; };
+
+export function actualizarCetesTabla(p, ref = CETES_REFERENCE) {
+  if (p.id !== 'cetes_1_mes') return p;
+  const plazo = (dias) => ref.products.find((x) => x.days === dias);
+  const [m1, m3, m6, a1, a2] = [28, 91, 182, 364, 728].map(plazo);
+  if (![m1, m3, m6, a1, a2].every(Boolean) || ref.sourceUrl !== CETES_TABLA) throw new Error('Snapshot CETES incompleto o de otra fuente');
+  const cortePrevio = p.campos.tasa_observada.fuentes[0].fecha_corte;
+  if (!(ref.sourceDate > cortePrevio)) return p; // sólo se aplica una lectura posterior y fechada
+  const texto = `Tabla oficial con fecha ${fechaTexto(ref.sourceDate)} (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión.`;
+  const valores = {
+    tasa_observada: m1.grossAnnualRatePct,
+    plazo_tabla: m1.displayTerm,
+    precio_indicativo: m1.indicativePrice,
+    otras_tasas_por_plazo: { '3_meses': m3.grossAnnualRatePct, '6_meses': m6.grossAnnualRatePct, '1_anio': a1.grossAnnualRatePct, '2_anios': a2.grossAnnualRatePct },
+  };
+  const campos = { ...p.campos };
+  for (const clave of CAMPOS_TABLA_CETES) {
+    const c = campos[clave];
+    if (c.fuentes.length !== 1 || c.fuentes[0].url !== CETES_TABLA) throw new Error(`Campo CETES con otra fuente: ${clave}`);
+    campos[clave] = { ...c, valor: valores[clave], fuentes: [{ ...c.fuentes[0], consulta_iso: ref.checkedAt, fecha_corte: ref.sourceDate, verificacion: ref.verification, vigencia: { desde: null, hasta: null, texto } }] };
+  }
+  return {
+    ...p,
+    campos,
+    advertencias: [`Tasas y precio de la tabla oficial del ${fechaTexto(ref.sourceDate)}; no es tasa garantizada para una operación posterior.`, ...p.advertencias.slice(1)],
+    actualizacion: { campos: CAMPOS_TABLA_CETES, fechaTabla: ref.sourceDate, revisado: ref.checkedAt, fechaSubasta: ref.auctionDate, corteAnterior: cortePrevio, verificacion: ref.verification },
+  };
+}
+
 export function normalizar() {
   const indice = leer('indice-catalogo-acumulativo.json');
   const base = leer('credito/base-v1/catalogo_credito.json');
@@ -485,7 +526,8 @@ export function normalizar() {
     });
   }
 
-  for (const p of ahorro.productos) {
+  for (const original of ahorro.productos) {
+    const p = actualizarCetesTabla(original);
     const datos = datosAhorro(p.campos);
     const fProducto = (p.producto.fuentes || []).map(fuenteAhorro);
     productos.push({
@@ -495,6 +537,7 @@ export function normalizar() {
       datos, discrepancias: [], historial: [], alertas: p.advertencias || [], conflictoCat: false,
       enlaceOficial: fProducto[0]?.url || enlaceOficial(datos, []),
       motivoExclusion: null, decisionEditorial: null,
+      ...(p.actualizacion ? { actualizacion: p.actualizacion } : {}),
     });
   }
 

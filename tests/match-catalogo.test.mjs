@@ -147,3 +147,39 @@ test('Rutas: Match tiene vista propia dentro de Finanzas y no carga extras ajeno
   assert.equal(extras.investmentEntry, false);
   assert.equal(extras.savedStateContext, false);
 });
+
+test('cetes_1_mes usa el snapshot CETES verificado sólo en los campos de la tabla oficial, con fecha explícita', async () => {
+  const { CETES_REFERENCE } = await import('../src/data/cetes-reference.js');
+  const p = producto('cetes_1_mes');
+  const tabla = ['tasa_observada', 'plazo_tabla', 'precio_indicativo', 'otras_tasas_por_plazo'];
+  const m = (dias) => CETES_REFERENCE.products.find((x) => x.days === dias);
+  assert.equal(datoDe(p, 'tasa_observada').numero, m(28).grossAnnualRatePct);
+  assert.equal(datoDe(p, 'precio_indicativo').valor, '$9.94 MXN por título');
+  assert.deepEqual(datoDe(p, 'otras_tasas_por_plazo').valor, [`3 meses: ${m(91).grossAnnualRatePct} % anual bruto`, `6 meses: ${m(182).grossAnnualRatePct} % anual bruto`, `1 año: ${m(364).grossAnnualRatePct} % anual bruto`, `2 años: ${m(728).grossAnnualRatePct} % anual bruto`]);
+  for (const clave of tabla) {
+    const ev = datoDe(p, clave).fuentes;
+    assert.equal(ev.length, 1, clave);
+    assert.equal(catalogo.fuentes[ev[0].f].url, CETES_REFERENCE.sourceUrl, clave);
+    assert.equal(ev[0].corte, CETES_REFERENCE.sourceDate, `${clave}: fecha de la tabla explícita`);
+    assert.equal(ev[0].consulta, CETES_REFERENCE.checkedAt, clave);
+    assert.match(ev[0].vigenciaTexto, /no es fecha de subasta/, clave);
+  }
+  // Los campos de otras páginas oficiales conservan su consulta original: no se mezclan cortes.
+  for (const d of p.datos.filter((x) => !tabla.includes(x.clave))) assert.ok(d.fuentes.every((f) => f.consulta === '2026-10-12' && !f.corte), d.clave);
+  assert.equal(p.actualizacion.fechaSubasta, null);
+  assert.equal(p.actualizacion.corteAnterior, '2026-10-12');
+  assert.match(p.alertas[0], /6 de noviembre de 2026/);
+  assert.ok(!p.alertas.some((a) => /12 octubre/.test(a)), 'sin advertencia con la fecha vieja');
+});
+
+test('la actualización CETES no se aplica con un snapshot anterior o incompleto', async () => {
+  const { actualizarCetesTabla } = await import('../scripts/match/normalizar-catalogo.mjs');
+  const { CETES_REFERENCE } = await import('../src/data/cetes-reference.js');
+  const crudo = JSON.parse(readFileSync('data/match/orion-v2/ahorro-inversion/catalogo-acumulativo.json', 'utf8')).productos.find((p) => p.id === 'cetes_1_mes');
+  assert.equal(actualizarCetesTabla(crudo, { ...CETES_REFERENCE, sourceDate: '2026-10-01' }), crudo, 'una tabla anterior al corte de Orion no lo sustituye');
+  assert.throws(() => actualizarCetesTabla(crudo, { ...CETES_REFERENCE, products: CETES_REFERENCE.products.slice(1) }), /incompleto/);
+});
+
+test('tasas por plazo y ponderaciones conservan la unidad de porcentaje del campo', () => {
+  assert.deepEqual(datoDe(producto('afore_sura_sb9094'), 'metodologia_irn').valor, ['10 años peso: 50 %', '5 años peso: 30 %', '3 años peso: 20 %']);
+});

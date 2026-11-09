@@ -5,6 +5,8 @@ html.ml-orbita-enabled[data-orbita-section="inicio"] .hero{
   padding:clamp(38px,5vw,68px) 0 28px!important;
   overflow:visible!important;
 }
+/* En escritorio el hero ya tiene su relleno: la rejilla heredada sumaba otros 68 px arriba y una altura mínima vacía. */
+@media(min-width:901px){html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid{padding-top:0!important;padding-bottom:0!important;min-height:0!important}}
 html.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid{
   width:min(1180px,calc(100% - 40px))!important;
   margin-inline:auto!important;

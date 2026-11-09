@@ -8755,8 +8755,8 @@
      "clave": "tasa_observada",
      "etiqueta": "Tasa observada",
      "grupo": "indicadores",
-     "valor": "6.09 % anual bruto",
-     "numero": 6.09,
+     "valor": "6.5 % anual bruto",
+     "numero": 6.5,
      "estado": {
       "codigo": "instantanea_fechada",
       "tipo": "verificado",
@@ -8766,9 +8766,9 @@
      "fuentes": [
       {
        "f": 182,
-       "consulta": "2026-10-12",
-       "corte": "2026-10-12",
-       "vigenciaTexto": "Instantánea del 12 octubre 2026; no es cotización futura ni promesa de reinversión"
+       "consulta": "2026-11-06",
+       "corte": "2026-11-06",
+       "vigenciaTexto": "Tabla oficial con fecha 6 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
       }
      ]
     },
@@ -8785,9 +8785,9 @@
      "fuentes": [
       {
        "f": 182,
-       "consulta": "2026-10-12",
-       "corte": "2026-10-12",
-       "vigenciaTexto": "Instantánea del 12 octubre 2026; no es cotización futura ni promesa de reinversión"
+       "consulta": "2026-11-06",
+       "corte": "2026-11-06",
+       "vigenciaTexto": "Tabla oficial con fecha 6 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
       }
      ]
     },
@@ -8795,8 +8795,8 @@
      "clave": "precio_indicativo",
      "etiqueta": "Precio indicativo",
      "grupo": "indicadores",
-     "valor": "$9.95 MXN por título",
-     "numero": 9.95,
+     "valor": "$9.94 MXN por título",
+     "numero": 9.94,
      "estado": {
       "codigo": "observado",
       "tipo": "observado",
@@ -8806,9 +8806,9 @@
      "fuentes": [
       {
        "f": 182,
-       "consulta": "2026-10-12",
-       "corte": "2026-10-12",
-       "vigenciaTexto": "Instantánea del 12 octubre 2026; no es cotización futura ni promesa de reinversión"
+       "consulta": "2026-11-06",
+       "corte": "2026-11-06",
+       "vigenciaTexto": "Tabla oficial con fecha 6 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
       }
      ]
     },
@@ -8836,10 +8836,10 @@
      "etiqueta": "Tasas de otros plazos",
      "grupo": "indicadores",
      "valor": [
-      "3: 7 meses",
-      "6: 7 meses",
-      "1 año: 7.44",
-      "2: 8 años"
+      "3 meses: 6.69 % anual bruto",
+      "6 meses: 6.72 % anual bruto",
+      "1 año: 7.12 % anual bruto",
+      "2 años: 7.85 % anual bruto"
      ],
      "estado": {
       "codigo": "instantanea_fechada",
@@ -8850,9 +8850,9 @@
      "fuentes": [
       {
        "f": 182,
-       "consulta": "2026-10-12",
-       "corte": "2026-10-12",
-       "vigenciaTexto": "Instantánea del 12 octubre 2026; no es cotización futura ni promesa de reinversión"
+       "consulta": "2026-11-06",
+       "corte": "2026-11-06",
+       "vigenciaTexto": "Tabla oficial con fecha 6 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
       }
      ]
     },
@@ -8976,13 +8976,26 @@
    "discrepancias": [],
    "historial": [],
    "alertas": [
-    "Instantánea al 12 octubre, no tasa garantizada para una operación posterior.",
+    "Tasas y precio de la tabla oficial del 6 de noviembre de 2026; no es tasa garantizada para una operación posterior.",
     "No simular reinversión por un año a la misma tasa sin supuesto explícito."
    ],
    "conflictoCat": false,
    "enlaceOficial": "https://www.cetesdirecto.com/sites/portal/productos.cetesdirecto",
    "motivoExclusion": null,
    "decisionEditorial": null,
+   "actualizacion": {
+    "campos": [
+     "tasa_observada",
+     "plazo_tabla",
+     "precio_indicativo",
+     "otras_tasas_por_plazo"
+    ],
+    "fechaTabla": "2026-11-06",
+    "revisado": "2026-11-06",
+    "fechaSubasta": null,
+    "corteAnterior": "2026-10-12",
+    "verificacion": "Lectura automática de la tabla oficial en GitHub Actions (workflow cetes-reference-watch, corrida 42285034850)."
+   },
    "estadoUso": "Ficha informativa; usar exclusivamente campos habilitados y respetar retenciones, ND y escenarios",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "valores",
@@ -11128,9 +11141,9 @@
      "etiqueta": "Ponderación del IRN",
      "grupo": "indicadores",
      "valor": [
-      "10 años peso: 50",
-      "5 años peso: 30",
-      "3 años peso: 20"
+      "10 años peso: 50 %",
+      "5 años peso: 30 %",
+      "3 años peso: 20 %"
      ],
      "estado": {
       "codigo": "observado",
@@ -11402,9 +11415,9 @@
      "etiqueta": "Ponderación del IRN",
      "grupo": "indicadores",
      "valor": [
-      "10 años peso: 50",
-      "5 años peso: 30",
-      "3 años peso: 20"
+      "10 años peso: 50 %",
+      "5 años peso: 30 %",
+      "3 años peso: 20 %"
      ],
      "estado": {
       "codigo": "observado",
@@ -11676,9 +11689,9 @@
      "etiqueta": "Ponderación del IRN",
      "grupo": "indicadores",
      "valor": [
-      "10 años peso: 50",
-      "5 años peso: 30",
-      "3 años peso: 20"
+      "10 años peso: 50 %",
+      "5 años peso: 30 %",
+      "3 años peso: 20 %"
      ],
      "estado": {
       "codigo": "observado",
@@ -11950,9 +11963,9 @@
      "etiqueta": "Ponderación del IRN",
      "grupo": "indicadores",
      "valor": [
-      "10 años peso: 50",
-      "5 años peso: 30",
-      "3 años peso: 20"
+      "10 años peso: 50 %",
+      "5 años peso: 30 %",
+      "3 años peso: 20 %"
      ],
      "estado": {
       "codigo": "observado",
@@ -12224,9 +12237,9 @@
      "etiqueta": "Ponderación del IRN",
      "grupo": "indicadores",
      "valor": [
-      "10 años peso: 50",
-      "5 años peso: 30",
-      "3 años peso: 20"
+      "10 años peso: 50 %",
+      "5 años peso: 30 %",
+      "3 años peso: 20 %"
      ],
      "estado": {
       "codigo": "observado",
@@ -12498,9 +12511,9 @@
      "etiqueta": "Ponderación del IRN",
      "grupo": "indicadores",
      "valor": [
-      "10 años peso: 50",
-      "5 años peso: 30",
-      "3 años peso: 20"
+      "10 años peso: 50 %",
+      "5 años peso: 30 %",
+      "3 años peso: 20 %"
      ],
      "estado": {
       "codigo": "observado",
@@ -12772,9 +12785,9 @@
      "etiqueta": "Ponderación del IRN",
      "grupo": "indicadores",
      "valor": [
-      "10 años peso: 50",
-      "5 años peso: 30",
-      "3 años peso: 20"
+      "10 años peso: 50 %",
+      "5 años peso: 30 %",
+      "3 años peso: 20 %"
      ],
      "estado": {
       "codigo": "observado",
@@ -13046,9 +13059,9 @@
      "etiqueta": "Ponderación del IRN",
      "grupo": "indicadores",
      "valor": [
-      "10 años peso: 50",
-      "5 años peso: 30",
-      "3 años peso: 20"
+      "10 años peso: 50 %",
+      "5 años peso: 30 %",
+      "3 años peso: 20 %"
      ],
      "estado": {
       "codigo": "observado",
@@ -13320,9 +13333,9 @@
      "etiqueta": "Ponderación del IRN",
      "grupo": "indicadores",
      "valor": [
-      "10 años peso: 50",
-      "5 años peso: 30",
-      "3 años peso: 20"
+      "10 años peso: 50 %",
+      "5 años peso: 30 %",
+      "3 años peso: 20 %"
      ],
      "estado": {
       "codigo": "observado",
@@ -13594,9 +13607,9 @@
      "etiqueta": "Ponderación del IRN",
      "grupo": "indicadores",
      "valor": [
-      "10 años peso: 50",
-      "5 años peso: 30",
-      "3 años peso: 20"
+      "10 años peso: 50 %",
+      "5 años peso: 30 %",
+      "3 años peso: 20 %"
      ],
      "estado": {
       "codigo": "observado",

@@ -56,3 +56,12 @@
   .finance-start-link{width:max-content;max-width:100%;margin-top:11px;padding:10px 14px}
 }
 @media(prefers-reduced-motion:reduce){.finance-start-link{transition:none}}
+
+@media(min-width:901px){
+  /* Escritorio: la rejilla de 620 px y la foto vertical de ~600 px empujaban el primer campo hasta ~850 px.
+     Mismo criterio compacto que el hub de Finanzas; identidad, textos y foto se conservan. */
+  .finance-pages .finance-page-hero:not(.finance-hub-page .finance-page-hero) .finance-page-hero-grid{min-height:0;padding:clamp(34px,3.4vw,48px) 0 clamp(30px,3vw,42px);gap:clamp(32px,4vw,56px)}
+  .finance-pages .finance-page-hero:not(.finance-hub-page .finance-page-hero) .finance-page-photo{max-height:320px;aspect-ratio:3/2;border-radius:24px 24px 64px 24px}
+  .finance-pages .finance-page-hero-tool .finance-page-hero-copy h1{font-size:clamp(40px,3.6vw,56px);margin:8px 0 14px}
+  .finance-pages .finance-tool-section{padding-top:clamp(36px,3.4vw,52px)}
+}

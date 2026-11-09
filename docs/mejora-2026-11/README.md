@@ -1,6 +1,6 @@
 # Mejora de MiLana — noviembre 2026
 
-Rama: `claude/inspiring-einstein-kix4fx` (vista previa de Cloudflare Pages). Nada está publicado en producción.
+Rama: `claude/inspiring-einstein-kix4fx`. Vista previa: https://claude-inspiring-einstein-ki.milana.pages.dev (se actualiza con cada cambio de la rama). Nada está publicado en producción.
 
 | Documento | Qué contiene |
 |---|---|

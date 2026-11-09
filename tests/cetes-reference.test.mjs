@@ -12,15 +12,15 @@ const sitemap = readFileSync('scripts/generar-sitemap-final.mjs','utf8');
 const workflow = readFileSync('.github/workflows/cetes-reference-watch.yml','utf8');
 
 test('snapshot CETES conserva fecha, fuente y cinco plazos oficiales verificados', () => {
-  assert.equal(CETES_REFERENCE.sourceDate, '2026-10-06');
-  assert.equal(CETES_REFERENCE.checkedAt, '2026-10-06');
+  assert.equal(CETES_REFERENCE.sourceDate, '2026-11-06');
+  assert.equal(CETES_REFERENCE.checkedAt, '2026-11-06');
   assert.equal(CETES_REFERENCE.products.length, 5);
   assert.deepEqual(CETES_REFERENCE.products.map((p) => [p.days, p.indicativePrice, p.grossAnnualRatePct]), [
-    [28, 9.95, 6.01],
-    [91, 9.83, 6.73],
-    [182, 9.65, 7.01],
-    [364, 9.32, 7.44],
-    [728, 8.68, 8.01],
+    [28, 9.94, 6.5],
+    [91, 9.83, 6.69],
+    [182, 9.68, 6.72],
+    [364, 9.35, 7.12],
+    [728, 8.68, 7.85],
   ]);
   assert.equal(CETES_REFERENCE.sourceUrl, 'https://www.cetesdirecto.com/tablas/valores_gubernamentales/cetes.html');
   assert.equal(CETES_REFERENCE.nominalValueMx, 10);

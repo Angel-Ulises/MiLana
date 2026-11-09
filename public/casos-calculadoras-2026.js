@@ -69,6 +69,8 @@
     const match = location.pathname.match(/^\/calculadoras\/([^/]+)\/?$/);
     if (!match) return;
     const slug = match[1];
+    // Mejora 2026-11: mientras se ve la calculadora prerenderizada (con su caso estático), no insertar otro.
+    if (document.querySelector('main[data-startup-calc]')) return;
     const main = document.querySelector('.calculator-main');
     const form = main?.querySelector('form');
     if (!main || !form) return;

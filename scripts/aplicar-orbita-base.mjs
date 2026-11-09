@@ -22,7 +22,7 @@ const STATIC_TOP_ROUTES = new Set([
   '/aprende/cat-y-gat-que-comparan',
   '/aprende/mensualidad-y-costo-del-credito',
   '/aprende/leer-fuentes-comparador-financiero',
-  '/sobre', '/contacto', '/metodo', '/privacidad', '/financiamiento',
+  '/sobre', '/contacto', '/metodo', '/privacidad', '/terminos', '/financiamiento',
 ]);
 const nav = NAVEGACION_MILANA;
 
@@ -68,7 +68,7 @@ const iconSearch = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" 
 const iconMenu = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>';
 const boot = `<script data-orbita-boot>(function(){var q=new URLSearchParams(location.search);var r=document.documentElement;if(q.get('embed')==='1'){r.classList.add('ml-orbita-embed');return}var p=location.pathname.replace(/\\\/$/,'')||'/';r.classList.add('ml-orbita-enabled');var s=p.indexOf('/calculadoras')===0?'calculadoras':p.indexOf('/carreras')===0?'carreras':p.indexOf('/estados')===0?'estados':p.indexOf('/finanzas')===0?'finanzas':p.indexOf('/invertir')===0?'invertir':p.indexOf('/economia')===0?'economia':p.indexOf('/aprende')===0?'aprende':'inicio';r.dataset.orbitaSection=s;try{if(localStorage.getItem('ml-orbita-easy')==='1')r.classList.add('ml-orbita-easy')}catch(e){}})();</script>`;
 const embedGuard = `<style data-orbita-embed-guard>html.ml-orbita-embed .ml-orbita-shell,html.ml-orbita-embed .ml-orbita-drawer,html.ml-orbita-embed .ml-orbita-search,html.ml-orbita-embed .ml-orbita-skip-link,html.ml-orbita-embed [data-orbita-static-reserve],html.ml-orbita-embed [data-orbita-ad-reserve]{display:none!important}</style>`;
-const baseHead = `${boot}${embedGuard}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=optional" rel="stylesheet"><link rel="stylesheet" href="/orbita-v3-base.css">`;
+const baseHead = `${boot}${embedGuard}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=optional" rel="stylesheet" media="print" onload="this.media=\'all\'"><noscript><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=optional" rel="stylesheet"></noscript><link rel="stylesheet" href="/orbita-v3-base.css">`;
 const runtimeBlocking = '<link rel="stylesheet" href="/orbita-v3-runtime.css" data-orbita-runtime-bundle>';
 // Probado: cargar el runtime sin bloquear en páginas estáticas baja el primer pintado de 1.4 s a 0.56 s, pero el CLS sube hasta 0.39
 // (/aprende/finiquito-vs-liquidacion). Se queda bloqueante hasta reducir el runtime o inlinear su CSS crítico.

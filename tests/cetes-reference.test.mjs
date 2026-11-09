@@ -14,6 +14,8 @@ const workflow = readFileSync('.github/workflows/cetes-reference-watch.yml','utf
 test('snapshot CETES conserva fecha, fuente y cinco plazos oficiales verificados', () => {
   assert.equal(CETES_REFERENCE.sourceDate, '2026-11-06');
   assert.equal(CETES_REFERENCE.checkedAt, '2026-11-06');
+  assert.equal(CETES_REFERENCE.auctionDate, null, 'la fecha de subasta no se infiere de la fecha de la tabla');
+  assert.match(page, /Fecha de subasta/);
   assert.equal(CETES_REFERENCE.products.length, 5);
   assert.deepEqual(CETES_REFERENCE.products.map((p) => [p.days, p.indicativePrice, p.grossAnnualRatePct]), [
     [28, 9.94, 6.5],

@@ -2,8 +2,12 @@
 // (GitHub Actions, corrida 42285034850, 2026-11-06 20:03 UTC; issue #103). Tasas idénticas a las
 // lecturas del 4 y 5 de noviembre. La fecha es la que encabeza la tabla oficial; no es fecha de subasta.
 export const CETES_REFERENCE = {
+  // checkedAt: fecha de la lectura oficial verificada. sourceDate: fecha que encabeza la tabla oficial.
+  // auctionDate: la tabla leída no publica fecha de subasta; queda en null en lugar de inferirla.
   checkedAt: '2026-11-06',
   sourceDate: '2026-11-06',
+  auctionDate: null,
+  verification: 'Lectura automática de la tabla oficial en GitHub Actions (workflow cetes-reference-watch, corrida 42285034850).',
   sourceLabel: 'cetesdirecto — Valores gubernamentales / CETES',
   sourceUrl: 'https://www.cetesdirecto.com/tablas/valores_gubernamentales/cetes.html',
   institution: 'Nacional Financiera, S.N.C. / cetesdirecto',

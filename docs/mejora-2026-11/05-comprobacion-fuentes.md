@@ -1,4 +1,4 @@
-# Comprobación contra fuentes oficiales — 11 de noviembre de 2026
+# Comprobación contra fuentes oficiales — 10 de noviembre de 2026
 
 > Comprobación técnica hecha por MiLana en la rama `claude/inspiring-einstein-kix4fx`. **No es una validación de contador ni de abogado.** No se cambió ninguna regla fiscal de la calculadora; las propuestas de abajo esperan decisión.
 

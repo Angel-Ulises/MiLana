@@ -19,7 +19,7 @@ const conMinimo = calcular(minimoMensual, true).r;
 
 console.log(`# Hoja de verificación — Sueldo bruto a neto 2026 (IMSS)
 
-> **Estado:** comprobación técnica hecha por MiLana contra los textos oficiales vigentes (actualizada el 11 de noviembre de 2026). **No es una validación de contador.** Motor: \`calcularBrutoNeto2026\` (sin cambios) con el SBC estimado (\`sbcEstimado\`). Los renglones «Revisado por» siguen vacíos.
+> **Estado:** comprobación técnica hecha por MiLana contra los textos oficiales vigentes (actualizada el 10 de noviembre de 2026). **No es una validación de contador.** Motor: \`calcularBrutoNeto2026\` (sin cambios) con el SBC estimado (\`sbcEstimado\`). Los renglones «Revisado por» siguen vacíos.
 
 ## Qué hace el modo rápido
 

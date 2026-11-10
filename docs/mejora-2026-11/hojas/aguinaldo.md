@@ -1,6 +1,6 @@
 # Hoja de verificación — Aguinaldo neto 2026 (empresa privada)
 
-> **Estado:** comprobación técnica hecha por MiLana contra los textos oficiales vigentes (actualizada el 11 de noviembre de 2026). **No es una validación de contador.** Las cifras se generan con el motor del sitio (`calcularAguinaldoNeto` en `src/lib/calculos-revisados.mjs`); los renglones «Revisado por» siguen vacíos.
+> **Estado:** comprobación técnica hecha por MiLana contra los textos oficiales vigentes (actualizada el 10 de noviembre de 2026). **No es una validación de contador.** Las cifras se generan con el motor del sitio (`calcularAguinaldoNeto` en `src/lib/calculos-revisados.mjs`); los renglones «Revisado por» siguen vacíos.
 
 ## Fórmula que usa la calculadora
 

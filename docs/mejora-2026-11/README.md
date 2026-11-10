@@ -7,7 +7,8 @@ Rama: `claude/inspiring-einstein-kix4fx`. Vista previa: https://claude-inspiring
 | `00-auditoria.md` | Fase 0: mapa del sitio, rendimiento en celular, qué ve Google, los 10 problemas más graves y la verificación de valores oficiales. |
 | `hojas/aguinaldo.md` | Hoja de verificación del aguinaldo neto (3 casos paso a paso) para el contador. |
 | `hojas/bruto-neto.md` | Hoja de verificación de sueldo bruto a neto con el salario base de cotización (SBC) estimado (3 casos). |
-| `04-poda-propuesta.md` | Fase 4: recomendación para cada una de las 157 URLs. **No se ejecutó nada.** |
+| `04-poda-propuesta.md` + `04-poda-urls.csv` | Fase 4: propuesta conservadora (58 de 158 URLs fuera del índice) con la lista exacta. **No se aplicó nada.** |
+| `05-comprobacion-fuentes.md` | Comprobación contra fuentes oficiales vigentes y diagnóstico de las 3 discrepancias (salario mínimo, art. 96 frente a art. 174, SBC estimado). **No es una validación de contador.** |
 
 ## Antes y después (celular emulado: Moto G4, CPU 4× más lenta, 4G lenta; emulador local, no el sitio en vivo)
 
@@ -32,9 +33,9 @@ Nunca se envían importes, fechas ni lo que escribe la persona. En producción l
 
 ## Pendiente de tu aprobación o de revisión humana
 
-1. **Contador:** revisar `hojas/aguinaldo.md` y `hojas/bruto-neto.md`. Puntos a decidir: el método de retención del aguinaldo (art. 96 contra el art. 174 del Reglamento), el caso de quien gana el salario mínimo y el factor de integración mínimo para estimar el SBC.
+1. **Contador (pendiente; nada validado):** revisar `hojas/aguinaldo.md`, `hojas/bruto-neto.md` y `05-comprobacion-fuentes.md`. Hay que decidir: el método de retención del aguinaldo (art. 96 o art. 174 RLISR, y la base del 174), la base sin aguinaldo para quien gana el mínimo, la exención en UMA o en salario mínimo, el factor de integración del SBC y cómo preguntar si la persona gana el mínimo. La detección automática por monto quedó descartada.
 2. **Aviso de privacidad:** el art. 15 fr. I de la LFPDPPP pide la identidad y el domicilio del responsable. Falta tu nombre o razón social y tu domicilio; no los inventé.
 3. **Fase 4:** aprobar, cambiar o rechazar la propuesta por URL antes de aplicar cualquier `noindex` o redirección.
-4. **GA4 (en el panel de Google):** registrar `modo`, `calculadora` y `destino` como dimensiones personalizadas y, tras publicar, confirmar los eventos en «Tiempo real».
+4. **GA4:** las dimensiones `calculadora`, `modo` y `destino` se revisan por separado; no están registradas por esta rama.
 5. **Pendiente técnico, sin hacer:** el JavaScript y el CSS comunes (unos 150 KB de JS y 240 KB de CSS por página) siguen siendo grandes. Reducirlos es una tarea aparte.
 6. **AdSense:** no se volvió a solicitar la revisión.

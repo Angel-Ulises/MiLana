@@ -44,7 +44,22 @@ test('bruto a neto con SBC estimado coincide con la hoja de verificación', () =
   assert.equal(sbc, 699.54);
   const r = calcularBrutoNeto2026({ brutoMensual: '20000', ingresoGravableISR: '20000', seguridadSocial: 'imss', sbcDiario: String(sbc), diasCotizados: '30', soloMinimo: false, periodo: '2026-11' });
   cerca(r.retenido, 2383.65, 'ISR'); cerca(r.cuotaObrera, 540.14, 'IMSS'); cerca(r.netoDespuesISRSeguridadSocial, 17076.21, 'neto');
-  assert.match(readFileSync('docs/mejora-2026-11/hojas/bruto-neto.md', 'utf8'), /\$17,076\.21/);
+  const hoja = readFileSync('docs/mejora-2026-11/hojas/bruto-neto.md', 'utf8');
+  assert.match(hoja, /\$17,076\.21/);
+  assert.match(hoja, /No es una validación de contador/);
+});
+
+test('diagnóstico salario mínimo en bruto a neto: el motor ya aplica LISR 96 y LSS 36 solo con la casilla marcada', () => {
+  // Documenta el comportamiento actual, sin cambiarlo: la detección automática por monto quedó descartada.
+  const base = { brutoMensual: '9451.20', ingresoGravableISR: '9451.20', seguridadSocial: 'imss', sbcDiario: String(sbcEstimado('9451.20')), diasCotizados: '30', periodo: '2026-11' };
+  const sinCasilla = calcularBrutoNeto2026({ ...base, soloMinimo: false });
+  const conCasilla = calcularBrutoNeto2026({ ...base, soloMinimo: true });
+  cerca(sinCasilla.retenido, 133.66, 'ISR sin casilla'); cerca(sinCasilla.cuotaObrera, 235.54, 'IMSS sin casilla'); cerca(sinCasilla.netoDespuesISRSeguridadSocial, 9082.00, 'neto sin casilla');
+  assert.equal(conCasilla.retenido, 0); assert.equal(conCasilla.cuotaObrera, 0); cerca(conCasilla.netoDespuesISRSeguridadSocial, 9451.20, 'neto con casilla');
+  const hoja = readFileSync('docs/mejora-2026-11/hojas/bruto-neto.md', 'utf8');
+  for (const cifra of ['$9,082.00', '$9,451.20']) assert.ok(hoja.includes(cifra), cifra);
+  const jsx = readFileSync('src/calculadorasDirectas.jsx', 'utf8');
+  assert.doesNotMatch(jsx, /ganaSalarioMinimoGeneral/, 'sin detección automática por monto hasta tener validación');
 });
 
 test('las 10 calculadoras usan el resultado común con WhatsApp, siguiente paso y evento GA4', () => {

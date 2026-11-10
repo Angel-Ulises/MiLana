@@ -34,6 +34,18 @@ Para revisión de un contador antes de publicar. Generada con el motor del sitio
 
 **Decisión que necesita confirmar el contador:** se usa el método general del art. 96. El Reglamento del ISR (art. 174) permite a la empresa otro procedimiento opcional que suele retener menos; la página lo menciona y no lo calcula.
 
+**Comparación con el art. 174 del Reglamento del ISR** (texto vigente, última reforma DOF 06-05-2016): divide la parte gravada entre 365, multiplica por 30.4, la suma al sueldo del mes, obtiene la diferencia de ISR, saca una tasa y la aplica a la parte gravada. Con la tabla 2026 y tomando el impuesto causado, los resultados son:
+
+| Caso | Art. 96 (el que usa la calculadora) | Art. 174 (opcional) |
+|---|---|---|
+| 1 — $12,000 | $366.29 | $269.90 (tasa 10.88%) |
+| 2 — $9,577.22 | $138.10 | $138.10 |
+| 3 — $30,000 desde julio | $863.44 | $863.44 |
+
+Solo hay diferencia cuando el aguinaldo hace brincar el ingreso del mes a un tramo más alto de la tabla (caso 1). Por eso la página dice «tu empresa puede usar otro método que a veces retiene un poco menos».
+
+**Revisión de actualizaciones (10 nov 2026):** LFT, última reforma DOF 14-05-2026. Las reformas de 2026 son la reducción gradual de la jornada (DOF 01-05-2026: 48 h en 2026 hasta 40 h en 2030), certificación agroexportadora y artistas intérpretes. Ninguna toca los artículos 76, 80, 84, 87, 89, 162 ni el 50, que usan las calculadoras. La Ley del ISR sigue en su reforma DOF 01-04-2024 y la Ley del Seguro Social en DOF 15-01-2026, sin cambios en los artículos usados. Las NIF (CINIF) son normas contables para los estados financieros de las empresas; la NIF D-3 trata cómo la empresa registra la PTU y la prima de antigüedad, no cuánto recibe ni cuánto se retiene a la persona trabajadora, así que no cambia ningún cálculo.
+
 **Segundo punto a confirmar (caso 2):** el art. 96 dice que no se retiene a quien en el mes *solo* gana el salario mínimo. En diciembre esa persona recibe además el aguinaldo, así que el motor calcula la diferencia entre el mes con y sin aguinaldo usando la tarifa y el subsidio normales. Si el contador considera que la base sin aguinaldo debe ser 0, el ISR del caso 2 sería la retención completa del mes con aguinaldo ($285.47), no $138.10.
 `);
 for (const [titulo, entrada] of casos) {

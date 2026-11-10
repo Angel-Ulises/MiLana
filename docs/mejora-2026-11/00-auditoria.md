@@ -68,3 +68,14 @@ En todas las calculadoras la persona ve primero texto y tarda unos 2.6 s en tene
 | Aguinaldo: mínimo 15 días, pagar antes del 20 de diciembre, proporcional si no completas el año | LFT art. 87, Cámara de Diputados | Coincide |
 | Exención del aguinaldo: 30 días de salario mínimo, leídos como 30 UMA = $3,519.30 | LISR art. 93 **fracción XIV** (última reforma DOF 01-04-2024) + CPEUM, transitorio Tercero de la reforma DOF 27-01-2016 (desindexación) | Coincide. El registro interno decía «fracción XIII»; en el texto vigente es la **XIV** |
 | Salario mínimo 2026: $315.04 general, $440.87 frontera norte | CONASAMI (gob.mx) | Coincide |
+
+## Revisión de actualizaciones (10 nov 2026)
+
+| Norma | Versión vigente | ¿Afecta a las calculadoras? |
+|---|---|---|
+| Ley Federal del Trabajo | Última reforma DOF 14-05-2026 | No. Las reformas de 2026 son jornada (DOF 01-05-2026, 48 h en 2026 bajando a 40 h en 2030; horas extra de 9 a 12), certificación agroexportadora y artistas. Los artículos 50, 76, 80, 84, 87, 89 y 162 no cambiaron. |
+| Ley del ISR | Última reforma DOF 01-04-2024 | No. |
+| Reglamento de la Ley del ISR | Última reforma DOF 06-05-2016 | No. El art. 174 (método opcional para el aguinaldo) está documentado en la hoja del contador. |
+| Ley del Seguro Social | Última reforma DOF 15-01-2026 | No; las cuotas obreras usadas siguen iguales. |
+| Ley Federal de Protección de Datos Personales en Posesión de los Particulares | Última reforma DOF 14-11-2025 | Sí, para el aviso de privacidad: art. 15 (contenido mínimo). La autoridad ahora es la Secretaría Anticorrupción y Buen Gobierno. |
+| NIF (CINIF) | Mejoras a las NIF 2026 | No. Son normas contables de las empresas (la NIF D-3 cubre cómo registran PTU y prima de antigüedad); no regulan lo que recibe o se retiene a la persona trabajadora. |

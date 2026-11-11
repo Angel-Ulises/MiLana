@@ -8755,8 +8755,8 @@
      "clave": "tasa_observada",
      "etiqueta": "Tasa observada",
      "grupo": "indicadores",
-     "valor": "6.5 % anual bruto",
-     "numero": 6.5,
+     "valor": "6.2 % anual bruto",
+     "numero": 6.2,
      "estado": {
       "codigo": "instantanea_fechada",
       "tipo": "verificado",
@@ -8766,9 +8766,9 @@
      "fuentes": [
       {
        "f": 182,
-       "consulta": "2026-11-06",
-       "corte": "2026-11-06",
-       "vigenciaTexto": "Tabla oficial con fecha 6 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
+       "consulta": "2026-11-11",
+       "corte": "2026-11-11",
+       "vigenciaTexto": "Tabla oficial con fecha 11 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
       }
      ]
     },
@@ -8785,9 +8785,9 @@
      "fuentes": [
       {
        "f": 182,
-       "consulta": "2026-11-06",
-       "corte": "2026-11-06",
-       "vigenciaTexto": "Tabla oficial con fecha 6 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
+       "consulta": "2026-11-11",
+       "corte": "2026-11-11",
+       "vigenciaTexto": "Tabla oficial con fecha 11 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
       }
      ]
     },
@@ -8795,8 +8795,8 @@
      "clave": "precio_indicativo",
      "etiqueta": "Precio indicativo",
      "grupo": "indicadores",
-     "valor": "$9.94 MXN por título",
-     "numero": 9.94,
+     "valor": "$9.95 MXN por título",
+     "numero": 9.95,
      "estado": {
       "codigo": "observado",
       "tipo": "observado",
@@ -8806,9 +8806,9 @@
      "fuentes": [
       {
        "f": 182,
-       "consulta": "2026-11-06",
-       "corte": "2026-11-06",
-       "vigenciaTexto": "Tabla oficial con fecha 6 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
+       "consulta": "2026-11-11",
+       "corte": "2026-11-11",
+       "vigenciaTexto": "Tabla oficial con fecha 11 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
       }
      ]
     },
@@ -8836,9 +8836,9 @@
      "etiqueta": "Tasas de otros plazos",
      "grupo": "indicadores",
      "valor": [
-      "3 meses: 6.69 % anual bruto",
-      "6 meses: 6.72 % anual bruto",
-      "1 año: 7.12 % anual bruto",
+      "3 meses: 6.47 % anual bruto",
+      "6 meses: 6.61 % anual bruto",
+      "1 año: 6.95 % anual bruto",
       "2 años: 7.85 % anual bruto"
      ],
      "estado": {
@@ -8850,9 +8850,9 @@
      "fuentes": [
       {
        "f": 182,
-       "consulta": "2026-11-06",
-       "corte": "2026-11-06",
-       "vigenciaTexto": "Tabla oficial con fecha 6 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
+       "consulta": "2026-11-11",
+       "corte": "2026-11-11",
+       "vigenciaTexto": "Tabla oficial con fecha 11 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
       }
      ]
     },
@@ -8976,7 +8976,7 @@
    "discrepancias": [],
    "historial": [],
    "alertas": [
-    "Tasas y precio de la tabla oficial del 6 de noviembre de 2026; no es tasa garantizada para una operación posterior.",
+    "Tasas y precio de la tabla oficial del 11 de noviembre de 2026; no es tasa garantizada para una operación posterior.",
     "No simular reinversión por un año a la misma tasa sin supuesto explícito."
    ],
    "conflictoCat": false,
@@ -8990,11 +8990,11 @@
      "precio_indicativo",
      "otras_tasas_por_plazo"
     ],
-    "fechaTabla": "2026-11-06",
-    "revisado": "2026-11-06",
+    "fechaTabla": "2026-11-11",
+    "revisado": "2026-11-11",
     "fechaSubasta": null,
     "corteAnterior": "2026-10-12",
-    "verificacion": "Lectura automática de la tabla oficial en GitHub Actions (workflow cetes-reference-watch, corrida 42285034850)."
+    "verificacion": "Lectura delegada del 2026-11-11: tabla oficial leída en navegador por Orion (equipo de MiLana) y corroborada con lector web; evidencia en data/cetes/lecturas/2026-11-11.json."
    },
    "estadoUso": "Ficha informativa; usar exclusivamente campos habilitados y respetar retenciones, ND y escenarios",
    "ofertaIndividualVerificada": false,

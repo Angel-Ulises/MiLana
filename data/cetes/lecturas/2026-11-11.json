@@ -1,0 +1,22 @@
+{
+  "fuente": "https://www.cetesdirecto.com/tablas/valores_gubernamentales/cetes.html",
+  "encabezado": "CETES 11 Noviembre 2026",
+  "fechaTabla": "2026-11-11",
+  "fechaLectura": "2026-11-11",
+  "fechaSubasta": null,
+  "notaFechaSubasta": "La tabla oficial no publica fecha de subasta; no se infiere.",
+  "procedencia": "Lectura delegada: leída directamente en navegador por Orion (equipo de MiLana) el 2026-11-11 y corroborada con lector web. La sesión que preparó el cambio no pudo abrir la URL (el proxy de su entorno la bloquea) y no hizo lectura propia.",
+  "autorizacion": "Ángel pidió implementar la corrección de CETES (11-11-2026).",
+  "plazos": [
+    { "plazo": "1 mes", "dias": 28, "precio": 9.95, "tasa": 6.20 },
+    { "plazo": "3 meses", "dias": 91, "precio": 9.83, "tasa": 6.47 },
+    { "plazo": "6 meses", "dias": 182, "precio": 9.67, "tasa": 6.61 },
+    { "plazo": "1 año", "dias": 364, "precio": 9.34, "tasa": 6.95 },
+    { "plazo": "2 años", "dias": 728, "precio": 8.68, "tasa": 7.85 }
+  ],
+  "corteAnteriorEnProduccion": { "fechaTabla": "2026-11-06", "tasas": [6.50, 6.69, 6.72, 7.12, 7.85], "precios": [9.94, 9.83, 9.68, 9.35, 8.68] },
+  "notas": [
+    "No se usa el corte del 10 de noviembre que mencionaba otra nota: la tabla oficial ya muestra el 11 de noviembre.",
+    "Los valores 6 de octubre / 6.01 % del issue #103 vienen del snapshot de la rama main, que va atrasada respecto a producción (claude/cloudflare-pages); no se copian."
+  ]
+}

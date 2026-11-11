@@ -14,4 +14,4 @@ Los JSON de `orion-v2/` no se editan. Una corrección posterior se aplica en el 
   - Fechas: el corte es la fecha del encabezado de la tabla, la consulta es la fecha de la lectura verificada y la fecha de subasta queda en `null`, porque la tabla no la publica.
   - Valor nominal, mínimo, comisiones, requisitos y riesgo vienen de otras páginas y conservan su consulta del 12-10-2026.
   - El reemplazo sólo ocurre si la tabla es posterior al corte de Orion, cubre los cinco plazos y tiene la misma URL de fuente. En otro caso, el build falla o deja el dato original.
-  - Límite: no hay lectura propia de esta sesión. Es la lectura de GitHub Actions citada en `cetes-reference.js`.
+  - Procedencia del corte vigente: tabla «CETES 11 Noviembre 2026», leída el 11-11-2026 por Orion en navegador y corroborada con lector web. Es una lectura delegada: la sesión que preparó el cambio no abrió la URL. Evidencia en `data/cetes/lecturas/2026-11-11.json`.

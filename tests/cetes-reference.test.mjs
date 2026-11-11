@@ -12,16 +12,17 @@ const sitemap = readFileSync('scripts/generar-sitemap-final.mjs','utf8');
 const workflow = readFileSync('.github/workflows/cetes-reference-watch.yml','utf8');
 
 test('snapshot CETES conserva fecha, fuente y cinco plazos oficiales verificados', () => {
-  assert.equal(CETES_REFERENCE.sourceDate, '2026-11-06');
-  assert.equal(CETES_REFERENCE.checkedAt, '2026-11-06');
+  assert.equal(CETES_REFERENCE.sourceDate, '2026-11-11');
+  assert.equal(CETES_REFERENCE.checkedAt, '2026-11-11');
+  assert.match(CETES_REFERENCE.verification, /Lectura delegada/);
   assert.equal(CETES_REFERENCE.auctionDate, null, 'la fecha de subasta no se infiere de la fecha de la tabla');
   assert.match(page, /Fecha de subasta/);
   assert.equal(CETES_REFERENCE.products.length, 5);
   assert.deepEqual(CETES_REFERENCE.products.map((p) => [p.days, p.indicativePrice, p.grossAnnualRatePct]), [
-    [28, 9.94, 6.5],
-    [91, 9.83, 6.69],
-    [182, 9.68, 6.72],
-    [364, 9.35, 7.12],
+    [28, 9.95, 6.2],
+    [91, 9.83, 6.47],
+    [182, 9.67, 6.61],
+    [364, 9.34, 6.95],
     [728, 8.68, 7.85],
   ]);
   assert.equal(CETES_REFERENCE.sourceUrl, 'https://www.cetesdirecto.com/tablas/valores_gubernamentales/cetes.html');
@@ -77,3 +78,15 @@ test('watcher de frescura no puede escribir contenido ni publicar tasas', () => 
   assert.doesNotMatch(workflow, /git\s+push|createPullRequest|pull-requests:\s*write/i);
   assert.match(workflow, /No actualizar automáticamente/i);
 });
+
+test('la evidencia de la lectura del 11-11-2026 coincide con el snapshot y no inventa fecha de subasta', () => {
+  const ev = JSON.parse(readFileSync('data/cetes/lecturas/2026-11-11.json', 'utf8'));
+  assert.equal(ev.fuente, CETES_REFERENCE.sourceUrl);
+  assert.equal(ev.encabezado, 'CETES 11 Noviembre 2026');
+  assert.equal(ev.fechaTabla, CETES_REFERENCE.sourceDate);
+  assert.equal(ev.fechaLectura, CETES_REFERENCE.checkedAt);
+  assert.equal(ev.fechaSubasta, null);
+  assert.match(ev.procedencia, /Lectura delegada/);
+  assert.deepEqual(ev.plazos.map((x) => [x.dias, x.precio, x.tasa]), CETES_REFERENCE.products.map((p) => [p.days, p.indicativePrice, p.grossAnnualRatePct]));
+});
+

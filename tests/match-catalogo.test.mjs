@@ -154,7 +154,7 @@ test('cetes_1_mes usa el snapshot CETES verificado sólo en los campos de la tab
   const tabla = ['tasa_observada', 'plazo_tabla', 'precio_indicativo', 'otras_tasas_por_plazo'];
   const m = (dias) => CETES_REFERENCE.products.find((x) => x.days === dias);
   assert.equal(datoDe(p, 'tasa_observada').numero, m(28).grossAnnualRatePct);
-  assert.equal(datoDe(p, 'precio_indicativo').valor, '$9.94 MXN por título');
+  assert.equal(datoDe(p, 'precio_indicativo').valor, '$9.95 MXN por título');
   assert.deepEqual(datoDe(p, 'otras_tasas_por_plazo').valor, [`3 meses: ${m(91).grossAnnualRatePct} % anual bruto`, `6 meses: ${m(182).grossAnnualRatePct} % anual bruto`, `1 año: ${m(364).grossAnnualRatePct} % anual bruto`, `2 años: ${m(728).grossAnnualRatePct} % anual bruto`]);
   for (const clave of tabla) {
     const ev = datoDe(p, clave).fuentes;
@@ -168,7 +168,7 @@ test('cetes_1_mes usa el snapshot CETES verificado sólo en los campos de la tab
   for (const d of p.datos.filter((x) => !tabla.includes(x.clave))) assert.ok(d.fuentes.every((f) => f.consulta === '2026-10-12' && !f.corte), d.clave);
   assert.equal(p.actualizacion.fechaSubasta, null);
   assert.equal(p.actualizacion.corteAnterior, '2026-10-12');
-  assert.match(p.alertas[0], /6 de noviembre de 2026/);
+  assert.match(p.alertas[0], /11 de noviembre de 2026/);
   assert.ok(!p.alertas.some((a) => /12 octubre/.test(a)), 'sin advertencia con la fecha vieja');
 });
 

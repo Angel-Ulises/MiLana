@@ -81,7 +81,9 @@ export default function CalcAguinaldo({ modoGobierno: ModoGobierno }) {
             monto={fmtMx(r.neto)}
             linea={r.isr > 0
               ? `Tu aguinaldo es de ${fmtMx(r.bruto)}. Tu empresa retiene unos ${fmtMx(r.isr)} de ISR.`
-              : `Tu aguinaldo es de ${fmtMx(r.bruto)} y no paga ISR: está debajo del límite exento de ${fmtMx(EXENCION_AGUINALDO_2026)}.`}
+              : r.gravado === 0
+                ? `Tu aguinaldo es de ${fmtMx(r.bruto)} y no paga ISR: no supera el límite exento de ${fmtMx(EXENCION_AGUINALDO_2026)}.`
+                : `Tu aguinaldo es de ${fmtMx(r.bruto)}. La retención estimada es cero con este método y subsidio; la parte gravada es ${fmtMx(r.gravado)}.`}
             secundarios={[
               ['Aguinaldo (bruto)', fmtMx(r.bruto)],
               ['ISR estimado', r.isr > 0 ? `− ${fmtMx(r.isr)}` : fmtMx(0)],
@@ -91,7 +93,7 @@ export default function CalcAguinaldo({ modoGobierno: ModoGobierno }) {
               <li>Sueldo diario: {fmtMx(r.sueldo)} ÷ 30 = {fmtMx(r.salarioDiario)}.</li>
               <li>Aguinaldo: {fmtMx(r.salarioDiario)} × {r.diasPrestacion} días{r.diasPeriodo < 365 ? ` × ${r.diasPeriodo} de 365 días trabajados en 2026` : ''} = <strong>{fmtMx(r.bruto)}</strong>.</li>
               <li>Parte sin impuesto (30 UMA = 30 × $117.31): {fmtMx(r.exento)}.</li>
-              <li>Parte que paga impuesto: {fmtMx(r.gravado)}.</li>
+              <li>Parte gravada: {fmtMx(r.gravado)}.</li>
               {r.gravado > 0 && <li>ISR: se suma esa parte a tu sueldo del mes y se calcula la diferencia con la tabla mensual del SAT 2026
                 ({fmtMx(r.isrSueldoMasAguinaldo.retenido)} − {fmtMx(r.isrSueldo.retenido)}) = <strong>{fmtMx(r.isr)}</strong>.</li>}
               <li>Te llega: {fmtMx(r.bruto)} − {fmtMx(r.isr)} = <strong>{fmtMx(r.neto)}</strong>.</li>

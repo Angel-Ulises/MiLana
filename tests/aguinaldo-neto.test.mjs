@@ -54,3 +54,12 @@ test('las calculadoras ya no montan el asistente «una pregunta a la vez»', () 
   assert.match(js, /const CALCULADORA_DIRECTA = true;/);
   assert.match(js, /if \(CALCULADORA_DIRECTA \|\| PENSION_PATH\.test\(location\.pathname\)\)/);
 });
+
+
+test('ISR cero no significa que todo el aguinaldo esté exento', () => {
+  const r = calcularAguinaldoNeto({ sueldoMensual: '7500' });
+  cerca(r.bruto, 3750, 'bruto'); cerca(r.gravado, 230.70, 'parte gravada'); cerca(r.isr, 0, 'retención');
+  const jsx = readFileSync('src/calcAguinaldo.jsx', 'utf8');
+  assert.match(jsx, /r\.gravado === 0/);
+  assert.match(jsx, /La retención estimada es cero/);
+});

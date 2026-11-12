@@ -17,12 +17,14 @@ export async function startHomeWhenReady({ root, load, mount, reload = () => loc
     // subárboles, nunca esta imagen interna, así que el intercambio es seguro.
     const heroPrevia = root.querySelector('.hero-media picture');
     const active = root.ownerDocument.activeElement;
+    const routeHref = active?.closest?.('.orb-home-route')?.getAttribute?.('href');
     const focusSelector = active?.closest?.('.orb-home-extra') ? '.orb-home-extra summary'
       : active?.closest?.('.orb-home-search') ? '.orb-home-search' : null;
     mount(page.default, () => {
       const details = root.querySelector('.orb-home-extra');
       if (details && extraOpen !== undefined) details.open = extraOpen;
       if (focusSelector) root.querySelector(focusSelector)?.focus({ preventScroll: true });
+      if (routeHref) [...(root.querySelectorAll?.('.orb-home-route') || [])].find(link => link.getAttribute('href') === routeHref)?.focus({ preventScroll: true });
       // Se mueve el <picture> completo: mover solo el <img> a otro <picture> obliga a recargarlo.
       const heroNueva = root.querySelector('.hero-media picture');
       const imgPrevia = heroPrevia?.querySelector('img');

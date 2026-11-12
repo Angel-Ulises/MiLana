@@ -121,11 +121,12 @@ try {
             assert.equal(result.before.titleVisible,true);
             assert.equal(result.before.static,true);
             assert.equal(result.before.loading,false);
-            assert.equal(result.before.routeCount,6);
+            assert.equal(result.before.routeCount,11);
             assert.equal(result.before.overflow,false);
-            await evaluate("document.querySelector('.orb-home-extra summary').click()");
-            assert.equal(await evaluate("document.querySelector('.orb-home-extra').open"),true,'Desplegable nativo usable sin App');
-            // Mantener abierta hasta que monte React: debe conservarse.
+            assert.equal(await evaluate("!!document.querySelector('.orb-home-extra')"),false,'Las once opciones no dependen de un desplegable');
+            await evaluate("document.querySelector('.orb-home-route').focus()");
+            result.focusHref = await evaluate("document.activeElement.getAttribute('href')");
+            assert.ok(result.focusHref.startsWith('/calculadoras/'),'Enlace real utilizable sin App');
           }
         })().catch(e=>{ earlyError=e; }).finally(()=>release());
       },
@@ -153,7 +154,8 @@ try {
           assert.equal(result.after.monitor.blankAfterTitle,false,'El título no puede desaparecer tras el primer pintado');
         }
         if(result.before && !testCase.legacy) {
-          assert.equal(await evaluate("document.querySelector('.orb-home-extra').open"),true,'Conservar la apertura hecha antes de React');
+          assert.equal(result.after.routeCount,11);
+          assert.equal(await evaluate("document.activeElement.getAttribute('href')"),result.focusHref,'Conservar foco de la opción elegida antes de React');
           assert.ok(Math.abs(result.before.titleTop-result.after.titleTop)<=2,'El H1 no debe saltar al montar React');
           assert.ok(Math.abs(result.before.linkTop-result.after.linkTop)<=2,'Las opciones no deben saltar al montar React');
         }

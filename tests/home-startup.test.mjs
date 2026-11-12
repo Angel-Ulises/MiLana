@@ -51,7 +51,7 @@ test('App fallido conserva enlaces, informa y recarga una sola vez al pulsar Rei
   assert.equal(root.children.length, 1, 'No duplicar el aviso');
 });
 
-test('El hero estático sale de App y contiene título, las tres rutas y el desplegable nativo', async () => {
+test('El hero estático sale de App y contiene título y las once rutas sin desplegable', async () => {
   const html = await prerenderHomeHero();
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   assert.match(html, /Calcula cuánta/);
@@ -82,4 +82,13 @@ test('Al montar React conserva el desplegable y el foco usados durante la descar
   await startHomeWhenReady({ root, load: async () => ({ default: () => null }), mount: (_page, ready) => { current = live; ready(); } });
   assert.equal(live.open, true);
   assert.equal(focused, true);
+});
+
+
+test('Al montar conserva el foco en el enlace de situación elegido antes de React', async () => {
+  const root = fixture(); let focused = false;
+  root.ownerDocument.activeElement = { closest: selector => selector === '.orb-home-route' ? { getAttribute: () => '/calculadoras/aguinaldo' } : null };
+  root.querySelectorAll = () => [{ getAttribute: () => '/calculadoras/aguinaldo', focus: () => { focused = true; } }];
+  await startHomeWhenReady({ root, load: async () => ({default: () => null}), mount: (_page, ready) => ready() });
+  assert.equal(focused,true);
 });

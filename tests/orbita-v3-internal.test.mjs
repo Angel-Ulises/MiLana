@@ -99,7 +99,8 @@ test('intro repetido se oculta y el hero móvil conserva la foto sin salto', () 
   assert.match(prepaint, /\.calculator-purpose\{[^}]*-webkit-line-clamp:2/);
   assert.match(prepaint, /\.orb-purpose-ready[^\n]*\.calculator-purpose\{[^}]*-webkit-line-clamp:unset!important/);
   assert.match(prepaint, /body:has\(\.calculator-hero\) \.calc-intro\{display:none!important\}/);
-  assert.match(prepaint, /\.calculator-main::before\{[^}]*height:131px/);
+  // Mejora 2026-11: sin asistente paso a paso, ya no se reserva su altura (formulario completo a la vista).
+  assert.doesNotMatch(prepaint, /\.calculator-main::before\{[^}]*height:131px/);
 });
 
 test('casos duplicados se eliminan por data-case-slug y no separan el flujo', () => {

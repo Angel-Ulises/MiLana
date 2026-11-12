@@ -41,14 +41,16 @@ test('calculadoras conservan la foto, ocultan intro repetido y vuelven al paso q
   assert.match(prepaint,/\.calculator-hero-media\{display:block!important[^}]*height:220px!important/);
   assert.match(prepaint,/\.calculator-purpose\{[^}]*-webkit-line-clamp:2/);
   assert.match(prepaint,/\.orb-purpose-ready[^\n]*\.calculator-purpose\{[^}]*-webkit-line-clamp:unset!important/);
-  assert.match(prepaint,/\.calculator-main::before\{[^}]*height:131px/);
+  // Mejora 2026-11: sin asistente paso a paso, ya no se reserva su altura (formulario completo a la vista).
+  assert.doesNotMatch(prepaint,/\.calculator-main::before\{[^}]*height:131px/);
 });
 
 test('Palabras claras queda después de búsqueda en Inicio y después del formulario en calculadoras',()=>{
   assert.match(glossary,/const search = main\.querySelector\('\.orb-home-search'\)/);
   assert.match(glossary,/const anchor = search \|\| routes/);
   assert.match(glossary,/root\.dataset\.orbitaSection === 'calculadoras'/);
-  assert.match(glossary,/form\.insertAdjacentElement\('afterend', strip\)/);
+  // Con la calculadora directa el glosario va después del resultado.
+  assert.match(glossary,/\(form\.closest\('\[data-calc-directo\]'\) \|\| form\)\.insertAdjacentElement\('afterend', strip\)/);
 });
 
 test('Economía deduplica por valor y fuente con etiquetas legibles',()=>{

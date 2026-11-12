@@ -18,13 +18,19 @@
     return `<svg ${common}>${paths[name] || paths.wallet}</svg>`;
   };
 
+  // Mejora 2026-11: misma lista que src/homeRoutes.jsx (respaldo si React no llega a montar la portada).
   const options = [
-    { label: 'Me despidieron', href: '/calculadoras/liquidacion', icon: 'exit', tone: 'blue' },
-    { label: 'Renuncié', href: '/calculadoras/finiquito', icon: 'work', tone: 'blue' },
     { label: 'Voy a cobrar aguinaldo', href: '/calculadoras/aguinaldo', icon: 'gift', tone: 'coral' },
-    { label: 'Quiero ahorrar', href: '/finanzas/ahorro', icon: 'wallet', tone: 'green' },
-    { label: 'Estoy eligiendo carrera', href: '/carreras', icon: 'cap', tone: 'violet' },
-    { label: 'Pienso mudarme de estado', href: '/estados/comparar', icon: 'map', tone: 'teal' }
+    { label: 'Me despidieron', href: '/calculadoras/liquidacion', icon: 'exit', tone: 'blue' },
+    { label: 'Renuncié o terminó mi trabajo', href: '/calculadoras/finiquito', icon: 'work', tone: 'blue' },
+    { label: '¿Cuánto me llega de sueldo?', href: '/calculadoras/bruto-a-neto', icon: 'wallet', tone: 'green' },
+    { label: '¿Cuánto ISR me quitan?', href: '/calculadoras/isr', icon: 'wallet', tone: 'green' },
+    { label: 'Me van a dar vacaciones', href: '/calculadoras/vacaciones', icon: 'map', tone: 'teal' },
+    { label: 'Me van a pagar utilidades (PTU)', href: '/calculadoras/ptu', icon: 'gift', tone: 'coral' },
+    { label: 'Trabajo por mi cuenta (RESICO)', href: '/calculadoras/resico', icon: 'work', tone: 'violet' },
+    { label: 'Voy a sacar un crédito Infonavit', href: '/calculadoras/infonavit', icon: 'map', tone: 'teal' },
+    { label: '¿Ya me puedo pensionar?', href: '/calculadoras/pension-imss', icon: 'cap', tone: 'violet' },
+    { label: 'Quiero ahorrar', href: '/finanzas/ahorro', icon: 'wallet', tone: 'green' }
   ];
 
   const readRoute = () => {
@@ -54,25 +60,16 @@
     block.appendChild(title);
 
     const main = document.createElement('div');
-    main.className = 'orb-home-route-grid';
-    const more = document.createElement('details');
-    more.className = 'orb-home-extra';
-    const summary = document.createElement('summary');
-    summary.innerHTML = 'Ver otras 3 situaciones <span aria-hidden="true">+</span>';
-    const moreGrid = document.createElement('div');
-    moreGrid.className = 'orb-home-extra-grid';
-    const important = new Set(['Me despidieron', 'Quiero ahorrar', 'Estoy eligiendo carrera']);
-
+    main.className = 'orb-home-route-grid orb-home-route-grid-todas';
     for (const option of options) {
       const a = document.createElement('a');
       a.className = `orb-home-route orb-tone-${option.tone}`;
       a.href = option.href;
       a.innerHTML = `<span class="orb-home-route-icon">${svgIcon(option.icon)}</span><span>${option.label}</span><b aria-hidden="true">›</b>`;
       a.addEventListener('click', () => rememberRoute(option));
-      (important.has(option.label) ? main : moreGrid).appendChild(a);
+      main.appendChild(a);
     }
-    more.append(summary, moreGrid);
-    block.append(main, more);
+    block.append(main);
 
     const search = document.createElement('button');
     search.type = 'button';

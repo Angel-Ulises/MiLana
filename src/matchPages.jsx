@@ -437,7 +437,7 @@ function Metodologia({ hoy }) {
           <thead><tr><th scope="col">Categoría</th><th scope="col">Fichas</th><th scope="col">Instituciones</th><th scope="col">Indicador propio</th></tr></thead>
           <tbody>{cob.porCategoria.map((c) => <tr key={c.id}><th scope="row"><a href={rutaCategoria(c)}>{c.nombre}</a></th><td>{c.total}</td><td>{c.entidades}</td><td>{MATCH_CATEGORIAS[c.id].metrica || 'Sin indicador único'}</td></tr>)}</tbody>
         </table></div>
-        <p>Las Afores cubren las diez administradoras de la tabla de CONSAR para la Siefore Básica 90–94 con corte de {fechaLegible(catalogo.consar.corte)}. No cubren otras generaciones.</p>
+        <p>Las Afores cubren las diez administradoras de la tabla de CONSAR para la Siefore Básica 90–94: rendimiento neto (IRN) con corte de {fechaLegible(catalogo.consar.corte)}{catalogo.consar.corteComisiones && catalogo.consar.corteComisiones !== catalogo.consar.corte ? <> y comisiones con corte de {fechaLegible(catalogo.consar.corteComisiones)}</> : null}. No cubren otras generaciones.</p>
         <h2>De dónde salen los datos</h2>
         <p>Consultamos páginas oficiales, tarifarios, contratos, prospectos y fuentes de autoridades. En cada dato puedes abrir la fuente y ver su fecha de cálculo, emisión o corte cuando se publica, además de la fecha en que la consultamos. La fecha de consulta no extiende una promoción ni sustituye la vigencia del documento. Cuando la fuente sólo publica un mes, como el corte de CONSAR, mostramos el mes y no inventamos un día.</p>
         <h2>Qué significa cada indicador</h2>

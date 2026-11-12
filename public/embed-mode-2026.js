@@ -27,7 +27,8 @@
     const bar = document.createElement('div');
     bar.className = 'ml-embed-brand';
     bar.innerHTML = `<span><strong>MiLana</strong> · calculadora gratuita</span><a href="${location.origin}${fullPath}" target="_blank" rel="noopener noreferrer">Abrir completa ↗</a>`;
-    main.insertBefore(bar, form);
+    const ancla = form.closest('[data-calc-directo]') || form;
+    ancla.parentNode.insertBefore(bar, ancla);
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'widget_view', { calculator_id: slug, page_path: location.pathname });
     }

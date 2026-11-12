@@ -2,9 +2,9 @@ name: CI — pruebas y build del repositorio
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, claude/cloudflare-pages]
   push:
-    branches: [main]
+    branches: [main, claude/cloudflare-pages]
 
 concurrency:
   group: repo-ci-${{ github.workflow }}-${{ github.ref }}

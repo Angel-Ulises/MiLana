@@ -12,14 +12,28 @@ const ICONOS = {
   map: 'm4 6 5-2 6 2 5-2v14l-5 2-6-2-5 2zM9 4v14m6-12v14'
 };
 
+// Mejora 2026-11: un solo objetivo en Inicio, llegar a la calculadora en un toque.
+// Todas las situaciones visibles; la de temporada va primero (ver ordenarPorTemporada).
 const RUTAS = [
+  { label: 'Voy a cobrar aguinaldo', href: '/calculadoras/aguinaldo', icon: 'gift', tone: 'coral', meses: [10, 11, 12] },
   { label: 'Me despidieron', href: '/calculadoras/liquidacion', icon: 'exit', tone: 'blue' },
-  { label: 'Renuncié', href: '/calculadoras/finiquito', icon: 'work', tone: 'blue' },
-  { label: 'Voy a cobrar aguinaldo', href: '/calculadoras/aguinaldo', icon: 'gift', tone: 'coral' },
+  { label: 'Renuncié o terminó mi trabajo', href: '/calculadoras/finiquito', icon: 'work', tone: 'blue' },
+  { label: '¿Cuánto me llega de sueldo?', href: '/calculadoras/bruto-a-neto', icon: 'wallet', tone: 'green' },
+  { label: '¿Cuánto ISR me quitan?', href: '/calculadoras/isr', icon: 'wallet', tone: 'green' },
+  { label: 'Me van a dar vacaciones', href: '/calculadoras/vacaciones', icon: 'map', tone: 'teal', meses: [6, 7] },
+  { label: 'Me van a pagar utilidades (PTU)', href: '/calculadoras/ptu', icon: 'gift', tone: 'coral', meses: [4, 5, 6] },
+  { label: 'Trabajo por mi cuenta (RESICO)', href: '/calculadoras/resico', icon: 'work', tone: 'violet' },
+  { label: 'Voy a sacar un crédito Infonavit', href: '/calculadoras/infonavit', icon: 'map', tone: 'teal' },
+  { label: '¿Ya me puedo pensionar?', href: '/calculadoras/pension-imss', icon: 'cap', tone: 'violet' },
   { label: 'Quiero ahorrar', href: '/finanzas/ahorro', icon: 'wallet', tone: 'green' },
-  { label: 'Estoy eligiendo carrera', href: '/carreras', icon: 'cap', tone: 'violet' },
-  { label: 'Pienso mudarme de estado', href: '/estados/comparar', icon: 'map', tone: 'teal' }
 ];
+
+// La situación de temporada sube al primer lugar: aguinaldo en oct–dic, PTU en abr–jun, vacaciones en verano.
+export function ordenarPorTemporada(rutas, fecha = new Date()) {
+  const mes = fecha.getMonth() + 1;
+  const deTemporada = rutas.filter((r) => r.meses?.includes(mes));
+  return [...deTemporada, ...rutas.filter((r) => !deTemporada.includes(r))];
+}
 
 const DURACION_RUTA = 14 * 24 * 60 * 60 * 1000;
 
@@ -46,17 +60,11 @@ function descartarRuta() {
   try { localStorage.removeItem('ml-orbita-route'); } catch { /* sin almacenamiento */ }
 }
 
-// El primer pantallazo cubre tres necesidades distintas. Las demás rutas
-// permanecen como enlaces normales, disponibles en un desplegable nativo.
-const RUTAS_INICIO = ['Me despidieron', 'Quiero ahorrar', 'Estoy eligiendo carrera'];
-const rutasPrincipales = RUTAS.filter((r) => RUTAS_INICIO.includes(r.label));
-const rutasAdicionales = RUTAS.filter((r) => !RUTAS_INICIO.includes(r.label));
-
-function EnlaceSituacion({ ruta }) {
+function EnlaceSituacion({ ruta, temporada = false }) {
   return (
-    <a className={`orb-home-route orb-tone-${ruta.tone}`} href={ruta.href} onClick={() => recordarRuta(ruta)}>
+    <a className={`orb-home-route orb-tone-${ruta.tone}${temporada ? ' orb-home-route-temporada' : ''}`} href={ruta.href} onClick={() => recordarRuta(ruta)}>
       <span className="orb-home-route-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={ICONOS[ruta.icon]} /></svg></span>
-      <span>{ruta.label}</span>
+      <span>{ruta.label}{temporada && <small className="orb-home-route-badge">Temporada</small>}</span>
       <b aria-hidden="true">›</b>
     </a>
   );
@@ -66,15 +74,9 @@ export function HomeRoutes() {
   return (
     <section className="orb-home-routes" id="orb-home-routes" aria-labelledby="orb-home-routes-title">
       <h2 id="orb-home-routes-title">¿Qué estás viviendo?</h2>
-      <div className="orb-home-route-grid">
-        {rutasPrincipales.map((ruta) => <EnlaceSituacion key={ruta.href} ruta={ruta} />)}
+      <div className="orb-home-route-grid orb-home-route-grid-todas">
+        {ordenarPorTemporada(RUTAS).map((ruta, i) => <EnlaceSituacion key={ruta.href} ruta={ruta} temporada={i === 0 && Boolean(ruta.meses)} />)}
       </div>
-      <details className="orb-home-extra">
-        <summary>Ver otras 3 situaciones <span aria-hidden="true">+</span></summary>
-        <div className="orb-home-extra-grid">
-          {rutasAdicionales.map((ruta) => <EnlaceSituacion key={ruta.href} ruta={ruta} />)}
-        </div>
-      </details>
       <button type="button" className="orb-home-search" onClick={() => document.querySelector('[data-orbita-search-open]')?.click()}>
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
         <span>¿Ya sabes qué buscas? <strong>Busca una calculadora</strong></span>

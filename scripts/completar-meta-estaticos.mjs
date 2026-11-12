@@ -9,6 +9,7 @@ const rutas = [
   ['metodo', 'Método editorial'],
   ['contacto', 'Contacto'],
   ['privacidad', 'Privacidad'],
+  ['terminos', 'Términos de uso'],
   ['financiamiento', 'Cómo se financia MiLana'],
   ['widgets', 'Widgets'],
 ];

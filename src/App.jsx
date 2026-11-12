@@ -12,20 +12,10 @@ import catalogoSituaciones from "./data/situaciones.json";
 import catalogoFotos from "./data/fotos.json";
 import AdReserve from './AdReserve.jsx';
 import { HomeRoutes, SituationCard } from './homeRoutes.jsx';
-import { HERO_FOCAL, HERO_PEXELS_ID, HERO_SIZES, heroSrcSet, heroUrl } from './lib/heroPhoto.js';
 import NetIncomeTransferActions from './netIncomeTransferActions.jsx';
-import ResultTransfer from './resultTransfer.jsx';
+import CalcAguinaldoDirecta from './calcAguinaldo.jsx';
+import { CalcFiniquitoDirecta, CalcLiquidacionDirecta, CalcISRDirecta, CalcBrutoNetoDirecta, CalcRESICODirecta, CalcPTUDirecta, CalcVacacionesDirecta, CalcInfonavitDirecta, CalcPensionDirecta } from './calculadorasDirectas.jsx';
 
-// Pagos únicos: el resultado puede volverse respaldo o avance de una meta.
-const DESTINOS_PAGO_UNICO = [
-  { href: '/finanzas/fondo-emergencia', campo: 'fondoActual', titulo: 'Empezar mi fondo de emergencia' },
-  { href: '/finanzas/ahorro', campo: 'ahorroMetaActual', titulo: 'Avanzar una meta de ahorro' },
-];
-function PagoUnicoTransfer({ origen, importe }) {
-  return <ResultTransfer origen={origen} importe={importe} destinos={DESTINOS_PAGO_UNICO}
-    titulo="¿Qué harás con este dinero?"
-    texto="Una parte puede convertirse en tu respaldo para emergencias o en el avance de una meta. Llévala y ve cuánto te acerca." />;
-}
 import { CalculatorResultContext, ResultNextSteps } from './calculatorResultJourney.jsx';
 import './calculator-result-journey.css';
 
@@ -127,162 +117,14 @@ function fmtPct(n) { return n.toFixed(2) + '%'; }
 // CALCULADORAS
 // ═══════════════════════════════════════════════════════════════
 
-function CalcFiniquito() {
-  const [regimen, setRegimen] = useState('lft');
-  const [salario, setSalario] = useState('');
-  const [ingreso, setIngreso] = useState('');
-  const [salida, setSalida] = useState('');
-  const [diasPendientes, setDiasPendientes] = useState('0');
-  const [vacPendientes, setVacPendientes] = useState('0');
-  const [diasAguinaldo, setDiasAguinaldo] = useState('15');
-  const [primaVac, setPrimaVac] = useState('25');
-  const [vacAnuales, setVacAnuales] = useState('');
-  const [causa, setCausa] = useState('renuncia');
-  const [zona, setZona] = useState('general');
-  const [resultado, setResultado] = useState(null);
-  const [error, setError] = useState('');
-  const errorId = useId();
-  const editar = setter => valor => { setter(valor); setResultado(null); setError(''); };
-  const calcular = e => {
-    e.preventDefault(); setResultado(null);
-    try {
-      if (regimen !== 'lft') throw new Error(regimen === 'lftse' ? 'Esta fórmula de finiquito usa la LFT y no debe aplicarse automáticamente a una plaza federal/SEP sujeta a la LFTSE. La baja depende de tu nombramiento y de las reglas de la dependencia.' : 'El servicio público estatal, municipal o con régimen especial puede tener reglas propias. MiLana detuvo la fórmula LFT para evitar una cifra incorrecta.');
-      setResultado(calcularFiniquito2026({
-        salarioMensual: salario, fechaIngreso: ingreso, fechaSalida: salida,
-        diasTrabajadosNoPagados: diasPendientes, vacacionesPendientes: vacPendientes,
-        causa, zona, diasAguinaldo, primaVacacionalPct: primaVac, diasVacacionesAnuales: vacAnuales,
-      }));
-      setError('');
-    } catch (err) { setError(err.message); }
-  };
-  return <form onSubmit={calcular} noValidate>
-    <p className="calc-intro">Estima el finiquito bruto de una terminación ocurrida en 2026. Primero identifica tu régimen: la fórmula numérica aplica a relaciones regidas por la LFT y se bloquea en plazas públicas que requieren reglas distintas.</p>
-    <label style={styles.fieldLabel} htmlFor="fin-regimen">Régimen laboral</label>
-    <select id="fin-regimen" value={regimen} onChange={e => editar(setRegimen)(e.target.value)} style={styles.select}>
-      <option value="lft">Ley Federal del Trabajo (empresa privada o puesto sujeto a LFT)</option>
-      <option value="lftse">Servicio público federal / SEP federal (LFTSE)</option>
-      <option value="otro-publico">Servicio público estatal, municipal u otro régimen</option>
-    </select>
-    <div style={styles.grid2}>
-      <Field label="Salario mensual fijo (MXN)" value={salario} onChange={editar(setSalario)} type="number" placeholder="Ej: 18000" error={error} errorId={errorId} />
-      <Field label="Días trabajados aún no pagados" value={diasPendientes} onChange={editar(setDiasPendientes)} type="number" placeholder="0" error={error} errorId={errorId} />
-      <Field label="Fecha de ingreso" value={ingreso} onChange={editar(setIngreso)} type="date" error={error} errorId={errorId} />
-      <Field label="Último día trabajado en 2026" value={salida} onChange={editar(setSalida)} type="date" error={error} errorId={errorId} />
-      <Field label="Vacaciones pendientes ya adquiridas (días)" value={vacPendientes} onChange={editar(setVacPendientes)} type="number" placeholder="0" help="No incluyas aquí la parte proporcional del ciclo actual: MiLana la calcula con tus fechas." error={error} errorId={errorId} />
-      <Field label="Días de aguinaldo que te corresponden" value={diasAguinaldo} onChange={editar(setDiasAguinaldo)} type="number" placeholder="15" error={error} errorId={errorId} />
-      <Field label="Prima vacacional (%)" value={primaVac} onChange={editar(setPrimaVac)} type="number" placeholder="25" error={error} errorId={errorId} />
-      <Field label="Vacaciones anuales de tu prestación (opcional)" value={vacAnuales} onChange={editar(setVacAnuales)} type="number" placeholder="En blanco usa el mínimo legal" help="Si tu contrato da más días que la LFT, captura aquí ese número." error={error} errorId={errorId} />
-    </div>
-    <label style={styles.fieldLabel} htmlFor="fin-causa">Cómo terminó la relación</label>
-    <select id="fin-causa" value={causa} onChange={e => editar(setCausa)(e.target.value)} style={styles.select}>
-      <option value="renuncia">Renuncia voluntaria</option>
-      <option value="separacion-patron">Separación por el patrón</option>
-    </select>
-    <label style={styles.fieldLabel} htmlFor="fin-zona">Zona de salario mínimo para el tope de prima de antigüedad</label>
-    <select id="fin-zona" value={zona} onChange={e => editar(setZona)(e.target.value)} style={styles.select}>
-      <option value="general">Zona del Salario Mínimo General</option>
-      <option value="frontera">Zona Libre de la Frontera Norte</option>
-    </select>
-    <p id={errorId} role="alert" className="calc-error">{error}</p>
-    <Btn>Calcular finiquito</Btn>
-    <div aria-live="polite" aria-atomic="true">
-      {resultado && <ResultBox>
-        <ResultLine label={'Salario pendiente (' + (diasPendientes || 0) + ' días)'} value={fmt(resultado.pagoSalarioPendiente)} />
-        <ResultLine label={'Aguinaldo proporcional (' + resultado.diasAguinaldo + ' días del año)'} value={fmt(resultado.aguinaldoProporcional)} />
-        <ResultLine label={'Vacaciones proporcionales (' + resultado.vacacionesProporcionalesDias.toFixed(2) + ' días)'} value={fmt(resultado.salarioDiario * resultado.vacacionesProporcionalesDias)} />
-        {resultado.vacacionesPendientesDias > 0 && <ResultLine label={'Vacaciones pendientes (' + resultado.vacacionesPendientesDias + ' días)'} value={fmt(resultado.salarioDiario * resultado.vacacionesPendientesDias)} />}
-        <ResultLine label={'Prima vacacional (' + resultado.primaPct + '%)'} value={fmt(resultado.primaVacacional)} />
-        {resultado.aplicaPrimaAntiguedad && <ResultLine label="Prima de antigüedad estimada" value={fmt(resultado.primaAntiguedad)} />}
-        <Divider />
-        <ResultLine label="Total bruto estimado" value={fmt(resultado.totalBruto)} bold color="#28735A" />
-        <PagoUnicoTransfer origen="/calculadoras/finiquito" importe={resultado.totalBruto} />
-        <Note>El total es bruto y no incluye una estimación de ISR por separación. Usa salario fijo y las prestaciones que capturaste; comisiones, bonos u otros conceptos integrables requieren un cálculo adicional con sus propios datos.</Note>
-      </ResultBox>}
-    </div>
-  </form>;
-}
+function AguinaldoGobierno() { return <CalculoRevisado tipo="aguinaldo" regimenInicial="lftse" />; }
+function CalcAguinaldo() { return <CalcAguinaldoDirecta modoGobierno={AguinaldoGobierno} />; }
 
-function CalcLiquidacion() {
-  const [regimen, setRegimen] = useState('lft');
-  const [salario, setSalario] = useState('');
-  const [ingreso, setIngreso] = useState('');
-  const [salida, setSalida] = useState('');
-  const [diasPendientes, setDiasPendientes] = useState('0');
-  const [vacPendientes, setVacPendientes] = useState('0');
-  const [diasAguinaldo, setDiasAguinaldo] = useState('15');
-  const [primaVac, setPrimaVac] = useState('25');
-  const [vacAnuales, setVacAnuales] = useState('');
-  const [zona, setZona] = useState('general');
-  const [indeterminada, setIndeterminada] = useState(false);
-  const [incluir20, setIncluir20] = useState(false);
-  const [resultado, setResultado] = useState(null);
-  const [error, setError] = useState('');
-  const errorId = useId();
-  const editar = setter => valor => { setter(valor); setResultado(null); setError(''); };
-  const calcular = e => {
-    e.preventDefault(); setResultado(null);
-    try {
-      if (regimen !== 'lft') throw new Error(regimen === 'lftse' ? 'La indemnización de 3 meses y el escenario de 20 días de esta calculadora son un modelo LFT. No los aplicamos a una plaza federal/SEP sujeta a LFTSE porque la terminación depende del nombramiento y del régimen burocrático.' : 'No aplicamos automáticamente la fórmula LFT a un puesto público estatal, municipal o especial. Revisa el estatuto local o las condiciones del nombramiento.');
-      setResultado(calcularLiquidacion2026({
-        salarioMensual: salario, fechaIngreso: ingreso, fechaSalida: salida,
-        diasTrabajadosNoPagados: diasPendientes, vacacionesPendientes: vacPendientes,
-        zona, diasAguinaldo, primaVacacionalPct: primaVac, diasVacacionesAnuales: vacAnuales,
-        relacionIndeterminada: indeterminada, incluirVeinteDias: incluir20,
-      }));
-      setError('');
-    } catch (err) { setError(err.message); }
-  };
-  return <form onSubmit={calcular} noValidate>
-    <p className="calc-intro">Estima un escenario de indemnización por despido injustificado bajo la LFT. Si trabajas en gobierno o SEP, selecciona tu régimen: MiLana no traslada esta indemnización privada a una plaza pública sin fundamento.</p>
-    <label style={styles.fieldLabel} htmlFor="liq-regimen">Régimen laboral</label>
-    <select id="liq-regimen" value={regimen} onChange={e => editar(setRegimen)(e.target.value)} style={styles.select}>
-      <option value="lft">Ley Federal del Trabajo (empresa privada o puesto sujeto a LFT)</option>
-      <option value="lftse">Servicio público federal / SEP federal (LFTSE)</option>
-      <option value="otro-publico">Servicio público estatal, municipal u otro régimen</option>
-    </select>
-    <div style={styles.grid2}>
-      <Field label="Salario mensual fijo (MXN)" value={salario} onChange={editar(setSalario)} type="number" placeholder="Ej: 18000" error={error} errorId={errorId} />
-      <Field label="Días trabajados aún no pagados" value={diasPendientes} onChange={editar(setDiasPendientes)} type="number" placeholder="0" error={error} errorId={errorId} />
-      <Field label="Fecha de ingreso" value={ingreso} onChange={editar(setIngreso)} type="date" error={error} errorId={errorId} />
-      <Field label="Fecha de despido en 2026" value={salida} onChange={editar(setSalida)} type="date" error={error} errorId={errorId} />
-      <Field label="Vacaciones pendientes ya adquiridas (días)" value={vacPendientes} onChange={editar(setVacPendientes)} type="number" placeholder="0" error={error} errorId={errorId} />
-      <Field label="Días de aguinaldo que te corresponden" value={diasAguinaldo} onChange={editar(setDiasAguinaldo)} type="number" placeholder="15" error={error} errorId={errorId} />
-      <Field label="Prima vacacional (%)" value={primaVac} onChange={editar(setPrimaVac)} type="number" placeholder="25" error={error} errorId={errorId} />
-      <Field label="Vacaciones anuales de tu prestación (opcional)" value={vacAnuales} onChange={editar(setVacAnuales)} type="number" placeholder="En blanco usa el mínimo legal" error={error} errorId={errorId} />
-    </div>
-    <label style={styles.fieldLabel} htmlFor="liq-zona">Zona de salario mínimo para la prima de antigüedad</label>
-    <select id="liq-zona" value={zona} onChange={e => editar(setZona)(e.target.value)} style={styles.select}>
-      <option value="general">Zona del Salario Mínimo General</option>
-      <option value="frontera">Zona Libre de la Frontera Norte</option>
-    </select>
-    <label className="calc-check"><input type="checkbox" checked={indeterminada} onChange={e => editar(setIndeterminada)(e.target.checked)} /> Confirmo que la relación era por tiempo indeterminado.</label>
-    <label className="calc-check"><input type="checkbox" checked={incluir20} onChange={e => editar(setIncluir20)(e.target.checked)} /> Incluir el escenario de 20 días de salario por año cuando jurídicamente proceda.</label>
-    <p className="calc-help">Los 20 días por año no son un pago automático en todo despido; por eso están apagados de forma predeterminada.</p>
-    <p id={errorId} role="alert" className="calc-error">{error}</p>
-    <Btn>Calcular escenario de liquidación</Btn>
-    <div aria-live="polite" aria-atomic="true">
-      {resultado && <ResultBox>
-        <ResultLine label="Prestaciones devengadas (finiquito)" value={fmt(resultado.subtotalSinPrimaAntiguedad)} />
-        <ResultLine label={'Indemnización de 3 meses (SDI ' + fmt(resultado.salarioDiarioIntegrado) + '/día)'} value={fmt(resultado.indemnizacionTresMeses)} />
-        {resultado.incluyeVeinteDias && <ResultLine label="Escenario de 20 días por año" value={fmt(resultado.indemnizacionVeinteDias)} />}
-        <ResultLine label="Prima de antigüedad" value={fmt(resultado.primaAntiguedad)} />
-        <Divider />
-        <ResultLine label="Total bruto del escenario" value={fmt(resultado.totalBruto)} bold color="#28735A" />
-        <PagoUnicoTransfer origen="/calculadoras/liquidacion" importe={resultado.totalBruto} />
-        <Note>No determina si el despido fue injustificado ni si los 20 días por año proceden en tu caso. No incluye salarios vencidos, intereses ni ISR por pagos de separación.</Note>
-      </ResultBox>}
-    </div>
-  </form>;
-}
-
-function CalcAguinaldo() { return <CalculoRevisado tipo="aguinaldo" />; }
-function CalcISR() { return <CalculoRevisado tipo="isr" />; }
-
-function CalculoRevisado({ tipo }) {
+function CalculoRevisado({ tipo, regimenInicial = 'lft' }) {
   const isISR = tipo === 'isr';
   const [importe, setImporte] = useState('');
-  const [dias, setDias] = useState('15');
-  const [regimenAguinaldo, setRegimenAguinaldo] = useState('lft');
+  const [dias, setDias] = useState(regimenInicial === 'lft' ? '15' : '40');
+  const [regimenAguinaldo, setRegimenAguinaldo] = useState(regimenInicial);
   const [fecha, setFecha] = useState('');
   const [minimo, setMinimo] = useState('');
   const [periodo, setPeriodo] = useState('2026-09');
@@ -353,86 +195,9 @@ function CalculoRevisado({ tipo }) {
       {resultado.reglaSEP && <ResultLine label="Regla SEP aplicada" value={resultado.reglaSEP} />}
       <ResultLine label="Aguinaldo bruto proyectado" value={fmt(resultado.bruto)} bold />
       <Note>{regimenAguinaldo === 'sep-basica' ? 'SEP federal: el Manual de RH 2025 usa 40 días y define los conceptos que integran la base. Verifica que el importe capturado coincida con tu tipo de plaza.' : regimenAguinaldo === 'sep-ems' ? 'SEP Media Superior: la regla se aplica al salario convencional computable capturado y supone que continúas en servicio hasta el 31 de diciembre de 2026.' : 'La retención de ISR no está incluida. La revisión del bruto no certifica la exención fiscal.'}</Note>
-          <PagoUnicoTransfer origen="/calculadoras/aguinaldo" importe={resultado.bruto} />
     </>}</ResultBox>}
     </div>
   </form>;
-}
-
-function CalcRESICO() {
-  const [ingresoMensual, setIngresoMensual] = useState('');
-  const [result, setResult] = useState(null);
-
-  const calcular = () => {
-    const ing = parseFloat(ingresoMensual) || 0;
-    if (ing <= 0) return;
-
-    let tasa = 2.5;
-    for (const r of RESICO_TASAS) {
-      if (ing >= r.li && ing <= r.ls) { tasa = r.tasa; break; }
-    }
-
-    const isrResico = ing * (tasa / 100);
-    const neto = ing - isrResico;
-
-    setResult({
-      ingreso: ing, tasa, isrResico, neto,
-      anual: { ingreso: ing * 12, isr: isrResico * 12, neto: neto * 12 }
-    });
-  };
-
-  return (
-    <div>
-      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula el ISR que pagarías bajo el Régimen Simplificado de Confianza (RESICO), disponible para personas físicas con ingresos anuales de hasta 3.5 millones de pesos. Las tasas aplicables van del 1% al 2.5% sobre tus ingresos efectivamente cobrados, conforme al Art. 113-E LISR.
-      </p>
-      <div style={styles.grid2}>
-        <Field label="Ingresos del mes efectivamente cobrados, sin IVA ($)" value={ingresoMensual} onChange={setIngresoMensual} type="number" placeholder="Ej: 40000" />
-      </div>
-      <Btn onClick={calcular}>Calcular RESICO</Btn>
-      {result && (
-        <ResultBox>
-          <ResultLine label="Ingreso mensual" value={fmt(result.ingreso)} />
-          <ResultLine label="Tasa RESICO" value={fmtPct(result.tasa)} bold />
-          <ResultLine label="ISR causado antes de retenciones" value={fmt(result.isrResico)} color="#A94442" />
-          <ResultLine label="Ingreso menos ISR causado, antes de otros ajustes" value={fmt(result.neto)} bold color="#28735A" />
-          <Note>RESICO aplica para personas físicas con ingresos anuales hasta $3,500,000 y ciertos requisitos de permanencia que esta calculadora no valida. El IVA se calcula aparte (hay actos gravados al 16%, al 0% y exentos, además de acreditamiento), así que no se incluye aquí.</Note>
-        </ResultBox>
-      )}
-    </div>
-  );
-}
-
-function CalcPTU() {
-  const [utilidadesEmpresa, setUtilidadesEmpresa] = useState('');
-  const [result, setResult] = useState(null);
-
-  const calcular = () => {
-    const util = parseFloat(utilidadesEmpresa) || 0;
-    if (util <= 0) return;
-
-    const repartoTotal = util * 0.10;
-
-    setResult({ repartoTotal });
-  };
-
-  return (
-    <div>
-      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Calcula el monto total que una empresa sujeta a la LFT debe repartir por Participación de los Trabajadores en las Utilidades (PTU): el 10% de sus utilidades anuales. No es una prestación automática del servicio público federal sujeto a la LFTSE.
-      </p>
-      <div style={styles.grid2}>
-        <Field label="Renta gravable para PTU de la empresa ($)" value={utilidadesEmpresa} onChange={setUtilidadesEmpresa} type="number" placeholder="Ej: 5000000" />
-      </div>
-      <Btn onClick={calcular}>Calcular PTU</Btn>
-      {result && (
-        <ResultBox>
-          <ResultLine label="10% de utilidades a repartir (PTU total)" value={fmt(result.repartoTotal)} bold color="#28735A" />
-          <Note>Esta calculadora solo obtiene el monto total a repartir entre todos los trabajadores (10% de las utilidades). No calcula la parte individual que le corresponde a cada trabajador: eso depende de los días trabajados y el salario de cada persona en relación con los de toda la plantilla (Art. 123 LFT), además de un tope de 3 meses de salario o el promedio de la PTU de los últimos 3 años, lo que sea más favorable para el trabajador. Consulta con el área de Recursos Humanos o Nóminas de tu empresa para el monto individual que te corresponde.</Note>
-        </ResultBox>
-      )}
-    </div>
-  );
 }
 
 function CalcBrutoNeto() {
@@ -518,8 +283,8 @@ function CalcBrutoNeto() {
   </form>;
 }
 
-function CalcVacaciones() {
-  const [regimen, setRegimen] = useState('lft');
+function CalcVacaciones({ regimenInicial = 'lft' }) {
+  const [regimen, setRegimen] = useState(regimenInicial);
   const [aniosTrabajados, setAniosTrabajados] = useState('');
   const [salarioMensual, setSalarioMensual] = useState('');
   const [result, setResult] = useState(null);
@@ -611,209 +376,6 @@ function CalcVacaciones() {
               ))}
             </div>
           </>}
-        </ResultBox>
-      )}
-    </div>
-  );
-}
-
-function CalcInfonavit() {
-  const [montoCredito, setMontoCredito] = useState('');
-  const [tasaAnual, setTasaAnual] = useState('10.45');
-  const [plazoAnios, setPlazoAnios] = useState('20');
-  const [result, setResult] = useState(null);
-  const [verTabla, setVerTabla] = useState(false);
-  const [vistaAnual, setVistaAnual] = useState(true);
-
-  const calcular = () => {
-    const monto = parseFloat(montoCredito) || 0;
-    const tasa = parseFloat(tasaAnual) || 0;
-    const plazo = parseInt(plazoAnios) || 0;
-    if (monto <= 0 || plazo <= 0 || tasa < 0) return;
-
-    const tasaMensual = tasa / 100 / 12;
-    const numPagos = plazo * 12;
-    const pagoBase = tasaMensual === 0
-      ? monto / numPagos
-      : monto * (tasaMensual * Math.pow(1 + tasaMensual, numPagos)) / (Math.pow(1 + tasaMensual, numPagos) - 1);
-
-    const tablaMensual = [];
-    let saldo = monto;
-    for (let mes = 1; mes <= numPagos; mes++) {
-      const interes = saldo * tasaMensual;
-      let capital = pagoBase - interes;
-      let pagoFila = pagoBase;
-      if (mes === numPagos) {
-        // Ajuste del último pago para liquidar el saldo exacto (evita residuo por redondeo)
-        capital = saldo;
-        pagoFila = capital + interes;
-      }
-      saldo = Math.max(saldo - capital, 0);
-      tablaMensual.push({ mes, pago: pagoFila, interes, capital, saldo });
-    }
-
-    const pagoMensual = pagoBase;
-    const totalPagado = tablaMensual.reduce((s, f) => s + f.pago, 0);
-    const totalIntereses = totalPagado - monto;
-
-    const tablaAnual = [];
-    for (let anio = 1; anio <= plazo; anio++) {
-      const filasAnio = tablaMensual.slice((anio - 1) * 12, anio * 12);
-      tablaAnual.push({
-        anio,
-        pago: filasAnio.reduce((s, f) => s + f.pago, 0),
-        interes: filasAnio.reduce((s, f) => s + f.interes, 0),
-        capital: filasAnio.reduce((s, f) => s + f.capital, 0),
-        saldo: filasAnio[filasAnio.length - 1].saldo
-      });
-    }
-
-    setVerTabla(false);
-    setResult({
-      monto, tasa, plazo, pagoMensual, totalPagado, totalIntereses,
-      porcentajeIntereses: (totalIntereses / monto) * 100,
-      tablaMensual, tablaAnual
-    });
-  };
-
-  return (
-    <div>
-      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Estima el pago mensual de capital e intereses de un crédito con las condiciones que ingreses. No incluye seguros, cuotas ni aportaciones patronales. Consulta tu contrato o Mi Cuenta Infonavit para tu monto real.
-      </p>
-      <div style={styles.grid2}>
-        <Field label="Monto del crédito ($)" value={montoCredito} onChange={setMontoCredito} type="number" placeholder="Ej: 800000" />
-        <Field label="Tasa anual (%)" value={tasaAnual} onChange={setTasaAnual} type="number" placeholder="10.45" />
-        <Field label="Plazo (años)" value={plazoAnios} onChange={setPlazoAnios} type="number" placeholder="20" />
-      </div>
-      <Btn onClick={calcular}>Simular Crédito</Btn>
-      {result && (
-        <ResultBox>
-          <ResultLine label="Monto del crédito" value={fmt(result.monto)} />
-          <ResultLine label="Tasa anual" value={fmtPct(result.tasa)} />
-          <ResultLine label={`Plazo: ${result.plazo} años (${result.plazo * 12} pagos)`} value="" />
-          <Divider />
-          <ResultLine label="Pago estimado (capital + interés)" value={fmt(result.pagoMensual)} bold color="#28735A" />
-          <Divider />
-          <ResultLine label="Total estimado (capital + intereses)" value={fmt(result.totalPagado)} bold />
-          <ResultLine label="Total solo en intereses" value={fmt(result.totalIntereses)} color="#A94442" />
-          <ResultLine label="Pagarás de intereses" value={fmtPct(result.porcentajeIntereses) + " del crédito"} bold color="#A94442" />
-          <Note>Esta es una simulación financiera de amortización de capital e intereses, no un cálculo oficial de Infonavit. No incluye seguros, cuotas, aportaciones patronales ni condiciones particulares de tu crédito (VSM, pesos, puntos Infonavit, tasa según tu nivel salarial). Consulta tu contrato o Mi Cuenta Infonavit para tu pago real.</Note>
-
-          <ResultTransfer origen="/calculadoras/infonavit" importe={result.pagoMensual}
-            titulo="¿Cabe esta mensualidad en tu mes?" texto="Súmala a tus pagos de deuda y ve cuánto te quedaría después de tus gastos."
-            destinos={[{ href: '/finanzas/presupuesto', campo: 'pagosDeuda', titulo: 'Agregarla a mi presupuesto' }, { href: '/finanzas/deuda-y-credito', campo: 'pagosDeuda', titulo: 'Ver cuánto de mi ingreso compromete' }]} />
-
-          <button onClick={() => setVerTabla(v => !v)} className="ml-btn" style={{
-            width:'100%',marginTop:16,padding:'10px 16px',background:'#faf7f0',
-            border:'1px solid #e8dcc3',borderRadius:10,color:'#92400e',fontSize:13,
-            fontWeight:600,cursor:'pointer',display:'flex',alignItems:'center',
-            justifyContent:'center',gap:6
-          }}>
-            {verTabla ? '▲ Ocultar tabla de amortización' : '▼ Ver tabla de amortización'}
-          </button>
-
-          {verTabla && (
-            <div className="ml-result" style={{marginTop:12}}>
-              <div style={{display:'flex',justifyContent:'center',gap:8,marginBottom:10}}>
-                <button onClick={() => setVistaAnual(true)} style={{
-                  padding:'5px 14px',borderRadius:20,fontSize:12,fontWeight:600,cursor:'pointer',
-                  border: vistaAnual ? '1px solid #b45309' : '1px solid #e2e8f0',
-                  background: vistaAnual ? '#b45309' : 'white',
-                  color: vistaAnual ? 'white' : '#5E6B78'
-                }}>Por año</button>
-                <button onClick={() => setVistaAnual(false)} style={{
-                  padding:'5px 14px',borderRadius:20,fontSize:12,fontWeight:600,cursor:'pointer',
-                  border: !vistaAnual ? '1px solid #b45309' : '1px solid #e2e8f0',
-                  background: !vistaAnual ? '#b45309' : 'white',
-                  color: !vistaAnual ? 'white' : '#5E6B78'
-                }}>Por mes</button>
-              </div>
-              <div style={{maxHeight:320,overflowY:'auto',border:'1px solid #ece2cb',borderRadius:10}}>
-                <table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}>
-                  <thead>
-                    <tr style={{position:'sticky',top:0,background:'#faf7f0',boxShadow:'0 1px 0 #e8dcc3'}}>
-                      <th style={{padding:'8px 10px',textAlign:'left',color:'#475569',fontWeight:600}}>{vistaAnual ? 'Año' : 'Mes'}</th>
-                      <th style={{padding:'8px 10px',textAlign:'right',color:'#475569',fontWeight:600}}>Interés</th>
-                      <th style={{padding:'8px 10px',textAlign:'right',color:'#475569',fontWeight:600}}>Capital</th>
-                      <th style={{padding:'8px 10px',textAlign:'right',color:'#475569',fontWeight:600}}>Saldo restante</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(vistaAnual ? result.tablaAnual : result.tablaMensual).map((fila, i) => (
-                      <tr key={i} style={{borderTop:'1px solid #f3efe6', background: i % 2 ? '#faf8f4' : 'white'}}>
-                        <td style={{padding:'7px 10px',color:'#13263B'}}>{vistaAnual ? fila.anio : fila.mes}</td>
-                        <td style={{padding:'7px 10px',textAlign:'right',color:'#A94442'}}>{fmt(fila.interes)}</td>
-                        <td style={{padding:'7px 10px',textAlign:'right',color:'#28735A'}}>{fmt(fila.capital)}</td>
-                        <td style={{padding:'7px 10px',textAlign:'right',color:'#13263B',fontWeight:600}}>{fmt(fila.saldo)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-        </ResultBox>
-      )}
-    </div>
-  );
-}
-
-function CalcPension() {
-  const [edad, setEdad] = useState('');
-  const [semanasCotizadas, setSemanasCotizadas] = useState('');
-  const [result, setResult] = useState(null);
-
-  const calcular = () => {
-    const ed = parseInt(edad) || 0;
-    const sc = parseInt(semanasCotizadas) || 0;
-    if (ed <= 0) return;
-
-    // Ley 97 (AFORE) — la mayoría de trabajadores actuales
-    const minSemanas = 875; // 2026, sube gradualmente hasta 1000 en 2031
-    const cumpleMinimo = sc >= minSemanas;
-    const tipoRetiro = ed >= 65 ? 'vejez' : (ed >= 60 ? 'cesantia' : null);
-
-    // Nota: el monto de la pensión (AFORE o "pensión garantizada", Art. 170 LSS)
-    // NO se calcula aquí a propósito. Depende del saldo real acumulado en tu
-    // AFORE (aportaciones, rendimientos, comisiones) o de una tabla oficial de
-    // dos entradas (semanas cotizadas × salario promedio en UMAs) que se
-    // actualiza cada febrero con el INPC — no es algo que una fórmula simple
-    // de una sola variable pueda aproximar con responsabilidad.
-
-    setResult({
-      sc, minSemanas, cumpleMinimo,
-      faltanSemanas: Math.max(minSemanas - sc, 0),
-      edad: ed,
-      tipoRetiro,
-    });
-  };
-
-  return (
-    <div>
-      <p style={{color:'#5E6B78',marginBottom:20,fontSize:14,lineHeight:1.6}}>
-        Revisa si cumples los requisitos generales de edad y semanas cotizadas para pensionarte bajo el esquema IMSS Ley 97 (AFORE). No aplica a una pensión ISSSTE ni a un instituto estatal. En 2026 se requiere un mínimo de 875 semanas cotizadas.
-      </p>
-      <div style={styles.grid2}>
-        <Field label="Tu edad actual" value={edad} onChange={setEdad} type="number" placeholder="Ej: 35" />
-        <Field label="Semanas cotizadas en IMSS" value={semanasCotizadas} onChange={setSemanasCotizadas} type="number" placeholder="Ej: 520" />
-      </div>
-      <Btn onClick={calcular}>Revisar Requisitos</Btn>
-      {result && (
-        <ResultBox>
-          <ResultLine label="Semanas cotizadas" value={result.sc} />
-          <ResultLine label={`Mínimo requerido (2026)`} value={`${result.minSemanas} semanas`} />
-          <ResultLine label="¿Cumples el mínimo de semanas?" value={result.cumpleMinimo ? 'Sí' : `Faltan ${result.faltanSemanas} semanas`} color={result.cumpleMinimo ? '#28735A' : '#A94442'} />
-          <Divider />
-          <ResultLine label="Tipo de retiro según tu edad" value={
-            result.tipoRetiro === 'vejez' ? 'Vejez (65 años o más)' :
-            result.tipoRetiro === 'cesantia' ? 'Cesantía en edad avanzada (60 a 64 años)' :
-            'Aún no alcanzas la edad mínima (60 años)'
-          } bold />
-          <div style={{marginTop:12,padding:'12px 14px',background:'#f1f5f9',borderRadius:10,fontSize:13,color:'#475569',lineHeight:1.5}}>
-            <strong>Pensión garantizada:</strong> no incluida aquí. Depende de las semanas cotizadas y del salario promedio en UMAs durante tu vida laboral (tabla oficial, Art. 170 LSS): no es un monto fijo.
-          </div>
-          <Note>Esta calculadora solo revisa los requisitos generales de edad y semanas cotizadas del régimen de Ley 97. No estima el monto de tu pensión ni el saldo de tu AFORE: eso depende de tu historial real de aportaciones, rendimientos y comisiones. Consulta tu estado de cuenta en AFORE o el simulador oficial del IMSS/CONSAR para una proyección de tu pensión.</Note>
         </ResultBox>
       )}
     </div>
@@ -1515,17 +1077,21 @@ const hubH2 = {
 // APP PRINCIPAL
 // ═══════════════════════════════════════════════════════════════
 
+function VacacionesGobierno() { return <CalcVacaciones regimenInicial="lftse" />; }
+function VacacionesConGobierno() { return <CalcVacacionesDirecta modoGobierno={VacacionesGobierno} />; }
+function BrutoNetoConDetalle() { return <CalcBrutoNetoDirecta modoDetallado={CalcBrutoNeto} />; }
+
 const CALCULADORAS = [
-  { id: 'finiquito', nombre: 'Finiquito', desc: 'Renuncia voluntaria', comp: CalcFiniquito },
-  { id: 'liquidacion', nombre: 'Liquidación', desc: 'Despido injustificado', comp: CalcLiquidacion },
+  { id: 'finiquito', nombre: 'Finiquito', desc: 'Renuncia voluntaria', comp: CalcFiniquitoDirecta },
+  { id: 'liquidacion', nombre: 'Liquidación', desc: 'Despido injustificado', comp: CalcLiquidacionDirecta },
   { id: 'aguinaldo', nombre: 'Aguinaldo', desc: 'Proporcional o completo', comp: CalcAguinaldo },
-  { id: 'isr', nombre: 'ISR Mensual', desc: 'Retención de nómina', comp: CalcISR },
-  { id: 'resico', nombre: 'RESICO', desc: 'Ingresos por actividad independiente', comp: CalcRESICO },
-  { id: 'ptu', nombre: 'PTU', desc: 'Reparto de utilidades', comp: CalcPTU },
-  { id: 'bruto-neto', nombre: 'Bruto a Neto', desc: 'Salario neto real', comp: CalcBrutoNeto },
-  { id: 'vacaciones', nombre: 'Vacaciones', desc: 'Días según antigüedad', comp: CalcVacaciones },
-  { id: 'infonavit', nombre: 'Infonavit', desc: 'Simulador de crédito', comp: CalcInfonavit },
-  { id: 'pension', nombre: 'Pensión IMSS', desc: 'Requisitos Ley 97', comp: CalcPension },
+  { id: 'isr', nombre: 'ISR Mensual', desc: 'Retención de nómina', comp: CalcISRDirecta },
+  { id: 'resico', nombre: 'RESICO', desc: 'Ingresos por actividad independiente', comp: CalcRESICODirecta },
+  { id: 'ptu', nombre: 'PTU', desc: 'Reparto de utilidades', comp: CalcPTUDirecta },
+  { id: 'bruto-neto', nombre: 'Bruto a Neto', desc: 'Salario neto real', comp: BrutoNetoConDetalle },
+  { id: 'vacaciones', nombre: 'Vacaciones', desc: 'Días según antigüedad', comp: VacacionesConGobierno },
+  { id: 'infonavit', nombre: 'Infonavit', desc: 'Simulador de crédito', comp: CalcInfonavitDirecta },
+  { id: 'pension', nombre: 'Pensión IMSS', desc: 'Requisitos Ley 97', comp: CalcPensionDirecta },
 ];
 
 const styles = {
@@ -1566,6 +1132,19 @@ function situacionDeLaUrl() {
   return m ? (SITUACIONES_HUB.find((s) => s.slug === m[1]) || null) : null;
 }
 
+// H1 de cada calculadora: corto para celular y con la palabra que busca la gente.
+const H1_CALCULADORA = {
+  finiquito: 'Calculadora de finiquito 2026',
+  liquidacion: 'Calculadora de liquidación 2026',
+  aguinaldo: 'Calculadora de aguinaldo 2026',
+  isr: 'Calculadora de ISR 2026',
+  resico: 'Calculadora RESICO 2026',
+  ptu: 'Calculadora de PTU 2026',
+  'bruto-neto': 'Sueldo bruto a neto 2026',
+  vacaciones: 'Calculadora de vacaciones 2026',
+  infonavit: 'Simulador de crédito Infonavit',
+  pension: 'Requisitos de pensión IMSS 2026',
+};
 const CSS_CALCULADORAS = `:root{--ml-blue-700:#245C93;--ml-blue-600:#2D6CAA;--ml-blue-500:#2D6CAA;--ml-blue-100:#DCEAF7;--ml-blue-50:#F2F7FB;--ml-slate-900:#13263B;--ml-slate-600:#5E6B78;--ml-slate-400:#7A8794;--ml-slate-200:#D9E1E8;--ml-white:#FFFFFF;--ml-green-600:#28735A;--ml-green-50:#EAF4EF;--ml-red-600:#A94442;--ml-red-50:#FBF1F1;--ml-amber-600:#9B6723;--ml-radius-input:10px;--ml-radius-control:12px;--ml-radius-card:14px;--ml-radius-pill:999px;--ml-shadow-card:0 2px 10px rgba(15,23,42,0.06);--ml-shadow-btn:0 4px 12px rgba(37,99,235,0.28)}@keyframes mlFadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes mlPopIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}.ml-panel{animation:mlFadeInUp 0.35s ease-out}.ml-result{animation:mlPopIn 0.3s ease-out}.ml-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}@keyframes mlFadeOutDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}.ml-panel-out{animation:mlFadeOutDown 0.18s ease-in forwards}.ml-grid-heading{font-size:22px;font-weight:600;color:var(--ml-slate-900);margin:0 0 12px 4px}@media (min-width:640px){.ml-grid-heading{font-size:26px}}.ml-calc-grid{display:grid;grid-template-columns:1fr;gap:12px}@media (min-width:640px){.ml-calc-grid{grid-template-columns:repeat(2,1fr);gap:20px}}@media (min-width:1024px){.ml-calc-grid{grid-template-columns:repeat(3,1fr)}}.ml-calc-card2{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;background:var(--ml-white);border:1px solid var(--ml-slate-200);border-radius:14px;box-shadow:var(--ml-shadow-card);padding:20px;padding-right:40px;cursor:pointer;transition:border-color 180ms,box-shadow 180ms,transform 180ms;font-family:inherit}@media (min-width:640px){.ml-calc-card2{flex-direction:column;align-items:flex-start;padding:24px;min-height:176px}}.ml-calc-card2:hover{border-color:var(--ml-blue-500);transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,0.16)}.ml-calc-card2:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:3px}.ml-calc-card2 .ml-card-title{display:block;font-size:18px;font-weight:600;color:var(--ml-slate-900)}.ml-calc-card2 .ml-card-desc{display:block;font-size:14px;line-height:1.5;color:var(--ml-slate-600);margin-top:4px}.ml-calc-card2 .ml-card-arrow{position:absolute;color:var(--ml-slate-400);display:flex;right:16px;top:50%;transform:translateY(-50%)}@media (min-width:640px){.ml-calc-card2 .ml-card-arrow{top:16px;transform:none}}@media (prefers-reduced-motion: reduce){.ml-panel,.ml-result,.ml-panel-out{animation:none}.ml-btn:hover{transform:none}.ml-calc-card2{transition:none}.ml-calc-card2:hover{transform:none}}.ml-details{margin-top:10px;padding-top:10px;border-top:1px solid var(--ml-slate-200);background:transparent}.ml-details-summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:4px 0;font-size:14px;font-weight:500;color:var(--ml-slate-600);cursor:pointer}.ml-details-summary::-webkit-details-marker{display:none}.ml-details-summary:focus-visible{outline:2px solid var(--ml-blue-600);outline-offset:2px}.ml-details-chevron{flex:none;transition:transform 180ms}.ml-details[open] .ml-details-chevron{transform:rotate(180deg)}.ml-details-body{font-size:14px;line-height:1.6;color:var(--ml-slate-600);padding-bottom:6px}@media (prefers-reduced-motion: reduce){.ml-details-chevron{transition:none}}`;
 
 // Metadatos de presentacion para las tarjetas del nuevo Inicio.
@@ -1599,8 +1178,9 @@ const LECTURAS = [
   { id: 'pension',    href: '/aprende/pension-imss-ley-97',       min: '6 min', tema: 'Retiro',  titulo: 'Qué revisar antes de confiar en una cifra de pensión' },
 ];
 
-export default function App() { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#18283A',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#17324D'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#17324D'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#17324D'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#17324D'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#17324D'}}>Contacto</h2><p>Para dudas sobre esta política, contáctanos a través de nuestras redes sociales.</p><p style={{fontSize:12,color:'#7A8794',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#2D6CAA'}}>← Volver a MiLana</a></div>); }
-  const [activa, _setActiva] = useState(calculadoraDeLaUrl);
+export default function App({ rutaSSR } = {}) { if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/,'') === '/privacidad') { return (<div style={{maxWidth:680,margin:'40px auto',padding:'0 16px 60px',fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',color:'#18283A',lineHeight:1.7}}><h1 style={{fontSize:26,color:'#17324D'}}>Política de Privacidad</h1><p>MiLana ("el Sitio", "nosotros") es un sitio informativo de calculadoras financieras y fiscales para México. Esta política explica qué datos se recopilan y cómo se usan.</p><h2 style={{fontSize:18,color:'#17324D'}}>Datos que recopilamos</h2><p>Las calculadoras del Sitio funcionan enteramente en tu navegador: los datos que ingresas (salarios, fechas, etc.) no se envían ni se almacenan en nuestros servidores.</p><h2 style={{fontSize:18,color:'#17324D'}}>Analítica y cookies</h2><p>Usamos Google Analytics para entender el uso general del Sitio (páginas vistas, país, dispositivo) de forma agregada y anónima. Puede usar cookies, que puedes bloquear desde la configuración de tu navegador.</p><h2 style={{fontSize:18,color:'#17324D'}}>Publicidad</h2><p>Este Sitio puede mostrar anuncios de Google AdSense. Google y sus socios publicitarios pueden usar cookies para mostrar anuncios relevantes según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en la Configuración de anuncios de Google.</p><h2 style={{fontSize:18,color:'#17324D'}}>Contacto</h2><p>Para dudas sobre esta política escribe a contacto.milanaaqui@gmail.com.</p><p style={{fontSize:12,color:'#7A8794',marginTop:24}}>Última actualización: septiembre 2026.</p><a href="/" style={{color:'#2D6CAA'}}>← Volver a MiLana</a></div>); }
+  // rutaSSR: solo al compilar (scripts/prerender-calculadoras.mjs) para emitir la calculadora real en el HTML inicial.
+  const [activa, _setActiva] = useState(() => (rutaSSR ? (ID_POR_SLUG[rutaSSR] || null) : calculadoraDeLaUrl()));
 
   // Navegar cambia la URL de verdad: el usuario puede compartirla, recargarla
   // y el boton de atras del navegador funciona.
@@ -1696,7 +1276,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                     {CALC_META[calc.id]?.tag || calc.desc}
                   </span>
                 </div>
-                <h1>{calc.nombre}</h1>
+                <h1>{H1_CALCULADORA[calc.id] || calc.nombre}</h1>
                 <Proposito id={calc.id} />
               </div>
 
@@ -1735,36 +1315,9 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             <div className="shell hero-grid">
               <div className="hero-copy">
                 <p className="eyebrow orb-home-kicker">Gratis · sin registro · datos 2026</p>
-                <h1>Entiende tu <span className="orb-home-accent">lana</span> en un minuto</h1>
-                <p className="hero-lede">Elige lo que estás viviendo y te decimos qué hacer, paso a paso.</p>
-                <div className="hero-actions" hidden>
-                  <a className="btn btn-primary" href="/#situaciones">Explorar mi situación</a>
-                  <a className="btn btn-secondary" href="/calculadoras">Ver calculadoras</a>
-                </div>
-                <div className="hero-proof" aria-label="Señales de confianza" hidden>
-                  <span>Datos 2026</span>
-                  <span>Fuentes oficiales</span>
-                  <span>Sin registro</span>
-                </div>
+                <h1>Calcula cuánta <span className="orb-home-accent">lana</span> te toca</h1>
+                <p className="hero-lede">Toca tu caso y lo calculas en un minuto.</p>
                 <HomeRoutes />
-              </div>
-
-              <div className="hero-media-wrap">
-                <div className="hero-orbit hero-orbit-one" aria-hidden="true"></div>
-                <div className="hero-orbit hero-orbit-two" aria-hidden="true"></div>
-                <figure className="hero-media">
-                  <picture>
-                    <img src={heroUrl(1440)} srcSet={heroSrcSet()} sizes={HERO_SIZES} alt="" aria-hidden="true"
-                         loading="eager" fetchPriority="high" decoding="sync" data-hero-milana={HERO_PEXELS_ID}
-                         style={{objectPosition: HERO_FOCAL}} />
-                  </picture>
-                  <figcaption className="orb-home-photo-caption">Calculadoras y guías con fuentes oficiales.</figcaption>
-                </figure>
-                <aside className="hero-note" aria-label="Qué ofrece MiLana" hidden>
-                  <span className="hero-note-kicker">Primero entiende</span>
-                  <strong>Luego compara escenarios.</strong>
-                  <span className="hero-note-copy">Y decide con números que sí puedes explicar.</span>
-                </aside>
               </div>
             </div>
           </section>
@@ -1787,34 +1340,6 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
                   ))}
                 </div>
               </Detalle>
-            </div>
-          </section>
-
-          <section className="section path-section">
-            <div className="shell">
-              <details className="ml-how-it-works">
-                <summary>
-                  <span><strong>¿Cómo funciona MiLana?</strong><small>Entender · Comparar · Decidir</small></span>
-                  <b aria-hidden="true">+</b>
-                </summary>
-                <div className="ml-how-it-works-body">
-                  <h2 className="path-title">De “no entiendo” a “sé por qué elegir esto”.</h2>
-                  <div className="path-grid">
-                    <div className="path-step">
-                      <span className="path-number">1</span>
-                      <div><h3>Entender</h3><p>Traducimos conceptos y reglas a lenguaje normal.</p></div>
-                    </div>
-                    <div className="path-step">
-                      <span className="path-number">2</span>
-                      <div><h3>Comparar</h3><p>Prueba números y escenarios sin perder el contexto.</p></div>
-                    </div>
-                    <div className="path-step">
-                      <span className="path-number">3</span>
-                      <div><h3>Decidir</h3><p>Qué cambia, qué revisar y qué conviene preguntar antes de actuar.</p></div>
-                    </div>
-                  </div>
-                </div>
-              </details>
             </div>
           </section>
 
@@ -1903,7 +1428,7 @@ export default function App() { if (typeof window !== 'undefined' && window.loca
             <p>Salario mínimo general: ${SALARIO_MINIMO_GENERAL}/día · Frontera: ${SALARIO_MINIMO_FRONTERA}/día · UMA: ${UMA_DIARIA}/día</p>
             <p>Los cálculos son estimaciones informativas. Para montos exactos consulta con un especialista fiscal o laboral.</p>
           </div>
-          <p>MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{textDecoration:'underline'}}>Privacidad</a></p>
+          <p>MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{textDecoration:'underline'}}>Privacidad</a> · <a href="/terminos" style={{textDecoration:'underline'}}>Términos</a> · <a href="/sobre" style={{textDecoration:'underline'}}>Sobre MiLana</a> · <a href="/contacto" style={{textDecoration:'underline'}}>Contacto</a></p>
         </div>
       </footer></>
     </>

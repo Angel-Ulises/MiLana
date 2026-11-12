@@ -1,0 +1,82 @@
+{
+  "fechaLectura": "2026-11-10",
+  "procedencia": "Lectura delegada: transcripción de las páginas oficiales aportada en la sesión de trabajo por el equipo de MiLana (lector web autorizado), leídas el 2026-11-10 en Monterrey. Esta sesión no reabrió las URLs: desde su entorno los dominios no resuelven.",
+  "autorizacion": "Ángel: «Actualice las entonces» (10 fichas Afore SB 90–94, Klar Light 30 días y Win Banregio).",
+  "fuentes": {
+    "consar_irn": {
+      "url": "https://www.consar.gob.mx/gobmx/aplicativo/siset/Series.aspx?cd=212",
+      "titulo": "CONSAR: IRN de Siefores Generacionales",
+      "extracto": [
+        "«Indicador de Rendimiento Neto (IRN) de las Siefores Generacionales»",
+        "«Periodo disponible: Ene 19 - Sep 26»",
+        "Cabeceras: «Septiembre 2025 / Agosto 2026 / Septiembre 2026»",
+        "Sección «Indicador de Rendimiento Neto SB 90-94», filas completas:",
+        "Azteca 6.76 7.72 7.73",
+        "Banamex 7.30 8.35 8.40",
+        "Coppel 6.56 7.51 7.58",
+        "Inbursa 7.83 8.91 8.92",
+        "Invercap 7.33 8.66 8.73",
+        "PensionISSSTE 6.93 7.62 7.59",
+        "Principal 6.90 8.09 8.14",
+        "Profuturo 8.23 9.55 9.56",
+        "SURA 7.79 9.02 9.04",
+        "XXI Banorte 7.56 8.93 8.98",
+        "«Fuente: CONSAR», «Cifras preliminares»"
+      ],
+      "corte": "2026-09",
+      "nota": "Se usa la última columna (septiembre 2026). Indicador histórico preliminar; no es promesa ni tasa garantizada.",
+      "irnSB9094": {
+        "afore_azteca_sb9094": { "septiembre2025": 6.76, "agosto2026": 7.72, "septiembre2026": 7.73 },
+        "afore_banamex_sb9094": { "septiembre2025": 7.30, "agosto2026": 8.35, "septiembre2026": 8.40 },
+        "afore_coppel_sb9094": { "septiembre2025": 6.56, "agosto2026": 7.51, "septiembre2026": 7.58 },
+        "afore_inbursa_sb9094": { "septiembre2025": 7.83, "agosto2026": 8.91, "septiembre2026": 8.92 },
+        "afore_invercap_sb9094": { "septiembre2025": 7.33, "agosto2026": 8.66, "septiembre2026": 8.73 },
+        "afore_pensionissste_sb9094": { "septiembre2025": 6.93, "agosto2026": 7.62, "septiembre2026": 7.59 },
+        "afore_principal_sb9094": { "septiembre2025": 6.90, "agosto2026": 8.09, "septiembre2026": 8.14 },
+        "afore_profuturo_sb9094": { "septiembre2025": 8.23, "agosto2026": 9.55, "septiembre2026": 9.56 },
+        "afore_sura_sb9094": { "septiembre2025": 7.79, "agosto2026": 9.02, "septiembre2026": 9.04 },
+        "afore_xxi_banorte_sb9094": { "septiembre2025": 7.56, "agosto2026": 8.93, "septiembre2026": 8.98 }
+      }
+    },
+    "klar_gat": {
+      "url": "https://www.klar.mx/gat/",
+      "urlLeida": "https://www.klar.mx/gat",
+      "titulo": "Klar: tabla GAT, sección Cuenta a la Vista/Depósitos a Plazo",
+      "extracto": [
+        "«Modalidad Depósitos a Plazo»",
+        "Columnas: «Segmento | Plazo (días) | Tasa de Interés Anual Fija Antes de impuestos | GAT Nominal Antes de impuestos | GAT Real Descontando la inflación estimada»",
+        "«Light | 30 | 6.20% | 6.42% | 2.25%»",
+        "«Ejemplo Representativo: GAT calculado del 05 de noviembre al 07 de diciembre de 2026, en un ejemplo representativo de $100.00 (cien pesos 00/100 M.N.).»",
+        "«Vigencia del cálculo: Del 05 de noviembre al 07 de diciembre de 2026.»"
+      ],
+      "producto": "klar_deposito_light_30",
+      "segmento": "Light",
+      "plazoDias": 30,
+      "tasaAnual": 6.20,
+      "gatNominal": 6.42,
+      "gatReal": 2.25,
+      "montoEjemplo": 100,
+      "vigencia": { "desde": "2026-11-05", "hasta": "2026-12-07" },
+      "nota": "La fuente da un intervalo de cálculo, no una fecha puntual. No se mezcla con Plus, Platino ni la inversión Max."
+    },
+    "banregio_recompensas": {
+      "url": "https://recompensas.banregio.com/",
+      "titulo": "Banregio Recompensas: CAT Tarjeta Win",
+      "extracto": [
+        "«Costo Anual Total (CAT) Tarjeta Win Banregio»",
+        "«CAT PROMEDIO 40.3% Sin IVA. Tasa Variable. Vigencia de la oferta al 28 de febrero de 2027. Cálculo realizado el 31 de agosto de 2026. Tasa anual de interés promedio ponderada del 34.1%, comisión anual $0 Sin IVA.»",
+        "«Tarjeta Win Banregio: 1% de recompensas con tarjeta física, 2% de recompensas en compras en línea con la Tarjeta Virtual.»"
+      ],
+      "producto": "banregio_win",
+      "catPromedioSinIVA": 40.3,
+      "tasaTipo": "variable",
+      "tasaPromedioPonderada": 34.1,
+      "anualidadSinIVA": 0,
+      "recompensasFisicaPct": 1,
+      "recompensasVirtualEnLineaPct": 2,
+      "calculo": "2026-08-31",
+      "vigenteHasta": "2027-02-28",
+      "nota": "Fuente distinta a la de la entrega de Orion (banregio.com/personas/tarjetas/banregio.php y folleto PDF). Comisiones, requisitos y fórmula de tasa no aparecen en el extracto: se conservan de la entrega de Orion."
+    }
+  }
+}

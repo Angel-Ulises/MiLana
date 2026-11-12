@@ -1,6 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { startHomeWhenReady } from './lib/homeStartup.js'
+import { startCalcWhenReady } from './lib/calcStartup.js'
+// Estilos del formulario y resultado de calculadora: globales para que la calculadora prerenderizada
+// se vea completa antes de cargar el módulo de App.
+import './resultado-claro.css'
 import {
   esRutaCarreras, esRutaProfesion, esRutaOcupaciones, esRutaCompararCarreras,
   esRutaCompararEstados, esRutaEstado, esRutaFondosCNBV, esRutaCetesReferencia,
@@ -212,6 +216,8 @@ const mount = (HomeApp, onInitialReady) => ReactDOM.createRoot(root).render(
 // mantienen su carga separada; ningún complemento retrasa este primer montaje.
 if (location.pathname === '/' && root.querySelector('[data-startup-home]')) {
   startHomeWhenReady({ root, load: () => import('./App.jsx'), mount });
+} else if (/^\/calculadoras\/[^/]+\/?$/.test(location.pathname) && root.querySelector('[data-startup-calc]')) {
+  startCalcWhenReady({ root, load: () => import('./App.jsx'), mount });
 } else {
   mount();
 }

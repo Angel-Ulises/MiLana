@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { calcularAguinaldo, calcularISR } from '../src/lib/calculos-revisados.mjs';
+import { calcularAguinaldo, calcularAguinaldoNeto, calcularISR } from '../src/lib/calculos-revisados.mjs';
 import { calcularFiniquito2026, calcularBrutoNeto2026 } from '../src/lib/calculos-laborales-2026.mjs';
 
 const casos = JSON.parse(readFileSync('public/casos-calculadoras.json', 'utf8'));
@@ -9,6 +9,7 @@ const casos = JSON.parse(readFileSync('public/casos-calculadoras.json', 'utf8'))
 function ejecutar(v) {
   switch (v.tipo) {
     case 'aguinaldo': return calcularAguinaldo(v.argumentos);
+    case 'aguinaldo-neto': return calcularAguinaldoNeto(v.argumentos);
     case 'isr': return calcularISR(v.argumentos);
     case 'finiquito': return calcularFiniquito2026(v.argumentos);
     case 'bruto-neto': return calcularBrutoNeto2026(v.argumentos);

@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { prerenderHomeHero, preloadHomeModule } from './prerender-home.mjs';
+import { prerenderCalculadoras } from './prerender-calculadoras.mjs';
 
 const RAIZ = resolve(new URL('..', import.meta.url).pathname);
 const DIST = resolve(RAIZ, 'dist');
@@ -38,42 +39,19 @@ function casoCalculadora(pagina) {
         </section>`;
 }
 
-function cuerpoCalculadora(pagina) {
-  const dato = contenido[pagina.id];
-  if (!dato) throw new Error(`Falta contenido editorial para ${pagina.id}`);
-  const faq = Array.isArray(dato.faq) ? dato.faq : [];
-  const siguientes = Array.isArray(dato.siguientes) ? dato.siguientes : [];
-
+// Mejora 2026-11 (fase 3): el HTML inicial lleva la calculadora real prerenderizada desde React
+// (encabezado, formulario, explicación y preguntas frecuentes), visible antes de cargar JavaScript.
+// El caso resuelto y los enlaces a guías se conservan para lectores y rastreadores.
+function cuerpoCalculadora(pagina, panel) {
+  if (!contenido[pagina.id]) throw new Error(`Falta contenido editorial para ${pagina.id}`);
+  if (!panel) throw new Error(`Falta el prerender de ${pagina.slug}`);
   return `    <div id="root">
-      <main data-static-seo="calculadora">
-        <nav aria-label="Ruta"><a href="/">Inicio</a> / <a href="/calculadoras">Calculadoras</a></nav>
-        <h1>${escapar(tituloCorto(pagina))}</h1>
-        <p>${escapar(dato.proposito)}</p>
-
-        ${casoCalculadora(pagina)}
-        <section>
-          <h2>Cómo leer tu resultado</h2>
-          <p>${escapar(dato.interpretacion)}</p>
-        </section>
-        <section>
-          <h2>Qué significa para ti</h2>
-          <p>${escapar(dato.significado)}</p>
-        </section>
-        <section>
-          <h2>Cómo se calcula</h2>
-          <p>${escapar(dato.metodologia)}</p>
-        </section>
-        <section>
-          <h2>Supuestos y límites</h2>
-          <p>${escapar(dato.supuestos)}</p>
-        </section>
-        <section>
-          <h2>Fundamento y fuentes</h2>
-          <p>${escapar(dato.fundamento)}</p>
-        </section>
-        ${faq.length ? `<section><h2>Preguntas frecuentes</h2>${faq.map((item) => `<h3>${escapar(item.pregunta)}</h3><p>${escapar(item.respuesta)}</p>`).join('')}</section>` : ''}
-        ${siguientes.length ? `<section><h2>Qué revisar después</h2><ul>${siguientes.map((item) => `<li><a href="${enlazar(item.destino)}">${escapar(item.texto)}</a></li>`).join('')}</ul></section>` : ''}
+      <main data-static-seo="calculadora" data-startup-calc>
+        ${panel}
+        <div class="shell" style="max-width:720px">
+        ${casoCalculadora(pagina).replace('<section data-static-case', '<section class="ml-case ml-case-static" data-case-slug="' + escapar(pagina.slug) + '" data-static-case')}
         <p><a href="/aprende">Consulta también las guías de MiLana</a>.</p>
+        </div>
       </main>
     </div>`;
 }
@@ -150,8 +128,9 @@ function inyectar(archivo, cuerpo) {
 
 inyectar(resolve(DIST, 'index.html'), cuerpoInicio(await prerenderHomeHero()));
 preloadHomeModule(DIST);
+const paneles = await prerenderCalculadoras(catalogo.paginas.map((pagina) => pagina.slug));
 for (const pagina of catalogo.paginas) {
-  inyectar(resolve(DIST, 'calculadoras', pagina.slug, 'index.html'), cuerpoCalculadora(pagina));
+  inyectar(resolve(DIST, 'calculadoras', pagina.slug, 'index.html'), cuerpoCalculadora(pagina, paneles[pagina.slug]));
 }
 
 console.log(`SEO estático: portada + ${catalogo.paginas.length} calculadoras con H1, contenido, casos verificados y enlaces internos.`);

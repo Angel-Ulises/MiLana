@@ -122,7 +122,7 @@
     qsa('input[type="number"]', main).forEach(input => input.setAttribute('inputmode', 'decimal'));
     qsa('input[type="date"]', main).forEach(input => {
       input.lang = 'es-MX';
-      if (!input.getAttribute('aria-describedby')) {
+      if (!input.getAttribute('aria-describedby') && !input.closest('[data-calc-directo]')) {
         const hint = document.createElement('p');
         hint.className = 'astra-field-hint';
         hint.textContent = 'Fecha en formato local del selector de tu dispositivo.';

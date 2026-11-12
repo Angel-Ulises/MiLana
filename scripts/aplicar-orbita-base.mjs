@@ -1,7 +1,6 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, sep } from 'node:path';
-import { DESCRIPCION_NAVEGACION, NAVEGACION_MILANA } from '../src/lib/siteNavigation.js';
-import { HERO_SIZES, heroSrcSet, heroUrl } from '../src/lib/heroPhoto.js';
+import { DESCRIPCION_NAVEGACION, NAVEGACION_MILANA, NAVEGACION_MAS } from '../src/lib/siteNavigation.js';
 import { SEARCH_INTENTS, SEARCH_FEATURED } from '../src/lib/searchIntent.js';
 
 const DIST = new URL('../dist/', import.meta.url);
@@ -23,7 +22,7 @@ const STATIC_TOP_ROUTES = new Set([
   '/aprende/cat-y-gat-que-comparan',
   '/aprende/mensualidad-y-costo-del-credito',
   '/aprende/leer-fuentes-comparador-financiero',
-  '/sobre', '/contacto', '/metodo', '/privacidad', '/financiamiento',
+  '/sobre', '/contacto', '/metodo', '/privacidad', '/terminos', '/financiamiento',
 ]);
 const nav = NAVEGACION_MILANA;
 
@@ -37,6 +36,7 @@ const [careerData, stateData, financeData, professionData, matchData] = await Pr
 const cleanTitle = (title='') => title.replace(/\s*\|\s*MiLana.*$/i, '').trim();
 const searchItems = [
   ...nav,
+  ...NAVEGACION_MAS,
   ['finiquito','/calculadoras/finiquito','Finiquito'],
   ['liquidacion','/calculadoras/liquidacion','Liquidación'],
   ['aguinaldo','/calculadoras/aguinaldo','Aguinaldo'],
@@ -68,7 +68,7 @@ const iconSearch = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" 
 const iconMenu = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>';
 const boot = `<script data-orbita-boot>(function(){var q=new URLSearchParams(location.search);var r=document.documentElement;if(q.get('embed')==='1'){r.classList.add('ml-orbita-embed');return}var p=location.pathname.replace(/\\\/$/,'')||'/';r.classList.add('ml-orbita-enabled');var s=p.indexOf('/calculadoras')===0?'calculadoras':p.indexOf('/carreras')===0?'carreras':p.indexOf('/estados')===0?'estados':p.indexOf('/finanzas')===0?'finanzas':p.indexOf('/invertir')===0?'invertir':p.indexOf('/economia')===0?'economia':p.indexOf('/aprende')===0?'aprende':'inicio';r.dataset.orbitaSection=s;try{if(localStorage.getItem('ml-orbita-easy')==='1')r.classList.add('ml-orbita-easy')}catch(e){}})();</script>`;
 const embedGuard = `<style data-orbita-embed-guard>html.ml-orbita-embed .ml-orbita-shell,html.ml-orbita-embed .ml-orbita-drawer,html.ml-orbita-embed .ml-orbita-search,html.ml-orbita-embed .ml-orbita-skip-link,html.ml-orbita-embed [data-orbita-static-reserve],html.ml-orbita-embed [data-orbita-ad-reserve]{display:none!important}</style>`;
-const baseHead = `${boot}${embedGuard}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=optional" rel="stylesheet"><link rel="stylesheet" href="/orbita-v3-base.css">`;
+const baseHead = `${boot}${embedGuard}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=optional" rel="stylesheet" media="print" onload="this.media=\'all\'"><noscript><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=optional" rel="stylesheet"></noscript><link rel="stylesheet" href="/orbita-v3-base.css">`;
 const runtimeBlocking = '<link rel="stylesheet" href="/orbita-v3-runtime.css" data-orbita-runtime-bundle>';
 // Probado: cargar el runtime sin bloquear en páginas estáticas baja el primer pintado de 1.4 s a 0.56 s, pero el CLS sube hasta 0.39
 // (/aprende/finiquito-vs-liquidacion). Se queda bloqueante hasta reducir el runtime o inlinear su CSS crítico.
@@ -76,9 +76,12 @@ const internalHead = '<!--RUNTIME-CSS--><script src="/orbita-v3-internal.js" def
 const headForRoute = (route) => `${baseHead}${route === PROTECTED_PENSION ? '' : '<link rel="stylesheet" href="/orbita-v3-prepaint.css" data-orbita-prepaint>'+internalHead.replace('<!--RUNTIME-CSS-->', runtimeBlocking)}<script src="/orbita-v3-base.js" defer data-orbita-runtime></script>`;
 const headerNav = nav.map(([key, href, label]) => `<a data-orbita-nav="${key}" href="${href}">${label}</a>`).join('');
 const drawerItem = (label, key) => `<span class="ml-orbita-drawer-label">${label}<small>${DESCRIPCION_NAVEGACION[key]}</small></span>`;
-const drawerNav = `<a href="/finanzas/mi-situacion">${drawerItem('Mi situación', 'mi-situacion')}</a>${nav.map(([key, href, label]) => `<a data-orbita-nav="${key}" href="${href}">${drawerItem(label === 'Finanzas' ? 'Finanzas personales' : label, key)}</a>`).join('')}<button class="ml-orbita-mobile-easy" type="button" data-orbita-easy aria-pressed="false">Letra grande</button>`;
-const results = searchItems.map(([,href,label])=>`<a data-orbita-search-item href="${href}" data-search-aliases="${(SEARCH_INTENTS[href]||[]).join(' ')}" data-search-featured="${SEARCH_FEATURED.includes(href)}">${label}</a>`).join('');
-const shell = `<a class="ml-orbita-skip-link" href="#__CONTENT_ID__">Saltar al contenido</a><header class="ml-orbita-shell" data-orbita-shell><div class="ml-orbita-top"><a class="ml-orbita-logo" href="/" aria-label="MiLana, inicio"><img class="ml-orbita-brand-image" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true"></a><nav class="ml-orbita-nav" aria-label="Secciones">${headerNav}</nav><div class="ml-orbita-actions"><button class="ml-orbita-icon-btn" type="button" data-orbita-easy aria-pressed="false" title="Letra grande desactivada">Aa<span>Letra grande</span></button><button class="ml-orbita-icon-btn" type="button" data-orbita-search-open aria-label="Buscar">${iconSearch}</button><a class="ml-orbita-situation" href="/finanzas/mi-situacion">Mi situación</a><button class="ml-orbita-menu-btn" type="button" aria-label="Menú" aria-expanded="false" aria-controls="ml-orbita-drawer">${iconMenu}</button></div></div></header><nav class="ml-orbita-drawer" id="ml-orbita-drawer" aria-label="Menú" aria-hidden="true">${drawerNav}</nav><dialog class="ml-orbita-search" aria-labelledby="ml-orbita-search-title"><div class="ml-orbita-search-inner"><div class="ml-orbita-search-head"><h2 id="ml-orbita-search-title">Buscar en MiLana</h2><button class="ml-orbita-search-close" type="button" data-orbita-search-close aria-label="Cerrar">×</button></div><input type="search" autocomplete="off" placeholder="¿Qué quieres resolver? Ej.: me despidieron" aria-label="Buscar por problema, tema o herramienta"><p class="ml-orbita-search-count" data-orbita-search-count aria-live="polite">Sugerencias para empezar</p><div class="ml-orbita-search-list">${results}</div><p class="ml-orbita-search-empty" data-orbita-search-empty hidden>Sin resultados. Prueba con «sueldo», «despido», «CETES» o «estados».</p></div></dialog>`;
+const drawerNav = `${nav.map(([key, href, label]) => `<a data-orbita-nav="${key}" href="${href}">${drawerItem(label === 'Finanzas' ? 'Finanzas personales' : label, key)}</a>`).join('')}<p class="ml-orbita-drawer-more">Más temas</p><div class="ml-orbita-drawer-mini">${NAVEGACION_MAS.map(([key, href, label]) => `<a data-orbita-nav="${key}" href="${href}">${label}</a>`).join('')}</div><button class="ml-orbita-mobile-easy" type="button" data-orbita-easy aria-pressed="false">Letra grande</button>`;
+// Mejora 2026-11: el HTML de cada página ya no lleva ~110 enlaces del buscador antes del contenido.
+// Solo van las sugerencias destacadas; el índice completo (/buscar-indice.json) se descarga al abrir el buscador.
+const searchIndex = searchItems.map(([,href,label])=>({ href, label, aliases: (SEARCH_INTENTS[href]||[]).join(' '), featured: SEARCH_FEATURED.includes(href) }));
+const results = searchIndex.filter((item)=>item.featured).map(({href,label,aliases})=>`<a data-orbita-search-item href="${href}" data-search-aliases="${aliases}" data-search-featured="true">${label}</a>`).join('');
+const shell = `<a class="ml-orbita-skip-link" href="#__CONTENT_ID__">Saltar al contenido</a><header class="ml-orbita-shell" data-orbita-shell><div class="ml-orbita-top"><a class="ml-orbita-logo" href="/" aria-label="MiLana, inicio"><img class="ml-orbita-brand-image" src="/milana-horizontal.svg" width="144" height="27" alt="" aria-hidden="true"></a><nav class="ml-orbita-nav" aria-label="Secciones">${headerNav}</nav><div class="ml-orbita-actions"><button class="ml-orbita-icon-btn" type="button" data-orbita-easy aria-pressed="false" title="Letra grande desactivada">Aa<span>Letra grande</span></button><button class="ml-orbita-icon-btn" type="button" data-orbita-search-open aria-label="Buscar">${iconSearch}</button><button class="ml-orbita-menu-btn" type="button" aria-label="Menú" aria-expanded="false" aria-controls="ml-orbita-drawer">${iconMenu}</button></div></div></header><nav class="ml-orbita-drawer" id="ml-orbita-drawer" aria-label="Menú" aria-hidden="true">${drawerNav}</nav><dialog class="ml-orbita-search" aria-labelledby="ml-orbita-search-title"><div class="ml-orbita-search-inner"><div class="ml-orbita-search-head"><h2 id="ml-orbita-search-title">Buscar en MiLana</h2><button class="ml-orbita-search-close" type="button" data-orbita-search-close aria-label="Cerrar">×</button></div><input type="search" autocomplete="off" placeholder="¿Qué quieres resolver? Ej.: me despidieron" aria-label="Buscar por problema, tema o herramienta"><p class="ml-orbita-search-count" data-orbita-search-count aria-live="polite">Sugerencias para empezar</p><div class="ml-orbita-search-list">${results}</div><p class="ml-orbita-search-empty" data-orbita-search-empty hidden>Sin resultados. Prueba con «sueldo», «despido», «CETES» o «estados».</p></div></dialog>`;
 
 const sectionForRoute = (route) => {
   if (route.startsWith('/carreras')) return 'carreras';
@@ -147,6 +150,7 @@ function routeFor(path) {
 }
 const runtimeCss=(await Promise.all(RUNTIME_CSS_FILES.map((name)=>readFile(new URL(name,PUBLIC),'utf8')))).join('\n\n');
 await writeFile(new URL('orbita-v3-runtime.css',DIST),runtimeCss);
+await writeFile(new URL('buscar-indice.json',DIST),JSON.stringify(searchIndex));
 let changed=0, skipped=0;
 const originals = await files(DIST);
 for(const path of originals){
@@ -167,7 +171,6 @@ for(const path of originals){
   const staticAttr = STATIC_TOP_ROUTES.has(route) ? ' data-orbita-static-top="true"' : '';
   // Preload estático solo en Inicio, para que lo vea el preload scanner.
   // Justo después de <meta name="viewport"> (antes el viewport por defecto de 980px hacía coincidir la media query); en móvil (≤620px) la foto del hero está oculta, así que no se precarga.
-  if(route==='/') html=html.replace(/(<meta\s+name=["']viewport["'][^>]*>)/i,`$1<link rel="preload" as="image" href="${heroUrl(1440)}" imagesrcset="${heroSrcSet()}" imagesizes="${HERO_SIZES}" fetchpriority="high" media="(min-width: 621px)">`);
   // Sin <link rel="icon" > el navegador pide /favicon.ico (404).
   if(!/<link[^>]+rel="(?:shortcut )?icon"/i.test(html)) html=html.replace('</head>','<link rel="icon" type="image/svg+xml" href="/favicon.svg"></head>');
   html=html.replace('</head>',`${headForRoute(route)}</head>`).replace(/<body([^>]*)>/i,`<body$1${staticAttr}>${frame}`);

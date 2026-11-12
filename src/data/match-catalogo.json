@@ -18,8 +18,9 @@
   "Marco general y declaraciones del proveedor se distinguen de verificación individual de padrón vigente."
  ],
  "consar": {
-  "corte": "2026-08",
-  "precision": "mes"
+  "corte": "2026-09",
+  "precision": "mes",
+  "corteComisiones": "2026-08"
  },
  "categorias": [
   {
@@ -4876,22 +4877,23 @@
      "clave": "cat",
      "etiqueta": "CAT publicado",
      "grupo": "indicadores",
-     "valor": "40.6 % (promedio, sin IVA)",
-     "numero": 40.6,
+     "valor": "40.3 % (promedio, sin IVA)",
+     "numero": 40.3,
      "estado": {
       "codigo": "vigente_al_corte",
       "tipo": "verificado",
       "etiqueta": "Vigente al corte"
      },
+     "nota": "«Tasa Variable» (lectura delegada del 10-11-2026; esta sesión no reabrió la URL).",
      "limites": [
       "No se divulgaron monto, plazo ni escenario completo en el bloque consultado; no reproducir como cotización individual."
      ],
      "fuentes": [
       {
        "f": 132,
-       "consulta": "2026-10-12",
-       "calculo": "2026-04-30",
-       "hasta": "2026-10-30"
+       "consulta": "2026-11-10",
+       "calculo": "2026-08-31",
+       "hasta": "2027-02-28"
       }
      ]
     },
@@ -4901,7 +4903,7 @@
      "grupo": "indicadores",
      "valor": [
       "Tipo: variable",
-      "Promedio ponderado anual: 34.2 %",
+      "Promedio ponderado anual: 34.1 %",
       "IVA: N/D",
       "Fórmula mínima: TIIE de fondeo compuesta por adelantado a 28 días + 27 puntos porcentuales",
       "Fórmula máxima: Misma TIIE + 42 puntos porcentuales"
@@ -4911,7 +4913,12 @@
       "tipo": "observado",
       "etiqueta": "Sin vigencia publicada"
      },
+     "nota": "Tipo y promedio ponderado: https://recompensas.banregio.com/ (cálculo al 31-08-2026, oferta al 28-02-2027; lectura delegada del 10-11-2026; esta sesión no reabrió la URL). Fórmulas mínima/máxima e IVA: folleto PDF consultado el 12-10-2026, sin vigencia explícita.",
      "fuentes": [
+      {
+       "f": 132,
+       "consulta": "2026-11-10"
+      },
       {
        "f": 133,
        "consulta": "2026-10-12"
@@ -4929,9 +4936,14 @@
       "tipo": "observado",
       "etiqueta": "Sin vigencia publicada"
      },
+     "nota": "La página de recompensas confirma «comisión anual $0 Sin IVA» (lectura delegada del 10-11-2026; esta sesión no reabrió la URL).",
      "fuentes": [
       {
        "f": 132,
+       "consulta": "2026-11-10"
+      },
+      {
+       "f": 134,
        "consulta": "2026-10-12"
       }
      ]
@@ -4976,7 +4988,7 @@
      },
      "fuentes": [
       {
-       "f": 132,
+       "f": 134,
        "consulta": "2026-10-12"
       }
      ]
@@ -4993,7 +5005,7 @@
      "nota": "No se divulga rango de línea de crédito general.",
      "fuentes": [
       {
-       "f": 132,
+       "f": 134,
        "consulta": "2026-10-12"
       }
      ]
@@ -5010,7 +5022,7 @@
      "nota": "No convertir diferimiento de hasta 24 meses en plazo de toda la tarjeta.",
      "fuentes": [
       {
-       "f": 132,
+       "f": 134,
        "consulta": "2026-10-12"
       }
      ]
@@ -5028,10 +5040,14 @@
       "tipo": "observado",
       "etiqueta": "Sin vigencia publicada"
      },
-     "nota": "Sujeto a términos del programa; no se calculó valor neto.",
+     "nota": "Sujeto a términos del programa; no se calculó valor neto. La página de recompensas confirma 1 % física y 2 % en compras en línea con la virtual (lectura delegada del 10-11-2026; esta sesión no reabrió la URL).",
      "fuentes": [
       {
        "f": 132,
+       "consulta": "2026-11-10"
+      },
+      {
+       "f": 134,
        "consulta": "2026-10-12"
       }
      ]
@@ -5048,14 +5064,37 @@
      },
      "fuentes": [
       {
-       "f": 132,
+       "f": 134,
        "consulta": "2026-10-12"
       }
      ]
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "CAT 40.6 % promedio sin IVA, cálculo del 30-04-2026, vigente hasta el 30-10-2026 (consulta del 12-10-2026).",
+     "nota": "Sustituido por el CAT con cálculo del 31-08-2026.",
+     "fuentes": [
+      {
+       "f": 134,
+       "consulta": "2026-10-12",
+       "calculo": "2026-04-30",
+       "hasta": "2026-10-30"
+      }
+     ]
+    },
+    {
+     "texto": "Tasa promedio ponderada anual 34.2 % (folleto PDF consultado el 12-10-2026).",
+     "nota": "Sustituida por 34.1 % (cálculo del 31-08-2026).",
+     "fuentes": [
+      {
+       "f": 133,
+       "consulta": "2026-10-12"
+      }
+     ]
+    }
+   ],
    "alertas": [
     "Los requisitos públicos no implican aprobación. ND no equivale a cero ni a rechazo."
    ],
@@ -5063,6 +5102,19 @@
    "enlaceOficial": "https://www.banregio.com/personas/tarjetas/banregio.php",
    "motivoExclusion": null,
    "decisionEditorial": null,
+   "actualizacion": {
+    "campos": [
+     "cat",
+     "tasa",
+     "anualidad",
+     "beneficios"
+    ],
+    "calculo": "2026-08-31",
+    "vigenteHasta": "2027-02-28",
+    "calculoAnterior": "2026-04-30",
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
    "estadoUso": "CAT con vigencia al corte; conserva escenarios y alertas",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "banco",
@@ -5099,7 +5151,7 @@
      "nota": "El HTML y la extracción de página dejan CAT, cálculo y vigencia vacíos. La ficha IFIT indexa 36.8%, pero devuelve HTTP 502: no se certifica vigencia ni IVA por ese snippet.",
      "fuentes": [
       {
-       "f": 134,
+       "f": 135,
        "consulta": "2026-10-12"
       }
      ]
@@ -5122,7 +5174,7 @@
      "nota": "Desde depende del perfil; no supone oferta para cualquier solicitante.",
      "fuentes": [
       {
-       "f": 135,
+       "f": 136,
        "consulta": "2026-10-12"
       }
      ]
@@ -5141,7 +5193,7 @@
      "nota": "No usar exención como costo permanente. El mismo HTML muestra cero dentro del simulador y de una promoción.",
      "fuentes": [
       {
-       "f": 134,
+       "f": 135,
        "consulta": "2026-10-12"
       }
      ]
@@ -5161,7 +5213,7 @@
      "nota": "No extender esta comisión a toda disposición inicial.",
      "fuentes": [
       {
-       "f": 134,
+       "f": 135,
        "consulta": "2026-10-12"
       }
      ]
@@ -5183,7 +5235,7 @@
      "nota": "Límites del simulador público y máximo de la ficha; sujeto a capacidad de pago.",
      "fuentes": [
       {
-       "f": 134,
+       "f": 135,
        "consulta": "2026-10-12"
       }
      ]
@@ -5200,7 +5252,7 @@
      },
      "fuentes": [
       {
-       "f": 134,
+       "f": 135,
        "consulta": "2026-10-12"
       }
      ]
@@ -5224,7 +5276,7 @@
      },
      "fuentes": [
       {
-       "f": 134,
+       "f": 135,
        "consulta": "2026-10-12"
       }
      ]
@@ -5241,7 +5293,7 @@
      },
      "fuentes": [
       {
-       "f": 134,
+       "f": 135,
        "consulta": "2026-10-12"
       }
      ]
@@ -5262,7 +5314,7 @@
      },
      "fuentes": [
       {
-       "f": 135,
+       "f": 136,
        "consulta": "2026-10-12"
       }
      ]
@@ -5279,7 +5331,7 @@
      },
      "fuentes": [
       {
-       "f": 135,
+       "f": 136,
        "consulta": "2026-10-12"
       }
      ]
@@ -5296,7 +5348,7 @@
      },
      "fuentes": [
       {
-       "f": 134,
+       "f": 135,
        "consulta": "2026-10-12"
       }
      ]
@@ -5307,7 +5359,7 @@
      "texto": "Campo: simulador tasa; Valores no adoptados: 12 % · 14 %; Decision: Son valores de plantilla/simulador; usar desde 20% y máximo 50% del texto de producto",
      "fuentes": [
       {
-       "f": 134,
+       "f": 135,
        "consulta": "2026-10-12"
       }
      ]
@@ -5316,7 +5368,7 @@
      "texto": "Campo: cat snippet ifit; Valor indexado: 36.8 %; Decision: Solo pista de verificación; no CAT listo para comparación",
      "fuentes": [
       {
-       "f": 136,
+       "f": 137,
        "consulta": "2026-10-12"
       }
      ]
@@ -5370,7 +5422,7 @@
      ],
      "fuentes": [
       {
-       "f": 137,
+       "f": 138,
        "consulta": "2026-10-12",
        "calculo": "2026-06-30",
        "hasta": "2026-12-31"
@@ -5396,7 +5448,7 @@
      "nota": "No se publica porcentaje vigente en la página; no recuperar rangos de artículos ajenos o del segmento Premier.",
      "fuentes": [
       {
-       "f": 137,
+       "f": 138,
        "consulta": "2026-10-12"
       }
      ]
@@ -5418,7 +5470,7 @@
      "nota": "Anexo emitido 7 julio 2025 enlazado actualmente; no publica fecha final de vigencia.",
      "fuentes": [
       {
-       "f": 138,
+       "f": 139,
        "consulta": "2026-10-12",
        "emision": "2025-07-07"
       }
@@ -5440,7 +5492,7 @@
      },
      "fuentes": [
       {
-       "f": 137,
+       "f": 138,
        "consulta": "2026-10-12"
       }
      ]
@@ -5461,7 +5513,7 @@
      "nota": "El folleto vencido dice hasta 72 meses; no ampliar la oferta actual con él.",
      "fuentes": [
       {
-       "f": 137,
+       "f": 138,
        "consulta": "2026-10-12"
       }
      ]
@@ -5478,7 +5530,7 @@
      },
      "fuentes": [
       {
-       "f": 137,
+       "f": 138,
        "consulta": "2026-10-12"
       }
      ]
@@ -5500,7 +5552,7 @@
      },
      "fuentes": [
       {
-       "f": 137,
+       "f": 138,
        "consulta": "2026-10-12"
       }
      ]
@@ -5518,7 +5570,7 @@
      "nota": "No convertir “Advance” heredado en rechazo automático sin confirmar política vigente.",
      "fuentes": [
       {
-       "f": 137,
+       "f": 138,
        "consulta": "2026-10-12"
       }
      ]
@@ -5535,7 +5587,7 @@
      "nota": "La página describe condonación al fallecimiento, no prima de seguro ni requisitos exhaustivos de aseguramiento.",
      "fuentes": [
       {
-       "f": 137,
+       "f": 138,
        "consulta": "2026-10-12"
       }
      ]
@@ -5552,7 +5604,7 @@
      },
      "fuentes": [
       {
-       "f": 137,
+       "f": 138,
        "consulta": "2026-10-12"
       }
      ]
@@ -5563,7 +5615,7 @@
      "texto": "Campo: plazo maximo; Alternativo: 72 meses; Seleccionado: 60 meses; Decision: No usar 72 meses del folleto vencido",
      "fuentes": [
       {
-       "f": 139,
+       "f": 140,
        "consulta": "2026-10-12",
        "hasta": "2026-04-30"
       }
@@ -5575,7 +5627,7 @@
      "texto": "Porcentaje: 40.4 %; Tipo: promedio; IVA: sin IVA; Supuesto monto: N/D; Supuesto plazo: N/D; Supuesto línea crédito: N/D",
      "fuentes": [
       {
-       "f": 139,
+       "f": 140,
        "consulta": "2026-10-12",
        "calculo": "2025-10-31",
        "hasta": "2026-04-30"
@@ -5630,7 +5682,7 @@
      ],
      "fuentes": [
       {
-       "f": 140,
+       "f": 141,
        "consulta": "2026-10-12",
        "emision": "2026-10",
        "calculo": "2026-08-31",
@@ -5654,7 +5706,7 @@
      },
      "fuentes": [
       {
-       "f": 140,
+       "f": 141,
        "consulta": "2026-10-12",
        "emision": "2026-10"
       }
@@ -5676,7 +5728,7 @@
      "nota": "Bloque HTML con oferta fechada al 30 septiembre 2026; no usar esta tasa máxima como condición vigente garantizada.",
      "fuentes": [
       {
-       "f": 141,
+       "f": 142,
        "consulta": "2026-10-12",
        "calculo": "2026-03-01",
        "hasta": "2026-09-30"
@@ -5699,7 +5751,7 @@
      "nota": "El HTML anterior sí explicita +IVA para disposición; el PDF actual no etiqueta IVA de esas comisiones. No inferir precio con IVA.",
      "fuentes": [
       {
-       "f": 140,
+       "f": 141,
        "consulta": "2026-10-12",
        "emision": "2026-10"
       }
@@ -5718,7 +5770,7 @@
      "nota": "Evidencia conservada de la oferta anterior, no impuesta silenciosamente al documento nuevo.",
      "fuentes": [
       {
-       "f": 141,
+       "f": 142,
        "consulta": "2026-10-12",
        "hasta": "2026-09-30"
       }
@@ -5740,7 +5792,7 @@
      },
      "fuentes": [
       {
-       "f": 140,
+       "f": 141,
        "consulta": "2026-10-12",
        "emision": "2026-10"
       }
@@ -5761,7 +5813,7 @@
      },
      "fuentes": [
       {
-       "f": 140,
+       "f": 141,
        "consulta": "2026-10-12",
        "emision": "2026-10"
       }
@@ -5787,7 +5839,7 @@
      },
      "fuentes": [
       {
-       "f": 140,
+       "f": 141,
        "consulta": "2026-10-12",
        "emision": "2026-10"
       }
@@ -5810,7 +5862,7 @@
      },
      "fuentes": [
       {
-       "f": 140,
+       "f": 141,
        "consulta": "2026-10-12",
        "emision": "2026-10"
       }
@@ -5828,7 +5880,7 @@
      },
      "fuentes": [
       {
-       "f": 140,
+       "f": 141,
        "consulta": "2026-10-12",
        "emision": "2026-10"
       }
@@ -5846,7 +5898,7 @@
      },
      "fuentes": [
       {
-       "f": 140,
+       "f": 141,
        "consulta": "2026-10-12",
        "emision": "2026-10"
       }
@@ -5858,7 +5910,7 @@
      "texto": "Campo: plazo minimo; Alternativo: 3 meses; Seleccionado: 6 meses; Decision: Usar ficha producto y folleto: 6 meses; el beneficio HTML mezcla 3 meses",
      "fuentes": [
       {
-       "f": 141,
+       "f": 142,
        "consulta": "2026-10-12"
       }
      ]
@@ -5869,7 +5921,7 @@
      "texto": "Porcentaje: 36.9 %; Tipo: promedio ponderado; IVA: sin IVA; Supuesto monto: N/D; Supuesto plazo: N/D; Supuesto línea crédito: N/D",
      "fuentes": [
       {
-       "f": 141,
+       "f": 142,
        "consulta": "2026-10-12",
        "calculo": "2026-03-01",
        "hasta": "2026-09-30"
@@ -5921,7 +5973,7 @@
      "nota": "No se encontró CAT completo con fecha de cálculo, supuestos y vigencia en página principal ni FAQ económica consultada. Ejemplos comparativos no adoptados como CAT de oferta vigente.",
      "fuentes": [
       {
-       "f": 142,
+       "f": 143,
        "consulta": "2026-10-12"
       }
      ]
@@ -5944,7 +5996,7 @@
      "nota": "FAQ de marzo 2024 aún accesible. No prueba vigencia al corte; tasa personalizada por historial. No confundir intervalo con cotización.",
      "fuentes": [
       {
-       "f": 143,
+       "f": 144,
        "consulta": "2026-10-12",
        "emision": "2024-03-19"
       }
@@ -5969,7 +6021,7 @@
      "nota": "Declaración FAQ 2023; la portada aún anuncia cero comisiones, sin tarifario fechado verificable.",
      "fuentes": [
       {
-       "f": 144,
+       "f": 145,
        "consulta": "2026-10-12",
        "emision": "2023-02-02"
       }
@@ -5991,7 +6043,7 @@
      },
      "fuentes": [
       {
-       "f": 142,
+       "f": 143,
        "consulta": "2026-10-12"
       }
      ]
@@ -6008,7 +6060,7 @@
      },
      "fuentes": [
       {
-       "f": 142,
+       "f": 143,
        "consulta": "2026-10-12"
       }
      ]
@@ -6030,7 +6082,7 @@
      "nota": "Ejemplo específico de enero 2023; tabla gráfica de rango general no leída. No convertir ejemplo en rango vigente.",
      "fuentes": [
       {
-       "f": 145,
+       "f": 146,
        "consulta": "2026-10-12",
        "emision": "2023-01-25"
       }
@@ -6054,7 +6106,7 @@
      },
      "fuentes": [
       {
-       "f": 142,
+       "f": 143,
        "consulta": "2026-10-12"
       }
      ]
@@ -6073,7 +6125,7 @@
      "nota": "Mínimo para utilizar/solicitar servicios en sitio; no equivale a edad máxima ni a aprobación.",
      "fuentes": [
       {
-       "f": 146,
+       "f": 147,
        "consulta": "2026-10-12",
        "emision": "2018-01-02"
       }
@@ -6091,7 +6143,7 @@
      },
      "fuentes": [
       {
-       "f": 147,
+       "f": 148,
        "consulta": "2026-10-12",
        "emision": "2023-01-25"
       }
@@ -6109,7 +6161,7 @@
      "nota": "ND en fuentes consultadas.",
      "fuentes": [
       {
-       "f": 142,
+       "f": 143,
        "consulta": "2026-10-12"
       }
      ]
@@ -6126,7 +6178,7 @@
      "nota": "Cero comisión de atraso no prueba tasa moratoria cero.",
      "fuentes": [
       {
-       "f": 144,
+       "f": 145,
        "consulta": "2026-10-12",
        "emision": "2023-02-02"
       }
@@ -6144,7 +6196,7 @@
      "nota": "No se verificó registro individual; no asumir RECA financiero.",
      "fuentes": [
       {
-       "f": 148,
+       "f": 149,
        "consulta": "2026-10-12"
       }
      ]
@@ -6155,7 +6207,7 @@
      "texto": "Umbral de deuda en portada: mayor a 10,000 vs al menos 10,000. No aplicar filtro inclusivo/exclusivo definitivo.",
      "fuentes": [
       {
-       "f": 142,
+       "f": 143,
        "consulta": "2026-10-12"
       }
      ]
@@ -6208,7 +6260,7 @@
      ],
      "fuentes": [
       {
-       "f": 149,
+       "f": 150,
        "consulta": "2026-10-12",
        "calculo": "2026-06-15"
       }
@@ -6232,7 +6284,7 @@
      "nota": "Sujeta a evaluación y calificación, no tasa garantizada.",
      "fuentes": [
       {
-       "f": 149,
+       "f": 150,
        "consulta": "2026-10-12",
        "calculo": "2026-06-15"
       }
@@ -6258,7 +6310,7 @@
      },
      "fuentes": [
       {
-       "f": 150,
+       "f": 151,
        "consulta": "2026-10-12"
       }
      ]
@@ -6281,7 +6333,7 @@
      "nota": "El importe se presenta como imagen que no pudo leerse. No sustituir por cifras de terceros; prima separada ND.",
      "fuentes": [
       {
-       "f": 150,
+       "f": 151,
        "consulta": "2026-10-12"
       }
      ]
@@ -6303,7 +6355,7 @@
      },
      "fuentes": [
       {
-       "f": 150,
+       "f": 151,
        "consulta": "2026-10-12"
       }
      ]
@@ -6327,7 +6379,7 @@
      "nota": "Conservar base publicada monto pagado; no cambiarla por saldo vencido.",
      "fuentes": [
       {
-       "f": 150,
+       "f": 151,
        "consulta": "2026-10-12"
       }
      ]
@@ -6347,7 +6399,7 @@
      },
      "fuentes": [
       {
-       "f": 149,
+       "f": 150,
        "consulta": "2026-10-12"
       }
      ]
@@ -6368,7 +6420,7 @@
      "nota": "Monto aprobado depende de capacidad y plazo; límites públicos no promesa.",
      "fuentes": [
       {
-       "f": 151,
+       "f": 152,
        "consulta": "2026-10-12",
        "emision": "2025-08-08"
       }
@@ -6386,7 +6438,7 @@
      },
      "fuentes": [
       {
-       "f": 152,
+       "f": 153,
        "consulta": "2026-10-12",
        "emision": "2026-09-17"
       }
@@ -6413,7 +6465,7 @@
      },
      "fuentes": [
       {
-       "f": 153,
+       "f": 154,
        "consulta": "2026-10-12",
        "emision": "2026-09-17"
       }
@@ -6431,7 +6483,7 @@
      },
      "fuentes": [
       {
-       "f": 154,
+       "f": 155,
        "consulta": "2026-10-12"
       }
      ]
@@ -6453,7 +6505,7 @@
      },
      "fuentes": [
       {
-       "f": 155,
+       "f": 156,
        "consulta": "2026-10-12",
        "emision": "2026-09-17"
       }
@@ -6471,7 +6523,7 @@
      },
      "fuentes": [
       {
-       "f": 154,
+       "f": 155,
        "consulta": "2026-10-12"
       }
      ]
@@ -6488,7 +6540,7 @@
      "nota": "Contrato enlazado inaccesible; no inferir número ni fecha de emisión del nombre del archivo.",
      "fuentes": [
       {
-       "f": 156,
+       "f": 157,
        "consulta": "2026-10-12"
       }
      ]
@@ -6505,7 +6557,7 @@
      "nota": "Tasa no verificada en fuentes legibles.",
      "fuentes": [
       {
-       "f": 150,
+       "f": 151,
        "consulta": "2026-10-12"
       }
      ]
@@ -6516,7 +6568,7 @@
      "texto": "Simulador portada etiqueta tasa promedio 18.5%; el ejemplo legal usa 18.6%.",
      "fuentes": [
       {
-       "f": 149,
+       "f": 150,
        "consulta": "2026-10-12"
       }
      ]
@@ -6525,7 +6577,7 @@
      "texto": "FAQ de página comercial usa tasa promedio 19%. Se preservan etiquetas 18.5/18.6/19 sin sustituir intervalo 8.9–38.9 ni recalcular CAT.",
      "fuentes": [
       {
-       "f": 154,
+       "f": 155,
        "consulta": "2026-10-12"
       }
      ]
@@ -6577,7 +6629,7 @@
      ],
      "fuentes": [
       {
-       "f": 157,
+       "f": 158,
        "consulta": "2026-10-12",
        "calculo": "2026-07-10",
        "hasta": "2027-01-10"
@@ -6602,7 +6654,7 @@
      "nota": "La tasa depende de evaluación individual.",
      "fuentes": [
       {
-       "f": 157,
+       "f": 158,
        "consulta": "2026-10-12"
       }
      ]
@@ -6622,7 +6674,7 @@
      },
      "fuentes": [
       {
-       "f": 157,
+       "f": 158,
        "consulta": "2026-10-12"
       }
      ]
@@ -6643,7 +6695,7 @@
      },
      "fuentes": [
       {
-       "f": 157,
+       "f": 158,
        "consulta": "2026-10-12"
       }
      ]
@@ -6663,7 +6715,7 @@
      },
      "fuentes": [
       {
-       "f": 157,
+       "f": 158,
        "consulta": "2026-10-12"
       }
      ]
@@ -6684,7 +6736,7 @@
      },
      "fuentes": [
       {
-       "f": 157,
+       "f": 158,
        "consulta": "2026-10-12"
       }
      ]
@@ -6706,7 +6758,7 @@
      },
      "fuentes": [
       {
-       "f": 157,
+       "f": 158,
        "consulta": "2026-10-12"
       }
      ]
@@ -6724,7 +6776,7 @@
      "nota": "La fuente dice sin cobro de seguro; no equivale a cobertura universal.",
      "fuentes": [
       {
-       "f": 157,
+       "f": 158,
        "consulta": "2026-10-12"
       }
      ]
@@ -6741,7 +6793,7 @@
      },
      "fuentes": [
       {
-       "f": 157,
+       "f": 158,
        "consulta": "2026-10-12"
       }
      ]
@@ -6758,7 +6810,7 @@
      "nota": "No divulgado en la página consultada.",
      "fuentes": [
       {
-       "f": 157,
+       "f": 158,
        "consulta": "2026-10-12"
       }
      ]
@@ -6770,7 +6822,7 @@
      "texto": "Porcentaje: 33.7 %; Tipo: promedio ponderado; IVA: sin IVA; Supuesto monto: N/D; Supuesto plazo: N/D; Supuesto línea crédito: N/D",
      "fuentes": [
       {
-       "f": 158,
+       "f": 159,
        "consulta": "2026-10-12",
        "emision": "2021-06-01",
        "calculo": "2025-11-03",
@@ -6823,7 +6875,7 @@
      },
      "fuentes": [
       {
-       "f": 159,
+       "f": 160,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -6842,7 +6894,7 @@
      },
      "fuentes": [
       {
-       "f": 160,
+       "f": 161,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -6861,7 +6913,7 @@
      },
      "fuentes": [
       {
-       "f": 160,
+       "f": 161,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -6880,7 +6932,7 @@
      },
      "fuentes": [
       {
-       "f": 160,
+       "f": 161,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -6902,7 +6954,7 @@
      },
      "fuentes": [
       {
-       "f": 159,
+       "f": 160,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -6922,7 +6974,7 @@
      "nota": "No reutilizar equivalentes históricos en pesos; elevar a 30,000 UDI requiere trámite en app.",
      "fuentes": [
       {
-       "f": 160,
+       "f": 161,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -6941,7 +6993,7 @@
      },
      "fuentes": [
       {
-       "f": 161,
+       "f": 162,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -6960,7 +7012,7 @@
      },
      "fuentes": [
       {
-       "f": 161,
+       "f": 162,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -6978,7 +7030,7 @@
      "nota": "No confundir Cuenta Switch con pagaré o Bolsa de Ahorro asociados; no se verificó GAT del saldo transaccional.",
      "fuentes": [
       {
-       "f": 159,
+       "f": 160,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -7001,12 +7053,12 @@
      },
      "fuentes": [
       {
-       "f": 159,
+       "f": 160,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       },
       {
-       "f": 162,
+       "f": 163,
        "consulta": "2026-10-12",
        "corte": "2026-06-18",
        "vigenciaTexto": "No declarada en el contenido consultado"
@@ -7025,7 +7077,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -7078,7 +7130,7 @@
      },
      "fuentes": [
       {
-       "f": 164,
+       "f": 165,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -7097,7 +7149,7 @@
      "nota": "Depende del nivel mostrado en app; los pesos aproximados de la web no son equivalencia vigente comprobada.",
      "fuentes": [
       {
-       "f": 164,
+       "f": 165,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -7117,7 +7169,7 @@
      "nota": "Sin saldo promedio mensual requerido.",
      "fuentes": [
       {
-       "f": 165,
+       "f": 166,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "desde": "2026-10-08",
@@ -7140,7 +7192,7 @@
      "nota": "Folleto de cuenta declara sin comisiones; verificar cobros de terceros/cajero externo por separado.",
      "fuentes": [
       {
-       "f": 165,
+       "f": 166,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "desde": "2026-10-08",
@@ -7161,7 +7213,7 @@
      "nota": "No se extrae cargo específico actual; no reutilizar tabla del PDF vencido. Recursos inactivos tienen tratamiento contractual propio.",
      "fuentes": [
       {
-       "f": 166,
+       "f": 167,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Documento enlazado actualmente; RECA 17455-999-044108/01-01627-0726; no inferir fecha exacta de emisión del sufijo"
       }
@@ -7184,7 +7236,7 @@
      },
      "fuentes": [
       {
-       "f": 165,
+       "f": 166,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "desde": "2026-10-08",
@@ -7205,22 +7257,22 @@
      "nota": "Contrato cláusula I.1.10 declara protección y padrón CNBV indizado identifica banco. No se recuperó confirmación individual IPAB directa; bloquear badge de protección verificada.",
      "fuentes": [
       {
-       "f": 167,
+       "f": 168,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       },
       {
-       "f": 166,
+       "f": 167,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Documento enlazado actualmente; RECA 17455-999-044108/01-01627-0726; no inferir fecha exacta de emisión del sufijo"
       },
       {
-       "f": 168,
+       "f": 169,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Resultado indizado presenta fecha de interfaz16 septiembre 2026; no es fecha del acto de autorización"
       },
       {
-       "f": 162,
+       "f": 163,
        "consulta": "2026-10-12",
        "corte": "2026-06-18",
        "vigenciaTexto": "No declarada en el contenido consultado"
@@ -7239,7 +7291,7 @@
      "nota": "Rendimientos publicados corresponden a dinero apartado en Cajitas; no atribuirlos automáticamente al saldo principal.",
      "fuentes": [
       {
-       "f": 164,
+       "f": 165,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -7257,7 +7309,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -7276,7 +7328,7 @@
      },
      "fuentes": [
       {
-       "f": 165,
+       "f": 166,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "desde": "2026-10-08",
@@ -7331,7 +7383,7 @@
      },
      "fuentes": [
       {
-       "f": 169,
+       "f": 170,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -7353,12 +7405,12 @@
      },
      "fuentes": [
       {
-       "f": 169,
+       "f": 170,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       },
       {
-       "f": 170,
+       "f": 171,
        "consulta": "2026-10-12",
        "emision": "2026-09-07",
        "vigenciaTexto": "No declarada en el contenido consultado"
@@ -7379,7 +7431,7 @@
      "nota": "La ficha indica que no hay que mantener saldo promedio mensual.",
      "fuentes": [
       {
-       "f": 170,
+       "f": 171,
        "consulta": "2026-10-12",
        "emision": "2026-09-07",
        "vigenciaTexto": "No declarada en el contenido consultado"
@@ -7400,7 +7452,7 @@
      "nota": "Exención condicionada a uso; no es cuenta universalmente libre de comisiones.",
      "fuentes": [
       {
-       "f": 171,
+       "f": 172,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Indefinida; modificación o terminación con aviso de 30 días naturales"
       }
@@ -7420,7 +7472,7 @@
      "nota": "En cajeros/practicajas BBVA; promoción indefinida y actividad de cuenta.",
      "fuentes": [
       {
-       "f": 171,
+       "f": 172,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Indefinida; modificación o terminación con aviso de 30 días naturales"
       }
@@ -7440,7 +7492,7 @@
      "nota": "Retiros sin tarjeta desde la app; puede perderse exención por seis meses sin movimientos.",
      "fuentes": [
       {
-       "f": 171,
+       "f": 172,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Indefinida; modificación o terminación con aviso de 30 días naturales"
       }
@@ -7458,18 +7510,18 @@
      "nota": "Web muestra 34; ficha emitida 7 septiembre 2026 y términos de exención muestran 38. No resolver por promedio.",
      "fuentes": [
       {
-       "f": 169,
+       "f": 170,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       },
       {
-       "f": 170,
+       "f": 171,
        "consulta": "2026-10-12",
        "emision": "2026-09-07",
        "vigenciaTexto": "No declarada en el contenido consultado"
       },
       {
-       "f": 171,
+       "f": 172,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Indefinida; modificación o terminación con aviso de 30 días naturales"
       }
@@ -7488,7 +7540,7 @@
      },
      "fuentes": [
       {
-       "f": 171,
+       "f": 172,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Indefinida; modificación o terminación con aviso de 30 días naturales"
       }
@@ -7506,7 +7558,7 @@
      "nota": "No se verificó rendimiento ni GAT del saldo transaccional; no asignar 0% por ausencia.",
      "fuentes": [
       {
-       "f": 170,
+       "f": 171,
        "consulta": "2026-10-12",
        "emision": "2026-09-07",
        "vigenciaTexto": "No declarada en el contenido consultado"
@@ -7530,13 +7582,13 @@
      },
      "fuentes": [
       {
-       "f": 170,
+       "f": 171,
        "consulta": "2026-10-12",
        "emision": "2026-09-07",
        "vigenciaTexto": "No declarada en el contenido consultado"
       },
       {
-       "f": 162,
+       "f": 163,
        "consulta": "2026-10-12",
        "corte": "2026-06-18",
        "vigenciaTexto": "No declarada en el contenido consultado"
@@ -7555,7 +7607,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -7611,14 +7663,14 @@
      "nota": "Vigencia explícita8 octubre–18 noviembre 2026; GAT calculada 25 septiembre 2026.",
      "fuentes": [
       {
-       "f": 172,
+       "f": 173,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "hasta": "2026-11-18",
        "vigenciaTexto": "Valores calculados 25 septiembre 2026; vigencia al 18 noviembre 2026"
       },
       {
-       "f": 165,
+       "f": 166,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "desde": "2026-10-08",
@@ -7641,14 +7693,14 @@
      "nota": "Vigencia explícita8 octubre–18 noviembre 2026; GAT calculada 25 septiembre 2026.",
      "fuentes": [
       {
-       "f": 172,
+       "f": 173,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "hasta": "2026-11-18",
        "vigenciaTexto": "Valores calculados 25 septiembre 2026; vigencia al 18 noviembre 2026"
       },
       {
-       "f": 165,
+       "f": 166,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "desde": "2026-10-08",
@@ -7671,14 +7723,14 @@
      "nota": "Vigencia explícita8 octubre–18 noviembre 2026; GAT calculada 25 septiembre 2026.",
      "fuentes": [
       {
-       "f": 172,
+       "f": 173,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "hasta": "2026-11-18",
        "vigenciaTexto": "Valores calculados 25 septiembre 2026; vigencia al 18 noviembre 2026"
       },
       {
-       "f": 165,
+       "f": 166,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "desde": "2026-10-08",
@@ -7699,7 +7751,7 @@
      },
      "fuentes": [
       {
-       "f": 164,
+       "f": 165,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -7718,7 +7770,7 @@
      },
      "fuentes": [
       {
-       "f": 165,
+       "f": 166,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "desde": "2026-10-08",
@@ -7741,7 +7793,7 @@
      "nota": "Folleto de Cuenta Nu; no incluye cobros de terceros.",
      "fuentes": [
       {
-       "f": 165,
+       "f": 166,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "desde": "2026-10-08",
@@ -7762,22 +7814,22 @@
      "nota": "Contrato cláusula I.1.10 declara protección y padrón CNBV indizado identifica banco. No se recuperó confirmación individual IPAB directa; bloquear badge de protección verificada.",
      "fuentes": [
       {
-       "f": 167,
+       "f": 168,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       },
       {
-       "f": 166,
+       "f": 167,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Documento enlazado actualmente; RECA 17455-999-044108/01-01627-0726; no inferir fecha exacta de emisión del sufijo"
       },
       {
-       "f": 168,
+       "f": 169,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Resultado indizado presenta fecha de interfaz16 septiembre 2026; no es fecha del acto de autorización"
       },
       {
-       "f": 162,
+       "f": 163,
        "consulta": "2026-10-12",
        "corte": "2026-06-18",
        "vigenciaTexto": "No declarada en el contenido consultado"
@@ -7797,7 +7849,7 @@
      "nota": "No garantiza conservarla indefinidamente ni ganar 6.5% del capital por cada mes.",
      "fuentes": [
       {
-       "f": 172,
+       "f": 173,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "hasta": "2026-11-18",
@@ -7817,7 +7869,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -7840,7 +7892,7 @@
      },
      "fuentes": [
       {
-       "f": 165,
+       "f": 166,
        "consulta": "2026-10-12",
        "calculo": "2026-09-25",
        "desde": "2026-10-08",
@@ -7901,11 +7953,11 @@
      },
      "fuentes": [
       {
-       "f": 173,
-       "consulta": "2026-10-12",
-       "desde": "2026-10-07",
-       "hasta": "2026-11-07",
-       "vigenciaTexto": "Depósitos a plazo: el sitio dice calculado del 7 octubre al 7 noviembre 2026; no hay día único de cálculo"
+       "f": 174,
+       "consulta": "2026-11-10",
+       "desde": "2026-11-05",
+       "hasta": "2026-12-07",
+       "vigenciaTexto": "Depósitos a plazo: la tabla dice calculado del 5 de noviembre al 7 de diciembre de 2026; no hay día único de cálculo. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -7922,11 +7974,11 @@
      },
      "fuentes": [
       {
-       "f": 173,
-       "consulta": "2026-10-12",
-       "desde": "2026-10-07",
-       "hasta": "2026-11-07",
-       "vigenciaTexto": "Depósitos a plazo: el sitio dice calculado del 7 octubre al 7 noviembre 2026; no hay día único de cálculo"
+       "f": 174,
+       "consulta": "2026-11-10",
+       "desde": "2026-11-05",
+       "hasta": "2026-12-07",
+       "vigenciaTexto": "Depósitos a plazo: la tabla dice calculado del 5 de noviembre al 7 de diciembre de 2026; no hay día único de cálculo. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -7943,11 +7995,11 @@
      },
      "fuentes": [
       {
-       "f": 173,
-       "consulta": "2026-10-12",
-       "desde": "2026-10-07",
-       "hasta": "2026-11-07",
-       "vigenciaTexto": "Depósitos a plazo: el sitio dice calculado del 7 octubre al 7 noviembre 2026; no hay día único de cálculo"
+       "f": 174,
+       "consulta": "2026-11-10",
+       "desde": "2026-11-05",
+       "hasta": "2026-12-07",
+       "vigenciaTexto": "Depósitos a plazo: la tabla dice calculado del 5 de noviembre al 7 de diciembre de 2026; no hay día único de cálculo. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -7964,11 +8016,11 @@
      },
      "fuentes": [
       {
-       "f": 173,
-       "consulta": "2026-10-12",
-       "desde": "2026-10-07",
-       "hasta": "2026-11-07",
-       "vigenciaTexto": "Depósitos a plazo: el sitio dice calculado del 7 octubre al 7 noviembre 2026; no hay día único de cálculo"
+       "f": 174,
+       "consulta": "2026-11-10",
+       "desde": "2026-11-05",
+       "hasta": "2026-12-07",
+       "vigenciaTexto": "Depósitos a plazo: la tabla dice calculado del 5 de noviembre al 7 de diciembre de 2026; no hay día único de cálculo. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -7985,11 +8037,11 @@
      },
      "fuentes": [
       {
-       "f": 173,
-       "consulta": "2026-10-12",
-       "desde": "2026-10-07",
-       "hasta": "2026-11-07",
-       "vigenciaTexto": "Depósitos a plazo: el sitio dice calculado del 7 octubre al 7 noviembre 2026; no hay día único de cálculo"
+       "f": 174,
+       "consulta": "2026-11-10",
+       "desde": "2026-11-05",
+       "hasta": "2026-12-07",
+       "vigenciaTexto": "Depósitos a plazo: la tabla dice calculado del 5 de noviembre al 7 de diciembre de 2026; no hay día único de cálculo. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -8007,7 +8059,7 @@
      "nota": "Confirmar disponibilidad del plazo y segmento al contratar.",
      "fuentes": [
       {
-       "f": 174,
+       "f": 175,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8025,11 +8077,11 @@
      },
      "fuentes": [
       {
-       "f": 173,
-       "consulta": "2026-10-12",
-       "desde": "2026-10-07",
-       "hasta": "2026-11-07",
-       "vigenciaTexto": "Depósitos a plazo: el sitio dice calculado del 7 octubre al 7 noviembre 2026; no hay día único de cálculo"
+       "f": 174,
+       "consulta": "2026-11-10",
+       "desde": "2026-11-05",
+       "hasta": "2026-12-07",
+       "vigenciaTexto": "Depósitos a plazo: la tabla dice calculado del 5 de noviembre al 7 de diciembre de 2026; no hay día único de cálculo. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -8045,7 +8097,7 @@
      "nota": "No se verificó condición contractual de retiro anticipado; no asumir liquidez diaria del depósito a plazo.",
      "fuentes": [
       {
-       "f": 174,
+       "f": 175,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8063,7 +8115,7 @@
      "nota": "No se recuperó tarifario actual legible; no poner costo cero por eslogan comercial.",
      "fuentes": [
       {
-       "f": 174,
+       "f": 175,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8087,17 +8139,17 @@
      "nota": "Cobertura publicada por proveedor, marco general CNBV y entidad identificada en padrón indizado; no representa garantía ilimitada ni evaluación de solvencia.",
      "fuentes": [
       {
-       "f": 175,
-       "consulta": "2026-10-12",
-       "vigenciaTexto": "No declarada en el contenido consultado"
-      },
-      {
        "f": 176,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       },
       {
        "f": 177,
+       "consulta": "2026-10-12",
+       "vigenciaTexto": "No declarada en el contenido consultado"
+      },
+      {
+       "f": 178,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Resultado indizado presenta fecha de interfaz 26 mayo 2026; no es fecha de autorización ni comprobación prudencial a octubre"
       }
@@ -8115,7 +8167,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8134,7 +8186,7 @@
      "nota": "No equivale a certificado de solvencia ni actualización del NICAP.",
      "fuentes": [
       {
-       "f": 177,
+       "f": 178,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Resultado indizado presenta fecha de interfaz 26 mayo 2026; no es fecha de autorización ni comprobación prudencial a octubre"
       }
@@ -8142,9 +8194,23 @@
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "Tasa 6.2 %, GAT nominal 6.42 % y GAT real 2.25 % con la tabla calculada del 7 de octubre al 7 de noviembre de 2026 (consulta del 12-10-2026).",
+     "nota": "Vigencia anterior vencida; las cifras de la tabla nueva son iguales.",
+     "fuentes": [
+      {
+       "f": 174,
+       "consulta": "2026-10-12",
+       "desde": "2026-10-07",
+       "hasta": "2026-11-07",
+       "vigenciaTexto": "Depósitos a plazo: el sitio dice calculado del 7 octubre al 7 noviembre 2026; no hay día único de cálculo"
+      }
+     ]
+    }
+   ],
    "alertas": [
-    "Tabla vigente de octubre prevalece para esta observación; pie de página de marzo 2026 vencido se excluye.",
+    "Tabla de Depósitos a Plazo, segmento Light, calculada del 5 de noviembre al 7 de diciembre de 2026.",
     "Tasas Plus/Platino y promociones a 365 días requieren otro perfil; no se mezclan con Light.",
     "No se comprobó situación prudencial actual ni NICAP; regulación no equivale a ausencia de riesgo."
    ],
@@ -8152,6 +8218,26 @@
    "enlaceOficial": "https://www.klar.mx/gat/",
    "motivoExclusion": null,
    "decisionEditorial": null,
+   "actualizacion": {
+    "campos": [
+     "tasa_anual",
+     "gat_nominal",
+     "gat_real",
+     "plazo",
+     "monto_ejemplo_gat",
+     "segmento"
+    ],
+    "vigencia": {
+     "desde": "2026-11-05",
+     "hasta": "2026-12-07"
+    },
+    "vigenciaAnterior": {
+     "desde": "2026-10-07",
+     "hasta": "2026-11-07"
+    },
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
    "estadoUso": "Ficha informativa; usar exclusivamente campos habilitados y respetar retenciones, ND y escenarios",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "sofipo",
@@ -8190,7 +8276,7 @@
      "nota": "Simulador muestra 8.69 para 360 días; fecha de cálculo 2 julio, sin cierre de vigencia explícito. No tratar como cotización vigente garantizada.",
      "fuentes": [
       {
-       "f": 178,
+       "f": 179,
        "consulta": "2026-10-12",
        "calculo": "2026-07-02",
        "vigenciaTexto": "Vigentes para los montos y plazos referidos; tasas revisables y sujetas a cambios; sin fecha de vencimiento publicada"
@@ -8208,7 +8294,7 @@
      },
      "fuentes": [
       {
-       "f": 178,
+       "f": 179,
        "consulta": "2026-10-12",
        "calculo": "2026-07-02",
        "vigenciaTexto": "Vigentes para los montos y plazos referidos; tasas revisables y sujetas a cambios; sin fecha de vencimiento publicada"
@@ -8226,7 +8312,7 @@
      },
      "fuentes": [
       {
-       "f": 178,
+       "f": 179,
        "consulta": "2026-10-12",
        "calculo": "2026-07-02",
        "vigenciaTexto": "Vigentes para los montos y plazos referidos; tasas revisables y sujetas a cambios; sin fecha de vencimiento publicada"
@@ -8246,7 +8332,7 @@
      },
      "fuentes": [
       {
-       "f": 178,
+       "f": 179,
        "consulta": "2026-10-12",
        "calculo": "2026-07-02",
        "vigenciaTexto": "Vigentes para los montos y plazos referidos; tasas revisables y sujetas a cambios; sin fecha de vencimiento publicada"
@@ -8266,7 +8352,7 @@
      },
      "fuentes": [
       {
-       "f": 178,
+       "f": 179,
        "consulta": "2026-10-12",
        "calculo": "2026-07-02",
        "vigenciaTexto": "Vigentes para los montos y plazos referidos; tasas revisables y sujetas a cambios; sin fecha de vencimiento publicada"
@@ -8285,7 +8371,7 @@
      "nota": "El texto extraído muestra campo 0.00 y una ganancia 43,450; no inferir monto representativo de 500,000 sin comprobar la interfaz.",
      "fuentes": [
       {
-       "f": 178,
+       "f": 179,
        "consulta": "2026-10-12",
        "calculo": "2026-07-02",
        "vigenciaTexto": "Vigentes para los montos y plazos referidos; tasas revisables y sujetas a cambios; sin fecha de vencimiento publicada"
@@ -8308,7 +8394,7 @@
      },
      "fuentes": [
       {
-       "f": 178,
+       "f": 179,
        "consulta": "2026-10-12",
        "calculo": "2026-07-02",
        "vigenciaTexto": "Vigentes para los montos y plazos referidos; tasas revisables y sujetas a cambios; sin fecha de vencimiento publicada"
@@ -8327,7 +8413,7 @@
      },
      "fuentes": [
       {
-       "f": 178,
+       "f": 179,
        "consulta": "2026-10-12",
        "calculo": "2026-07-02",
        "vigenciaTexto": "Vigentes para los montos y plazos referidos; tasas revisables y sujetas a cambios; sin fecha de vencimiento publicada"
@@ -8346,7 +8432,7 @@
      "nota": "No se verificó disposición antes del vencimiento.",
      "fuentes": [
       {
-       "f": 178,
+       "f": 179,
        "consulta": "2026-10-12",
        "calculo": "2026-07-02",
        "vigenciaTexto": "Vigentes para los montos y plazos referidos; tasas revisables y sujetas a cambios; sin fecha de vencimiento publicada"
@@ -8365,7 +8451,7 @@
      "nota": "La página remite al contrato; no se verificó tarifario completo.",
      "fuentes": [
       {
-       "f": 178,
+       "f": 179,
        "consulta": "2026-10-12",
        "calculo": "2026-07-02",
        "vigenciaTexto": "Vigentes para los montos y plazos referidos; tasas revisables y sujetas a cambios; sin fecha de vencimiento publicada"
@@ -8390,18 +8476,18 @@
      "nota": "Cobertura publicada por proveedor, marco general CNBV y entidad identificada en padrón indizado; no representa garantía ilimitada ni evaluación de solvencia.",
      "fuentes": [
       {
-       "f": 178,
+       "f": 179,
        "consulta": "2026-10-12",
        "calculo": "2026-07-02",
        "vigenciaTexto": "Vigentes para los montos y plazos referidos; tasas revisables y sujetas a cambios; sin fecha de vencimiento publicada"
       },
       {
-       "f": 176,
+       "f": 177,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       },
       {
-       "f": 179,
+       "f": 180,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Resultado indizado presenta fecha de interfaz 26 mayo 2026; no es fecha de autorización ni comprobación prudencial a octubre"
       }
@@ -8419,7 +8505,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8438,7 +8524,7 @@
      "nota": "No equivale a certificado de solvencia ni actualización del NICAP.",
      "fuentes": [
       {
-       "f": 179,
+       "f": 180,
        "consulta": "2026-10-12",
        "vigenciaTexto": "Resultado indizado presenta fecha de interfaz 26 mayo 2026; no es fecha de autorización ni comprobación prudencial a octubre"
       }
@@ -8496,7 +8582,7 @@
      "nota": "Tabla etiqueta rendimiento diario; convención de anualización no explícita en esa tabla. No interpretar 6.44% como ganancia por día.",
      "fuentes": [
       {
-       "f": 180,
+       "f": 181,
        "consulta": "2026-10-12",
        "corte": "2026-10-12",
        "vigenciaTexto": "Instantánea; rendimiento revisable diariamente"
@@ -8516,7 +8602,7 @@
      },
      "fuentes": [
       {
-       "f": 180,
+       "f": 181,
        "consulta": "2026-10-12",
        "corte": "2026-10-12",
        "vigenciaTexto": "Instantánea; rendimiento revisable diariamente"
@@ -8536,7 +8622,7 @@
      },
      "fuentes": [
       {
-       "f": 180,
+       "f": 181,
        "consulta": "2026-10-12",
        "corte": "2026-10-12",
        "vigenciaTexto": "Instantánea; rendimiento revisable diariamente"
@@ -8556,7 +8642,7 @@
      },
      "fuentes": [
       {
-       "f": 180,
+       "f": 181,
        "consulta": "2026-10-12",
        "corte": "2026-10-12",
        "vigenciaTexto": "Instantánea; rendimiento revisable diariamente"
@@ -8575,7 +8661,7 @@
      "nota": "Fondo expuesto a fluctuaciones; rendimientos pasados no garantizan futuros.",
      "fuentes": [
       {
-       "f": 181,
+       "f": 182,
        "consulta": "2026-10-12",
        "corte": "2026-02-27",
        "vigenciaTexto": "Autorización 13 noviembre 2024; cartera al 27 febrero 2026; no prueba actualización de costos a octubre"
@@ -8595,7 +8681,7 @@
      "nota": "DICI con corte febrero 2026; verificar horario operativo de plataforma y condiciones extraordinarias.",
      "fuentes": [
       {
-       "f": 181,
+       "f": 182,
        "consulta": "2026-10-12",
        "corte": "2026-02-27",
        "vigenciaTexto": "Autorización 13 noviembre 2024; cartera al 27 febrero 2026; no prueba actualización de costos a octubre"
@@ -8614,7 +8700,7 @@
      },
      "fuentes": [
       {
-       "f": 181,
+       "f": 182,
        "consulta": "2026-10-12",
        "corte": "2026-02-27",
        "vigenciaTexto": "Autorización 13 noviembre 2024; cartera al 27 febrero 2026; no prueba actualización de costos a octubre"
@@ -8633,7 +8719,7 @@
      "nota": "DICI lista N/A en conceptos directos; no equivale a inexistencia de costos del fondo.",
      "fuentes": [
       {
-       "f": 181,
+       "f": 182,
        "consulta": "2026-10-12",
        "corte": "2026-02-27",
        "vigenciaTexto": "Autorización 13 noviembre 2024; cartera al 27 febrero 2026; no prueba actualización de costos a octubre"
@@ -8652,7 +8738,7 @@
      "nota": "Administración activos PF2 en DICI con corte febrero 2026; importe publicado incluye IVA. No se comprobó periodicidad/actualización a octubre.",
      "fuentes": [
       {
-       "f": 181,
+       "f": 182,
        "consulta": "2026-10-12",
        "corte": "2026-02-27",
        "vigenciaTexto": "Autorización 13 noviembre 2024; cartera al 27 febrero 2026; no prueba actualización de costos a octubre"
@@ -8671,7 +8757,7 @@
      },
      "fuentes": [
       {
-       "f": 181,
+       "f": 182,
        "consulta": "2026-10-12",
        "corte": "2026-02-27",
        "vigenciaTexto": "Autorización 13 noviembre 2024; cartera al 27 febrero 2026; no prueba actualización de costos a octubre"
@@ -8690,7 +8776,7 @@
      "nota": "Es inversión en acciones de un fondo, no depósito bancario asegurado.",
      "fuentes": [
       {
-       "f": 181,
+       "f": 182,
        "consulta": "2026-10-12",
        "corte": "2026-02-27",
        "vigenciaTexto": "Autorización 13 noviembre 2024; cartera al 27 febrero 2026; no prueba actualización de costos a octubre"
@@ -8709,7 +8795,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8765,7 +8851,7 @@
      "nota": "Rendimiento anual al vencimiento de última subasta publicada según página de productos; la tabla no identifica fecha de subasta ni serie.",
      "fuentes": [
       {
-       "f": 182,
+       "f": 183,
        "consulta": "2026-11-11",
        "corte": "2026-11-11",
        "vigenciaTexto": "Tabla oficial con fecha 11 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
@@ -8784,7 +8870,7 @@
      },
      "fuentes": [
       {
-       "f": 182,
+       "f": 183,
        "consulta": "2026-11-11",
        "corte": "2026-11-11",
        "vigenciaTexto": "Tabla oficial con fecha 11 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
@@ -8805,7 +8891,7 @@
      "nota": "Precio redondeado en tabla; no calcular rendimiento exacto desde él.",
      "fuentes": [
       {
-       "f": 182,
+       "f": 183,
        "consulta": "2026-11-11",
        "corte": "2026-11-11",
        "vigenciaTexto": "Tabla oficial con fecha 11 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
@@ -8825,7 +8911,7 @@
      },
      "fuentes": [
       {
-       "f": 183,
+       "f": 184,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8849,7 +8935,7 @@
      "nota": "Comparar cada plazo por separado; no son alternativas equivalentes en liquidez.",
      "fuentes": [
       {
-       "f": 182,
+       "f": 183,
        "consulta": "2026-11-11",
        "corte": "2026-11-11",
        "vigenciaTexto": "Tabla oficial con fecha 11 de noviembre de 2026 (encabezado de la tabla; no es fecha de subasta). No es cotización futura ni promesa de reinversión."
@@ -8869,7 +8955,7 @@
      },
      "fuentes": [
       {
-       "f": 184,
+       "f": 185,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8889,7 +8975,7 @@
      "nota": "No implica exención de impuestos ni ausencia de pérdida por venta anticipada.",
      "fuentes": [
       {
-       "f": 184,
+       "f": 185,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8911,7 +8997,7 @@
      },
      "fuentes": [
       {
-       "f": 184,
+       "f": 185,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8930,7 +9016,7 @@
      "nota": "No presentar como depósito asegurado IPAB ni como riesgo cero.",
      "fuentes": [
       {
-       "f": 183,
+       "f": 184,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8948,7 +9034,7 @@
      "nota": "Se publica tasa de instrumento gubernamental; no se verificó GAT aplicable. No sustituir rendimiento con CAT/GAT calculado ad hoc.",
      "fuentes": [
       {
-       "f": 183,
+       "f": 184,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -8966,7 +9052,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9032,7 +9118,7 @@
      "nota": "FAQ primaria indizada indica rango según inversión total; apertura directa bloqueada y sin fecha de vigencia.",
      "fuentes": [
       {
-       "f": 185,
+       "f": 186,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9050,7 +9136,7 @@
      },
      "fuentes": [
       {
-       "f": 185,
+       "f": 186,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9069,7 +9155,7 @@
      },
      "fuentes": [
       {
-       "f": 186,
+       "f": 187,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9089,7 +9175,7 @@
      "nota": "FAQ del proveedor. No extender a Smart Cash Dólares ni fondos/Trading.",
      "fuentes": [
       {
-       "f": 187,
+       "f": 188,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9107,7 +9193,7 @@
      },
      "fuentes": [
       {
-       "f": 188,
+       "f": 189,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9125,7 +9211,7 @@
      "nota": "Se confirma cuenta/app GBM y CLABE propia del producto; lista completa de apertura no verificada.",
      "fuentes": [
       {
-       "f": 186,
+       "f": 187,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9143,7 +9229,7 @@
      "nota": "No publicar cobertura IPAB: es casa de bolsa; estructura jurídica y protección del instrumento subyacente requieren ficha contractual.",
      "fuentes": [
       {
-       "f": 188,
+       "f": 189,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9161,7 +9247,7 @@
      "nota": "No se localizó GAT específico vigente.",
      "fuentes": [
       {
-       "f": 185,
+       "f": 186,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9179,7 +9265,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9233,7 +9319,7 @@
      },
      "fuentes": [
       {
-       "f": 189,
+       "f": 190,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -9258,7 +9344,7 @@
      },
      "fuentes": [
       {
-       "f": 189,
+       "f": 190,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -9282,7 +9368,7 @@
      "nota": "Opcionales; no confundir con paquete Amplia Plus.",
      "fuentes": [
       {
-       "f": 189,
+       "f": 190,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -9300,12 +9386,12 @@
      "nota": "Cotización individual requerida; no se verificó precio universal.",
      "fuentes": [
       {
-       "f": 189,
+       "f": 190,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       },
       {
-       "f": 190,
+       "f": 191,
        "consulta": "2026-10-12",
        "emision": "2025-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -9331,7 +9417,7 @@
      "nota": "Configuración publicada, no oferta individual; no sumar RC básica y exceso como una cobertura homogénea.",
      "fuentes": [
       {
-       "f": 189,
+       "f": 190,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -9354,7 +9440,7 @@
      "nota": "No son porcentajes sobre la prima; debe revisarse la base contractual de cada cobertura.",
      "fuentes": [
       {
-       "f": 189,
+       "f": 190,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -9372,7 +9458,7 @@
      },
      "fuentes": [
       {
-       "f": 190,
+       "f": 191,
        "consulta": "2026-10-12",
        "emision": "2025-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -9391,7 +9477,7 @@
      "nota": "No se documentó un coaseguro separado para este paquete. No inferir cero.",
      "fuentes": [
       {
-       "f": 190,
+       "f": 191,
        "consulta": "2026-10-12",
        "emision": "2025-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -9415,7 +9501,7 @@
      "nota": "Requisitos generales de AXA; antigüedad máxima del vehículo y lista específica de documentos: ND.",
      "fuentes": [
       {
-       "f": 191,
+       "f": 192,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -9437,7 +9523,7 @@
      },
      "fuentes": [
       {
-       "f": 191,
+       "f": 192,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -9455,7 +9541,7 @@
      },
      "fuentes": [
       {
-       "f": 190,
+       "f": 191,
        "consulta": "2026-10-12",
        "emision": "2025-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -9479,7 +9565,7 @@
      "nota": "Selección no exhaustiva; no generalizar exclusiones particulares a todas las coberturas.",
      "fuentes": [
       {
-       "f": 190,
+       "f": 191,
        "consulta": "2026-10-12",
        "emision": "2025-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -9498,7 +9584,7 @@
      "nota": "Se fija en carátula; ninguna póliza individual consultada.",
      "fuentes": [
       {
-       "f": 190,
+       "f": 191,
        "consulta": "2026-10-12",
        "emision": "2025-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -9518,7 +9604,7 @@
      "nota": "El PDF declara registro desde 2025-05-22; cotejo independiente ND.",
      "fuentes": [
       {
-       "f": 190,
+       "f": 191,
        "consulta": "2026-10-12",
        "emision": "2025-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -9538,7 +9624,7 @@
      "nota": "Versión pública localizada, sin afirmar que sea la aplicable a todas las pólizas emitidas en 2026.",
      "fuentes": [
       {
-       "f": 190,
+       "f": 191,
        "consulta": "2026-10-12",
        "emision": "2025-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -9557,7 +9643,7 @@
      "nota": "CAT es indicador de costo de crédito y no corresponde a la prima de este seguro.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9611,7 +9697,7 @@
      },
      "fuentes": [
       {
-       "f": 192,
+       "f": 193,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9629,7 +9715,7 @@
      },
      "fuentes": [
       {
-       "f": 193,
+       "f": 194,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9655,7 +9741,7 @@
      },
      "fuentes": [
       {
-       "f": 193,
+       "f": 194,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9673,7 +9759,7 @@
      "nota": "Cotización depende del vehículo, ubicación, uso, perfil y paquete. No se solicitó cotización ni se transmitieron datos.",
      "fuentes": [
       {
-       "f": 193,
+       "f": 194,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9691,7 +9777,7 @@
      "nota": "La carátula determina deducible; no asumir estándar 5%.",
      "fuentes": [
       {
-       "f": 192,
+       "f": 193,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9709,7 +9795,7 @@
      "nota": "La carátula determina deducible; no asumir estándar 10%.",
      "fuentes": [
       {
-       "f": 192,
+       "f": 193,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9727,7 +9813,7 @@
      "nota": "Depende de vehículo y carátula; no es cifra universal.",
      "fuentes": [
       {
-       "f": 192,
+       "f": 193,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9745,7 +9831,7 @@
      "nota": "Índice consultado no permitió extraer ficha completa específica de autos residentes personales.",
      "fuentes": [
       {
-       "f": 194,
+       "f": 195,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9763,7 +9849,7 @@
      "nota": "La página reúne coberturas opcionales con restricciones diferentes; verificar versión y paquete antes de atribuir exclusiones.",
      "fuentes": [
       {
-       "f": 192,
+       "f": 193,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9781,7 +9867,7 @@
      },
      "fuentes": [
       {
-       "f": 195,
+       "f": 196,
        "consulta": "2026-10-12",
        "corte": "2026-06-30",
        "vigenciaTexto": "Datos enero-junio 2026; fuente CNSF"
@@ -9800,7 +9886,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9852,7 +9938,7 @@
      },
      "fuentes": [
       {
-       "f": 196,
+       "f": 197,
        "consulta": "2026-10-12",
        "emision": "2026-02",
        "vigenciaTexto": "Formato de febrero 2026; no cotización ni compromiso de aceptación"
@@ -9876,7 +9962,7 @@
      },
      "fuentes": [
       {
-       "f": 197,
+       "f": 198,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -9898,7 +9984,7 @@
      "nota": "Opciones del formato febrero 2026; no constituyen cotización ni todas las combinaciones están garantizadas.",
      "fuentes": [
       {
-       "f": 196,
+       "f": 197,
        "consulta": "2026-10-12",
        "emision": "2026-02",
        "vigenciaTexto": "Formato de febrero 2026; no cotización ni compromiso de aceptación"
@@ -9917,7 +10003,7 @@
      },
      "fuentes": [
       {
-       "f": 196,
+       "f": 197,
        "consulta": "2026-10-12",
        "emision": "2026-02",
        "vigenciaTexto": "Formato de febrero 2026; no cotización ni compromiso de aceptación"
@@ -9936,7 +10022,7 @@
      },
      "fuentes": [
       {
-       "f": 196,
+       "f": 197,
        "consulta": "2026-10-12",
        "emision": "2026-02",
        "vigenciaTexto": "Formato de febrero 2026; no cotización ni compromiso de aceptación"
@@ -9960,7 +10046,7 @@
      },
      "fuentes": [
       {
-       "f": 196,
+       "f": 197,
        "consulta": "2026-10-12",
        "emision": "2026-02",
        "vigenciaTexto": "Formato de febrero 2026; no cotización ni compromiso de aceptación"
@@ -9979,7 +10065,7 @@
      "nota": "Requiere cotización por edad/perfil, domicilio, cobertura, deducible y coaseguro; no existe prima universal en estas fuentes.",
      "fuentes": [
       {
-       "f": 196,
+       "f": 197,
        "consulta": "2026-10-12",
        "emision": "2026-02",
        "vigenciaTexto": "Formato de febrero 2026; no cotización ni compromiso de aceptación"
@@ -9998,7 +10084,7 @@
      "nota": "Requiere póliza/condiciones generales de versión correspondiente; no asumir cobertura de preexistencias ni ausencia de espera.",
      "fuentes": [
       {
-       "f": 197,
+       "f": 198,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10019,7 +10105,7 @@
      },
      "fuentes": [
       {
-       "f": 196,
+       "f": 197,
        "consulta": "2026-10-12",
        "emision": "2026-02",
        "vigenciaTexto": "Formato de febrero 2026; no cotización ni compromiso de aceptación"
@@ -10038,7 +10124,7 @@
      },
      "fuentes": [
       {
-       "f": 198,
+       "f": 199,
        "consulta": "2026-10-12",
        "corte": "2026-06-30",
        "vigenciaTexto": "Datos enero-junio 2026; fuente CNSF"
@@ -10057,7 +10143,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10111,7 +10197,7 @@
      },
      "fuentes": [
       {
-       "f": 199,
+       "f": 200,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10132,7 +10218,7 @@
      },
      "fuentes": [
       {
-       "f": 199,
+       "f": 200,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10154,12 +10240,12 @@
      "nota": "Diferencia no resuelta. No automatizar aceptación ni descarte.",
      "fuentes": [
       {
-       "f": 199,
+       "f": 200,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       },
       {
-       "f": 200,
+       "f": 201,
        "consulta": "2026-10-12",
        "emision": "2026-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -10182,7 +10268,7 @@
      },
      "fuentes": [
       {
-       "f": 199,
+       "f": 200,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10200,7 +10286,7 @@
      "nota": "Requiere cotización individual. No se verificó tarifa universal ni se ingresaron datos.",
      "fuentes": [
       {
-       "f": 199,
+       "f": 200,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10218,13 +10304,13 @@
      "nota": "Cuantía en carátula/certificado; ficha menciona opciones anuales por asegurado.",
      "fuentes": [
       {
-       "f": 200,
+       "f": 201,
        "consulta": "2026-10-12",
        "emision": "2026-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       },
       {
-       "f": 199,
+       "f": 200,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10246,7 +10332,7 @@
      },
      "fuentes": [
       {
-       "f": 200,
+       "f": 201,
        "consulta": "2026-10-12",
        "emision": "2026-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -10269,7 +10355,7 @@
      },
      "fuentes": [
       {
-       "f": 200,
+       "f": 201,
        "consulta": "2026-10-12",
        "emision": "2026-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -10292,7 +10378,7 @@
      "nota": "Lista parcial; revisar excepciones, esperas y certificado.",
      "fuentes": [
       {
-       "f": 200,
+       "f": 201,
        "consulta": "2026-10-12",
        "emision": "2026-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -10311,7 +10397,7 @@
      "nota": "Fechas individuales ND; renovación anual automática según cláusula.",
      "fuentes": [
       {
-       "f": 200,
+       "f": 201,
        "consulta": "2026-10-12",
        "emision": "2026-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -10331,7 +10417,7 @@
      "nota": "Registro declarado desde 2026-06-02; cotejo independiente ND.",
      "fuentes": [
       {
-       "f": 200,
+       "f": 201,
        "consulta": "2026-10-12",
        "emision": "2026-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -10350,7 +10436,7 @@
      },
      "fuentes": [
       {
-       "f": 200,
+       "f": 201,
        "consulta": "2026-10-12",
        "emision": "2026-06",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
@@ -10369,7 +10455,7 @@
      "nota": "CAT es indicador de costo de crédito y no corresponde a la prima de este seguro.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10424,7 +10510,7 @@
      },
      "fuentes": [
       {
-       "f": 201,
+       "f": 202,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10444,7 +10530,7 @@
      },
      "fuentes": [
       {
-       "f": 201,
+       "f": 202,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10466,7 +10552,7 @@
      "nota": "Opciones comerciales; plazo exacto en carátula.",
      "fuentes": [
       {
-       "f": 202,
+       "f": 203,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10488,7 +10574,7 @@
      },
      "fuentes": [
       {
-       "f": 201,
+       "f": 202,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10512,7 +10598,7 @@
      "nota": "Seleccionables; inclusión y costo deben verificarse en carátula.",
      "fuentes": [
       {
-       "f": 202,
+       "f": 203,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10531,12 +10617,12 @@
      "nota": "No presentar como pago adicional independiente ni inclusión automática.",
      "fuentes": [
       {
-       "f": 201,
+       "f": 202,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       },
       {
-       "f": 202,
+       "f": 203,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10558,7 +10644,7 @@
      },
      "fuentes": [
       {
-       "f": 203,
+       "f": 204,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10576,12 +10662,12 @@
      "nota": "Personalizada. No se solicitó cotización ni hay prima universal verificable.",
      "fuentes": [
       {
-       "f": 202,
+       "f": 203,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       },
       {
-       "f": 203,
+       "f": 204,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10603,7 +10689,7 @@
      "nota": "Mínimos de ficha; no son prima, rescate ni indemnización garantizada para cualquier caso.",
      "fuentes": [
       {
-       "f": 202,
+       "f": 203,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10621,7 +10707,7 @@
      "nota": "Importe contractual en carátula.",
      "fuentes": [
       {
-       "f": 201,
+       "f": 202,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10643,7 +10729,7 @@
      "nota": "Selección no exhaustiva. Exclusiones del beneficio ET no equivalen a exclusiones universales de fallecimiento.",
      "fuentes": [
       {
-       "f": 201,
+       "f": 202,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10661,7 +10747,7 @@
      },
      "fuentes": [
       {
-       "f": 201,
+       "f": 202,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10679,7 +10765,7 @@
      "nota": "Fechas contractuales en carátula; no hay póliza individual consultada.",
      "fuentes": [
       {
-       "f": 201,
+       "f": 202,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10698,7 +10784,7 @@
      "nota": "Registro declarado por aseguradora; cotejo independiente ND.",
      "fuentes": [
       {
-       "f": 201,
+       "f": 202,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10717,12 +10803,12 @@
      "nota": "Fechas de metadatos PDF no se usaron como inicio de vigencia.",
      "fuentes": [
       {
-       "f": 201,
+       "f": 202,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       },
       {
-       "f": 204,
+       "f": 205,
        "consulta": "2026-10-12",
        "vigenciaTexto": "ND: la consulta y el registro documental no acreditan vigencia de una póliza ni disponibilidad individual."
       }
@@ -10740,7 +10826,7 @@
      "nota": "CAT es indicador de costo de crédito y no corresponde a la prima de este seguro.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10795,7 +10881,7 @@
      },
      "fuentes": [
       {
-       "f": 205,
+       "f": 206,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10813,7 +10899,7 @@
      },
      "fuentes": [
       {
-       "f": 205,
+       "f": 206,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10835,7 +10921,7 @@
      },
      "fuentes": [
       {
-       "f": 205,
+       "f": 206,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10853,7 +10939,7 @@
      },
      "fuentes": [
       {
-       "f": 205,
+       "f": 206,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10874,7 +10960,7 @@
      },
      "fuentes": [
       {
-       "f": 205,
+       "f": 206,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10896,7 +10982,7 @@
      },
      "fuentes": [
       {
-       "f": 205,
+       "f": 206,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10914,7 +11000,7 @@
      "nota": "Cotización individual según perfil, plazo y suma asegurada. No hay prima universal verificable.",
      "fuentes": [
       {
-       "f": 205,
+       "f": 206,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10932,7 +11018,7 @@
      "nota": "Se elige al contratar; no se verificó mínimo/máximo actual.",
      "fuentes": [
       {
-       "f": 205,
+       "f": 206,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10950,7 +11036,7 @@
      "nota": "No aparece valor en ficha; no inferir cero.",
      "fuentes": [
       {
-       "f": 205,
+       "f": 206,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -10968,7 +11054,7 @@
      "nota": "Condiciones localizadas son de agosto 2017; validar versión de póliza antes de extraer exclusiones vigentes.",
      "fuentes": [
       {
-       "f": 206,
+       "f": 207,
        "consulta": "2026-10-12",
        "emision": "2017-08",
        "vigenciaTexto": "No declarada en el contenido consultado"
@@ -10988,7 +11074,7 @@
      "nota": "Identificador publicado por proveedor; cotejo independiente del registro no completado.",
      "fuentes": [
       {
-       "f": 205,
+       "f": 206,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -11006,7 +11092,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -11059,7 +11145,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11081,7 +11167,7 @@
      "nota": "Interpretación de la denominación generacional; confirmar asignación individual.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11094,22 +11180,21 @@
      "clave": "irn",
      "etiqueta": "Indicador de Rendimiento Neto (IRN)",
      "grupo": "indicadores",
-     "valor": "7.72 %",
-     "numero": 7.72,
+     "valor": "7.73 %",
+     "numero": 7.73,
      "estado": {
       "codigo": "historico_misma_cohorte_corte",
       "tipo": "verificado",
       "etiqueta": "Histórico del mismo corte"
      },
-     "nota": "Agosto de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
+     "nota": "Septiembre de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
      "fuentes": [
       {
-       "f": 207,
-       "consulta": "2026-10-12",
-       "corte": "2026-08",
-       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
-       "publicacion": "2026-09-15",
-       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+       "f": 208,
+       "consulta": "2026-11-10",
+       "corte": "2026-09",
+       "corteNota": "La fuente identifica septiembre de 2026, sin día de cierre expreso.",
+       "vigenciaTexto": "Último corte visible: septiembre 2026; cifras preliminares; indicador histórico. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -11127,7 +11212,7 @@
      "nota": "Tabla agosto 2026; no descontar de nuevo del IRN.",
      "fuentes": [
       {
-       "f": 208,
+       "f": 209,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11152,7 +11237,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11173,7 +11258,7 @@
      "nota": "IRN es indicador de desempeño pasado, no oferta de rentabilidad futura.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11201,7 +11286,7 @@
      "nota": "Registro inicial, no traspaso. El canal AforeMóvil y los supuestos de menores/beneficiarios tienen requisitos específicos. No se inició trámite ni se verificó elegibilidad individual.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -11219,7 +11304,7 @@
      "nota": "Régimen de retiro no se establece con este trámite; no tratar cuenta de retiro como ahorro de libre disponibilidad.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -11237,7 +11322,7 @@
      "nota": "IRN/Siefore no es cuenta de depósito asegurada por IPAB.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11258,7 +11343,7 @@
      "nota": "Usar IRN/periodo/cohorte, no GAT ni CAT.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11279,7 +11364,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -11287,9 +11372,24 @@
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "IRN 7.72 % con corte de agosto de 2026 (consulta del 12-10-2026).",
+     "nota": "Sustituido por el corte de septiembre de 2026.",
+     "fuentes": [
+      {
+       "f": 208,
+       "consulta": "2026-10-12",
+       "corte": "2026-08",
+       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
+       "publicacion": "2026-09-15",
+       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+      }
+     ]
+    }
+   ],
    "alertas": [
-    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94, agosto de 2026; no otras cohortes ni periodos.",
+    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94. IRN con corte de septiembre de 2026 (cifras preliminares); comisiones con corte de agosto de 2026. No otras cohortes ni periodos.",
     "No recomendar traspaso sólo por un corte de IRN.",
     "IRN histórico, no tasa garantizada; no restar otra vez la comisión del indicador neto.",
     "Servicios, elegibilidad y régimen individual requieren revisión adicional."
@@ -11298,7 +11398,16 @@
    "enlaceOficial": "https://www.consar.gob.mx/gobmx/aplicativo/siset/Series.aspx?cd=212",
    "motivoExclusion": null,
    "decisionEditorial": null,
-   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-08",
+   "actualizacion": {
+    "campos": [
+     "irn"
+    ],
+    "corte": "2026-09",
+    "corteAnterior": "2026-08",
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
+   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-09",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "afore",
    "relacionComercial": null,
@@ -11333,7 +11442,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11355,7 +11464,7 @@
      "nota": "Interpretación de la denominación generacional; confirmar asignación individual.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11368,22 +11477,21 @@
      "clave": "irn",
      "etiqueta": "Indicador de Rendimiento Neto (IRN)",
      "grupo": "indicadores",
-     "valor": "8.35 %",
-     "numero": 8.35,
+     "valor": "8.4 %",
+     "numero": 8.4,
      "estado": {
       "codigo": "historico_misma_cohorte_corte",
       "tipo": "verificado",
       "etiqueta": "Histórico del mismo corte"
      },
-     "nota": "Agosto de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
+     "nota": "Septiembre de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
      "fuentes": [
       {
-       "f": 207,
-       "consulta": "2026-10-12",
-       "corte": "2026-08",
-       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
-       "publicacion": "2026-09-15",
-       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+       "f": 208,
+       "consulta": "2026-11-10",
+       "corte": "2026-09",
+       "corteNota": "La fuente identifica septiembre de 2026, sin día de cierre expreso.",
+       "vigenciaTexto": "Último corte visible: septiembre 2026; cifras preliminares; indicador histórico. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -11401,7 +11509,7 @@
      "nota": "Tabla agosto 2026; no descontar de nuevo del IRN.",
      "fuentes": [
       {
-       "f": 208,
+       "f": 209,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11426,7 +11534,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11447,7 +11555,7 @@
      "nota": "IRN es indicador de desempeño pasado, no oferta de rentabilidad futura.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11475,7 +11583,7 @@
      "nota": "Registro inicial, no traspaso. El canal AforeMóvil y los supuestos de menores/beneficiarios tienen requisitos específicos. No se inició trámite ni se verificó elegibilidad individual.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -11493,7 +11601,7 @@
      "nota": "Régimen de retiro no se establece con este trámite; no tratar cuenta de retiro como ahorro de libre disponibilidad.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -11511,7 +11619,7 @@
      "nota": "IRN/Siefore no es cuenta de depósito asegurada por IPAB.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11532,7 +11640,7 @@
      "nota": "Usar IRN/periodo/cohorte, no GAT ni CAT.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11553,7 +11661,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -11561,9 +11669,24 @@
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "IRN 8.35 % con corte de agosto de 2026 (consulta del 12-10-2026).",
+     "nota": "Sustituido por el corte de septiembre de 2026.",
+     "fuentes": [
+      {
+       "f": 208,
+       "consulta": "2026-10-12",
+       "corte": "2026-08",
+       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
+       "publicacion": "2026-09-15",
+       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+      }
+     ]
+    }
+   ],
    "alertas": [
-    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94, agosto de 2026; no otras cohortes ni periodos.",
+    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94. IRN con corte de septiembre de 2026 (cifras preliminares); comisiones con corte de agosto de 2026. No otras cohortes ni periodos.",
     "No recomendar traspaso sólo por un corte de IRN.",
     "IRN histórico, no tasa garantizada; no restar otra vez la comisión del indicador neto.",
     "Servicios, elegibilidad y régimen individual requieren revisión adicional."
@@ -11572,7 +11695,16 @@
    "enlaceOficial": "https://www.consar.gob.mx/gobmx/aplicativo/siset/Series.aspx?cd=212",
    "motivoExclusion": null,
    "decisionEditorial": null,
-   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-08",
+   "actualizacion": {
+    "campos": [
+     "irn"
+    ],
+    "corte": "2026-09",
+    "corteAnterior": "2026-08",
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
+   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-09",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "afore",
    "relacionComercial": null,
@@ -11607,7 +11739,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11629,7 +11761,7 @@
      "nota": "Interpretación de la denominación generacional; confirmar asignación individual.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11642,22 +11774,21 @@
      "clave": "irn",
      "etiqueta": "Indicador de Rendimiento Neto (IRN)",
      "grupo": "indicadores",
-     "valor": "7.51 %",
-     "numero": 7.51,
+     "valor": "7.58 %",
+     "numero": 7.58,
      "estado": {
       "codigo": "historico_misma_cohorte_corte",
       "tipo": "verificado",
       "etiqueta": "Histórico del mismo corte"
      },
-     "nota": "Agosto de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
+     "nota": "Septiembre de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
      "fuentes": [
       {
-       "f": 207,
-       "consulta": "2026-10-12",
-       "corte": "2026-08",
-       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
-       "publicacion": "2026-09-15",
-       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+       "f": 208,
+       "consulta": "2026-11-10",
+       "corte": "2026-09",
+       "corteNota": "La fuente identifica septiembre de 2026, sin día de cierre expreso.",
+       "vigenciaTexto": "Último corte visible: septiembre 2026; cifras preliminares; indicador histórico. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -11675,7 +11806,7 @@
      "nota": "Tabla agosto 2026; no descontar de nuevo del IRN.",
      "fuentes": [
       {
-       "f": 208,
+       "f": 209,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11700,7 +11831,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11721,7 +11852,7 @@
      "nota": "IRN es indicador de desempeño pasado, no oferta de rentabilidad futura.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11749,7 +11880,7 @@
      "nota": "Registro inicial, no traspaso. El canal AforeMóvil y los supuestos de menores/beneficiarios tienen requisitos específicos. No se inició trámite ni se verificó elegibilidad individual.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -11767,7 +11898,7 @@
      "nota": "Régimen de retiro no se establece con este trámite; no tratar cuenta de retiro como ahorro de libre disponibilidad.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -11785,7 +11916,7 @@
      "nota": "IRN/Siefore no es cuenta de depósito asegurada por IPAB.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11806,7 +11937,7 @@
      "nota": "Usar IRN/periodo/cohorte, no GAT ni CAT.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11827,7 +11958,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -11835,9 +11966,24 @@
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "IRN 7.51 % con corte de agosto de 2026 (consulta del 12-10-2026).",
+     "nota": "Sustituido por el corte de septiembre de 2026.",
+     "fuentes": [
+      {
+       "f": 208,
+       "consulta": "2026-10-12",
+       "corte": "2026-08",
+       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
+       "publicacion": "2026-09-15",
+       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+      }
+     ]
+    }
+   ],
    "alertas": [
-    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94, agosto de 2026; no otras cohortes ni periodos.",
+    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94. IRN con corte de septiembre de 2026 (cifras preliminares); comisiones con corte de agosto de 2026. No otras cohortes ni periodos.",
     "No recomendar traspaso sólo por un corte de IRN.",
     "IRN histórico, no tasa garantizada; no restar otra vez la comisión del indicador neto.",
     "Servicios, elegibilidad y régimen individual requieren revisión adicional."
@@ -11846,7 +11992,16 @@
    "enlaceOficial": "https://www.consar.gob.mx/gobmx/aplicativo/siset/Series.aspx?cd=212",
    "motivoExclusion": null,
    "decisionEditorial": null,
-   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-08",
+   "actualizacion": {
+    "campos": [
+     "irn"
+    ],
+    "corte": "2026-09",
+    "corteAnterior": "2026-08",
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
+   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-09",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "afore",
    "relacionComercial": null,
@@ -11881,7 +12036,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11903,7 +12058,7 @@
      "nota": "Interpretación de la denominación generacional; confirmar asignación individual.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11916,22 +12071,21 @@
      "clave": "irn",
      "etiqueta": "Indicador de Rendimiento Neto (IRN)",
      "grupo": "indicadores",
-     "valor": "8.91 %",
-     "numero": 8.91,
+     "valor": "8.92 %",
+     "numero": 8.92,
      "estado": {
       "codigo": "historico_misma_cohorte_corte",
       "tipo": "verificado",
       "etiqueta": "Histórico del mismo corte"
      },
-     "nota": "Agosto de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
+     "nota": "Septiembre de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
      "fuentes": [
       {
-       "f": 207,
-       "consulta": "2026-10-12",
-       "corte": "2026-08",
-       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
-       "publicacion": "2026-09-15",
-       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+       "f": 208,
+       "consulta": "2026-11-10",
+       "corte": "2026-09",
+       "corteNota": "La fuente identifica septiembre de 2026, sin día de cierre expreso.",
+       "vigenciaTexto": "Último corte visible: septiembre 2026; cifras preliminares; indicador histórico. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -11949,7 +12103,7 @@
      "nota": "Tabla agosto 2026; no descontar de nuevo del IRN.",
      "fuentes": [
       {
-       "f": 208,
+       "f": 209,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11974,7 +12128,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -11995,7 +12149,7 @@
      "nota": "IRN es indicador de desempeño pasado, no oferta de rentabilidad futura.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12023,7 +12177,7 @@
      "nota": "Registro inicial, no traspaso. El canal AforeMóvil y los supuestos de menores/beneficiarios tienen requisitos específicos. No se inició trámite ni se verificó elegibilidad individual.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12041,7 +12195,7 @@
      "nota": "Régimen de retiro no se establece con este trámite; no tratar cuenta de retiro como ahorro de libre disponibilidad.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12059,7 +12213,7 @@
      "nota": "IRN/Siefore no es cuenta de depósito asegurada por IPAB.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12080,7 +12234,7 @@
      "nota": "Usar IRN/periodo/cohorte, no GAT ni CAT.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12101,7 +12255,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12109,9 +12263,24 @@
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "IRN 8.91 % con corte de agosto de 2026 (consulta del 12-10-2026).",
+     "nota": "Sustituido por el corte de septiembre de 2026.",
+     "fuentes": [
+      {
+       "f": 208,
+       "consulta": "2026-10-12",
+       "corte": "2026-08",
+       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
+       "publicacion": "2026-09-15",
+       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+      }
+     ]
+    }
+   ],
    "alertas": [
-    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94, agosto de 2026; no otras cohortes ni periodos.",
+    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94. IRN con corte de septiembre de 2026 (cifras preliminares); comisiones con corte de agosto de 2026. No otras cohortes ni periodos.",
     "No recomendar traspaso sólo por un corte de IRN.",
     "IRN histórico, no tasa garantizada; no restar otra vez la comisión del indicador neto.",
     "Servicios, elegibilidad y régimen individual requieren revisión adicional."
@@ -12120,7 +12289,16 @@
    "enlaceOficial": "https://www.consar.gob.mx/gobmx/aplicativo/siset/Series.aspx?cd=212",
    "motivoExclusion": null,
    "decisionEditorial": null,
-   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-08",
+   "actualizacion": {
+    "campos": [
+     "irn"
+    ],
+    "corte": "2026-09",
+    "corteAnterior": "2026-08",
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
+   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-09",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "afore",
    "relacionComercial": null,
@@ -12155,7 +12333,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12177,7 +12355,7 @@
      "nota": "Interpretación de la denominación generacional; confirmar asignación individual.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12190,22 +12368,21 @@
      "clave": "irn",
      "etiqueta": "Indicador de Rendimiento Neto (IRN)",
      "grupo": "indicadores",
-     "valor": "8.66 %",
-     "numero": 8.66,
+     "valor": "8.73 %",
+     "numero": 8.73,
      "estado": {
       "codigo": "historico_misma_cohorte_corte",
       "tipo": "verificado",
       "etiqueta": "Histórico del mismo corte"
      },
-     "nota": "Agosto de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
+     "nota": "Septiembre de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
      "fuentes": [
       {
-       "f": 207,
-       "consulta": "2026-10-12",
-       "corte": "2026-08",
-       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
-       "publicacion": "2026-09-15",
-       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+       "f": 208,
+       "consulta": "2026-11-10",
+       "corte": "2026-09",
+       "corteNota": "La fuente identifica septiembre de 2026, sin día de cierre expreso.",
+       "vigenciaTexto": "Último corte visible: septiembre 2026; cifras preliminares; indicador histórico. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -12223,7 +12400,7 @@
      "nota": "Tabla agosto 2026; no descontar de nuevo del IRN.",
      "fuentes": [
       {
-       "f": 208,
+       "f": 209,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12248,7 +12425,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12269,7 +12446,7 @@
      "nota": "IRN es indicador de desempeño pasado, no oferta de rentabilidad futura.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12297,7 +12474,7 @@
      "nota": "Registro inicial, no traspaso. El canal AforeMóvil y los supuestos de menores/beneficiarios tienen requisitos específicos. No se inició trámite ni se verificó elegibilidad individual.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12315,7 +12492,7 @@
      "nota": "Régimen de retiro no se establece con este trámite; no tratar cuenta de retiro como ahorro de libre disponibilidad.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12333,7 +12510,7 @@
      "nota": "IRN/Siefore no es cuenta de depósito asegurada por IPAB.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12354,7 +12531,7 @@
      "nota": "Usar IRN/periodo/cohorte, no GAT ni CAT.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12375,7 +12552,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12383,9 +12560,24 @@
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "IRN 8.66 % con corte de agosto de 2026 (consulta del 12-10-2026).",
+     "nota": "Sustituido por el corte de septiembre de 2026.",
+     "fuentes": [
+      {
+       "f": 208,
+       "consulta": "2026-10-12",
+       "corte": "2026-08",
+       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
+       "publicacion": "2026-09-15",
+       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+      }
+     ]
+    }
+   ],
    "alertas": [
-    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94, agosto de 2026; no otras cohortes ni periodos.",
+    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94. IRN con corte de septiembre de 2026 (cifras preliminares); comisiones con corte de agosto de 2026. No otras cohortes ni periodos.",
     "No recomendar traspaso sólo por un corte de IRN.",
     "IRN histórico, no tasa garantizada; no restar otra vez la comisión del indicador neto.",
     "Servicios, elegibilidad y régimen individual requieren revisión adicional."
@@ -12394,7 +12586,16 @@
    "enlaceOficial": "https://www.consar.gob.mx/gobmx/aplicativo/siset/Series.aspx?cd=212",
    "motivoExclusion": null,
    "decisionEditorial": null,
-   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-08",
+   "actualizacion": {
+    "campos": [
+     "irn"
+    ],
+    "corte": "2026-09",
+    "corteAnterior": "2026-08",
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
+   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-09",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "afore",
    "relacionComercial": null,
@@ -12429,7 +12630,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12451,7 +12652,7 @@
      "nota": "Interpretación de la denominación generacional; confirmar asignación individual.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12464,22 +12665,21 @@
      "clave": "irn",
      "etiqueta": "Indicador de Rendimiento Neto (IRN)",
      "grupo": "indicadores",
-     "valor": "7.62 %",
-     "numero": 7.62,
+     "valor": "7.59 %",
+     "numero": 7.59,
      "estado": {
       "codigo": "historico_misma_cohorte_corte",
       "tipo": "verificado",
       "etiqueta": "Histórico del mismo corte"
      },
-     "nota": "Agosto de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
+     "nota": "Septiembre de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
      "fuentes": [
       {
-       "f": 207,
-       "consulta": "2026-10-12",
-       "corte": "2026-08",
-       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
-       "publicacion": "2026-09-15",
-       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+       "f": 208,
+       "consulta": "2026-11-10",
+       "corte": "2026-09",
+       "corteNota": "La fuente identifica septiembre de 2026, sin día de cierre expreso.",
+       "vigenciaTexto": "Último corte visible: septiembre 2026; cifras preliminares; indicador histórico. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -12497,7 +12697,7 @@
      "nota": "Tabla agosto 2026; no descontar de nuevo del IRN.",
      "fuentes": [
       {
-       "f": 208,
+       "f": 209,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12522,7 +12722,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12543,7 +12743,7 @@
      "nota": "IRN es indicador de desempeño pasado, no oferta de rentabilidad futura.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12571,7 +12771,7 @@
      "nota": "Registro inicial, no traspaso. El canal AforeMóvil y los supuestos de menores/beneficiarios tienen requisitos específicos. No se inició trámite ni se verificó elegibilidad individual.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12589,7 +12789,7 @@
      "nota": "Régimen de retiro no se establece con este trámite; no tratar cuenta de retiro como ahorro de libre disponibilidad.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12607,7 +12807,7 @@
      "nota": "IRN/Siefore no es cuenta de depósito asegurada por IPAB.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12628,7 +12828,7 @@
      "nota": "Usar IRN/periodo/cohorte, no GAT ni CAT.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12649,7 +12849,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12657,9 +12857,24 @@
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "IRN 7.62 % con corte de agosto de 2026 (consulta del 12-10-2026).",
+     "nota": "Sustituido por el corte de septiembre de 2026.",
+     "fuentes": [
+      {
+       "f": 208,
+       "consulta": "2026-10-12",
+       "corte": "2026-08",
+       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
+       "publicacion": "2026-09-15",
+       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+      }
+     ]
+    }
+   ],
    "alertas": [
-    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94, agosto de 2026; no otras cohortes ni periodos.",
+    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94. IRN con corte de septiembre de 2026 (cifras preliminares); comisiones con corte de agosto de 2026. No otras cohortes ni periodos.",
     "No recomendar traspaso sólo por un corte de IRN.",
     "IRN histórico, no tasa garantizada; no restar otra vez la comisión del indicador neto.",
     "Servicios, elegibilidad y régimen individual requieren revisión adicional."
@@ -12668,7 +12883,16 @@
    "enlaceOficial": "https://www.consar.gob.mx/gobmx/aplicativo/siset/Series.aspx?cd=212",
    "motivoExclusion": null,
    "decisionEditorial": null,
-   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-08",
+   "actualizacion": {
+    "campos": [
+     "irn"
+    ],
+    "corte": "2026-09",
+    "corteAnterior": "2026-08",
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
+   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-09",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "afore",
    "relacionComercial": null,
@@ -12703,7 +12927,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12725,7 +12949,7 @@
      "nota": "Interpretación de la denominación generacional; confirmar asignación individual.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12738,22 +12962,21 @@
      "clave": "irn",
      "etiqueta": "Indicador de Rendimiento Neto (IRN)",
      "grupo": "indicadores",
-     "valor": "8.09 %",
-     "numero": 8.09,
+     "valor": "8.14 %",
+     "numero": 8.14,
      "estado": {
       "codigo": "historico_misma_cohorte_corte",
       "tipo": "verificado",
       "etiqueta": "Histórico del mismo corte"
      },
-     "nota": "Agosto de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
+     "nota": "Septiembre de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
      "fuentes": [
       {
-       "f": 207,
-       "consulta": "2026-10-12",
-       "corte": "2026-08",
-       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
-       "publicacion": "2026-09-15",
-       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+       "f": 208,
+       "consulta": "2026-11-10",
+       "corte": "2026-09",
+       "corteNota": "La fuente identifica septiembre de 2026, sin día de cierre expreso.",
+       "vigenciaTexto": "Último corte visible: septiembre 2026; cifras preliminares; indicador histórico. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -12771,7 +12994,7 @@
      "nota": "Tabla agosto 2026; no descontar de nuevo del IRN.",
      "fuentes": [
       {
-       "f": 208,
+       "f": 209,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12796,7 +13019,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12817,7 +13040,7 @@
      "nota": "IRN es indicador de desempeño pasado, no oferta de rentabilidad futura.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12845,7 +13068,7 @@
      "nota": "Registro inicial, no traspaso. El canal AforeMóvil y los supuestos de menores/beneficiarios tienen requisitos específicos. No se inició trámite ni se verificó elegibilidad individual.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12863,7 +13086,7 @@
      "nota": "Régimen de retiro no se establece con este trámite; no tratar cuenta de retiro como ahorro de libre disponibilidad.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12881,7 +13104,7 @@
      "nota": "IRN/Siefore no es cuenta de depósito asegurada por IPAB.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12902,7 +13125,7 @@
      "nota": "Usar IRN/periodo/cohorte, no GAT ni CAT.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12923,7 +13146,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -12931,9 +13154,24 @@
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "IRN 8.09 % con corte de agosto de 2026 (consulta del 12-10-2026).",
+     "nota": "Sustituido por el corte de septiembre de 2026.",
+     "fuentes": [
+      {
+       "f": 208,
+       "consulta": "2026-10-12",
+       "corte": "2026-08",
+       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
+       "publicacion": "2026-09-15",
+       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+      }
+     ]
+    }
+   ],
    "alertas": [
-    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94, agosto de 2026; no otras cohortes ni periodos.",
+    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94. IRN con corte de septiembre de 2026 (cifras preliminares); comisiones con corte de agosto de 2026. No otras cohortes ni periodos.",
     "No recomendar traspaso sólo por un corte de IRN.",
     "IRN histórico, no tasa garantizada; no restar otra vez la comisión del indicador neto.",
     "Servicios, elegibilidad y régimen individual requieren revisión adicional."
@@ -12942,7 +13180,16 @@
    "enlaceOficial": "https://www.consar.gob.mx/gobmx/aplicativo/siset/Series.aspx?cd=212",
    "motivoExclusion": null,
    "decisionEditorial": null,
-   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-08",
+   "actualizacion": {
+    "campos": [
+     "irn"
+    ],
+    "corte": "2026-09",
+    "corteAnterior": "2026-08",
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
+   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-09",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "afore",
    "relacionComercial": null,
@@ -12977,7 +13224,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -12999,7 +13246,7 @@
      "nota": "Interpretación de la denominación generacional; confirmar asignación individual.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13012,22 +13259,21 @@
      "clave": "irn",
      "etiqueta": "Indicador de Rendimiento Neto (IRN)",
      "grupo": "indicadores",
-     "valor": "9.55 %",
-     "numero": 9.55,
+     "valor": "9.56 %",
+     "numero": 9.56,
      "estado": {
       "codigo": "historico_misma_cohorte_corte",
       "tipo": "verificado",
       "etiqueta": "Histórico del mismo corte"
      },
-     "nota": "Agosto de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
+     "nota": "Septiembre de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
      "fuentes": [
       {
-       "f": 207,
-       "consulta": "2026-10-12",
-       "corte": "2026-08",
-       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
-       "publicacion": "2026-09-15",
-       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+       "f": 208,
+       "consulta": "2026-11-10",
+       "corte": "2026-09",
+       "corteNota": "La fuente identifica septiembre de 2026, sin día de cierre expreso.",
+       "vigenciaTexto": "Último corte visible: septiembre 2026; cifras preliminares; indicador histórico. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -13045,7 +13291,7 @@
      "nota": "Tabla agosto 2026; no descontar de nuevo del IRN.",
      "fuentes": [
       {
-       "f": 208,
+       "f": 209,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13070,7 +13316,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13091,7 +13337,7 @@
      "nota": "IRN es indicador de desempeño pasado, no oferta de rentabilidad futura.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13119,7 +13365,7 @@
      "nota": "Registro inicial, no traspaso. El canal AforeMóvil y los supuestos de menores/beneficiarios tienen requisitos específicos. No se inició trámite ni se verificó elegibilidad individual.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -13137,7 +13383,7 @@
      "nota": "Régimen de retiro no se establece con este trámite; no tratar cuenta de retiro como ahorro de libre disponibilidad.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -13155,7 +13401,7 @@
      "nota": "IRN/Siefore no es cuenta de depósito asegurada por IPAB.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13176,7 +13422,7 @@
      "nota": "Usar IRN/periodo/cohorte, no GAT ni CAT.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13197,7 +13443,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -13205,9 +13451,24 @@
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "IRN 9.55 % con corte de agosto de 2026 (consulta del 12-10-2026).",
+     "nota": "Sustituido por el corte de septiembre de 2026.",
+     "fuentes": [
+      {
+       "f": 208,
+       "consulta": "2026-10-12",
+       "corte": "2026-08",
+       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
+       "publicacion": "2026-09-15",
+       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+      }
+     ]
+    }
+   ],
    "alertas": [
-    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94, agosto de 2026; no otras cohortes ni periodos.",
+    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94. IRN con corte de septiembre de 2026 (cifras preliminares); comisiones con corte de agosto de 2026. No otras cohortes ni periodos.",
     "No recomendar traspaso sólo por un corte de IRN.",
     "IRN histórico, no tasa garantizada; no restar otra vez la comisión del indicador neto.",
     "Servicios, elegibilidad y régimen individual requieren revisión adicional."
@@ -13216,7 +13477,16 @@
    "enlaceOficial": "https://www.consar.gob.mx/gobmx/aplicativo/siset/Series.aspx?cd=212",
    "motivoExclusion": null,
    "decisionEditorial": null,
-   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-08",
+   "actualizacion": {
+    "campos": [
+     "irn"
+    ],
+    "corte": "2026-09",
+    "corteAnterior": "2026-08",
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
+   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-09",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "afore",
    "relacionComercial": null,
@@ -13251,7 +13521,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13273,7 +13543,7 @@
      "nota": "Interpretación de la denominación generacional; confirmar asignación individual.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13286,22 +13556,21 @@
      "clave": "irn",
      "etiqueta": "Indicador de Rendimiento Neto (IRN)",
      "grupo": "indicadores",
-     "valor": "9.02 %",
-     "numero": 9.02,
+     "valor": "9.04 %",
+     "numero": 9.04,
      "estado": {
       "codigo": "historico_misma_cohorte_corte",
       "tipo": "verificado",
       "etiqueta": "Histórico del mismo corte"
      },
-     "nota": "Agosto de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
+     "nota": "Septiembre de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
      "fuentes": [
       {
-       "f": 207,
-       "consulta": "2026-10-12",
-       "corte": "2026-08",
-       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
-       "publicacion": "2026-09-15",
-       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+       "f": 208,
+       "consulta": "2026-11-10",
+       "corte": "2026-09",
+       "corteNota": "La fuente identifica septiembre de 2026, sin día de cierre expreso.",
+       "vigenciaTexto": "Último corte visible: septiembre 2026; cifras preliminares; indicador histórico. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -13319,7 +13588,7 @@
      "nota": "Tabla agosto 2026; no descontar de nuevo del IRN.",
      "fuentes": [
       {
-       "f": 208,
+       "f": 209,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13344,7 +13613,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13365,7 +13634,7 @@
      "nota": "IRN es indicador de desempeño pasado, no oferta de rentabilidad futura.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13393,7 +13662,7 @@
      "nota": "Registro inicial, no traspaso. El canal AforeMóvil y los supuestos de menores/beneficiarios tienen requisitos específicos. No se inició trámite ni se verificó elegibilidad individual.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -13411,7 +13680,7 @@
      "nota": "Régimen de retiro no se establece con este trámite; no tratar cuenta de retiro como ahorro de libre disponibilidad.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -13429,7 +13698,7 @@
      "nota": "IRN/Siefore no es cuenta de depósito asegurada por IPAB.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13450,7 +13719,7 @@
      "nota": "Usar IRN/periodo/cohorte, no GAT ni CAT.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13471,7 +13740,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -13479,9 +13748,24 @@
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "IRN 9.02 % con corte de agosto de 2026 (consulta del 12-10-2026).",
+     "nota": "Sustituido por el corte de septiembre de 2026.",
+     "fuentes": [
+      {
+       "f": 208,
+       "consulta": "2026-10-12",
+       "corte": "2026-08",
+       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
+       "publicacion": "2026-09-15",
+       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+      }
+     ]
+    }
+   ],
    "alertas": [
-    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94, agosto de 2026; no otras cohortes ni periodos.",
+    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94. IRN con corte de septiembre de 2026 (cifras preliminares); comisiones con corte de agosto de 2026. No otras cohortes ni periodos.",
     "No recomendar traspaso sólo por un corte de IRN.",
     "IRN histórico, no tasa garantizada; no restar otra vez la comisión del indicador neto.",
     "Servicios, elegibilidad y régimen individual requieren revisión adicional."
@@ -13490,7 +13774,16 @@
    "enlaceOficial": "https://www.consar.gob.mx/gobmx/aplicativo/siset/Series.aspx?cd=212",
    "motivoExclusion": null,
    "decisionEditorial": null,
-   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-08",
+   "actualizacion": {
+    "campos": [
+     "irn"
+    ],
+    "corte": "2026-09",
+    "corteAnterior": "2026-08",
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
+   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-09",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "afore",
    "relacionComercial": null,
@@ -13525,7 +13818,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13547,7 +13840,7 @@
      "nota": "Interpretación de la denominación generacional; confirmar asignación individual.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13560,22 +13853,21 @@
      "clave": "irn",
      "etiqueta": "Indicador de Rendimiento Neto (IRN)",
      "grupo": "indicadores",
-     "valor": "8.93 %",
-     "numero": 8.93,
+     "valor": "8.98 %",
+     "numero": 8.98,
      "estado": {
       "codigo": "historico_misma_cohorte_corte",
       "tipo": "verificado",
       "etiqueta": "Histórico del mismo corte"
      },
-     "nota": "Agosto de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
+     "nota": "Septiembre de 2026, cifras preliminares. Comparar sólo SB 90–94 del mismo corte y metodología. No es rendimiento futuro garantizado.",
      "fuentes": [
       {
-       "f": 207,
-       "consulta": "2026-10-12",
-       "corte": "2026-08",
-       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
-       "publicacion": "2026-09-15",
-       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+       "f": 208,
+       "consulta": "2026-11-10",
+       "corte": "2026-09",
+       "corteNota": "La fuente identifica septiembre de 2026, sin día de cierre expreso.",
+       "vigenciaTexto": "Último corte visible: septiembre 2026; cifras preliminares; indicador histórico. Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
       }
      ]
     },
@@ -13593,7 +13885,7 @@
      "nota": "Tabla agosto 2026; no descontar de nuevo del IRN.",
      "fuentes": [
       {
-       "f": 208,
+       "f": 209,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13618,7 +13910,7 @@
      },
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13639,7 +13931,7 @@
      "nota": "IRN es indicador de desempeño pasado, no oferta de rentabilidad futura.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13667,7 +13959,7 @@
      "nota": "Registro inicial, no traspaso. El canal AforeMóvil y los supuestos de menores/beneficiarios tienen requisitos específicos. No se inició trámite ni se verificó elegibilidad individual.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -13685,7 +13977,7 @@
      "nota": "Régimen de retiro no se establece con este trámite; no tratar cuenta de retiro como ahorro de libre disponibilidad.",
      "fuentes": [
       {
-       "f": 209,
+       "f": 210,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -13703,7 +13995,7 @@
      "nota": "IRN/Siefore no es cuenta de depósito asegurada por IPAB.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13724,7 +14016,7 @@
      "nota": "Usar IRN/periodo/cohorte, no GAT ni CAT.",
      "fuentes": [
       {
-       "f": 207,
+       "f": 208,
        "consulta": "2026-10-12",
        "corte": "2026-08",
        "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
@@ -13745,7 +14037,7 @@
      "nota": "CAT es un indicador de costo de crédito; no corresponde a este producto no crediticio.",
      "fuentes": [
       {
-       "f": 163,
+       "f": 164,
        "consulta": "2026-10-12",
        "vigenciaTexto": "No declarada en el contenido consultado"
       }
@@ -13753,9 +14045,24 @@
     }
    ],
    "discrepancias": [],
-   "historial": [],
+   "historial": [
+    {
+     "texto": "IRN 8.93 % con corte de agosto de 2026 (consulta del 12-10-2026).",
+     "nota": "Sustituido por el corte de septiembre de 2026.",
+     "fuentes": [
+      {
+       "f": 208,
+       "consulta": "2026-10-12",
+       "corte": "2026-08",
+       "corteNota": "La fuente identifica agosto de 2026, sin día de cierre expreso.",
+       "publicacion": "2026-09-15",
+       "vigenciaTexto": "Último corte visible: agosto 2026; cifras preliminares; indicador histórico"
+      }
+     ]
+    }
+   ],
    "alertas": [
-    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94, agosto de 2026; no otras cohortes ni periodos.",
+    "La categoría cubre las diez administradoras que figuran en la tabla de CONSAR para SB 90–94. IRN con corte de septiembre de 2026 (cifras preliminares); comisiones con corte de agosto de 2026. No otras cohortes ni periodos.",
     "No recomendar traspaso sólo por un corte de IRN.",
     "IRN histórico, no tasa garantizada; no restar otra vez la comisión del indicador neto.",
     "Servicios, elegibilidad y régimen individual requieren revisión adicional."
@@ -13764,7 +14071,16 @@
    "enlaceOficial": "https://www.consar.gob.mx/gobmx/aplicativo/siset/Series.aspx?cd=212",
    "motivoExclusion": null,
    "decisionEditorial": null,
-   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-08",
+   "actualizacion": {
+    "campos": [
+     "irn"
+    ],
+    "corte": "2026-09",
+    "corteAnterior": "2026-08",
+    "revisado": "2026-11-10",
+    "procedencia": "Lectura delegada del 10-11-2026 (transcripción aportada por el equipo de MiLana; esta sesión no reabrió la URL)."
+   },
+   "estadoUso": "Comparación histórica IRN solo misma cohorte SB 90–94 y corte mensual 2026-09",
    "ofertaIndividualVerificada": false,
    "tipoEntidadClase": "afore",
    "relacionComercial": null,
@@ -14493,14 +14809,19 @@
    "acceso": "verificado"
   },
   {
-   "titulo": "Tarjeta Win Banregio",
-   "url": "https://www.banregio.com/personas/tarjetas/banregio.php",
-   "localizador": "Requisitos y Ley de Transparencia"
+   "titulo": "Banregio Recompensas: CAT Tarjeta Win",
+   "url": "https://recompensas.banregio.com/",
+   "localizador": "Costo Anual Total (CAT) Tarjeta Win Banregio"
   },
   {
    "titulo": "Folleto tarjetas de crédito Banregio",
    "url": "https://portalbanregio.s3.amazonaws.com/assets/naranja/img/Tarjetas-Credito.pdf",
    "localizador": "Páginas 3–6"
+  },
+  {
+   "titulo": "Tarjeta Win Banregio",
+   "url": "https://www.banregio.com/personas/tarjetas/banregio.php",
+   "localizador": "Requisitos y Ley de Transparencia"
   },
   {
    "titulo": "Crédito Personal Banamex",

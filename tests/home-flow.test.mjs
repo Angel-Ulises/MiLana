@@ -7,15 +7,9 @@ const routes = readFileSync('src/homeRoutes.jsx','utf8');
 const fallback = readFileSync('public/orbita-v3-experience.js','utf8');
 const css = readFileSync('src/home-flow.css','utf8');
 
-test('la explicación de MiLana queda disponible sin repetir un bloque alto', () => {
-  assert.match(app, /<details className="ml-how-it-works">/);
-  assert.match(app, /<summary>/);
-  assert.match(app, /Cómo funciona MiLana/);
-  assert.doesNotMatch(app, /<details className="ml-how-it-works" open/);
-  for (const palabra of ['Entender','Comparar','Decidir']) assert.ok(app.includes(palabra));
-  assert.match(css, /\.path-section/);
-  assert.match(css, /padding-block:18px!important/);
-  assert.match(css, /prefers-reduced-motion/);
+test('mejora 2026-11: Inicio tiene un solo objetivo, sin el bloque «Cómo funciona»', () => {
+  assert.doesNotMatch(app, /ml-how-it-works/);
+  assert.match(app, /Toca tu caso y lo calculas en un minuto/);
 });
 
 test('la tarjeta de regreso no introduce rutas arbitrarias o pasos falsos', () => {
@@ -30,10 +24,11 @@ test('la tarjeta de regreso no introduce rutas arbitrarias o pasos falsos', () =
   assert.match(fallback, /if \(saved\) hero\.insertAdjacentElement\('afterend', saved\)/);
 });
 
-test('conserva el conjunto de seis rutas reales y no altera cálculos', () => {
+test('mejora 2026-11: Inicio lista las 10 calculadoras y ahorro, sin alterar cálculos', () => {
   for (const route of [
-    '/calculadoras/liquidacion','/calculadoras/finiquito','/calculadoras/aguinaldo',
-    '/finanzas/ahorro','/carreras','/estados/comparar'
+    '/calculadoras/aguinaldo','/calculadoras/liquidacion','/calculadoras/finiquito','/calculadoras/bruto-a-neto',
+    '/calculadoras/isr','/calculadoras/vacaciones','/calculadoras/ptu','/calculadoras/resico',
+    '/calculadoras/infonavit','/calculadoras/pension-imss','/finanzas/ahorro'
   ]) {
     assert.ok(routes.includes(route), route);
     assert.ok(fallback.includes(route), route);

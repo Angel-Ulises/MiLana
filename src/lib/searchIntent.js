@@ -33,12 +33,12 @@ export const SEARCH_INTENTS = Object.freeze({
   '/aprende': ['no entiendo mi nomina', 'aprender finanzas', 'explicaciones faciles'],
 });
 export const SEARCH_FEATURED = Object.freeze([
+  '/calculadoras/aguinaldo',
   '/calculadoras/finiquito',
+  '/calculadoras/liquidacion',
   '/calculadoras/bruto-a-neto',
-  '/finanzas/presupuesto',
-  '/carreras/comparar',
-  '/estados/comparar',
-  '/invertir'
+  '/calculadoras/isr',
+  '/finanzas/presupuesto'
 ]);
 export function normalizeSearch(value=''){
  return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('es-MX').replace(/[¿?¡!.,;:]/g,' ').replace(/\s+/g,' ').trim();

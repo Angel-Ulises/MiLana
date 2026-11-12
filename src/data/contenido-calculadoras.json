@@ -1,7 +1,7 @@
 {
   "_nota": "Contenido editorial por calculadora, redactado por ChatGPT segun la Fase 6. Complementa los mini-articulos de articulos.json, no los repite. Solo fuentes oficiales. No es asesoria individual.",
   "finiquito": {
-    "proposito": "Estima el finiquito bruto de una terminación ocurrida en 2026 con salario fijo y prestaciones capturadas. La herramienta separa cada concepto y aplica la prima de antigüedad solo cuando corresponde al supuesto declarado.",
+    "proposito": "Cuánto te deben si renuncias o te despiden en 2026.",
     "interpretacion": "Lee el resultado como un desglose, no solo como una cifra final. Revisa cuánto corresponde a cada concepto y compáralo con tus recibos de nómina, fechas de ingreso y salida, días de vacaciones ya disfrutados y prestaciones pactadas. Una diferencia importante en uno de esos datos puede cambiar el total. El resultado representa una estimación con la información capturada; la cantidad efectivamente pagada puede variar si existen prestaciones superiores a las legales, conceptos pendientes que la calculadora no incluya o ajustes fiscales y de nómina.",
     "significado": "El finiquito sirve para comprobar qué derechos ya se habían generado hasta la fecha en que terminó la relación laboral. Por eso conviene revisar sus componentes por separado. Una cifra total aparentemente razonable puede ocultar que falta una prestación, que se usó una antigüedad incorrecta o que se descontaron días que ya estaban devengados. También es importante no asumir que finiquito e indemnización son lo mismo: dependiendo de la forma en que terminó la relación laboral pueden existir otros conceptos que deben analizarse aparte.",
     "metodologia": "MiLana usa días civiles de 2026 para el aguinaldo, el ciclo transcurrido desde el último aniversario para vacaciones y la prestación anual que captures o, si la dejas en blanco, el mínimo de la LFT. La prima vacacional usa el porcentaje capturado. La prima de antigüedad se limita a doce días por año con el tope de dos salarios mínimos de la zona y solo se incorpora cuando la causa declarada cumple el supuesto modelado.",
@@ -57,7 +57,7 @@
     ]
   },
   "liquidacion": {
-    "proposito": "Estima un escenario económico de despido injustificado en una relación por tiempo indeterminado. Separa prestaciones devengadas, indemnización de tres meses, prima de antigüedad y, solo si lo activas, el escenario de veinte días por año.",
+    "proposito": "Cuánto te toca si te despidieron sin causa justificada.",
     "interpretacion": "Lee el resultado como un escenario estimado y revisa cada concepto por separado. Una indemnización, una prima de antigüedad y las prestaciones pendientes tienen fundamentos y condiciones diferentes. Que la calculadora muestre un componente no demuestra por sí mismo que jurídicamente proceda en tu caso, y que un componente no aparezca tampoco significa que hayas perdido un derecho. Utiliza el desglose para identificar qué cantidades requieren comprobarse con la causa de terminación, el contrato, la antigüedad y los documentos laborales.",
     "significado": "La diferencia más importante frente al finiquito es que una liquidación puede incorporar conceptos vinculados con la forma en que terminó la relación laboral y no solamente prestaciones ya generadas. Por eso dos personas con el mismo salario y antigüedad pueden obtener resultados distintos si las causas de separación son diferentes. Antes de tomar el total como referencia, identifica qué ocurrió con la relación laboral y separa los derechos devengados de los posibles conceptos indemnizatorios.",
     "metodologia": "El salario diario integrado se construye con el salario fijo y las prestaciones de aguinaldo y prima vacacional capturadas, usando las vacaciones anuales aplicables. El escenario base agrega tres meses de SDI y prima de antigüedad. Los veinte días por año permanecen apagados de forma predeterminada porque su procedencia depende del supuesto jurídico previsto por la LFT.",
@@ -113,63 +113,59 @@
     ]
   },
   "aguinaldo": {
-    "proposito": "Proyecta el aguinaldo bruto 2026 según el régimen que selecciones. Distingue LFT, servicio público federal sujeto a LFTSE y reglas SEP federales; no incluye la retención de ISR.",
-    "interpretacion": "El resultado depende del régimen, la base salarial y el tiempo de servicio. En LFT y LFTSE pueden existir prestaciones superiores al mínimo. En SEP federal la nómina puede usar conceptos computables o salario convencional propios, por lo que conviene comparar la base capturada con tu recibo y tu tipo de plaza. Si trabajaste solo parte del año, revisa también qué regla proporcional aplicó la calculadora.",
-    "significado": "El aguinaldo es una prestación independiente del salario ordinario y no depende de que la relación laboral continúe hasta diciembre para haber generado una parte proporcional. Lo importante para interpretar el resultado es distinguir tres elementos: cuánto aguinaldo reconoce tu relación laboral, qué parte del periodo efectivamente generaste y qué salario se está utilizando como base. Una diferencia en cualquiera de esos elementos puede explicar por qué tu recibo y la estimación no coinciden.",
-    "metodologia": "En LFT y en el modo federal general, MiLana parte del salario diario y de los días de prestación aplicables. Para SEP Educación Básica/apoyo utiliza la referencia de 40 días y la base computable indicada por el Manual SEP 2025. Para SEP Educación Media Superior aplica automáticamente la regla por tiempo de servicio del mismo Manual: 40 días con seis meses o más, 20 días con más de tres y menos de seis meses, y hasta tres meses una proporción sobre la base anual de 40 días. El modo supone servicio continuo hasta el 31 de diciembre de 2026 y no calcula ISR.",
-    "supuestos": "La estimación supone que seleccionaste el régimen correcto y capturaste la base salarial que corresponde a tu plaza. En relaciones LFT puede existir una prestación superior por contrato o convenio. En servicio público federal y SEP pueden existir conceptos computables, incidencias, nombramientos o condiciones colectivas que cambien la base o mejoren la prestación. Salarios variables, cambios de plaza o interrupciones de servicio pueden requerir revisión adicional. El resultado es informativo y no sustituye el recibo de nómina ni determina el tratamiento fiscal final.",
-    "fundamento": "Para relaciones regidas por la LFT, el artículo 87 establece el aguinaldo anual y su parte proporcional. Para personas trabajadoras federales sujetas a la LFTSE, el artículo 42 Bis establece un aguinaldo anual de al menos 40 días. En SEP federal, el Manual de Normas para la Administración de Recursos Humanos 2025 define bases y reglas específicas; en Educación Media Superior distingue 40, 20 o proporcional según el tiempo de servicio. MiLana separa estos regímenes para no trasladar automáticamente una regla privada a una plaza pública.",
+    "proposito": "Cuánto te toca de aguinaldo 2026 y cuánto te llega después de impuestos.",
+    "interpretacion": "La cifra grande es lo que te llega a la cuenta: el aguinaldo menos el ISR que retiene tu empresa. Si tu recibo dice otra cosa, revisa tres cosas: el sueldo que usaron, los días que te dan y desde qué fecha cuentan.",
+    "significado": "El aguinaldo es un pago extra al año, aparte de tu sueldo. Te toca aunque no hayas trabajado el año completo: en ese caso recibes la parte proporcional a los días que trabajaste. Y si dejas la empresa antes de diciembre, también te lo deben pagar en tu finiquito.",
+    "metodologia": "Tu sueldo mensual entre 30 da tu sueldo diario. Eso por 15 días (o los que te dé tu empresa) es tu aguinaldo de un año completo. Si entraste en 2026, se multiplica por los días que trabajaste entre 365. Los primeros $3,519.30 no pagan impuesto (30 veces la UMA de $117.31). Lo que pasa de esa cantidad se suma a tu sueldo del mes y se calcula el ISR con la tabla mensual del SAT 2026; la diferencia es lo que te retienen.",
+    "supuestos": "Supone un sueldo fijo durante el año, que sigues trabajando hasta el 31 de diciembre y que tu empresa usa el método general de retención. Algunas empresas usan otro método permitido por el Reglamento del ISR (artículo 174) que a veces retiene un poco menos. Si tu sueldo tiene comisiones o bonos, o cambió durante el año, toma el resultado como referencia. Es una estimación: tu recibo de nómina manda.",
+    "fundamento": "Ley Federal del Trabajo, artículo 87: al menos 15 días de salario, pagados antes del 20 de diciembre, y la parte proporcional si no completaste el año. Ley del ISR, artículo 93, fracción XIV: el aguinaldo no paga impuesto hasta 30 días de salario mínimo, que desde 2016 se calculan con la UMA. Ley del ISR, artículo 96, y Anexo 8 de la Resolución Miscelánea Fiscal 2026: tabla mensual para la retención. UMA 2026 publicada por el INEGI: $117.31 diarios. Para gobierno federal (40 días, Ley Federal de los Trabajadores al Servicio del Estado, artículo 42 Bis) y SEP (Manual de Recursos Humanos 2025) usa el enlace «¿Trabajas en gobierno o SEP?».",
     "faq": [
       {
-        "pregunta": "¿Qué cambia si trabajo en SEP o en otra dependencia federal?",
-        "respuesta": "No debes asumir automáticamente el mínimo de 15 días de la LFT. El servicio público federal sujeto a LFTSE parte de al menos 40 días, y SEP tiene reglas y bases específicas según el tipo de plaza. Por eso MiLana pide primero el régimen y, en Educación Media Superior, aplica la regla de tiempo de servicio correspondiente."
+        "pregunta": "¿Cuánto me toca de aguinaldo si gano $10,000 al mes?",
+        "respuesta": "Con 15 días y el año completo, tu aguinaldo es de $5,000 ($10,000 ÷ 30 × 15). De eso, $3,519.30 no pagan impuesto. Escribe tu sueldo arriba para ver el ISR y lo que te llega."
       },
       {
-        "pregunta": "¿Cómo se calcula el aguinaldo si entré durante 2026?",
-        "respuesta": "Depende del régimen seleccionado. En LFT se reconoce la parte proporcional correspondiente al tiempo trabajado. En SEP Educación Media Superior, el Manual 2025 distingue entre seis meses o más, más de tres y menos de seis meses, y hasta tres meses; MiLana aplica esa regla específica cuando eliges ese modo."
+        "pregunta": "¿Cuándo me tienen que pagar el aguinaldo?",
+        "respuesta": "A más tardar el 19 de diciembre: la ley dice que se paga antes del día 20."
       },
       {
-        "pregunta": "¿Por qué mi empresa puede pagar más de lo que muestra una estimación con el mínimo legal?",
-        "respuesta": "Porque el mínimo de la Ley funciona como piso. Un contrato, convenio, contrato colectivo o política laboral puede establecer un número mayor de días de aguinaldo, y esa condición superior modifica el cálculo."
+        "pregunta": "Entré a trabajar este año, ¿me toca aguinaldo?",
+        "respuesta": "Sí. Te toca la parte proporcional a los días que trabajaste en 2026. Elige «Entré en 2026» y pon tu fecha de ingreso."
       },
       {
-        "pregunta": "¿El resultado de MiLana es bruto o exactamente lo que llegará a mi cuenta?",
-        "respuesta": "La estimación laboral de la prestación y el importe efectivamente depositado pueden no ser iguales. En nómina pueden existir efectos fiscales u otros ajustes. Por eso conviene revisar primero el monto de la prestación y después, por separado, cualquier retención aplicable."
+        "pregunta": "¿Por qué me llega menos de lo que dice mi aguinaldo?",
+        "respuesta": "Porque la parte que pasa de $3,519.30 paga ISR y tu empresa lo retiene. La calculadora te muestra ese descuento y lo que te llega."
       },
       {
-        "pregunta": "¿Qué pasa si mi salario cambió durante el año?",
-        "respuesta": "Un cambio salarial puede hacer que una estimación simplificada no coincida exactamente con la metodología utilizada en la nómina real, especialmente si las condiciones de pago no fueron uniformes durante todo el periodo. Revisa qué salario utiliza la calculadora y compáralo con tus recibos."
+        "pregunta": "Mi empresa me da más de 15 días, ¿cómo lo calculo?",
+        "respuesta": "Toca «¿Te dan más de 15 días?» y escribe los días que te da tu contrato. La ley pone 15 como mínimo; tu empresa puede dar más, nunca menos."
       },
       {
-        "pregunta": "¿Bonos y comisiones forman automáticamente parte del salario usado para el aguinaldo?",
-        "respuesta": "No conviene asumirlo automáticamente. La forma de remuneración y las características de cada percepción pueden modificar la base que deba revisarse. Si tu ingreso tiene componentes variables, el resultado de una calculadora basada en un salario fijo debe tratarse como una referencia."
+        "pregunta": "Trabajo en gobierno o en la SEP, ¿esto aplica para mí?",
+        "respuesta": "No del todo: en gobierno federal son al menos 40 días y la SEP tiene reglas propias. Toca «¿Trabajas en gobierno o SEP?» para usar el cálculo de tu caso."
       },
       {
-        "pregunta": "¿Cómo puedo comprobar si el periodo proporcional está bien calculado?",
-        "respuesta": "Verifica la fecha desde la que comenzó a generarse la prestación dentro del periodo correspondiente y la fecha hasta la que se reconoce el servicio. Después confirma que la calculadora esté utilizando los días de aguinaldo que realmente te corresponden."
+        "pregunta": "¿Las comisiones y bonos cuentan para el aguinaldo?",
+        "respuesta": "Depende de cómo te los paguen. La calculadora usa un sueldo fijo; si tu ingreso cambia mucho, toma el resultado como referencia y compáralo con tu recibo."
       },
       {
-        "pregunta": "¿El aguinaldo sustituye otras prestaciones pendientes cuando termina una relación laboral?",
-        "respuesta": "No. El aguinaldo proporcional es un concepto distinto. Vacaciones, prima vacacional, salarios pendientes u otros derechos deben revisarse por separado cuando correspondan."
+        "pregunta": "Me despidieron o renuncié, ¿pierdo el aguinaldo?",
+        "respuesta": "No. Te deben pagar la parte proporcional en tu finiquito, junto con vacaciones y otros pagos pendientes."
       }
     ],
     "siguientes": [
       {
-        "texto": "Consulta el ISR del sueldo mensual ordinario; no calcula el ISR del aguinaldo",
-        "destino": "isr"
-      },
-      {
-        "texto": "Comprueba tus vacaciones y prima vacacional por separado",
-        "destino": "vacaciones"
-      },
-      {
-        "texto": "Si terminó tu relación laboral, revisa los demás conceptos pendientes",
+        "texto": "Calcula tu finiquito si dejaste el trabajo",
         "destino": "finiquito"
+      },
+      {
+        "texto": "Revisa cuántos días de vacaciones te tocan",
+        "destino": "vacaciones"
       }
     ]
   },
   "vacaciones": {
-    "proposito": "Compara vacaciones y prima vacacional sin mezclar regímenes. La herramienta conserva la escala de Vacaciones Dignas para LFT y añade referencias separadas para servicio público federal sujeto a LFTSE y para plazas SEP federales.",
+    "proposito": "Cuántos días de vacaciones te tocan y cuánto te pagan de prima.",
     "interpretacion": "Revisa por separado los días de vacaciones y la prima vacacional. Los días representan tiempo de descanso pagado; la prima es una prestación adicional calculada sobre la remuneración correspondiente a ese periodo. Si ya disfrutaste parte de tus vacaciones, si tu empresa concede más días o una prima superior, o si existen periodos pendientes de años anteriores, el resultado debe compararse con esas circunstancias antes de tomar el total como definitivo.",
     "significado": "Las vacaciones no son únicamente una cantidad que se agrega al salario: su función principal es otorgar descanso pagado. Por eso saber cuántos días te corresponden no significa automáticamente que todos deban pagarse en efectivo mientras la relación laboral continúa. La prima vacacional es un concepto distinto que acompaña ese derecho. La antigüedad es especialmente importante porque determina el periodo mínimo de vacaciones que se va generando con los años de servicio.",
     "metodologia": "En LFT, MiLana usa la antigüedad para aplicar la escala legal y una prima mínima de 25%. En el modo LFTSE federal muestra como referencia anual dos periodos de 10 días laborables y una prima de 30% para personal con más de seis meses consecutivos. Para SEP Educación Básica/apoyo utiliza 20 días laborables y una prima de 50% sobre el sueldo base correspondiente; para SEP Educación Media Superior calcula la prima de 60% usando como base salarial 40 días de salario convencional. En este último caso, los 40 días son la base económica de la prima, no una afirmación de 40 días de vacaciones disfrutables.",
@@ -225,7 +221,7 @@
     ]
   },
   "isr": {
-    "proposito": "Estima la retención de ISR de un mes completo ordinario de febrero a diciembre de 2026, con un solo empleador. El ingreso gravable puede ser distinto del sueldo bruto.",
+    "proposito": "Cuánto ISR te quitan de tu sueldo cada mes.",
     "interpretacion": "Lee el resultado como una estimación de la retención correspondiente al mes, no como el impuesto definitivo de todo el año. La cantidad parte del ingreso gravable utilizado por la herramienta, aplica la tarifa mensual vigente y, cuando se cumplen las condiciones del subsidio para el empleo, incorpora ese beneficio al cálculo. Si tu recibo muestra una cantidad distinta, revisa primero si hubo ingresos exentos, pagos extraordinarios, ajustes de nómina, periodos distintos a un mes u otros conceptos que no formen parte del escenario capturado.",
     "significado": "El ISR sobre salarios no se obtiene aplicando un único porcentaje al sueldo completo. La tarifa es progresiva: el ingreso se ubica en el rango que corresponda y el impuesto se determina con los elementos previstos para ese rango. Después puede intervenir el subsidio para el empleo cuando la persona trabajadora cumple las condiciones establecidas en el decreto vigente. Por eso un aumento de sueldo no significa que todo el ingreso pase a tributar con una sola tasa más alta.",
     "metodologia": "Retención para un mes completo ordinario, de febrero a diciembre de 2026 y con un solo empleador. No incluye IMSS ni otros descuentos. Los supuestos y descuentos incluidos se indican junto a la herramienta. No sustituye un recibo de nómina.",
@@ -281,7 +277,7 @@
     ]
   },
   "resico": {
-    "proposito": "Esta calculadora estima el ISR mensual de una persona física que tributa en el Régimen Simplificado de Confianza por las actividades comprendidas en el artículo 113-E de la Ley del Impuesto sobre la Renta. Está diseñada para explicar la mecánica básica del pago mensual a partir de ingresos efectivamente cobrados. No determina por sí sola si una persona reúne todos los requisitos para pertenecer al régimen ni calcula otros impuestos.",
+    "proposito": "Cuánto ISR pagas en RESICO por lo que cobraste este mes.",
     "interpretacion": "El resultado representa una estimación del ISR correspondiente a los ingresos de RESICO considerados por la herramienta durante el periodo. La base no se construye como una utilidad obtenida al restar gastos: para esta mecánica se consideran los ingresos efectivamente cobrados que cumplen las condiciones legales, sin incluir el IVA y sin aplicar deducciones al determinar el pago mensual. Si existen retenciones acreditables u otras circunstancias fiscales que la calculadora no solicite expresamente, la cantidad efectivamente enterada puede ser distinta.",
     "significado": "La característica central del cálculo mensual de RESICO para personas físicas es que mira principalmente cuánto ingreso elegible fue efectivamente cobrado y documentado, en lugar de calcular primero una utilidad restando gastos. Esto hace que tener facturas emitidas, cobradas o pendientes de pago pueda producir consecuencias diferentes dentro del periodo. El régimen también tiene requisitos de permanencia y obligaciones propias, por lo que obtener una cifra en la calculadora no significa por sí mismo que una persona pueda tributar bajo RESICO.",
     "metodologia": "MiLana toma el importe de los ingresos de las actividades comprendidas en el régimen que hayan sido efectivamente cobrados y estén amparados por los comprobantes fiscales correspondientes. El IVA no se incorpora a la base del ISR y, para el pago mensual regulado por el artículo 113-E, no se restan deducciones. Sobre esa base se aplica la tasa que corresponda conforme a la tabla vigente aplicable al alcance indicado. Cuando existan retenciones de ISR que legalmente puedan acreditarse, estas solo modifican la estimación final si la herramienta las contempla expresamente como dato de entrada.",
@@ -337,7 +333,7 @@
     ]
   },
   "bruto-neto": {
-    "proposito": "Estima lo que queda de tus percepciones brutas después de ISR y la seguridad social obligatoria en un mes completo ordinario de febrero a diciembre de 2026. Separa el régimen IMSS —con SBC diario— del régimen ISSSTE federal —con Sueldo Básico mensual— para no mezclar bases.",
+    "proposito": "Cuánto te llega de tu sueldo después de ISR e IMSS.",
     "interpretacion": "El sueldo neto mostrado es una estimación obtenida al partir del ingreso bruto y descontar los conceptos que modela la herramienta. Revisa por separado el ISR y la cuota de seguridad social del régimen seleccionado, porque usan bases y reglas distintas. Una nómina real puede mostrar otra cantidad si incluye bonos, percepciones exentas, ausencias, créditos de vivienda, préstamos, pensiones, fondos, descuentos internos, pagos extraordinarios u otros conceptos que esta calculadora no modele.",
     "significado": "Bruto y neto describen momentos distintos de una nómina. El sueldo bruto representa las percepciones antes de los descuentos considerados; el neto es lo que queda después de aplicar las retenciones y deducciones correspondientes. El ISR se relaciona con el ingreso gravable fiscal; el IMSS usa el salario base de cotización y el ISSSTE federal usa el Sueldo Básico de cotización. Esas bases no deben asumirse como idénticas.",
     "metodologia": "El ISR usa la tarifa mensual 2026 y el subsidio para el empleo dentro del alcance indicado. En IMSS, la cuota obrera usa SBC, días cotizados, tope de 25 UMA y la estructura aplicable. En ISSSTE federal, las cuotas obligatorias del trabajador suman 10.625% sobre el Sueldo Básico sujeto al tope de 10 UMA: RCV 6.125%, salud 3.375%, invalidez y vida 0.625% y servicios sociales y culturales 0.5%. Ahorro Solidario, FOVISSSTE, préstamos y otros descuentos personales quedan fuera.",
@@ -393,7 +389,7 @@
     ]
   },
   "ptu": {
-    "proposito": "Calcula únicamente el monto total de PTU a repartir a partir de la renta gravable que captures. No estima cuánto recibe una persona trabajadora ni determina por sí sola si el patrón está obligado, exceptuado o si una plaza pública está dentro del régimen de PTU de la LFT.",
+    "proposito": "Cuánto reparte tu empresa de utilidades (PTU) entre los trabajadores.",
     "interpretacion": "El resultado es el fondo total de PTU bajo el supuesto capturado, no la participación individual de una persona. Para distribuir ese fondo hacen falta datos del conjunto de personas con derecho a participar, sus días trabajados, salarios aplicables, exclusiones y límites individuales. Si esos datos no están disponibles, mostrar una cifra personal sería una precisión falsa.",
     "significado": "La PTU total y la PTU individual son etapas distintas. Primero se determina la renta gravable y el monto global destinado al reparto; después ese monto se distribuye conforme a las reglas laborales entre quienes tengan derecho. Esta herramienta termina en la primera etapa y deja explícitamente fuera la distribución individual.",
     "metodologia": "MiLana multiplica la renta gravable capturada por el porcentaje general de participación vigente que utiliza la herramienta y muestra el monto total a repartir. No divide esa cantidad entre trabajadores, no usa días o salarios individuales y no aplica el límite personal del artículo 127, porque hacerlo correctamente requiere información del universo completo de participantes y antecedentes que esta calculadora no solicita.",
@@ -449,7 +445,7 @@
     ]
   },
   "infonavit": {
-    "proposito": "Esta calculadora simula cómo puede evolucionar el saldo de un crédito Infonavit a lo largo del tiempo a partir de los datos capturados sobre saldo, pago, tasa y demás componentes que contemple la herramienta. Su objetivo es ayudarte a entender cuánto del pago se destina a intereses y cuánto reduce la deuda, así como observar el efecto de aportaciones o pagos adicionales cuando estén incluidos en el escenario. No sustituye el estado de cuenta ni reproduce necesariamente todas las condiciones contractuales de un crédito real.",
+    "proposito": "Cuánto pagarías al mes por tu crédito y cuánto se va en intereses.",
     "interpretacion": "Lee la tabla o proyección como un escenario financiero, no como el calendario oficial de tu crédito. Observa principalmente tres elementos: cómo disminuye el saldo, cuánto interés se genera en cada periodo y cómo cambia el plazo estimado cuando varía el pago aplicado a la deuda. Si la simulación difiere de Mi Cuenta Infonavit, utiliza como referencia oficial tu estado de cuenta, porque el crédito real puede incluir seguros, cuotas, adeudos, beneficios, reestructuras o reglas contractuales que una simulación general no conoce.",
     "significado": "En una amortización, una mensualidad no reduce íntegramente el capital desde el primer pago. Parte puede destinarse a los intereses generados y a otros conceptos del crédito, mientras que el remanente reduce el saldo. Conforme cambia el saldo también cambia la cantidad sobre la que se calculan intereses. Además, durante la vigencia de determinados créditos las aportaciones patronales pueden contribuir a reducir la deuda conforme a las reglas aplicables, por lo que su efecto debe distinguirse del descuento realizado al salario de la persona acreditada.",
     "metodologia": "La simulación calcula capital e intereses con monto, tasa y plazo capturados. No incorpora seguros, cuotas ni aportaciones patronales. El estado de cuenta y las condiciones oficiales del crédito pueden producir importes distintos.",
@@ -505,7 +501,7 @@
     ]
   },
   "pension": {
-    "proposito": "Esta calculadora revisa requisitos generales de cesantía en edad avanzada y vejez para personas sujetas al régimen de la Ley del Seguro Social de 1997. Su objetivo es ayudarte a identificar si la edad, la situación laboral y las semanas reconocidas se acercan a las condiciones exigidas por la Ley para solicitar una pensión. No estima una pensión garantizada ni promete un monto mensual, porque la cuantía y modalidad dependen de factores que no pueden reducirse a una sola cifra fija.",
+    "proposito": "Si ya cumples la edad y las semanas para pensionarte en el IMSS.",
     "interpretacion": "Lee el resultado principalmente como una verificación de requisitos. La calculadora debe distinguir entre cumplir la edad correspondiente, encontrarse en la situación laboral exigida y reunir el mínimo de semanas vigente para el año evaluado. Si alguno de estos elementos falta, eso no significa necesariamente que los recursos de la cuenta individual se pierdan: la Ley contempla alternativas según las circunstancias. Si los requisitos aparecen cumplidos, el resultado tampoco equivale a una resolución de pensión; el reconocimiento oficial corresponde al IMSS.",
     "significado": "Bajo la Ley de 1997, tener cierta edad por sí sola no genera automáticamente una pensión. Para cesantía en edad avanzada se requiere, entre otras condiciones, haber alcanzado la edad legal aplicable, estar privado de trabajo remunerado y contar con las semanas reconocidas que correspondan. Para vejez existe una edad legal distinta y también debe cumplirse el periodo mínimo de cotización. El requisito de semanas se encuentra sujeto al régimen transitorio derivado de la reforma pensionaria, por lo que esta referencia requiere revisión al cambiar de año.",
     "metodologia": "MiLana compara la edad y las semanas capturadas con las referencias generales de Ley 97 para 2026. No comprueba la baja laboral, el historial reconocido por IMSS ni los demás requisitos administrativos. No calcula una pensión monetaria.",

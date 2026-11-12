@@ -45,7 +45,7 @@ const rutas = [
   '/aprende/mensualidad-y-costo-del-credito',
   '/aprende/leer-fuentes-comparador-financiero',
   '/widgets',
-  '/sobre', '/metodo', '/contacto', '/privacidad', '/financiamiento'
+  '/sobre', '/metodo', '/contacto', '/privacidad', '/terminos', '/financiamiento'
 ];
 const prioridad = ruta => ruta === '/' ? '1.0'
   : ruta === '/calculadoras' || ruta === '/carreras' || ruta === '/finanzas' || ruta === '/economia' || ruta === '/estados' || ruta === '/invertir' ? '0.9'

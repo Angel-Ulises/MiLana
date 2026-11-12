@@ -120,7 +120,7 @@
       const form = calculator.querySelector('form');
       if (form) {
         strip.classList.add('orb-glossary-after-calculator');
-        form.insertAdjacentElement('afterend', strip);
+        (form.closest('[data-calc-directo]') || form).insertAdjacentElement('afterend', strip);
         return true;
       }
     }

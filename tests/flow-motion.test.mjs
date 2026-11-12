@@ -59,12 +59,11 @@ test('en táctil no se abre el teclado por código ni queda el recuadro de toque
   assert.match(readFileSync('public/orbita-v3-base.css', 'utf8'), /\[role="button"\],\[tabindex\]\)\{-webkit-tap-highlight-color:transparent\}/);
 });
 
-test('la foto del hero se pinta una sola vez: misma fuente en React, prerender y precarga', () => {
+test('mejora 2026-11: Inicio sin foto de stock ni precarga de imagen', () => {
   const app = readFileSync('src/App.jsx', 'utf8');
-  assert.match(app, /src=\{heroUrl\(1440\)\} srcSet=\{heroSrcSet\(\)\}/);
+  assert.doesNotMatch(app, /heroUrl\(|data-hero-milana|hero-media-wrap/);
   assert.doesNotMatch(app, /<Foto name="inicio"/);
-  assert.match(readFileSync('scripts/aplicar-orbita-base.mjs', 'utf8'), /imagesrcset="\$\{heroSrcSet\(\)\}"/);
-  assert.match(readFileSync('src/lib/homeStartup.js', 'utf8'), /heroNueva\.replaceWith\(heroPrevia\)/);
+  assert.doesNotMatch(readFileSync('scripts/aplicar-orbita-base.mjs', 'utf8'), /imagesrcset=/);
 });
 
 test('Pensión: los bloques no se ocultan tras el primer pintado (sin tocar su cálculo)', () => {

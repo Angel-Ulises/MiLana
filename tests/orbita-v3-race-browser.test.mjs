@@ -103,19 +103,8 @@ async function withServer(t, fixtures, fn) {
   finally { await server.close(); rmSync(fixtureDir, { recursive:true, force:true }); }
 }
 
-test('navegador: las cuatro calculadoras conservan el asistente 10 de 10 tras reemplazar #root', async (t) => {
-  const kinds = ['finiquito','isr','aguinaldo','bruto-a-neto'];
-  const fixtures = Object.fromEntries(kinds.map((kind) => [`calc-${kind}`, calculatorFixture(kind)]));
-  await withServer(t, fixtures, async (port) => {
-    for (const kind of kinds) {
-      for (let i=0; i<10; i++) {
-        const html=await dumpDom(`http://127.0.0.1:${port}/__orbita-race/calc-${kind}.html?run=${i}`);
-        assert.match(html, /data-race-visible="true"/, `${kind} carga ${i+1}: contador no visible`);
-        assert.match(html, /data-race-count="Pregunta 1 de 2"/, `${kind} carga ${i+1}: asistente ausente`);
-      }
-    }
-  });
-});
+// Mejora 2026-11: el asistente «una pregunta a la vez» se retiró de las calculadoras.
+// Su reemplazo se prueba en tests/calculadoras-directas-browser.test.mjs.
 
 test('navegador: Estados y Economía reinsertan su visual en el main vivo', async (t) => {
   const fixtures = { estados: visualFixture('estados'), economia: visualFixture('economia') };

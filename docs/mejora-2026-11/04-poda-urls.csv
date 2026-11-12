@@ -1,0 +1,159 @@
+url,accion_propuesta,motivo
+/,Sin cambio,
+/calculadoras,Sin cambio,
+/calculadoras/finiquito,Sin cambio,
+/calculadoras/liquidacion,Sin cambio,
+/calculadoras/aguinaldo,Sin cambio,
+/calculadoras/isr,Sin cambio,
+/calculadoras/resico,Sin cambio,
+/calculadoras/ptu,Sin cambio,
+/calculadoras/bruto-a-neto,Sin cambio,
+/calculadoras/vacaciones,Sin cambio,
+/calculadoras/infonavit,Sin cambio,
+/calculadoras/pension-imss,Sin cambio,
+/situaciones/entender-mi-sueldo,Sin cambio,
+/situaciones/revisar-mis-prestaciones,Sin cambio,
+/situaciones/terminar-relacion-laboral,Sin cambio,
+/carreras,Sin cambio,
+/carreras/mejor-pagadas,Sin cambio,
+/carreras/mas-demandadas,Sin cambio,
+/carreras/por-estado,Sin cambio,
+/carreras/peor-pagadas,Sin cambio,
+/carreras/profesion/finanzas-banca-seguros,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/profesion/medicina,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/profesion/diseno,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/profesion/ciencias-computacion,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/profesion/derecho,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/profesion/contabilidad,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/profesion/administracion,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/profesion/psicologia,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/profesion/arquitectura,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/profesion/enfermeria,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/profesion/ingenieria-civil,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/profesion/mercadotecnia,Sin cambio (decisión pendiente: enriquecer o quitar del índice),Datos del Observatorio Laboral; página corta y 65% del texto en común con otras profesiones.
+/carreras/ocupaciones,Sin cambio,
+/carreras/comparar,Sin cambio,
+/estados,Sin cambio,
+/estados/comparar,Sin cambio,
+/estados/aguascalientes,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/baja-california,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/baja-california-sur,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/campeche,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/chiapas,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/chihuahua,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/ciudad-de-mexico,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/coahuila,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/colima,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/durango,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/estado-de-mexico,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/guanajuato,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/guerrero,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/hidalgo,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/jalisco,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/michoacan,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/morelos,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/nayarit,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/nuevo-leon,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/oaxaca,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/puebla,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/queretaro,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/quintana-roo,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/san-luis-potosi,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/sinaloa,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/sonora,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/tabasco,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/tamaulipas,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/tlaxcala,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/veracruz,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/yucatan,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/estados/zacatecas,Sin cambio (decisión pendiente: enriquecer),"Datos reales y distintos (ENOE T2 2026, ingresos, vivienda SHF, ocupaciones); 72% del texto en común con otros estados."
+/finanzas,Sin cambio,
+/finanzas/presupuesto,Sin cambio,
+/finanzas/fondo-emergencia,Sin cambio,
+/finanzas/deuda-y-credito,Sin cambio,
+/finanzas/ahorro,Sin cambio,
+/finanzas/vivienda,Sin cambio,
+/finanzas/mi-situacion,Sin cambio,
+/invertir,Sin cambio,
+/finanzas/inversion,Sin cambio,
+/finanzas/inversion/comparar,Sin cambio,
+/finanzas/inversion/cetes,Sin cambio,
+/finanzas/inversion/fondos,Candidata a quitar del índice (decisión pendiente),"Muestra CNBV: periodo de los datos 31-07-2026, revisada el 01-10-2026; la actualización está bloqueada (issue #147)."
+/finanzas/match,Candidata a quitar del índice (decisión pendiente),Portada del comparador; depende de la decisión sobre sus categorías.
+/finanzas/match/metodologia,Candidata a quitar del índice (decisión pendiente),Metodología; se decide junto con Match.
+/finanzas/match/hipotecas,Candidata a quitar del índice (decisión pendiente),"Categoría «hipotecas»: 4/58 campos verificados (7%), 50 observados sin vigencia explícita, 2 ND, 2 en conflicto, 0 caducados."
+/finanzas/match/automotriz,Candidata a quitar del índice (decisión pendiente),"Categoría «automotriz»: 3/38 campos verificados (8%), 29 observados sin vigencia explícita, 6 ND, 0 en conflicto, 0 caducados."
+/finanzas/match/tarjetas,Candidata a quitar del índice (decisión pendiente),"Categoría «tarjetas»: 49/124 campos verificados (40%), 41 observados sin vigencia explícita, 31 ND, 3 en conflicto, 0 caducados."
+/finanzas/match/creditos-personales,Candidata a quitar del índice (decisión pendiente),"Categoría «creditos-personales»: 3/69 campos verificados (4%), 51 observados sin vigencia explícita, 9 ND, 0 en conflicto, 6 caducados."
+/finanzas/match/cuentas,Candidata a quitar del índice (decisión pendiente),"Categoría «cuentas»: 0/32 campos verificados (0%), 23 observados sin vigencia explícita, 4 ND, 1 en conflicto, 0 caducados."
+/finanzas/match/ahorro,Candidata a quitar del índice (decisión pendiente),"Categoría «ahorro»: 6/35 campos verificados (17%), 17 observados sin vigencia explícita, 5 ND, 0 en conflicto, 0 caducados."
+/finanzas/match/inversiones,Candidata a quitar del índice (decisión pendiente),"Categoría «inversiones»: 6/32 campos verificados (19%), 14 observados sin vigencia explícita, 3 ND, 0 en conflicto, 0 caducados."
+/finanzas/match/seguros,Candidata a quitar del índice (decisión pendiente),"Categoría «seguros»: 0/79 campos verificados (0%), 49 observados sin vigencia explícita, 23 ND, 1 en conflicto, 0 caducados."
+/finanzas/match/afores,Candidata a quitar del índice (decisión pendiente),"Categoría «afores»: 20/110 campos verificados (18%), 40 observados sin vigencia explícita, 10 ND, 0 en conflicto, 0 caducados."
+/finanzas/match/hipotecas/mx-hipoteca-bbva-fija,Candidata a quitar del índice (decisión pendiente),"Ficha «Hipoteca Fija BBVA»: 2/22 campos verificados (9%), 17 observados sin vigencia explícita, 1 ND, 2 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/hipotecas/mx-hipoteca-banorte-fuerte-adquisicion,Candidata a quitar del índice (decisión pendiente),"Ficha «Hipoteca Fuerte Banorte, adquisición de vivienda»: 1/17 campos verificados (6%), 16 observados sin vigencia explícita, 0 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/hipotecas/mx-hipoteca-santander-adquisicion,Candidata a quitar del índice (decisión pendiente),"Ficha «Hipoteca Santander»: 1/19 campos verificados (5%), 17 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/automotriz/mx-auto-banorte-autoestrene-tradicional,Candidata a quitar del índice (decisión pendiente),"Ficha «Autoestrene Banorte / Autoestrene Tradicional»: 1/12 campos verificados (8%), 9 observados sin vigencia explícita, 2 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/automotriz/mx-auto-bbva-consumer-finance,Candidata a quitar del índice (decisión pendiente),"Ficha «BBVA Consumer Finance»: 1/15 campos verificados (7%), 10 observados sin vigencia explícita, 4 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/automotriz/mx-auto-scotiabank-crediauto-mas,Candidata a quitar del índice (decisión pendiente),"Ficha «CrediAuto MAS»: 1/11 campos verificados (9%), 10 observados sin vigencia explícita, 0 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/tarjetas/stori-green-clasica-mx,Candidata a quitar del índice (decisión pendiente),"Ficha «STORI GREEN CLÁSICA»: 20/30 campos verificados (67%), 1 observados sin vigencia explícita, 8 ND, 1 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/tarjetas/bbva-azul,Candidata a quitar del índice (decisión pendiente),"Ficha «Tarjeta Azul BBVA»: 1/9 campos verificados (11%), 6 observados sin vigencia explícita, 2 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/tarjetas/hsbc-zero,Candidata a quitar del índice (decisión pendiente),"Ficha «Tarjeta de Crédito HSBC Zero»: 1/9 campos verificados (11%), 6 observados sin vigencia explícita, 2 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/tarjetas/klar-tarjeta-credito,Candidata a quitar del índice (decisión pendiente),"Ficha «Tarjeta de Crédito Klar sin garantía»: 1/12 campos verificados (8%), 6 observados sin vigencia explícita, 5 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/tarjetas/santander-likeu-mastercard,Candidata a quitar del índice (decisión pendiente),"Ficha «Tarjeta de Crédito LikeU Mastercard»: 1/8 campos verificados (12%), 5 observados sin vigencia explícita, 2 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/tarjetas/nu-tarjeta-credito,Candidata a quitar del índice (decisión pendiente),"Ficha «Tarjeta de Crédito Nu»: 0/14 campos verificados (0%), 11 observados sin vigencia explícita, 1 ND, 2 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/tarjetas/uala-tarjeta-credito-clasica-mx,Candidata a quitar del índice (decisión pendiente),"Ficha «Tarjeta de crédito Ualá (clásica)»: 24/33 campos verificados (73%), 0 observados sin vigencia explícita, 9 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/tarjetas/banregio-win,Candidata a quitar del índice (decisión pendiente),"Ficha «Tarjeta Win Banregio»: 1/9 campos verificados (11%), 6 observados sin vigencia explícita, 2 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/creditos-personales/banamex-personal,Candidata a quitar del índice (decisión pendiente),"Ficha «Crédito Personal Banamex»: 0/11 campos verificados (0%), 10 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/creditos-personales/hsbc-personal,Candidata a quitar del índice (decisión pendiente),"Ficha «Crédito Personal HSBC»: 1/10 campos verificados (10%), 8 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/creditos-personales/santander-personal,Candidata a quitar del índice (decisión pendiente),"Ficha «Crédito Personal Santander»: 1/11 campos verificados (9%), 8 observados sin vigencia explícita, 0 ND, 0 en conflicto, 2 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/creditos-personales/digitt-refinanciamiento,Candidata a quitar del índice (decisión pendiente),"Ficha «Préstamo Digitt para refinanciar deuda de tarjetas»: 0/12 campos verificados (0%), 4 observados sin vigencia explícita, 4 ND, 0 en conflicto, 4 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/creditos-personales/yotepresto-personal,Candidata a quitar del índice (decisión pendiente),"Ficha «Préstamo personal en línea YoTePresto»: 0/15 campos verificados (0%), 13 observados sin vigencia explícita, 2 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/creditos-personales/bbva-personal-inmediato,Candidata a quitar del índice (decisión pendiente),"Ficha «Préstamo Personal Inmediato BBVA»: 1/10 campos verificados (10%), 8 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/cuentas/banamex-switch,Candidata a quitar del índice (decisión pendiente),"Ficha «Cuenta Digital Switch»: 0/11 campos verificados (0%), 9 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/cuentas/nu-cuenta,Candidata a quitar del índice (decisión pendiente),"Ficha «Cuenta Nu de Débito»: 0/10 campos verificados (0%), 6 observados sin vigencia explícita, 2 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/cuentas/bbva-libreton-digital,Candidata a quitar del índice (decisión pendiente),"Ficha «Libretón Básico Cuenta Digital»: 0/11 campos verificados (0%), 8 observados sin vigencia explícita, 1 ND, 1 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/ahorro/nu-cajitas-24-7,Candidata a quitar del índice (decisión pendiente),"Ficha «Cajitas Nu con disponibilidad 24/7»: 3/10 campos verificados (30%), 5 observados sin vigencia explícita, 0 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/ahorro/klar-deposito-light-30,Candidata a quitar del índice (decisión pendiente),"Ficha «Cuenta a la Vista: Depósito a Plazo Light, 30 días»: 3/12 campos verificados (25%), 6 observados sin vigencia explícita, 2 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/ahorro/finsus-plazo-360,Candidata a quitar del índice (decisión pendiente),"Ficha «Inversión a Plazo Fijo, 360 días»: 0/13 campos verificados (0%), 6 observados sin vigencia explícita, 3 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/inversiones/bonddia-pf2,Candidata a quitar del índice (decisión pendiente),"Ficha «BONDDIA, serie PF2»: 4/12 campos verificados (33%), 3 observados sin vigencia explícita, 0 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/inversiones/cetes-1-mes,Candidata a quitar del índice (decisión pendiente),"Ficha «CETES, 1 mes en cetesdirecto»: 2/11 campos verificados (18%), 7 observados sin vigencia explícita, 0 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/inversiones/gbm-smart-cash-pesos,Candidata a quitar del índice (decisión pendiente),"Ficha «Smart Cash en pesos»: 0/9 campos verificados (0%), 4 observados sin vigencia explícita, 3 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/seguros/axa-auto-individual-amplia,Candidata a quitar del índice (decisión pendiente),"Ficha «Auto Individual, paquete Amplia»: 0/16 campos verificados (0%), 12 observados sin vigencia explícita, 3 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/seguros/qualitas-amplia,Candidata a quitar del índice (decisión pendiente),"Ficha «Autos y Pickups Personales: Amplia»: 0/11 campos verificados (0%), 4 observados sin vigencia explícita, 6 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/seguros/axa-flex-plus,Candidata a quitar del índice (decisión pendiente),"Ficha «Gastos Médicos Mayores Flex Plus»: 0/11 campos verificados (0%), 8 observados sin vigencia explícita, 2 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/seguros/gnp-linea-azul-versatil,Candidata a quitar del índice (decisión pendiente),"Ficha «Línea Azul Versátil Individual»: 0/13 campos verificados (0%), 6 observados sin vigencia explícita, 5 ND, 1 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/seguros/metlife-tempolife,Candidata a quitar del índice (decisión pendiente),"Ficha «TempoLife»: 0/16 campos verificados (0%), 12 observados sin vigencia explícita, 3 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/seguros/gnp-temporal,Candidata a quitar del índice (decisión pendiente),"Ficha «Temporal (vida)»: 0/12 campos verificados (0%), 7 observados sin vigencia explícita, 4 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/afores/afore-azteca-sb9094,Candidata a quitar del índice (decisión pendiente),"Ficha «Azteca / Siefore Básica 90–94»: 2/11 campos verificados (18%), 4 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/afores/afore-banamex-sb9094,Candidata a quitar del índice (decisión pendiente),"Ficha «Banamex / Siefore Básica 90–94»: 2/11 campos verificados (18%), 4 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/afores/afore-coppel-sb9094,Candidata a quitar del índice (decisión pendiente),"Ficha «Coppel / Siefore Básica 90–94»: 2/11 campos verificados (18%), 4 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/afores/afore-inbursa-sb9094,Candidata a quitar del índice (decisión pendiente),"Ficha «Inbursa / Siefore Básica 90–94»: 2/11 campos verificados (18%), 4 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/afores/afore-invercap-sb9094,Candidata a quitar del índice (decisión pendiente),"Ficha «Invercap / Siefore Básica 90–94»: 2/11 campos verificados (18%), 4 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/afores/afore-pensionissste-sb9094,Candidata a quitar del índice (decisión pendiente),"Ficha «PENSIONISSSTE / Siefore Básica 90–94»: 2/11 campos verificados (18%), 4 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/afores/afore-principal-sb9094,Candidata a quitar del índice (decisión pendiente),"Ficha «Principal / Siefore Básica 90–94»: 2/11 campos verificados (18%), 4 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/afores/afore-profuturo-sb9094,Candidata a quitar del índice (decisión pendiente),"Ficha «Profuturo / Siefore Básica 90–94»: 2/11 campos verificados (18%), 4 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/afores/afore-sura-sb9094,Candidata a quitar del índice (decisión pendiente),"Ficha «SURA / Siefore Básica 90–94»: 2/11 campos verificados (18%), 4 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/finanzas/match/afores/afore-xxi-banorte-sb9094,Candidata a quitar del índice (decisión pendiente),"Ficha «XXI Banorte / Siefore Básica 90–94»: 2/11 campos verificados (18%), 4 observados sin vigencia explícita, 1 ND, 0 en conflicto, 0 caducados; corte del catálogo 12-10-2026."
+/economia,Sin cambio,
+/economia/banxico-mantiene-tasa-650-septiembre-2026,Sin cambio,
+/economia/inflacion-primera-quincena-septiembre-2026,Sin cambio,
+/economia/consumo-privado-agosto-2026,Sin cambio,
+/economia/economias-regionales-segundo-trimestre-2026,Sin cambio,
+/aprende,Sin cambio,
+/aprende/finiquito-vs-liquidacion,Sin cambio,
+/aprende/leer-recibo-nomina,Sin cambio,
+/aprende/aguinaldo-bruto-neto,Sin cambio,
+/aprende/vacaciones-prima-vacacional,Sin cambio,
+/aprende/resico-ingresos-cobrados,Sin cambio,
+/aprende/pension-imss-ley-97,Sin cambio,
+/aprende/cat-y-gat-que-comparan,Sin cambio,
+/aprende/mensualidad-y-costo-del-credito,Sin cambio,
+/aprende/leer-fuentes-comparador-financiero,Sin cambio,
+/widgets,Sin cambio,Ofrece calculadoras reales para insertar en otros sitios; no se descarta.
+/sobre,Sin cambio,
+/metodo,Sin cambio,
+/contacto,Sin cambio,
+/privacidad,Sin cambio,
+/terminos,Sin cambio,
+/financiamiento,Sin cambio,

@@ -6,6 +6,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CETES_REFERENCE } from '../../src/data/cetes-reference.js';
 
+import { actualizarAforeIRN, actualizarKlarLight30, actualizarBanregioWin, registroBanregioRecompensas } from './actualizaciones-verificadas.mjs';
 const RAIZ = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const ORIGEN = resolve(RAIZ, 'data/match/orion-v2');
 const leer = (ruta) => JSON.parse(readFileSync(resolve(ORIGEN, ruta), 'utf8'));
@@ -274,7 +275,7 @@ function fuenteCredito(d, registro) {
       localizador: principal ? (d.localizador || null) : (reg.localizador || null),
       acceso: reg.acceso || null,
       fechas: {
-        consulta: d.fecha_consulta || reg.fecha_consulta || null,
+        consulta: d.fechas_consulta?.[i] || d.fecha_consulta || reg.fecha_consulta || null,
         emision: principal ? (d.fecha_emision ?? null) : (reg.fecha_emision ?? null),
         calculo: principal ? (d.fecha_calculo ?? null) : null,
         referencia: principal ? (d.fecha_referencia ?? null) : null,
@@ -485,12 +486,13 @@ export function normalizar() {
   const base = leer('credito/base-v1/catalogo_credito.json');
   const ampl = leer('credito/ampliacion/catalogo_ampliacion.json');
   const ahorro = leer('ahorro-inversion/catalogo-acumulativo.json');
-  const regBase = new Map(base.fuentes.map((f) => [f.id, f]));
+  const regBase = new Map([...base.fuentes.map((f) => [f.id, f]), ['banregio_recompensas', registroBanregioRecompensas()]]);
   const regAmpl = new Map(ampl.fuentes.map((f) => [f.id, f]));
   const usoPorId = new Map(indice.productos.map((p) => [p.id, p]));
   const productos = [];
 
-  for (const p of base.productos) {
+  for (const original of base.productos) {
+    const p = actualizarBanregioWin(original);
     const datos = datosCredito(p.campos, regBase);
     const fuenteNombre = fuenteCredito(p.nombre, regBase);
     const discrepancias = notaLista(p.discrepancias, regBase);
@@ -498,10 +500,11 @@ export function normalizar() {
       id: p.id, slug: slugDe(p.id), modulo: 'credito-base', categoria: categoriaEditorial(p.categoria),
       subcategoria: SUBCATEGORIAS[p.categoria] || null,
       nombre: p.nombre.valor, entidad: p.entidad.valor, tipoEntidad: p.tipo_entidad?.valor || null,
-      datos, discrepancias, historial: notaLista(p.historial_no_usar_como_vigente, regBase),
+      datos, discrepancias, historial: notaLista([...(p.historial_no_usar_como_vigente || []), ...(p.historialActualizacion || [])], regBase),
       alertas: p.alertas || [], conflictoCat: conflictoAfectaCat(p.discrepancias),
       enlaceOficial: fuenteNombre[0]?.url || enlaceOficial(datos, ['cat']),
       motivoExclusion: null, decisionEditorial: null,
+      ...(p.actualizacion ? { actualizacion: p.actualizacion } : {}),
     });
   }
 
@@ -527,14 +530,16 @@ export function normalizar() {
   }
 
   for (const original of ahorro.productos) {
-    const p = actualizarCetesTabla(original);
+    const p = actualizarKlarLight30(actualizarAforeIRN(actualizarCetesTabla(original)));
     const datos = datosAhorro(p.campos);
     const fProducto = (p.producto.fuentes || []).map(fuenteAhorro);
     productos.push({
       id: p.id, slug: slugDe(p.id), modulo: 'ahorro-inversion', categoria: categoriaEditorial(p.categoria),
       subcategoria: subcategoriaAhorro(p),
       nombre: p.producto.valor, entidad: p.entidad.valor, tipoEntidad: null,
-      datos, discrepancias: [], historial: [], alertas: p.advertencias || [], conflictoCat: false,
+      datos, discrepancias: [],
+      historial: (p.historialActualizacion || []).map((h) => ({ texto: h.texto, nota: h.nota || null, fuentes: [fuenteAhorro(h.fuente)] })),
+      alertas: [...(p.advertencias || []), ...(p.conflictoActualizacion ? [p.conflictoActualizacion] : [])], conflictoCat: false,
       enlaceOficial: fProducto[0]?.url || enlaceOficial(datos, []),
       motivoExclusion: null, decisionEditorial: null,
       ...(p.actualizacion ? { actualizacion: p.actualizacion } : {}),
@@ -545,6 +550,8 @@ export function normalizar() {
     const uso = usoPorId.get(p.id);
     if (!uso) throw new Error(`Producto fuera del índice: ${p.id}`);
     p.estadoUso = uso.estado_uso;
+    // Afores actualizadas: el índice de Orion menciona el corte de agosto; se sustituye solo ese corte del IRN.
+    if (p.categoria === 'afores' && p.actualizacion?.corte) p.estadoUso = p.estadoUso.replace(p.actualizacion.corteAnterior, p.actualizacion.corte);
     p.ofertaIndividualVerificada = uso.oferta_individual_comparable_verificada === true;
     p.tipoEntidadClase = p.categoria === 'seguros' ? 'aseguradora' : p.categoria === 'afores' ? 'afore' : tipoEntidadDe(`${p.tipoEntidad || ''} ${p.entidad || ''}`);
     p.relacionComercial = null; // Ninguna afiliación aprobada o activa al corte (registro de afiliados, 12-10-2026).
@@ -563,10 +570,17 @@ export function normalizar() {
     fechaCorte: indice.fecha_corte_investigacion,
     origen: 'Entrega acumulativa v2 de Orion (MiLana Match), 12-10-2026. SHA-256 del ZIP: 0d06850301d9f2042eac585e343592427f6e96dfc13aa2e9776b0a1b89fdc146.',
     reglas: [...base.reglas_lectura, ampl.regla_uso, ...Object.values(ahorro.reglas_datos)],
-    consar: { corte: ahorro.revision.fecha_corte_consar, precision: ahorro.revision.fecha_corte_consar_precision },
+    // IRN: corte de las fichas Afore (septiembre 2026 tras la lectura delegada del 10-11-2026); comisiones: corte de Orion.
+    consar: { corte: corteIRN(productos, ahorro.revision.fecha_corte_consar), precision: ahorro.revision.fecha_corte_consar_precision, corteComisiones: ahorro.revision.fecha_corte_consar },
     categorias: CATEGORIAS.map(({ id, slug, nombre }) => ({ id, slug, nombre, total: productos.filter((p) => p.categoria === id).length })),
     productos,
   });
+}
+
+function corteIRN(productos, respaldo) {
+  const cortes = new Set(productos.filter((p) => p.categoria === 'afores').map((p) => p.datos.find((d) => d.clave === 'irn')?.fuentes[0]?.fechas?.corte).filter(Boolean));
+  if (cortes.size > 1) throw new Error(`Afores con cortes de IRN distintos: ${[...cortes].join(', ')}`);
+  return [...cortes][0] || respaldo;
 }
 
 // Las fuentes se repiten entre datos: se guardan una vez y cada evidencia conserva sus propias fechas.

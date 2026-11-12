@@ -38,10 +38,11 @@ test('los textos secundarios auditados conservan contraste AA sobre marfil',()=>
   assert.match(css,/\.ml-editorial-note,html\.ml-orbita-enabled p\[data-milana-share-note="true"\]\{color:#5E6B78!important\}/);
 });
 
-test('las 15 páginas estáticas ocultan header.top al recibir el marco',()=>{
+test('las 16 páginas estáticas (con Términos) ocultan header.top al recibir el marco',()=>{
   const block=inject.match(/const STATIC_TOP_ROUTES = new Set\(\[([\s\S]*?)\]\);/)?.[1]||'';
   const routes=[...block.matchAll(/'([^']+)'/g)].map(m=>m[1]);
-  assert.equal(routes.length,15);
+  assert.equal(routes.length,16);
+  assert.ok(routes.includes('/terminos'));
   assert.match(css,/body\[data-orbita-static-top="true"\]>header\.top\{display:none\}/);
   assert.match(inject,/data-orbita-static-top="true"/);
 });

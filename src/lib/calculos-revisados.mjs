@@ -82,3 +82,52 @@ export function calcularAguinaldoSEPEMS2026({salarioConvencional,ingreso='',anio
   if (!Number.isFinite(bruto)) throw new Error('Revisa los importes capturados.');
   return {salarioDiario,diasPrestacion,diasPeriodo,bruto,reglaSEP};
 }
+
+// ─── Aguinaldo neto estimado (empresa privada, LFT) ───────────────────────────
+// Verificado el 2026-11-09 contra fuentes oficiales (docs/mejora-2026-11/00-auditoria.md):
+// - LFT art. 87: al menos 15 días; proporcional si no se completó el año.
+// - LISR art. 93 fr. XIV: exentas las gratificaciones anuales hasta 30 días de salario mínimo,
+//   que por el transitorio Tercero de la reforma constitucional (DOF 27-01-2016) se leen como 30 UMA.
+// - UMA 2026 (INEGI): $117.31 diaria → exención $3,519.30.
+// - LISR art. 96 + Anexo 8 RMF 2026 apartado V: la parte gravada se suma al sueldo del mes y se
+//   retiene la diferencia de ISR (método general). El Reglamento (art. 174) permite otro método
+//   opcional que puede retener menos; aquí no se usa.
+// - Subsidio para el empleo 2026 (DOF 31-12-2025): 15.02 % de la UMA mensual si el ingreso
+//   del mes no excede $11,492.66; se aplica contra el ISR del mes y nunca da saldo a favor.
+export const UMA_DIARIA_2026_AGUINALDO = 117.31;
+export const UMA_MENSUAL_2026_AGUINALDO = 3566.22;
+export const EXENCION_AGUINALDO_2026 = Math.round(30 * UMA_DIARIA_2026_AGUINALDO * 100) / 100; // 3,519.30
+export const LIMITE_SUBSIDIO_2026 = 11492.66;
+export const SUBSIDIO_MAXIMO_2026 = UMA_MENSUAL_2026_AGUINALDO * 0.1502; // 535.646244
+export const AGUINALDO_ACTUALIZADO = '2026-11-09';
+
+function isrDelMes(ingresoMensual) {
+  if (!(ingresoMensual > 0)) return { tramo: null, causado: 0, subsidio: 0, retenido: 0 };
+  const tramo = ISR_MENSUAL_2026.find((r) => ingresoMensual >= r.li && ingresoMensual <= r.ls)
+    || ISR_MENSUAL_2026.find((r, i, t) => i < t.length - 1 && ingresoMensual > r.ls && ingresoMensual < t[i + 1].li)
+    || ISR_MENSUAL_2026[ISR_MENSUAL_2026.length - 1];
+  const causado = (ingresoMensual - tramo.li) * tramo.tasa / 100 + tramo.cf;
+  const subsidio = ingresoMensual <= LIMITE_SUBSIDIO_2026 ? Math.min(causado, SUBSIDIO_MAXIMO_2026) : 0;
+  return { tramo, causado, subsidio, retenido: Math.max(0, causado - subsidio) };
+}
+
+export function calcularAguinaldoNeto({ sueldoMensual, fechaIngreso = '', dias = '15' }) {
+  const sueldo = money(sueldoMensual);
+  const base = calcularAguinaldo({ salario: String(sueldo), dias: String(dias), ingreso: fechaIngreso, anioCompleto: !fechaIngreso });
+  const bruto = base.bruto;
+  const exento = Math.min(bruto, EXENCION_AGUINALDO_2026);
+  const gravado = Math.max(0, bruto - exento);
+  const sinAguinaldo = isrDelMes(sueldo);
+  const conAguinaldo = isrDelMes(sueldo + gravado);
+  const isr = gravado > 0 ? Math.max(0, conAguinaldo.retenido - sinAguinaldo.retenido) : 0;
+  return {
+    ...base,
+    sueldo,
+    exento,
+    gravado,
+    isrSueldo: sinAguinaldo,
+    isrSueldoMasAguinaldo: conAguinaldo,
+    isr,
+    neto: bruto - isr,
+  };
+}

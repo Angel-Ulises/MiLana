@@ -21,7 +21,10 @@ const home = readFileSync(join(DIST, 'index.html'), 'utf8');
 for (const id of ['calculadoras', 'situaciones', 'aprende', 'fuentes']) {
   if (!new RegExp(`id=["']${id}["']`).test(home)) errors.push(`inicio: falta id=${id} en HTML generado`);
 }
-if (!home.includes('/carreras/profesion/medicina')) errors.push('inicio/search shell: falta profesión Medicina en HTML generado');
+// Mejora 2026-11: el índice completo del buscador vive en /buscar-indice.json (se carga al abrir el buscador).
+const indice = existsSync(join(DIST, 'buscar-indice.json')) ? JSON.parse(readFileSync(join(DIST, 'buscar-indice.json'), 'utf8')) : [];
+if (!indice.some((item) => item.href === '/carreras/profesion/medicina')) errors.push('buscador: falta profesión Medicina en /buscar-indice.json');
+if ((home.match(/data-orbita-search-item/g) || []).length > 12) errors.push('inicio: el HTML vuelve a cargar el índice completo del buscador');
 
 if (existsSync(join(DIST, 'widgets', 'calculadoras'))) errors.push('no deben generarse rutas físicas /widgets/calculadoras/*');
 

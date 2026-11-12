@@ -64,11 +64,16 @@ test('Conflictos documentados bloquean el CAT: Stori y Nu no aparecen como verif
 });
 
 test('El corte de CONSAR conserva precisión mensual y no se presenta como día 31', () => {
-  assert.equal(catalogo.consar.corte, '2026-08');
-  assert.equal(fechaLegible('2026-08'), 'agosto de 2026');
+  // IRN actualizado a septiembre 2026 por lectura delegada (10-11-2026); comisiones siguen con el corte de agosto de Orion.
+  assert.equal(catalogo.consar.corte, '2026-09');
+  assert.equal(catalogo.consar.corteComisiones, '2026-08');
+  assert.equal(fechaLegible('2026-09'), 'septiembre de 2026');
   const irn = datoDe(producto('afore_sura_sb9094'), 'irn');
-  assert.ok(irn.fuentes.every((f) => f.corte === '2026-08' && f.publicacion === '2026-09-15'));
-  assert.ok(!JSON.stringify(catalogo.productos.filter((p) => p.categoria === 'afores')).includes('2026-08-31'));
+  assert.ok(irn.fuentes.every((f) => f.corte === '2026-09' && f.publicacion === undefined && f.consulta === '2026-11-10'));
+  const comision = datoDe(producto('afore_sura_sb9094'), 'comision_saldo');
+  assert.ok(comision.fuentes.every((f) => f.corte === '2026-08' && f.publicacion === '2026-09-15'));
+  const afores = JSON.stringify(catalogo.productos.filter((p) => p.categoria === 'afores'));
+  assert.ok(!afores.includes('2026-08-31') && !afores.includes('2026-09-30'));
 });
 
 test('Sólo Afores ofrece orden numérico; los CAT publicitarios no se ordenan', () => {
@@ -104,12 +109,13 @@ test('Sin afiliaciones aprobadas al corte: ninguna ficha se etiqueta como patroc
 });
 
 test('Una vigencia vencida pasa a Caducado y un plazo editorial vencido a Revisión vencida', () => {
+  // Win Banregio: CAT con cálculo del 31-08-2026, oferta vigente hasta el 28-02-2027 (lectura delegada del 10-11-2026).
   const cat = datoDe(producto('banregio_win'), 'cat');
-  assert.equal(estadoEfectivo(cat, CORTE, 'tarjetas').tipo, 'verificado');
-  assert.equal(estadoEfectivo(cat, '2026-10-31', 'tarjetas').tipo, 'caducado');
+  assert.equal(estadoEfectivo(cat, '2026-11-10', 'tarjetas').tipo, 'verificado');
+  assert.equal(estadoEfectivo(cat, '2027-03-01', 'tarjetas').tipo, 'caducado');
   const cat2 = datoDe(producto('bbva_azul'), 'cat');
   assert.equal(estadoEfectivo(cat2, '2026-11-12', 'tarjetas').tipo, 'revision');
-  assert.equal(ordenar([producto('banregio_win')], { clave: 'cat' }, '2026-10-31').excluidos.length, 1);
+  assert.equal(ordenar([producto('banregio_win')], { clave: 'cat' }, '2027-03-01').excluidos.length, 1);
 });
 
 test('Filtros con tres resultados: coincide, no coincide y no comprobable', () => {

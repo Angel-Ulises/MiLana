@@ -1,20 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { DESCRIPCION_NAVEGACION, NAVEGACION_MILANA, seccionNavegacion } from '../src/lib/siteNavigation.js';
+import { DESCRIPCION_NAVEGACION, NAVEGACION_MILANA, NAVEGACION_MAS, seccionNavegacion } from '../src/lib/siteNavigation.js';
 
 const pages=['src/App.jsx','src/financePages.jsx','src/advisorPage.jsx','src/careerPages.jsx','src/statePages.jsx','src/stateComparePage.jsx','src/careerComparePage.jsx'];
 
-test('Órbita y React comparten las mismas siete secciones en idéntico orden',()=>{
-  const expected=[
-    ['calculadoras','/calculadoras','Calculadoras'],['carreras','/carreras','Carreras'],
-    ['estados','/estados','Estados'],['finanzas','/finanzas','Finanzas'],
-    ['invertir','/invertir','Invertir'],['economia','/economia','Economía'],['aprende','/aprende','Aprende']
-  ];
+test('mejora 2026-11: Órbita y React comparten el menú esencial; el resto queda en «Más temas»',()=>{
+  const expected=[['calculadoras','/calculadoras','Calculadoras'],['finanzas','/finanzas','Finanzas'],['aprende','/aprende','Aprende']];
   assert.deepEqual(NAVEGACION_MILANA,expected);
+  assert.deepEqual(NAVEGACION_MAS.map(([id])=>id),['carreras','estados','invertir','economia']);
   const generator=readFileSync('scripts/aplicar-orbita-base.mjs','utf8');
   const shared=readFileSync('src/siteHeader.jsx','utf8');
-  assert.match(generator,/import \{ DESCRIPCION_NAVEGACION, NAVEGACION_MILANA \} from '\.\.\/src\/lib\/siteNavigation\.js'/);
+  assert.match(generator,/import \{ DESCRIPCION_NAVEGACION, NAVEGACION_MILANA, NAVEGACION_MAS \} from '\.\.\/src\/lib\/siteNavigation\.js'/);
   for (const [id] of NAVEGACION_MILANA) assert.ok(DESCRIPCION_NAVEGACION[id], `Menú móvil describe ${id}`);
   assert.match(generator,/const nav = NAVEGACION_MILANA/);
   assert.match(generator,/const headerNav = nav\.map/);

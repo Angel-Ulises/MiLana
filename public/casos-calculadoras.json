@@ -48,30 +48,41 @@
     }
   },
   "aguinaldo": {
-    "titulo": "Ejemplo LFT: $18,000 y año completo",
-    "resumen": "Ejemplo para una relación sujeta a LFT: salario mensual fijo de $18,000, 15 días de aguinaldo y servicio durante todo 2026; el salario diario usado es de $600.",
+    "titulo": "Ejemplo: sueldo de $18,000 y todo el año trabajado",
+    "resumen": "Una persona gana $18,000 al mes en una empresa privada, le dan 15 días de aguinaldo y trabajó todo 2026. Su sueldo diario es de $600.",
     "entradas": [
-      "Salario mensual: $18,000",
-      "Prestación: 15 días de aguinaldo",
-      "Periodo: año completo 2026"
+      "Sueldo mensual: $18,000",
+      "Días de aguinaldo: 15",
+      "Trabajó todo 2026"
     ],
     "resultados": [
       {
-        "etiqueta": "Aguinaldo bruto estimado",
+        "etiqueta": "Aguinaldo (bruto)",
         "valor": 9000
+      },
+      {
+        "etiqueta": "Parte sin impuesto (30 UMA)",
+        "valor": 3519.3
+      },
+      {
+        "etiqueta": "ISR estimado",
+        "valor": 1170.67752
+      },
+      {
+        "etiqueta": "Te llega (neto)",
+        "valor": 7829.32248
       }
     ],
-    "nota": "Es un ejemplo LFT y un monto bruto. Si seleccionaste LFTSE o SEP, usa el resultado del formulario superior: esos regímenes aplican días o bases diferentes. No incluye ISR del aguinaldo.",
+    "nota": "El ISR usa el método general de la Ley del ISR (artículo 96) con la tabla mensual del SAT 2026. Tu empresa puede usar otro método permitido que a veces retiene un poco menos.",
     "verificacion": {
-      "tipo": "aguinaldo",
+      "tipo": "aguinaldo-neto",
       "argumentos": {
-        "salario": "18000",
-        "dias": "15",
-        "ingreso": "",
-        "anioCompleto": true
+        "sueldoMensual": "18000",
+        "fechaIngreso": "",
+        "dias": "15"
       },
-      "campo": "bruto",
-      "esperado": 9000
+      "campo": "neto",
+      "esperado": 7829.32248
     }
   },
   "isr": {

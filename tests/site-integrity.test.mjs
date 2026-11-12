@@ -72,8 +72,8 @@ test('el hero y las anclas usan la corrección visual nueva', () => {
   const mejoras = read('src/siteEnhancements.jsx');
   const overrides = read('src/site-overrides.css');
   // La foto del hero (Pexels 7129713) vive en un módulo compartido y se pinta desde el primer render.
-  assert.ok(read('src/lib/heroPhoto.js').includes("HERO_PEXELS_ID = '7129713'"));
-  assert.match(read('src/App.jsx'), /data-hero-milana=\{HERO_PEXELS_ID\}/);
+  // Mejora 2026-11: Inicio ya no muestra la foto de stock.
+  assert.doesNotMatch(read('src/App.jsx'), /data-hero-milana/);
   assert.match(mejoras, /from '\.\/lib\/heroPhoto\.js'/);
   assert.ok(mejoras.includes('contacto.milanaaqui@gmail.com'));
   assert.match(overrides, /scroll-padding-top:\s*0\s*!important/);
@@ -186,11 +186,14 @@ test('no quedan mensajes públicos de canal o importes pendientes', () => {
 test('las calculadoras separan LFT, IMSS e ISSSTE antes de aplicar fórmulas de régimen privado', () => {
   const app = read('src/App.jsx');
   const calculos = read('src/lib/calculos-laborales-2026.mjs');
-  for (const id of ['fin-regimen', 'liq-regimen', 'agu-regimen', 'bn-seguridad', 'vac-regimen']) {
-    assert.ok(app.includes(id), `falta selector ${id}`);
-  }
+  // Mejora 2026-11: el caso común (LFT/IMSS) va por defecto; gobierno, SEP e ISSSTE quedan tras un enlace
+  // que abre el modo detallado (aguinaldo, vacaciones, bruto a neto) o detiene la fórmula LFT (finiquito, liquidación).
+  const directas = read('src/calculadorasDirectas.jsx') + read('src/calcAguinaldo.jsx');
+  for (const id of ['agu-regimen', 'bn-seguridad', 'vac-regimen']) assert.ok(app.includes(id), `falta selector ${id}`);
+  assert.equal((directas.match(/¿Trabajas en gobierno o SEP/g) || []).length, 5, 'enlace de gobierno/SEP en las 5 calculadoras laborales');
+  assert.match(directas, /AvisoGobierno onVolver/);
   assert.ok(app.includes('FOVISSSTE'));
-  assert.ok(app.includes('No aplica a una pensión ISSSTE'));
+  assert.ok(directas.includes('No aplica a ISSSTE'));
   assert.ok(calculos.includes("seguridadSocial = 'imss'"));
   assert.ok(calculos.includes('calcularCuotaTrabajadorISSSTE2026'));
   assert.ok(app.includes('calcularAguinaldoSEPEMS2026'));
@@ -201,11 +204,12 @@ test('las calculadoras separan LFT, IMSS e ISSSTE antes de aplicar fórmulas de 
 test('el editorial no contradice los nuevos alcances público/privado', () => {
   const contenido = JSON.parse(read('src/data/contenido-calculadoras.json'));
   const casos = JSON.parse(read('public/casos-calculadoras.json'));
-  assert.match(contenido.aguinaldo.fundamento, /LFTSE/);
-  assert.match(contenido.aguinaldo.metodologia, /Educación Media Superior/);
+  // Mejora 2026-11: el caso común (empresa privada) va primero; gobierno y SEP siguen citados y disponibles.
+  assert.match(contenido.aguinaldo.fundamento, /Trabajadores al Servicio del Estado/);
+  assert.match(contenido.aguinaldo.fundamento, /SEP/);
   assert.match(contenido.vacaciones.metodologia, /prima de 30%/);
   assert.match(contenido.vacaciones.metodologia, /prima de 60%/);
-  assert.match(contenido.ptu.proposito, /únicamente el monto total/);
+  assert.match(contenido.ptu.proposito, /reparte tu empresa/);
   assert.doesNotMatch(contenido.ptu.proposito, /participación individual/i);
-  assert.match(casos.aguinaldo.titulo, /Ejemplo LFT/);
+  assert.match(casos.aguinaldo.resumen, /empresa privada/);
 });

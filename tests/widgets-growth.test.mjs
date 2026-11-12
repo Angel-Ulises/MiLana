@@ -64,15 +64,18 @@ test('el iframe publicado renderiza el formulario real de la calculadora', async
 });
 
 test('el runtime del fallback monta la barra Abrir completa junto al formulario', () => {
-  const form = { tagName: 'FORM' };
+  // Mejora 2026-11: el formulario vive dentro de [data-calc-directo]; la barra va antes de ese contenedor.
+  let main;
+  const contenedor = { get parentNode() { return main; } };
+  const form = { tagName: 'FORM', closest: (sel) => (sel === '[data-calc-directo]' ? contenedor : null) };
   let brand = null;
-  const main = {
+  main = {
     querySelector(selector) {
       if (selector === 'form') return form;
       if (selector === '.ml-embed-brand') return brand;
       return null;
     },
-    insertBefore(node, before) { assert.equal(before, form); brand = node; },
+    insertBefore(node, before) { assert.equal(before, contenedor); brand = node; },
   };
   const classNames = new Set();
   const document = {

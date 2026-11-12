@@ -194,6 +194,7 @@ function sitemap(urls, urlsSituacion = []) {
     ...urlsSituacion.map((u) => entrada(u, "0.9", "monthly")),
     ...urls.map((u) => entrada(u, "0.9", "monthly")),
     entrada(`${origen}/privacidad`, "0.3", "yearly"),
+    entrada(`${origen}/terminos`, "0.3", "yearly"),
   ].join("\n");
   writeFileSync(
     resolve(DIST, "sitemap.xml"),

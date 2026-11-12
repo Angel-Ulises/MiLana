@@ -6,6 +6,7 @@
   if (html.classList.contains('ml-orbita-embed') || params.get('embed') === '1') return;
 
   const PENSION_PATH = /^\/calculadoras\/pension-imss\/?$/;
+  const CALCULADORA_DIRECTA = true;
   const HEADER_OFFSET = 82;
   const PURPOSE_MEDIA = matchMedia('(max-width: 760px)');
   const COMPACT_PURPOSES = {
@@ -397,7 +398,7 @@
         share.target = '_blank';
         share.rel = 'noopener noreferrer';
         share.textContent = 'Compartir por WhatsApp';
-        const shareText = `Mi resultado en MiLana: ${rawAmount || 'revisa el cálculo'} — ${location.href}`;
+        const shareText = `Calculadora gratuita de MiLana: https://www.milanaaqui.mx${location.pathname}`;
         share.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
         tools.appendChild(share);
       }
@@ -412,7 +413,7 @@
     } else {
       const share = tools.querySelector('.orb-result-share');
       if (share && rawAmount) {
-        share.href = `https://wa.me/?text=${encodeURIComponent(`Mi resultado en MiLana: ${rawAmount} — ${location.href}`)}`;
+        share.href = `https://wa.me/?text=${encodeURIComponent(`Calculadora gratuita de MiLana: https://www.milanaaqui.mx${location.pathname}`)}`;
       }
     }
 
@@ -621,7 +622,9 @@
   const enhanceCalculator = () => {
     syncSection();
     if (html.dataset.orbitaSection !== 'calculadoras' || !html.classList.contains('ml-orbita-enabled')) return;
-    if (PENSION_PATH.test(location.pathname)) {
+    // Mejora 2026-11: las calculadoras muestran el formulario corto completo, con el resultado
+    // en vivo. El asistente «una pregunta a la vez» ya no se monta en ninguna calculadora.
+    if (CALCULADORA_DIRECTA || PENSION_PATH.test(location.pathname)) {
       resetCalculatorState();
       html.classList.remove('orb-purpose-ready');
       return;

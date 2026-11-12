@@ -62,7 +62,8 @@ test('calculadoras móviles reservan la foto sin cortar el propósito y reservan
   assert.match(prepaint,/body:has\(\.calculator-hero\) \.calc-intro\{display:none!important\}/);
   assert.match(prepaint,/\.calculator-hero-media\{display:block!important[^}]*height:220px!important/);
   assert.match(prepaint,/\.calculator-main\{padding-top:6px!important\}/);
-  assert.match(prepaint,/\.calculator-main::before\{[^}]*height:131px/);
+  // Mejora 2026-11: sin asistente paso a paso, ya no se reserva su altura (formulario completo a la vista).
+  assert.doesNotMatch(prepaint,/\.calculator-main::before\{[^}]*height:131px/);
 });
 
 test('prepaint colapsa reservas publicitarias vacías sin tocar el cargador real de AdSense',()=>{

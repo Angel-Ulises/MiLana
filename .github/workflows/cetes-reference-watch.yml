@@ -13,7 +13,11 @@ jobs:
   revisar:
     runs-on: ubuntu-latest
     steps:
+      # GitHub ejecuta los cron desde main, pero Cloudflare publica esta rama.
+      # Mantener este workflow también en main; no comparar su snapshot histórico.
       - uses: actions/checkout@v4
+        with:
+          ref: claude/cloudflare-pages
       - uses: actions/setup-node@v4
         with:
           node-version: 20

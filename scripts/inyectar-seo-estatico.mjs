@@ -49,8 +49,10 @@ function cuerpoCalculadora(pagina, panel) {
       <main data-static-seo="calculadora" data-startup-calc>
         ${panel}
         <div class="shell" style="max-width:720px">
+        <details class="calc-mas-info"><summary>Ver un ejemplo resuelto</summary>
         ${casoCalculadora(pagina).replace('<section data-static-case', '<section class="ml-case ml-case-static" data-case-slug="' + escapar(pagina.slug) + '" data-static-case')}
         <p><a href="/aprende">Consulta también las guías de MiLana</a>.</p>
+        </details>
         </div>
       </main>
     </div>`;

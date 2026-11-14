@@ -93,7 +93,10 @@
     // Mejora 2026-11: con la calculadora directa, el caso va después del resultado, nunca entre formulario y resultado.
     const ancla = form.closest('[data-calc-directo]') || form;
     const glosario = ancla.nextElementSibling?.matches?.('.orb-glossary-after-calculator') ? ancla.nextElementSibling : null;
-    (glosario || ancla).insertAdjacentElement('afterend', section);
+    // Página limpia (2026-11-14): el ejemplo vive dentro del desplegable «Ejemplo, cómo se calcula y fuentes».
+    const masInfo = main.querySelector('[data-mas-info-cuerpo]');
+    if (masInfo) masInfo.prepend(section);
+    else (glosario || ancla).insertAdjacentElement('afterend', section);
     section.querySelector('[data-case-try]')?.addEventListener('click', () => {
       const first = form.querySelector('input,select,textarea');
       form.scrollIntoView({ behavior: 'smooth', block: 'start' });

@@ -103,7 +103,6 @@ export default function CalcAguinaldo({ modoGobierno: ModoGobierno }) {
             actualizado={fmtFecha(AGUINALDO_ACTUALIZADO)}
           />
         )}
-        {!r && !error && <p className="cc-ayuda" style={{ marginTop: 12 }}>Escribe tu sueldo y verás al instante cuánto te toca y cuánto te llega. Se paga a más tardar el 19 de diciembre.</p>}
       </div>
     </div>
   );

@@ -105,3 +105,13 @@ html[data-orbita-section="inicio"] .orb-home-route-grid-todas{display:grid!impor
 html[data-orbita-section="inicio"] .orb-home-route-temporada{border:2px solid #c2410c!important}
 .orb-home-route .orb-home-route-badge{display:inline-block!important;margin-left:8px;padding:2px 8px;border-radius:999px;background:#9a3412!important;color:#fff!important;font-size:12px!important;font-weight:700;line-height:1.4;vertical-align:middle}
 @media(min-width:901px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{max-width:880px!important;width:100%!important;grid-column:1/-1!important}html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid{display:block!important}}
+/* Página limpia (2026-11-14), todo el sitio: menos bloques a la vista, sin perder contenido.
+   - «En pocas palabras» (glosario) solo vive dentro del desplegable de información de las calculadoras.
+   - Inicio: fuera lo que repite las situaciones de arriba (rejilla de calculadoras, «¿No sabes por dónde
+     empezar?», rutas por tema) y la banda de confianza; quedan situaciones, buscador, seis temas y guías. */
+.orb-glossary:not([data-mas-info-cuerpo] .orb-glossary),.orb-glossary-reserve{display:none!important;min-height:0!important}
+html[data-orbita-section="inicio"] #calculadoras,
+html[data-orbita-section="inicio"] #fuentes,
+html[data-orbita-section="inicio"] #situaciones,
+html[data-orbita-section="inicio"] .ml-start-strip{display:none!important}
+html[data-orbita-section="inicio"] #aprende .learn-copy>p:not(.eyebrow){display:none!important}

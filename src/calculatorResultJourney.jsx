@@ -20,6 +20,8 @@ export function ResultNextSteps() {
       </div>
       <a className="ml-result-interpret" href="#ml-calc-interpretation" onClick={() => {
         const interpretacion = document.getElementById('ml-calc-interpretation');
+        const masInfo = interpretacion?.closest('[data-mas-info]');
+        if (masInfo) masInfo.open = true;
         if (interpretacion) interpretacion.open = true;
       }}>
         Entender qué significa y qué no incluye <span aria-hidden="true">↓</span>

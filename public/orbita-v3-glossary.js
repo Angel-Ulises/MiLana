@@ -120,7 +120,10 @@
       const form = calculator.querySelector('form');
       if (form) {
         strip.classList.add('orb-glossary-after-calculator');
-        (form.closest('[data-calc-directo]') || form).insertAdjacentElement('afterend', strip);
+        // Página limpia (2026-11-14): el glosario va al final del desplegable de información, no bajo el formulario.
+        const masInfo = calculator.querySelector('[data-mas-info-cuerpo]');
+        if (masInfo) masInfo.append(strip);
+        else (form.closest('[data-calc-directo]') || form).insertAdjacentElement('afterend', strip);
         return true;
       }
     }

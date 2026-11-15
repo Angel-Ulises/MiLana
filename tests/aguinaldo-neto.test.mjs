@@ -46,7 +46,8 @@ test('la calculadora pide solo sueldo y periodo por defecto; gobierno y SEP qued
   assert.match(jsx, /¿Trabajas en gobierno o SEP\?/);
   assert.match(jsx, /¿Te dan más de 15 días\?/);
   assert.match(jsx, /registrarResultado\('aguinaldo'/);
-  assert.equal((jsx.match(/<input /g) || []).length, 5, 'sueldo, dos opciones de periodo, fecha (condicional) y días (condicional)');
+  assert.equal((jsx.match(/<input /g) || []).length, 4, 'dos opciones de periodo, fecha (condicional) y días (condicional); el sueldo va en CampoSueldo');
+  assert.match(jsx, /<CampoSueldo sueldo=\{sueldo\}/);
 });
 
 test('las calculadoras ya no montan el asistente «una pregunta a la vez»', () => {

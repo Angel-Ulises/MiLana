@@ -1,11 +1,12 @@
+import { useEffect, useState } from 'react';
 import { registrarEvento } from './lib/medicion.js';
 import './resultado-claro.css';
 
 const SITIO = 'https://www.milanaaqui.mx';
 
 // Resultado común de todas las calculadoras (mejora 2026-11):
-// la cifra grande primero, una línea de contexto, el detalle plegado,
-// una sola sugerencia de siguiente paso y compartir por WhatsApp.
+// Página limpia (2026-11-14): solo la cifra grande, una línea y compartir. El desglose, los pasos y la
+// fecha de los datos van plegados en «Ver cómo se calculó»; el siguiente paso es un enlace discreto.
 export default function ResultadoClaro({
   calculadora,
   etiqueta,
@@ -15,8 +16,22 @@ export default function ResultadoClaro({
   detalle,
   siguiente,
   actualizado,
+  reclamo,
   children,
 }) {
+  // «Escuchar»: lee el resultado en voz alta, en el propio teléfono (no se envía nada a ningún servidor).
+  const [puedeHablar, setPuedeHablar] = useState(false);
+  useEffect(() => { setPuedeHablar(typeof window !== 'undefined' && 'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function'); }, []);
+  const escuchar = () => {
+    try {
+      const voz = new window.SpeechSynthesisUtterance(textoHablado(`${etiqueta}: ${monto}. ${linea || ''}`));
+      voz.lang = 'es-MX';
+      voz.rate = 0.95;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(voz);
+      registrarEvento('escuchar_resultado', { calculadora: calculadora.replace(/[^a-z0-9_-]/g, '') });
+    } catch { /* sin voz disponible */ }
+  };
   const ruta = `/calculadoras/${calculadora === 'bruto-neto' ? 'bruto-a-neto' : calculadora === 'pension' ? 'pension-imss' : calculadora}`;
   const textoCompartir = `Calculadora gratuita de MiLana: ${SITIO}${ruta}`;
   return (
@@ -24,35 +39,60 @@ export default function ResultadoClaro({
       <div className="rc-etiqueta">{etiqueta}</div>
       <div className="rc-monto">{monto}</div>
       {linea && <div className="rc-linea">{linea}</div>}
-      {secundarios.length > 0 && (
-        <dl className="rc-secundarios">
-          {secundarios.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
-        </dl>
-      )}
-      {detalle && (
+      {puedeHablar && <button type="button" className="rc-escuchar" onClick={escuchar}>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" /></svg>
+        Escuchar
+      </button>}
+      <a className="rc-whatsapp" href={`https://wa.me/?text=${encodeURIComponent(textoCompartir)}`} target="_blank" rel="noopener noreferrer"
+        title="Se comparte solo el enlace de la herramienta, sin tus cifras ni resultados."
+        onClick={() => registrarEvento('compartir_whatsapp', { calculadora })}>
+        Compartir por WhatsApp
+      </a>
+      {(detalle || secundarios.length > 0) && (
         <details className="rc-detalle">
           <summary>Ver cómo se calculó</summary>
-          <div className="rc-detalle-cuerpo">{detalle}</div>
+          <div className="rc-detalle-cuerpo">
+            {secundarios.length > 0 && (
+              <dl className="rc-secundarios">
+                {secundarios.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
+              </dl>
+            )}
+            {detalle}
+            {actualizado && <p className="rc-actualizado">Datos actualizados al {actualizado}. Es una estimación; tu recibo puede variar.</p>}
+          </div>
+        </details>
+      )}
+      {reclamo && (
+        <details className="rc-detalle rc-reclamo">
+          <summary>¿Y si no me lo pagan?</summary>
+          <div className="rc-detalle-cuerpo">
+            <p>La Procuraduría de la Defensa del Trabajo te asesora y te representa <strong>gratis</strong>. No necesitas pagar un abogado para empezar.</p>
+            <p>{reclamo === 'despido'
+              ? <>Si te despidieron, tienes <strong>2 meses</strong> para reclamar, contados desde el día siguiente al despido. Para los demás pagos tienes 1 año.</>
+              : <>Tienes <strong>1 año</strong> para reclamar, contado desde el día en que te debieron pagar.</>}</p>
+            <p><a href="https://www.gob.mx/profedet" target="_blank" rel="noopener noreferrer">Ir a PROFEDET (gob.mx) ↗</a></p>
+            <p className="rc-actualizado">Ley Federal del Trabajo, artículos 516, 518, 530 y 534.</p>
+          </div>
         </details>
       )}
       {children}
       {siguiente && (
         <a className="rc-siguiente" href={siguiente.href}
           onClick={() => registrarEvento('clic_siguiente_paso', { calculadora: calculadora.replace(/[^a-z0-9_-]/g, ''), destino: siguiente.href.split('/').filter(Boolean).pop() })}>
-          <span className="rc-siguiente-kicker">Siguiente paso</span>
           <span className="rc-siguiente-texto">{siguiente.texto}</span>
           <span aria-hidden="true" className="rc-flecha">→</span>
         </a>
       )}
-      <a className="rc-whatsapp" href={`https://wa.me/?text=${encodeURIComponent(textoCompartir)}`} target="_blank" rel="noopener noreferrer"
-        onClick={() => registrarEvento('compartir_whatsapp', { calculadora })}>
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg>
-        Compartir enlace por WhatsApp
-      </a>
-      <p className="rc-actualizado">Se comparte solo el enlace de la herramienta, sin tus cifras ni resultados.</p>
-      {actualizado && <div className="rc-actualizado">Datos actualizados al {actualizado}. Es una estimación; tu recibo puede variar.</div>}
     </section>
   );
+}
+
+// «$5,633.71» → «5633 pesos con 71 centavos», para que la voz lo lea como lo diría una persona.
+export function textoHablado(texto) {
+  return String(texto).replace(/\$\s?([\d,]+)(?:\.(\d{2}))?/g, (_, entero, cent) => {
+    const pesos = Number(entero.replace(/,/g, ''));
+    return `${pesos} ${pesos === 1 ? 'peso' : 'pesos'}${cent && cent !== '00' ? ` con ${Number(cent)} centavos` : ''}`;
+  }).replace(/ISR/g, 'I S R').replace(/\s+/g, ' ').trim();
 }
 
 export const fmtMx = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(n);

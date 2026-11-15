@@ -1299,9 +1299,16 @@ export default function App({ rutaSSR } = {}) { if (typeof window !== 'undefined
             <CalculatorResultContext.Provider value={calc.id}>
               <Comp />
             </CalculatorResultContext.Provider>
-            <FichaConfianza id={calc.id} />
-            <Articulo id={calc.id} />
-            <ContenidoCalculadora id={calc.id} ir={setActiva} />
+            {/* Página limpia (2026-11-14): arriba solo el formulario y el resultado. Ejemplo, glosario,
+                explicación, fuentes y preguntas quedan en un solo desplegable cerrado. */}
+            <details className="calc-mas-info" data-mas-info>
+              <summary>Ejemplo, cómo se calcula y fuentes</summary>
+              <div className="calc-mas-info-cuerpo" data-mas-info-cuerpo>
+                <FichaConfianza id={calc.id} />
+                <Articulo id={calc.id} />
+                <ContenidoCalculadora id={calc.id} ir={setActiva} />
+              </div>
+            </details>
             <p style={{marginTop:30}}>
               <a href="/calculadoras" style={{color:'var(--ml-blue)',fontSize:14,fontWeight:600,textDecoration:'none'}}>
                 ← Todas las calculadoras

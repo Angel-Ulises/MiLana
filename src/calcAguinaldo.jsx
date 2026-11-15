@@ -2,21 +2,22 @@ import { useEffect, useId, useMemo, useState } from 'react';
 import { calcularAguinaldoNeto, EXENCION_AGUINALDO_2026, AGUINALDO_ACTUALIZADO } from './lib/calculos-revisados.mjs';
 import ResultadoClaro, { fmtMx, fmtFecha } from './resultadoClaro.jsx';
 import { registrarResultado, olvidarResultado } from './lib/medicion.js';
+import { CampoSueldo, useSueldo } from './calcComun.jsx';
 
 // Aguinaldo 2026 (mejora 2026-11): caso más común por defecto —empresa privada, 15 días—.
 // Solo pide sueldo mensual y, si entraste en 2026, la fecha de ingreso.
 // Gobierno federal y SEP siguen disponibles con su calculadora detallada (`modoGobierno`).
 export default function CalcAguinaldo({ modoGobierno: ModoGobierno }) {
-  const [sueldo, setSueldo] = useState('');
+  const sueldo = useSueldo();
   const [todoElAnio, setTodoElAnio] = useState(true);
   const [fecha, setFecha] = useState('');
   const [verDias, setVerDias] = useState(false);
   const [dias, setDias] = useState('15');
   const [gobierno, setGobierno] = useState(false);
-  const ids = { sueldo: useId(), fecha: useId(), dias: useId(), error: useId() };
+  const ids = { fecha: useId(), dias: useId(), error: useId() };
 
   const { r, error } = useMemo(() => {
-    const limpio = String(sueldo).replace(/[$,\s]/g, '');
+    const limpio = sueldo.mensual;
     if (!limpio) return { r: null, error: '' };
     if (!todoElAnio && !fecha) return { r: null, error: '' };
     try {
@@ -24,7 +25,7 @@ export default function CalcAguinaldo({ modoGobierno: ModoGobierno }) {
     } catch (e) {
       return { r: null, error: e.message };
     }
-  }, [sueldo, todoElAnio, fecha, dias]);
+  }, [sueldo.mensual, todoElAnio, fecha, dias]);
 
   useEffect(() => {
     if (r) registrarResultado('aguinaldo', todoElAnio ? 'anio_completo' : 'parte_del_anio');
@@ -41,13 +42,7 @@ export default function CalcAguinaldo({ modoGobierno: ModoGobierno }) {
   return (
     <div data-calc-directo>
       <form className="cc-form" noValidate onSubmit={(e) => e.preventDefault()}>
-        <div className="cc-campo">
-          <label htmlFor={ids.sueldo}>Tu sueldo mensual, antes de descuentos</label>
-          <div className="cc-dinero">
-            <input id={ids.sueldo} name="sueldo" inputMode="decimal" autoComplete="off" placeholder="12,000"
-              value={sueldo} onChange={(e) => setSueldo(e.target.value)} aria-describedby={error ? ids.error : undefined} aria-invalid={error ? true : undefined} />
-          </div>
-        </div>
+        <CampoSueldo sueldo={sueldo} placeholder="12,000" />
         <fieldset className="cc-opciones">
           <legend className="cc-legend">¿Trabajaste todo 2026 en esa empresa?</legend>
           <label className="cc-opcion"><input type="radio" name="periodo" checked={todoElAnio} onChange={() => setTodoElAnio(true)} /><span>Sí, todo el año</span></label>
@@ -100,10 +95,10 @@ export default function CalcAguinaldo({ modoGobierno: ModoGobierno }) {
             </ol>}
             siguiente={{ texto: 'Decide cuánto apartar para tu fondo de emergencia', href: '/finanzas/fondo-emergencia' }}
             compartir={`Mi aguinaldo 2026 sale en ${fmtMx(r.bruto)} y me llegan unos ${fmtMx(r.neto)} después de ISR.`}
+            reclamo="general"
             actualizado={fmtFecha(AGUINALDO_ACTUALIZADO)}
           />
         )}
-        {!r && !error && <p className="cc-ayuda" style={{ marginTop: 12 }}>Escribe tu sueldo y verás al instante cuánto te toca y cuánto te llega. Se paga a más tardar el 19 de diciembre.</p>}
       </div>
     </div>
   );

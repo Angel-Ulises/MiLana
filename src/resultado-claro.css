@@ -58,3 +58,28 @@
   .ml-panel .calculator-hero .calculator-purpose{font-size:15px!important;line-height:1.4!important;margin:4px 0 0!important}
   .ml-panel .calculator-main{padding-top:4px!important}
 }
+
+/* Página limpia (2026-11-14): menos texto a la vista; lo explicativo queda a un toque. */
+.rc-whatsapp{margin-top:14px}
+.rc-detalle{border-top:0;padding-top:0;margin-top:6px}
+.rc-detalle .rc-secundarios{border-top:0;padding-top:0;margin:4px 0 10px}
+.rc-siguiente{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:4px;padding:8px 0 0;background:none;border-top:1px solid var(--ml-slate-200,#e2e8f0);border-radius:0}
+.rc-siguiente-texto{font-size:14px;font-weight:600;color:var(--ml-blue-700,#1d4ed8)}
+.rc-flecha{font-size:16px}
+.cc-mas{gap:2px 16px}
+.cc-mas .cc-enlace{font-size:13px;font-weight:500;color:var(--ml-slate-600,#475569)}
+.calc-mas-info{margin-top:22px;border-top:1px solid var(--ml-slate-200,#e2e8f0)}
+.calc-mas-info>summary{cursor:pointer;min-height:52px;display:flex;align-items:center;justify-content:space-between;font-size:15px;font-weight:600;color:var(--ml-slate-900,#0f172a);list-style:none}
+.calc-mas-info>summary::-webkit-details-marker{display:none}
+.calc-mas-info>summary::after{content:'+';font-size:22px;font-weight:400;color:var(--ml-slate-600,#475569)}
+.calc-mas-info[open]>summary::after{content:'–'}
+
+/* Cada cuándo te pagan (semana, quincena, mes). */
+.cc-frecuencia{display:flex;gap:6px;margin-top:2px}
+.cc-opcion-chica{flex:1}
+.cc-opcion-chica span{min-height:40px;padding:6px 4px;font-size:13.5px;border-width:1.5px;border-radius:10px}
+
+/* Escuchar el resultado y ayuda para reclamar. */
+.rc-escuchar{display:inline-flex;align-items:center;gap:6px;margin-top:10px;min-height:40px;padding:6px 14px;border:1.5px solid var(--ml-slate-200,#cbd5e1);border-radius:999px;background:#fff;color:var(--ml-slate-900,#0f172a);font:600 14px inherit;cursor:pointer}
+.rc-escuchar:focus-visible{outline:3px solid var(--ml-blue-600,#2563eb);outline-offset:2px}
+.rc-reclamo p{margin:0 0 8px}

@@ -105,3 +105,36 @@ html[data-orbita-section="inicio"] .orb-home-route-grid-todas{display:grid!impor
 html[data-orbita-section="inicio"] .orb-home-route-temporada{border:2px solid #c2410c!important}
 .orb-home-route .orb-home-route-badge{display:inline-block!important;margin-left:8px;padding:2px 8px;border-radius:999px;background:#9a3412!important;color:#fff!important;font-size:12px!important;font-weight:700;line-height:1.4;vertical-align:middle}
 @media(min-width:901px){html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-copy{max-width:880px!important;width:100%!important;grid-column:1/-1!important}html.ml-orbita-enabled.ml-orbita-enabled[data-orbita-section="inicio"] .hero-grid{display:block!important}}
+/* Página limpia (2026-11-14), todo el sitio: menos bloques a la vista, sin perder contenido.
+   - «En pocas palabras» (glosario) solo vive dentro del desplegable de información de las calculadoras.
+   - Inicio: fuera lo que repite las situaciones de arriba (rejilla de calculadoras, «¿No sabes por dónde
+     empezar?», rutas por tema) y la banda de confianza; quedan situaciones, buscador, seis temas y guías. */
+.orb-glossary:not([data-mas-info-cuerpo] .orb-glossary),.orb-glossary-reserve{display:none!important;min-height:0!important}
+html[data-orbita-section="inicio"] #calculadoras,
+html[data-orbita-section="inicio"] #fuentes,
+html[data-orbita-section="inicio"] #situaciones,
+html[data-orbita-section="inicio"] .ml-start-strip{display:none!important}
+html[data-orbita-section="inicio"] #aprende .learn-copy>p:not(.eyebrow){display:none!important}
+/* Página limpia (2026-11-15): secciones secundarias plegadas bajo su título (public/pagina-limpia.js). */
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"]{padding-block:0!important;min-height:0!important;background:none!important;margin-block:0!important}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-nivel]{padding-block:0!important;display:block!important;min-height:0!important}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-nivel]>:not([data-pl-cabeza]){display:none!important}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-cabeza]{display:block!important;margin:0!important;padding:0!important}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-cabeza] *:not([data-pl-titulo]):not([data-pl-titulo] *):not(:has([data-pl-titulo])){display:none!important}
+[data-pl-titulo]{cursor:pointer;display:flex!important;align-items:center;justify-content:space-between;gap:12px}
+[data-pl-titulo]::after{content:'–';flex:none;font:400 24px/1 system-ui,sans-serif;color:#5E6B78}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-titulo]{margin:0!important;padding:16px 0!important;border-top:1px solid #D9E1E8;font-size:17px!important;line-height:1.3!important;letter-spacing:0!important;font-family:inherit!important;font-weight:650!important;color:#13263B!important;max-width:none!important}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-titulo]::after{content:'+'}
+[data-pl-titulo]:focus-visible{outline:3px solid #2D6CAA;outline-offset:3px}
+/* Herramientas de finanzas: sin tarjetas de resultado vacías antes de escribir. */
+.finance-tool-section[data-sin-datos] .finance-results{display:none!important}
+/* Página limpia (2026-11-15, segunda ronda). */
+/* Inversión: el mapa «falta dato» no aparece hasta que la persona escribe algo. */
+.investment-tool[data-sin-datos] .investment-output{display:none!important}
+/* Finanzas y ficha de estado: sin la gráfica genérica ni su hueco reservado. */
+html[data-orbita-section="finanzas"] :is(.orb-section-visual,.orb-visual-reserve),
+html[data-orbita-section="estados"]:has(.state-detail-hero) :is(.orb-section-visual,.orb-visual-reserve){display:none!important;min-height:0!important}
+/* Match por categoría: cada tarjeta muestra nombre y dato principal; lo demás está en «Ver ficha completa». */
+.match-group .match-card :is(.match-card-entity,.match-card-partial,.match-dato-secundario){display:none!important}
+/* El «siguiente paso» de una herramienta de finanzas aparece cuando ya hay un resultado. */
+body:has(:is(.finance-tool-section,.investment-tool)[data-sin-datos]) .ml-next-step-band{display:none!important}

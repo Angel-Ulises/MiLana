@@ -2,7 +2,9 @@ import { useEffect, useId, useMemo, useState } from 'react';
 import { calcularAguinaldoNeto, EXENCION_AGUINALDO_2026, AGUINALDO_ACTUALIZADO } from './lib/calculos-revisados.mjs';
 import ResultadoClaro, { fmtMx, fmtFecha } from './resultadoClaro.jsx';
 import { registrarResultado, olvidarResultado } from './lib/medicion.js';
-import { CampoSueldo, useSueldo } from './calcComun.jsx';
+import { CampoSueldo, useSueldo, conMiles } from './calcComun.jsx';
+import { compararDeposito } from './lib/calculos-directos.mjs';
+import { registrarEvento } from './lib/medicion.js';
 
 // Aguinaldo 2026 (mejora 2026-11): caso más común por defecto —empresa privada, 15 días—.
 // Solo pide sueldo mensual y, si entraste en 2026, la fecha de ingreso.
@@ -97,9 +99,46 @@ export default function CalcAguinaldo({ modoGobierno: ModoGobierno }) {
             compartir={`Mi aguinaldo 2026 sale en ${fmtMx(r.bruto)} y me llegan unos ${fmtMx(r.neto)} después de ISR.`}
             reclamo="general"
             actualizado={fmtFecha(AGUINALDO_ACTUALIZADO)}
-          />
+          >
+            <MePagaronBien neto={r.neto} bruto={r.bruto} />
+          </ResultadoClaro>
         )}
       </div>
     </div>
   );
 }
+
+// «¿Me pagaron bien?»: la persona escribe lo que le depositaron y ve si cuadra con la estimación.
+// La cifra se queda en el navegador; el evento de medición no lleva importes ni el veredicto.
+function MePagaronBien({ neto, bruto }) {
+  const [deposito, setDeposito] = useState('');
+  const id = useId();
+  const c = compararDeposito({ neto, bruto, deposito });
+  useEffect(() => { if (c) registrarEvento('comparar_deposito', { calculadora: 'aguinaldo' }); }, [Boolean(c)]);
+  return (
+    <details className="rc-detalle rc-pagaron">
+      <summary>¿Ya te lo depositaron? Revisa si te pagaron bien</summary>
+      <div className="rc-detalle-cuerpo">
+        <div className="cc-campo">
+          <label htmlFor={id}>¿Cuánto te depositaron de aguinaldo?</label>
+          <div className="cc-dinero"><input id={id} name="deposito" inputMode="decimal" autoComplete="off" value={deposito}
+            onChange={(e) => setDeposito(e.target.value)} onBlur={(e) => { const f = conMiles(e.target.value); if (f !== e.target.value) setDeposito(f); }} /></div>
+        </div>
+        <div aria-live="polite">
+          {c?.veredicto === 'cuadra' && <p className="rc-veredicto rc-veredicto-bien"><strong>Sí cuadra.</strong> Lo que te depositaron coincide con el cálculo.</p>}
+          {c?.veredicto === 'mas' && <p className="rc-veredicto rc-veredicto-bien"><strong>Te llegaron {fmtMx(c.diferencia)} más</strong> de lo estimado. Suele pasar si tu empresa da más de 15 días o usó otro método permitido para retener el ISR.{c.superaBruto ? ' Si te dan más días, toca «¿Te dan más de 15 días?» arriba para afinar el cálculo.' : ''}</p>}
+          {c?.veredicto === 'menos' && <>
+            <p className="rc-veredicto rc-veredicto-ojo"><strong>Te llegaron {fmtMx(Math.abs(c.diferencia))} menos</strong> de lo estimado. No siempre es un error. Revisa en tu recibo:</p>
+            <ul>
+              <li>El sueldo que usaron: que sea el que ganas hoy.</li>
+              <li>Los días: la ley pide al menos 15 por año completo, o la parte proporcional si entraste este año.</li>
+              <li>Otros descuentos: préstamos, pensión alimenticia o faltas.</li>
+            </ul>
+            <p>Si después de revisar no cuadra, pregunta en nómina. Si no te lo resuelven, abre «¿Y si no me lo pagan?».</p>
+          </>}
+        </div>
+      </div>
+    </details>
+  );
+}
+

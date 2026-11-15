@@ -103,3 +103,15 @@ export function sbcEstimado(sueldoMensual) {
   return Math.round((sueldo / 30) * FACTOR_INTEGRACION_MINIMO * 100) / 100;
 }
 export const TOPE_SBC_2026 = 25 * UMA_DIARIA_2026;
+
+// «¿Me pagaron bien?» (aguinaldo): compara lo depositado con la estimación. No es un dictamen:
+// la empresa puede usar el método opcional de retención (RLISR art. 174), dar más días o aplicar
+// descuentos propios del recibo. Margen: lo mayor entre $50 y 1% del aguinaldo bruto.
+export function compararDeposito({ neto, bruto, deposito }) {
+  const d = Number(String(deposito ?? '').replace(/[$,\s]/g, ''));
+  if (!Number.isFinite(d) || d <= 0) return null;
+  const margen = Math.max(50, bruto * 0.01);
+  const diferencia = Math.round((d - neto) * 100) / 100;
+  const veredicto = Math.abs(diferencia) <= margen ? 'cuadra' : diferencia < 0 ? 'menos' : 'mas';
+  return { deposito: d, diferencia, margen, veredicto, superaBruto: d > bruto + margen };
+}

@@ -11,8 +11,14 @@
     [/^\/finanzas\/inversion\/?$/, ['.investment-questions', '.investment-security', '.investment-next']],
     [/^\/invertir\/?$/, ['.ml-inv-fees', '.ml-inv-boundary']],
     [/^\/economia\/?$/, ['.economy-sources-section']],
+    [/^\/carreras\/?$/, ['.career-snapshot']],
+    [/^\/finanzas\/match\/(?!metodologia\/?$)[^/]+\/?$/, ['.match-section-split']],
   ];
-  const HERRAMIENTA_FINANZAS = /^\/finanzas\/(presupuesto|fondo-emergencia|deuda-y-credito|ahorro)\/?$/;
+  // [ruta, sección, formulario]: mientras el formulario esté vacío, la sección lleva data-sin-datos.
+  const SIN_DATOS = [
+    [/^\/finanzas\/(presupuesto|fondo-emergencia|deuda-y-credito|ahorro)\/?$/, '.finance-tool-section', '.finance-form-card'],
+    [/^\/finanzas\/inversion\/?$/, '.investment-tool', '.investment-form'],
+  ];
 
   const selectores = () => (REGLAS.find(([re]) => re.test(location.pathname)) || [null, []])[1];
 
@@ -57,9 +63,10 @@
 
   // Herramientas de finanzas: las tarjetas de resultado vacías no se muestran hasta que hay datos.
   function sinDatos() {
-    if (!HERRAMIENTA_FINANZAS.test(location.pathname)) return;
-    const seccion = document.querySelector('.finance-tool-section');
-    const formulario = seccion?.querySelector('.finance-form-card');
+    const regla = SIN_DATOS.find(([re]) => re.test(location.pathname));
+    if (!regla) return;
+    const seccion = document.querySelector(regla[1]);
+    const formulario = seccion?.querySelector(regla[2]);
     if (!seccion || !formulario) return;
     const campos = [...formulario.querySelectorAll('input:not([type="checkbox"]):not([type="radio"])')];
     const vacio = campos.length > 0 && campos.every((c) => !(Number(String(c.value).replace(/[$,\s]/g, '')) > 0));

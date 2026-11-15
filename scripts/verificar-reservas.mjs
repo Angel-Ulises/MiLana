@@ -25,7 +25,8 @@ if (!chrome) { console.warn('reservas: Chrome/Chromium no encontrado; verificaci
 
 const medir = () => {
   const visual = document.querySelector('.orb-section-visual');
-  if (!visual) return null;
+  // Página limpia (2026-11-15): un visual oculto por diseño no reserva altura ni se mide.
+  if (!visual || getComputedStyle(visual).display === 'none') return null;
   const reserved = parseFloat(getComputedStyle(visual).minHeight) || 0;
   const previous = visual.style.minHeight;
   visual.style.minHeight = '0px';

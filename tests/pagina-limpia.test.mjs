@@ -36,3 +36,17 @@ test('las secciones secundarias se pliegan bajo su título sin borrar contenido 
   assert.match(css, /\[data-pl-nivel\]>:not\(\[data-pl-cabeza\]\)\{display:none!important\}/);
   assert.match(css, /\.finance-tool-section\[data-sin-datos\] \.finance-results\{display:none!important\}/);
 });
+
+test('segunda ronda: sin estados vacíos ni gráficas de relleno; Match muestra el dato principal por tarjeta', () => {
+  const js = readFileSync('public/pagina-limpia.js', 'utf8');
+  assert.match(js, /'\.investment-tool', '\.investment-form'/);
+  for (const sel of ['.career-snapshot', '.match-section-split']) assert.ok(js.includes(`'${sel}'`), sel);
+  const css = readFileSync('public/orbita-v3-prepaint.css', 'utf8');
+  assert.match(css, /\.investment-tool\[data-sin-datos\] \.investment-output\{display:none!important\}/);
+  assert.match(css, /html\[data-orbita-section="finanzas"\] :is\(\.orb-section-visual,\.orb-visual-reserve\)/);
+  assert.match(css, /\.match-group \.match-card :is\(\.match-card-entity,\.match-card-partial,\.match-dato-secundario\)\{display:none!important\}/);
+  assert.match(css, /\[data-sin-datos\]\) \.ml-next-step-band\{display:none!important\}/);
+  // La ficha completa de Match no se recorta: la regla solo alcanza a las tarjetas del listado.
+  assert.doesNotMatch(css, /\.match-ficha[^{]*\{display:none/);
+  assert.match(readFileSync('scripts/verificar-reservas.mjs', 'utf8'), /getComputedStyle\(visual\)\.display === 'none'\) return null/);
+});

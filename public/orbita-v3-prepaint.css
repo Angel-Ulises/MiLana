@@ -128,3 +128,13 @@ html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.m
 [data-pl-titulo]:focus-visible{outline:3px solid #2D6CAA;outline-offset:3px}
 /* Herramientas de finanzas: sin tarjetas de resultado vacías antes de escribir. */
 .finance-tool-section[data-sin-datos] .finance-results{display:none!important}
+/* Página limpia (2026-11-15, segunda ronda). */
+/* Inversión: el mapa «falta dato» no aparece hasta que la persona escribe algo. */
+.investment-tool[data-sin-datos] .investment-output{display:none!important}
+/* Finanzas y ficha de estado: sin la gráfica genérica ni su hueco reservado. */
+html[data-orbita-section="finanzas"] :is(.orb-section-visual,.orb-visual-reserve),
+html[data-orbita-section="estados"]:has(.state-detail-hero) :is(.orb-section-visual,.orb-visual-reserve){display:none!important;min-height:0!important}
+/* Match por categoría: cada tarjeta muestra nombre y dato principal; lo demás está en «Ver ficha completa». */
+.match-group .match-card :is(.match-card-entity,.match-card-partial,.match-dato-secundario){display:none!important}
+/* El «siguiente paso» de una herramienta de finanzas aparece cuando ya hay un resultado. */
+body:has(:is(.finance-tool-section,.investment-tool)[data-sin-datos]) .ml-next-step-band{display:none!important}

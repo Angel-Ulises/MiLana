@@ -4,7 +4,7 @@ import { calcularFiniquito2026, calcularLiquidacion2026, calcularBrutoNeto2026, 
 import { calcularRESICO, calcularPTUTotal, calcularVacaciones, calcularCredito, revisarPension, sbcEstimado, FACTOR_INTEGRACION_MINIMO } from './lib/calculos-directos.mjs';
 import ResultadoClaro, { fmtMx, fmtFecha } from './resultadoClaro.jsx';
 import {
-  CampoDinero, CampoNumero, CampoFecha, Opciones, Casilla, MasOpciones, Formulario, MensajeError,
+  CampoDinero, CampoSueldo, useSueldo, CampoNumero, CampoFecha, Opciones, Casilla, MasOpciones, Formulario, MensajeError,
   useEventoResultado, hoy2026, Contenedor, limpiarNumero, ACTUALIZADO_2026,
 } from './calcComun.jsx';
 
@@ -22,7 +22,7 @@ function AvisoGobierno({ children, onVolver }) {
 
 // ─── Finiquito ───────────────────────────────────────────────────────────────
 export function CalcFiniquitoDirecta() {
-  const [sueldo, setSueldo] = useState('');
+  const sueldo = useSueldo();
   const [ingreso, setIngreso] = useState('');
   const [salida, setSalida] = useState(hoy2026);
   const [causa, setCausa] = useState('renuncia');
@@ -34,20 +34,20 @@ export function CalcFiniquitoDirecta() {
   const [frontera, setFrontera] = useState(false);
   const [gobierno, setGobierno] = useState(false);
   const { r, error } = useMemo(() => {
-    if (!limpiarNumero(sueldo) || !ingreso || !salida) return { r: null, error: '' };
+    if (!sueldo.mensual || !ingreso || !salida) return { r: null, error: '' };
     return intentar(() => calcularFiniquito2026({
-      salarioMensual: limpiarNumero(sueldo), fechaIngreso: ingreso, fechaSalida: salida,
+      salarioMensual: sueldo.mensual, fechaIngreso: ingreso, fechaSalida: salida,
       diasTrabajadosNoPagados: pendientes || '0', vacacionesPendientes: vacPend || '0', causa,
       zona: frontera ? 'frontera' : 'general', diasAguinaldo: diasAg || '15', primaVacacionalPct: prima || '25', diasVacacionesAnuales: vacAnuales,
     }));
-  }, [sueldo, ingreso, salida, causa, pendientes, vacPend, diasAg, prima, vacAnuales, frontera]);
+  }, [sueldo.mensual, ingreso, salida, causa, pendientes, vacPend, diasAg, prima, vacAnuales, frontera]);
   useEventoResultado('finiquito', Boolean(r), causa === 'renuncia' ? 'renuncia' : 'despido');
   if (gobierno) return <Contenedor><AvisoGobierno onVolver={() => setGobierno(false)}>
     Esta calculadora usa la Ley Federal del Trabajo. En una plaza de gobierno federal o de la SEP (Ley Federal de los Trabajadores al Servicio del Estado), la baja depende de tu nombramiento y de las reglas de tu dependencia, así que no te daremos una cifra que podría estar mal. Pide tu cálculo a Recursos Humanos de tu dependencia.
   </AvisoGobierno></Contenedor>;
   return <Contenedor>
     <Formulario>
-      <CampoDinero name="sueldo" label="Tu sueldo mensual, antes de descuentos" placeholder="18,000" value={sueldo} onChange={setSueldo} />
+      <CampoSueldo sueldo={sueldo} placeholder="18,000" />
       <CampoFecha name="ingreso" label="¿Qué día entraste a trabajar?" value={ingreso} onChange={setIngreso} max="2026-12-31" />
       <CampoFecha name="salida" label="Tu último día de trabajo" value={salida} onChange={setSalida} min="2026-01-01" max="2026-12-31" />
       <Opciones name="causa" legend="¿Cómo terminó?" value={causa} onChange={setCausa} opciones={[['renuncia', 'Renuncié'], ['separacion-patron', 'Me despidieron']]} />
@@ -83,13 +83,14 @@ export function CalcFiniquitoDirecta() {
         ? { texto: 'Calcula cuántos meses te alcanza este dinero', href: '/finanzas/fondo-emergencia' }
         : { texto: 'Si te despidieron sin causa, calcula tu liquidación', href: '/calculadoras/liquidacion' }}
       compartir={`Según MiLana, mi finiquito sale en unos ${fmtMx(r.totalBruto)} antes de impuestos.`}
+      reclamo={causa === 'renuncia' ? 'general' : 'despido'}
       actualizado={ACT} />}</div>
   </Contenedor>;
 }
 
 // ─── Liquidación ─────────────────────────────────────────────────────────────
 export function CalcLiquidacionDirecta() {
-  const [sueldo, setSueldo] = useState('');
+  const sueldo = useSueldo();
   const [ingreso, setIngreso] = useState('');
   const [salida, setSalida] = useState(hoy2026);
   const [indeterminada, setIndeterminada] = useState(true);
@@ -102,21 +103,21 @@ export function CalcLiquidacionDirecta() {
   const [frontera, setFrontera] = useState(false);
   const [gobierno, setGobierno] = useState(false);
   const { r, error } = useMemo(() => {
-    if (!limpiarNumero(sueldo) || !ingreso || !salida) return { r: null, error: '' };
+    if (!sueldo.mensual || !ingreso || !salida) return { r: null, error: '' };
     return intentar(() => calcularLiquidacion2026({
-      salarioMensual: limpiarNumero(sueldo), fechaIngreso: ingreso, fechaSalida: salida,
+      salarioMensual: sueldo.mensual, fechaIngreso: ingreso, fechaSalida: salida,
       diasTrabajadosNoPagados: pendientes || '0', vacacionesPendientes: vacPend || '0',
       zona: frontera ? 'frontera' : 'general', diasAguinaldo: diasAg || '15', primaVacacionalPct: prima || '25', diasVacacionesAnuales: vacAnuales,
       relacionIndeterminada: indeterminada, incluirVeinteDias: veinte,
     }));
-  }, [sueldo, ingreso, salida, indeterminada, veinte, pendientes, vacPend, diasAg, prima, vacAnuales, frontera]);
+  }, [sueldo.mensual, ingreso, salida, indeterminada, veinte, pendientes, vacPend, diasAg, prima, vacAnuales, frontera]);
   useEventoResultado('liquidacion', Boolean(r), veinte ? 'con_20_dias' : 'tres_meses');
   if (gobierno) return <Contenedor><AvisoGobierno onVolver={() => setGobierno(false)}>
     La indemnización de 3 meses es de la Ley Federal del Trabajo. En gobierno federal o la SEP la terminación depende de tu nombramiento y de la Ley Federal de los Trabajadores al Servicio del Estado; no la calculamos para no darte una cifra equivocada.
   </AvisoGobierno></Contenedor>;
   return <Contenedor>
     <Formulario>
-      <CampoDinero name="sueldo" label="Tu sueldo mensual, antes de descuentos" placeholder="18,000" value={sueldo} onChange={setSueldo} />
+      <CampoSueldo sueldo={sueldo} placeholder="18,000" />
       <CampoFecha name="ingreso" label="¿Qué día entraste a trabajar?" value={ingreso} onChange={setIngreso} max="2026-12-31" />
       <CampoFecha name="salida" label="¿Qué día te despidieron?" value={salida} onChange={setSalida} min="2026-01-01" max="2026-12-31" />
       <MensajeError error={error} />
@@ -149,23 +150,24 @@ export function CalcLiquidacionDirecta() {
       </ul>}
       siguiente={{ texto: 'Calcula cuántos meses te alcanza este dinero', href: '/finanzas/fondo-emergencia' }}
       compartir={`Según MiLana, mi liquidación sale en unos ${fmtMx(r.totalBruto)} antes de impuestos.`}
+      reclamo="despido"
       actualizado={ACT} />}</div>
   </Contenedor>;
 }
 
 // ─── ISR mensual ─────────────────────────────────────────────────────────────
 export function CalcISRDirecta() {
-  const [sueldo, setSueldo] = useState('');
+  const sueldo = useSueldo();
   const [minimo, setMinimo] = useState(false);
   const mes = `2026-${String(Math.min(Math.max(new Date().getMonth() + 1, 2), 12)).padStart(2, '0')}`;
   const { r, error } = useMemo(() => {
-    if (!limpiarNumero(sueldo)) return { r: null, error: '' };
-    return intentar(() => calcularISR({ ingreso: limpiarNumero(sueldo), soloMinimo: minimo, periodo: new Date().getFullYear() === 2026 ? mes : '2026-11' }));
-  }, [sueldo, minimo, mes]);
+    if (!sueldo.mensual) return { r: null, error: '' };
+    return intentar(() => calcularISR({ ingreso: sueldo.mensual, soloMinimo: minimo, periodo: new Date().getFullYear() === 2026 ? mes : '2026-11' }));
+  }, [sueldo.mensual, minimo, mes]);
   useEventoResultado('isr', Boolean(r), minimo ? 'salario_minimo' : 'mensual');
   return <Contenedor>
     <Formulario>
-      <CampoDinero name="sueldo" label="Tu sueldo mensual, antes de descuentos" placeholder="20,000" value={sueldo} onChange={setSueldo} ayuda="Si parte de tu sueldo no paga impuesto (vales, por ejemplo), escribe solo la parte que sí paga." />
+      <CampoSueldo sueldo={sueldo} opciones={['quincena', 'mes']} placeholder="20,000" ayuda="Si parte de tu sueldo no paga impuesto (vales, por ejemplo), escribe solo la parte que sí paga." />
       <MensajeError error={error} />
       <MasOpciones texto="¿Ganas el salario mínimo? Más opciones">
         <Casilla checked={minimo} onChange={setMinimo}>Solo gano el salario mínimo (${SALARIOS_MINIMOS_2026.general.toFixed(2)} diarios; ${SALARIOS_MINIMOS_2026.frontera.toFixed(2)} en la frontera norte)</Casilla>
@@ -190,12 +192,12 @@ export function CalcISRDirecta() {
 
 // ─── Bruto a neto ────────────────────────────────────────────────────────────
 export function CalcBrutoNetoDirecta({ modoDetallado: ModoDetallado }) {
-  const [sueldo, setSueldo] = useState('');
+  const sueldo = useSueldo();
   const [sbc, setSbc] = useState('');
   const [minimo, setMinimo] = useState(false);
   const [detallado, setDetallado] = useState(false);
   const { r, error, sbcUsado } = useMemo(() => {
-    const bruto = limpiarNumero(sueldo);
+    const bruto = sueldo.mensual;
     if (!bruto) return { r: null, error: '' };
     let sbcUsado = '';
     try { sbcUsado = limpiarNumero(sbc) || String(sbcEstimado(bruto)); } catch (e) { return { r: null, error: e.message }; }
@@ -203,7 +205,7 @@ export function CalcBrutoNetoDirecta({ modoDetallado: ModoDetallado }) {
       brutoMensual: bruto, ingresoGravableISR: bruto, seguridadSocial: 'imss', sbcDiario: sbcUsado, diasCotizados: '30',
       soloMinimo: minimo, periodo: '2026-11', empleadorUnico: true,
     })), sbcUsado };
-  }, [sueldo, sbc, minimo]);
+  }, [sueldo.mensual, sbc, minimo]);
   useEventoResultado('bruto_neto', Boolean(r), limpiarNumero(sbc) ? 'sbc_propio' : 'sbc_estimado');
   if (detallado && ModoDetallado) return <Contenedor>
     <p className="cc-mas"><button type="button" className="cc-enlace" onClick={() => setDetallado(false)}>← Volver al cálculo rápido</button></p>
@@ -211,10 +213,10 @@ export function CalcBrutoNetoDirecta({ modoDetallado: ModoDetallado }) {
   </Contenedor>;
   return <Contenedor>
     <Formulario>
-      <CampoDinero name="sueldo" label="Tu sueldo mensual, antes de descuentos" placeholder="20,000" value={sueldo} onChange={setSueldo} />
+      <CampoSueldo sueldo={sueldo} opciones={['quincena', 'mes']} placeholder="20,000" />
       <MensajeError error={error} />
       <MasOpciones texto="¿Conoces tu salario base de cotización (SBC)? Más opciones">
-        <CampoDinero label="Salario base de cotización diario (viene en tu recibo o en tu alta del IMSS)" placeholder={sueldo ? String(sbcEstimadoSeguro(sueldo)) : '700'} value={sbc} onChange={setSbc} ayuda="Si lo dejas vacío, lo estimamos con las prestaciones mínimas de ley." />
+        <CampoDinero label="Salario base de cotización diario (viene en tu recibo o en tu alta del IMSS)" placeholder={sueldo.mensual ? String(sbcEstimadoSeguro(sueldo.mensual)) : '700'} value={sbc} onChange={setSbc} ayuda="Si lo dejas vacío, lo estimamos con las prestaciones mínimas de ley." />
         <Casilla checked={minimo} onChange={setMinimo}>Solo gano el salario mínimo</Casilla>
       </MasOpciones>
       {ModoDetallado && <p className="cc-mas"><button type="button" className="cc-enlace" onClick={() => setDetallado(true)}>¿Trabajas en gobierno o SEP (ISSSTE)?</button></p>}
@@ -235,7 +237,7 @@ export function CalcBrutoNetoDirecta({ modoDetallado: ModoDetallado }) {
       actualizado={ACT} />}</div>
   </Contenedor>;
 }
-function sbcEstimadoSeguro(sueldo) { try { return sbcEstimado(limpiarNumero(sueldo)); } catch { return ''; } }
+function sbcEstimadoSeguro(sueldo) { try { return sbcEstimado(sueldo.mensual); } catch { return ''; } }
 
 // ─── RESICO ──────────────────────────────────────────────────────────────────
 export function CalcRESICODirecta() {
@@ -290,11 +292,11 @@ export function CalcPTUDirecta() {
 // ─── Vacaciones ──────────────────────────────────────────────────────────────
 export function CalcVacacionesDirecta({ modoGobierno: ModoGobierno }) {
   const [anios, setAnios] = useState('');
-  const [sueldo, setSueldo] = useState('');
+  const sueldo = useSueldo();
   const [prima, setPrima] = useState('25');
   const [gobierno, setGobierno] = useState(false);
   const { r, error } = useMemo(() => String(anios).trim()
-    ? intentar(() => calcularVacaciones({ anios: limpiarNumero(anios), sueldoMensual: limpiarNumero(sueldo), primaPct: prima || '25' }))
+    ? intentar(() => calcularVacaciones({ anios: limpiarNumero(anios), sueldoMensual: sueldo.mensual, primaPct: prima || '25' }))
     : { r: null, error: '' }, [anios, sueldo, prima]);
   useEventoResultado('vacaciones', Boolean(r), r?.total > 0 ? 'con_sueldo' : 'solo_dias');
   if (gobierno && ModoGobierno) return <Contenedor>
@@ -304,7 +306,7 @@ export function CalcVacacionesDirecta({ modoGobierno: ModoGobierno }) {
   return <Contenedor>
     <Formulario>
       <CampoNumero name="anios" label="¿Cuántos años cumplidos llevas en tu trabajo?" placeholder="3" value={anios} onChange={setAnios} />
-      <CampoDinero name="sueldo" label="Tu sueldo mensual (opcional, para saber cuánto te pagan)" placeholder="18,000" value={sueldo} onChange={setSueldo} />
+      <CampoSueldo sueldo={sueldo} label="Lo que te pagan (opcional, para saber cuánto te toca)" placeholder="18,000" />
       <MensajeError error={error} />
       <MasOpciones texto="¿Tu prima vacacional es mayor a 25%?">
         <CampoNumero label="Prima vacacional" sufijo="%" value={prima} onChange={setPrima} ayuda="La ley pide al menos 25%." />
@@ -324,6 +326,7 @@ export function CalcVacacionesDirecta({ modoGobierno: ModoGobierno }) {
         </ul>}
         siguiente={{ texto: 'Si vas a dejar tu trabajo, calcula tu finiquito', href: '/calculadoras/finiquito' }}
         compartir={`Según MiLana, me tocan ${r.dias} días de vacaciones al año.`}
+        reclamo="general"
         actualizado={ACT} />)}</div>
   </Contenedor>;
 }

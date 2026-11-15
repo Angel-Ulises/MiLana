@@ -23,3 +23,16 @@ test('el resultado muestra cifra, una línea y compartir; desglose y fecha van p
   assert.doesNotMatch(s, /rc-siguiente-kicker/);
   assert.doesNotMatch(readFileSync('src/calcAguinaldo.jsx', 'utf8'), /Escribe tu sueldo y verás/);
 });
+
+test('las secciones secundarias se pliegan bajo su título sin borrar contenido ni insertar nodos', () => {
+  const js = readFileSync('public/pagina-limpia.js', 'utf8');
+  for (const sel of ['.state-labor', '.state-occupations', '.state-housing', '.investment-questions', '.ml-inv-fees', '.economy-sources-section']) assert.ok(js.includes(`'${sel}'`), sel);
+  assert.doesNotMatch(js, /createElement|innerHTML|\.remove\(\)|appendChild|insertAdjacent/, 'solo marca atributos: no toca el árbol de React');
+  assert.match(js, /setAttribute\('aria-expanded'/);
+  assert.match(js, /e\.key !== 'Enter' && e\.key !== ' '/);
+  assert.match(js, /estados\\\/\(\?!comparar/, 'el comparador de estados no se pliega');
+  assert.match(readFileSync('index.html', 'utf8'), /<script defer src="\/pagina-limpia\.js"><\/script>/);
+  const css = readFileSync('public/orbita-v3-prepaint.css', 'utf8');
+  assert.match(css, /\[data-pl-nivel\]>:not\(\[data-pl-cabeza\]\)\{display:none!important\}/);
+  assert.match(css, /\.finance-tool-section\[data-sin-datos\] \.finance-results\{display:none!important\}/);
+});

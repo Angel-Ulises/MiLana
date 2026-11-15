@@ -115,3 +115,16 @@ html[data-orbita-section="inicio"] #fuentes,
 html[data-orbita-section="inicio"] #situaciones,
 html[data-orbita-section="inicio"] .ml-start-strip{display:none!important}
 html[data-orbita-section="inicio"] #aprende .learn-copy>p:not(.eyebrow){display:none!important}
+/* Página limpia (2026-11-15): secciones secundarias plegadas bajo su título (public/pagina-limpia.js). */
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"]{padding-block:0!important;min-height:0!important;background:none!important;margin-block:0!important}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-nivel]{padding-block:0!important;display:block!important;min-height:0!important}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-nivel]>:not([data-pl-cabeza]){display:none!important}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-cabeza]{display:block!important;margin:0!important;padding:0!important}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-cabeza] *:not([data-pl-titulo]):not([data-pl-titulo] *):not(:has([data-pl-titulo])){display:none!important}
+[data-pl-titulo]{cursor:pointer;display:flex!important;align-items:center;justify-content:space-between;gap:12px}
+[data-pl-titulo]::after{content:'–';flex:none;font:400 24px/1 system-ui,sans-serif;color:#5E6B78}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-titulo]{margin:0!important;padding:16px 0!important;border-top:1px solid #D9E1E8;font-size:17px!important;line-height:1.3!important;letter-spacing:0!important;font-family:inherit!important;font-weight:650!important;color:#13263B!important;max-width:none!important}
+html:is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root):is(.js,.ml-orbita-enabled,:root) [data-pl="1"][data-pl="1"][data-pl="1"] [data-pl-titulo]::after{content:'+'}
+[data-pl-titulo]:focus-visible{outline:3px solid #2D6CAA;outline-offset:3px}
+/* Herramientas de finanzas: sin tarjetas de resultado vacías antes de escribir. */
+.finance-tool-section[data-sin-datos] .finance-results{display:none!important}

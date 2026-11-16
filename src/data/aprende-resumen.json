@@ -45,6 +45,11 @@
       "Antes de usar un dato, abre su fuente y confirma que corresponde al producto y a la institución.",
       "Consulta, cálculo o corte y vigencia son fechas distintas: reabrir una promoción vencida no la vuelve vigente.",
       "N/D, «requiere cotización» y «caducado» no equivalen a cero; una relación comercial debe declararse."
+    ],
+    "fechas-de-pago": [
+      "Sueldo: cada semana si haces trabajo material y cada quincena como máximo en los demás trabajos.",
+      "Aguinaldo: antes del 20 de diciembre. Utilidades: a más tardar el 30 de mayo si trabajas para una empresa y el 29 de junio si tu patrón es una persona.",
+      "Vacaciones: dentro de los seis meses después de tu aniversario, con prima de por lo menos 25%."
     ]
   }
 }

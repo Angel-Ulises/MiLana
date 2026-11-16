@@ -8,6 +8,7 @@ const guias = [
   'leer-recibo-nomina',
   'aguinaldo-bruto-neto',
   'vacaciones-prima-vacacional',
+  'fechas-de-pago',
   'resico-ingresos-cobrados',
   'pension-imss-ley-97'
 ];
@@ -32,6 +33,7 @@ const rutasSitemap = [
   '/aprende/leer-recibo-nomina',
   '/aprende/aguinaldo-bruto-neto',
   '/aprende/vacaciones-prima-vacacional',
+  '/aprende/fechas-de-pago',
   '/aprende/resico-ingresos-cobrados',
   '/aprende/pension-imss-ley-97',
   '/widgets',
@@ -116,7 +118,7 @@ test('el build genera sitemap final sin lastmod artificial', () => {
   assert.ok(script.includes('/widgets'));
 });
 
-test('el sitemap fuente contiene exactamente las 27 rutas públicas esperadas', () => {
+test('el sitemap fuente contiene exactamente las 28 rutas públicas esperadas', () => {
   const sitemap = read('public/sitemap.xml');
   assert.ok(!sitemap.includes('<lastmod>'));
   const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);

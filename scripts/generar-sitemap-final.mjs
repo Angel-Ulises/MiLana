@@ -39,6 +39,7 @@ const rutas = [
   '/aprende/leer-recibo-nomina',
   '/aprende/aguinaldo-bruto-neto',
   '/aprende/vacaciones-prima-vacacional',
+  '/aprende/fechas-de-pago',
   '/aprende/resico-ingresos-cobrados',
   '/aprende/pension-imss-ley-97',
   '/aprende/cat-y-gat-que-comparan',

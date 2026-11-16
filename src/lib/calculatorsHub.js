@@ -3,12 +3,12 @@
 export const CALCULADORAS_HUB = Object.freeze({
   finiquito: { nombre: 'Finiquito', href: '/calculadoras/finiquito', usala: 'Renunciaste o terminó tu contrato y quieres saber qué te deben pagar.' },
   liquidacion: { nombre: 'Liquidación', href: '/calculadoras/liquidacion', usala: 'Te despidieron sin causa justificada y quieres estimar la indemnización.' },
-  'bruto-a-neto': { nombre: 'Bruto a neto', href: '/calculadoras/bruto-a-neto', usala: 'Conoces tu sueldo bruto y quieres saber cuánto te llega después de ISR y seguridad social.' },
-  isr: { nombre: 'ISR mensual', href: '/calculadoras/isr', usala: 'Quieres revisar si la retención de impuesto de tu recibo tiene sentido.' },
-  resico: { nombre: 'RESICO', href: '/calculadoras/resico', usala: 'Trabajas por tu cuenta en el Régimen Simplificado de Confianza.' },
+  'bruto-a-neto': { nombre: 'Cuánto me llega de mi sueldo', href: '/calculadoras/bruto-a-neto', usala: 'Sabes cuánto ganas en papel (sueldo bruto) y quieres saber cuánto te llega ya con descuentos.' },
+  isr: { nombre: 'Impuesto de mi sueldo (ISR)', href: '/calculadoras/isr', usala: 'Quieres revisar si la retención de impuesto de tu recibo tiene sentido.' },
+  resico: { nombre: 'Trabajo por mi cuenta (RESICO)', href: '/calculadoras/resico', usala: 'Cobras con recibos o facturas y estás dado de alta en el SAT en el régimen RESICO.' },
   aguinaldo: { nombre: 'Aguinaldo', href: '/calculadoras/aguinaldo', usala: 'Quieres saber cuánto aguinaldo te toca, completo o proporcional.' },
   vacaciones: { nombre: 'Vacaciones', href: '/calculadoras/vacaciones', usala: 'Quieres saber cuántos días de vacaciones y prima te corresponden.' },
-  ptu: { nombre: 'PTU', href: '/calculadoras/ptu', usala: 'Tu empresa reparte utilidades y quieres revisar tu parte.' },
+  ptu: { nombre: 'Utilidades (PTU)', href: '/calculadoras/ptu', usala: 'Tu empresa reparte utilidades y quieres revisar tu parte.' },
   infonavit: { nombre: 'Infonavit', href: '/calculadoras/infonavit', usala: 'Tienes o piensas tomar un crédito Infonavit y quieres ver capital e intereses.' },
   'pension-imss': { nombre: 'Pensión IMSS', href: '/calculadoras/pension-imss', usala: 'Quieres revisar los requisitos de pensión de la Ley 97 antes de proyectar una cifra.' },
 });

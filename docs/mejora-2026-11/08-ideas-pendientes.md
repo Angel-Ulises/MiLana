@@ -261,6 +261,70 @@ Con más de cien ideas, el riesgo es volver al sitio saturado que ya limpiamos. 
 | O12 | Terminar la medición (dimensiones de GA4) para saber qué se usa antes de construir más | decisión |
 | O13 | Retirar o fusionar lo que nadie usa, ya con datos | decisión |
 
+## P. Dinero de la familia
+
+| Código | Idea | Tipo | Fuente |
+|---|---|---|---|
+| P1 | ¿Cuánto cuesta un bebé el primer año? Con tus propios números | calc | propia |
+| P2 | Dinero en pareja: repartir gastos según lo que gana cada quien | calc | propia |
+| P3 | ¿Rentar o comprar casa? | calc | propia |
+| P4 | Regreso a clases y colegiaturas: presupuesto y qué se puede deducir | guía + calc | ley (conviene contador) |
+| P5 | Fiestas sin deuda: Navidad, XV años, boda | calc | propia |
+| P6 | Reparte tu aguinaldo: deuda cara primero, luego colchón, luego gusto | calc | propia |
+| P7 | Gasto hormiga: cuánto suma al año lo chiquito de cada día | calc | propia |
+| P8 | Presupuesto por semana o quincena (adaptar el que ya existe) | calc | propia |
+| P9 | Cuidar a los papás: cómo darlos de alta en tu IMSS y qué cubre | guía | ley IMSS |
+| P10 | Permiso de paternidad, lactancia y guardería del IMSS | guía | ley |
+| P11 | Beneficiarios al día: Afore, banco y seguro; y el testamento | guía | delegada |
+| P12 | Separación o divorcio: qué pasa con el dinero (varía por estado) | guía | ley estatal |
+| P13 | Enseñar dinero a los hijos: mesada y primeras metas | guía | propia |
+| P14 | ¿Vale la pena esa carrera? Costo de estudiar contra lo que se gana (une con Carreras) | calc | dato existente |
+| P15 | Apoyos y becas del gobierno: cuáles existen y dónde se piden | guía | dato gob.mx |
+| P16 | Recibo de luz en sencillo y por qué sube de tarifa | guía | delegada |
+| P17 | Precio por unidad: ¿cuál presentación sale más barata? | calc | propia |
+
+## Q. Dinero del negocio chico
+
+| Código | Idea | Tipo | Fuente |
+|---|---|---|---|
+| Q1 | ¿A cuánto debo vender? Costo más ganancia | calc | propia |
+| Q2 | ¿Cuánto tengo que vender para no perder? | calc | propia |
+| Q3 | Separa el dinero del negocio del tuyo y «págate un sueldo» | guía | propia |
+| Q4 | Terminal de cobro: cuánto se queda en comisión, con tu tasa | calc | propia |
+| Q5 | ¿Me conviene este préstamo para el negocio? Costo total | calc | propia |
+| Q6 | Darme de alta en el SAT paso a paso | guía | ley SAT |
+| Q7 | Mi primer empleado: qué me toca hacer (une con A6) | guía | ley |
+| Q8 | Factura e IVA en sencillo | guía | ley (conviene contador) |
+| Q9 | Vender por redes o plataformas: comisiones y retenciones | guía | ley |
+| Q10 | Fiar y cobrar: control sencillo | guía | propia |
+| Q11 | Meses buenos y meses malos: planear el dinero del año | calc | propia |
+| Q12 | Corte de caja diario, hoja para imprimir | sitio | propia |
+| Q13 | Mercancía y merma: cuánto pierdo sin darme cuenta | calc | propia |
+| Q14 | Cerrar el negocio y darse de baja | guía | ley SAT |
+
+## R. Ideas poco comunes (para que hablen de MiLana)
+
+| Código | Idea | Tipo | Fuente |
+|---|---|---|---|
+| R1 | Formal contra informal, en pesos: lo que ganas o pierdes en IMSS, Infonavit, aguinaldo y retiro | calc | ley |
+| R2 | «¿Qué lugar ocupo?»: tu ingreso frente al del resto del país | calc | dato INEGI |
+| R3 | ¿Cuánto vale esa prestación? Vales, fondo de ahorro y seguro convertidos a pesos (une con D13) | calc | propia |
+| R4 | Meses sin intereses o de contado con descuento: ¿qué conviene? | calc | propia |
+| R5 | Costo real del carro por mes: gasolina, seguro, tenencia, servicio | calc | propia |
+| R6 | El reloj de tu sueldo: cuánto ganas por hora y por minuto | calc | propia |
+| R7 | Tu sueldo en el tiempo: lo que valía hace cinco años (une con D11) | calc | dato INEGI |
+| R8 | El costo de esperar: cada año sin ahorrar para el retiro, sin prometer rendimientos | calc | propia |
+| R9 | «Trabajas hasta tal día del año para pagar tus impuestos» | calc | propia |
+| R10 | Traductor de recibo: escribes las claves de tu recibo y te dice qué es cada una | sitio | ley SAT |
+| R11 | ¿Mi municipio es zona frontera? Para saber qué salario mínimo aplica | calc | ley (DOF) |
+| R12 | Tarjeta «Mis derechos» de bolsillo, para guardar como imagen | sitio | ley |
+| R13 | Cada guía como mensaje de cinco líneas para reenviar por WhatsApp | sitio | propia |
+| R14 | Modo «para leerle a alguien»: pasos grandes y audio, para ayudar a un familiar | sitio | propia |
+| R15 | ¿Es estafa? Lista de señales para ofertas de inversión o de empleo | calc | delegada |
+| R16 | Antes de pedir prestado: tres preguntas y el costo total | calc | propia |
+| R17 | Juego corto de decisiones: primer trabajo, primera tarjeta, primera renta | sitio | propia |
+| R18 | Calendario de quincenas y puentes del año | guía | ley |
+
 ---
 
 ## Orden sugerido
@@ -272,6 +336,7 @@ Con más de cien ideas, el riesgo es volver al sitio saturado que ya limpiamos. 
 3. **Tercera tanda (motivos para volver, baratas):** E1, E2, F1, F3.
 4. **Después:** D13, D14, D11, D12, A2, A8, E9.
 5. **Para ser referencia:** H1, H5, H7, I1, L1, H9. Son las que hacen que otros enlacen y citen a MiLana.
+6. **Para que hablen del sitio:** R1, R2, N2, L1, P6. Son las más fáciles de compartir.
 
 ## Avisos
 
@@ -282,4 +347,6 @@ Con más de cien ideas, el riesgo es volver al sitio saturado que ya limpiamos. 
 - **No rellenar (I3, I4):** pocas páginas y con contenido propio; muchas páginas casi iguales dañan al sitio (ver la propuesta de poda).
 - **Plazos (N2):** el plazo puede suspenderse durante la conciliación; la herramienta debe decirlo y no dar una fecha como definitiva.
 - **Crisis (N):** no prometer resultados ni sustituir asesoría; siempre remitir a la Procuraduría gratuita.
+- **Comparaciones con el país (R2, R7, H11):** usar el dato del INEGI con su año y su definición exacta; no mezclar ingreso por persona con ingreso por hogar.
+- **Retiro e inversión (D17, R8):** nunca prometer rendimientos; usar supuestos visibles que la persona pueda cambiar.
 - **Privacidad:** E4 y cualquier cosa que guarde algo en el dispositivo necesita decisión de Ángel y ajuste del aviso de privacidad.

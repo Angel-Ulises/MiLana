@@ -199,9 +199,73 @@ Pago por semana/quincena/mes, «Escuchar», «¿Y si no me lo pagan?», comas de
 | L9 | Revisión completa con lector de pantalla y teclado | sitio |
 | L10 | Audio en lenguas indígenas para las guías principales | guía |
 
+## M. Nichos por oficio o forma de trabajo
+
+Cada uno sería una portada corta («Si trabajas en…») que reúne lo que ya existe y agrega lo propio del oficio.
+
+| Código | Idea | Lo propio del nicho | Fuente |
+|---|---|---|---|
+| M1 | Gobierno y maestros | Otra ley (apartado B), ISSSTE, aguinaldo distinto | ley |
+| M2 | Salud | Guardias, turnos de noche, jornadas acumuladas | ley |
+| M3 | Construcción | Contrato por obra, IMSS por obra, utilidades | ley |
+| M4 | Fábrica y maquila | Turnos, bonos de asistencia y puntualidad, paros técnicos | ley |
+| M5 | Tiendas y restaurantes | Comisiones, propinas, descanso semanal | ley |
+| M6 | Choferes y transporte | Pago por viaje o por kilómetro | ley |
+| M7 | Seguridad privada | Jornadas de 12 y 24 horas | ley |
+| M8 | Subcontratados y call centers | Quién es tu patrón de verdad, utilidades | ley |
+| M9 | Independientes y creadores | Qué régimen conviene, cómo cobrar, plataformas | ley (conviene contador) |
+| M10 | Comerciantes | RESICO, comisiones de la terminal de cobro | ley + dato |
+| M11 | Eventuales y por temporada | Parte proporcional, utilidades desde 60 días | ley |
+| M12 | Medio tiempo y por horas | Prestaciones proporcionales | ley |
+| M13 | Trabajo desde casa | Qué debe pagar el patrón (luz, internet, equipo) | ley |
+| M14 | Becarios y practicantes | Cuándo es práctica y cuándo ya es trabajo | ley |
+| M15 | Puestos de confianza | Qué cambia en utilidades y despido | ley |
+
+## N. Quien llega asustado o enojado
+
+Hoy el sitio habla a quien tiene calma para calcular. Mucha gente llega el día que la despidieron.
+
+| Código | Idea | Tipo | Fuente |
+|---|---|---|---|
+| N1 | Botón «Me acaban de despedir» en la portada: cinco cosas en orden y qué no firmar | guía | ley |
+| N2 | Cuenta regresiva de plazos: pones la fecha del despido y te dice hasta qué día puedes reclamar, con sus salvedades | calc | ley |
+| N3 | «Me ofrecen $X, ¿es justo?»: compara la oferta contra el estimado de finiquito o liquidación | calc | propia |
+| N4 | «Me quieren hacer firmar mi renuncia» | guía | ley |
+| N5 | «No me han pagado» y «me descontaron de más» | guía | ley |
+| N6 | La conciliación paso a paso: qué es, cuánto tarda, qué llevar | guía | ley |
+| N7 | Lista de papeles para llevar a la Procuraduría, para imprimir | guía | ley + delegada |
+| N8 | Embarazo y despido | guía | ley |
+| N9 | Accidente de trabajo: primeros pasos | guía | ley (conviene abogado) |
+| N10 | Acoso o violencia en el trabajo: a dónde acudir | guía | delegada |
+| N11 | «No puedo pagar mis deudas»: qué hacer y qué no pueden hacerte los cobradores | guía | delegada |
+| N12 | Emergencia de dinero: opciones de menos a más caras (incluye el costo de retirar de la Afore) | guía | delegada |
+| N13 | Tono de calma en estas páginas: frases cortas, un paso a la vez, sin distracciones | sitio | — |
+
+## O. Ordenar antes de crecer
+
+Con más de cien ideas, el riesgo es volver al sitio saturado que ya limpiamos. Esto va primero o en paralelo.
+
+| Código | Idea | Tipo |
+|---|---|---|
+| O1 | Reorganizar el menú por necesidad, no por tipo de página: Mi trabajo, Mis impuestos, Mi dinero, Mi futuro | sitio |
+| O2 | Una página por tema («Todo sobre el aguinaldo») que junte calculadora, guía, fechas y mitos | sitio |
+| O3 | Fusionar Aprende y Situaciones dentro de cada tema | sitio |
+| O4 | Menú del celular de cinco opciones o menos | sitio |
+| O5 | Resolver lo pendiente antes de sumar: Match y las 57 URLs, plantillas repetidas de Estados y Profesiones | decisión |
+| O6 | Regla «entra una, se revisa otra»: cada página nueva obliga a revisar una vieja | interno |
+| O7 | Una sola plantilla para guías y otra para calculadoras | sitio |
+| O8 | Un solo pie de página y encabezado en el código (hoy está repetido en unos 18 archivos) | interno |
+| O9 | Una sola rama principal: `main` sigue atrasada | interno |
+| O10 | Guía de redacción escrita y una prueba automática de lectura fácil | interno |
+| O11 | Probar con cinco personas reales y ver dónde se atoran | fuera del sitio |
+| O12 | Terminar la medición (dimensiones de GA4) para saber qué se usa antes de construir más | decisión |
+| O13 | Retirar o fusionar lo que nadie usa, ya con datos | decisión |
+
 ---
 
 ## Orden sugerido
+
+**Antes de todo:** O11 (probar con cinco personas) y O12 (terminar la medición). Sin eso se construye a ciegas. O1 y O2 deciden dónde vive cada idea nueva.
 
 1. **Primera tanda (aprovecha lo ya construido, sin datos que caduquen):** A1, B1, B4.
 2. **Segunda tanda (el salto a «financiera total»):** C1, D1, C4.
@@ -216,4 +280,6 @@ Pago por semana/quincena/mes, «Escuchar», «¿Y si no me lo pagan?», comas de
 - **Fuente delegada:** A7, A12, D2, D4, D6, D7, D8. Sin el texto oficial en mano no se publican.
 - **Reformas (H4):** solo lo publicado en el DOF es ley; lo demás se marca como «en discusión» con su fecha.
 - **No rellenar (I3, I4):** pocas páginas y con contenido propio; muchas páginas casi iguales dañan al sitio (ver la propuesta de poda).
+- **Plazos (N2):** el plazo puede suspenderse durante la conciliación; la herramienta debe decirlo y no dar una fecha como definitiva.
+- **Crisis (N):** no prometer resultados ni sustituir asesoría; siempre remitir a la Procuraduría gratuita.
 - **Privacidad:** E4 y cualquier cosa que guarde algo en el dispositivo necesita decisión de Ángel y ajuste del aviso de privacidad.

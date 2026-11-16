@@ -36,7 +36,7 @@ jobs:
           echo "Fontconfig cache: $cache_home/fontconfig (writable)"
 
       - name: Instalar dependencias
-        run: npm install --ignore-scripts --no-audit --no-fund
+        run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: Build completo
         run: npm run build

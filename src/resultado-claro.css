@@ -89,3 +89,17 @@
 .rc-veredicto{margin:0 0 8px;padding:10px 12px;border-radius:10px;font-size:15px;line-height:1.45}
 .rc-veredicto-bien{background:#EAF4EF;color:#14532d}
 .rc-veredicto-ojo{background:#FEF3C7;color:#713f12}
+
+/* Hoja de impresión (H-13, 2026-11-16): sin menús, pie, botones ni fotos; el resultado y el cálculo en papel blanco. */
+@media print {
+  html,body{background:#fff!important;color:#000!important}
+  .ml-orbita-shell,.ml-orbita-drawer,.ml-orbita-search,.ml-orbita-skip-link,.site-header,.site-footer,
+  .calculator-hero-media,.rc-escuchar,.rc-whatsapp,.rc-siguiente,.rc-reclamo,.rc-pagaron,.cc-mas,.cc-volver,.calculator-main>p>a[href="/calculadoras"],
+  .ml-embed-brand,.ml-startup-error,.calc-mas-info{display:none!important}
+  .calculator-main{max-width:none!important;padding:0!important}
+  [data-resultado-claro]{break-inside:avoid;box-shadow:none!important;border:1px solid #000!important;background:#fff!important}
+  .rc-detalle{border-top:1px solid #999!important}
+  .rc-detalle summary{list-style:none}
+  .calculator-main::after{content:"Calculado con MiLana · www.milanaaqui.mx · Es una estimación informativa; tu recibo o la autoridad pueden dar otra cifra.";display:block;margin-top:18px;padding-top:8px;border-top:1px solid #999;font-size:12px;color:#333}
+}
+

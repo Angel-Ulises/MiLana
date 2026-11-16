@@ -1,5 +1,7 @@
 # Análisis a fondo: puntos ciegos y dónde ser pionera (16-nov-2026)
 
+> **Si solo lees una parte, lee la sección 8:** problemas que ya existen y problemas previstos, cada uno con su solución.
+>
 > **Léelo primero.** Este documento manda sobre el orden de `08-ideas-pendientes.md` y `09-auditoria-y-plan.md`. Corrige cuatro cosas que esos documentos decían y que al medir resultaron distintas (sección 4).
 
 ## 1. Cómo se hizo y qué límites tiene
@@ -201,12 +203,19 @@ Para cada cambio de ley, una página que lo traduzca a tu caso con tus números:
 
 ## 6. Orden de trabajo (sustituye a los anteriores)
 
+**Hoy o mañana (fallas que ya existen; arreglos chicos, ver sección 8.1)**
+- R-1: widgets vacíos.
+- R-2: fecha de salida congelada.
+- R-3 y R-4: proteger la rama de producción y fijar versiones (antes de que Opus abra muchos PR).
+
 **Esta semana (temporada de aguinaldo)**
 1. H-4 en aguinaldo: que el resultado se vea al escribir.
 2. H-7 en aguinaldo: «12 mil», «12k», «12.000».
 3. H-5: buscador (guías dentro, palabras alternativas, nombres nuevos).
 
 **Antes del 15 de diciembre**
+- R-14: finiquito y liquidación deben aceptar fechas de 2027.
+- R-7: pruebas de viaje en el tiempo (procedimiento 8.4-A).
 4. H-1: pensión con el requisito por año.
 5. P-1: jornada 2027 (herramienta y guía).
 6. T11: prueba con reloj simulado de las 10 calculadoras.
@@ -221,13 +230,19 @@ Para cada cambio de ley, una página que lo traduzca a tu caso con tus números:
 11. P-3: cálculo comprobable.
 12. T3, T4, T5 del plan.
 
+**Antes del 11 de enero**
+- R-13: decisión sobre Match. Ese día, 71% de sus datos estarán caducados o con revisión vencida y no quedará ninguno vigente.
+
 **Decisiones solo de Ángel (ninguna depende de terceros)**
 - Revisar si `mi-lana-pn2f.vercel.app` sigue publicado y apagarlo o redirigirlo.
 - Repositorio: privado, o abierto a propósito con licencia.
 - Cerrar o resolver los 33 asuntos y los 6 PR viejos.
 - Responsable del aviso de privacidad.
 - Correo con el dominio propio en lugar de Gmail.
-- Las 57 URLs.
+- Las 57 URLs (con fecha: ver R-13).
+- Proteger la rama de producción en GitHub (R-3).
+- Verificación en dos pasos y códigos de recuperación en GitHub, Cloudflare, Google y el dominio (R-30).
+- Si se crea `CLAUDE.md` con el texto de 8.4-E.
 
 ## 7. Datos de ley ya verificados (para no repetir la búsqueda)
 
@@ -245,3 +260,149 @@ Para cada cambio de ley, una página que lo traduzca a tu caso con tus números:
 | Autoridad de datos personales | LFPDPPP, art. 2 | Secretaría Anticorrupción y Buen Gobierno |
 
 Volver a leer la fuente antes de publicar: las leyes pueden haber cambiado después del 16 de noviembre de 2026.
+
+## 8. Problemas que ya existen y problemas previstos, con su solución
+
+Segunda pasada del 16-nov-2026. Aquí no se supuso: se adelantó el reloj a diciembre, enero, febrero, marzo y julio (en las pruebas, en el build y dentro del navegador), se revisó el proceso de publicación en GitHub y se proyectó la caducidad de los datos con la misma función que usa el sitio.
+
+**Lo que salió bien al adelantar el reloj:** las 527 pruebas que no usan navegador pasan en todas las fechas, y el build completo termina bien en enero y marzo de 2027. Nada se rompe solo por el paso del tiempo. **El problema es el contrario: todo sigue en verde mientras varias calculadoras ya están mal** (R-7).
+
+### 8.1 Ya existen hoy (comprobados)
+
+| Código | Problema | Evidencia | Solución | Listo cuando |
+|---|---|---|---|---|
+| **R-1** | **Los widgets para insertar en otros sitios salen vacíos.** Con `?embed=1` solo se ve «MiLana · calculadora gratuita · Abrir completa»: ni campos ni resultado | Probado en aguinaldo, ISR y finiquito. La hoja de `public/embed-mode-2026.js` oculta todo hijo de `.calculator-main` que no sea `form`; desde el rediseño, el formulario vive dentro de `[data-calc-directo]`, que queda oculto. La página `/widgets` sigue ofreciendo esos códigos | En la regla `.calculator-main>*:not(form):not(.ml-embed-brand)` agregar `:not([data-calc-directo])`, y dentro del contenedor ocultar solo la explicación larga. Ajustar el alto sugerido del `iframe` | Prueba de navegador: con `?embed=1`, escribir un sueldo muestra el monto, en las 10. Hoy no existe esa prueba |
+| **R-2** | **La fecha «último día de trabajo» queda congelada al día del último despliegue** en finiquito y liquidación | Con el reloj del navegador en 31-dic, el campo siguió en 16-nov (día del build) y calculó «320 días trabajados». El HTML prerenderizado trae la fecha del build y `restaurarCampos` (`src/lib/calcStartup.js`) la copia encima de la de hoy | Restaurar solo lo que la persona cambió: comparar `el.value` con `el.defaultValue` al capturar. O no prerenderizar el valor de las fechas | Prueba con reloj simulado: build de un día, visita de otro, y el campo muestra el día de la visita |
+| **R-3** | **La rama de producción no está protegida.** Se puede fusionar con comprobaciones en rojo o empujar directo | API de GitHub: `protected: false`, sin comprobaciones obligatorias, en `claude/cloudflare-pages` y en `main` | En GitHub, proteger `claude/cloudflare-pages`: exigir PR y las comprobaciones «validar» y «Cloudflare Pages» en verde. Es configuración de Ángel, gratuita en repositorios públicos | Un PR con una prueba rota no se puede fusionar |
+| **R-4** | **Las versiones de las dependencias no están fijas.** No existe `package-lock.json`; el flujo usa `npm install`; Node no está fijado (20 en la validación, 22 en local) | `git ls-files` no lista el archivo; `package.json` usa rangos (`vite ^5`, `react ^18.2`) y no tiene `engines` | Generar y subir `package-lock.json`, usar `npm ci` en la validación y en Cloudflare, y fijar Node con `.nvmrc` y `engines`. Actualizar dependencias a propósito, en un PR propio | Dos builds del mismo commit en días distintos instalan exactamente lo mismo |
+| **R-5** | **Salen peticiones a terceros que el aviso de privacidad no menciona.** Letras desde Google Fonts en 161 páginas; fotos desde `images.pexels.com` en Carreras, Profesiones, Economía y Finanzas | Dominios externos en el HTML generado; el aviso solo nombra Google Analytics y AdSense | Alojar las letras y esas fotos en el propio sitio (las calculadoras ya lo hacen con sus fotos). Así el aviso queda cierto **sin tocarlo**, y además carga más rápido | El HTML generado no pide nada a `fonts.googleapis.com`, `fonts.gstatic.com` ni `images.pexels.com`; prueba que lo verifique |
+| **R-6** | **En Match, 157 de 577 datos (27%) ya se muestran como «caducado» o «revisión vencida»** | Calculado con `estadoEfectivo` del propio sitio al 16-nov. Peor en hipotecas (38 de 58) y tarjetas (48 de 124) | Ver R-13: la decisión hay que tomarla antes del 11 de enero | — |
+| **R-7** | **Las pruebas no ven el tiempo.** Pasan igual en 2027 aunque pensión, finiquito y liquidación ya estén mal | 527 de 527 en verde con el reloj en dic-2026, ene, feb y jul-2027 | Agregar pruebas «de viaje en el tiempo» (procedimiento en 8.4) que fijen qué debe pasar el 1-ene, el 1-feb y un año después | Las pruebas nuevas fallan hoy por R-2, R-14 y H-1, y pasan cuando se corrijan |
+| **R-8** | **No hay instrucciones escritas para los asistentes ni plantilla de PR.** Las reglas viven en conversaciones | No existen `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md` ni plantilla; el `README` tiene tres líneas | Crear `CLAUDE.md` con el texto de 8.4 y una plantilla de PR con la lista «antes de fusionar» | Una sesión nueva encuentra las reglas sin que nadie se las repita |
+| **R-9** | **`main` y producción se separaron en ambos sentidos:** `main` tiene 2 commits que producción no, y producción 60 que `main` no | `git rev-list --left-right --count` | Decidir una sola rama. Lo más simple: que Cloudflare siga en `claude/cloudflare-pages`, y `main` se iguale a ella o se archive con un aviso en el `README` | Una sola rama recibe trabajo |
+| **R-10** | **«Datos actualizados al 9 de noviembre de 2026» está escrito fijo** en el detalle de las 10 calculadoras | Mismo texto con el reloj en febrero de 2027 | Separar dos fechas: «Reglas de: ley publicada el…» (no cambia hasta que cambie la ley) y «Revisado contra la fuente el…» (lo actualiza la revisión). Nunca una fecha que envejezca sola | En marzo no dice «noviembre» sin explicación |
+
+Siguen vigentes, de la sección 3: resultado tapado por el teclado (H-4), buscador (H-5), vacaciones en el primer año (H-6), formatos de dinero (H-7), asuntos abiertos (H-11), ícono e impresión (H-13).
+
+### 8.2 Previstos con fecha
+
+| Fecha | Qué va a pasar | Código | Qué tener listo |
+|---|---|---|---|
+| **Ya, hasta el 20-dic** | Temporada de aguinaldo: el mayor tráfico del año cae sobre una sola página | R-11 | Aguinaldo impecable esta semana (H-4, H-7). No hacer cambios riesgosos en esa página del 10 al 20 de diciembre |
+| **En cualquier momento** | Una reforma puede publicarse en plena temporada (circula que el aguinaldo subiría a 30 días; **no** está en la ley vigente) | R-12 | Vigilancia diaria de la fecha «Última reforma» de la LFT, LSS y LISR, y el procedimiento del «día del cambio» (8.4) |
+| **8-dic-2026** | Vence la vigencia de Klar en Match; los datos caducados o con revisión vencida suben a 218 de 577 (38%) | R-13 | — |
+| **1-ene-2027** | **Finiquito y liquidación no aceptan fechas de 2027.** Los campos traen `max="2026-12-31"` y `hoy2026()` recorta al 31-dic. A quien despidan el 5 de enero no le sirven | R-14 | Quitar el límite al año en curso; calcular aguinaldo y vacaciones proporcionales con el año de la fecha de salida; prueba con reloj en enero |
+| **1-ene-2027** | **Pensión dirá «Ya cumples» con 880 semanas;** la ley pedirá 900 | H-1 | Tabla 2021 a 2031 |
+| **1-ene-2027** | ISR y sueldo neto siguen con tablas de 2026 sin avisar. Enero es especial: la UMA nueva aplica desde febrero, y el código ya excluye enero de 2026 por eso | R-15 | Aviso visible mientras no haya valores oficiales; cada cifra con su año |
+| **1-ene-2027** | Cambian salario mínimo, tablas del ISR y jornada (46 horas). Los títulos siguen diciendo «2026» en 21 páginas y casi 2,000 lugares del código | R-16 | Datos del año en un solo archivo; títulos generados a partir del año vigente; decidir de antemano qué dice el título en enero |
+| **11-ene-2027** | **En Match, 410 de 577 datos (71%) estarán caducados o con revisión vencida, y no quedará ninguno vigente.** El resto serán «no disponible», «no aplica» o «en conflicto». Son 56 páginas, el 35% del sitio | R-13 | Decisión de Ángel antes de esa fecha: actualizar el catálogo, quitarlo del índice, o reducirlo a lo que se pueda mantener |
+| **1-feb-2027** | Cambia la UMA: tope de aguinaldo exento, descuentos del IMSS, topes | R-17 | Segunda fecha en el procedimiento; prueba con reloj en febrero |
+| **Abril de 2027** | Declaración anual: demanda alta y el sitio no tiene nada (búsquedas sin resultado: «declaración anual», «devolución») | R-18 | Guía sencilla en marzo, marcada como explicación |
+| **Mayo de 2027** | Utilidades: la calculadora solo da el total que reparte la empresa, no la parte de la persona | R-19 | Estimación individual con supuestos visibles, o decir claro qué datos pedirle a la empresa |
+| **1-ene de 2028 a 2031** | Baja la jornada cada año hasta 2030; suben las semanas de pensión hasta 2031 | R-20 | Tablas completas desde ahora; que el año se lea del reloj, no del código |
+
+### 8.3 Previstos sin fecha
+
+| Código | Qué puede pasar | Qué tan probable | Daño | Solución |
+|---|---|---|---|---|
+| R-21 | **Una corrección urgente tarda demasiado en salir.** Hoy cada cambio pasa por validación (unos 10 minutos), fusión y despliegue (unos 15 más) | Alta | Alto en temporada | Que Cloudflare solo compile y la validación sea la que corre las pruebas (posible una vez protegida la rama, R-3). El procedimiento de 8.4 incluye cómo volver atrás en un minuto |
+| R-22 | **Se agotan los builds del mes o un build rebasa el tiempo máximo de Cloudflare.** Cada empuje a cualquier rama dispara uno (comprobado: los ocho empujes de estos documentos dispararon ocho builds de vista previa) | Media si Opus abre muchos PR | Alto: no se puede publicar | Verificar los límites del plan en el panel de Cloudflare. Juntar cambios por PR. Para documentos, usar el prefijo que evita el build en el mensaje del commit (confirmar el texto exacto en la documentación de Cloudflare) |
+| R-23 | **Un cambio rompe algo visual y nadie lo ve,** porque el sitio en vivo no se alcanza desde el entorno de trabajo | Alta | Medio | La validación ya guarda capturas de recorridos durante 7 días: revisarlas antes de fusionar. Agregar comparación automática de capturas de las páginas clave. Regla: abrir la vista previa del PR en un teléfono antes de fusionar |
+| R-24 | **Dos asistentes trabajan lo mismo o se pisan** (ya pasó una vez) | Alta con varios asistentes | Medio | Antes de empezar: revisar PR abiertos y ramas remotas. Un asunto en GitHub por tarea, asignado. Una rama por tarea. Este documento como única lista |
+| R-25 | **Se pierde trabajo sin subir** (ya pasó: tres commits) | Media | Medio | Subir la rama tras el primer commit; nunca encadenar «commit y push» sin ver que el build terminó bien |
+| R-26 | **Un PR viejo se fusiona por error y revierte trabajo nuevo.** Hay seis abiertos desde octubre | Baja | Alto | Cerrarlos ya (#96, #131, #133, #134, #135, #141), con una nota de por qué |
+| R-27 | **Una dependencia nueva rompe el build o trae código malicioso** | Baja cada día, segura con el tiempo | Alto | R-4. Revisar actualizaciones una vez al mes; atender el asunto #79 |
+| R-28 | **Alguien copia el sitio,** aprovechando que el repositorio es público | Media | Medio | Decidir: privado, o abierto a propósito con licencia (H-10). Sacar del repositorio los documentos de estrategia si se queda público |
+| R-29 | **El sitio viejo en Vercel sigue vivo** con cálculos atrasados y compite con el dominio | No comprobado | Alto si es cierto | Ángel lo abre hoy. Si responde: apagarlo o redirigirlo, y corregir la dirección en la página del repositorio |
+| R-30 | **Se pierde el acceso a una cuenta** (GitHub, Cloudflare, Google, dominio). Todo depende de una persona | Baja | Muy alto | Verificación en dos pasos y códigos de recuperación guardados en las cuatro; renovación automática del dominio; anotar en un lugar seguro qué cuenta controla qué |
+| R-31 | **Alguien toma una decisión con un resultado equivocado** | Media | Alto para esa persona | Ya hay avisos y términos. Agregar: botón «¿Encontraste un error?», bitácora pública, y en finiquito y liquidación repetir junto al monto que es una estimación y que la Procuraduría asesora gratis. A los términos les falta decir qué ley aplica y de quién es el contenido |
+| R-32 | **Google contesta la pregunta sin mandar la visita** (calculadoras propias o respuestas automáticas) | Alta y creciente | Alto para el tráfico | Apostar por lo que una respuesta automática no da: el cálculo con tus propios números, la herramienta que te acompaña después, lo imprimible. Que la gente busque «MiLana» por nombre. Medir cuánta visita llega directa o por WhatsApp |
+| R-33 | **El sitio falla en teléfonos viejos.** Usa funciones recientes: `:has()` en 14 reglas de estilo, ventana de búsqueda nativa y funciones nuevas en 11 lugares del código sin transpilar | Baja, sin medición | Medio | Definir qué navegadores se soportan; atrapar errores en el código suelto para que una función faltante no apague el resto; probar una vez en un navegador de hace cuatro años |
+| R-34 | **El sitio vuelve a saturarse** al implementar ideas | Alta | Medio | Regla «entra una, se revisa otra»; límite de pantallas por página medido en una prueba; cada tarea dice qué quita, no solo qué agrega |
+| R-35 | **Un valor inventado llega a producción** porque un asistente «recordó» una cifra | Media | Muy alto | Regla dura: ninguna cifra sin la línea de la fuente citada en el PR. Prueba que compare las tablas del código contra un archivo de fuentes con fecha y enlace |
+| R-36 | **Las alarmas dejan de mirarse** | Ya ocurre | Medio | H-11: poner en ceros y dejar solo las que alguien atienda |
+| R-37 | **Las pruebas con números fijos frenan cada cambio** (agregar una guía rompe cinco) | Ya ocurre | Bajo, pero constante | Que los conteos se calculen de los datos (número de carpetas en `aprende`, rutas del mapa) en vez de estar escritos |
+| R-38 | **Las secciones con datos viejos arrastran a las buenas** en buscadores | Media | Alto | H-15 y R-13: decidir sobre Match, Estados y Profesiones |
+
+### 8.4 Procedimientos listos para usar
+
+**A. Prueba «de viaje en el tiempo»**
+
+Dos piezas, ya probadas hoy:
+
+1. Pruebas de Node con el reloj adelantado. Un archivo de precarga sustituye `Date` cuando existe la variable `FAKE_NOW`:
+
+   ```js
+   // tests/helpers/fake-date.mjs
+   if (process.env.FAKE_NOW) {
+     const Real = Date;
+     const offset = new Real(process.env.FAKE_NOW).getTime() - Real.now();
+     class Fake extends Real {
+       constructor(...a) { if (a.length === 0) super(Real.now() + offset); else super(...a); }
+       static now() { return Real.now() + offset; }
+     }
+     globalThis.Date = Fake;
+   }
+   ```
+
+   Uso: `FAKE_NOW=2027-01-02T12:00:00 NODE_OPTIONS="--import ./tests/helpers/fake-date.mjs" npm test`
+
+2. Navegador con el reloj adelantado: `await page.clock.install({ time: new Date('2027-01-02T12:00:00') })` antes de abrir la página (Playwright 1.63 lo trae), y `await page.clock.runFor(1500)` para que avance.
+
+Fechas mínimas que deben probarse siempre: hoy, 31 de diciembre, 2 de enero, 2 de febrero y un año después.
+
+Qué debe afirmar cada prueba el 2 de enero de 2027:
+- Finiquito y liquidación aceptan una salida del 2 de enero de 2027 y calculan con ese año.
+- La fecha por defecto es el día de la visita, no el del build.
+- Pensión con 880 semanas no dice «Ya cumples».
+- ISR y sueldo neto muestran el aviso de «valores de 2026» mientras no existan los de 2027.
+
+**B. El «día del cambio» (cuando sale un número oficial)**
+
+1. Confirmar en la fuente primaria (DOF, CONASAMI, INEGI, SAT o el PDF de diputados.gob.mx) y guardar el enlace y la línea exacta.
+2. Cambiar el valor en un solo archivo de datos del año.
+3. Correr las pruebas, incluidas las de viaje en el tiempo.
+4. Un PR solo con ese cambio; en la descripción, la cita de la fuente.
+5. Fusionar, esperar el despliegue y abrir dos páginas en el teléfono.
+6. Anotarlo en la bitácora pública con la fecha.
+
+Si la fuente todavía no publica el valor: aviso visible «Calculado con valores de 2026; los de 2027 se actualizan cuando se publiquen». Nunca estimar el valor.
+
+Fechas que se repiten cada año: salario mínimo (diciembre), tablas del ISR (fin de diciembre), jornada y semanas de pensión (1 de enero), UMA (enero; aplica el 1 de febrero).
+
+**C. Volver atrás un despliegue**
+
+- Lo más rápido: en el panel de Cloudflare Pages, abrir la lista de despliegues y restaurar el anterior. Tarda segundos y lo hace Ángel.
+- Desde el repositorio: revertir el commit de fusión con un PR. Tarda lo que un despliegue normal.
+- Después de cualquiera de los dos: abrir un asunto con qué falló y qué prueba faltaba.
+
+**D. Antes de fusionar (plantilla de PR)**
+
+- [ ] Un solo tema.
+- [ ] Build completo en verde con navegador real (`CI=true MILANA_CHROME=<ruta>`), cero pruebas omitidas.
+- [ ] Cada cifra o artículo nuevo, con la línea de la fuente citada.
+- [ ] Probado a 390 px sin desbordes; el resultado se ve al escribir.
+- [ ] Vista previa abierta en un teléfono, o capturas revisadas.
+- [ ] Dice qué se quitó o simplificó, no solo qué se agregó.
+- [ ] No toca aviso de privacidad, medición, anuncios ni indexación sin instrucción de Ángel.
+
+**E. Texto propuesto para `CLAUDE.md`** (no está creado; lo decide Ángel)
+
+```md
+# MiLana: reglas para asistentes
+
+- Producción es la rama `claude/cloudflare-pages` (Cloudflare Pages). No es `main`.
+- Lee primero `docs/mejora-2026-11/10-analisis-a-fondo.md`: ahí está el orden de trabajo.
+- Build y pruebas: `CI=true MILANA_CHROME=<ruta de Chrome> npm run build`. Sin esas variables,
+  las pruebas de navegador se omiten y parecen pasar.
+- Una rama y un PR por tarea. Sube la rama tras el primer commit.
+- Antes de empezar, revisa PR abiertos y ramas remotas para no duplicar trabajo.
+- Ninguna cifra, fecha o artículo de ley sin leerlo en la fuente oficial y citar la línea en el PR.
+  Fuentes que se alcanzan: diputados.gob.mx, gob.mx, dof.gob.mx, inegi.org.mx, sat.gob.mx, imss.gob.mx.
+- No presentes nada como validado por un contador o abogado.
+- No publiques nombre ni domicilio personal; no inventes responsable del aviso de privacidad.
+- No toques aviso de privacidad, medición, anuncios ni indexación sin instrucción de Ángel.
+- No detectes salario mínimo por el monto.
+- Diseño: celular primero, resultado antes que explicación, palabras de persona, sin saturar.
+- El sitio en vivo no se alcanza desde el entorno de trabajo: di siempre que falta la revisión visual.
+```

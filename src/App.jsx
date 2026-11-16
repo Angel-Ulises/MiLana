@@ -1085,10 +1085,10 @@ const CALCULADORAS = [
   { id: 'finiquito', nombre: 'Finiquito', desc: 'Renuncia voluntaria', comp: CalcFiniquitoDirecta },
   { id: 'liquidacion', nombre: 'Liquidación', desc: 'Despido injustificado', comp: CalcLiquidacionDirecta },
   { id: 'aguinaldo', nombre: 'Aguinaldo', desc: 'Proporcional o completo', comp: CalcAguinaldo },
-  { id: 'isr', nombre: 'ISR Mensual', desc: 'Retención de nómina', comp: CalcISRDirecta },
-  { id: 'resico', nombre: 'RESICO', desc: 'Ingresos por actividad independiente', comp: CalcRESICODirecta },
-  { id: 'ptu', nombre: 'PTU', desc: 'Reparto de utilidades', comp: CalcPTUDirecta },
-  { id: 'bruto-neto', nombre: 'Bruto a Neto', desc: 'Salario neto real', comp: BrutoNetoConDetalle },
+  { id: 'isr', nombre: 'Impuesto de mi sueldo (ISR)', desc: 'Lo que te descuentan en la nómina', comp: CalcISRDirecta },
+  { id: 'resico', nombre: 'Trabajo por mi cuenta (RESICO)', desc: 'Impuesto si cobras con recibos o facturas', comp: CalcRESICODirecta },
+  { id: 'ptu', nombre: 'Utilidades (PTU)', desc: 'Reparto de utilidades', comp: CalcPTUDirecta },
+  { id: 'bruto-neto', nombre: 'Cuánto me llega de mi sueldo', desc: 'Sueldo ya con descuentos', comp: BrutoNetoConDetalle },
   { id: 'vacaciones', nombre: 'Vacaciones', desc: 'Días según antigüedad', comp: VacacionesConGobierno },
   { id: 'infonavit', nombre: 'Infonavit', desc: 'Simulador de crédito', comp: CalcInfonavitDirecta },
   { id: 'pension', nombre: 'Pensión IMSS', desc: 'Requisitos Ley 97', comp: CalcPensionDirecta },
@@ -1137,10 +1137,10 @@ const H1_CALCULADORA = {
   finiquito: 'Calculadora de finiquito 2026',
   liquidacion: 'Calculadora de liquidación 2026',
   aguinaldo: 'Calculadora de aguinaldo 2026',
-  isr: 'Calculadora de ISR 2026',
-  resico: 'Calculadora RESICO 2026',
-  ptu: 'Calculadora de PTU 2026',
-  'bruto-neto': 'Sueldo bruto a neto 2026',
+  isr: 'Impuesto de tu sueldo: calculadora de ISR 2026',
+  resico: 'Impuesto si trabajas por tu cuenta: RESICO 2026',
+  ptu: 'Reparto de utilidades: calculadora de PTU 2026',
+  'bruto-neto': 'Cuánto me llega de mi sueldo: bruto a neto 2026',
   vacaciones: 'Calculadora de vacaciones 2026',
   infonavit: 'Simulador de crédito Infonavit',
   pension: 'Requisitos de pensión IMSS 2026',
@@ -1431,11 +1431,9 @@ export default function App({ rutaSSR } = {}) { if (typeof window !== 'undefined
           <div>
             <span className="brand-name">MiLana</span>
             <p>Dinero claro para decidir mejor.</p>
-            <p>Datos basados en: Anexo 8 RMF 2026 (DOF 28/12/2025) · Ley Federal del Trabajo · CONASAMI · INEGI UMA 2026</p>
-            <p>Salario mínimo general: ${SALARIO_MINIMO_GENERAL}/día · Frontera: ${SALARIO_MINIMO_FRONTERA}/día · UMA: ${UMA_DIARIA}/día</p>
             <p>Los cálculos son estimaciones informativas. Para montos exactos consulta con un especialista fiscal o laboral.</p>
           </div>
-          <p>MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{textDecoration:'underline'}}>Privacidad</a> · <a href="/terminos" style={{textDecoration:'underline'}}>Términos</a> · <a href="/sobre" style={{textDecoration:'underline'}}>Sobre MiLana</a> · <a href="/contacto" style={{textDecoration:'underline'}}>Contacto</a></p>
+          <p>MiLana © 2026 · Hecho en México · <a href="/privacidad" style={{textDecoration:'underline'}}>Privacidad</a> · <a href="/terminos" style={{textDecoration:'underline'}}>Términos</a></p>
         </div>
       </footer></>
     </>

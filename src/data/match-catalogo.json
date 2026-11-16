@@ -3830,7 +3830,7 @@
       "tipo": "conflicto",
       "etiqueta": "Vigencia inconsistente"
      },
-     "nota": "Rango temporal inconsistente con cálculo 13-ago-2026. No se corrige el año ni se infiere febrero 2027. Fechas normalizadas null; CAT no etiquetado vigente.",
+     "nota": "Rango temporal inconsistente con cálculo 13-ago-2026. No se corrige el año ni se infiere febrero 2027. Sin fechas normalizadas; CAT no etiquetado vigente.",
      "limites": [
       "Ponderado; escenario numérico completo ND.",
       "Vigencia literal en la fuente: «del 8 de octubre al 9 de febrero de 2026»."

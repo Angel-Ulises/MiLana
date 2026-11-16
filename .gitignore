@@ -16,6 +16,6 @@ assets-master/originales-verticales/
 
 # Evidencia de UI generada por CI; se entrega como artefacto, no como código.
 .qa/decision-journey/
-# Evidencia local de verificar-arranque y lockfile que genera npm install.
+# Evidencia local de verificar-arranque.
 .qa/
-package-lock.json
+# package-lock.json se versiona: fija las versiones que se prueban y se publican (usar `npm ci`).

@@ -47,9 +47,9 @@
       "N/D, «requiere cotización» y «caducado» no equivalen a cero; una relación comercial debe declararse."
     ],
     "fechas-de-pago": [
-      "Sueldo: cada semana si haces trabajo material y cada quincena como máximo en los demás trabajos.",
-      "Aguinaldo: antes del 20 de diciembre. Utilidades: a más tardar el 30 de mayo si trabajas para una empresa y el 29 de junio si tu patrón es una persona.",
-      "Vacaciones: dentro de los seis meses después de tu aniversario, con prima de por lo menos 25%."
+      "Aplica si trabajas para un patrón. Sueldo: cada semana si haces trabajo material y cada quincena como máximo en los demás trabajos.",
+      "Aguinaldo: antes del 20 de diciembre. Vacaciones: dentro de los seis meses después de tu aniversario, con prima de por lo menos 25%.",
+      "Utilidades: a más tardar el 30 de mayo si tu patrón es una empresa (persona moral) y el 29 de junio si es persona física, y solo si tuvo renta gravable."
     ]
   }
 }

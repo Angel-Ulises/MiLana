@@ -35,19 +35,40 @@ const [careerData, stateData, financeData, professionData, matchData] = await Pr
   readFile(new URL('../src/data/match-catalogo.json', import.meta.url), 'utf8').then(JSON.parse),
 ]);
 const cleanTitle = (title='') => title.replace(/\s*\|\s*MiLana.*$/i, '').trim();
-const searchItems = [
+const searchItemsCrudos = [
   ...nav,
   ...NAVEGACION_MAS,
   ['finiquito','/calculadoras/finiquito','Finiquito'],
   ['liquidacion','/calculadoras/liquidacion','Liquidación'],
   ['aguinaldo','/calculadoras/aguinaldo','Aguinaldo'],
-  ['isr','/calculadoras/isr','ISR'],
-  ['resico','/calculadoras/resico','RESICO'],
-  ['ptu','/calculadoras/ptu','PTU'],
-  ['bruto','/calculadoras/bruto-a-neto','Bruto a Neto'],
+  ['isr','/calculadoras/isr','Impuesto de mi sueldo (ISR)'],
+  ['resico','/calculadoras/resico','Trabajo por mi cuenta (RESICO)'],
+  ['ptu','/calculadoras/ptu','Utilidades (PTU)'],
+  ['bruto','/calculadoras/bruto-a-neto','Cuánto me llega de mi sueldo (bruto a neto)'],
   ['vacaciones','/calculadoras/vacaciones','Vacaciones'],
   ['infonavit','/calculadoras/infonavit','Infonavit'],
   ['pension','/calculadoras/pension-imss','Pensión IMSS'],
+  // Guías, situaciones y páginas de confianza: antes no estaban en el buscador (47 de 87 búsquedas comunes no daban nada).
+  ['situacion-sueldo','/situaciones/entender-mi-sueldo','Entender mi sueldo'],
+  ['situacion-prestaciones','/situaciones/revisar-mis-prestaciones','Revisar mis prestaciones'],
+  ['situacion-terminar','/situaciones/terminar-relacion-laboral','Terminar una relación laboral'],
+  ['guia-fechas-de-pago','/aprende/fechas-de-pago','Fechas de pago: aguinaldo, utilidades, vacaciones y sueldo'],
+  ['guia-recibo','/aprende/leer-recibo-nomina','Cómo leer tu recibo de nómina'],
+  ['guia-finiquito','/aprende/finiquito-vs-liquidacion','Finiquito o liquidación: la diferencia'],
+  ['guia-aguinaldo','/aprende/aguinaldo-bruto-neto','Por qué tu aguinaldo llega con descuento'],
+  ['guia-vacaciones','/aprende/vacaciones-prima-vacacional','Vacaciones y prima vacacional'],
+  ['guia-resico','/aprende/resico-ingresos-cobrados','RESICO: qué ingresos cuentan'],
+  ['guia-pension','/aprende/pension-imss-ley-97','Pensión IMSS: qué revisar antes de pensionarte'],
+  ['guia-cat-gat','/aprende/cat-y-gat-que-comparan','CAT y GAT: qué comparan'],
+  ['guia-mensualidad','/aprende/mensualidad-y-costo-del-credito','Mensualidad y costo total de un crédito'],
+  ['guia-fuentes','/aprende/leer-fuentes-comparador-financiero','Cómo leer las fuentes del comparador'],
+  ['privacidad','/privacidad','Aviso de privacidad'],
+  ['contacto','/contacto','Contacto y correcciones'],
+  ['sobre','/sobre','Sobre MiLana'],
+  ['metodo','/metodo','Cómo revisamos'],
+  ['terminos','/terminos','Términos de uso'],
+  ['financiamiento','/financiamiento','Cómo se financia MiLana'],
+  ['widgets','/widgets','Calculadoras gratuitas para tu sitio'],
   ...careerData.paginas.filter(x=>x.slug).map(x=>[`carrera-${x.slug}`, `/carreras/${x.slug}`, cleanTitle(x.titulo)]),
   ['carreras-comparar','/carreras/comparar','Comparar carreras'],
   ['carreras-ocupaciones','/carreras/ocupaciones','Carrera y ocupación'],
@@ -65,6 +86,8 @@ const searchItems = [
   ...matchData.categorias.map(c=>[`match-${c.slug}`, `/finanzas/match/${c.slug}`, `Comparar ${c.nombre.toLowerCase()}`]),
   ['match-metodologia','/finanzas/match/metodologia','Metodología de MiLana Match'],
 ];
+// Una sola entrada por ruta: se conserva la posición de la primera y el nombre de la última (el más descriptivo).
+const searchItems = [...searchItemsCrudos.reduce((mapa, item) => mapa.set(item[1], item), new Map()).values()];
 const iconSearch = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>';
 const iconMenu = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>';
 const boot = `<script data-orbita-boot>(function(){var q=new URLSearchParams(location.search);var r=document.documentElement;if(q.get('embed')==='1'){r.classList.add('ml-orbita-embed');return}var p=location.pathname.replace(/\\\/$/,'')||'/';r.classList.add('ml-orbita-enabled');var s=p.indexOf('/calculadoras')===0?'calculadoras':p.indexOf('/carreras')===0?'carreras':p.indexOf('/estados')===0?'estados':p.indexOf('/finanzas')===0?'finanzas':p.indexOf('/invertir')===0?'invertir':p.indexOf('/economia')===0?'economia':p.indexOf('/aprende')===0?'aprende':'inicio';r.dataset.orbitaSection=s;try{if(localStorage.getItem('ml-orbita-easy')==='1')r.classList.add('ml-orbita-easy')}catch(e){}})();</script>`;

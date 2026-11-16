@@ -24,6 +24,15 @@ export const CATEGORIAS = [
 ];
 
 // ---------- Texto ----------
+// Palabras de programación que se colaron en notas escritas por la entrega de datos («Fechas normalizadas null»).
+// Se reemplazan por texto de persona; el archivo de origen de Orion no se edita.
+export function sinNulos(texto) {
+  if (typeof texto !== 'string') return texto;
+  return texto
+    .replace(/\bFechas normalizadas null\b/g, 'Sin fechas normalizadas')
+    .replace(/(?<![\w/_=-])(?:null|undefined|NaN)(?![\w/_-])/g, 'sin dato');
+}
+
 const ACENTOS = {
   comision: 'comisión', comisiones: 'comisiones', minimo: 'mínimo', minima: 'mínima', maximo: 'máximo', maxima: 'máxima',
   anios: 'años', anio: 'año', credito: 'crédito', linea: 'línea', garantia: 'garantía', version: 'versión', poliza: 'póliza',
@@ -327,7 +336,7 @@ function dato(clave, valorCrudo, unidad, codigoEstado, fuentes, extra = {}) {
     valor,
     numero: numeroPrincipal(valorCrudo),
     estado: estado(codigo),
-    nota: extra.nota || null,
+    nota: sinNulos(extra.nota) || null,
     limites,
     fuentes,
   };
@@ -361,8 +370,8 @@ function datosAhorro(campos) {
 
 function notaLista(items, registro) {
   return (items || []).map((x) => ({
-    texto: typeof x.valor === 'string' ? x.valor : [].concat(formatearValor(x.valor, null, '')).join('; '),
-    nota: x.nota || null,
+    texto: sinNulos(typeof x.valor === 'string' ? x.valor : [].concat(formatearValor(x.valor, null, '')).join('; ')),
+    nota: sinNulos(x.nota) || null,
     fuentes: fuenteCredito(x, registro),
   }));
 }

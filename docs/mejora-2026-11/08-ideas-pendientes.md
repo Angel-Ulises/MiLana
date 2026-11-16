@@ -127,6 +127,78 @@ Pago por semana/quincena/mes, «Escuchar», «¿Y si no me lo pagan?», comas de
 | G5 | Promover los widgets entre sindicatos, contadores, RH y medios locales | fuera del sitio |
 | G6 | Página para periodistas con datos citables y cómo citar | guía |
 
+## H. Ser referencia (que otros citen a MiLana)
+
+| Código | Idea | Tipo | Fuente |
+|---|---|---|---|
+| H1 | «Tablas del año»: ISR, subsidio, UMA, salario mínimo y cuotas IMSS en una sola página, con fecha y fuente | guía | ley |
+| H2 | Históricos con gráfica: salario mínimo, UMA e inflación por año | guía | dato INEGI/DOF |
+| H3 | «Qué cambió este año» en trabajo e impuestos, en una página por año | guía | ley |
+| H4 | Reformas en curso: qué ya es ley y qué sigue en discusión (jornada, aguinaldo, etc.), sin adelantar nada | guía | ley (DOF, Diputados) |
+| H5 | La ley en sencillo: una página por artículo clave («Artículo 87: aguinaldo») con el texto oficial y la explicación | guía | ley |
+| H6 | Glosario con una dirección por palabra, para que se pueda enlazar cada definición | guía | propia |
+| H7 | «Así comprobamos»: por calculadora, casos de prueba públicos con el resultado esperado | guía | propia |
+| H8 | Comparación documentada contra simuladores oficiales (SAT, IMSS) donde existan | guía | delegada |
+| H9 | Tablero público de vigencias: qué tan al día está cada dato del sitio | sitio | propia |
+| H10 | Datos abiertos: descargar las tablas en hoja de cálculo, con «cómo citar a MiLana» | sitio | propia |
+| H11 | Informe anual «Cuánto gana México» con datos del INEGI, citable por medios | guía | dato INEGI |
+| H12 | «¿A dónde voy?» por estado: Procuraduría del trabajo, centros de conciliación, Condusef, SAT, con datos verificados | guía | ley + delegada |
+| H13 | Colaboradores y revisores reales con nombre, cuando existan | sitio | — |
+| H14 | Cierre de año: lista fija de lo que cambia cada enero (UMA, salario mínimo, tablas) y quién lo actualiza | interno | ley |
+
+## I. Que te encuentren (buscadores y asistentes de IA)
+
+| Código | Idea | Tipo |
+|---|---|---|
+| I1 | Respuesta directa al inicio de cada página: la primera línea contesta la pregunta | sitio |
+| I2 | Títulos escritos como la pregunta que hace la gente | sitio |
+| I3 | Páginas por oficio: «¿cuánto gana un albañil, una enfermera?» con los datos de ocupaciones que ya existen | guía |
+| I4 | Unas pocas páginas por monto muy buscado («aguinaldo con sueldo de $10,000»), con explicación real, no relleno | guía |
+| I5 | Preguntas frecuentes marcadas para buscadores en cada calculadora | sitio |
+| I6 | Preparar el sitio para asistentes de IA: resúmenes claros, datos marcados y un archivo guía para que citen a MiLana | sitio |
+| I7 | Imagen para compartir propia de cada página y cada resultado | sitio |
+| I8 | «Siguiente duda»: al final de cada página, la pregunta que normalmente sigue | sitio |
+| I9 | Medir y cuidar la velocidad en celulares lentos | sitio |
+| I10 | Páginas clave en inglés para mexicanos en Estados Unidos | guía |
+
+## J. Sostener el sitio (decisiones de Ángel)
+
+| Código | Idea | Nota |
+|---|---|---|
+| J1 | «¿Te sirvió? Sí / No» de un toque, sin datos personales, para saber qué mejorar | Solo cuenta toques |
+| J2 | Donativos voluntarios | Requiere una cuenta de Ángel |
+| J3 | Patrocinio transparente y etiquetado | Cuidar la independencia |
+| J4 | Widgets con la marca de contadores, sindicatos o despachos | Es vender un servicio |
+| J5 | Boletín por correo | Recoge correos: cambia el aviso de privacidad |
+| J6 | Alianzas con universidades u organizaciones para revisar contenido | Da el sello real de G3 |
+| J7 | Enlaces de afiliado | Riesgo para la credibilidad; solo etiquetados, o no hacerlo |
+
+## K. Contenido vivo y comunidad
+
+| Código | Idea | Tipo |
+|---|---|---|
+| K1 | «Pregúntale a MiLana»: la gente manda su duda por correo y las respuestas se publican sin nombres | guía |
+| K2 | Casos reales contados con permiso y sin datos que identifiquen | guía |
+| K3 | Guiones cortos para video y audio sacados de cada guía | fuera del sitio |
+| K4 | Infografías descargables de cada tema | sitio |
+| K5 | Kit para maestros: una clase de dinero lista para secundaria y prepa | guía |
+| K6 | Kit para sindicatos y Recursos Humanos: hoja para explicar el aguinaldo, las utilidades, el recibo | guía |
+
+## L. Mejoras de producto que cruzan todo el sitio
+
+| Código | Idea | Tipo |
+|---|---|---|
+| L1 | «Mi panorama»: escribes sueldo y fecha de ingreso una vez y ves aguinaldo, vacaciones, lo que te llega y el tope de utilidades juntos | calc |
+| L2 | Línea de tiempo personal: con tu fecha de ingreso, cuándo te tocan vacaciones, aniversario y cada pago | calc |
+| L3 | «Agregar a mi calendario»: un archivo con la fecha del aguinaldo o las utilidades; no guarda nada en el sitio | sitio |
+| L4 | «¿Y si…?»: mover el sueldo o los días y ver cómo cambia el resultado | calc |
+| L5 | Dibujo de a dónde se va tu sueldo: lo que te llega, impuesto, IMSS | calc |
+| L6 | El sueldo que escribes se conserva al pasar de una calculadora a otra en la misma visita | sitio |
+| L7 | El buscador como entrada principal: escribes «me despidieron» y te lleva | sitio |
+| L8 | «¿Qué te pasó?» guiado en todo el sitio, no solo en calculadoras | sitio |
+| L9 | Revisión completa con lector de pantalla y teclado | sitio |
+| L10 | Audio en lenguas indígenas para las guías principales | guía |
+
 ---
 
 ## Orden sugerido
@@ -135,10 +207,13 @@ Pago por semana/quincena/mes, «Escuchar», «¿Y si no me lo pagan?», comas de
 2. **Segunda tanda (el salto a «financiera total»):** C1, D1, C4.
 3. **Tercera tanda (motivos para volver, baratas):** E1, E2, F1, F3.
 4. **Después:** D13, D14, D11, D12, A2, A8, E9.
+5. **Para ser referencia:** H1, H5, H7, I1, L1, H9. Son las que hacen que otros enlacen y citen a MiLana.
 
 ## Avisos
 
 - **Datos que caducan** (D9, E1 y cualquier comparador de productos): hacerlas como calculadora con los números de la persona, no como catálogo. Ya se vio con Match lo que cuesta mantener cifras de terceros.
 - **Conviene contador antes de publicar:** A4, A6, D10.
 - **Fuente delegada:** A7, A12, D2, D4, D6, D7, D8. Sin el texto oficial en mano no se publican.
+- **Reformas (H4):** solo lo publicado en el DOF es ley; lo demás se marca como «en discusión» con su fecha.
+- **No rellenar (I3, I4):** pocas páginas y con contenido propio; muchas páginas casi iguales dañan al sitio (ver la propuesta de poda).
 - **Privacidad:** E4 y cualquier cosa que guarde algo en el dispositivo necesita decisión de Ángel y ajuste del aviso de privacidad.

@@ -3,6 +3,8 @@
 > **Qué es esto:** hallazgos medidos en un navegador real (Chrome, 390 px de ancho) sobre el build local de producción (`1a2209b` + PR 168), no sobre el sitio en vivo. Todo lo de esta lista se puede hacer sin depender de nadie externo. Las ideas que dependen de terceros (probar con personas, contador, alianzas, canal de WhatsApp) quedan fuera por decisión de Ángel.
 >
 > Las reglas vigentes están en `08-ideas-pendientes.md`. Aplican todas.
+>
+> **El orden de trabajo vigente está en `10-analisis-a-fondo.md`, sección 6.** Ese análisis agregó las tareas T12 a T17 de abajo y bajó la prioridad de T7.
 
 ## Hallazgos
 
@@ -70,6 +72,8 @@ Las guías cortas (`leer-recibo-nomina`, `pension-imss-ley-97`) y las portadas e
 - Peso sin comprimir por página: de 350 KB (ISR) a 847 KB (RESICO). La diferencia entre páginas parece venir de la foto de cabecera; hay que confirmarlo.
 - 12 programas y 11 hojas de estilo por página; letras servidas desde un servidor externo.
 
+**Corrección al medir con celular y red lentos simulados:** el contenido principal aparece entre 0.8 y 2.2 s en las 7 páginas probadas, casi sin saltos de diseño. El sitio no es lento; reducir peticiones es mejora, no urgencia.
+
 ### 7. Lo que salió bien
 
 - Ninguna página tiene desborde horizontal a 390 px.
@@ -116,7 +120,7 @@ Cada tarea es un PR independiente contra `claude/cloudflare-pages`, con build co
 - Un test que recorra los HTML generados y falle si el texto visible fuera de «Para especialistas» tiene frases de más de 28 palabras o palabras de una lista prohibida sin su explicación.
 - Empezar como informe (no bloquea) y volverlo obligatorio cuando el sitio esté limpio.
 
-### T7. Peso y velocidad
+### T7. Peso y velocidad (prioridad baja tras medir)
 - Medir primero: guardar en el repositorio un informe por página (peticiones, peso, tiempo hasta poder escribir) para comparar después.
 - Unir las hojas `orbita-v3-*` en una y los programas `orbita-v3-*` en uno.
 - Servir las letras desde el propio sitio.
@@ -135,16 +139,49 @@ Cada tarea es un PR independiente contra `claude/cloudflare-pages`, con build co
 - **Listo cuando:** cambiar el salario mínimo en un archivo actualiza calculadoras, textos y pruebas.
 
 ### T10. Vigilancia sin terceros
-- Una tarea programada en GitHub que cada día compile, corra las pruebas y abra un aviso si algo falla.
+- Ya existen 9 automatizaciones de datos y recordatorios. Primero: resolver o cerrar los 33 asuntos abiertos y los 6 PR viejos, y dejar solo las alarmas que alguien atienda.
+- Agregar una revisión diaria que compile, corra las pruebas y abra un aviso si algo falla.
 - Una segunda que revise si cambió la fecha de «última reforma» de la LFT y la LISR en diputados.gob.mx y avise, sin cambiar nada sola.
 
 ### T11. Cambio de año (urgente: faltan seis semanas)
 - El año «2026» está escrito a mano en unos 1,970 lugares de `src`, 21 páginas HTML de `public`, 90 de `scripts` y 297 de `tests`.
+- **Caso confirmado:** pensión usa `SEMANAS_MINIMAS_2026 = 875`; en 2027 la ley pide 900 (ver T16).
 - La calculadora de ISR, a partir del 1 de enero de 2027, usa en silencio el periodo `2026-11` (`src/calculadorasDirectas.jsx`, línea 165). No se rompe, pero mostrará cifras de 2026 sin avisar que el año ya cambió.
 - Hacer **antes de diciembre**: una prueba que simule el reloj en enero y en febrero de 2027 y recorra las 10 calculadoras, para ver cuáles fallan, cuáles calculan con el año equivocado (por ejemplo, días trabajados «en 2026») y cuáles solo necesitan un aviso.
 - Mientras no existan los valores oficiales de 2027, mostrar un aviso visible: «Cálculo con valores de 2026; los de 2027 se actualizan cuando se publiquen».
 - No escribir ningún valor de 2027 que no esté publicado en el DOF, CONASAMI, INEGI o SAT.
 - **Listo cuando:** la prueba con reloj simulado pasa y existe la lista «qué cambia en enero y dónde» (une con T9).
+
+### T12. Que el resultado se vea al escribir
+- Con el teclado abierto el monto queda de 71 a 337 px debajo de lo visible en las 10 calculadoras.
+- Franja fija con el resultado en una línea, o desplazar el resultado a la vista cuando el dato ya es válido. Sin tapar el campo que se está llenando.
+- **Listo cuando:** prueba de navegador con ventana de 420 px de alto: tras escribir un dato válido, el monto es visible en las 10. Revisado en un teléfono real por Ángel u Orion.
+
+### T13. Buscador que entienda a la gente
+- Incluir en el índice las guías de Aprende, Situaciones y las páginas institucionales.
+- Palabras alternativas para todas las entradas (hoy PTU e Infonavit no tienen); usar los nombres sencillos nuevos.
+- Comparar por raíz de palabra para que «renuncia» encuentre «renuncié» y «impuestos» encuentre «impuesto».
+- Para lo que no existe: «Todavía no tenemos eso» y lo más cercano.
+- **Listo cuando:** una prueba con 100 búsquedas fijas (las 87 del análisis y 13 más) da resultado en todas las que tienen contenido; hoy fallan 47 de 87.
+
+### T14. Campos de dinero que entienden a la gente
+- Aceptar «12 mil», «12mil», «12k», «12000 pesos».
+- Ante «12.000» o «12,00», preguntar «¿Quisiste decir $12,000?» con un botón; no adivinar en silencio.
+- Es una duda de formato. No es detección por monto, que sigue prohibida.
+- **Listo cuando:** prueba con esos formatos en las 10.
+
+### T15. Vacaciones en el primer año
+- Con 0 años o una fracción menor a 1, explicar cuándo llegan los primeros días y enlazar a Finiquito para la parte proporcional. Hoy `0` da error y `0.5` no muestra nada.
+- Verificar el texto en los arts. 76 y 79 de la LFT.
+
+### T16. Pensión con el requisito por año (antes del 1 de enero)
+- Sustituir la constante `SEMANAS_MINIMAS_2026` por la tabla 2021 a 2031 de la Ley del Seguro Social (transitorio Cuarto, decreto DOF 16-12-2020).
+- Mostrar «hoy se piden X» y, si la persona sigue cotizando, en qué año aproximado lo alcanzaría y cuántas se pedirán entonces. Sin prometer fechas.
+- **Listo cuando:** con reloj simulado en enero de 2027, 880 semanas ya no dice «Ya cumples»; hay pruebas para 2026 a 2031.
+
+### T17. Jornada 2027 (antes del 15 de diciembre)
+- Herramienta y guía con los datos de la sección 7 del documento 10. Transcribir la ley; no interpretar más allá del texto.
+- **Listo cuando:** cada cifra visible tiene su artículo o transitorio, y hay pruebas para los cinco años.
 
 ### T0. Temporada de aguinaldo (ahora mismo)
 - Del 16 de noviembre al 20 de diciembre es el momento del año en que más gente busca esto. La página de aguinaldo debe ser la mejor del sitio antes que cualquier otra tarea.

@@ -2,6 +2,8 @@
 
 > **Estado:** solo ideas. Nada de esta lista está implementado ni aprobado. Ángel decide cuáles se hacen y en qué orden. Reunidas el 16 de noviembre de 2026.
 
+> **Orden vigente:** `10-analisis-a-fondo.md`, sección 6. Ese documento corrige cuatro afirmaciones de esta lista y agrega hallazgos medidos y las apuestas para ser pionera (P-1 a P-8).
+>
 > **Actualización 16-nov-2026:** Ángel decidió no hacer nada que dependa de terceros (probar con personas, contador, alianzas, canales externos, fuentes «delegadas»). Quedan fuera por ahora: S1, S13, G3, G5, J2 a J7, K1, K2, E11, O11 y toda idea con fuente `delegada`. El plan a seguir primero está en `09-auditoria-y-plan.md`.
 
 ## Cómo usar esta lista
@@ -17,7 +19,7 @@
 - No publicar nombre ni domicilio personal; no inventar responsable del aviso de privacidad.
 - No pedir revisión de AdSense. No aplicar poda ni `noindex` (las 57 URLs siguen pendientes de decisión).
 - No detectar salario mínimo automáticamente por el monto.
-- Los eventos de medición no llevan importes ni datos personales. Hoy no se guarda nada en el dispositivo; cambiarlo requiere visto bueno de Ángel.
+- Los eventos de medición no llevan importes ni datos personales. El sitio ya guarda en el navegador preferencias (estado elegido, ruta recordada, letra grande) y contexto de la visita, y el aviso de privacidad lo explica. Guardar algo nuevo, sobre todo importes o resultados, requiere visto bueno de Ángel y ajuste del aviso.
 - Principios de diseño: celular primero, resultado antes que explicación, lenguaje de persona, una sola acción clara por pantalla, sin saturar.
 - Build completo con `CI=true MILANA_CHROME=<ruta de Chrome>` para que las pruebas de navegador no se omitan.
 
@@ -31,7 +33,7 @@ Pago por semana/quincena/mes, «Escuchar», «¿Y si no me lo pagan?», comas de
 
 | Código | Idea | Tipo | Fuente |
 |---|---|---|---|
-| A1 | Horas extra, días festivos y prima dominical: «¿cuánto me deben?» | calc | ley |
+| A1 | **Urgente (ver P-1 en el documento 10).** Horas extra, días festivos y prima dominical: «¿cuánto me deben?». La jornada baja a 46 horas el 1-ene-2027 y las reglas de horas extra cambiaron (DOF 01-05-2026) | calc | ley |
 | A2 | Trabajadoras del hogar: aguinaldo, vacaciones, IMSS | calc + guía | ley |
 | A3 | Repartidores y choferes de plataformas: derechos nuevos, PTU | guía | ley |
 | A4 | Incapacidad y maternidad: cuánto paga el IMSS y desde qué día | calc | ley (conviene contador) |
@@ -95,7 +97,7 @@ Pago por semana/quincena/mes, «Escuchar», «¿Y si no me lo pagan?», comas de
 | E1 | El dato del día en la portada: días para el aguinaldo, tipo de cambio, próximo aumento | sitio + dato |
 | E2 | Portada por temporada: diciembre aguinaldo, abril declaración, mayo utilidades | sitio |
 | E3 | Calendario del año del trabajador: festivos oficiales, pagos, declaración | guía |
-| E4 | «Mi lista»: lo calculado queda solo en tu celular, sin cuenta. **Requiere visto bueno de privacidad** | sitio |
+| E4 | «Mi lista»: lo calculado queda solo en tu celular, sin cuenta. El sitio ya guarda preferencias, pero no importes: **requiere visto bueno de privacidad** | sitio |
 | E5 | Reto de 30 días: una acción chiquita diaria | guía |
 | E6 | Preguntas de la gente: una página por pregunta real, cinco líneas | guía |
 | E7 | Quiz «¿Cuánto sabes de tu dinero?» para compartir | sitio |
@@ -136,7 +138,7 @@ Pago por semana/quincena/mes, «Escuchar», «¿Y si no me lo pagan?», comas de
 | H1 | «Tablas del año»: ISR, subsidio, UMA, salario mínimo y cuotas IMSS en una sola página, con fecha y fuente | guía | ley |
 | H2 | Históricos con gráfica: salario mínimo, UMA e inflación por año | guía | dato INEGI/DOF |
 | H3 | «Qué cambió este año» en trabajo e impuestos, en una página por año | guía | ley |
-| H4 | Reformas en curso: qué ya es ley y qué sigue en discusión (jornada, aguinaldo, etc.), sin adelantar nada | guía | ley (DOF, Diputados) |
+| H4 | Reformas: qué ya es ley y qué sigue en discusión. **La jornada de 40 horas ya es ley** (gradual de 2027 a 2030); el aguinaldo de 30 días **no** está en la ley vigente | guía | ley (DOF, Diputados) |
 | H5 | La ley en sencillo: una página por artículo clave («Artículo 87: aguinaldo») con el texto oficial y la explicación | guía | ley |
 | H6 | Glosario con una dirección por palabra, para que se pueda enlazar cada definición | guía | propia |
 | H7 | «Así comprobamos»: por calculadora, casos de prueba públicos con el resultado esperado | guía | propia |
@@ -156,7 +158,7 @@ Pago por semana/quincena/mes, «Escuchar», «¿Y si no me lo pagan?», comas de
 | I2 | Títulos escritos como la pregunta que hace la gente | sitio |
 | I3 | Páginas por oficio: «¿cuánto gana un albañil, una enfermera?» con los datos de ocupaciones que ya existen | guía |
 | I4 | Unas pocas páginas por monto muy buscado («aguinaldo con sueldo de $10,000»), con explicación real, no relleno | guía |
-| I5 | Preguntas frecuentes marcadas para buscadores en cada calculadora | sitio |
+| I5 | ~~Preguntas frecuentes marcadas para buscadores~~. Ya existe en 10 páginas y hoy aporta poco; no invertirle sin verificar | sitio |
 | I6 | Preparar el sitio para asistentes de IA: resúmenes claros, datos marcados y un archivo guía para que citen a MiLana | sitio |
 | I7 | Imagen para compartir propia de cada página y cada resultado | sitio |
 | I8 | «Siguiente duda»: al final de cada página, la pregunta que normalmente sigue | sitio |
@@ -337,7 +339,7 @@ Medición hecha sobre el build local del 16-nov-2026 (no sobre el sitio en vivo)
 |---|---|---|
 | S1 | **Ver a cinco personas reales usar el sitio** en su celular, sin ayudarles | Lista de dónde se atoraron |
 | S2 | **Terminar la medición:** dimensiones de GA4 y comprobar que llegan datos | Se ve qué calculadora se usa y cuál se abandona |
-| S3 | **Velocidad:** juntar las 11 hojas de estilo y los 12 programas, quitar estilos sin uso, servir las letras desde el propio sitio | Menos de 5 archivos por página; medición de velocidad en celular lento antes y después |
+| S3 | **Baja prioridad: al medir, el sitio no es lento (0.8 a 2.2 s simulando celular y red lentos).** Velocidad: juntar las 11 hojas de estilo y los 12 programas, quitar estilos sin uso, servir las letras desde el propio sitio | Menos de 5 archivos por página; medición de velocidad en celular lento antes y después |
 | S4 | **Cargar solo lo de la página:** que una calculadora no descargue el código de Match, Estados o Carreras | Peso de cada página medido |
 | S5 | **Una sola capa de estilos:** fusionar las hojas `orbita-v3-*` y eliminar las reglas forzadas | Cero o casi cero `!important` |
 | S6 | **Mismo trato en las 10 calculadoras:** mismos nombres de campo, mismo orden, mismos mensajes de error, mismo «¿y si no me lo pagan?» | Tabla comparativa de las 10 |
@@ -355,6 +357,26 @@ Medición hecha sobre el build local del 16-nov-2026 (no sobre el sitio en vivo)
 | S18 | **Portada que se entienda en cinco segundos:** qué es, para quién y qué hago primero | Prueba S1 |
 | S19 | **Resolver lo pendiente:** responsable del aviso de privacidad, Match y las 57 URLs, plantillas repetidas | Decisiones de Ángel |
 | S20 | **Sin internet y con pocos datos:** que una calculadora ya abierta siga funcionando | Prueba en modo avión |
+
+## T. Nuevas, salidas del análisis a fondo (detalle en el documento 10)
+
+| Código | Idea | Tipo |
+|---|---|---|
+| T1 | Franja con el resultado visible mientras escribes (hoy queda tapado por el teclado en las 10 calculadoras) | sitio |
+| T2 | «Solo sé cuánto me llega»: entrar a cualquier calculadora con lo que te depositan | calc |
+| T3 | Pago «por día» además de semana, quincena y mes | calc |
+| T4 | «No recuerdo el día»: fecha de ingreso por mes y año | calc |
+| T5 | Entender «12 mil», «12k», «12000 pesos»; ante «12.000» preguntar «¿Quisiste decir $12,000?» | calc |
+| T6 | Resultado en pesos cerrados en grande; centavos en el detalle | sitio |
+| T7 | Vacaciones en el primer año: explicar y mandar a Finiquito | calc |
+| T8 | Pensión con el requisito de semanas según el año, y cuándo lo alcanzarías si sigues cotizando | calc |
+| T9 | Buscador: guías dentro, palabras de la gente, raíces de palabra, prueba fija de 100 búsquedas | sitio |
+| T10 | «¿Te tienen registrado con tu sueldo real?» en el IMSS y lo que pierdes si no | guía + calc |
+| T11 | «¿Cómo me afecta?»: cada cambio de ley traducido a tu caso, antes y después | calc |
+| T12 | Procedimiento del «día del cambio»: publicar en horas cuando sale un número oficial | interno |
+| T13 | Ícono para la pantalla de inicio del teléfono y hoja de impresión limpia | sitio |
+| T14 | Reglas de cálculo abiertas, con licencia, pruebas públicas y fecha de la ley en cada resultado | sitio |
+| T15 | Poner en ceros los asuntos y PR abiertos; dejar solo alarmas que alguien atienda | interno |
 
 ---
 

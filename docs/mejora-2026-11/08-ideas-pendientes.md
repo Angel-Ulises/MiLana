@@ -325,9 +325,40 @@ Con más de cien ideas, el riesgo es volver al sitio saturado que ya limpiamos. 
 | R17 | Juego corto de decisiones: primer trabajo, primera tarjeta, primera renta | sitio | propia |
 | R18 | Calendario de quincenas y puentes del año | guía | ley |
 
+## S. Mejorar lo que ya existe (sin secciones nuevas)
+
+Ángel pidió el 16-nov-2026 dejar de sumar secciones y mejorar la página en todos los aspectos. Esta sección va antes que las demás.
+
+Medición hecha sobre el build local del 16-nov-2026 (no sobre el sitio en vivo): la página de aguinaldo carga 12 archivos de programa y 11 hojas de estilo; la hoja principal pesa unos 246 KB y otra unos 100 KB; el programa principal, unos 250 KB; las letras se piden a un servidor externo; `orbita-v3-prepaint.css` tiene 70 reglas forzadas (`!important`); `src/App.jsx` tiene 1,442 líneas.
+
+| Código | Mejora | Cómo se sabe que quedó |
+|---|---|---|
+| S1 | **Ver a cinco personas reales usar el sitio** en su celular, sin ayudarles | Lista de dónde se atoraron |
+| S2 | **Terminar la medición:** dimensiones de GA4 y comprobar que llegan datos | Se ve qué calculadora se usa y cuál se abandona |
+| S3 | **Velocidad:** juntar las 11 hojas de estilo y los 12 programas, quitar estilos sin uso, servir las letras desde el propio sitio | Menos de 5 archivos por página; medición de velocidad en celular lento antes y después |
+| S4 | **Cargar solo lo de la página:** que una calculadora no descargue el código de Match, Estados o Carreras | Peso de cada página medido |
+| S5 | **Una sola capa de estilos:** fusionar las hojas `orbita-v3-*` y eliminar las reglas forzadas | Cero o casi cero `!important` |
+| S6 | **Mismo trato en las 10 calculadoras:** mismos nombres de campo, mismo orden, mismos mensajes de error, mismo «¿y si no me lo pagan?» | Tabla comparativa de las 10 |
+| S7 | **Errores que ayudan:** si falta un dato o está raro, decir cuál y por qué, junto al campo | Prueba con datos vacíos, negativos y absurdos |
+| S8 | **Lectura fácil medida:** revisar todos los textos con una regla de frases cortas y palabras comunes | Prueba automática de legibilidad |
+| S9 | **Una sola voz:** siempre «tú», mismas palabras para lo mismo (patrón, sueldo, lo que te llega) | Guía de redacción y lista de palabras |
+| S10 | **Accesibilidad completa:** teclado, lector de pantalla, contraste, tamaño de botones para dedos | Auditoría página por página |
+| S11 | **Cada cifra con fecha y fuente** a un toque, y aviso visible cuando un dato tiene más de cierto tiempo | Tablero de vigencias (H9) |
+| S12 | **Cierre de año preparado:** qué cambia en enero (salario mínimo, UMA, tablas) y dónde se cambia | Un solo archivo de datos del año |
+| S13 | **Segunda revisión de cálculos** por un contador real, calculadora por calculadora | Sello real (G3) |
+| S14 | **Partir `App.jsx`** y unificar encabezado y pie (hoy repetidos en unos 18 archivos) | Un solo componente de cada uno |
+| S15 | **Una sola rama principal:** `main` sigue atrasada | `main` igual a producción |
+| S16 | **Vigilancia del sitio en vivo:** una revisión automática diaria que abra las páginas clave y avise si algo falla | Aviso por correo o en GitHub |
+| S17 | **Buscador que entienda a la gente:** «me corrieron», «lana», «chamba», errores de dedo | Lista de 50 búsquedas probadas |
+| S18 | **Portada que se entienda en cinco segundos:** qué es, para quién y qué hago primero | Prueba S1 |
+| S19 | **Resolver lo pendiente:** responsable del aviso de privacidad, Match y las 57 URLs, plantillas repetidas | Decisiones de Ángel |
+| S20 | **Sin internet y con pocos datos:** que una calculadora ya abierta siga funcionando | Prueba en modo avión |
+
 ---
 
 ## Orden sugerido
+
+**Primero la sección S** (mejorar lo que existe), en este orden: S1, S2, S3, S6, S8, S10, S13. Después, lo demás.
 
 **Antes de todo:** O11 (probar con cinco personas) y O12 (terminar la medición). Sin eso se construye a ciegas. O1 y O2 deciden dónde vive cada idea nueva.
 

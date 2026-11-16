@@ -55,3 +55,20 @@ test('los casos se publican tanto para usuarios como para rastreadores', () => {
   assert.ok(seo.includes('public/casos-calculadoras.json'));
   assert.ok(seo.includes('data-static-case'));
 });
+
+test('R-39: el ejemplo de sueldo neto da lo mismo que la calculadora rápida con el mismo sueldo', async () => {
+  const { sbcEstimado } = await import('../src/lib/calculos-directos.mjs');
+  const caso = casos['bruto-a-neto'];
+  const bruto = String(caso.verificacion.argumentos.brutoMensual);
+  // Mismos argumentos que usa CalcBrutoNetoDirecta (src/calculadorasDirectas.jsx).
+  const calculadora = calcularBrutoNeto2026({
+    brutoMensual: bruto, ingresoGravableISR: bruto, seguridadSocial: 'imss', sbcDiario: String(sbcEstimado(bruto)),
+    diasCotizados: '30', soloMinimo: false, periodo: '2026-11', empleadorUnico: true,
+  });
+  assert.equal(caso.verificacion.argumentos.sbcDiario, String(sbcEstimado(bruto)), 'el ejemplo usa el SBC que estima la calculadora');
+  assert.ok(Math.abs(calculadora.netoDespuesISRIMSS - caso.verificacion.esperado) < 1e-6, 'neto del ejemplo = neto de la calculadora');
+  const mostrado = Object.fromEntries(caso.resultados.map((r) => [r.etiqueta, r.valor]));
+  assert.ok(Math.abs(mostrado['ISR estimado'] - calculadora.retenido) < 1e-6);
+  assert.ok(Math.abs(mostrado['Cuota obrera IMSS estimada'] - calculadora.cuotaObrera) < 1e-6);
+  assert.ok(Math.abs(mostrado['Neto después de ISR e IMSS'] - calculadora.netoDespuesISRIMSS) < 1e-6);
+});

@@ -298,14 +298,14 @@ export function CalcVacacionesDirecta({ modoGobierno: ModoGobierno }) {
   const { r, error } = useMemo(() => String(anios).trim()
     ? intentar(() => calcularVacaciones({ anios: limpiarNumero(anios), sueldoMensual: sueldo.mensual, primaPct: prima || '25' }))
     : { r: null, error: '' }, [anios, sueldo, prima]);
-  useEventoResultado('vacaciones', Boolean(r), r?.total > 0 ? 'con_sueldo' : 'solo_dias');
+  useEventoResultado('vacaciones', Boolean(r), r?.dias === 0 ? 'menos_de_un_anio' : r?.total > 0 ? 'con_sueldo' : 'solo_dias');
   if (gobierno && ModoGobierno) return <Contenedor>
     <p className="cc-mas"><button type="button" className="cc-enlace" onClick={() => setGobierno(false)}>← Volver al cálculo para empresa privada</button></p>
     <ModoGobierno />
   </Contenedor>;
   return <Contenedor>
     <Formulario>
-      <CampoNumero name="anios" label="¿Cuántos años cumplidos llevas en tu trabajo?" placeholder="3" value={anios} onChange={setAnios} />
+      <CampoNumero name="anios" label="¿Cuántos años cumplidos llevas en tu trabajo?" placeholder="3" value={anios} onChange={setAnios} ayuda="Si llevas menos de un año, escribe 0." />
       <CampoSueldo sueldo={sueldo} label="Lo que te pagan (opcional, para saber cuánto te toca)" placeholder="18,000" />
       <MensajeError error={error} />
       <MasOpciones texto="¿Tu prima vacacional es mayor a 25%?">
@@ -314,7 +314,10 @@ export function CalcVacacionesDirecta({ modoGobierno: ModoGobierno }) {
       {ModoGobierno && <p className="cc-mas"><button type="button" className="cc-enlace" onClick={() => setGobierno(true)}>¿Trabajas en gobierno o SEP?</button></p>}
     </Formulario>
     <div aria-live="polite">{r && (r.dias === 0
-      ? <p className="cc-ayuda" style={{ marginTop: 12 }}>Las vacaciones se ganan al cumplir el primer año. Si llevas menos, te tocarán 12 días en tu primer aniversario.</p>
+      ? <div className="rc-veredicto rc-veredicto-bien" data-menos-de-un-anio>
+        <p><strong>Todavía no te tocan vacaciones.</strong> Se ganan al cumplir el primer año de trabajo: ese día te tocan 12 días de descanso pagados, más la prima vacacional de por lo menos 25% (artículos 76 y 80 de la Ley Federal del Trabajo).</p>
+        <p>Si dejas el trabajo antes de cumplir el año, tienes derecho a una parte proporcional por el tiempo que trabajaste (artículo 79). <a href="/calculadoras/finiquito">Calcúlala en Finiquito</a>.</p>
+      </div>
       : <ResultadoClaro calculadora="vacaciones"
         etiqueta="Te tocan al año"
         monto={`${r.dias} días`}

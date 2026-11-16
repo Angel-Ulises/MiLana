@@ -39,7 +39,11 @@ export function diasVacacionesLFT2026(anios) {
 }
 
 export function calcularVacaciones({ anios, sueldoMensual = '', primaPct = '25' }) {
-  const a = Math.floor(positivo(anios, 'Años cumplidos'));
+  // 0 es una respuesta válida: quien lleva menos de un año todavía no gana vacaciones (LFT art. 76).
+  const texto = String(anios ?? '').replace(/[$,\s]/g, '');
+  const n = Number(texto);
+  if (!texto || !Number.isFinite(n) || n < 0) throw new Error('Años cumplidos: escribe un número. Si llevas menos de un año, escribe 0.');
+  const a = Math.floor(n);
   const dias = diasVacacionesLFT2026(a);
   const prima = Number(primaPct) / 100;
   if (!(prima >= 0.25)) throw new Error('La prima vacacional es de al menos 25%.');

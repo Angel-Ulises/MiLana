@@ -2,11 +2,13 @@ import { startHomeWhenReady } from './homeStartup.js';
 
 // Mejora 2026-11 (fase 3): la calculadora llega prerenderizada en el HTML y se puede escribir en ella
 // antes de que cargue React. Al montar, se copian los valores escritos a los campos de React.
-const setValor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set;
+const setValor = typeof HTMLInputElement === 'undefined' ? undefined : Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set;
 
 export function capturarCampos(root) {
   return [...root.querySelectorAll('[data-calc-directo] input')].map((el, i) => ({
     i, name: el.name, type: el.type, value: el.value, checked: el.checked,
+    // Valor con el que llegó en el HTML. Si no cambió, la persona no escribió nada.
+    defecto: el.defaultValue,
   }));
 }
 
@@ -21,9 +23,12 @@ export function restaurarCampos(root, guardados) {
       continue;
     }
     if (!g.name || !g.value || g.type === 'checkbox') continue;
+    // Un valor que viene del HTML (por ejemplo, la fecha de hoy al momento de compilar) no se copia:
+    // React ya calculó el suyo con el día de la visita.
+    if (g.value === g.defecto) continue;
     const destino = nuevos.find((el) => el.name === g.name);
     if (!destino || destino.value === g.value) continue;
-    setValor?.call(destino, g.value);
+    if (setValor) setValor.call(destino, g.value); else destino.value = g.value;
     destino.dispatchEvent(new Event('input', { bubbles: true }));
   }
 }

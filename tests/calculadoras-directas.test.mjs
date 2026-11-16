@@ -74,3 +74,12 @@ test('las 10 calculadoras usan el resultado común con WhatsApp, siguiente paso 
   assert.match(comun, /registrarEvento\('clic_siguiente_paso'/);
   assert.match(comun, /Datos actualizados al/);
 });
+
+test('H-6: vacaciones acepta 0 años (menos de un año) sin error y no da días; vacío y negativos explican qué escribir', () => {
+  const cero = calcularVacaciones({ anios: '0', sueldoMensual: '18000' });
+  assert.equal(cero.dias, 0); assert.equal(cero.total, 0);
+  assert.equal(calcularVacaciones({ anios: '0.5' }).dias, 0, 'una fracción menor a un año tampoco da días');
+  assert.equal(calcularVacaciones({ anios: '1' }).dias, 12, 'al cumplir el año, 12 días (LFT art. 76)');
+  assert.equal(calcularVacaciones({ anios: '1.9' }).dias, 12, 'solo cuentan los años cumplidos');
+  for (const malo of ['', '-1', 'abc']) assert.throws(() => calcularVacaciones({ anios: malo }), /escribe un número\. Si llevas menos de un año, escribe 0/, `«${malo}»`);
+});

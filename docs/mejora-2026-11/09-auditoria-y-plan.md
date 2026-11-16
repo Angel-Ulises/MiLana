@@ -138,6 +138,29 @@ Cada tarea es un PR independiente contra `claude/cloudflare-pages`, con build co
 - Una tarea programada en GitHub que cada día compile, corra las pruebas y abra un aviso si algo falla.
 - Una segunda que revise si cambió la fecha de «última reforma» de la LFT y la LISR en diputados.gob.mx y avise, sin cambiar nada sola.
 
+### T11. Cambio de año (urgente: faltan seis semanas)
+- El año «2026» está escrito a mano en unos 1,970 lugares de `src`, 21 páginas HTML de `public`, 90 de `scripts` y 297 de `tests`.
+- La calculadora de ISR, a partir del 1 de enero de 2027, usa en silencio el periodo `2026-11` (`src/calculadorasDirectas.jsx`, línea 165). No se rompe, pero mostrará cifras de 2026 sin avisar que el año ya cambió.
+- Hacer **antes de diciembre**: una prueba que simule el reloj en enero y en febrero de 2027 y recorra las 10 calculadoras, para ver cuáles fallan, cuáles calculan con el año equivocado (por ejemplo, días trabajados «en 2026») y cuáles solo necesitan un aviso.
+- Mientras no existan los valores oficiales de 2027, mostrar un aviso visible: «Cálculo con valores de 2026; los de 2027 se actualizan cuando se publiquen».
+- No escribir ningún valor de 2027 que no esté publicado en el DOF, CONASAMI, INEGI o SAT.
+- **Listo cuando:** la prueba con reloj simulado pasa y existe la lista «qué cambia en enero y dónde» (une con T9).
+
+### T0. Temporada de aguinaldo (ahora mismo)
+- Del 16 de noviembre al 20 de diciembre es el momento del año en que más gente busca esto. La página de aguinaldo debe ser la mejor del sitio antes que cualquier otra tarea.
+- Revisar que la portada ponga aguinaldo primero en estas semanas, y que T1, T2 y T4 se apliquen primero a aguinaldo.
+
+## Cómo trabajar este plan (lecciones de esta sesión)
+
+- **Subir la rama en cuanto haya un commit.** El contenedor se reinició una vez y se perdieron tres commits sin subir.
+- **Un tema por PR**, pequeño. Los PR 163 a 168 se publicaron así sin incidentes.
+- **Nunca encadenar «commit y push» sin comprobar que el build terminó bien.** Pasó una vez en esta sesión: se subió un commit con una prueba rota y hubo que corregirlo antes de abrir el PR.
+- **Pruebas con número fijo:** agregar una guía o una página rompe unas cinco pruebas que cuentan elementos. Actualizarlas una por una, entendiendo qué cuentan; no relajarlas.
+- **El resumen «En 30 segundos»** de cada guía admite tres ideas de entre 30 y 170 caracteres, y la primera sección de la guía debe quedar justo después de la fecha de revisión.
+- **Chrome:** sin `CI=true` y `MILANA_CHROME`, 74 pruebas de navegador se omiten y parecen pasar.
+- **Una segunda revisión ayuda.** Las observaciones de Orion y de otro asistente encontraron imprecisiones reales en la guía de fechas y en «¿Me pagaron bien?». Conviene mantener esa revisión cruzada en cada PR de contenido legal.
+- **Nadie ha visto el sitio en vivo desde el entorno de trabajo.** Cada despliegue necesita que Ángel u Orion abran la página y confirmen.
+
 ## Lo que no se debe hacer
 
 - No cambiar fórmulas al tocar validaciones o textos.

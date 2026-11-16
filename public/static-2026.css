@@ -107,3 +107,15 @@
 @media(max-width:580px){html.ml-orbita-enabled .article h1{font-size:34px;line-height:1.06}}
 /* Ilustraciones de guías: flujo normal, sin recorte del texto del SVG. */
 .guide-figure{margin:28px 0;padding:16px;border:1px solid #D9E1E8;border-radius:16px;background:#FBF8F2}.guide-figure img{display:block;width:100%;max-width:480px;height:auto;margin:0 auto}.guide-figure figcaption{margin-top:10px;color:#4F5D6B;font-size:14px;line-height:1.5;text-align:center}
+
+/* Hoja de impresión (H-13, 2026-11-16): las guías salen sin menús, botones de herramientas ni pie. */
+@media print {
+  html,body{background:#fff!important;color:#000!important}
+  .ml-orbita-shell,.ml-orbita-drawer,.ml-orbita-search,.ml-orbita-skip-link,header.top,footer.footer,
+  .guide-direct,.cta,.card-tools,.crumb{display:none!important}
+  .wrap,.article{max-width:none!important;padding:0!important}
+  .guide-more>summary::after,.guide-more>summary::before{display:none!important;content:none!important}
+  a{color:#000!important;text-decoration:underline}
+  .sources a[href^="http"]::after{content:" (" attr(href) ")";font-size:11px;word-break:break-all}
+}
+

@@ -1,0 +1,146 @@
+# Auditoría del sitio y plan de mejora sin terceros (16-nov-2026)
+
+> **Qué es esto:** hallazgos medidos en un navegador real (Chrome, 390 px de ancho) sobre el build local de producción (`1a2209b` + PR 168), no sobre el sitio en vivo. Todo lo de esta lista se puede hacer sin depender de nadie externo. Las ideas que dependen de terceros (probar con personas, contador, alianzas, canal de WhatsApp) quedan fuera por decisión de Ángel.
+>
+> Las reglas vigentes están en `08-ideas-pendientes.md`. Aplican todas.
+
+## Hallazgos
+
+### 1. Las calculadoras aceptan datos imposibles y dan un resultado
+
+Probado escribiendo `999999999999` en el primer campo:
+
+| Calculadora | Lo que mostró |
+|---|---|
+| Vacaciones | «400000000018 días» |
+| Pensión IMSS (edad) | «Te faltan 75 semanas», como si nada |
+| RESICO | ISR de $24,999,999,999.98; el régimen tiene tope de ingresos y la tabla del código termina en $3,500,000 |
+| Aguinaldo, ISR, Infonavit | Montos de cientos o miles de millones |
+| Finiquito, liquidación, bruto a neto | Sí lo rechazan |
+
+### 2. Los mensajes de error no hablan igual
+
+Para el mismo problema (campo vacío, cero, negativo o letras) hay cuatro estilos:
+
+- Aguinaldo e ISR: «Captura un importe positivo con un máximo de dos decimales.»
+- Finiquito y liquidación: «Salario mensual: revisa el valor capturado.» / «Salario mensual: captura un número válido.»
+- Bruto a neto: «Sueldo: escribe una cantidad mayor que cero.» y, con un valor enorme, «Percepciones brutas del mes: revisa el…»
+- El resto: «<Campo>: escribe una cantidad mayor que cero.»
+
+Además, el mensaje dice «Salario mensual» aunque la persona haya elegido pago por semana o quincena, y usa nombres internos («Percepciones brutas», «Renta gravable de la empresa») distintos de la etiqueta que ve.
+
+### 3. Lo que tiene cada resultado no es parejo
+
+| Calculadora | Semana/quincena/mes | «¿Y si no me lo pagan?» | «¿Me pagaron bien?» |
+|---|---|---|---|
+| Aguinaldo | Sí | Sí | Sí |
+| Finiquito | Sí | Sí | No |
+| Liquidación | Sí | Sí | No |
+| Vacaciones | Sí | Sí | No |
+| PTU | No aplica | **No** (y sí se puede reclamar) | No |
+| ISR | Quincena/mes | No aplica | No |
+| Bruto a neto | Quincena/mes | No aplica | No |
+| RESICO, Infonavit, Pensión | No aplica | No aplica | No aplica |
+
+Todas tienen «Escuchar», WhatsApp, «Ver cómo se calculó» y un siguiente paso.
+
+### 4. Botones y enlaces chicos para el dedo
+
+- «Ver cómo se calculó», «¿Y si no me lo pagan?» y «¿Ya te lo depositaron?»: 36 px de alto.
+- El enlace del siguiente paso: 35 px.
+- «← Todas las calculadoras»: 17 px.
+- Enlaces dentro de texto: 20 px.
+
+La referencia usual es 44 px o más.
+
+### 5. La explicación plegada sigue escrita para especialistas
+
+Con «Ejemplo, cómo se calcula y fuentes» abierto, cada calculadora tiene entre 760 y 1,080 palabras y de 3 a 8 frases de más de 28 palabras. Palabras frecuentes sin explicar: «capturar», «percepciones», «gravable», «devengado», «integrado», «cotización», «amortización», «subsidio». Ejemplos reales:
+
+- Aguinaldo: «Aguinaldo bruto 2026: LFT con días capturados; LFTSE federal con mínimo de 40 días; SEP federal Básica/apoyo con 40 días y base computable…»
+- Liquidación: «Que la calculadora muestre un componente no demuestra por sí mismo que jurídicamente proceda en tu caso…»
+- RESICO: «La base no se construye como una utilidad obtenida al restar gastos: para esta mecánica se consideran los ingresos efectivamente cobrados…»
+- Bruto a neto: 19 veces «ISR», 13 «UMA», 10 «SBC».
+
+Las guías cortas (`leer-recibo-nomina`, `pension-imss-ley-97`) y las portadas están bien: cero frases largas.
+
+### 6. Peso
+
+- Cada calculadora hace 41 peticiones (pensión, 34).
+- Peso sin comprimir por página: de 350 KB (ISR) a 847 KB (RESICO). La diferencia entre páginas parece venir de la foto de cabecera; hay que confirmarlo.
+- 12 programas y 11 hojas de estilo por página; letras servidas desde un servidor externo.
+
+### 7. Lo que salió bien
+
+- Ninguna página tiene desborde horizontal a 390 px.
+- Un solo `h1` por página; ninguna imagen sin texto alternativo.
+- Ningún texto visible menor de 13 px en las calculadoras.
+- Todos los botones de opción tienen etiqueta y están agrupados.
+- Los campos principales miden 55 px de alto.
+
+---
+
+## Plan, en orden
+
+Cada tarea es un PR independiente contra `claude/cloudflare-pages`, con build completo en verde.
+
+### T1. Límites sensatos en todas las calculadoras
+- Definir por campo un mínimo y un máximo razonables en un solo lugar (por ejemplo: edad 15 a 100; años de antigüedad 0 a 60; semanas cotizadas 0 a 3,000).
+- Para montos, no inventar un tope legal: si el valor es extraordinariamente alto, mostrar aviso «Revisa la cantidad: parece demasiado alta» y no dar resultado.
+- RESICO: verificar el tope de ingresos del régimen en la Ley del ISR vigente (diputados.gob.mx) antes de escribir cualquier cifra; si el ingreso mensual anualizado lo rebasa, avisar que el régimen podría no aplicar, sin afirmarlo.
+- **Listo cuando:** `999999999999`, `-1`, `0`, vacío y letras dan aviso y ningún resultado en las 10; hay prueba por calculadora.
+
+### T2. Un solo modo de avisar errores
+- Un componente y una función para el mensaje, usados por las 10.
+- Texto con la etiqueta que la persona ve, no el nombre interno. Sin «captura», sin «importe».
+- Propuesta de textos: vacío, nada; cero o negativo, «Escribe una cantidad mayor que cero»; letras, «Escribe solo números»; demasiado alto, «Revisa la cantidad: parece demasiado alta».
+- El aviso va junto al campo, ligado con `aria-describedby`, y se anuncia con `aria-live`.
+- **Listo cuando:** una prueba recorre las 10 con los mismos datos malos y compara los textos.
+
+### T3. Resultado parejo
+- «¿Y si no me lo pagan?» en PTU, tras verificar plazos en la LFT (arts. 122 y 516).
+- «¿Me pagaron bien?» en finiquito, liquidación y vacaciones, reutilizando `compararDeposito` y `VeredictoDeposito`. Ojo: finiquito y liquidación muestran total antes de impuestos; el texto debe decirlo y no comparar un depósito neto contra un bruto sin avisar.
+- **Listo cuando:** la tabla del hallazgo 3 queda pareja y con pruebas de texto visible.
+
+### T4. Botones del tamaño de un dedo
+- Mínimo 44 px de alto en `summary`, enlace de siguiente paso y «← Todas las calculadoras».
+- **Listo cuando:** una prueba de navegador mide los elementos interactivos de las 10 y ninguno principal baja de 44 px.
+
+### T5. Explicación en dos niveles
+- En «Ejemplo, cómo se calcula y fuentes»: primero un ejemplo con una persona y cinco renglones; debajo, el detalle técnico tal como está, bajo «Para especialistas».
+- No borrar contenido técnico ni fuentes.
+- Reemplazar «capturar» por «escribir» en todo texto visible.
+- **Listo cuando:** la parte de arriba no tiene frases de más de 25 palabras (prueba automática).
+
+### T6. Prueba automática de lectura fácil
+- Un test que recorra los HTML generados y falle si el texto visible fuera de «Para especialistas» tiene frases de más de 28 palabras o palabras de una lista prohibida sin su explicación.
+- Empezar como informe (no bloquea) y volverlo obligatorio cuando el sitio esté limpio.
+
+### T7. Peso y velocidad
+- Medir primero: guardar en el repositorio un informe por página (peticiones, peso, tiempo hasta poder escribir) para comparar después.
+- Unir las hojas `orbita-v3-*` en una y los programas `orbita-v3-*` en uno.
+- Servir las letras desde el propio sitio.
+- Confirmar si la foto de cabecera explica la diferencia de 350 a 847 KB y, si es así, servirla más ligera en celular.
+- **Listo cuando:** menos de 15 peticiones por calculadora y el informe muestra la mejora. No cambiar el aspecto.
+
+### T8. Orden por dentro
+- Un solo componente de pie y uno de encabezado (hoy repetidos en unos 18 archivos).
+- Partir `src/App.jsx` (1,442 líneas) por calculadora.
+- Quitar reglas `!important` conforme T7 una las hojas.
+- **Listo cuando:** las pruebas siguen en verde y no cambia nada visible (comparación de capturas).
+
+### T9. Datos del año en un solo lugar
+- Salario mínimo, UMA, tablas de ISR y cuotas en un único archivo con fecha y fuente, usado por cálculos y por los textos.
+- Lista escrita de «qué cambia en enero y dónde».
+- **Listo cuando:** cambiar el salario mínimo en un archivo actualiza calculadoras, textos y pruebas.
+
+### T10. Vigilancia sin terceros
+- Una tarea programada en GitHub que cada día compile, corra las pruebas y abra un aviso si algo falla.
+- Una segunda que revise si cambió la fecha de «última reforma» de la LFT y la LISR en diputados.gob.mx y avise, sin cambiar nada sola.
+
+## Lo que no se debe hacer
+
+- No cambiar fórmulas al tocar validaciones o textos.
+- No presentar los límites de T1 como límites legales.
+- No borrar explicación técnica ni fuentes: se reordenan.
+- No tocar aviso de privacidad, GA4/AdSense ni la indexación.

@@ -2,6 +2,8 @@
 
 > **Estado:** solo ideas. Nada de esta lista está implementado ni aprobado. Ángel decide cuáles se hacen y en qué orden. Reunidas el 16 de noviembre de 2026.
 
+> **Actualización 16-nov-2026:** Ángel decidió no hacer nada que dependa de terceros (probar con personas, contador, alianzas, canales externos, fuentes «delegadas»). Quedan fuera por ahora: S1, S13, G3, G5, J2 a J7, K1, K2, E11, O11 y toda idea con fuente `delegada`. El plan a seguir primero está en `09-auditoria-y-plan.md`.
+
 ## Cómo usar esta lista
 
 - Cada idea tiene un código (A1, B3…) para poder pedirla por nombre.

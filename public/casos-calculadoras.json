@@ -117,12 +117,12 @@
     }
   },
   "bruto-a-neto": {
-    "titulo": "Ejemplo: $20,000 brutos con bases iguales para ISR e IMSS",
-    "resumen": "Este escenario didáctico usa $20,000 de percepciones brutas, $20,000 de ingreso gravable para ISR, SBC diario de $666.67 y 30 días cotizados. Solo resta ISR e IMSS obrero.",
+    "titulo": "Ejemplo: $20,000 brutos con el SBC que estima la calculadora",
+    "resumen": "Este escenario usa los mismos supuestos que la calculadora de arriba: $20,000 de percepciones brutas, $20,000 de ingreso gravable para ISR, un salario base de cotización (SBC) diario de $699.54 (el sueldo diario con las prestaciones mínimas de ley) y 30 días cotizados. Solo resta ISR e IMSS obrero.",
     "entradas": [
       "Percepciones brutas: $20,000",
       "Ingreso gravable ISR: $20,000",
-      "SBC diario: $666.67",
+      "SBC diario: $699.54 (estimado: sueldo diario × 1.0452)",
       "Días cotizados: 30"
     ],
     "resultados": [
@@ -132,27 +132,28 @@
       },
       {
         "etiqueta": "Cuota obrera IMSS estimada",
-        "valor": 512.771175
+        "valor": 540.13545
       },
       {
         "etiqueta": "Neto después de ISR e IMSS",
-        "valor": 17103.576465
+        "valor": 17076.21219
       }
     ],
-    "nota": "Un recibo real puede tener otras deducciones y bases diferentes. El ejemplo muestra por qué bruto, gravable para ISR y SBC no deben confundirse.",
+    "nota": "Un recibo real puede tener otras deducciones y bases diferentes: si tu empresa te integra más prestaciones, tu SBC y tu cuota de IMSS serán mayores. El ejemplo muestra por qué bruto, gravable para ISR y SBC no deben confundirse.",
     "verificacion": {
       "tipo": "bruto-neto",
       "argumentos": {
         "brutoMensual": "20000",
         "ingresoGravableISR": "20000",
-        "sbcDiario": "666.67",
+        "sbcDiario": "699.54",
         "diasCotizados": "30",
-        "soloMinimo": false,
-        "periodo": "2026-09",
+        "seguridadSocial": "imss",
+   "soloMinimo": false,
+        "periodo": "2026-11",
         "empleadorUnico": true
       },
       "campo": "netoDespuesISRIMSS",
-      "esperado": 17103.576465
+      "esperado": 17076.21219
     }
   }
 }

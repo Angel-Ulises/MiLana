@@ -82,6 +82,7 @@ function cuerpoInicio(hero) {
           <li><a href="/aprende/leer-recibo-nomina">Cómo leer tu recibo de nómina</a></li>
           <li><a href="/aprende/aguinaldo-bruto-neto">Aguinaldo bruto y neto</a></li>
           <li><a href="/aprende/vacaciones-prima-vacacional">Vacaciones y prima vacacional</a></li>
+          <li><a href="/aprende/fechas-de-pago">Fechas de pago de tus prestaciones</a></li>
           <li><a href="/aprende/resico-ingresos-cobrados">RESICO e ingresos cobrados</a></li>
           <li><a href="/aprende/pension-imss-ley-97">Pensión IMSS Ley 97</a></li>
         </ul></section>

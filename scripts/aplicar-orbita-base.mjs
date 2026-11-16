@@ -19,6 +19,7 @@ const STATIC_TOP_ROUTES = new Set([
   '/aprende/pension-imss-ley-97',
   '/aprende/resico-ingresos-cobrados',
   '/aprende/vacaciones-prima-vacacional',
+  '/aprende/fechas-de-pago',
   '/aprende/cat-y-gat-que-comparan',
   '/aprende/mensualidad-y-costo-del-credito',
   '/aprende/leer-fuentes-comparador-financiero',

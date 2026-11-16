@@ -1310,7 +1310,7 @@ export default function App({ rutaSSR } = {}) { if (typeof window !== 'undefined
               </div>
             </details>
             <p style={{marginTop:30}}>
-              <a href="/calculadoras" style={{color:'var(--ml-blue)',fontSize:14,fontWeight:600,textDecoration:'none'}}>
+              <a href="/calculadoras" className="cc-volver" style={{color:'var(--ml-blue)',fontSize:14,fontWeight:600,textDecoration:'none'}}>
                 ← Todas las calculadoras
               </a>
             </p>

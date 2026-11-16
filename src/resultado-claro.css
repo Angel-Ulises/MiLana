@@ -77,7 +77,7 @@
 /* Cada cuándo te pagan (semana, quincena, mes). */
 .cc-frecuencia{display:flex;gap:6px;margin-top:2px}
 .cc-opcion-chica{flex:1}
-.cc-opcion-chica span{min-height:40px;padding:6px 4px;font-size:13.5px;border-width:1.5px;border-radius:10px}
+.cc-opcion-chica span{min-height:44px;padding:6px 4px;font-size:13.5px;border-width:1.5px;border-radius:10px}
 
 /* Escuchar el resultado y ayuda para reclamar. */
 .rc-escuchar{display:inline-flex;align-items:center;gap:6px;margin-top:10px;min-height:40px;padding:6px 14px;border:1.5px solid var(--ml-slate-200,#cbd5e1);border-radius:999px;background:#fff;color:var(--ml-slate-900,#0f172a);font:600 14px inherit;cursor:pointer}
@@ -89,3 +89,12 @@
 .rc-veredicto{margin:0 0 8px;padding:10px 12px;border-radius:10px;font-size:15px;line-height:1.45}
 .rc-veredicto-bien{background:#EAF4EF;color:#14532d}
 .rc-veredicto-ojo{background:#FEF3C7;color:#713f12}
+
+/* Objetivos táctiles de al menos 44 px (T4, 2026-11-16). Antes: «Ver cómo se calculó» 36 px, siguiente paso 35 px,
+   «← Todas las calculadoras» 17 px y enlaces de opciones 28 px. */
+.rc-detalle summary{min-height:44px}
+.rc-siguiente{min-height:44px;box-sizing:border-box}
+.rc-escuchar{min-height:44px}
+.cc-enlace{display:inline-flex;align-items:center;min-height:44px;padding-top:0;padding-bottom:0}
+.cc-volver{display:inline-flex;align-items:center;min-height:44px}
+

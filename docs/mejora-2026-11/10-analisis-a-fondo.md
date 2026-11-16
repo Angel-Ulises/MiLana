@@ -1,6 +1,6 @@
 # Análisis a fondo: puntos ciegos y dónde ser pionera (16-nov-2026)
 
-> **Si solo lees una parte, lee la sección 8:** problemas que ya existen y problemas previstos, cada uno con su solución.
+> **Si solo lees una parte, lee las secciones 8 y 9:** problemas que ya existen y problemas previstos, cada uno con su solución.
 >
 > **Léelo primero.** Este documento manda sobre el orden de `08-ideas-pendientes.md` y `09-auditoria-y-plan.md`. Corrige cuatro cosas que esos documentos decían y que al medir resultaron distintas (sección 4).
 
@@ -156,7 +156,7 @@ De 159 páginas en el mapa del sitio, solo 25 (16%) son el núcleo de trabajo y 
 
 | Dije | Al medir |
 |---|---|
-| El sitio es pesado y lento para celulares sencillos | **No es lento.** Carga en 0.8 a 2.2 s simulando celular y red lentos. Sí hay 38 a 44 peticiones y unos 450 a 565 KB por página, pero no es prioridad. La tarea T7 baja al final |
+| El sitio es pesado y lento para celulares sencillos | **Lo propio no es lento** (ojo: la medición no incluyó los programas de Google, que solo cargan en el dominio real; ver R-42). Carga en 0.8 a 2.2 s simulando celular y red lentos. Sí hay 38 a 44 peticiones y unos 450 a 565 KB por página, pero no es prioridad. La tarea T7 baja al final |
 | «Hoy no se guarda nada en el dispositivo» | **Falso.** El sitio ya guarda preferencias (estado elegido, ruta recordada, letra grande) y contexto de la visita, y el aviso de privacidad lo dice |
 | Falta vigilancia automática | **Ya existe.** Lo que falta es atender lo que avisa (H-11) y vigilar el sitio en vivo y los cambios de ley |
 | Marcar preguntas frecuentes para buscadores | **Ya está** en 10 páginas, y hoy Google casi no las muestra fuera de sitios oficiales o de salud. Poco valor; verificar antes de invertirle |
@@ -207,6 +207,7 @@ Para cada cambio de ley, una página que lo traduzca a tu caso con tus números:
 - R-1: widgets vacíos.
 - R-2: fecha de salida congelada.
 - R-3 y R-4: proteger la rama de producción y fijar versiones (antes de que Opus abra muchos PR).
+- R-39: que el ejemplo de sueldo neto coincida con la calculadora.
 
 **Esta semana (temporada de aguinaldo)**
 1. H-4 en aguinaldo: que el resultado se vea al escribir.
@@ -216,6 +217,7 @@ Para cada cambio de ley, una página que lo traduzca a tu caso con tus números:
 **Antes del 15 de diciembre**
 - R-14: finiquito y liquidación deben aceptar fechas de 2027.
 - R-7: pruebas de viaje en el tiempo (procedimiento 8.4-A).
+- P-9: vigía de leyes funcionando (sección 9.4), antes de que termine la temporada.
 4. H-1: pensión con el requisito por año.
 5. P-1: jornada 2027 (herramienta y guía).
 6. T11: prueba con reloj simulado de las 10 calculadoras.
@@ -406,3 +408,77 @@ Fechas que se repiten cada año: salario mínimo (diciembre), tablas del ISR (fi
 - Diseño: celular primero, resultado antes que explicación, palabras de persona, sin saturar.
 - El sitio en vivo no se alcanza desde el entorno de trabajo: di siempre que falta la revisión visual.
 ```
+
+## 9. Tercera pasada: lo que faltaba por mirar
+
+Zonas revisadas: enlaces a fuentes, cifras viejas, basura visible, anuncios, portada, medición y coherencia entre ejemplos y calculadoras.
+
+### 9.1 Lo que salió limpio (no hay que hacer nada)
+
+- **Ninguna cifra vieja** en las 163 páginas: no aparecen la UMA ni los salarios mínimos de 2024 o 2025, ni «750 semanas», ni «48 horas», ni «INAI».
+- **Ningún carácter roto** ni página vacía.
+- **Los ejemplos de aguinaldo, ISR, finiquito y sueldo neto se recalculan en las pruebas con el mismo motor** que las calculadoras.
+- **Los eventos de medición no llevan importes ni texto escrito por la persona.**
+- **No se muestran huecos de anuncios:** el componente de reserva no dibuja nada.
+- **La portada ya está bien resuelta:** en la primera pantalla hay un título, una frase y seis situaciones («Voy a cobrar aguinaldo», con etiqueta de temporada; «Me despidieron»; «Renuncié…»). No conviene rehacerla.
+- **Calculadoras verificadas contra la ley en esta pasada:** tabla de vacaciones (art. 76 LFT) de 1 a 60 años; cuotas del IMSS del trabajador (2.375% más 0.40% sobre el excedente de 3 UMA); tabla de RESICO (art. 113-E LISR); prima de antigüedad al renunciar solo desde 15 años; liquidación sin los 20 días por defecto.
+
+### 9.2 Problemas nuevos
+
+| Código | Problema | Evidencia | Solución |
+|---|---|---|---|
+| **R-39** | **El ejemplo y la calculadora de sueldo neto dan resultados distintos para el mismo sueldo.** Con $20,000, el ejemplo de la página dice $17,103.58 y la calculadora $17,076.21 | El ejemplo usa un salario de cotización de $666.67 («bases iguales»); la calculadora usa el salario integrado mínimo ($699.54). IMSS: $512.77 contra $540.14. Los dos son defendibles, pero juntos se contradicen | Que el ejemplo use el mismo supuesto que la calculadora, o que diga en una línea por qué difiere. Prueba: el ejemplo de cada página coincide con lo que da la calculadora con esos datos |
+| **R-40** | **Un enlace a fuente oficial está roto y nadie vigila los enlaces externos.** La página del IPAB sobre la garantía de depósitos responde «no encontrada» | Probado dos veces; aparece en 4 fichas de Match (por ejemplo `/finanzas/match/cuentas/banamex-switch`). El sitio enlaza 137 direcciones externas de 50 dominios y el build solo verifica enlaces internos. Desde el entorno de trabajo solo se alcanzan 15 | Corregir el enlace por la vía de «actualizaciones verificadas» (los archivos de `orion-v2` no se editan). Agregar una revisión semanal de enlaces externos en GitHub, donde sí hay salida a internet, que abra **un solo** aviso con la lista |
+| **R-41** | **El programa de anuncios de Google se carga en 141 páginas y el sitio no tiene ningún espacio de anuncio.** | `index.html` lo inserta al cargar; `AdReserve` devuelve nada. Solo tiene sentido si la cuenta de AdSense tiene activados los anuncios automáticos | **Decisión de Ángel** (no se tocan anuncios sin su instrucción). Si los automáticos no están activos: quitar el programa hasta que haya anuncios, porque pesa y pone cookies sin dar ingreso. Si lo están: cargarlo después de la primera interacción |
+| **R-42** | **Mi medición de velocidad no incluyó los programas de Google.** Solo se cargan en el dominio real (`if (!prod) return`), así que en la prueba local no estaban | Código de `index.html` y `milana-analytics.js` | Medir en vivo con PageSpeed Insights sobre `milanaaqui.mx` (lo corre Ángel u Orion; es gratuito) en la portada, aguinaldo y una guía. Hasta entonces, «el sitio es rápido» vale solo para lo propio |
+| **R-43** | **La medición usa tres mecanismos y dos idiomas.** 15 eventos en inglés (`calculator_view`, `calculator_start`…), 4 en español (`compartir_whatsapp`…), 3 directos, y un evento distinto por calculadora (`calcular_aguinaldo`, `calcular_isr`…). `calculator_submit` parece muerto: las calculadoras ya no tienen botón | Inventario del código | Un diccionario de eventos en el repositorio (nombre, cuándo ocurre, parámetros, qué pregunta responde); quitar los muertos; un solo evento `calcular` con el parámetro `calculadora`. Hacerlo **antes** de registrar dimensiones en GA4, para no registrar nombres que van a cambiar |
+| **R-44** | **RESICO acepta ingresos que el régimen no admite** | Art. 113-E de la Ley del ISR: tope de $3,500,000 al año; si se rebasa en cualquier momento, deja de aplicar desde el mes siguiente | Cuando el ingreso del mes multiplicado por 12 rebase ese tope, avisar que a ese ritmo dejaría de aplicarle, sin afirmarlo como hecho. Sustituye al límite genérico de T1 en esta calculadora |
+| **R-45** | **Solo 4 de 10 calculadoras tienen ejemplo trabajado** | `public/casos-calculadoras.json`: finiquito, aguinaldo, ISR y sueldo neto | Agregar los seis que faltan con el mismo mecanismo (se recalculan en pruebas). Une con T5 |
+| **R-46** | Se ve la palabra «null» en una ficha | `/finanzas/match/tarjetas/nu-tarjeta-credito`: «Fechas normalizadas null» | No mostrar el campo cuando no hay dato. Prueba general: ninguna página muestra «null», «undefined» ni «NaN» |
+
+### 9.3 Qué medir, antes de configurar nada
+
+Seis preguntas que la medición debe poder contestar. Si un evento no ayuda a ninguna, sobra.
+
+1. ¿Qué calculadora se abre más y cuál se abandona antes de dar resultado?
+2. De quienes ven un resultado, ¿cuántos abren «Ver cómo se calculó», «¿Y si no me lo pagan?» o «¿Me pagaron bien?»?
+3. ¿Cuántos siguen al paso siguiente y a cuál?
+4. ¿Cuántos comparten o escuchan el resultado?
+5. ¿Qué buscan en el buscador interno que no encuentran? (Solo contar «sin resultado»; nunca enviar el texto.)
+6. ¿Por dónde llegan: buscador, directo o un enlace compartido?
+
+### 9.4 Novena apuesta: el vigía de leyes (probado)
+
+**P-9. Que el sitio se entere solo cuando cambia un artículo que cita.**
+
+Hoy la «revisión regulatoria» es un recordatorio semanal que nadie atiende (10 acumulados). Lo sustituye una revisión automática que dice exactamente qué cambió:
+
+- Descarga los PDF vigentes de la LFT, la LSS y la LISR desde diputados.gob.mx.
+- Extrae el texto y calcula una huella de cada artículo que MiLana usa, ignorando encabezados de página y la fecha de «Última reforma».
+- Compara contra la base guardada. Si un artículo cambió, o cambió la fecha de última reforma, termina con error para que la automatización abra un aviso con la lista.
+
+Probado hoy: localiza 55 de 55 artículos (38 de la LFT, 9 de la LSS, 8 de la LISR); dos corridas seguidas dan el mismo resultado; un cambio simulado en el artículo 87 se detecta. Así se habría sabido el 1 de mayo que cambiaron los artículos 59, 61, 66, 68, 69 y 71.
+
+Archivos en `docs/mejora-2026-11/herramientas/`:
+
+| Archivo | Para qué |
+|---|---|
+| `vigia-leyes.mjs` | El vigía. Uso: `node vigia-leyes.mjs <carpeta>`; con `--guardar` fija la base |
+| `huellas-2026-11-16.json` | Base de hoy. Copiarla como `huellas.json` en la carpeta de trabajo |
+| `fake-date.mjs` | Precarga para adelantar el reloj en las pruebas de Node |
+| `reloj-calculadoras.cjs` | Recorre las 10 calculadoras con el reloj del navegador en cuatro fechas |
+
+Para dejarlo funcionando:
+1. Mover `vigia-leyes.mjs` a `scripts/` y la base a `data/`.
+2. Una automatización diaria en GitHub que instale `poppler-utils`, lo corra y, si termina con error, abra un aviso. Sustituye a `regulatory-reminder.yml`.
+3. Anotar en cada calculadora y guía qué artículos usa, para que el aviso diga también qué páginas revisar.
+4. Los transitorios (donde viven el calendario de la jornada y las semanas de pensión) no tienen huella propia: el cambio de fecha de «Última reforma» es la señal para leer el decreto nuevo, al final del PDF.
+
+Límite: vigila leyes, no cifras anuales. Salario mínimo, UMA y tablas del ISR salen en otras publicaciones y siguen el procedimiento del «día del cambio».
+
+### 9.5 Decisiones de Ángel que se agregan
+
+- ¿Están activados los anuncios automáticos en AdSense? De eso depende R-41.
+- Correr PageSpeed Insights en vivo y guardar el resultado (R-42).
+- Si usa Search Console: guardar cada mes las búsquedas con más impresiones. Es la mejor fuente propia para decidir qué construir.
+- Decir el dominio en voz alta a alguien y ver si lo escribe bien. La marca es «MiLana» y el dominio es `milanaaqui.mx`; si la gente no lo recuerda, se pierde el boca a boca. No implica comprar nada: solo saberlo.

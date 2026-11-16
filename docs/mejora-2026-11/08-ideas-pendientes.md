@@ -377,6 +377,10 @@ Medición hecha sobre el build local del 16-nov-2026 (no sobre el sitio en vivo)
 | T13 | Ícono para la pantalla de inicio del teléfono y hoja de impresión limpia | sitio |
 | T14 | Reglas de cálculo abiertas, con licencia, pruebas públicas y fecha de la ley en cada resultado | sitio |
 | T15 | Poner en ceros los asuntos y PR abiertos; dejar solo alarmas que alguien atienda | interno |
+| T16 | Vigía de leyes: aviso automático cuando cambia un artículo citado (probado; ver documento 10, sección 9.4) | interno |
+| T17 | Diccionario de eventos de medición y las seis preguntas que debe contestar | interno |
+| T18 | Revisión semanal de enlaces externos a fuentes | interno |
+| T19 | Ejemplo trabajado en las seis calculadoras que no lo tienen, igual al resultado de la calculadora | calc |
 
 ---
 

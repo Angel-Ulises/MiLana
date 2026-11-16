@@ -78,12 +78,15 @@ test('el runtime del fallback monta la barra Abrir completa junto al formulario'
     insertBefore(node, before) { assert.equal(before, contenedor); brand = node; },
   };
   const classNames = new Set();
+  const enlaceInterno = { target: '', rel: '' };
+  const enlaceConDestino = { target: '_self', rel: '' };
   const document = {
     readyState: 'complete',
     documentElement: { classList: { add: (name) => classNames.add(name) } },
     head: { appendChild() {} },
     createElement: () => ({ className: '', innerHTML: '', textContent: '' }),
     querySelector: (selector) => selector === '.calculator-main' ? main : null,
+    querySelectorAll: (selector) => (selector === '.calculator-main a[href]' ? [enlaceInterno, enlaceConDestino] : []),
     addEventListener() {},
   };
   class MutationObserver { constructor(callback) { this.callback = callback; } observe() { this.callback(); } }
@@ -93,4 +96,7 @@ test('el runtime del fallback monta la barra Abrir completa junto al formulario'
   assert.ok(brand, 'la barra debe montarse junto al formulario');
   assert.match(brand.innerHTML, /Abrir completa/);
   assert.match(brand.innerHTML, /https:\/\/www\.milanaaqui\.mx\/calculadoras\/aguinaldo/);
+  assert.equal(enlaceInterno.target, '_blank', 'los enlaces internos se abren fuera del iframe');
+  assert.match(enlaceInterno.rel, /noopener/);
+  assert.equal(enlaceConDestino.target, '_self', 'un enlace con destino propio no se toca');
 });

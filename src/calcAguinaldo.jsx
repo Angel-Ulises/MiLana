@@ -125,20 +125,35 @@ function MePagaronBien({ neto, bruto }) {
             onChange={(e) => setDeposito(e.target.value)} onBlur={(e) => { const f = conMiles(e.target.value); if (f !== e.target.value) setDeposito(f); }} /></div>
         </div>
         <div aria-live="polite">
-          {c?.veredicto === 'cuadra' && <p className="rc-veredicto rc-veredicto-bien"><strong>Sí cuadra.</strong> Lo que te depositaron coincide con el cálculo.</p>}
-          {c?.veredicto === 'mas' && <p className="rc-veredicto rc-veredicto-bien"><strong>Te llegaron {fmtMx(c.diferencia)} más</strong> de lo estimado. Suele pasar si tu empresa da más de 15 días o usó otro método permitido para retener el ISR.{c.superaBruto ? ' Si te dan más días, toca «¿Te dan más de 15 días?» arriba para afinar el cálculo.' : ''}</p>}
-          {c?.veredicto === 'menos' && <>
-            <p className="rc-veredicto rc-veredicto-ojo"><strong>Te llegaron {fmtMx(Math.abs(c.diferencia))} menos</strong> de lo estimado. No siempre es un error. Revisa en tu recibo:</p>
-            <ul>
-              <li>El sueldo que usaron: que sea el que ganas hoy.</li>
-              <li>Los días: la ley pide al menos 15 por año completo, o la parte proporcional si entraste este año.</li>
-              <li>Otros descuentos: préstamos, pensión alimenticia o faltas.</li>
-            </ul>
-            <p>Si después de revisar no cuadra, pregunta en nómina. Si no te lo resuelven, abre «¿Y si no me lo pagan?».</p>
-          </>}
+          <VeredictoDeposito c={c} />
         </div>
       </div>
     </details>
   );
 }
 
+// Texto del veredicto: dice la diferencia y la tolerancia tal como las calcula compararDeposito,
+// y presenta las causas como posibilidades, no como hechos.
+export function VeredictoDeposito({ c }) {
+  if (!c) return null;
+  return (<>
+    {c.veredicto === 'exacto' && <p className="rc-veredicto rc-veredicto-bien"><strong>Coincide con el cálculo.</strong> Lo que te depositaron es igual a lo estimado, sin diferencia.</p>}
+    {c.veredicto === 'tolerancia' && <>
+      <p className="rc-veredicto rc-veredicto-bien"><strong>Casi igual: te llegaron {fmtMx(Math.abs(c.diferencia))} {c.diferencia < 0 ? 'menos' : 'más'}</strong> de lo estimado. La diferencia está dentro de la tolerancia de {fmtMx(c.margen)} que usa esta revisión.</p>
+      <p>La tolerancia es lo mayor entre $50 y 1% de tu aguinaldo antes de impuestos. Una diferencia así puede venir del redondeo o de la forma en que tu empresa retuvo el impuesto, pero aquí no podemos saber la causa: tu recibo es el que la dice.</p>
+    </>}
+    {c.veredicto === 'mas' && <>
+      <p className="rc-veredicto rc-veredicto-bien"><strong>Te llegaron {fmtMx(c.diferencia)} más</strong> de lo estimado. Eso rebasa la tolerancia de {fmtMx(c.margen)} que usa esta revisión.</p>
+      <p>Puede deberse, por ejemplo, a que tu empresa da más de 15 días o a que retuvo el impuesto con otro método permitido. Aquí no podemos saber la causa: tu recibo es el que la dice.{c.superaBruto ? ' Si te dan más días, toca «¿Te dan más de 15 días?» arriba para afinar el cálculo.' : ''}</p>
+    </>}
+    {c.veredicto === 'menos' && <>
+      <p className="rc-veredicto rc-veredicto-ojo"><strong>Te llegaron {fmtMx(Math.abs(c.diferencia))} menos</strong> de lo estimado. Eso rebasa la tolerancia de {fmtMx(c.margen)} que usa esta revisión. No siempre es un error. Revisa en tu recibo:</p>
+      <ul>
+        <li>El sueldo que usaron: que sea el que ganas hoy.</li>
+        <li>Los días: la ley pide al menos 15 por año completo, o la parte proporcional si entraste este año.</li>
+        <li>Otros descuentos que aparezcan en el recibo, por ejemplo un préstamo o una pensión alimenticia.</li>
+      </ul>
+      <p>Si después de revisar no cuadra, pregunta en nómina. Si no te lo resuelven, abre «¿Y si no me lo pagan?».</p>
+    </>}
+  </>);
+}

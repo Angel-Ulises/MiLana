@@ -18,7 +18,7 @@ const GUIAS = [
 
 // Fecha de la última revisión editorial visible en cada guía.
 const REVISADO = {
-  'fechas-de-pago': '2026-11-15',
+  'fechas-de-pago': '2026-11-16',
   'cat-y-gat-que-comparan': '2026-10-12',
   'mensualidad-y-costo-del-credito': '2026-10-12',
   'leer-fuentes-comparador-financiero': '2026-10-12',

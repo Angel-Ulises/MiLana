@@ -14,6 +14,15 @@ export const SALARIOS_MINIMOS_2026 = Object.freeze({
   general: 315.04,
   frontera: 440.87,
 });
+// Salarios mínimos por año de salida (CONASAMI, publicados en el DOF). Para agregar un año: solo con el valor
+// publicado en la fuente oficial. Mientras falte, se usa el último año conocido y el resultado lo avisa.
+export const SALARIOS_MINIMOS_POR_ANIO = Object.freeze({ 2026: SALARIOS_MINIMOS_2026 });
+export function salariosMinimosDe(anio) {
+  const conocidos = Object.keys(SALARIOS_MINIMOS_POR_ANIO).map(Number).sort((a, b) => a - b);
+  const usado = conocidos.filter((a) => a <= anio).at(-1) ?? conocidos[0];
+  return { anio: usado, valores: SALARIOS_MINIMOS_POR_ANIO[usado], pendiente: usado !== anio };
+}
+const diasDelAnio = (y) => ((y % 4 === 0 && y % 100 !== 0) || y % 400 === 0 ? 366 : 365);
 
 const DIA = 86_400_000;
 
@@ -57,7 +66,7 @@ function datosServicio(fechaIngreso, fechaSalida) {
   const ingreso = fechaCivil(fechaIngreso, 'Fecha de ingreso');
   const salida = fechaCivil(fechaSalida, 'Fecha de salida');
   if (salida.ms < ingreso.ms) throw new Error('La fecha de salida no puede ser anterior a la fecha de ingreso.');
-  if (salida.y !== 2026) throw new Error('Este cálculo está acotado a terminaciones ocurridas durante 2026.');
+  if (salida.y < 2026) throw new Error('Este cálculo cubre salidas desde el 1 de enero de 2026.');
 
   let completos = salida.y - ingreso.y;
   if (aniversario(ingreso, ingreso.y + completos) > salida.ms) completos -= 1;
@@ -74,8 +83,10 @@ function datosServicio(fechaIngreso, fechaSalida) {
   const diasServicio = Math.floor((salida.ms - ingreso.ms) / DIA) + 1;
   const aniosEquivalentes = completos + (diasTranscurridosCiclo / diasCiclo);
 
-  const inicioAguinaldo = Math.max(ingreso.ms, Date.UTC(2026, 0, 1));
+  // El aguinaldo proporcional cuenta desde el 1 de enero del año de la salida (o desde el ingreso, si fue después).
+  const inicioAguinaldo = Math.max(ingreso.ms, Date.UTC(salida.y, 0, 1));
   const diasAguinaldo = Math.floor((salida.ms - inicioAguinaldo) / DIA) + 1;
+  const diasAnioSalida = diasDelAnio(salida.y);
 
   return {
     ingreso,
@@ -86,6 +97,7 @@ function datosServicio(fechaIngreso, fechaSalida) {
     diasCiclo,
     diasCicloActual,
     diasAguinaldo,
+    diasAnioSalida,
   };
 }
 
@@ -135,14 +147,16 @@ export function calcularFiniquito2026({
   const salarioDiario = salario / 30;
 
   const pagoSalarioPendiente = salarioDiario * pendientesSalario;
-  const aguinaldoProporcional = salarioDiario * prestaciones.aguinaldo * (datos.diasAguinaldo / 365);
+  const aguinaldoProporcional = salarioDiario * prestaciones.aguinaldo * (datos.diasAguinaldo / datos.diasAnioSalida);
   const vacacionesProporcionalesDias = prestaciones.vacAnuales * (datos.diasCicloActual / datos.diasCiclo);
   const vacacionesTotalesDias = vacacionesProporcionalesDias + vacPendientes;
   const pagoVacaciones = salarioDiario * vacacionesTotalesDias;
   const primaVacacional = pagoVacaciones * (prestaciones.primaPct / 100);
 
   const aplicaPrimaAntiguedad = causa === 'separacion-patron' || (causa === 'renuncia' && datos.aniosCompletos >= 15);
-  const topePrimaDiario = SALARIOS_MINIMOS_2026[zonaOk] * 2;
+  // Tope de la prima de antigüedad: dos salarios mínimos del año de la salida (LFT arts. 162 y 486).
+  const minimos = salariosMinimosDe(datos.salida.y);
+  const topePrimaDiario = minimos.valores[zonaOk] * 2;
   const primaAntiguedad = aplicaPrimaAntiguedad
     ? 12 * Math.min(salarioDiario, topePrimaDiario) * datos.aniosEquivalentes
     : 0;
@@ -163,6 +177,8 @@ export function calcularFiniquito2026({
     primaVacacional,
     aplicaPrimaAntiguedad,
     topePrimaDiario,
+    anioSalariosMinimos: minimos.anio,
+    salariosMinimosPendientes: minimos.pendiente,
     primaAntiguedad,
     subtotalSinPrimaAntiguedad,
     totalBruto,

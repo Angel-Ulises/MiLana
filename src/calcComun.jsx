@@ -115,13 +115,22 @@ export function useEventoResultado(calculadora, hayResultado, modo) {
   }, [calculadora, hayResultado, modo]);
 }
 
-// Hoy, limitado a 2026 (las calculadoras laborales cubren terminaciones en 2026).
-export function hoy2026() {
+// Fecha de hoy para el «último día de trabajo». Las calculadoras laborales cubren salidas desde el 1 de enero de 2026.
+export function hoyDesde2026() {
+  const iso = hoyISO();
+  return iso < '2026-01-01' ? '2026-01-01' : iso;
+}
+export function hoyISO() {
   const d = new Date();
-  const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-  if (iso < '2026-01-01') return '2026-01-01';
-  if (iso > '2026-12-31') return '2026-12-31';
-  return iso;
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+// Último día que aceptan los campos de fecha: el 31 de diciembre del año en curso.
+export function finDeAnioEnCurso() {
+  return `${Math.max(2026, new Date().getFullYear())}-12-31`;
+}
+// Se conserva por compatibilidad; ya no limita a 2026.
+export function hoy2026() {
+  return hoyDesde2026();
 }
 
 export function Contenedor({ children }) {

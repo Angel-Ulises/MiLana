@@ -1,0 +1,62 @@
+name: Leyes — vigilar artículos que usa MiLana
+
+# Descarga la LFT, la LSS y la LISR vigentes de diputados.gob.mx y compara cada artículo que usa MiLana con
+# data/leyes/huellas.json. Si algo cambió, abre (o actualiza) un solo aviso con la lista y las páginas a revisar.
+# Si deja de haber diferencias (porque se revisó y se guardó la base nueva), cierra el aviso.
+on:
+  schedule:
+    - cron: '41 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Instalar pdftotext
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - id: check
+        run: node scripts/leyes/vigia-leyes.mjs
+      - name: Abrir, actualizar o cerrar el aviso
+        uses: actions/github-script@v7
+        env:
+          CHANGED: ${{ steps.check.outputs.changed }}
+          RESUMEN_B64: ${{ steps.check.outputs.resumen_b64 }}
+        with:
+          script: |
+            const title = '[Leyes] Cambió un artículo que usa MiLana';
+            const { data: issues } = await github.rest.issues.listForRepo({ owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100 });
+            const existing = issues.find((issue) => issue.title === title && !issue.pull_request);
+            if (process.env.CHANGED !== 'true') {
+              if (existing) {
+                await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, body: 'Ya no hay diferencias con la base guardada. Se cierra el aviso.' });
+                await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, state: 'closed' });
+              }
+              core.notice('Sin cambios en los artículos vigilados.');
+              return;
+            }
+            const resumen = Buffer.from(process.env.RESUMEN_B64 || '', 'base64').toString('utf8');
+            const body = [
+              'El texto oficial cambió en artículos que usa MiLana:',
+              '',
+              resumen,
+              '',
+              '**Qué hacer**',
+              '1. Leer el decreto nuevo al final del PDF en diputados.gob.mx y ver qué cambió y desde cuándo aplica.',
+              '2. Ajustar las páginas indicadas (cálculo, texto y fuente), con la cita en el PR.',
+              '3. Guardar la base nueva: `node scripts/leyes/vigia-leyes.mjs --guardar` y subir `data/leyes/huellas.json` en el mismo PR.',
+              '',
+              '_Aviso automático. No se cierra solo hasta que la base se actualice._',
+            ].join('\n');
+            if (existing) {
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, body });
+            } else {
+              await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title, body });
+            }

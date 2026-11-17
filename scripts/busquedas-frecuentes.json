@@ -1,84 +1,337 @@
 {
-  "_nota": "Búsquedas que la gente escribe y la página a la que deben llevar. El buscador muestra las primeras 10 coincidencias en el orden del índice; la página esperada debe estar entre ellas. Para sumar una: agrega [búsqueda, ruta]. Búsquedas sin página (todavía no hay contenido): horas extra, incapacidad, maternidad, embarazo, días festivos, prima de antigüedad, declaración anual, devolución de impuestos, buró de crédito, factura, SAT, RFC, salario mínimo.",
+  "_nota": "Búsquedas que la gente escribe y la página a la que deben llevar. El buscador muestra las primeras 10 coincidencias en el orden del índice; la página esperada debe estar entre ellas. Para sumar una: agrega [búsqueda, ruta]. Búsquedas sin página (todavía no hay contenido): incapacidad, maternidad, embarazo, días festivos (solo como día de descanso), prima de antigüedad, declaración anual, devolución de impuestos, buró de crédito, factura, SAT, RFC, salario mínimo.",
   "busquedas": [
-    ["renuncia", "/calculadoras/finiquito"],
-    ["renunciar", "/calculadoras/finiquito"],
-    ["voy a renunciar", "/calculadoras/finiquito"],
-    ["renuncié", "/calculadoras/finiquito"],
-    ["me corrieron", "/calculadoras/liquidacion"],
-    ["me despidieron", "/calculadoras/liquidacion"],
-    ["despido", "/calculadoras/liquidacion"],
-    ["finiquito", "/calculadoras/finiquito"],
-    ["liquidación", "/calculadoras/liquidacion"],
-    ["aguinaldo", "/calculadoras/aguinaldo"],
-    ["cuándo pagan aguinaldo", "/aprende/fechas-de-pago"],
-    ["fechas de pago", "/aprende/fechas-de-pago"],
-    ["cuándo me pagan", "/aprende/fechas-de-pago"],
-    ["utilidades", "/calculadoras/ptu"],
-    ["reparto de utilidades", "/calculadoras/ptu"],
-    ["ptu", "/calculadoras/ptu"],
-    ["vacaciones", "/calculadoras/vacaciones"],
-    ["prima vacacional", "/calculadoras/vacaciones"],
-    ["cuánto me descuentan", "/calculadoras/isr"],
-    ["descuentos", "/calculadoras/isr"],
-    ["impuestos", "/calculadoras/isr"],
-    ["impuesto", "/calculadoras/isr"],
-    ["isr", "/calculadoras/isr"],
-    ["sueldo", "/calculadoras/bruto-a-neto"],
-    ["salario", "/calculadoras/bruto-a-neto"],
-    ["sueldo neto", "/calculadoras/bruto-a-neto"],
-    ["cuánto me llega", "/calculadoras/bruto-a-neto"],
-    ["quincena", "/calculadoras/bruto-a-neto"],
-    ["nómina", "/calculadoras/bruto-a-neto"],
-    ["recibo de nómina", "/aprende/leer-recibo-nomina"],
-    ["recibo", "/aprende/leer-recibo-nomina"],
-    ["resico", "/calculadoras/resico"],
-    ["honorarios", "/calculadoras/resico"],
-    ["freelance", "/calculadoras/resico"],
-    ["pensión", "/calculadoras/pension-imss"],
-    ["jubilación", "/calculadoras/pension-imss"],
-    ["jubilarme", "/calculadoras/pension-imss"],
-    ["afore", "/finanzas/match/afores"],
-    ["infonavit", "/calculadoras/infonavit"],
-    ["crédito infonavit", "/calculadoras/infonavit"],
-    ["casa", "/finanzas/match/hipotecas"],
-    ["cetes", "/finanzas/inversion/cetes"],
-    ["tarjeta", "/finanzas/match/tarjetas"],
-    ["deuda", "/finanzas/deuda-y-credito"],
-    ["deudas", "/finanzas/deuda-y-credito"],
-    ["ahorro", "/finanzas/ahorro"],
-    ["ahorrar", "/finanzas/ahorro"],
-    ["no me alcanza", "/finanzas/presupuesto"],
-    ["dinero", "/finanzas/presupuesto"],
-    ["seguro", "/finanzas/match/seguros"],
-    ["carro", "/finanzas/match/automotriz"],
-    ["préstamo", "/finanzas/match/creditos-personales"],
-    ["invertir", "/invertir"],
-    ["inflación", "/economia"],
-    ["privacidad", "/privacidad"],
-    ["aviso de privacidad", "/privacidad"],
-    ["datos personales", "/privacidad"],
-    ["contacto", "/contacto"],
-    ["reportar un error", "/contacto"],
-    ["quién hizo esta página", "/sobre"],
-    ["términos y condiciones", "/terminos"],
-    ["cómo calculan", "/metodo"],
-    ["publicidad", "/financiamiento"],
-    ["insertar calculadora", "/widgets"],
-    ["cdmx", "/estados/ciudad-de-mexico"],
-    ["monterrey", "/estados/nuevo-leon"],
-    ["guadalajara", "/estados/jalisco"],
-    ["mérida", "/estados/yucatan"],
-    ["cancún", "/estados/quintana-roo"],
-    ["enfermera", "/carreras/profesion/enfermeria"],
-    ["ingeniero", "/carreras/profesion/ingenieria-civil"],
-    ["abogado", "/carreras/profesion/derecho"],
-    ["contador", "/carreras/profesion/contabilidad"],
-    ["programador", "/carreras/profesion/ciencias-computacion"],
-    ["psicólogo", "/carreras/profesion/psicologia"],
-    ["qué carrera estudiar", "/carreras/comparar"],
-    ["dónde vivir", "/estados/comparar"],
-    ["me van a despedir", "/situaciones/terminar-relacion-laboral"],
-    ["no entiendo mi sueldo", "/situaciones/entender-mi-sueldo"]
+    [
+      "renuncia",
+      "/calculadoras/finiquito"
+    ],
+    [
+      "renunciar",
+      "/calculadoras/finiquito"
+    ],
+    [
+      "voy a renunciar",
+      "/calculadoras/finiquito"
+    ],
+    [
+      "renuncié",
+      "/calculadoras/finiquito"
+    ],
+    [
+      "me corrieron",
+      "/calculadoras/liquidacion"
+    ],
+    [
+      "me despidieron",
+      "/calculadoras/liquidacion"
+    ],
+    [
+      "despido",
+      "/calculadoras/liquidacion"
+    ],
+    [
+      "finiquito",
+      "/calculadoras/finiquito"
+    ],
+    [
+      "liquidación",
+      "/calculadoras/liquidacion"
+    ],
+    [
+      "aguinaldo",
+      "/calculadoras/aguinaldo"
+    ],
+    [
+      "cuándo pagan aguinaldo",
+      "/aprende/fechas-de-pago"
+    ],
+    [
+      "fechas de pago",
+      "/aprende/fechas-de-pago"
+    ],
+    [
+      "cuándo me pagan",
+      "/aprende/fechas-de-pago"
+    ],
+    [
+      "utilidades",
+      "/calculadoras/ptu"
+    ],
+    [
+      "reparto de utilidades",
+      "/calculadoras/ptu"
+    ],
+    [
+      "ptu",
+      "/calculadoras/ptu"
+    ],
+    [
+      "vacaciones",
+      "/calculadoras/vacaciones"
+    ],
+    [
+      "prima vacacional",
+      "/calculadoras/vacaciones"
+    ],
+    [
+      "cuánto me descuentan",
+      "/calculadoras/isr"
+    ],
+    [
+      "descuentos",
+      "/calculadoras/isr"
+    ],
+    [
+      "impuestos",
+      "/calculadoras/isr"
+    ],
+    [
+      "impuesto",
+      "/calculadoras/isr"
+    ],
+    [
+      "isr",
+      "/calculadoras/isr"
+    ],
+    [
+      "sueldo",
+      "/calculadoras/bruto-a-neto"
+    ],
+    [
+      "salario",
+      "/calculadoras/bruto-a-neto"
+    ],
+    [
+      "sueldo neto",
+      "/calculadoras/bruto-a-neto"
+    ],
+    [
+      "cuánto me llega",
+      "/calculadoras/bruto-a-neto"
+    ],
+    [
+      "quincena",
+      "/calculadoras/bruto-a-neto"
+    ],
+    [
+      "nómina",
+      "/calculadoras/bruto-a-neto"
+    ],
+    [
+      "recibo de nómina",
+      "/aprende/leer-recibo-nomina"
+    ],
+    [
+      "recibo",
+      "/aprende/leer-recibo-nomina"
+    ],
+    [
+      "resico",
+      "/calculadoras/resico"
+    ],
+    [
+      "honorarios",
+      "/calculadoras/resico"
+    ],
+    [
+      "freelance",
+      "/calculadoras/resico"
+    ],
+    [
+      "pensión",
+      "/calculadoras/pension-imss"
+    ],
+    [
+      "jubilación",
+      "/calculadoras/pension-imss"
+    ],
+    [
+      "jubilarme",
+      "/calculadoras/pension-imss"
+    ],
+    [
+      "afore",
+      "/finanzas/match/afores"
+    ],
+    [
+      "infonavit",
+      "/calculadoras/infonavit"
+    ],
+    [
+      "crédito infonavit",
+      "/calculadoras/infonavit"
+    ],
+    [
+      "casa",
+      "/finanzas/match/hipotecas"
+    ],
+    [
+      "cetes",
+      "/finanzas/inversion/cetes"
+    ],
+    [
+      "tarjeta",
+      "/finanzas/match/tarjetas"
+    ],
+    [
+      "deuda",
+      "/finanzas/deuda-y-credito"
+    ],
+    [
+      "deudas",
+      "/finanzas/deuda-y-credito"
+    ],
+    [
+      "ahorro",
+      "/finanzas/ahorro"
+    ],
+    [
+      "ahorrar",
+      "/finanzas/ahorro"
+    ],
+    [
+      "no me alcanza",
+      "/finanzas/presupuesto"
+    ],
+    [
+      "dinero",
+      "/finanzas/presupuesto"
+    ],
+    [
+      "seguro",
+      "/finanzas/match/seguros"
+    ],
+    [
+      "carro",
+      "/finanzas/match/automotriz"
+    ],
+    [
+      "préstamo",
+      "/finanzas/match/creditos-personales"
+    ],
+    [
+      "invertir",
+      "/invertir"
+    ],
+    [
+      "inflación",
+      "/economia"
+    ],
+    [
+      "privacidad",
+      "/privacidad"
+    ],
+    [
+      "aviso de privacidad",
+      "/privacidad"
+    ],
+    [
+      "datos personales",
+      "/privacidad"
+    ],
+    [
+      "contacto",
+      "/contacto"
+    ],
+    [
+      "reportar un error",
+      "/contacto"
+    ],
+    [
+      "quién hizo esta página",
+      "/sobre"
+    ],
+    [
+      "términos y condiciones",
+      "/terminos"
+    ],
+    [
+      "cómo calculan",
+      "/metodo"
+    ],
+    [
+      "publicidad",
+      "/financiamiento"
+    ],
+    [
+      "insertar calculadora",
+      "/widgets"
+    ],
+    [
+      "cdmx",
+      "/estados/ciudad-de-mexico"
+    ],
+    [
+      "monterrey",
+      "/estados/nuevo-leon"
+    ],
+    [
+      "guadalajara",
+      "/estados/jalisco"
+    ],
+    [
+      "mérida",
+      "/estados/yucatan"
+    ],
+    [
+      "cancún",
+      "/estados/quintana-roo"
+    ],
+    [
+      "enfermera",
+      "/carreras/profesion/enfermeria"
+    ],
+    [
+      "ingeniero",
+      "/carreras/profesion/ingenieria-civil"
+    ],
+    [
+      "abogado",
+      "/carreras/profesion/derecho"
+    ],
+    [
+      "contador",
+      "/carreras/profesion/contabilidad"
+    ],
+    [
+      "programador",
+      "/carreras/profesion/ciencias-computacion"
+    ],
+    [
+      "psicólogo",
+      "/carreras/profesion/psicologia"
+    ],
+    [
+      "qué carrera estudiar",
+      "/carreras/comparar"
+    ],
+    [
+      "dónde vivir",
+      "/estados/comparar"
+    ],
+    [
+      "me van a despedir",
+      "/situaciones/terminar-relacion-laboral"
+    ],
+    [
+      "no entiendo mi sueldo",
+      "/situaciones/entender-mi-sueldo"
+    ],
+    [
+      "horas extra",
+      "/aprende/jornada-2027"
+    ],
+    [
+      "jornada laboral",
+      "/aprende/jornada-2027"
+    ],
+    [
+      "40 horas",
+      "/aprende/jornada-2027"
+    ],
+    [
+      "prima dominical",
+      "/aprende/jornada-2027"
+    ]
   ]
 }

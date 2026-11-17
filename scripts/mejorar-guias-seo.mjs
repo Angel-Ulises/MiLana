@@ -9,6 +9,7 @@ const GUIAS = [
   'aguinaldo-bruto-neto',
   'vacaciones-prima-vacacional',
   'fechas-de-pago',
+  'jornada-2027',
   'resico-ingresos-cobrados',
   'pension-imss-ley-97',
   'cat-y-gat-que-comparan',
@@ -19,6 +20,7 @@ const GUIAS = [
 // Fecha de la última revisión editorial visible en cada guía.
 const REVISADO = {
   'fechas-de-pago': '2026-11-16',
+  'jornada-2027': '2026-11-17',
   'cat-y-gat-que-comparan': '2026-10-12',
   'mensualidad-y-costo-del-credito': '2026-10-12',
   'leer-fuentes-comparador-financiero': '2026-10-12',
@@ -34,6 +36,7 @@ const IMAGENES = {
   'aguinaldo-bruto-neto': '/images/gen/aguinaldo-1024.jpg',
   'vacaciones-prima-vacacional': '/images/gen/vacaciones-1024.jpg',
   'fechas-de-pago': '/images/gen/aguinaldo-1024.jpg',
+  'jornada-2027': '/images/gen/bruto-neto-1024.jpg',
   'resico-ingresos-cobrados': '/images/gen/resico-1024.jpg',
   'pension-imss-ley-97': '/images/gen/pension-1024.jpg',
   'cat-y-gat-que-comparan': '/images/match/og-cat-y-gat.jpg',

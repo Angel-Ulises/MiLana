@@ -12,7 +12,7 @@ test('Aprende ofrece ocho situaciones y solo revela la explicación al elegir',(
  assert.match(html, /data-learn-result[^>]*hidden/);
  assert.equal((html.match(/data-learn-topic="/g)||[]).length,8);
  assert.match(html, /<details class="learn-catalog" id="catalogo">/);
- assert.equal((html.match(/<article class="card">/g)||[]).length,10);
+ assert.equal((html.match(/<article class="card">/g)||[]).length,11);
  assert.ok(html.indexOf('id="encontrar"') < html.indexOf('class="learn-catalog"'));
  assert.match(html, /src="\/learn-guide\.js"/);
  assert.match(html,/rel="canonical"/);

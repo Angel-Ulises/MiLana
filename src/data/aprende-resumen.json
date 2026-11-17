@@ -50,6 +50,11 @@
       "Aplica si trabajas para un patrón. Sueldo: cada semana si haces trabajo material y cada quincena como máximo en los demás trabajos.",
       "Aguinaldo: antes del 20 de diciembre. Vacaciones: dentro de los seis meses después de tu aniversario, con prima de por lo menos 25%.",
       "Utilidades: a más tardar el 30 de mayo si tu patrón es una empresa (persona moral) y el 29 de junio si es persona física, y solo si tuvo renta gravable."
+    ],
+    "jornada-2027": [
+      "Desde el 1 de enero de 2027 la jornada máxima baja de 48 a 46 horas por semana; llega a 40 en 2030. Tu sueldo no puede bajar.",
+      "El día sigue siendo de máximo 8 horas (diurna), 7 (nocturna) o 7 y media (mixta), con un día de descanso por cada 6 de trabajo.",
+      "Horas extra: al doble hasta 9 a la semana en 2027; al triple si se pasa, y nunca más de 12 horas en un día."
     ]
   }
 }

@@ -108,6 +108,11 @@
 /* Ilustraciones de guías: flujo normal, sin recorte del texto del SVG. */
 .guide-figure{margin:28px 0;padding:16px;border:1px solid #D9E1E8;border-radius:16px;background:#FBF8F2}.guide-figure img{display:block;width:100%;max-width:480px;height:auto;margin:0 auto}.guide-figure figcaption{margin-top:10px;color:#4F5D6B;font-size:14px;line-height:1.5;text-align:center}
 
+/* Tablas dentro de guías (jornada 2027). */
+.tabla-jornada{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:15px}
+.tabla-jornada th,.tabla-jornada td{padding:10px 8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+.tabla-jornada th{font-size:13px;font-weight:700}
+
 /* Hoja de impresión (H-13, 2026-11-16): las guías salen sin menús, botones de herramientas ni pie. */
 @media print {
   html,body{background:#fff!important;color:#000!important}

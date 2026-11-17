@@ -1,8 +1,41 @@
 # Análisis a fondo: puntos ciegos y dónde ser pionera (16-nov-2026)
 
+> **Estado al 17-nov-2026 (ver sección 0).** Ya están en producción: R-1, R-2, R-4, R-39, R-46, H-1, H-6, R-14, T4, H-13, buscador (parte de datos de H-5/T9) y la guía de jornada 2027 (P-1, parte 1). En PR: H-4 (#182) y R-15 (aviso de año).
+>
 > **Si solo lees una parte, lee las secciones 8 y 9:** problemas que ya existen y problemas previstos, cada uno con su solución.
 >
 > **Léelo primero.** Este documento manda sobre el orden de `08-ideas-pendientes.md` y `09-auditoria-y-plan.md`. Corrige cuatro cosas que esos documentos decían y que al medir resultaron distintas (sección 4).
+
+## 0. Estado (actualizado el 17-nov-2026)
+
+| Código | Qué | PR | Estado |
+|---|---|---|---|
+| R-1 | Widgets vacíos | [#169](https://github.com/Angel-Ulises/MiLana/pull/169) | En producción |
+| R-2 | Fecha de salida congelada al día del despliegue | [#170](https://github.com/Angel-Ulises/MiLana/pull/170) | En producción |
+| R-39 | Ejemplo de sueldo neto distinto de la calculadora | [#171](https://github.com/Angel-Ulises/MiLana/pull/171) | En producción |
+| R-4 | Versiones fijas: `package-lock.json` y `npm ci` | [#172](https://github.com/Angel-Ulises/MiLana/pull/172) | En producción |
+| H-5 / T9 (datos) | Buscador: guías, situaciones, palabras de la gente, 79 búsquedas verificadas | [#173](https://github.com/Angel-Ulises/MiLana/pull/173) | En producción |
+| R-46 | «null» visible; verificador de texto visible en el build | [#174](https://github.com/Angel-Ulises/MiLana/pull/174) | En producción |
+| H-6 | Vacaciones con menos de un año | [#175](https://github.com/Angel-Ulises/MiLana/pull/175) | En producción |
+| T4 | Objetivos táctiles de 44 px | [#176](https://github.com/Angel-Ulises/MiLana/pull/176) | En producción |
+| H-13 | Ícono para el teléfono y hoja de impresión | [#177](https://github.com/Angel-Ulises/MiLana/pull/177) | En producción |
+| H-1 | Pensión: semanas por año y medidas en el año en que se pide | [#179](https://github.com/Angel-Ulises/MiLana/pull/179) | En producción |
+| R-14 | Finiquito y liquidación aceptan salidas en 2027 | [#180](https://github.com/Angel-Ulises/MiLana/pull/180) | En producción |
+| P-1 (guía) | `/aprende/jornada-2027` | [#181](https://github.com/Angel-Ulises/MiLana/pull/181) | En producción |
+| H-4 | Barra con el monto sobre el teclado | [#182](https://github.com/Angel-Ulises/MiLana/pull/182) | En revisión |
+| R-15 | Aviso cuando ISR y sueldo neto usan valores del año anterior | — | En curso |
+
+**Siguen pendientes con fecha:**
+- **Salario mínimo 2027** (CONASAMI lo publica en diciembre): agregarlo a `SALARIOS_MINIMOS_POR_ANIO` en `src/lib/calculos-laborales-2026.mjs`, con su fuente. Mientras no esté, finiquito y liquidación avisan.
+- **Tablas del ISR y UMA 2027**: cuando se publiquen, seguir el procedimiento del «día del cambio» (8.4-B). Mientras no estén, ISR y sueldo neto avisan (R-15).
+- **Aguinaldo**: calcula explícitamente el aguinaldo de 2026 (correcto para revisar el pago de diciembre). Para el aguinaldo de 2027 hay que generalizar el año antes de mediados de 2027.
+- **P-1, parte 2**: calculadora de horas extra; decidir antes cómo se calcula el valor de la hora (con supuestos visibles).
+
+**Lecciones nuevas de esta ronda:**
+- Al juntar PR que agregan pasos en el mismo punto de `package.json` o bloques al final del mismo CSS, hay conflictos. Se resuelven conservando ambos lados; conviene integrar todos en una rama local y correr el build completo antes de fusionar.
+- Correr el build completo **después** del último cambio, no antes (PR #172 falló por eso).
+- `position: fixed` dentro de `.ml-premium-reveal` (tiene `transform`) no se mide contra la pantalla: usar un portal al `body`.
+- `MensajeError` siempre dibuja un `<p role="alert">` vacío: las pruebas deben contar solo los que tienen texto.
 
 ## 1. Cómo se hizo y qué límites tiene
 

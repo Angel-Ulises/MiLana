@@ -32,14 +32,18 @@ async function revisar(chrome, port, slug, campos, alto) {
         let ultimo;
         for (const [n, v] of ${JSON.stringify(campos)}) { ultimo = document.querySelector('[data-calc-directo] input[name="' + n + '"]'); poner.call(ultimo, v); ultimo.dispatchEvent(new Event('input', { bubbles: true })); }
         ultimo.focus({ preventScroll: true });
-        await espera(700);
+        // Espera a que haya resultado y a que la barra reaccione (hasta 5 s), en vez de un tiempo fijo.
+        const hasta = async (cond) => { for (let i = 0; i < 50 && !cond(); i++) await espera(100); };
+        await hasta(() => document.querySelector('.rc-monto'));
+        await hasta(() => document.querySelector('.rc-flotante') || ((r) => r && r.top >= 0 && r.bottom <= innerHeight)(document.querySelector('.rc-monto')?.getBoundingClientRect()));
+        await espera(150);
         const dentro = (e) => { if (!e) return false; const r = e.getBoundingClientRect(); return r.top >= 0 && r.bottom <= innerHeight && r.width > 0 && r.height > 0; };
         const barra = document.querySelector('.rc-flotante');
         const monto = document.querySelector('.rc-monto');
         document.body.dataset.montoAntes = String(dentro(monto));
         document.body.dataset.barra = String(dentro(barra));
         document.body.dataset.barraMonto = barra ? String(barra.innerText.includes(monto.innerText)) : 'sin-barra';
-        if (barra) { barra.click(); await espera(900); }
+        if (barra) { barra.click(); await hasta(() => !document.querySelector('.rc-flotante')); await espera(400); }
         document.body.dataset.montoDespues = String(dentro(document.querySelector('.rc-monto')));
         document.body.dataset.barraDespues = String(!!document.querySelector('.rc-flotante'));
         document.body.dataset.fin = 'listo';

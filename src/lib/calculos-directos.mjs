@@ -82,18 +82,41 @@ export function calcularCredito({ monto, tasaAnual, plazoAnios }) {
   return { monto: m, tasa, plazo, pagoMensual: pago, totalPagado, totalIntereses: totalPagado - m, tablaAnual };
 }
 
-// LSS, transitorio Cuarto del decreto DOF 16-12-2020: 750 semanas en 2021, +25 por año hasta 1,000 en 2031.
-export const SEMANAS_MINIMAS_2026 = 875;
-export function revisarPension({ edad, semanas }) {
+// Ley del Seguro Social, transitorio Cuarto del decreto DOF 16-12-2020 (vigente desde el 1-ene-2021): las semanas para
+// cesantía (art. 154) y vejez (art. 162) son 750 en 2021 y suben 25 cada año hasta llegar a 1,000 en 2031.
+export const SEMANAS_PENSION_FINAL = 1000;
+export function semanasMinimasPension(anio) {
+  const a = Math.floor(Number(anio));
+  if (!Number.isFinite(a) || a < 2021) throw new Error('Año fuera del calendario de la reforma de 2020.');
+  return Math.min(SEMANAS_PENSION_FINAL, 750 + 25 * (a - 2021));
+}
+export const SEMANAS_MINIMAS_2026 = semanasMinimasPension(2026);
+
+// Lo que exige la ley se mide en el año en que la persona puede pedir la pensión: el de hoy si ya tiene 60 años,
+// o el año en que cumpla 60. Comparar contra el requisito de hoy engaña a quien todavía no tiene la edad.
+// La proyección supone que sigue cotizando sin pausas (unas 52 semanas al año); es aproximada.
+const SEMANAS_POR_ANIO = 52;
+export function revisarPension({ edad, semanas, anio = new Date().getFullYear() }) {
   const e = Math.floor(positivo(edad, 'Edad'));
   const s = String(semanas ?? '').trim() === '' ? 0 : Math.floor(Number(semanas));
   if (!Number.isFinite(s) || s < 0) throw new Error('Semanas cotizadas: revisa el número.');
+  const hoy = Math.max(Math.floor(Number(anio)), 2021);
+  const anioReclamo = hoy + Math.max(60 - e, 0);
+  const minimo = semanasMinimasPension(anioReclamo);
+  let anioSemanas = hoy;
+  while (s + SEMANAS_POR_ANIO * (anioSemanas - hoy) < semanasMinimasPension(anioSemanas)) anioSemanas++;
   return {
     edad: e,
     semanas: s,
-    minimo: SEMANAS_MINIMAS_2026,
-    faltan: Math.max(SEMANAS_MINIMAS_2026 - s, 0),
-    cumpleSemanas: s >= SEMANAS_MINIMAS_2026,
+    anio: hoy,
+    minimoHoy: semanasMinimasPension(hoy),
+    anioReclamo,
+    minimo,
+    faltan: Math.max(minimo - s, 0),
+    cumpleSemanas: s >= minimo,
+    // Año aproximado en que tendría las semanas si sigue cotizando, y en que podría pedir la pensión (semanas y 60 años).
+    anioSemanas,
+    anioPosible: Math.max(anioSemanas, anioReclamo),
     tipo: e >= 65 ? 'vejez' : e >= 60 ? 'cesantia' : null,
     aniosParaSesenta: Math.max(60 - e, 0),
   };

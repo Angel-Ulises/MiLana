@@ -98,6 +98,9 @@
 .cc-enlace{display:inline-flex;align-items:center;min-height:44px;padding-top:0;padding-bottom:0}
 .cc-volver{display:inline-flex;align-items:center;min-height:44px}
 
+/* Aviso de año (R-15): el cálculo usa valores de un año anterior al actual. */
+.rc-aviso-anio{margin:8px 0 0;padding:8px 10px;border-radius:8px;background:#FEF3C7;color:#713f12;font-size:14px;line-height:1.4}
+
 /* Resultado a la vista (H-4, 2026-11-17): barra fija sobre el teclado mientras el monto está abajo de lo visible. */
 .rc-flotante{position:fixed;left:12px;right:12px;bottom:calc(12px + var(--rc-teclado,0px));z-index:60;display:flex;align-items:center;gap:10px;max-width:560px;min-height:52px;margin:0 auto;padding:10px 16px;border:0;border-radius:14px;background:var(--ml-slate-900,#0f172a);color:#fff;font:inherit;font-size:15px;box-shadow:0 8px 24px rgba(15,23,42,.28);cursor:pointer;text-align:left}
 .rc-flotante strong{font-size:19px;font-weight:800;white-space:nowrap}

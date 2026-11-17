@@ -5,7 +5,7 @@ import { calcularRESICO, calcularPTUTotal, calcularVacaciones, calcularCredito, 
 import ResultadoClaro, { fmtMx, fmtFecha } from './resultadoClaro.jsx';
 import {
   CampoDinero, CampoSueldo, useSueldo, CampoNumero, CampoFecha, Opciones, Casilla, MasOpciones, Formulario, MensajeError,
-  useEventoResultado, hoy2026, Contenedor, limpiarNumero, ACTUALIZADO_2026,
+  useEventoResultado, hoyDesde2026, finDeAnioEnCurso, Contenedor, limpiarNumero, ACTUALIZADO_2026,
 } from './calcComun.jsx';
 
 const ACT = fmtFecha(ACTUALIZADO_2026);
@@ -24,7 +24,7 @@ function AvisoGobierno({ children, onVolver }) {
 export function CalcFiniquitoDirecta() {
   const sueldo = useSueldo();
   const [ingreso, setIngreso] = useState('');
-  const [salida, setSalida] = useState(hoy2026);
+  const [salida, setSalida] = useState(hoyDesde2026);
   const [causa, setCausa] = useState('renuncia');
   const [pendientes, setPendientes] = useState('0');
   const [vacPend, setVacPend] = useState('0');
@@ -48,8 +48,8 @@ export function CalcFiniquitoDirecta() {
   return <Contenedor>
     <Formulario>
       <CampoSueldo sueldo={sueldo} placeholder="18,000" />
-      <CampoFecha name="ingreso" label="¿Qué día entraste a trabajar?" value={ingreso} onChange={setIngreso} max="2026-12-31" />
-      <CampoFecha name="salida" label="Tu último día de trabajo" value={salida} onChange={setSalida} min="2026-01-01" max="2026-12-31" />
+      <CampoFecha name="ingreso" label="¿Qué día entraste a trabajar?" value={ingreso} onChange={setIngreso} max={finDeAnioEnCurso()} />
+      <CampoFecha name="salida" label="Tu último día de trabajo" value={salida} onChange={setSalida} min="2026-01-01" max={finDeAnioEnCurso()} />
       <Opciones name="causa" legend="¿Cómo terminó?" value={causa} onChange={setCausa} opciones={[['renuncia', 'Renuncié'], ['separacion-patron', 'Me despidieron']]} />
       <MensajeError error={error} />
       <MasOpciones texto="¿Te deben días de sueldo o vacaciones? Más opciones">
@@ -75,9 +75,10 @@ export function CalcFiniquitoDirecta() {
       ]}
       detalle={<ul>
         <li>Sueldo diario: {fmtMx(r.salarioDiario)}.</li>
-        <li>Aguinaldo: {r.diasAguinaldo} días trabajados en 2026 de 365.</li>
+        <li>Aguinaldo: {r.diasAguinaldo} días trabajados en {r.salida.y} de {r.diasAnioSalida}.</li>
         <li>Vacaciones de este año: {dias(r.vacacionesProporcionalesDias)}{r.vacacionesPendientesDias > 0 ? `, más ${dias(r.vacacionesPendientesDias)} pendientes` : ''}; prima de {r.primaPct}%.</li>
         <li>{r.aplicaPrimaAntiguedad ? 'Incluye prima de antigüedad: 12 días por año, con tope de dos salarios mínimos diarios.' : 'Sin prima de antigüedad: al renunciar solo aplica con 15 años o más.'}</li>
+        {r.aplicaPrimaAntiguedad && r.salariosMinimosPendientes && <li>Tu salida es en {r.salida.y}: el tope de la prima de antigüedad se calculó con el salario mínimo de {r.anioSalariosMinimos}, porque el de {r.salida.y} todavía no está en MiLana. Solo cambia el resultado si ganas más de dos salarios mínimos.</li>}
       </ul>}
       siguiente={causa === 'renuncia'
         ? { texto: 'Calcula cuántos meses te alcanza este dinero', href: '/finanzas/fondo-emergencia' }
@@ -92,7 +93,7 @@ export function CalcFiniquitoDirecta() {
 export function CalcLiquidacionDirecta() {
   const sueldo = useSueldo();
   const [ingreso, setIngreso] = useState('');
-  const [salida, setSalida] = useState(hoy2026);
+  const [salida, setSalida] = useState(hoyDesde2026);
   const [indeterminada, setIndeterminada] = useState(true);
   const [veinte, setVeinte] = useState(false);
   const [pendientes, setPendientes] = useState('0');
@@ -118,8 +119,8 @@ export function CalcLiquidacionDirecta() {
   return <Contenedor>
     <Formulario>
       <CampoSueldo sueldo={sueldo} placeholder="18,000" />
-      <CampoFecha name="ingreso" label="¿Qué día entraste a trabajar?" value={ingreso} onChange={setIngreso} max="2026-12-31" />
-      <CampoFecha name="salida" label="¿Qué día te despidieron?" value={salida} onChange={setSalida} min="2026-01-01" max="2026-12-31" />
+      <CampoFecha name="ingreso" label="¿Qué día entraste a trabajar?" value={ingreso} onChange={setIngreso} max={finDeAnioEnCurso()} />
+      <CampoFecha name="salida" label="¿Qué día te despidieron?" value={salida} onChange={setSalida} min="2026-01-01" max={finDeAnioEnCurso()} />
       <MensajeError error={error} />
       <MasOpciones texto="¿Contrato temporal, 20 días por año o días pendientes? Más opciones">
         <Casilla checked={!indeterminada} onChange={(v) => setIndeterminada(!v)}>Mi contrato era temporal o por obra (no indefinido)</Casilla>
@@ -146,6 +147,7 @@ export function CalcLiquidacionDirecta() {
       detalle={<ul>
         <li>Los 3 meses se calculan con tu salario diario integrado: {fmtMx(r.salarioDiarioIntegrado)} por día (sueldo diario más la parte proporcional de aguinaldo y prima vacacional).</li>
         <li>Prima de antigüedad: 12 días por año, con tope de dos salarios mínimos diarios.</li>
+        {r.salariosMinimosPendientes && <li>Tu salida es en {r.salida.y}: el tope de la prima de antigüedad se calculó con el salario mínimo de {r.anioSalariosMinimos}, porque el de {r.salida.y} todavía no está en MiLana. Solo cambia el resultado si ganas más de dos salarios mínimos.</li>}
         <li>No incluye salarios caídos, intereses ni impuestos. Si el despido llega a juicio, la cifra puede cambiar.</li>
       </ul>}
       siguiente={{ texto: 'Calcula cuántos meses te alcanza este dinero', href: '/finanzas/fondo-emergencia' }}

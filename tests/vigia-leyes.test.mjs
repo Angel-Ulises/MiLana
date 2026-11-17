@@ -50,4 +50,8 @@ test('vigía: el flujo diario instala pdftotext, corre el vigía y mantiene un s
   assert.match(wf, /node scripts\/leyes\/vigia-leyes\.mjs/);
   assert.match(wf, /issues: write/);
   assert.match(wf, /\[Leyes\] Cambió un artículo que usa MiLana/);
+  // Los cron corren desde main; la base y el script deben ser los de la rama publicada (misma convención que CETES).
+  const checkout = wf.split(/^      - /m).slice(1).find((paso) => /uses: actions\/checkout@/.test(paso));
+  assert.match(checkout, /^        with:\s*\n          ref: claude\/cloudflare-pages\s*$/m);
+  assert.doesNotMatch(wf, /contents: write|git push/);
 });

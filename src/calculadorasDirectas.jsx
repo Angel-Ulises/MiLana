@@ -175,7 +175,7 @@ export function CalcISRDirecta() {
         <Casilla checked={minimo} onChange={setMinimo}>Solo gano el salario mínimo (${SALARIOS_MINIMOS_2026.general.toFixed(2)} diarios; ${SALARIOS_MINIMOS_2026.frontera.toFixed(2)} en la frontera norte)</Casilla>
       </MasOpciones>
     </Formulario>
-    <div aria-live="polite">{r && <ResultadoClaro calculadora="isr"
+    <div aria-live="polite">{r && <ResultadoClaro calculadora="isr" valoresDe={2026}
       etiqueta="Te retienen de ISR al mes"
       monto={fmtMx(r.retenido)}
       linea={`Te quedan ${fmtMx(r.despuesISR)} antes de IMSS y otros descuentos.`}
@@ -223,7 +223,7 @@ export function CalcBrutoNetoDirecta({ modoDetallado: ModoDetallado }) {
       </MasOpciones>
       {ModoDetallado && <p className="cc-mas"><button type="button" className="cc-enlace" onClick={() => setDetallado(true)}>¿Trabajas en gobierno o SEP (ISSSTE)?</button></p>}
     </Formulario>
-    <div aria-live="polite">{r && <ResultadoClaro calculadora="bruto-neto"
+    <div aria-live="polite">{r && <ResultadoClaro calculadora="bruto-neto" valoresDe={2026}
       etiqueta="Te llegan al mes aproximadamente"
       monto={fmtMx(r.netoDespuesISRSeguridadSocial)}
       linea={`De ${fmtMx(r.bruto)} se descuentan ${fmtMx(r.retenido)} de ISR y ${fmtMx(r.cuotaObrera)} de IMSS.`}

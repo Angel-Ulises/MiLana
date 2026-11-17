@@ -17,6 +17,7 @@ export default function ResultadoClaro({
   siguiente,
   actualizado,
   reclamo,
+  valoresDe,
   children,
 }) {
   // «Escuchar»: lee el resultado en voz alta, en el propio teléfono (no se envía nada a ningún servidor).
@@ -39,6 +40,10 @@ export default function ResultadoClaro({
       <div className="rc-etiqueta">{etiqueta}</div>
       <div className="rc-monto">{monto}</div>
       {linea && <div className="rc-linea">{linea}</div>}
+      {/* Aviso de año (R-15): si el cálculo usa tablas o valores de un año anterior al actual, se dice a la vista. */}
+      {valoresDe && new Date().getFullYear() > valoresDe && (
+        <p className="rc-aviso-anio">Calculado con los valores oficiales de {valoresDe}. Los de {new Date().getFullYear()} se agregan a MiLana en cuanto se publiquen.</p>
+      )}
       {puedeHablar && <button type="button" className="rc-escuchar" onClick={escuchar}>
         <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" /></svg>
         Escuchar

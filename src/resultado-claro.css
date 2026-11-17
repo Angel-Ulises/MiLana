@@ -98,6 +98,9 @@
 .cc-enlace{display:inline-flex;align-items:center;min-height:44px;padding-top:0;padding-bottom:0}
 .cc-volver{display:inline-flex;align-items:center;min-height:44px}
 
+/* Aviso de año (R-15): el cálculo usa valores de un año anterior al actual. */
+.rc-aviso-anio{margin:8px 0 0;padding:8px 10px;border-radius:8px;background:#FEF3C7;color:#713f12;font-size:14px;line-height:1.4}
+
 /* Hoja de impresión (H-13, 2026-11-16): sin menús, pie, botones ni fotos; el resultado y el cálculo en papel blanco. */
 @media print {
   html,body{background:#fff!important;color:#000!important}

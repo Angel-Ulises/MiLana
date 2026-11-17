@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { registrarEvento } from './lib/medicion.js';
 import './resultado-claro.css';
 
@@ -32,10 +33,46 @@ export default function ResultadoClaro({
       registrarEvento('escuchar_resultado', { calculadora: calculadora.replace(/[^a-z0-9_-]/g, '') });
     } catch { /* sin voz disponible */ }
   };
+  // Resultado a la vista (H-4): con el teclado abierto el monto queda debajo de lo visible. Mientras esté abajo,
+  // una barra fija con el monto en una línea se pega al borde de la parte visible; al tocarla, lleva al resultado.
+  const tarjeta = useRef(null);
+  const [abajo, setAbajo] = useState(false);
+  useEffect(() => {
+    const cifra = tarjeta.current?.querySelector('.rc-monto');
+    if (!cifra || typeof IntersectionObserver === 'undefined') return undefined;
+    const io = new IntersectionObserver(([e]) => setAbajo(!e.isIntersecting && e.boundingClientRect.top > 0));
+    io.observe(cifra);
+    return () => io.disconnect();
+  }, []);
+  useEffect(() => {
+    const vv = typeof window !== 'undefined' ? window.visualViewport : null;
+    if (!vv) return undefined;
+    const ajustar = () => document.documentElement.style.setProperty('--rc-teclado', `${Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop))}px`);
+    ajustar();
+    vv.addEventListener('resize', ajustar);
+    vv.addEventListener('scroll', ajustar);
+    return () => { vv.removeEventListener('resize', ajustar); vv.removeEventListener('scroll', ajustar); };
+  }, []);
+  const irAlResultado = () => {
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    const sinMovimiento = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    tarjeta.current?.scrollIntoView({ block: 'start', behavior: sinMovimiento ? 'auto' : 'smooth' });
+    registrarEvento('ver_resultado_barra', { calculadora: calculadora.replace(/[^a-z0-9_-]/g, '') });
+  };
   const ruta = `/calculadoras/${calculadora === 'bruto-neto' ? 'bruto-a-neto' : calculadora === 'pension' ? 'pension-imss' : calculadora}`;
   const textoCompartir = `Calculadora gratuita de MiLana: ${SITIO}${ruta}`;
   return (
-    <section className="rc" aria-label="Tu resultado" data-resultado-claro>
+    <section className="rc" aria-label="Tu resultado" data-resultado-claro ref={tarjeta}>
+      {/* Va directo al <body>: algunos contenedores de la página tienen animaciones con «transform», y dentro de
+          ellos «position: fixed» se mediría contra el contenedor y no contra la pantalla. */}
+      {abajo && typeof document !== 'undefined' && createPortal(
+        <button type="button" className="rc-flotante" onClick={irAlResultado} aria-label={`Ver tu resultado: ${etiqueta} ${monto}`}>
+          <span className="rc-flotante-etiqueta">{etiqueta}</span>
+          <strong>{monto}</strong>
+          <span className="rc-flotante-ver" aria-hidden="true">Ver ↓</span>
+        </button>,
+        document.body,
+      )}
       <div className="rc-etiqueta">{etiqueta}</div>
       <div className="rc-monto">{monto}</div>
       {linea && <div className="rc-linea">{linea}</div>}

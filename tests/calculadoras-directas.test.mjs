@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { calcularRESICO, calcularPTUTotal, calcularVacaciones, diasVacacionesLFT2026, calcularCredito, revisarPension, sbcEstimado, FACTOR_INTEGRACION_MINIMO, SEMANAS_MINIMAS_2026 } from '../src/lib/calculos-directos.mjs';
+import { calcularRESICO, calcularPTUTotal, calcularVacaciones, diasVacacionesLFT2026, calcularCredito, revisarPension, semanasMinimasPension, sbcEstimado, FACTOR_INTEGRACION_MINIMO, SEMANAS_MINIMAS_2026 } from '../src/lib/calculos-directos.mjs';
 import { calcularBrutoNeto2026 } from '../src/lib/calculos-laborales-2026.mjs';
 
 const cerca = (a, b, msg) => assert.ok(Math.abs(a - b) < 0.005, `${msg}: ${a} ≠ ${b}`);
@@ -33,9 +33,37 @@ test('crédito: pago fijo y saldo final en cero', () => {
 
 test('pensión: 875 semanas en 2026 y tipo de retiro por edad', () => {
   assert.equal(SEMANAS_MINIMAS_2026, 875);
-  const r = revisarPension({ edad: '62', semanas: '800' });
+  const r = revisarPension({ edad: '62', semanas: '800', anio: 2026 });
   assert.equal(r.faltan, 75); assert.equal(r.tipo, 'cesantia');
-  assert.equal(revisarPension({ edad: '66', semanas: '900' }).cumpleSemanas, true);
+  assert.equal(revisarPension({ edad: '66', semanas: '900', anio: 2026 }).cumpleSemanas, true);
+});
+
+test('H-1: las semanas de pensión siguen el calendario de la LSS (transitorio Cuarto, DOF 16-12-2020)', () => {
+  const tabla = { 2021: 750, 2022: 775, 2023: 800, 2024: 825, 2025: 850, 2026: 875, 2027: 900, 2028: 925, 2029: 950, 2030: 975, 2031: 1000, 2032: 1000, 2050: 1000 };
+  for (const [anio, semanas] of Object.entries(tabla)) assert.equal(semanasMinimasPension(Number(anio)), semanas, anio);
+  assert.throws(() => semanasMinimasPension(2020));
+});
+
+test('H-1: el 1 de enero de 2027, 880 semanas ya no alcanzan (se piden 900)', () => {
+  assert.equal(revisarPension({ edad: '62', semanas: '880', anio: 2026 }).cumpleSemanas, true);
+  const enero = revisarPension({ edad: '62', semanas: '880', anio: 2027 });
+  assert.equal(enero.cumpleSemanas, false); assert.equal(enero.minimo, 900); assert.equal(enero.faltan, 20);
+});
+
+test('H-1: a quien no tiene 60 años se le compara con lo que se pedirá cuando los cumpla', () => {
+  const r = revisarPension({ edad: '45', semanas: '900', anio: 2026 });
+  assert.equal(r.anioReclamo, 2041); assert.equal(r.minimo, 1000); assert.equal(r.faltan, 100); assert.equal(r.cumpleSemanas, false);
+  assert.equal(r.anioPosible, 2041, 'si sigue cotizando junta las semanas antes; se pensiona al cumplir 60');
+  const joven = revisarPension({ edad: '30', semanas: '0', anio: 2026 });
+  assert.equal(joven.minimo, 1000); assert.equal(joven.anioPosible, 2056);
+});
+
+test('H-1: la proyección de quien ya tiene la edad considera que el requisito sube cada año', () => {
+  // 800 semanas en 2026 con 62 años: 2027 → 852 < 900; 2028 → 904 < 925; 2029 → 956 ≥ 950.
+  const r = revisarPension({ edad: '62', semanas: '800', anio: 2026 });
+  assert.equal(r.anioSemanas, 2029); assert.equal(r.anioPosible, 2029);
+  // Sin el año explícito usa el reloj: no truena y entrega un año válido.
+  assert.ok(revisarPension({ edad: '62', semanas: '800' }).anio >= 2026);
 });
 
 test('bruto a neto con SBC estimado coincide con la hoja de verificación', () => {

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { calcularISR } from './lib/calculos-revisados.mjs';
 import { calcularFiniquito2026, calcularLiquidacion2026, calcularBrutoNeto2026, SALARIOS_MINIMOS_2026 } from './lib/calculos-laborales-2026.mjs';
-import { calcularRESICO, calcularPTUTotal, calcularVacaciones, calcularCredito, revisarPension, sbcEstimado, FACTOR_INTEGRACION_MINIMO } from './lib/calculos-directos.mjs';
+import { calcularRESICO, calcularPTUTotal, calcularVacaciones, calcularCredito, revisarPension, semanasMinimasPension, sbcEstimado, FACTOR_INTEGRACION_MINIMO } from './lib/calculos-directos.mjs';
 import ResultadoClaro, { fmtMx, fmtFecha } from './resultadoClaro.jsx';
 import {
   CampoDinero, CampoSueldo, useSueldo, CampoNumero, CampoFecha, Opciones, Casilla, MasOpciones, Formulario, MensajeError,
@@ -380,11 +380,13 @@ export function CalcPensionDirecta() {
     <div aria-live="polite">{r && <ResultadoClaro calculadora="pension"
       etiqueta={r.cumpleSemanas ? 'Semanas cotizadas' : 'Te faltan'}
       monto={r.cumpleSemanas ? 'Ya cumples' : `${r.faltan.toLocaleString('es-MX')} semanas`}
-      linea={r.tipo === 'vejez' ? 'Por edad ya puedes pedir pensión por vejez (65 años o más).'
-        : r.tipo === 'cesantia' ? 'Por edad ya puedes pedir pensión por cesantía (de 60 a 64 años).'
-        : `Te faltan ${r.aniosParaSesenta} años para la edad mínima de 60.`}
+      linea={r.tipo === 'vejez' ? `Por edad ya puedes pedir pensión por vejez (65 años o más). En ${r.anio} se piden ${r.minimo.toLocaleString('es-MX')} semanas.`
+        : r.tipo === 'cesantia' ? `Por edad ya puedes pedir pensión por cesantía (de 60 a 64 años). En ${r.anio} se piden ${r.minimo.toLocaleString('es-MX')} semanas.`
+        : `Cumples 60 años en ${r.anioReclamo}; ese año se pedirán ${r.minimo.toLocaleString('es-MX')} semanas.`}
       detalle={<ul>
-        <li>En 2026 se piden {r.minimo} semanas cotizadas (Ley 97, AFORE). Sube 25 semanas cada año hasta llegar a 1,000 en 2031.</li>
+        <li>Las semanas que pide la ley suben cada año: {Array.from({ length: Math.max(0, 2031 - r.anio) }, (_, i) => r.anio + i).map((a) => `${a}: ${semanasMinimasPension(a).toLocaleString('es-MX')}`).concat('2031 en adelante: 1,000').join(' · ')}. Cuenta el año en que pides la pensión, no el de hoy.</li>
+        {!r.cumpleSemanas && <li>Si sigues cotizando sin pausas (unas 52 semanas al año), podrías pensionarte hacia {r.anioPosible}. Es aproximado: una pausa sin cotizar lo retrasa.</li>}
+        <li>Fuente: Ley del Seguro Social, artículos 154 y 162, y artículo Cuarto transitorio del decreto publicado en el Diario Oficial el 16 de diciembre de 2020.</li>
         <li>Esta revisión no calcula el monto de tu pensión: depende del saldo de tu AFORE y de tu sueldo promedio.</li>
         <li>Aplica a quienes empezaron a cotizar al IMSS desde julio de 1997. No aplica a ISSSTE.</li>
       </ul>}

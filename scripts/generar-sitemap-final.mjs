@@ -40,6 +40,7 @@ const rutas = [
   '/aprende/aguinaldo-bruto-neto',
   '/aprende/vacaciones-prima-vacacional',
   '/aprende/fechas-de-pago',
+  '/aprende/jornada-2027',
   '/aprende/resico-ingresos-cobrados',
   '/aprende/pension-imss-ley-97',
   '/aprende/cat-y-gat-que-comparan',

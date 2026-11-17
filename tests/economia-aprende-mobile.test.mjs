@@ -10,6 +10,7 @@ const guiaRutas = {
   'aguinaldo-bruto-neto': ['/calculadoras/aguinaldo'],
   'vacaciones-prima-vacacional': ['/calculadoras/vacaciones'],
   'fechas-de-pago': ['/calculadoras/aguinaldo', '/calculadoras/ptu', '/calculadoras/vacaciones'],
+  'jornada-2027': ['/calculadoras/bruto-a-neto'],
   'resico-ingresos-cobrados': ['/calculadoras/resico'],
   'pension-imss-ley-97': ['/calculadoras/pension-imss'],
   'cat-y-gat-que-comparan': ['/finanzas/match/tarjetas', '/finanzas/match/ahorro'],
@@ -46,8 +47,8 @@ test('Aprende muestra las guías antes del bloque metodológico', () => {
   assert.ok(s.indexOf('id="guias"') < s.indexOf('class="learn-method"'));
   assert.match(s, /href="#encontrar"/);
   assert.match(s, /<details class="learn-catalog" id="catalogo">/);
-  assert.equal((s.match(/<article class="card">/g) || []).length, 10);
-  assert.equal((s.match(/<a class="card-content"/g) || []).length, 10);
+  assert.equal((s.match(/<article class="card">/g) || []).length, 11);
+  assert.equal((s.match(/<a class="card-content"/g) || []).length, 11);
   assert.match(s, /rel="canonical"/);
 });
 test('Todas las guías muestran destinos reales sin enlaces anidados', () => {
@@ -62,7 +63,7 @@ test('Todas las guías muestran destinos reales sin enlaces anidados', () => {
       assert.ok(hub.includes('href="' + url + '"'), 'Hub: ' + url);
     }
   }
-  assert.equal((hub.match(/<nav class="card-tools"/g) || []).length, 10);
+  assert.equal((hub.match(/<nav class="card-tools"/g) || []).length, 11);
 });
 test('Los CTAs de Aprende son visibles en móvil y respetan movimiento reducido', () => {
   const s = read('public/static-2026.css');

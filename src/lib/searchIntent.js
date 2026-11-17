@@ -33,6 +33,7 @@ export const SEARCH_INTENTS = Object.freeze({
   '/aprende': ['no entiendo mi nomina', 'aprender finanzas', 'explicaciones faciles'],
   '/calculadoras/ptu': ['utilidades', 'reparto de utilidades', 'participacion de utilidades', 'cuando pagan utilidades', 'ptu 2026'],
   '/calculadoras/infonavit': ['credito infonavit', 'infonavit', 'vivienda', 'mensualidad infonavit', 'comprar casa con infonavit'],
+  '/aprende/jornada-2027': ['horas extra', 'horas extras', 'jornada laboral', '40 horas', '46 horas', '48 horas', 'jornada 2027', 'reduccion de jornada', 'tiempo extra', 'domingo', 'prima dominical', 'dia de descanso', 'registro de jornada'],
   '/aprende/fechas-de-pago': ['fechas de pago', 'cuando me pagan', 'cuando pagan aguinaldo', 'cuando pagan utilidades', 'cuando pagan vacaciones', 'dias de pago', 'cuando debo cobrar'],
   '/aprende/leer-recibo-nomina': ['recibo de nomina', 'recibo', 'talon de pago', 'nomina', 'que significa cada renglon'],
   '/aprende/finiquito-vs-liquidacion': ['finiquito o liquidacion', 'diferencia entre finiquito y liquidacion', 'me despidieron que me deben'],
